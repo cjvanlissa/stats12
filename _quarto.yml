@@ -18,9 +18,6 @@ book:
   google-analytics: ''
   page-navigation: true
   search: true
-  downloads:
-  - pdf
-  - epub
   sharing:
   - twitter
   - facebook
@@ -46,6 +43,7 @@ book:
   - introduction.qmd
   - probability.qmd
   - samplingdistribution.qmd
+  - testing.qmd
   - glm1.qmd
   appendices:
   - references.qmd

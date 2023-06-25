@@ -1,0 +1,521 @@
+---
+title: "Lecture 1 - Introduction to Statistics"
+author:   "Caspar J. van Lissa"
+date:     "`r format(Sys.Date(), '%d %b %Y')`"
+format: revealjs
+---
+
+```{r}
+library(kableExtra)
+library(tidySEM)
+options(knitr.kable.NA = '')
+set.seed(1)
+```
+
+
+```{r}
+#| label = "setup",
+#| include = FALSE
+knitr::opts_chunk$set(echo = FALSE)
+library(ggplot2)
+data <- read.csv("./Materials/StudentQuestionnaire.csv", stringsAsFactors = FALSE)
+source("functions.R")
+```
+
+<!-- ## Today -->
+
+<!--   * Lecture 1: Introduction -->
+<!--     * Welcome -->
+<!--     * Research Methodology and Data Analysis -->
+<!--     * Samples versus Populations -->
+<!--     * Measurement and Measurement Levels -->
+<!--     * Descriptive Statistics and Graphs -->
+<!--   * Literature covered -->
+<!--     * Chapter 2: sections 2\.1\-2\.4\, 2\.6\-2\.8\, 2\.11\.1\, 2\.12 and Appendix 2A -->
+<!--     * Chapter 4: sections 4\.1\-4\.5\, 4\.9\, 4\.12\-4\.13 -->
+<!--     * Chapter 7: section 7\.1 -->
+
+<!-- ## Welcome everyone -->
+
+<!-- ## COURSE OVERVIEW -->
+
+<!-- * What can you expect for this course? -->
+<!--   * 14 lectures -->
+<!--     * 10 common lectures\, 4 major specific lectures -->
+<!--   * 11 lab sessions -->
+<!-- * What will the examination look like? -->
+<!--   * Multiple choice exam \(1\-10\) -->
+<!--   * SPSS test \(Pass/ Fail\) -->
+<!-- * What more do we offer you? -->
+<!--   * Short lecture quizzes -->
+<!--   * Midterm quiz -->
+<!--   * Practice exams online -->
+<!--   * Practice workbook online -->
+
+<!-- ![](images/Lecture 10.wmf) -->
+
+<!-- Major\-specific part -->
+
+<!-- ![](images/Lecture 11.wmf) -->
+
+<!-- ![](images/Lecture 12.wmf) -->
+
+<!-- * What do I expect from you? -->
+<!--   * Active participation during lectures and lab sessions -->
+<!--   * Read the syllabus before contacting me with questions -->
+<!--   * Be on time -->
+<!-- * Preparation -->
+<!--   * Lecture: Read the literature -->
+<!--   * Lab session: https://bps\.uvt\.nl \(if you want\) -->
+
+<!-- ![](images/Lecture 13.png) -->
+
+# Introduction
+
+## Why statistics?
+
+You grew up in the "digital age". There is data about your entire life...
+
+[Google Timeline](https://www.google.com/maps/timeline)
+
+## And everybody wants your data
+
+```{r}
+#| out.width = "60%"
+knitr::include_graphics("images/Everybodywantsyourdata.png", dpi = NA)
+```
+
+## What can you do with data?
+
+* Data literacy is increasingly important in many jobs
+* You can get insights from data to
+    + Better understand social life
+    + Predict sales and optimize marketing
+    + Explore what activity in the brain is associated with observed behavior
+* Data analysis is one of the most marketable concrete skills we teach at university
+
+## Difference between Methods and Statistics
+
+Methods is about the procedures of research:
+
+* What actions do we take to collect good data
+* Which participants to include
+* How to measure what we want to measure
+* How to design studies that are suitable for answering our research questions
+
+## Difference between Methods and Statistics
+
+Statistics is about analyzing data
+
+* __Descriptive statistics__: describing/summarizing data 
+* __Inferential statistics__: Making best guesses about the population from a smaller sample
+* __Statistical modeling__: Representing a theory mathematically
+* Predicting important outcomes (sales, well-being, neurological disorders)
+* Exploring data to find interesting patterns
+* Performing tests to answer theoretical research questions
+
+# Dictionary of basic concepts
+
+## Tabular data
+
+Most data in the social sciences is tabular, where each row represents an individual $i$ observation, and each column $j$ represents that individual's data on several variables:
+
+```{r}
+knitr::include_graphics("images/assumptions19.png")
+```
+
+## About observations: Population
+
+**Population:**
+
+* The complete set of objects of interest
+    + E.g., all people in NL, all students in this class
+* Number of individuals in the population: N
+    + N = 17.53 million, N = 75
+ 
+## About observations: Sample
+
+**Sample:**
+
+* Observed part of the population
+* Number of observations: *n*
+
+## About variables: Construct
+
+**Construct:**
+
+*	Abstract feature of interest for the population
+    + E.g., Short Term Memory, intelligence, perseverance, education
+
+**Operational definition:**
+    
+* Concrete measurable representation of the construct
+    + E.g., Number of words recalled, the Wechsler Adult Intelligence Scale (WAIS),
+    ability to withstand a tasty treat, highest degree obtained
+
+## About variables: Variable
+
+**Variable:**
+
+* (Mathematical) placeholder for specific values
+* E.g., `WAIS` is a variable representing scores on the WAIS
+* You can refer to a variable without (yet) knowing its specific values
+
+*Data:*
+	
+* Specific values of a variable
+* Example of data: Jen's score on the variable `WAIS` is 138
+
+
+# Role of data in scientific research
+
+## Empirical cycle
+
+De Groot (1961)
+
+```{r}
+knitr::include_graphics("images/empirical cycle.png")
+```
+
+
+## Relationship between theory and empiricism
+
+```{r}
+#| eval = T
+library(tidySEM)
+lo <- get_layout("Construct A", "Construct B",
+                 "Variable A", "Variable B", rows = 2)
+edg <- data.frame(
+  from = c("Construct A", "Variable A"),
+  to = c("Construct B", "Variable B")
+  )
+p <- prepare_graph(layout = lo, edges = edg)
+p$nodes$linetype <- c(2, 2, 1, 1)
+p$nodes$fill <- c("gray90", "gray90", "white", "white")
+p$edges$linetype <- c(2, 1)
+plot(p)+geom_label(aes(x = c(3, 3), y = c(5, 3), label = c("Theoretical level", "Empirical level"), size = 20))
+```
+
+## Relationship between theory and empiricism
+
+Theory:
+
+Construct A influences construct B
+
+* E.g., being exposed to war increases depression
+
+Empirical test:
+
+Variable A predicts variable B
+
+* E.g., being deployed (yes/no) predicts scores on the SCL-90 depression questionnaire
+
+## Sampling theory
+
+```{r}
+#| out.width = "90%"
+knitr::include_graphics("images/sample_population.png")
+```
+
+## Samples: why?
+
+* We want to make a claim about the population
+* It is not possible to access the entire population
+* We observe a part of the population: the *sample*
+* Sample statistics are also our best guess about population parameters
+    + Of course, sample statistics are not *equal to* population parameters
+    + You will learn ways to express uncertainty about your best guess
+
+## Samples: why?
+
+* If the sample is *representative* of the population, your best guess will generalize better to the entire population and to new samples
+* The best way to get a representative sample is *random sampling*    
+* Random sample:
+    +	Every population individual has the same probability of being included
+
+## Non-random samples
+
+* Probability of inclusion unknown to the researcher
+* Examples: convenience sampling, snowball sampling, cluster sampling
+* Sampling bias
+    + E.g., Individuals that are easy to access ave higher probability of being included
+
+# Measurement level
+
+## NOIR measurement levels
+
+Measurement level: What kind of information is contained in a variable?
+
+Mnemonic: `n o i r` = black in French
+
+Subsequent levels carry incremental information
+
+
+## NOIR measurement levels
+
+<small>
+
+* Nominal
+    + Categories; values differ in name only (e.g., majors)
+* Ordinal
+    + Categories; additionally, values have meaningful order (e.g., SES groups, bachelor year 1, 2, 3)
+* Interval
+    + Numeric; additionally, distance between values is meaningful
+    + A step from 1 to 2 is equally large as a step from 2 to 3, or 5 to 6
+* Ratio
+    + Numeric; additionally has a meaningful zero-point
+    + Because of this, ratios between two values are also meaningful
+
+</small>
+
+## Interval v Ratio
+
+* Celsius and Fahrenheit are interval scales
+* Kelvin is a ratio scale
+
+```{r}
+#| out.height = "400px"
+knitr::include_graphics("images/Thermo1.png", dpi = NA)
+```
+
+## Interval v Ratio
+
+```{r}
+#| out.height = "400px"
+knitr::include_graphics("images/Thermo2.png", dpi = NA)
+```
+
+## Measurement level matters
+
+* Measurement level is a property of the construct and of the operational definition
+    + Ideally, the measurement level of the construct and its variable are the same
+    + E.g., sex assigned at birth: nominal
+    + E.g., gender identification: ordinal or continuous
+* Measurement level determines what statistics and analyses you can use
+
+## Other common distinctions
+
+* Categorical variables: Nominal, Ordinal
+* Continuous variables: Interval, Ratio
+* Qualitative variable: Difference in kind, Nominal
+* Quantitative variables: Differences in degree; ordinal, interval, ratio
+
+Edge cases: 
+
+* Number of children (discrete ratio)
+* Political orientation from liberal to conservative (ordinal, but which is higher/lower?)
+
+
+# Descriptive statistics
+
+## Descriptive Statistics {.smaller}
+
+* Descriptive statistics summarize data across a sample
+* You nearly always examine them to get a sense of your dataset
+    + E.g., which major is most common among LAS students?
+    + How old are my students, on average?
+    + How much do the ages of my students vary?
+    + What's the gender distribution?
+* Descriptive statistics *may* also be relevant to answer research questions
+    + E.g.: When evaluating exam questions: Is the proportion of correct answers on this MC question greater than chance?
+
+## Distributions
+
+| Type of variable | Central tendency | Graph |
+| :-: | :-: | :-: |
+| Nominal | Frequency distribution | Bar chart |
+| Ordinal | (Cumulative) frequency distribution | Bar chart |
+| Interval/ratio | (Normal) probability distribution | Histogram, density plot |
+
+## A nominal variable
+
+```{r}
+#| results = "asis"
+tab <- sample(c("SS", "CN", "BE"), size = 75, replace = TRUE, prob = c(.6, .3, .1))
+out <- data.frame(Major = names(table(tab)),
+                  Frequency = as.vector(table(tab)),
+                  Percent = as.vector(prop.table(table(tab))))
+knitr::kable(out, row.names = FALSE, digits = 2)
+```
+
+## Bar chart
+
+```{r}
+#| results = "asis"
+library(ggplot2)
+ggplot(out, aes(x = Major, y = Frequency)) + geom_bar(stat = "identity") + theme_bw()
+```
+
+## An ordinal variable
+
+```{r}
+#| results = "asis"
+tab <- sample(ordered(c("Low", "Medium", "High"), levels = c("Low", "Medium", "High")), size = 75, replace = TRUE, prob = c(.4, .5, .1))
+out <- data.frame(SES = ordered(levels(tab), levels = levels(tab)),
+                  Frequency = as.vector(table(tab)),
+                  Percent = as.vector(prop.table(table(tab))),
+                  Cumulative = as.vector(cumsum(prop.table(table(tab)))))
+knitr::kable(out, row.names = FALSE, digits = 2)
+```
+
+## Bar chart
+
+```{r}
+#| results = "asis"
+library(ggplot2)
+ggplot(out, aes(x = SES, y = Frequency)) + geom_bar(stat = "identity") + theme_bw()
+```
+
+## A continuous variable
+
+```{r}
+dat <- data.frame(Height = rnorm(75, mean = sample(c(175, 165), 75, replace = T), sd = 5))
+ggplot(dat, aes(x = Height)) + geom_histogram(bins = 20, colour = "white") + theme_bw()
+```
+
+## Measures of central tendency
+
+What is the average or most common response?
+
+| Type of measure | Type of variable | Definition |
+| :-: | :-: | :-: |
+| Mode | Nominal/Ordinal | Most common value |
+| Median | Ordinal/Continuous | Middle value/50th percentile |
+| Mean | Continuous | Average value |
+
+## Measures of dispersion
+
+How much variability is there in responses?
+
+| Type of measure | Type of variable | Definition |
+| :-: | :-: | :-: |
+| Frequency table | Nominal | Count/percentage of responses |
+| Range | Ordinal/continuous | Minimum to maximum value |
+| Variance | Continuous | Mean squared distance of observations to the mean |
+
+## Median and Mode for ordinal variable
+
+__Median:__  middle value
+
+Example 1: \( _n_  = unequal\):  4\, 5\, 6\, 7\, 8\, 9\, 9 -> median is 7
+
+Example 2: \( _n_  = equal\):  4\, 5\, 6\, 8\, 9\, 9 -> median 7 \(mean of the two middle values\)
+
+__Mode:__  Most frequent score; 9 in both examples
+
+
+## Mean, median, mode for continuous variable
+
+![](images/Lecture 111.png)
+
+The average Australian is a millionaire
+
+But... most Australians are not!
+
+[https://www.volkskrant.nl/columns-opinie/australiers-zijn-gemiddeld-miljonair-maar-daar-hebben-de-meeste-australiers-helemaal-niks-aan~b8aa3fd3/](https://www.volkskrant.nl/columns-opinie/australiers-zijn-gemiddeld-miljonair-maar-daar-hebben-de-meeste-australiers-helemaal-niks-aan~b8aa3fd3/)
+
+## Skewed Distributions
+
+![](images/Lecture 112.png)
+
+
+<!-- __Q:__  Can you think of variables that typically have skewed distributions? -->
+
+<!-- ![](images/Lecture 113.png) -->
+
+<!-- ![](images/Lecture 114.png) -->
+
+<!-- ![](images/Lecture 115.png) -->
+
+<!-- ![](images/Lecture 116.jpg) -->
+
+<!-- ![](images/Lecture 117.png) -->
+
+<!-- ![](images/Lecture 118.png) -->
+
+## Mean, variance
+
+```{r}
+# df <- data.frame(x <- rnorm(rep(c(-5, 0, 5), each = 5), rep(c(.5, 1), each = 5)),
+#                  Distribution = paste0("M = ", rep(c(-5, 0, 5), each = 2000), ", SD = ", rep(c(.5, 1), each = 1000)))
+# ggplot(df, aes(x = x, color = Distribution, fill = Distribution)) + geom_density(alpha = .2)
+ggplot(data.frame(x = c(-4, 4)), aes(x)) + 
+  mapply(function(mean, sd, col) {
+    stat_function(fun = dnorm, args = list(mean = mean, sd = sd), col = col)
+  }, 
+  # enter means, standard deviations and colors here
+  # mean = c(-5, 0, 5, -5, 0, 5), 
+  # sd = c(1, 1, 1, .5, .5, .5), 
+  # col = c('red', 'red', 'red', 'blue','blue','blue')
+  mean = c(0, 0), 
+  sd = c(1, .5), 
+  col = c('red', 'blue')
+) + theme_bw() + labs(x = "Value", y = "Probability")
+```
+
+# Bivariate descriptives {.smaller}
+
+Describing associations
+
+|   | Nominal | Ordinal | Interval/Ratio |
+| :-: | :-: | :-: | :-: |
+| Nominal | Contingency Table | Contingency Table | Contingency table |
+| Ordinal |   | Contingency Table<br />Spearman’s correlation | Biserial Correlation |
+| Interval/Ratio |   |   | Pearson Correlation Coefficient<br />Scatter plot |
+
+
+<!-- |   | Nominal | Ordinal | Interval/Ratio | -->
+<!-- | :-: | :-: | :-: | :-: | -->
+<!-- | Nominal | Contingency Table | Contingency Table | Contingency table | -->
+<!-- | Ordinal |   | Contingency Table<br />Spearman’s correlation | Biserial Correlation | -->
+<!-- | Interval/Ratio |   |   | Pearson Correlation Coefficient<br />Scatter plot | -->
+
+## Contingency table
+
+![](images/Lecture 120.png)
+
+Is there an association between gender and education?
+
+## Scatterplot
+
+![](images/Lecture 121.png)
+
+* Is there an association?
+* What is the direction of the association?
+* How strong is the association?
+
+## Weak/no association
+
+![](images/Lecture 122.png)
+
+## Strong positive association
+
+![](images/Lecture 123.png)
+
+## Moderate negative association
+
+![](images/Lecture 124.png)
+
+## Non-linear association
+
+Outside of the scope of this course
+
+![](images/Lecture 125.png)
+
+<!-- # On causality -->
+
+<!-- ## Correlation vs causation -->
+
+<!-- * Statistics is *not* about proving causality! -->
+<!--   + "Correlation does not equal causation" -->
+<!-- * A statistical association between X and Y could be because -->
+<!--   + X causes Y -->
+<!--   + Or Y causes X -->
+<!--   + Or X and Y share common causes -->
+<!--   + Or pure coincidence -->
+
+
+
+
+<!-- The Book of Why: The New Science of Cause and Effect -->
+

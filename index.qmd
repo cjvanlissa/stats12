@@ -201,7 +201,7 @@ The focus should be on your analysis; how it relates to theory (introduction), a
 
 ## Credit
 
-This book is based on Lisa DeBruine's "booktem":
+This book was authored by Caspar J. Van Lissa. Its code and layout are derived from Lisa DeBruine's "booktem":
 
 > DeBruine L, Lakens D (2023). _booktem: Methods Book Template_.
   https://github.com/debruine/booktem, https://debruine.github.io/booktem/.

@@ -1,0 +1,778 @@
+---
+title: "Lecture 3 - Sampling Distributions"
+author:   "Caspar J. van Lissa"
+date:     "`r format(Sys.Date(), '%d %b %Y')`"
+format: revealjs
+server: shiny
+---
+
+```{r}
+library(kableExtra)
+library(tidySEM)
+options(knitr.kable.NA = '')
+set.seed(1)
+```
+<!-- Sampling distribution of the mean and the standard error. -->
+
+
+<!-- # Introduction -->
+
+<!-- * Last week we discussed: -->
+<!--   * The normal distribution -->
+<!-- * Today we will discuss: -->
+<!--   * The sampling distribution -->
+<!--   * Null hypothesis significance testing \(start\) -->
+<!--   * Literature covered: Chapter 7 \(7\.6\-7\.8\) -->
+
+<!-- # Quiz lecture 2 -->
+
+<!-- # Question 1 -->
+
+<!-- A researcher is interested in the relationship between type of movie and popcorn consumption\. -->
+
+<!-- She counts the number of people who consume popcorn during a movie\, and whether they have watched “Mean Girls”\. -->
+
+<!-- The results are presented in the following table: -->
+
+<!-- What is P\(Popcorn|Mean Girls\)\, rounded to 3 decimal places? -->
+
+<!-- 0\.083 -->
+
+<!-- 0\.627 -->
+
+<!-- 0\.060 -->
+
+<!-- 0\.037 -->
+
+<!-- |   |   | Popcorn consumption |  |   | -->
+<!-- | :-: | :-: | :-: | :-: | :-: | -->
+<!-- |   |   | Yes | No | Total | -->
+<!-- | Movie type | Mean Girls | 151 | 90 | 241 | -->
+<!-- |  | Other | 1678 | 2130 | 3808 | -->
+<!-- |   | Total | 1829 | 2220 | 4049 | -->
+
+<!-- # Question 1 - answer -->
+
+<!-- A researcher is interested in the relationship between type of movie and popcorn consumption\. -->
+
+<!-- She counts the number of people who consume popcorn during a movie\, and whether they have watched “Mean Girls”\. -->
+
+<!-- The results are presented in the following table: -->
+
+<!-- What is P\(Popcorn|Mean Girls\)\, rounded to 3 decimal places? -->
+
+<!-- 0\.083 -->
+
+<!-- __0\.627 = 151/241__ -->
+
+<!-- 0\.060 -->
+
+<!-- 0\.037 -->
+
+<!-- |   |   | Popcorn consumption |  |   | -->
+<!-- | :-: | :-: | :-: | :-: | :-: | -->
+<!-- |   |   | Yes | No | Total | -->
+<!-- | Movie type | Mean Girls | 151 | 90 | 241 | -->
+<!-- |  | Other | 1678 | 2130 | 3808 | -->
+<!-- |   | Total | 1829 | 2220 | 4049 | -->
+
+<!-- # Question 2 -->
+
+<!-- An HR advisor is looking for new employees for LEGO\. He thinks it is important for them to be creative\. Creativity is normally distributed in the population\, with a mean of 180 and a standard deviation of 25\. A higher score indicates higher creativity\. The advisor only wants to select applicants that belong to the 0\.015 proportion of most creative people\. -->
+
+<!-- What cut\-off/boundary score for creativity should the HR advisor use? Round the answer to two decimals\. -->
+
+<!-- 125\.75 -->
+
+<!-- 206\.13 -->
+
+<!-- 180\.38 -->
+
+<!-- 234\.25 __		__ -->
+
+<!-- # Question 2 - answer -->
+
+<!-- An HR advisor is looking for new employees for LEGO\. He thinks it is important for them to be creative\. Creativity is normally distributed in the population\, with a mean of 180 and a standard deviation of 25\. A higher score indicates higher creativity\. The advisor only wants to select applicants that belong to the 0\.015 proportion of most creative people\. -->
+
+<!-- What cut\-off/boundary score for creativity should the HR advisor use? Round the answer to two decimals\. -->
+
+<!-- 125\.75 -->
+
+<!-- 206\.13 -->
+
+<!-- 180\.38 -->
+
+<!-- __234\.25		__ X\* = 2\.17 x 25 \+ 180 = 234\.25 -->
+
+# Sampling error
+
+## Sampling theory
+
+```{r}
+#| out.width = "90%"
+knitr::include_graphics("images/sample_population.png")
+```
+
+## Estimating population parameters
+
+* Say we want to estimate population mean $\mu$
+* Our best guess of the population mean is the sample mean $M$ (aka $\bar{X}$)
+* But the sample mean $M$ is not a perfect estimate of $\mu$
+* The (unknown) difference between $M$ and $\mu$ is called *sampling error*
+
+<!-- ## {background-iframe="https://ihstevenson.shinyapps.io/sample_means/"} -->
+
+## Sampling distribution demo
+
+```{r}
+#| panel: fill
+fluidPage(fluidRow(
+  column(3, selectInput("dist", "Distribution:",
+                   c("Normal" = "norm",
+                     "Uniform" = "unif",
+                     "Log-normal" = "lnorm",
+                     "Exponential" = "exp"))),
+  column(3, numericInput("n", 
+                  "n:", 
+                   value = 30,
+                   min = 1, 
+                   max = 200)),
+  column(3, numericInput(inputId = "reps", label = "Samples:", value = 200, min = 1, max = 1000)),
+  column(3, 
+         checkboxInput("checkbox", label = "Add", value = FALSE),
+         actionButton("resample", label = "Draw")
+    )
+),
+fluidRow(
+  column(12, plotOutput('plot', width = "1000px", height = "500px"))
+))
+
+```
+
+
+```{r}
+#| context: server
+# Stable vars to use when adding one sample at a time
+means <- NULL
+means_offset <- 0
+
+data <- reactive({
+  dist <- switch(
+    input$dist,
+    norm = rnorm,
+    unif = runif,
+    lnorm = rlnorm,
+    exp = rexp,
+    rnorm
+  )
+  
+  # in addition to input$dist and input$n react to changes in...
+  input$resample
+  input$checkbox
+  input$reps
+  
+  dist(input$n) # draw n samples
+})
+
+# Reactive expression to update the list of means when the distribution changes
+doReset <- reactive({
+  dist <- switch(
+    input$dist,
+    norm = rnorm,
+    unif = runif,
+    lnorm = rlnorm,
+    exp = rexp,
+    rnorm
+  )
+  
+  # in addition to input$dist react to changes in...
+  input$checkbox
+  input$n
+  input$reps
+  
+  means <<- NULL
+  print("reset")
+})
+
+# Generate a plot of the data. Also uses the inputs to build
+# the plot label. Note that the dependencies on both the inputs
+# and the data reactive expression are both tracked, and
+# all expressions are called in the sequence implied by the
+# dependency graph
+output$plot <- renderPlot({
+  # Plot parameters...
+  tcol = "orange"      # fill colors
+  acol = "orangered"   # color for added samples
+  tscale = 2
+  # label rescaling factor
+  
+  dist <- input$dist
+  n <- input$n
+  reps <- input$reps
+  x <- data()
+  doReset()
+  
+  # Add to list of sample means or repeat sampling reps times depending on checkbox
+  if (input$checkbox) {
+    if (length(means) == 0) {
+      means_offset <<- input$resample
+    }
+    means[input$resample - means_offset + 1] <<- mean(x)
+  }
+  else {
+    means <<- 1:reps
+    for (i in 1:reps) {
+      means[i] <<- mean(switch(
+        dist,
+        norm = rnorm(n),
+        unif = runif(n),
+        lnorm = rlnorm(n),
+        exp = rexp(n),
+        rnorm(n)
+      ))
+    }
+  }
+  
+  # set plot range
+  xmin = switch(
+    dist,
+    norm = -3,
+    unif = 0,
+    lnorm = 0,
+    exp = 0,
+    -3
+  )
+  xmax = switch(
+    dist,
+    norm =  3,
+    unif = 1,
+    lnorm = 4,
+    exp = 4,
+    3
+  )
+  
+  # do not plot outliers
+  xrm <- x
+  xrm[x > xmax] <- NA
+  xrm[x < xmin] <- NA
+  means[means > xmax] <<- NA
+  means[means < xmin] <<- NA
+  
+  par(mfrow = c(3, 1), mar = c(8, 6, 2, 2))
+  
+  # plot true distribution
+  x0 = seq(xmin, xmax, length.out = 512)
+  
+  y0 = switch(
+    dist,
+    norm = dnorm(x0),
+    unif = dunif(x0),
+    lnorm = dlnorm(x0),
+    exp = dexp(x0),
+    dnorm(x0)
+  )
+  y0 = y0 / sum(y0)
+  
+  plot(
+    x0,
+    y0,
+    type = "l",
+    lwd = 0,
+    col = NULL,
+    main = "Population",
+    xlab = "",
+    ylab = "Probability",
+    frame = F,
+    cex.lab = tscale,
+    cex.axis = tscale,
+    cex.main = tscale,
+    cex.sub = tscale
+  )
+  polygon(c(xmin, x0, xmax),
+          c(0, y0, 0),
+          col = tcol,
+          border = NA)
+  
+  
+  # plot typical sample
+  hist(
+    xrm,
+    breaks = seq(xmin, xmax, length.out = 50),
+    main = "Typical Sample",
+    warn.unused = FALSE,
+    col = tcol,
+    border = tcol,
+    xlab = "",
+    cex.lab = tscale,
+    cex.axis = tscale,
+    cex.main = tscale,
+    cex.sub = tscale
+  )
+  if (any(x < xmin)) {
+    points(
+      rep(xmin - 0.1, sum(x < xmin)),
+      rbeta(sum(x < xmin), 2, 2),
+      lwd = 2,
+      col = tcol,
+      cex = tscale
+    )
+  }
+  if (any(x > xmax)) {
+    points(
+      rep(xmax + 0.1, sum(x > xmax)),
+      rbeta(sum(x > xmax), 2, 2),
+      lwd = 2,
+      col = tcol,
+      cex = tscale
+    )
+  }
+  
+  # plot list of sample means with the latest sample highlighted and N(mu,sigma^2/n)
+  breaks_mh = seq(xmin, xmax, length.out = 100)
+  
+  y0 = dnorm(x0, switch(
+    dist,
+    norm = 0,
+    unif = 0.5,
+    lnorm = exp(1 / 2),
+    exp = 1,
+    0
+  ),
+  switch(
+    dist,
+    norm = 1 / sqrt(n),
+    unif = 1 / sqrt(12) / sqrt(n),
+    lnorm = sqrt((exp(1) - 1) * (exp(1))) / sqrt(n),
+    exp = 1 / sqrt(n),
+    0
+  ))
+  y0 = y0 / sum(y0) * length(means) * mean(diff(breaks_mh)) / mean(diff(x0))
+  
+  nh <- hist(
+    means,
+    breaks = breaks_mh,
+    main = "Sample Means",
+    warn.unused = FALSE,
+    col = tcol,
+    border = tcol,
+    xlab = "",
+    cex.lab = tscale,
+    cex.axis = tscale,
+    cex.main = tscale,
+    cex.sub = tscale
+  )
+  if (mean(x) > xmin && mean(x) < xmax) {
+    hist(
+      mean(x),
+      breaks = breaks_mh,
+      col = acol,
+      border = acol,
+      add = TRUE,
+      ylim = c(0, max(y0, max(nh$counts)))
+    )
+  }
+  points(x0, y0, type = "l", lwd = 2)
+  print(input$resample)
+}, width = 600, height = 600)
+```
+
+## Sampling distribution
+
+**Hypothetically**, imagine that
+
+* We draw many ($k$) samples from the population
+* Estimate $\mu$ in each sample, so $M_1, M_2, \ldots M_k$
+* We could plot a distribution of the observed $M$s and call it the *sampling distribution*
+
+
+# Central Limit Theorem
+
+## Central limit theorem
+
+* As the number of samples increases, the sampling distribution approaches a normal distribution, $\bar{X} \sim N(\mu, SE_\mu)$
+* The mean of $M_{1\ldots k}$ converges to the population value $\mu$
+* This happens **regardless of the distribution of the data** (not normal? no problem)
+* The samples must be **large enough** (typically > 30)
+* This applies to other statistics than means too
+
+## The standard error
+
+The sampling distribution is $\sim N(\mu, SE_\mu)$
+
+* $SE_\mu$ is its standard deviation
+  + To avoid confusion with the SD of the *data*, we call it *standard error*, or SE
+* SE gives us the average sampling error
+  + "When we estimate $\mu$ using $M$, how wrong are we on average?"
+* Think of this as a measure of uncertainty of $M$ as an estimate of $\mu$
+  + If $SE_\mu$ is very small, our guesses of $\mu$ are very accurate
+
+## Properties of the standard error {.smaller}
+
+$SE_M = \frac{\sigma}{\sqrt{n}}$
+
+* SE decreases as the sample size increases (more precise estimates of $\mu$)
+  + Imagine the sample size becomes as large as the entire population
+  + The sample mean $M$ will be a perfect estimate of $\mu$
+  + So the SE goes to zero
+* SE increases as the population SD increases (less precise estimates of $\mu$)
+  + Imagine everyone in our sample has the same value
+  + Again, the sample mean $M$ will be a perfect estimate of $\mu$
+  + So the SE goes to zero
+  
+## Thought experiment
+
+* There are two elevators
+* One has a 6-person limit, the other a 12-person limit
+* Both elevators get stuck if the _average_  weight exceeds 95 kg
+* Which of the two elevators would likely get stuck more often?
+
+## Thought experiment 2
+
+* The "best schools" (highest average score on standardized tests) are often small schools
+* Does that mean small schools are better?
+
+## One remaining problem
+
+**In practice** we typically have only one sample so we can't *calculate* $SE_\mu$
+
+* **Solution**: We *estimate* the $SE_M$ from the single sample
+
+$SE_\mu = \frac{\sigma}{\sqrt{n}}$
+
+$SE_M = \frac{SD}{\sqrt{n}}$
+
+# Working with standard errors
+
+## Use the normal distribution!
+
+Last lecture we calculated probabilities using the normal distribution
+
+* Previous lecture: calculations about the population distribution and distribution of data in one sample
+* Today: calculations about the sampling distribution!
+* Thanks to Central limit theorem, we can make inferences about likely values of population parameters using only sample statistics
+* Use what you know about the normal distribution
+
+## Disambiguation {.smaller}
+
+Today, we have talked about 3 types of normal distributions (remember interactive demo):
+
+1. Population distribution of $X \sim N(\mu, \sigma)$
+  + Typically unknown
+2. Distribution of data in one sample, $X \sim N(M, SD)$
+  + Typically observed
+3. Sampling distribution of the means of many hypothetical samples from the population: $\bar{X} \sim N(\mu, SE_\mu)$
+  + We know its theoretical properties, we estimate its parameters from the sample
+
+
+## Confidence intervals {.smaller}
+
+**Confidence interval**: window of uncertainty around estimate
+
+* SE is a measure of uncertainty of $M$ as an estimate of $\mu$
+  + If $SE_\mu$ is very small, our guesses of $\mu$ are very accurate
+* Use this to express our confidence in $M$ as an estimate of $\mu$
+* Remember 95% of a normal distribution is between +/- 2SD
+* So $M +/- 2*SE_m$ gives us boundaries corresponding to 95% probability
+* We can never be sure that **this** confidence interval contains the population value
+* But 95% of confidence intervals ought to include the population value
+
+## Confidence interval 2
+
+```{r}
+# 
+# library(shiny)
+#  fluidPage(fluidRow(
+#                         column(1, selectInput("a", choices = letters[1:3], label ="a")),
+#                         column(1, selectInput("b", choices = letters[1:3], label ="b")),
+#                         column(1, textInput("c", label = "c"))
+#                         )
+#                )
+```
+
+```{r}
+#| panel: fill
+# vars <- setdiff(names(iris), "Species")
+# div(style="display: inline-block;vertical-align:top; width: 150px;", selectInput('xcol', 'X Variable', vars))
+# div(style="display: inline-block;vertical-align:top; width: 150px;", selectInput('ycol', 'Y Variable', vars, selected = vars[[2]]))
+# div(style="display: inline-block;vertical-align:top; width: 150px;", numericInput('clusters', 'Cluster count', 3, min = 1, max = 9))
+fluidPage(fluidRow(
+  column(3, numericInput(inputId = "mean", label = "M = ", value = 100)),
+  column(3, numericInput(inputId = "SD", label = "SD = ", value = 15)),
+  column(3, numericInput(inputId = "n", label = "n = ", value = 75)),
+  column(3, numericInput(inputId = "perc", label = "%: ", value = 95))
+),
+fluidRow(
+  column(12, plotOutput('plot1', width = "1000px", height = "500px"))
+))
+
+```
+
+
+```{r}
+#| context: server
+library(ggplot2)
+output$plot1 <- renderPlot({
+  the_se <- (input$SD / sqrt(input$n))
+  the_perc <- abs(qnorm((1-(input$perc/100))/2))
+  ggplot(data.frame(x = c((input$mean - 3 * input$SD), (input$mean + 3 * input$SD)
+)), aes(x = x)) +
+  stat_function(fun = dnorm, args = list(mean = input$mean, sd = the_se)) +
+  ylab("Probability density") +
+  xlab("Number line") +
+  scale_y_continuous(breaks = NULL, expand = c(0, 0)) +
+  #scale_x_continuous(breaks = c(-4:4)) +
+  geom_vline(xintercept = input$mean, color = "black") +
+  geom_area(
+    stat = "function",
+    fun = dnorm,
+    fill = "red",
+    alpha = .2,
+    xlim = c(input$mean - (the_perc * the_se),
+             input$mean + (the_perc * the_se)),
+    args = list(mean = input$mean, sd = the_se)
+  ) +
+  geom_segment(aes(
+    x = input$mean - (the_perc * the_se),
+    xend = input$mean - (the_perc * the_se),
+    y = 0,
+    yend = dnorm(input$mean - (the_perc * the_se), input$mean, the_se))) +
+  geom_segment(aes(
+    x = input$mean + (the_perc * the_se),
+    xend = input$mean + (the_perc * the_se),
+    y = 0,
+    yend = dnorm(input$mean + (the_perc * the_se), input$mean, the_se))) +
+  geom_label(
+    x = input$mean+3*input$SD,
+    y = dnorm(input$mean, input$mean, the_se),
+    vjust = 1,
+    hjust = 1,
+    label = paste0(
+      "M = ",
+      formatC(input$mean, digits = 2, format = "f"),
+      "\n95% CI [",
+      formatC(
+        input$mean - (the_perc * the_se),
+        digits = 2,
+        format = "f"
+      ),
+      ", ",
+      formatC(
+        input$mean + (the_perc * the_se),
+        digits = 2,
+        format = "f"
+      ),
+      "]"
+    )
+  ) +
+  theme_bw()
+})
+```
+
+## {background-iframe="https://rpsychologist.com/d3/ci/"}
+
+## Z-scores {.smaller}
+
+* Previous lecture: population & sample distribution
+    + IQ is normally distributed with mean 100 and SD of 15 
+    + What is the probability that the IQ of a randomly chosen person exceeds 115?
+    + $Z = \frac{X-\mu}{\sigma} = \frac{115-100}{15} = 1$
+    + $P(Z>1) = .025$
+* Today: sampling distribution of the mean
+    + What is the probability that the  mean of a random sample of 9 persons exceeds 115?
+    + $SE_m = \frac{\sigma}{\sqrt{n}} = \frac{15}{\sqrt{9}} = 5$ 
+    + $Z = \frac{X-\mu}{SE_m} = \frac{115-100}{5} = 3$
+    + $P(Z>3) = .001$
+
+## Calculating Z-scores
+
+Weekly fruit consumption is distributed $\sim N(\mu = 10.5, \sigma = 6.4)$
+
+* What is the probability that the mean fruit consumption of 16 randomly chosen people is less than 7.78?
+* $SE_\mu = \frac{\sigma}{\sqrt{n}} = \frac{6.4}{\sqrt{16}} = 1.6$
+* $Z = \frac{X - \mu}{SE_\mu} = \frac{7.78 - 10.5}{1.6} = - 1.7$
+
+```{r}
+#| out.width = "50%"
+library(ggplot2)
+ggplot(data = data.frame(x = c(-3, 3)), aes(x)) +
+  stat_function(fun = dnorm, n = 101, args = list(mean = 0, sd = 1)) +
+  ylab("Probability density") +
+  xlab("Z") +
+  scale_y_continuous(breaks = NULL, expand = c(0,0)) +
+  scale_x_continuous(breaks = c(-3:3)) +
+  geom_vline(xintercept = 0, color = "black") +
+  geom_area(stat = "function", fun = dnorm, fill = "red", alpha = .2, xlim = c(-3, -1.7), args = list(mean = 0, sd = 1)) +
+  geom_vline(xintercept = -1.7)+
+  geom_label(x = -2, y = dnorm(-2), label = "P(Z<-1.7) = .04")+
+  theme_bw()
+```
+
+## From Z to X {.smaller}
+
+A coffee roaster uses a machine to fill 1000 bags with coffee
+
+* The machine's accuracy is $\sigma = 10$
+* For how many grams should they set the machine to ensure that at most 1 bag contains less than 250g?
+
+* $SE_M = \frac{10}{\sqrt{1000}} = 0.32$
+* $Z(P > .001) = 2.33$
+* $250 + 2.33 * 0.32 = 250.75$
+
+```{r}
+#| out.width = "50%"
+library(ggplot2)
+ggplot(data = data.frame(x = c(-3, 3)), aes(x)) +
+  stat_function(fun = dnorm, n = 101, args = list(mean = 0, sd = 1)) +
+  ylab("Probability density") +
+  xlab("Z") +
+  scale_y_continuous(breaks = NULL, expand = c(0,0)) +
+  scale_x_continuous(breaks = c(-3:3)) +
+  geom_vline(xintercept = 0, color = "black") +
+  geom_area(stat = "function", fun = dnorm, fill = "red", alpha = .2, xlim = c(2.326, 3), args = list(mean = 0, sd = 1)) +
+  geom_vline(xintercept = 2.326)+
+  theme_bw()
+```
+
+
+
+<!-- ## Time for Examples… -->
+
+<!--   * IQ is normally distributed with mean 100 and SD of 15\. What is the probability that the  _mean_  IQ of a randomly chosen group of 9 persons exceeds 106? -->
+<!--   *  -->
+
+<!-- ![](images/Lecture 312.png) -->
+
+  * IQ is normally distributed with mean 100 and SD of 15\. What is the probability that the  _mean_  IQ of a randomly chosen group of 9 persons exceeds 106?
+
+![](images/Lecture 313.png)
+
+  * Weekly fruit consumption \(i\.e\.\, pieces of fruit\) is normally distributed with mean 10\.5 and an SD of 6\.4\. What is the probability that the  _mean_  fruit consumption of 16 randomly chosen persons is less than 7\.78?
+
+
+
+<!-- Also\, it let us realize that if we compare the mean between groups \(say males and females\)\, we must take into account that the means may differ by chance\. -->
+
+<!-- Before we can draw conclusions about the mean difference we have to find out whether the observed mean difference in the sample reflect true differences between populations\, or could be well explained by chance\. =>  __Hypothesis testing\!__ -->
+
+<!-- # Use of the standard error -->
+
+<!-- # Significance tests -->
+
+<!-- We use  _significance_  _ tests_  to draw conclusions about a certain  _hypothesis_ -->
+
+<!-- Hypothesis: Statement about the population -->
+
+<!-- Significance test: uses data to summarize the evidence about a hypothesis -->
+
+<!-- # Are university students in the Netherlands smarter than in the general population? -->
+
+<!-- # General Idea of Hypothesis Testing -->
+
+<!-- # A formal outline -->
+
+<!-- State a  _hypothesis_  about the population by specifying the parameter value \(this is the null hypothesis: H0\)\. -->
+
+<!-- We believe that the null hypothesis is true as long as we don’t have convincing evidence against H0 \! -->
+
+<!-- 2\.	Collect data to  _test_  the hypothesis → Does it survive in empirical data? 	Do we have enough empirical evidence to reject our null hypothesis? -->
+
+<!-- __	__  _Assume that the hypothesis H_  _0 _  _is true\! _  __	__ We use the  __sampling distribution __ to predict the distribution of the means in random samples of size 	 _n_   __under the null model__ \. -->
+
+<!-- If the null hypothesis \(H0\) is true\, we expect to observe a sample mean that is close to the 	hypothesized value under H0\. -->
+
+<!-- 3\.	Compare the observed sample result with the predictions under H0 \(step 2\)\. If the difference is ‘ _large_ ’\, 	we are inclined to believe that the sample is  __not__  from the population with parameter values as 	specified under H0\. -->
+
+<!-- State a  _hypothesis_  about the population by specifying the parameter value \(this is the null hypothesis: H0\)\. -->
+
+<!-- We believe that the null hypothesis is true as long as we don’t have convincing evidence against H0 \! -->
+
+<!-- 2\.	Collect data to  _test_  the hypothesis → Does it survive in empirical data? 	Do we have enough empirical evidence to reject our null hypothesis? -->
+
+<!-- __	__  _Assume that the hypothesis H_  _0 _  _is true\! _  __	__ We use the  __sampling distribution __ to predict the distribution of the means in random samples of size 	 _n_   __under the null model__ \. -->
+
+<!-- If the null hypothesis \(H0\) is true\, we expect to observe a sample mean that is close to the 	hypothesized value under H0\. -->
+
+<!-- 3\.	Compare the observed sample result with the predictions under H0 \(step 2\)\. If the difference is ‘ _large_ ’\, 	we are inclined to believe that the sample is  __not__  from the population with parameter values as 	specified under H0\. -->
+
+<!-- A formal outline -->
+
+<!-- State a  _hypothesis_  about the population by specifying the parameter value \(this is the null hypothesis: H0\)\. -->
+
+<!-- We believe that the null hypothesis is true as long as we don’t have convincing evidence against H0 \! -->
+
+<!-- 2\.	Collect data to  _test_  the hypothesis → Does it survive in empirical data? 	Do we have enough empirical evidence to reject our null hypothesis? -->
+
+<!-- __	__  _Assume that the hypothesis H_  _0 _  _is true\! _  __	__ We use the  __sampling distribution __ to predict the distribution of the means in random samples of size 	 _n_   __under the null model__ \. -->
+
+<!-- If the null hypothesis \(H0\) is true\, we expect to observe a sample mean that is close to the 	hypothesized value under H0\. -->
+
+<!-- 3\.	Compare the observed sample result with the predictions under H0 \(step 2\)\. If the difference is ‘ _large_ ’\, 	we are inclined to believe that the sample is  __not__  from the population with parameter values as 	specified under H0\. -->
+
+<!-- # Why is the sampling distribution of the mean important important for significance testing? -->
+
+<!-- If we find a mean IQ of 113 in a sample with N = 2\, then the probability that you find this mean IQ or larger by coincidence \(assuming that the mean IQ in the population is equal to 100\) is still quite large\. -->
+
+<!-- However\, this probability is extremely small for a sample with N = 100\. Then we conclude that the mean IQ in the population is probably not equal to 100\. -->
+
+<!-- # The Three Major Steps in Null-Hypothesis Significance Testing (NHST) -->
+
+<!-- For example\, if we find a sample mean of 105 and we see that it is really really really unlikely to find a sample mean of 105 if the population mean is 100\.  Then we say\, the population mean must not be 100\, but something closer to 105\. -->
+
+<!-- Then we reject H0\, and say that the population mean  __significantly differs __ from 100\. -->
+
+<!-- ![](images/Lecture 314.png) -->
+
+<!-- # Step 2a: Test statistic -->
+
+<!-- # Significance level and rejection region -->
+
+<!-- Significance \(α\) level: we reject H0 if our sample is among the 5% of the samples in the tails -->
+
+<!-- \(thus\, among the 5% most unlikely samples under H0\) -->
+
+<!-- We can use tables to find critical values \(cv\)\, but the use of  _p_ \-values is more common -->
+
+<!-- ![](images/Lecture 315.png) -->
+
+<!-- ![](images/Lecture 316.png) -->
+
+<!-- 1/2 = -->
+
+<!-- 0\.025 \(2\.5%\) -->
+
+<!-- 1/2 = -->
+
+<!-- 0\.025 \(2\.5%\) -->
+
+<!-- Can we reject H0  in our example? -->
+
+<!-- ![](images/Lecture 317.png) -->
+
+<!-- Method 1: Compare the test statistic \(here: Z\) to the critical value \(here: Zcv\) -->
+
+<!-- If Z is more extreme than Zcv\, -->
+
+<!-- we reject H0\. -->
+
+<!-- ![](images/Lecture 318.png) -->
+
+<!-- # Step 2b: p-value -->
+
+<!-- ![](images/Lecture 319.png) -->
+
+<!-- ![](images/Lecture 320.png) -->
+
+<!-- Method 2: Compute the p\-value\. -->
+
+<!-- P\(Z \< \-2\.4 or Z > 2\.4 | H0\) = -->
+
+<!-- 2 x 0\.008 = 0\.016 -->
+
+<!-- If the p\-value is smaller than the significance level\, we reject H0 -->
+
+<!-- # Step 3. Conclusion? -->
+
+<!-- We reject the null hypothesis\. -->
+
+<!-- We found sufficient evidence to conclude that in the population\, IQ of students is not equal to 100\. Sample results suggest that students are smarter than the general population\. -->
+

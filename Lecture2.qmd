@@ -1,0 +1,767 @@
+---
+title: "Lecture 2 - Probability Distributions"
+author:   "Caspar J. van Lissa"
+date:     "`r format(Sys.Date(), '%d %b %Y')`"
+format: revealjs
+#server: shiny
+---
+
+```{r}
+library(kableExtra)
+library(tidySEM)
+options(knitr.kable.NA = '')
+set.seed(1)
+```
+
+```{r}
+#| label = "setup",
+#| include = FALSE
+knitr::opts_chunk$set(echo = FALSE)
+library(ggplot2)
+data <- read.csv("./Materials/StudentQuestionnaire.csv", stringsAsFactors = FALSE)
+source("functions.R")
+```
+
+<!-- * Today we’ll discuss… -->
+
+<!--   * Probabilities -->
+
+<!--   * Normal distribution -->
+
+<!--   * Readings for today: Chapter 6 (6.1-6.10) -->
+
+<!-- | Week number  | Dates | Monday | Tuesday | Wednesday | Thursday | Friday | Notes | -->
+
+<!-- | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | -->
+
+<!-- | 35 | 30 Aug – 3 Sep  | Lecture 1 |   |   | Lab session 1 |   |   | -->
+
+<!-- | 36 | 6 Sep – 10 Sep | Lecture 2 |   |   | Lab session 2 |   |   | -->
+
+<!-- | 37 | 13 Sep – 17 Sep | Lecture 3 |   |   |   |   | Home-practice practical this week | -->
+
+<!-- | 38 | 20 Sep – 24 Sep  | Lecture 4 |   |   | Lab session 3 |   |   | -->
+
+<!-- | 39 | 27 Sep – 1 Oct | Lecture 5 |   |   | Lab session 4 |   |   | -->
+
+<!-- | 40 | 4 Oct – 8 Oct | Lecture 6 |   |   |   |   |   | -->
+
+<!-- | 41 | 11 Oct – 15 Oct | Lecture 7 |   |   | Lab session 5 |   |   | -->
+
+<!-- | 42 | 18 Oct – 22 Oct | No lectures this week |  |  |  |  |   | -->
+
+<!-- | 43 | 25 Oct – 29 Oct | Lecture 8 |   |   | Lab session 6 |   |   | -->
+
+<!-- | 44 | 1 Nov – 5 Nov | Lecture 9 |   |   | Lab session 7 |   |   | -->
+
+<!-- | 45 | 8 Nov – 12 Nov | Lecture 10 |   |   | Lab session 8 |   | Voluntary exam after lecture 10 | -->
+
+<!-- ## Quiz lecture 1 -->
+
+<!-- ## Question 1 -->
+
+<!-- Suppose that I ask a random sample of 5 students how many pairs of shoes they have. The number of pairs are: 7, 6, 8, 6, and 8. -->
+
+<!-- What is the variance of these pairs of shoes? -->
+
+<!-- 4 -->
+
+<!-- 7 -->
+
+<!-- 1 -->
+
+<!-- 2 -->
+
+<!-- ## Question 1 - answer -->
+
+<!-- ## Question 2 -->
+
+<!-- Six students work on a Statistics exam. They obtain the following grades: 8, 9, 5, 6, 7 and 8. The teacher calculates a certain statistic, which is equal to 7.5. -->
+
+<!-- Which statistic did the teacher calculate? -->
+
+<!-- Mean -->
+
+<!-- Standard deviation -->
+
+<!-- Median -->
+
+<!-- Mode -->
+
+<!-- ## Question 2 - answer -->
+
+<!-- Six students work on a Statistics exam. They obtain the following grades: 8, 9, 5, 6, 7 and 8. The teacher calculates a certain statistic, which is equal to 7.5. -->
+
+<!-- Which statistic did the teacher calculate? -->
+
+<!-- Mean; Mean = (8 + 9 + 5 + 6 + 7 + 8)/6 = 43/6 = 7.17 -->
+
+<!-- Standard deviation; 1.47 -->
+
+<!-- Median; 5, 6, 7, 8, 8, 9  7.5 -->
+
+<!-- Mode; 8 -->
+
+<!-- ## Question 3 -->
+
+<!-- For which of the three scatterplots below is the correlation coefficient largest? -->
+
+<!-- ![](images/Lecture 20.png) -->
+
+<!-- ![](images/Lecture 21.png) -->
+
+<!-- ![](images/Lecture 22.png) -->
+
+<!-- ## Question 3 - ANSWER -->
+
+<!-- For which of the three scatterplots below is the correlation coefficient largest? -->
+
+<!-- ![](images/Lecture 23.png) -->
+
+<!-- ![](images/Lecture 24.png) -->
+
+<!-- ![](images/Lecture 25.png) -->
+
+<!-- ## Question 4 -->
+
+<!-- Bob investigates the relationship between number of COVID-19 vaccine doses had and the amount of headache people have. He concludes that there is a linear relationship, and the correlation coefficient  _r_  is equal to +0.17. -->
+
+<!-- What can Bob conclude? -->
+
+<!-- Larger number of vaccine doses cause more headache. -->
+
+<!-- Larger number of vaccine doses cause less headache. -->
+
+<!-- None of the above. -->
+
+<!-- ## Question 4 - answer -->
+
+<!-- Bob investigates the relationship between number of COVID-19 vaccine doses had and the amount of headache people have. He concludes that there is a linear relationship, and the correlation coefficient  _r_  is equal to +0.17. -->
+
+<!-- What can Bob conclude? -->
+
+<!-- Larger number of vaccine doses cause more headache. -->
+
+<!-- Larger number of vaccine doses cause less headache. -->
+
+<!-- _None of the above._ -->
+
+# Probability
+
+## Defining probability
+
+For any *random experiment* the probability of an outcome is defined as the proportion of times this outcome occurs
+
+*Random experiment*
+
+-   Could theoretically be repeated an infinite number of times
+-   Before I flip a coin, the coinflip is a random experiment with $P_{heads} = .5$, or 50%
+-   After I flip the coin, it's no longer random; it's fixed (either 100% or 0%)
+
+## Examples probability
+
+Probability:
+
+-   of a baby being born male, $p_{male} = .51$
+-   of rolling a 7 with two dice in Catan, $p_7 = .167$
+
+Not probability:
+
+-   The probability that there is life on other planets is either 100% or 0%
+-   Even if you don't know which is correct
+
+## Random variables
+
+**Random variable**: An unknown value that follows some probability distribution.
+
+*Disambiguation: Last lecture we learned that the term "variable" is also used as a placeholder for some unknown number.*
+
+-   The outcome of a coin toss is a random variable
+-   It is discrete because it has only two possible outcomes
+-   The probability distributions is
+    -   P(X = heads) = 0.5
+    -   P(X = tails) = 0.5
+    -   Together: 1.0, so all possible outcomes are covered
+
+# Discrete probability distributions
+
+![](images/Lecture 28.gif){width=80%}
+
+## Frequency vs probability
+
+Frequency distributions
+
+-   Summarize observed outcomes in a sample
+-   E.g., the number of Dutch/foreign students in this class
+
+A probability distribution is similar, but
+
+-   Can be interpreted as the (estimated) probability of observing these outcomes in the future
+-   E.g., if I select a random student in this class, what's the probability that they will be Dutch?
+
+<!-- ## Random sample -->
+
+## Discrete distributions
+
+-   Finite number of outcomes
+    - Dutch student / foreign student
+    - Student has tattoos / no tattoos
+    - Describe using contingency table or bar chart
+    
+<!-- -   Each has a probability -->
+<!--     -   $p_{tattoo} = .36$, $p_{\text{no tattoo}} = .64$ -->
+<!--     -   $p_{Dutch} = .70$, $p_{\text{foreign}} = .30$ -->
+<!-- -   Describe using table or bar chart -->
+
+<!-- ```{r} -->
+<!-- tab = data.frame(Value = c("Tattoo", "No tattoo"), Probability = c(.36, .64)) -->
+<!-- knitr::kable(tab, digits = 2) -->
+<!-- ``` -->
+
+<!-- ## Cross table -->
+
+```{r}
+library(gtsummary)
+set.seed(1)
+n = 74
+dutch <- sample.int(2, size = n, replace = TRUE, prob = c(.3, .7))
+tattoo <- sapply(c(.2, .5)[dutch], rbinom, n = 1, size = 1)
+df_tattoo <- data.frame(Dutch = ordered(dutch, levels = c(1,2), labels = c("No", "Yes")),
+                 Tattoo = ordered(tattoo, levels = c(0,1), labels = c("No", "Yes")))
+tmp <- table(df_tattoo); cell11 = tmp[1,1]; cell12 = tmp[1,2]; cell21 = tmp[2,1]; cell22 = tmp[2,2]
+library(gt)
+tbl_cross(df_tattoo, row=Dutch, col=Tattoo, percent="none")
+```
+
+## Indexing contingency tables
+
+$i$: row
+
+$j$: column
+
+$f$: frequency (number of observations)
+
+$f_{i,j}$: frequency in the cell in row $i$, column $j$
+
+
+```{r}
+df <- data.frame("$i$" = c("$i = 1$", "$i = 2$", "<b>Margin columns</b>"),
+                 "$j = 1$" = c("$f_{1,1}$", "$f_{2,1}$", "$f_{+,1}$"), 
+                 "$j = 2$" = c("$f_{1,2}$", "$f_{2,2}$",  "$f_{+,2}$"), 
+                 "<b>Margin rows</b>" = c("$f_{1,+}$", "$f_{2,+}$", "$f_{+,+}$"), 
+                 check.names = FALSE)
+
+kbl(df, escape = FALSE, align = rep('l', length(df[,1])), format = "markdown") %>%
+  kable_styling("striped") %>%
+  add_header_above(c(" " = 1, "$j$" = 2, " " = 1))
+```
+
+## Marginal frequency distribution
+
+Separate frequency distribution of each variable in contingency table
+
+```{r}
+kable(df, escape = FALSE, align = rep('l', length(df[,1])), format = "markdown") |>
+  kable_styling("striped") |>
+  add_header_above(c(" " = 1, "$j$" = 2, " " = 1))
+```
+
+
+## Marginal frequency distribution
+
+<font color = "orange">For the variable "Tattoo":</font> How many people do / don't have one?
+
+<font color = "purple">For the variable "Dutch":</font> How many students are Dutch / International?
+
+```{r}
+df <- data.frame("Dutch" = c("No", "Yes", "<b>Total column</b>"),
+                 "No" = c(cell11, cell21, cell11+cell21), 
+                 "Yes" = c(cell12, cell22, cell12+cell22), 
+                 "Total row" = c(
+                   cell11+cell12, cell21+cell22, cell11+cell12+cell21+cell22), 
+                 check.names = FALSE)
+df$`Total row`[1:2] <- cell_spec(df$`Total row`[1:2], color = "purple", bold = TRUE)
+df$No[3] <- cell_spec(df$No[3], color = "orange", bold = TRUE)
+df$Yes[3] <- cell_spec(df$Yes[3], color = "orange", bold = TRUE)
+kable(df, escape = FALSE, align = rep('l', length(df[,1]))) %>%
+  kable_styling("striped") %>%
+  add_header_above(c(" " = 1, "Tattoo" = 2, " " = 1))
+```
+
+## Conditional frequency distribution
+
+Frequency distribution of one variable, for specific value of the other variable
+
+E.g.: What is the conditional frequency distribution of Tattoos <font color = "purple">**for Dutch students?**</font>
+
+```{r}
+df <- data.frame("Dutch" = c("No", "Yes", "<b>Total column</b>"),
+                 "No" = c(cell11, cell21, cell11+cell21), 
+                 "Yes" = c(cell12, cell22, cell12+cell22), 
+                 "Total row" = c(cell11+cell12,cell21+cell22,cell11+cell12+cell21+cell22), 
+                 check.names = FALSE)
+df$No[2] <- cell_spec(df$No[2], color = "purple", bold = TRUE)
+df$Yes[2] <- cell_spec(df$Yes[2], color = "purple", bold = TRUE)
+kable(df, escape = FALSE, align = rep('l', length(df[,1]))) %>%
+  kable_styling("striped") %>%
+  add_header_above(c(" " = 1, "Tattoo" = 2, " " = 1))
+```
+
+## Joint frequency distribution
+
+Frequency of a combination of two (or more) variables
+
+E.g.: What is the frequency of <font color = "purple">**Dutch students with a tattoo**</font>?
+
+```{r}
+df <- data.frame("Dutch" = c("No", "Yes", "<b>Total column</b>"),
+                 "No" = c(cell11, cell21, cell11+cell21), 
+                 "Yes" = c(cell12, cell22, cell12+cell22), 
+                 "Total row" = c(cell11+cell12,cell21+cell22,cell11+cell12+cell21+cell22), 
+                 check.names = FALSE)
+df$Yes[2] <- cell_spec(df$Yes[2], color = "purple", bold = TRUE)
+kbl(df, escape = FALSE, align = rep('l', length(df[,1]))) %>%
+  kable_styling("striped") |>
+  add_header_above(c(" " = 1, "Tattoo" = 2, " " = 1))
+```
+
+
+
+## Frequencies to probabilities
+
+Divide frequencies by a total to get a probability distribution
+
+Which frequencies and which total you use depends on what probability distribution you want
+
+## Marginal probability distribution
+
+Divide marginal totals by the <font color = "orange">global total</font>
+	
+E.g.: What is the <font color = "purple">marginal probability distribution of having a tattoo</font>?
+
+```{r}
+df <- data.frame("Dutch" = c("No", "Yes", "<b>Total column</b>"),
+                 "No" = c(cell11, cell21, cell11+cell21), 
+                 "Yes" = c(cell12, cell22, cell12+cell22), 
+                 "Total row" = c(
+                   paste0(cell11+cell12, " / ", cell11+cell12+cell21+cell22, " = ", round((cell11+cell12)/(cell11+cell12+cell21+cell22), digits = 2)), 
+                   paste0(cell21+cell22, " / ", cell11+cell12+cell21+cell22, " = ", round((cell21+cell22)/(cell11+cell12+cell21+cell22), digits = 2)), paste0(cell11+cell12+cell21+cell22)), 
+                 check.names = FALSE)
+df$`Total row`[1:2] <- cell_spec(df$`Total row`[1:2], color = "purple", bold = TRUE)
+df$`Total row`[3] <- cell_spec(df$`Total row`[3], color = "orange", bold = TRUE)
+kable(df, escape = FALSE, align = rep('l', length(df[,1]))) %>%
+  kable_styling("striped") %>%
+  add_header_above(c(" " = 1, "Tattoo" = 2, " " = 1))
+```
+
+## Conditional probability distribution
+
+Divide the row- or column frequencies by the <font color = "orange">marginal total</font>
+
+E.g.: What is the conditional probability of <font color = "purple">having a tattoo for international students</font>?
+
+
+```{r}
+df <- data.frame("Dutch" = c("No", "Yes", "<b>Total column</b>"),
+                 "No" = c(cell11, paste0(cell21, " / ", cell21+cell22, " = ", round((cell21)/(cell21+cell22), digits = 2)), cell11+cell21), 
+                 "Yes" = c(cell12, paste0(cell22, " / ", cell21+cell22, " = ", round((cell22)/(cell21+cell22), digits = 2)), cell12+cell22), 
+                "Total row" = c(cell11+cell12,
+                                 cell21+cell22,cell11+cell12+cell21+cell22), 
+                 check.names = FALSE)
+df$Yes[2] <- cell_spec(df$Yes[2], color = "purple", bold = TRUE)
+df$No[2] <- cell_spec(df$No[2], color = "purple", bold = TRUE)
+df$`Total row`[2] <- cell_spec(df$`Total row`[2], color = "orange", bold = TRUE)
+kable(df, escape = FALSE, align = rep('l', length(df[,1]))) %>%
+  kable_styling("striped") %>%
+  add_header_above(c(" " = 1, "Tattoo" = 2, " " = 1))
+
+```
+
+
+## Joint probability distribution
+
+Divide the cell frequency by the <font color = "orange">global total</font>
+
+E.g.: What is the joint probability of someone being <font color = "purple">Dutch and having a tattoo</font>?
+
+
+```{r}
+df <- data.frame("Dutch" = c("No", "Yes", "<b>Total column</b>"),
+                 "No" = c(cell11, paste0(cell21, " / ", cell21+cell22+cell11+cell12, " = ", round((cell21)/(cell11+cell12+cell21+cell22), digits = 2)), cell11+cell21), 
+                 "Yes" = c(cell12, cell22, cell12+cell22), 
+                "Total row" = c(cell11+cell12,
+                                 cell21+cell22, cell11+cell12+cell21+cell22), 
+                 check.names = FALSE)
+df$No[2] <- cell_spec(df$No[2], color = "purple", bold = TRUE)
+df$`Total row`[3] <- cell_spec(df$`Total row`[3], color = "orange", bold = TRUE)
+kable(df, escape = FALSE, align = rep('l', length(df[,1]))) %>%
+  kable_styling("striped") %>%
+  add_header_above(c(" " = 1, "Tattoo" = 2, " " = 1))
+```
+
+# Continuous probability distributions
+
+![](images/Lecture 27.gif){width=80%}
+
+<!-- ::: {layout-ncol=2} -->
+<!-- ![](images/Lecture 28.gif){width=80%} -->
+
+<!-- ![](images/Lecture 27.gif){width=80%} -->
+<!-- ::: -->
+
+
+## Continuous probability distributions
+
+* Infinite possible outcomes
+* No exact probability for specific values
+* Continuous probability distribution describes how likely each outcome is
+* Surface area determines probability
+* Many probability distributions exist
+* This course covers only one...
+
+## Normal Distribution
+
+Theoretical distribution for continuous variables
+
+Bell-shaped, symmetric, from -infinity to +infinity
+
+You can use it to describe (=model) real data
+
+Two parameters:
+
+-   Mean $\mu$ ("mu"): Most common / average value
+-   Standard deviation $\sigma$ ("sigma"): Average deviation from the mean
+
+```{r}
+#| out.width = "40%"
+knitr::include_graphics("images/Lecture 29.png")
+```
+
+## Examples of Normal Distributions
+
+![](images/Lecture 212.png)
+
+| Dist. |   μ   |  σ  |
+|:-----:|:-----:|:---:|
+|   1   | --1.0 | 0.5 |
+|   2   |  0.5  | 0.5 |
+|   3   |  0.5  | 1.5 |
+|   4   |  2.0  | 1.0 |
+
+## {background-iframe="https://statdist.com/distributions/normal"}
+
+<!-- ## Normal distribution: Location and scale -->
+
+<!-- ```{r eval = FALSE} -->
+<!-- library(shiny) -->
+<!-- numericInput( -->
+<!--   inputId = "mean", -->
+<!--   label = "Mean:", -->
+<!--   value = 0, -->
+<!--   min = -4, -->
+<!--   max = 4, -->
+<!--   step = .2 -->
+<!-- ); numericInput( -->
+<!--   inputId = "sd", -->
+<!--   label = "Standard deviation:", -->
+<!--   value = 1, -->
+<!--   min = 0, -->
+<!--   max = 2, -->
+<!--   step = .2 -->
+<!-- ) -->
+
+<!-- plotOutput("normdist") -->
+<!-- ``` -->
+
+<!-- ```{r eval = FALSE} -->
+<!-- #| context: server -->
+<!-- library(2) -->
+
+<!-- output$normdist <- renderPlot({ p1 <- (data = data.frame(x = c(-5, 5)), aes(x)) + -->
+<!--   stat_function(fun = dnorm, n = 101, args = list(mean = input$mean, sd = input$sd)) + ylab("Probability density") + -->
+<!--   scale_y_continuous(breaks = NULL) -->
+<!-- p1 + theme_bw() -->
+<!-- }) -->
+<!-- ``` -->
+
+## Standard Normal Distribution (Z-distribution)
+
+$Z \sim N(\mu = 0, \sigma^2 = 1)$ (so also $\sigma = 1$)
+
+* We can standardize any normal distribution to the *Z*-distribution
+* This removes the units of measurement of our original variable
+* Standardizing allows us to calculate probabilities more easily
+* Stats books contain probability values for the Z-distribution
+* We can always convert back to the original units
+
+## Standard Normal Distribution
+
+$Z \sim N(\mu = 0, \sigma = 1)$
+
+![](images/Lecture 213.png)
+
+## X to Z and vice versa
+
+You can standardize values of any normally distributed variable
+
+$Z = \frac{X-\mu_x}{\sigma_x}$
+
+**Standardizing:** Removing the original units of measurement
+
+And reverse it to get the units back; for any Z-value:
+
+$X = \mu_x + (Z*\sigma_x)$
+
+## Properties of normal distribution
+
+* The distribution is symmetric
+
+![](images/Lecture 222.png)
+
+$P(Z < -1.64) = P(Z > 1.64) = 0.05$
+
+## Properties 2
+
+* Total surface area is 1
+* We can find areas by taking the complement (1-something)
+
+$P(Z < 1.64) = .95$
+
+```{r}
+#| out.width = "50%"
+knitr::include_graphics("images/Lecture 223.png")
+```
+
+So $P(Z > 1.64) = 1-.95 = .05$
+
+## Properties 3
+
+* Areas can be added
+
+$P(Z > 0) = .5$
+
+$P(-.5< Z < 0) = .19$
+
+::: {layout-ncol=2}
+![](images/Lecture 224.png){width=50%}
+
+![](images/Lecture 225.png){width=50%}
+:::
+
+So $P(Z > -.5) = .5+.19 = .69$
+
+## Properties 4
+
+Standard percentages for mean, +/- 1, 2, 3 SD
+
+* 50% of distribution is below $\mu$, 50% above
+
+```{r}
+library(ggplot2)
+ggplot(data = data.frame(x = c(-4, 4)), aes(x)) +
+  stat_function(fun = dnorm, n = 101, args = list(mean = 0, sd = 1)) +
+  ylab("Probability density") +
+  xlab("Z") +
+  scale_y_continuous(breaks = NULL, expand = c(0,0)) +
+  scale_x_continuous(breaks = c(-4:4)) +
+  geom_vline(xintercept = 0, color = "black") +
+  geom_area(stat = "function", fun = dnorm, fill = "red", alpha = .2, xlim = c(-1, 1), args = list(mean = 0, sd = 1)) +
+  geom_area(stat = "function", fun = dnorm, fill = "red", alpha = .2, xlim = c(-2, 2), args = list(mean = 0, sd = 1)) +
+  geom_area(stat = "function", fun = dnorm, fill = "red", alpha = .2, xlim = c(-3, 3), args = list(mean = 0, sd = 1)) +
+  geom_errorbar(aes(xmin = -1, xmax = 1, y = dnorm(1)), width = .03)+
+  geom_label(x = 0, y = dnorm(1), label = "+/-1SD: 68%") +
+  geom_errorbar(aes(xmin = -2, xmax = 2, y = dnorm(2)), width = .03)+
+  geom_label(x = 0, y = dnorm(2), label = "+/-2SD: 95%") +
+  geom_errorbar(aes(xmin = -3, xmax = 3, y = dnorm(3)), width = .03)+
+  geom_label(x = 0, y = dnorm(3), label = "+/-3SD: 99.7%") +
+  theme_bw()
+```
+
+## Percentiles
+
+The $k$-th percentile is the score below which $k$ percent of scores fall
+
+So in the standard normal distribution:
+
+* The mean/median is the 50th percentile, because $P(Z < 0) = .5$
+* We call the 25th and 75th percentile the first and third *quartile*
+* +1SD is the 84th percentile, because $P(Z < 1) = .84$
+
+## Percentiles for X-scores
+
+Let's apply this to $IQ \sim N(\mu = 100, \sigma = 15)$
+
+* What percentile corresponds to IQ < 120?
+* $Z = \frac{120-100}{15} = 1.33$
+* $P(Z<1.33) \approx .90$,  so 90th percentile
+
+```{r out.width="70%"}
+library(ggplot2)
+boxloc <- -.003
+x <- rnorm(10000, 100, 15)
+ggplot(data = data.frame(x = x), aes(x = x)) +
+    stat_function(fun = dnorm, n = 101, args = list(mean = 100, sd = 15)) +
+    ylab("Probability density") +
+    xlab("IQ") +
+    geom_boxplot(ymin = boxloc-.002, ymax = boxloc+.002, y =boxloc)+
+    scale_y_continuous(breaks = NULL, expand = c(0,0), limits = c(boxloc-.0025, .027))+
+    geom_hline(yintercept = 0)+
+    scale_x_continuous(breaks = c(90, 100, 110, 120)) +
+    geom_vline(xintercept = 100, color = "black") +
+    geom_vline(xintercept = 90, color = "red") +
+    geom_vline(xintercept = 110, color = "red") +
+    geom_vline(xintercept = 120, color = "green") +
+    theme_bw()
+```
+
+# Describing data
+
+## A simple model
+
+We can use the normal distribution as a *model* for the distribution of an observed variable
+
+```{r}
+#| out.width = "70%"
+knitr::include_graphics("images/Lecture 216.png")
+```
+
+## A simple model
+
+"We assume variable X to be normally distributed"
+
+This allows us to:
+
+* Summarize people's values with just a mean and SD
+* Calculate probabilities of observing certain scores using table
+
+## Models can be wrong
+
+Of course, the assumption can be wrong
+
+```{r}
+#| out.width = "70%"
+knitr::include_graphics("images/Lecture 110.png")
+```
+
+* "All models are wrong, but some are useful" (Box)
+* In this example, mean, SD, and probabilities are going to misrepresent our data somewhat (i.e.: not very useful)
+
+## What if the model is wrong?
+
+Solution:
+
+* Choose a different probability distribution (not part of this course)
+* Comment that the assumption of normality may be violated (e.g., in Discussion section)
+
+
+
+<!-- ## Personality of 501 psychology students -->
+
+<!-- ![](images/Lecture 216.png) -->
+
+<!-- ![](images/Lecture 217.png) -->
+
+<!-- ![](images/Lecture 218.png) -->
+
+<!-- ![](images/Lecture 219.png) -->
+
+# Exercises
+
+## Exercises
+
+Neuroticism is distributed $N(\mu = 50, \sigma = 10)$
+
+What is the probability that a randomly chosen person has a neuroticism score of 60 or higher?
+
+Complete the sentence: "95% of the population scores between ... and ... on neuroticism.
+
+## Solutions
+
+What is the probability that a randomly chosen person has a neuroticism score of 60 or higher?
+
+```{r}
+library(ggplot2)
+ggplot(data = data.frame(x = c(10, 90)), aes(x)) +
+    stat_function(fun = dnorm, n = 101, args = list(mean = 50, sd = 10)) +
+  ylab("Probability density") +
+  xlab("Neuroticism") +
+    scale_y_continuous(breaks = NULL, expand = c(0,0), limits = c(0, .045)) +
+    scale_x_continuous(breaks = c(25, 50, 60, 75)) +
+    geom_vline(xintercept = 50, color = "black") +
+    geom_vline(xintercept = 60, color = "red") +
+    geom_area(stat = "function", fun = dnorm, fill = "red", alpha = .2, xlim = c(60, 90), args = list(mean = 50, sd = 10)) +
+    geom_label(x = 50, y = .04, label = "Mean, 0.5") +
+    geom_label(x = 60, y = .03, label = "+1SD, +0.34", hjust = 0, color = "red") +
+  geom_label(x = 70, y = .005, label = "1 - (.5 + .34)", hjust = 0, color = "red") +
+    theme_bw()
+```
+
+## Solutions
+
+Complete the sentence: "95% of the population scores between ... and ... on neuroticism.
+
+```{r}
+library(ggplot2)
+ggplot(data = data.frame(x = c(10, 90)), aes(x)) +
+    stat_function(fun = dnorm, n = 101, args = list(mean = 50, sd = 10)) +
+  ylab("Probability density") +
+  xlab("Neuroticism") +
+    scale_y_continuous(breaks = NULL, expand = c(0,0), limits = c(0, .045)) +
+    scale_x_continuous(breaks = c(20, 30, 40, 50, 60, 70, 80)) +
+    geom_vline(xintercept = 30, color = "red") +
+    geom_vline(xintercept = 70, color = "red") +
+    geom_area(stat = "function", fun = dnorm, fill = "red", alpha = .2, xlim = c(10, 30), args = list(mean = 50, sd = 10)) +
+  geom_area(stat = "function", fun = dnorm, fill = "red", alpha = .2, xlim = c(70, 90), args = list(mean = 50, sd = 10)) +
+    geom_label(x = 30, y = .005, label = "-2SD, .025", hjust = 1, color = "red") +
+    geom_label(x = 70, y = .005, label = "+2SD, .025", hjust = 0, color = "red") +
+     theme_bw()
+```
+
+## Calculate Z-values and p-values
+
+1. **Draw the problem**
+2. Check if the solution is (close to) a standard value like +/-SD
+3. If not, calculate Z-score
+4. Find p-value
+    * In Z-table
+    * Using an online calculator, e.g. https://onecompiler.com/r: `pnorm(zscore, mean, sd, lower.tail = TRUE)`
+    * Using Excel formula: `=NORM.DIST(zscore, mean, sd, TRUE)`
+
+## More difficult example
+
+**Example:** Assume height is distributed
+
+$\text{Height}\sim N(\mu = 180, \sigma = 20)$
+
+* What percentage of the population is taller than 212cm?
+
+Step 1: Draw the problem
+
+Step 2: Standard solution? Not really
+
+```{r}
+#| out.width = "50%"
+knitr::include_graphics("images/Lecture 220.png")
+```
+
+## Calculate p-value
+
+Step 3: Calculate Z-score
+
+* $Z = \frac{212 - 180}{20} = 1.6$
+
+Step 4: Find p-value
+
+* To the **right** of 1.6
+* Excel: `=1-NORM.DIST(1.6, 0, 1, TRUE)`
+* R: `pnorm(1.6, 0, 1, lower.tail = FALSE)`
+* Table (next slide)
+
+## Z-table
+
+```{r}
+#| out.width = "100%"
+knitr::include_graphics("images/Lecture 221.png")
+```
+
+**Conclusion:** 5.48% of the population is taller than 212cm.

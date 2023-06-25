@@ -1,0 +1,108 @@
+# Hypothesis Testing {#sec-testing}
+
+```{r, include = FALSE}
+source("R/booktem_setup.R")
+source("R/my_setup.R")
+```
+
+Hypothesis testing is a method of inferential statistics which allows researchers to draw conclusions about the population based on sample data. It involves formulating hypotheses, calculating test statistics, determining p-values, and drawing conclusions about the null hypothesis.
+
+Hypothesis testing builds upon previously covered topics like sampling theory and estimation, where sample statistics are used as the best estimate of population parameters;
+standard errors to express the uncertainty surrounding those estimates;
+and probability calculus, using probability distributions - like the standard normal distribution - to compute the probability of observing certain values based on the sampling distribution.
+
+To introduce the concept of hypothesis testing, let's consider an intuitive example. Imagine your car won't start, and you hypothesize that the battery is dead. You then perform an experiment by replacing the battery. If the car starts, you conclude that your initial hypothesis was correct - the battery was indeed dead.
+
+In this thought experiment, you only need one piece of evidence.
+Statistical hypothesis instead rely on evidence from many observations, and use probability calculus to test hypotheses in the presence of uncertainty.
+Statistical tests use probability calculations to compute how probable it is to observe the sample data if the null hypothesis were true.
+If the resulting probability is very low, we may doubt whether the null hypothesis is indeed true.
+
+The steps involved in hypothesis testing are as follows:
+
+1. Formulate hypotheses: This involves stating a testable proposition about population parameters.
+2. Calculate a test statistic: The test statistic describes how many standard errors away from the population statistic, under the null hypothesis, the sample statistic is.
+3. Calculate the p-value: The p-value represents the probability of observing a value at least as extreme as the sample statistic, assuming the null hypothesis is true.
+4. Draw a conclusion about the null hypothesis: Based on the p-value, we either reject or fail to reject the null hypothesis.
+
+Hypotheses can be formulated as equality or inequality statements. Equality hypotheses state that a value, difference, or effect is equal to zero, while inequality hypotheses state that a value, difference, or effect is larger or smaller than a specific value. It's important to keep in mind that hypothesis testing does not provide evidence for hypotheses but rather helps in casting doubt on a null hypothesis.
+
+In addition to the null hypothesis, we can also specify an alternative hypothesis.
+The specification of the alternative hypothesis depends on a bit of philosophy of science.
+Fisher's philosophy suggests using only a null hypothesis; if this null hypothesis is rejected, the "truth" must be anything other than the null hypothesis.
+We could thus say that, according to Fisher's philosophy, the alternative hypothesis is the negation of the null hypothesis. If $H_0: \mu = 0$, then $H_a: \mu \neq 0$; or, if $H_0: \mu > 0$, then $H_a: \mu \leq 0$. The alternative hypothesis is in both cases the "opposite" of the null hypothesis.
+
+Neyman-Pearson's philosophy instead involves stating specific null and alternative hypotheses, with an explicit expected effect size for the alternative hypothesis. Assuming a specific expected effect size allows us to calculate the probabilities of drawing correct or incorrect conclusions.
+
+In hypothesis testing, we calculate a test statistic, which measures the distance between the hypothesized population value and the sample statistic in terms of standard errors.
+The probability of observing a test statistic at least as extreme as the one we did observe is computed using an appropriate probability distribution.
+For many tests, we use either the Z-distribution or t-distribution, depending on whether we know the population standard deviation or not.
+This gives us a probability value (p-value), representing the probability of observing data as extreme as or more extreme than the sample data, assuming that the null hypothesis is true.
+
+When interpreting p-values, it's crucial to understand that they give the probability of observing certain data assuming the null hypothesis is true, rather than providing the probability of the null hypothesis being true or false. The p-value is then compared to a pre-determined significance level (usually denoted as alpha) to make a decision about accepting or rejecting the null hypothesis.
+
+Rejecting the null hypothesis indicates that the observed data is unlikely to occur if the null hypothesis were true. On the other hand, failing to reject the null hypothesis means that the observed data is not surprising or does not provide sufficient evidence to reject it.
+
+When testing hypotheses, we can make two types of errors: A Type I error refers to rejecting the null hypothesis when it is true (a false-positive conclusion), while Type II error refers to accepting the null hypothesis when it is false (failing to detect a true effect).
+
+# Formative Test
+
+A formative test helps you assess your progress in the course, and helps you address any blind spots in your understanding of the material. If you get a question wrong, you will receive a hint on how to improve your understanding of the material.
+
+Complete the formative test ideally after you’ve seen the lecture, but before the lecture meeting in which we can discuss any topics that need more attention
+
+::: {.webex-check .webex-box}
+
+**Question 1**
+
+```{r, results='asis', echo = FALSE}
+mc("Suppose that I ask a random sample of 5 students how many pairs of shoes they have. The number of pairs are: 7, 6, 8, 6, and 8. What is the variance of these pairs of shoes?", 1, 4, 7, 2)
+```
+
+**Question 2**
+
+```{r, results='asis', echo = FALSE}
+mc("Six students work on a Statistics exam. They obtain the following grades: 8, 9, 5, 6, 7 and 8. The teacher calculates a certain statistic, which is equal to 7.5. Which statistic did the teacher calculate?", "Median","Mean", "Standard deviation", "Mode")
+```
+
+**Question 3**
+
+For which of the three scatterplots below is the correlation coefficient largest? `r mcq(c(answer = "A", "B", "C"))`
+
+::: {#fig-scatter layout-ncol=3}
+
+![A](images/lecture 73.png){width = 30%}
+
+![B](images/lecture 74.png){width = 30%}
+
+![C](images/lecture 76.png){width = 30%}
+
+Question 3 scatterplots
+:::
+
+```{r, results='asis', echo = FALSE}
+mc("Six students work on a Statistics exam. They obtain the following grades: 8, 9, 5, 6, 7 and 8. The teacher calculates a certain statistic, which is equal to 7.5. Which statistic did the teacher calculate?", "Median","Mean", "Standard deviation", "Mode")
+```
+:::
+
+`r hide("Show answers")`
+
+**Question 1**
+
+The variance is the sum of squared distances of observations to the mean, divided by the number of observations minus one. So calculate:
+
+$S_{X}^2= \frac{\sum_{i=1}^nX_i}{n} = \frac{(7 + 6 + 8 + 6 + 8)}{5} = 7$
+
+**Question 2**
+
+First rule out improbable answers; all grades are pretty close to each other, so it's impossible for the variance to be that high. We can see what the mode (most common value) is: it's 8. So we only choose between mean or median.
+
+Mean: calculate $\bar{X}= \frac{\sum_{i=1}^nX_i}{n} = \frac{8 + 9 + 5 + 6 + 7 + 8}{6} = 7.17$
+
+Median: order the numbers, note that there is an odd number, take the average of the two middle numbers. 5, 6, 7, 8, 8, 9 -> 7.5
+
+**Question 3**
+
+Correlation measures linear association, so eliminate option C. Option B shows a very small correlation - probably 0 or maybe .1. So the correct answer is A, which shows a moderate negative correlation.
+`r unhide()`
+
