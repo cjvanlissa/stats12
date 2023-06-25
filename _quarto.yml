@@ -1,0 +1,82 @@
+project:
+  type: book
+  output-dir: docs
+  resources: resources
+execute:
+  freeze: auto
+book:
+  title: Statistics 1 and 2
+  subtitle: ''
+  author: Caspar J. Van Lissa
+  doi: ''
+  license: CC-BY
+  description: Book Description
+  cover-image: images/logos/logo.jpg
+  image: images/logos/logo.jpg
+  favicon: images/logos/favicon.png
+  cookie-consent: false
+  google-analytics: ''
+  page-navigation: true
+  search: true
+  downloads:
+  - pdf
+  - epub
+  sharing:
+  - twitter
+  - facebook
+  - linkedin
+  sidebar:
+    title: ''
+    logo: ''
+    search: true
+    contents: ''
+    style: floating
+    background: light
+    foreground: dark
+    border: true
+    alignment: left
+    collapse-level: 3
+    pinned: true
+    header: ''
+    footer: ''
+  margin-header: ''
+  page-footer: CC-BY (2023) Caspar J. Van Lissa
+  chapters:
+  - index.qmd
+  - introduction.qmd
+  - probability.qmd
+  - samplingdistribution.qmd
+  - glm1.qmd
+  appendices:
+  - references.qmd
+bibliography: include/references.bib
+csl: include/apa.csl
+format:
+  html:
+    theme:
+      light:
+      - flatly
+      - include/light.scss
+      dark:
+      - darkly
+      - include/dark.scss
+    css:
+    - https://use.fontawesome.com/releases/v5.13.0/css/all.css
+    - include/booktem.css
+    - include/webex.css
+    - include/glossary.css
+    - include/style.css
+    - c:/gitbook_stats12/include/webex.css
+    df-print: kable
+    code-link: true
+    code-fold: false
+    code-line-numbers: true
+    code-overflow: wrap
+    code-copy: hover
+    highlight-style: a11y
+    mainfont: ''
+    monofont: ''
+    include-after-body:
+    - include/webex.js
+    - include/script.js
+    - c:/gitbook_stats12/include/webex.js

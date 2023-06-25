@@ -1,0 +1,31 @@
+# Probability Distributions {#sec-probability}
+
+```{r, include = FALSE}
+source("R/booktem_setup.R")
+source("R/my_setup.R")
+```
+
+Probability Distributions
+
+Probability refers to the likelihood or chance of an outcome occurring in a random experiment. It is defined as the proportion of times that a particular outcome is expected to occur if the experiment is repeated an infinite number of times.
+
+A random experiment is a process with multiple potential outcomes that could theoretically be repeated under similar conditions. For example, flipping a coin is a random experiment, and before flipping the coin, the outcome is a random experiment with a probability of getting heads or tails of 50% each. Once the coin is flipped, the outcome becomes fixed (the opposite of random), resulting in either heads or tails.
+
+In a way, when you draw samples from a population and observe the values of particular variables (e.g., country of origin, height, age), you are performing random experiments. That means that, like with any random experiment, the values you are likely to observe also follow certain probability distributions. Discrete random variables have a finite or countable number of possible outcomes, such as the outcome of a coin toss. On the other hand, continuous random variables, such as the height of individuals, have an infinite number of possible outcomes.
+
+For discrete (categorical) variables, we use discrete frequency and probability distributions, which summarize the observations and probabilities of each possible outcome, respectively. These distributions can be represented using frequency distributions, contingency tables, or bar charts.
+
+Frequency distributions summarize observed outcomes in a sample. For example, a frequency distribution can tell us the proportion of Dutch students in a class or the number of times a particular number was rolled on a die.
+
+Contingency tables (also called crosstables) are used to describe the join frequency distribution, and possibly relationship, between two categorical variables. They show the frequencies of different combinations of values for the two variables.
+
+We can use frequency distributions to estimate the probabilities of observing those outcomes in the future. To calculate probabilities from frequencies, we can use different approaches depending on the type of probability distribution we want. In general, dividing frequencies by the total number of observations (grand total) gives us probabilities. In contingency tables, marginal probability distributions are obtained by dividing the marginal totals (row sums or column sums) by the grand total, which provides us with a probability distribution for each separate variable. Conditional probability distributions are derived by dividing a specific row or column by the row- or column total (marginal total), and tells us the probabilities of one variable given a specific value of the other variable.
+
+In continuous probability distributions, the possible outcomes are infinite and described by a continuous function. One common example is the normal distribution, also known as the bell curve. It is a symmetric distribution that extends from negative infinity to positive infinity, and it is characterized by two parameters: its mean (average) and standard deviation (measure of dispersion). The square of the standard deviation is called the variance.
+
+The *standard* normal distribution, also known as the Z-distribution, is a standardized version of the normal distribution, rescaled to have a mean of 0 and a standard deviation of 1. Standardizing normal distributions allows us to calculate probabilities more easily using standard normal distribution tables or calculators. We can then convert these probabilities back to the original units if needed.
+
+Probability distributions can be used as models to describe/approximate the distribution of real data. Behind the scenes, we do this any time we describe the distribution of scores on a variable using its mean and standard deviation.
+While we often assumpe that variables are normally distributed, that assumption is not always accurate. For example, depression symptoms do not follow a normal distribution: Most people score near-zero on depression symptoms, and few people have higher scores (but these are also not normally distributed). In such cases of violations of the assumption of normality, the mean and standard deviation are not very informative. You may use other descriptive statistics, consider different probability distributions (outside the scope of this course), or discuss the limitations of the assumption of normality.
+
+In conclusion, probability distributions provide a way to represent the probabilities associated with different outcomes of a random variable, whether discrete or continuous. By using probability distributions, we can report descriptive statistics, calculate probabilities, and make predictions about future observations.

@@ -1,0 +1,36 @@
+# The Sampling Distribution {#sec-sampdist}
+
+```{r, include = FALSE}
+source("R/booktem_setup.R")
+source("R/my_setup.R")
+```
+
+As explained in lecture 1, a sample is an observed subset of a larger population.
+We typically calculate statistics based on sample data, and use these as best guesses of the values of population parameters.
+This process is called statistical inference. 
+A crucial insight is that sample statistics are not perfect estimates of population parameters. The discrepancy between the sample statistic and population parameter is known as sampling error.
+
+We have some theoretical insight into theoretical behavior of sample statistics.
+For example, we can imagine constructing a probability distribution of the values we might see for a sample statistic, such as the mean, if we were to draw very many random samples from an identical population.
+This theoretical distribution of means is called the sampling distribution.
+The central limit theorem tells us that, regardless of the shape of the distribution of the data in the population, as the sample size increases, the sampling distribution of the mean approaches a normal distribution.
+This is an important realization, because it means that we can use probability calculus using the normal distribution to draw inferences about population parameters based on sample statistics.
+
+The standard deviation of the sampling distribution plays a central role in inferential statistics.
+It is so important that we give it a unique name: we call this particular standard deviation the *standard error* (SE).
+The standard error quantifies the average, or expected, amount of sampling error when we use a sample statistic to estimate the population parameter.
+If the standard error is small, our estimates based on the sample are likely to be accurate, whereas a large standard error indicates greater uncertainty.
+
+With the help of the normal distribution,
+and given a particular (hypothesized or known) population mean and standard error,
+we can calculate how likely it is to observe specific sample means.
+For example, if we want to determine the probability that the mean of a random sample exceeds a certain value, we can standardize the sample mean using the formula $Z = \frac{M - \mu}{SE_M}, where M is the sample mean, $\mu$ is the known or hypothesized population mean,
+and SE is the standard error.
+By looking up the corresponding probability on the standard normal distribution table or using statistical software, we can assess the likelihood of observing a specific sample mean (or greater, or smaller).
+
+Confidence intervals are a way to express our uncertainty about the sample statistic as estimator of the population parameter.
+A confidence interval is a range of values - a window - within which we expect the true population parameter to fall with a certain level of confidence.
+Typically, we select a 95% confidence interval, which means that if we could repeat the sampling process many times and calculated confidence intervals each time, 95% of those intervals would contain the true population parameter.
+The width of the confidence interval is determined by the standard error and is proportional to the level of confidence desired.
+The formula for a confidence interval is often written as: $M \pm Z_{95%} * SE_M$.
+In practice, this comes down to approximately: $M \pm 2 * SE_M$.

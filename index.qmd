@@ -1,0 +1,209 @@
+# Overview {.unnumbered}
+
+This course covers the basics of statistics and data analysis.
+The ability to extract insights from data is an essential skill for both academic and non-academic work, and "data literacy" is increasingly important in a world where data are collected about every aspect of our lives.
+After completing this course, you will be able to independently analyze data,
+interpret and report your findings,
+and assess the results of analyses performed by others, such as you might find in scientific articles.
+
+This GitBook contains all relevant information about this course.
+It is assumed that every student reads it carefully.
+If you have any questions, first consult this GitBook,
+then ask a fellow student, and only if your question is still not answered,
+then contact the course coordinator.
+
+Communication about the course occurs through Canvas (Login with your student ID and password).
+
+## Course overview
+
+The **course schedule** is available on Osiris. For an overview of the content, see below:
+
+```{r, results = "asis", echo = FALSE}
+schedule <- read.csv("schedule.csv")
+library(DT)
+# library(lubridate)
+# mdy(isoweek(4))
+# lubridate::isoweek(as.Date("13-09-2021", format = "%d-%m-%Y"))
+# lubridate::parse_date_time("37", orders = "%W")
+# lubridate::isoweek(as.Date("13-09-2021", format = "%d-%m-%Y"))
+DT::datatable(schedule[order(schedule$Week, decreasing = FALSE), ], rownames = FALSE, options = list(pageLength = nrow(schedule)))
+```
+
+## Literature & Software
+
+**You do not need a book for this course!** 
+
+All essential information is contained within this GitBook.
+
+During lab sessions, you work on the exercises and your portfolio using the commercial SPSS software installed on university computers.
+
+If you want to use your own computer instead, you might consider trying some free alternatives to SPSS:
+
+* PSPP, which is designed to be nearly identical to SPSS with all the same basic functionality: https://www.gnu.org/software/pspp/pspp.html
+* JASP, which is more modern, looks nicer and is very easy to use – but looks less similar to SPSS: 
+https://jasp-stats.org/
+
+
+## Learning goals
+
+After taking this course, students will be able to...
+
+### All majors
+
+1.	compute and interpret commonly used descriptive statistics such as the sample mean, the median, the mode, variance and standard deviation, the standard error, and the correlation coefficient.
+2.	recognize different probability distributions such as the normal distribution, and make computations for these probability distributions. 
+3.	explain the essential aspects of null-hypothesis significance testing, including sampling distributions, Type I and Type II errors, one-tailed versus two-tailed testing, and statistical power. 
+4.	apply different statistical tests such as the Z-test, the one sample t-test, the one way Between Subjects Analysis of Variance test, and statistical tests related to (multiple) linear regression analysis with continuous and categorical predictors; and clarify the statistical and/or methodological assumptions that apply to the techniques that are discussed in this course.
+5.	explain basic concepts in regression analysis, including: linear association, least-squares estimation, explained variance, Multiple R, multiple correlation, adjusted R-square, raw and standardized regression coefficients, model-comparison tests, predicted scores, residuals and the assumptions;
+6.	choose the appropriate analysis technique for answering a specific research problem from the range of techniques that are covered in the course.
+7.	use the software package SPSS to perform several statistical data analyses and be able to correctly interpret and report the output to an informed audience (e.g., Liberal arts students, researchers from the social sciences/business and economics/cognitive neuroscience).
+8.	draw valid conclusions from the results of empirical data analyses given specific research questions envisaged.
+
+### Major Business and Economics
+
+9.	apply statistical tests in the context of multiple linear regression models with interaction terms and logistic regression models; interpret the corresponding output. 
+10.	describe the concepts of probabilities, odds and logits; describe the relationship between the three scales; transform one into another (formulae are provided).
+
+### Major Cognitive Neuroscience
+
+11.	apply statistical tests in the context of factorial ANOVA, ANCOVA and Analysis of Repeated measures; interpret the corresponding output; and calculate and interpret effect size estimates relevant for these statistical techniques (e.g., (partial) eta squared)
+
+### Major Social Sciences
+
+12.	apply statistical tests in the context of multiple linear regression models with interaction terms and interpret the corresponding output.
+13.	gauge the reliability of measurements from questionnaires and identify problematic items.
+14.	explore the dimensionality of questionnaire data.
+
+## Attendance
+
+Attendance is mandatory based on our experience that students who actively participate tend to pass the course, whereas those who do not tend to drop out or fail.
+All lectures and practicals ‘build’ on each other,
+so if you have to miss either one, absolutely make sure you have caught up with the materials before the next session.
+
+
+## Staff
+
+**Coordinator:**
+
+[dr. Caspar J. van Lissa](https://www.tilburguniversity.edu/nl/medewerkers/c-j-vanlissa)
+
+**Lab sessions**
+
+(Thu) Tra Lê
+
+## Teaching Philosophy
+
+The corona crisis is challenging all of us to rethink how we teach and learn. But aside from the challenges, it also offers opportunities. In adapting this course, we kept two goals in mind: increasing the alignment between the way of teaching and the learning goals, and ensuring high-quality interaction among students and between the students and teachers while still using online communication. Based on these goals, we made the following changes:
+
+1. During the course, you will be working in learning teams to promote interaction among students and peer support
+2. The two in-person exams (4 hours each) are replaced with take-home assignments: Two group assignments, and one individual assignment.
+
+
+### Why group assignments?
+
+Contact with fellow students is a key aspect of the university experience.
+We want to stimulate you to engage with the material and with one another.
+Therefore, the portfolio assignments are made in groups.
+There are also aspects of learning in groups that can really improve your knowledge, like peer feedback.
+To ensure that every group member pulls their weight, the final exam tests each student's individual comprehension of all material covered in the portfolios.
+
+Groups comprise 3-5 members and are assigned randomly when the course starts.
+However, it is allowed to switch with a consenting member of another group,
+or to join/merge with another small group if your group has become smaller than 3 members.
+There are three portfolio registration deadlines. At this point, one group member submits the definitive group composition via a Google form.
+
+### Why use portfolio assessment?
+
+Portfolio assignments are well-suited for a skills-based course like Statistics 1 & 2.
+They also take a lot of the pressure off because you can work at your own pace, and keep improving the work until it is good enough. We entrust you with the responsibility of making  these portfolio assignments in good faith, without instrumental assistance from outside your group or plagiarism, so I kindly ask you to make good on this trust, and hand in original work to show what you’ve learned.
+
+### Use of AI for making assignments
+
+There is, in principle, nothing wrong with using AI-based tools like ChatGPT,
+as you will also have access to them in your working life - but be warned:
+when you use ChatGPT, it is your responsibility to thoroughly check its output for logical consistency and correctness.
+You may not yet have the level of expertise required to know when ChatGPT generates irrelevant nonsense - but the teacher who grades your work does.
+Consider this carefully when deciding what makes more sense: doing your work manually, making sure each step is correct - or outsourcing it to AI, and then checking its work before submitting.
+
+## Grading
+
+Your grade is based on three portfolio assignments made in groups,
+and one individual exam to test comprehension of the material covered in the portfolios.
+
+### Portfolios 40% (3 x 13.3%)
+
+You work on the portfolio assignments with your group, both during the lab sessions and outside of class. You hand in your group’s portfolio assignment before the set deadline, at which point it is graded. If your grade is below the passing level of 5.5, your group will have the opportunity to revise the portfolio based on teacher feedback to receive a maximum grade of 6.
+
+### Exam 60% 
+
+To make sure that all students are equally involved in the making of the portfolio assignments, an individual exam assesses comprehension of the material covered therein. It is a digital multiple choice exam. You may bring all course materials to the exam, including the portfolio. The exam consists of a common part and a major-specific part. Note: As per university policy, a guessing correction is applied to your grade.
+
+## Assignments 
+
+A description of the assignments follows below.
+For each assignment, every element labeled with a lower case letter is graded fail (0 points), pass (1 point), or excellent (1.5 points).
+Grades are summed for each assignment, and rescaled from 1-10.
+The final grade is a weighted average across assignments of the rescaled grades (weights in %).
+Note that the assignments are **not** full-length papers!
+You only get 200 words to justify your theoretical model, and 300 words to discuss the results.
+The focus should be on your analysis; how it relates to theory (introduction), and what you have learned from it and how you might improve it (discussion).
+
+1. Apply the “latent variable model” to a real-life problem, where observed variables do not directly measure, but are indicators of, an unobserved social scientific construct (G, 25%)
+    a. Find a suitable dataset, for example: (no word limit)
+        i.	Data you have collected for a previous course
+        ii.	Open data, provided with a published paper
+        iii.	The “Coping with COVID-19” dataset (if you can’t find anything)
+    b.	Describe the dataset, and introduce the theoretical latent variable model (200 words)
+    c.	Estimate the latent variable model (PCA, EFA, CFA) and conduct reliability analysis, provide relevant output in a suitable format (no word limit; as short as possible and as long as necessary to report the relevant output)
+    d.	Explain your rationale for important modeling decisions (300 words)
+        i.	Motivate your choice for the type of latent variable model
+        ii.	Discuss assumptions
+        iii.	Discuss other important decisions, as discussed in the course reading materials
+    e.	Report and interpret the results in APA style  (no word limit; as short as possible and as long as necessary to report the relevant results)
+    f.	Discuss the results in max 300 words
+        i.	Devote attention to strengths and limitations
+2. Use the “path model” to describe how several variables are causally related to one another (G, 25%)
+    a.	Find a suitable dataset, for example: (no word limit)
+        i.	Data you have collected and analyzed for a previous course
+        ii.	Open data, provided with a published paper
+        iii.	The “Coping with COVID-19” dataset (if you can’t find anything)
+    b.	Describe the dataset, and introduce the theoretical path model (200 words)
+    c.	Conduct a SEM path model to answer the theoretical questions  (no word limit; as short as possible and as long as necessary to report the relevant output)
+        i. 	This can be a re-analysis of a question that had been tested using regression, ANOVA, or t-test analysis in the original paper
+    d.	Explain your rationale for important modeling decisions (300 words)
+        i.	Fit between theory and model
+        ii.	Model assumptions
+        iii.	Difference/similarity between the path model and the (original) regression, ANOVA, or t-test analysis
+        iv.	Why you use standardized or unstandardized coefficients
+    e.	Report and interpret the results in APA style  (no word limit; as short as possible and as long as necessary to report the relevant results)
+        i. 	Include measures of explained variance for the dependent variables.
+    f.	Discuss the results (max 300 words)
+        i.	Devote attention to strengths and limitations
+3. Independently analyze data using the free, open-source statistical software R (I, 50%) 
+    a.	Find a suitable dataset, for example: (no word limit)
+        i.	Data you have collected for a previous course
+        ii.	Open data, provided with a published paper
+        iii.	The “Coping with COVID-19” dataset (if you can’t find anything)
+    b.	Describe the dataset, and introduce a theory involving at least 3 variables that can be tested using these data (300 words)
+    c.	Translate the theory to lavaan syntax and estimate the model (could be multiple models if you think it’s necessary; no word limit)
+    d.	Use at least all of the following: (no word limit)
+        i.	One latent variable
+        ii.	Moderation (continuous or multi-group)
+        iii.	Mediation
+    e. 	Explain your rationale for important modeling decisions (300 words)
+        i.	Fit between theory and model
+        ii.	Model assumptions
+        iii.	Difference/similarity between the path model and the (original) regression, ANOVA, or t-test analysis
+        iv.	Why you use standardized or unstandardized coefficients
+    f.	Report and interpret your results in APA style  (no word limit; as short as possible and as long as necessary to report the relevant results)
+    g.	Discuss your results in maximum 500 words
+
+
+## Credit
+
+This book is based on Lisa DeBruine's "booktem":
+
+> DeBruine L, Lakens D (2023). _booktem: Methods Book Template_.
+  https://github.com/debruine/booktem, https://debruine.github.io/booktem/.
+
+Also see: https://psyteachr.github.io/
