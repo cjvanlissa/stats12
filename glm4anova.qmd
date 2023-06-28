@@ -1,0 +1,95 @@
+# GLM-IV: ANOVA {#sec-glm4}
+
+```{r, include = FALSE}
+source("R/booktem_setup.R")
+source("R/my_setup.R")
+```
+
+We can also use regression analysis to examine mean differences between the categories of a nominal or ordinal predictor with more than two categories.
+Suppose we have a categorical predictor, such as socioeconomic status (SES), with three categories: Low, Medium, and High. We want to predict fathers' involvement in child rearing based on these SES categories. We can use regression analysis to model this relationship by using dummy variables.
+
+We previously discussed how *bivariate* linear regression allows us to model the effect of a binary categorical predictor by using dummy coding.
+We code one variable as the reference group (giving it the value 0), 
+and estimate the mean difference between the reference group and the other category.
+
+When we have two or more categories, we can use the same principle - but we need to expand the model. For our example with SES, we can select one reference category (say, High SES), and we would create **two** dummy variables to estimate the mean differences between the reference category and the Medium and Low SES categories.
+Our regression model then includes both dummy variables as predictors, along with the intercept term.
+
+This regression model is completely equivalent to one-way ANOVA (Analysis of Variance). Think of ANOVA as a different interface to the same analysis, which presents the results in a slightly different way that is more common in some subfields of social science.
+
+When we perform an ANOVA, we conduct an omnibus test of differences between group means.
+The default null hypothesis is that all group means are equal, and the alternative hypothesis suggests that at least two group means differ.
+We test this hypothesis with an F-test for the overall significance of the model.
+You are already familiar with this test from the lecture on sums of square.
+
+One way to think about the F-test in th context of ANOVA is that it compares the size of the variance (differences) in group means, relative to the error variance in the data.
+If the differences between group means are large relative to the spread of the data, we observe a significant test.
+In ANOVA, the regression sum of squares is also called the "between-group sum of squares",
+and the error sum of squares is also called "within-group sum of squares".
+
+When interpreting the results of ANOVA,
+it's common to use eta squared $\eta^2$ as an effect size.
+It is simply another name for the familiar $R^2$.
+It reflects the proportion of variance in the outcome variable that can be explained by the categorical predictor.
+
+# Formative Test
+
+A formative test helps you assess your progress in the course, and helps you address any blind spots in your understanding of the material. If you get a question wrong, you will receive a hint on how to improve your understanding of the material.
+
+Complete the formative test ideally after you’ve seen the lecture, but before the lecture meeting in which we can discuss any topics that need more attention
+
+::: {.webex-check .webex-box}
+
+**Question 1**
+
+```{r, results='asis', echo = FALSE}
+mc("Suppose that I ask a random sample of 5 students how many pairs of shoes they have. The number of pairs are: 7, 6, 8, 6, and 8. What is the variance of these pairs of shoes?", 1, 4, 7, 2)
+```
+
+**Question 2**
+
+```{r, results='asis', echo = FALSE}
+mc("Six students work on a Statistics exam. They obtain the following grades: 8, 9, 5, 6, 7 and 8. The teacher calculates a certain statistic, which is equal to 7.5. Which statistic did the teacher calculate?", "Median","Mean", "Standard deviation", "Mode")
+```
+
+**Question 3**
+
+For which of the three scatterplots below is the correlation coefficient largest? `r mcq(c(answer = "A", "B", "C"))`
+
+::: {#fig-scatter layout-ncol=3}
+
+![A](images/lecture 73.png){width = 30%}
+
+![B](images/lecture 74.png){width = 30%}
+
+![C](images/lecture 76.png){width = 30%}
+
+Question 3 scatterplots
+:::
+
+```{r, results='asis', echo = FALSE}
+mc("Six students work on a Statistics exam. They obtain the following grades: 8, 9, 5, 6, 7 and 8. The teacher calculates a certain statistic, which is equal to 7.5. Which statistic did the teacher calculate?", "Median","Mean", "Standard deviation", "Mode")
+```
+:::
+
+`r hide("Show answers")`
+
+**Question 1**
+
+The variance is the sum of squared distances of observations to the mean, divided by the number of observations minus one. So calculate:
+
+$S_{X}^2= \frac{\sum_{i=1}^nX_i}{n} = \frac{(7 + 6 + 8 + 6 + 8)}{5} = 7$
+
+**Question 2**
+
+First rule out improbable answers; all grades are pretty close to each other, so it's impossible for the variance to be that high. We can see what the mode (most common value) is: it's 8. So we only choose between mean or median.
+
+Mean: calculate $\bar{X}= \frac{\sum_{i=1}^nX_i}{n} = \frac{8 + 9 + 5 + 6 + 7 + 8}{6} = 7.17$
+
+Median: order the numbers, note that there is an odd number, take the average of the two middle numbers. 5, 6, 7, 8, 8, 9 -> 7.5
+
+**Question 3**
+
+Correlation measures linear association, so eliminate option C. Option B shows a very small correlation - probably 0 or maybe .1. So the correct answer is A, which shows a moderate negative correlation.
+`r unhide()`
+

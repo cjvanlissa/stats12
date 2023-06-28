@@ -1,0 +1,367 @@
+---
+title: "Lecture 7 - GLM III\nDifferences between two groups"
+author:   "Caspar J. van Lissa"
+date:     "`r format(Sys.Date(), '%d %b %Y')`"
+format: revealjs
+server: shiny
+---
+
+```{r}
+library(kableExtra)
+library(tidySEM)
+options(knitr.kable.NA = '')
+
+set.seed(5793)
+data <- data.frame(
+  sex_dich = ordered(sample(c("Man", "Woman"), size = 100, replace = TRUE), levels = c("Woman", "Man"))
+)
+data$shoesize <- rnorm(100, mean = c(39, 43)[as.integer(data$sex_dich)], sd = 2)
+```
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(ggplot2)
+```
+
+# Categorical predictors
+
+## Binary variables
+
+Examples of binary/dichotomous variables
+
+* Nominal
+    + Biological sex (male/female)
+    + Student ethnicity (Dutch/foreign student)
+    + Has tattoo, has pets (No/Yes)
+* Ordinal
+    + Performance on exam question (Fail/Pass)
+    + Risk of disease (Low/High)
+    
+## Ways of coding
+
+```{r}
+n = 6
+df_cat <- data.frame(
+  sex = sample(c("Man", "Woman"), size = n, replace = TRUE),
+  ethnicity = sample(c(0, 1), size = n, replace = TRUE),
+  tattoo = sample(c(1, 2), size = n, replace = TRUE),
+  exam = sample(c("Fail", "Pass"), size = n, replace = TRUE),
+  risk = sample(c(-1, 1), size = n, replace = TRUE)
+)
+kableExtra::kbl(df_cat)
+```
+
+## Dummy coding
+
+```{r}
+df_dum <- model.matrix(~., lapply(df_cat, factor))[,-1]
+names(df_dum) <- paste0("D_", c("woman", "Dutch", "tattoo", "pass", "risk_high"))
+kableExtra::kbl(df_dum)
+```
+
+## Other ways of coding
+
+* There are other ways to code binary variables
+* Outside the scope of this course
+* Further reading: https://stats.oarc.ucla.edu/spss/faq/coding-systems-for-categorical-variables-in-regression-analysis
+
+# Regression with dummy variables
+
+## Linear regression
+
+Linear regression is a basic model that can be adapted for various purposes
+
+You've learned $Y_i = a + b*X_i + e_i$
+
+* Where $X$ is a continuous predictor
+
+Today we examine how we can use the same model for *binary predictors*
+
+
+
+## Scatterplot
+
+We have previously examined some scatterplots, including this one:
+
+![](images/sexshoesscatter_noreg.png)
+
+## Scatterplot
+
+You could imagine drawing a diagonal line through the two categories:
+
+![](images/sexshoesscatter.png)
+
+## Coefficients
+
+The formula for a diagonal regression line is:
+
+$Y = a + bX$
+
+
+$a$ is the $\color{blue}{\text{intercept}}$
+
+* This is the predicted value **when X equals 0**
+
+$b$ is the $\color{blue}{\text{slope}}$, how steep the line is
+
+* Y increases by $b$ **when X increases by 1**
+
+## Regression with binary predictor
+
+We make clever use of regression to include a binary predictor:
+
+* Assign the value 0 to one of the categories
+    + This is the "reference category"
+* Assign the value 1 to the other category
+* You can enter your data this way, or "recode" existing variables
+* Regression will estimate the mean of the reference category and test the difference between the two categories!
+
+## Visualization
+
+```{r, fig.width=7, fig.asp=3/4, echo=FALSE}
+meandat <- tapply(data$shoesize, data$sex_dich, mean)
+meandat <- data.frame(sex = c(0,1), Shoesize = meandat)
+
+shoedat <- data.frame(sex=as.integer(data$sex_dich)-1, Shoesize = data$shoesize)
+
+shoereg <- lm(Shoesize ~ sex, data= shoedat)
+p <- ggplot(shoedat, aes(x = sex, y = Shoesize))
+p + geom_bar(data = meandat, colour = " black", fill="white", stat = "identity") +#position = 'dodge', 
+  geom_jitter(aes(x = sex), width=.2, alpha=.5)+
+  scale_x_continuous(breaks = c(0,1), labels = c("Woman\n0", "Man\n1"))+
+  geom_abline(intercept = shoereg$coefficients[1], slope = shoereg$coefficients[2], colour = "blue", size = 1)+
+  coord_cartesian(ylim=c(30,50))+
+  theme_bw()
+  
+
+```
+
+
+## Visualisation
+
+```{r, fig.width=7, fig.asp=3/4, echo=FALSE}
+library(ggplot2)
+meandat <- tapply(data$shoesize, data$sex_dich, mean)
+meandat <- data.frame(sex = c(0,1), Shoesize = meandat)
+
+shoedat <- data.frame(sex=as.integer(data$sex_dich)-1, Shoesize = data$shoesize)
+
+shoereg <- lm(Shoesize ~ sex, data= shoedat)
+p <- ggplot(shoedat, aes(x = sex, y = Shoesize))
+p + geom_bar(data = meandat, colour = " black", fill="white", stat = "identity") +#position = 'dodge', 
+  geom_jitter(aes(x = sex), width=.2, alpha=.5)+
+  scale_x_continuous(breaks = c(0,1), labels = c("Woman\n0", "Man\n1"))+
+  geom_abline(intercept = shoereg$coefficients[1], slope = shoereg$coefficients[2], colour = "blue", size = 1)+
+  geom_segment(x=0, xend=0, y=0, yend = shoereg$coefficients[1], colour = "green", size = 2)+
+  annotate("text", x = .1, y = 32, label = "a", colour = "green", size =12)+
+  geom_segment(x=0, xend=1, y=shoereg$coefficients[1], yend = shoereg$coefficients[1], colour = "red", size = 2)+
+  geom_segment(x=1, xend=1, y=shoereg$coefficients[1], yend = shoereg$coefficients[1]+shoereg$coefficients[2], colour = "red", size = 2)+
+  annotate("text", x = 1.1, y = 40, label = "b", colour = "red", size=  12)+
+  coord_cartesian(ylim=c(30,50))+
+  theme_bw()
+
+```
+
+## Formula
+
+$\hat{Y}_i = a + b*X_i$
+
+* $\hat{y}_i$: Individual predicted value of Shoesize
+* $a$: Intercept
+* $b$: Slope
+* $X_i$: Sex (0 = woman, 1 = man)
+
+## Fill in the formula
+
+**Fill in for women:**
+
+* $\hat{Y}_i = a + b*0 = a$
+
+* So the predicted shoesize for women is the intercept (a)
+
+**Fill in for men:**
+
+* $\hat{Y}_i = a + b*1 = a + b$
+* So the predicted shoesize for men is the intercept (a) plus the difference between men and women (b)
+
+## Regression with dummy
+
+![](images/sexshoesreg.png)
+
+
+
+
+# Independent samples t-test
+
+## Independent Samples t-Test
+
+The independent samples t-test is used to compare the means of two independent groups
+
+* It is equivalent to the t-test of the slope in regression with a binary predictor
+
+## Compare: t-test
+
+![](images/sexshoest.png)
+
+
+## Compare: Regression
+
+![](images/sexshoesreg.png)
+
+## Assumptions
+
+The t-test has the same assumptions as bivariate linear regression, with slight nuances
+
+* Linearity of relationship between X and Y
+    + Difference between two groups is linear by definition
+* Normality of residuals
+    + The outcome is normally distributed in each group
+* Homoscedasticity
+    + Equality of Variances in both groups (Levene's test)
+* Independence of observations
+
+## Levene's test {.smaller}
+
+By default, SPSS tests the assumption of homoscedasticity using Levene's test
+
+* This is an F-test, as two sources of variance (i.e., the variances of the two groups) are compared
+* $H_0: S^2_1 = S^2_2$, which is equivalent to $H_0: S^2_1 - S^2_2 = 0$
+* If Levene's test is *significant*, there is evidence that the two variances are not equal
+* SPSS offers a test that allows for unequal variances
+
+But remember: The notion of "assumption checks" risks overfitting data
+
+* Better to make an informed guess (variances equal or not), and stick with it
+
+## Demo
+
+```{r}
+#| panel: fill
+fluidPage(fluidRow(
+  column(3, shiny::numericInput(inputId = "m1", label = "M1 = ", value = 0, min = -5, max = 5, step = 1)),
+  column(3, shiny::numericInput(inputId = "sd1", label = "SD1 = ", value = 1, min = 0, max = 5, step = .5)),
+    column(3, shiny::numericInput(inputId = "m2", label = "M2 = ", value = 1, min = -5, max = 5, step = 1)),
+  column(3, shiny::numericInput(inputId = "sd2", label = "SD2 = ", value = 1, min = 0, max = 5, step = .5))
+),
+fluidRow(
+  column(12, textOutput('txt'))
+),
+fluidRow(
+  column(12, plotOutput('plot1', width = "1000px", height = "500px"))
+))
+
+```
+
+
+```{r}
+#| context: server
+library(ggplot2)
+output$plot1 <- renderPlot({
+  ggplot(NULL) +
+  stat_function(fun = dnorm, args = list(mean = input$m1, sd = input$sd1), colour = "red") +
+  stat_function(fun = dnorm, args = list(mean = input$m2, sd = input$sd2), colour = "blue") +
+  scale_x_continuous(limits = c(-5, 5))+
+  ylab("Probability density") +
+  xlab("Number line") +
+  scale_y_continuous(breaks = NULL, expand = c(0, 0)) +
+  theme_bw()
+})
+
+output$txt <- shiny::renderText({
+  n = 30
+  set.seed(1)
+  df <- data.frame(
+  group = factor(rep(c("g1", "g2"), each = n)),
+  y = c(rnorm(n, mean = input$m1, sd = input$sd1),
+    rnorm(n, mean = input$m2, sd = input$sd2))
+  )
+  res <- car::leveneTest(y ~ group, df)
+  paste0("Levene's test: F(1, 58) ", tidySEM::report(res$`F value`[1]), ", p ", tidySEM::report(res$`Pr(>F)`[1]))
+})
+```
+
+## Step 1. Hypotheses
+
+The default hypothesis in most software is:
+
+* $H_0: \mu_1 = \mu2$, which is equivalent to $H_0: (\mu_1 - \mu_2) = 0$
+* $H_A: (\mu_1 - \mu_2) \neq 0$
+
+But a one-sided test is also possible:
+
+* $H_0: \mu_1 > \mu2$, which is equivalent to $H_0: (\mu_1 - \mu_2) > 0$
+* $H_A: (\mu_1 - \mu_2) \leq 0$
+
+Or custom hypothesis
+
+## Step 2. Test statistic {.smaller}
+
+Observed group difference minus hypothesized group difference, divided by the appropriate standard error
+
+$$
+t = \frac{(\bar{X}_1-\bar{X}_2) - (\mu_{1}-\mu_2)_{H_0}}{SE_{\bar{X}_1-\bar{X}_2}}
+$$
+
+Standard error:
+
+$$
+SE_{\bar{X}_1-\bar{X}_2} = \sqrt{S^2_{pooled}(\frac{1}{n_1}+\frac{1}{n_2})}
+$$
+
+Where
+
+$$
+S^2_{pooled} = \frac{(n_1-1)*S^2_1 + (n_2-1)*S^2_2}{n_1+n_2-2}
+$$
+
+## Step 3. P-value
+
+Use the t-distribution with appropriate degrees of freedom
+
+* $df: n_1+n_2-2$, minus 2 because two parameters are being estimated
+    + $a$ and $b$, or the two means $\bar{X}_1$ and $\bar{X}_2$
+* Find p-value in the t-table, online calculator, Excel or SPSS
+* Remember: decide whether you assume equal variances or not
+
+## Step 4. Draw conclusion
+
+* If $p < \alpha$, the test is significant
+* It is very unlikely to observe a group difference at least as large as you observed, if $H_0$ were true
+
+# Effect size
+
+## Effect size
+
+The t-test tells us whether the difference between groups is statistically significant
+
+* But is it also  _practically_  significant?
+* Remember statistical power
+    + In a large enough sample, even trivial differences between groups become significant
+* Effect size measures standardize the difference between the group means
+* This makes it interpetable on a meaningful scale (i.e., number of standard deviations)
+
+## Visualization
+
+![](images/Lecture 534.png)
+
+## Cohen's D
+
+Cohen's d is an effect size for mean differences, calculated as:
+
+$$
+\frac{\bar{X}_1-\bar{X}_2}{S_{pooled}}
+$$
+
+Difference divided by pooled SD
+
+## Interpreting Cohen's d
+
+Larger Cohen's d: bigger difference between the groups
+
+Rule of thumb:
+
+- Small effect size: d ≈ 0.2
+- Medium effect size: d ≈ 0.5
+- Large effect size: d ≈ 0.8
+

@@ -1,0 +1,85 @@
+# GLM-III: Binary Predictors {#sec-glm3}
+
+```{r, include = FALSE}
+source("R/booktem_setup.R")
+source("R/my_setup.R")
+```
+
+We can examine group differences in a continuous outcome variable using bivariate regression.
+To do this, group membership must be represented as a binary variable (e.g., gender or ethnicity).
+To ensure meaningful results, we use dummy coding to represent the binary variable.
+Dummy coding assigns the value 0 to one category, which serves as the reference category, and the value 1 to the other category. 
+When we include this dummy variable as the predictor in a bivariate linear regression analysis,
+it will estimate the mean value of the reference category and test the difference between the means of the two categories.
+
+Regression with a binary predictor is completely equivalent to the independent samples t-test. The independent samples t-test is also used to compare the means of two independent groups.
+In regression, we estimate the slope (b) for the binary predictor, which represents the difference between the means of the two groups.
+This t-test of the slope in regression is the same as an independent samples t-test.
+
+Both regression with a binary predictor and the independent samples t-test rely on certain assumptions. These include the linearity of the relationship between the binary predictor and the outcome variable, the normality of residuals (the outcome variable should be normally distributed within each group), homoscedasticity (equal variances in both groups), and independence of observations. To check for equal variances, we can use Levene's test - but keep in mind that "assumption checks" are questionable. If you assume equal variances, report the normal t-test; if you do not assume equal variances, you can report a corrected t-test that allows for different variances. Both are included in SPSS output by default.
+
+To determine the practical significance of a mean difference, we can calculate an effect size measure. Cohen's d is a commonly used effect size for mean differences. It standardizes the difference between the two group means by the pooled standard deviation.
+A larger Cohen's d indicates a greater magnitude of difference between the groups.
+As a rule of thumb, a small effect size is typically considered around d ≈ 0.2, a medium effect size around d ≈ 0.5, and a large effect size around d ≈ 0.8.
+
+# Formative Test
+
+A formative test helps you assess your progress in the course, and helps you address any blind spots in your understanding of the material. If you get a question wrong, you will receive a hint on how to improve your understanding of the material.
+
+Complete the formative test ideally after you’ve seen the lecture, but before the lecture meeting in which we can discuss any topics that need more attention
+
+::: {.webex-check .webex-box}
+
+**Question 1**
+
+```{r, results='asis', echo = FALSE}
+mc("Suppose that I ask a random sample of 5 students how many pairs of shoes they have. The number of pairs are: 7, 6, 8, 6, and 8. What is the variance of these pairs of shoes?", 1, 4, 7, 2)
+```
+
+**Question 2**
+
+```{r, results='asis', echo = FALSE}
+mc("Six students work on a Statistics exam. They obtain the following grades: 8, 9, 5, 6, 7 and 8. The teacher calculates a certain statistic, which is equal to 7.5. Which statistic did the teacher calculate?", "Median","Mean", "Standard deviation", "Mode")
+```
+
+**Question 3**
+
+For which of the three scatterplots below is the correlation coefficient largest? `r mcq(c(answer = "A", "B", "C"))`
+
+::: {#fig-scatter layout-ncol=3}
+
+![A](images/lecture 73.png){width = 30%}
+
+![B](images/lecture 74.png){width = 30%}
+
+![C](images/lecture 76.png){width = 30%}
+
+Question 3 scatterplots
+:::
+
+```{r, results='asis', echo = FALSE}
+mc("Six students work on a Statistics exam. They obtain the following grades: 8, 9, 5, 6, 7 and 8. The teacher calculates a certain statistic, which is equal to 7.5. Which statistic did the teacher calculate?", "Median","Mean", "Standard deviation", "Mode")
+```
+:::
+
+`r hide("Show answers")`
+
+**Question 1**
+
+The variance is the sum of squared distances of observations to the mean, divided by the number of observations minus one. So calculate:
+
+$S_{X}^2= \frac{\sum_{i=1}^nX_i}{n} = \frac{(7 + 6 + 8 + 6 + 8)}{5} = 7$
+
+**Question 2**
+
+First rule out improbable answers; all grades are pretty close to each other, so it's impossible for the variance to be that high. We can see what the mode (most common value) is: it's 8. So we only choose between mean or median.
+
+Mean: calculate $\bar{X}= \frac{\sum_{i=1}^nX_i}{n} = \frac{8 + 9 + 5 + 6 + 7 + 8}{6} = 7.17$
+
+Median: order the numbers, note that there is an odd number, take the average of the two middle numbers. 5, 6, 7, 8, 8, 9 -> 7.5
+
+**Question 3**
+
+Correlation measures linear association, so eliminate option C. Option B shows a very small correlation - probably 0 or maybe .1. So the correct answer is A, which shows a moderate negative correlation.
+`r unhide()`
+

@@ -1,0 +1,30 @@
+# Portfolio Data {.unnumbered}
+
+You will need to use an appropriate data source for your portfolio assignments. Although you are welcome to use any data that you consider to be suitable for making the assignments - including datasets that you have previously collected, or open access data sources - we want to make sure that everybody has a default option that meets the course requirements. Below, we introduce three data sources that have been customized for the three major tracks. You can follow your own interests in selecting one of these data sources.
+
+## SS: Values and Beliefs about Individuals and Collectives
+
+The World Values Survey (WVS) is a global research project that explores people's values and beliefs and what social and political impact these have. Among topics covered are support for democracy, tolerance of ethnic minorities, support for gender equality, the role of religion and changing levels of religiosity, the impact of globalization, attitudes toward the environment, work, family, politics, national identity, culture, diversity, insecurity, and subjective well-being. This data source is used by governments, scholars, and international organizations like the United Nations.
+
+Examples of research questions:
+
+*	What proportion of participants considers work to be very important in life? (Q5)
+*	What proportion of participants score more extreme than 9/10 on a left-right political ideology scale? (Q240)
+*	Is trust in the government significantly higher than the neutral middle of the scale (3)? (Q292O)
+*	Does participants’ age predict the attitude that children should take care of their parents? (Q38 and Q262)
+
+This synthetic dataset was inspired by Wave 7 of the World Values Survey (Haerpfer et al., 2022). All relevant information can be found here: 
+https://www.worldvaluessurvey.org/WVSDocumentationWV7.jsp
+
+**Reference:** Haerpfer, C., Inglehart, R., Moreno, A., Welzel, C., Kizilova, K., Diez-Medrano J., M. Lagos, P. Norris, E. Ponarin & B. Puranen (eds.). 2022. World Values Survey: Round Seven - Country-Pooled Datafile Version 5.0. Madrid, Spain & Vienna, Austria: JD Systems Institute & WVSA Secretariat. doi:10.14281/18241.20.
+
+## CN: Behavioral and Neural Correlates of Empathy in Adolescents
+
+Adolescence is characterized by significant changes in how individuals perceive and interact with others, both cognitively and emotionally. Empathy is a crucial element in appropriately responding to the emotions and actions of others. It is often described as the capacity to understand and share the emotional experiences of others, enabling us to comprehend and anticipate their intentions. Children who possess higher levels of empathy demonstrate greater emotional regulation and engage in more prosocial behavior towards others. This experimental study presented adolescents with either positive or negative social situations, and asked them to focus either on person A or person B in those situations (in negative situations, person A was the perpetrator and person B was the victim). They then measured how many coins participants were willing to give to the focal person. Empathy was measured using a scale with three sub-dimensions of empathy (Contagion, Understanding, and Support), and brain activation in several regions of interest was measured.
+
+This synthetic dataset was inspired by a study by Overgaauw and colleagues (2014).
+
+**Reference:** Overgaauw, S., Güroğlu, B., Rieffe, C., & Crone, E. A. (2014). Developmental Neuroscience, 36 (3-4). Behavior and Neural Correlates of Empathy in Adolescents. https://doi.org/10.1159/000363318
+
+## BE: Sustainable Food Choices
+

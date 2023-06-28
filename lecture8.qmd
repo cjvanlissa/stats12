@@ -1,0 +1,258 @@
+---
+title: "Lecture 8 - GLM IV\nDifferences between more groups"
+author:   "Caspar J. van Lissa"
+date:     "`r format(Sys.Date(), '%d %b %Y')`"
+format: revealjs
+server: shiny
+---
+
+```{r}
+library(kableExtra)
+library(tidySEM)
+options(knitr.kable.NA = '')
+
+set.seed(5793)
+data <- data.frame(
+  sex_dich = ordered(sample(c("Man", "Woman"), size = 100, replace = TRUE), levels = c("Woman", "Man"))
+)
+data$shoesize <- rnorm(100, mean = c(39, 43)[as.integer(data$sex_dich)], sd = 2)
+```
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(ggplot2)
+```
+
+# Categorical predictors
+
+## More than 2 categories
+
+Imagine we measured SES as Low, Medium and High
+
+We want to predict fathers' involvement in child rearing
+
+How can we model this using regression?
+
+## {background-iframe="https://utrecht-university.shinyapps.io/cj_anova/"}
+
+
+## Two+ categories {.smaller}
+
+Remember: we can use bivariate linear regression to model two categories
+
+$\hat{Y}_i = a + b*X_i$
+
+* a: Mean of group 1
+* b: Mean difference between groups 1 and 2
+
+For **three+** categories, we can **expand** the model:
+
+$\hat{Y}_i = a + b_1*X_{1i}+ b_2*X_{2i}$
+
+* a: Mean of group 1
+* $b_1$: Mean difference between groups 1 and 2
+* $b_2$: Mean difference between groups 1 and 3
+
+## Dummy coding
+
+We make $\color{blue}{\text{dummy variables}}$ for two of the categories of SES:
+
+SES  | $X_1$  | $X_2$ 
+-----------|--------|-------
+High       | 0      | 0
+Medium     | 1      | 0
+Low       | 0      | 1 
+
+Regression formula:
+
+$\hat{Y}_i = a + b_1*X_{1i}+ b_2*X_{2i}$
+
+
+## Dummy variabelen {.smaller}
+
+Regression formula:
+
+$\hat{Y}_i = a + b_1*X_{1i}+ b_2*X_{2i}$
+
+**Complete for High:**
+
+* $\hat{Y}_i = a + b_1*0+ b_2*0 = a$
+
+* The mean value for high SES is the intercept (a)
+
+**Complete for Medium:**
+
+* $\hat{Y}_i = a + b_1*1+ b_2*0 = a + b_1$
+
+* The mean value for Medium SES is $a$ plus the difference between High and Medium SES ($b_1$)
+
+**Complete for Low:**
+
+* $\hat{Y}_i = a + b_1*0+ b_2*1 = a + b_2$
+
+* The mean value for Low SES is $a$ plus the difference between High and Low SES ($b_2$)
+
+## Dummy variables
+
+**Intercept (a)**: Mean of the "reference category"
+
+**b-coefficients**: Mean difference relative to the "reference category"
+
+SES  | $X_1$  | $X_2$ 
+-----------|--------|-------
+High       | 0      | 0
+Medium     | 1      | 0
+Low       | 0      | 1 
+
+## Reference category
+
+If you want to change the reference category, choose different dummies:
+
+SES  | $X_1$  | $X_2$ 
+-----------|--------|-------
+High       | 1      | 0
+Medium     | 0      | 1
+Low       | 0      | 0 
+
+## Degrees of freedom?
+
+Three categories, two dummy variables, how many parameters?
+
+$\hat{Y}_i = a + b_1*X_{1i}+ b_2*X_{2i}$?
+
+* $df_1$: p-1
+* $df_2$: n-p
+
+p: 3 ($a, b_1, b_2$)
+
+# ANOVA
+
+## What is ANOVA
+
+**AN**alysis **O**f **VA**riance
+
+One-way ANOVA has one categorical predictor and a continuous outcome
+
+* It provides an omnibus test of differences between group means
+
+
+## Step 1. Hypothesis {.smaller}
+
+ANOVA: comparing means of two or more groups
+
+* Common default null hypothesis:
+    + $H_0: \mu_1= \mu_2=\mu_3$, $H_a: \text{not } H_0$
+    + $H_0$ is rejected if there are sufficient differences between ANY of the means
+    + So $H_0$ is also rejected if we find that $\mu_1= \mu_2; (\mu_1, \mu_2) < \mu_3$
+
+Significant ANOVA means that the means of at least two groups differ
+
+* We can do follow-up analyses (e.g., pairwise comparisons) to understand which groups differ significantly
+
+## Step 2. Test statistic {.smaller}
+
+* Why called "Analysis of Variance" when we are comparing group means?
+    + Because we test how large the variance in group means is, relative to the error variance
+    + Of course, since we compare two sources of variance, we'll use an F-test
+
+$$
+F = \frac{MS_B}{MS_W} = \frac{SSB / df_b}{SSW/df_w}
+$$
+
+
+How large are the between-group differences relative to the error variance?
+
+
+## {background-iframe="https://utrecht-university.shinyapps.io/Anova-Regression/"}
+
+## Sums of Squares in ANOVA
+
+Sum  | Formula                         | Meaning
+-----|---------------------------------|---------------
+SST  | $\sum{(Y_i - \bar{Y})^2}$       | Variation of individuals wrt grand mean
+SSB (SSR)  | $\sum{(\hat{Y}_i - \bar{Y})^2}$ | Variation of group means wrt grand mean
+SSW (SSE)  | $\sum{(Y_i - \hat{Y}_i)^2}$     | Variation of individuals wrt group means
+
+
+## {background-iframe="https://utrecht-university.shinyapps.io/cj_anova/"}
+
+## Step 3. p-value
+
+The F-distribution has two degrees of freedom parameters:
+
+* Numerator df: $df_b$ = g−1 (g = number of groups)
+* Denominator df: $df_w$ = n-g (n = number of observations)
+
+How to calculate the p-value?
+
+* Statistical software
+* Table in book
+* Excel: `=F.DIST.RT(x, degree_freedom1, degree_freedom2)`
+* R: `pf(F_statistic, dataframe1, dataframe2, lower.tail = FALSE)`
+
+## Step 4. Conclusion
+
+* If $p < \alpha$, the test is significant
+* It is very unlikely to observe differences between group means at least as large as you observed, if $H_0$ were true
+
+<!-- ## ANOVA specification of regression {.smaller} -->
+
+<!-- To compare 3 groups using regression, We can include an intercept and two dummies: -->
+
+<!-- * $\hat{Y}_i = a + b_1*X_{1i}+ b_2*X_{2i}$ -->
+<!-- * $a$ is the mean of the reference category -->
+<!-- * $b$s give us the difference between the mean of the reference category and the means of the other categories -->
+
+<!-- But we could also estimate all three means (not their differences): -->
+
+<!-- * $\hat{Y}_i = b_1*X_{1i}+ b_2*X_{2i}+ b_3*X_{3i}$ -->
+<!-- * Dropping the intercept and including **three** dummies -->
+<!-- * Each $b$ is now the estimated mean of its category -->
+
+<!-- ## Including all dummies -->
+
+<!-- **b-coefficients**: Mean of the category the dummy codes for -->
+
+<!-- SES  | $X_1$  | $X_2$ | $X_2$  -->
+<!-- -----------|--------|-------|------- -->
+<!-- High       | 1      | 0     | 0 -->
+<!-- Medium     | 0      | 1     | 0 -->
+<!-- Low       | 0      | 0      | 1 -->
+
+<!-- ## Complete formula {.smaller} -->
+
+<!-- $\hat{Y}_i = b_1*X_{1i}+ b_2*X_{2i}+ b_3*X_{3i}$ -->
+
+<!-- **Complete for High:** -->
+
+<!-- * $\hat{Y}_i = b_1*1+ b_2*0+ b_3*0 = b_1$ -->
+
+<!-- * The mean value for high SES is $b_1$ -->
+
+<!-- **Complete for Medium:** -->
+
+<!-- * $\hat{Y}_i = b_1*0+ b_2*1+ b_3*0 = b_2$ -->
+
+<!-- * The mean value for medium SES is $b_2$ -->
+
+<!-- **Complete for Low:** -->
+
+<!-- * $\hat{Y}_i = b_1*0+ b_2*0+ b_3*1 = b_3$ -->
+
+<!-- * The mean value for high SES is $b_3$ -->
+
+
+## Effect size in ANOVA
+
+It's common to call $R^2$ for ANOVA models "eta squared", $\eta^2$
+
+* Note: It is exactly the same as $R^2$
+    + $\eta^2 = \frac{SSB}{SST}$, $R^2 = \frac{SSR}{SST}$
+* There are rules of thumb like (Cohen, 1988)
+* But they differ from rules of thumb for $R^2$, which is confusing
+
+| Small | 0.01 |
+| :-: | :-: |
+| Medium | 0.06 |
+| Large | 0.14 |

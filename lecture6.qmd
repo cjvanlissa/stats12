@@ -10,7 +10,14 @@ server: shiny
 library(kableExtra)
 library(tidySEM)
 options(knitr.kable.NA = '')
-set.seed(1)
+
+set.seed(42/101)
+Hours = abs(rnorm(92, 4, 2))
+Grade = abs(3 + (7/9)*Hours)+rnorm(92)
+Grade[Grade > 10] <- 10 - (Grade[Grade > 10] - 10)
+studentdata <- data.frame(Grade=Grade, Hours=Hours)
+Grade.Hours <- lm(Grade ~Hours, studentdata)
+predicted <- predict(Grade.Hours)
 ```
 
 
@@ -39,7 +46,10 @@ Last week, we discussed linear regression
 * Today, we will learn how that is determined
 
 ```{r, fig.width=6, fig.asp=3/4, echo=FALSE}
-ggplot(studentdata, aes(x=Hours, y=Grade))+geom_point()+geom_hline(yintercept = 0)+geom_vline(xintercept = 0)+theme_bw()+scale_x_continuous(limits = c(0,10), breaks=seq(0, 10, by = 1))+scale_y_continuous(limits = c(0,10), breaks=seq(0, 10, by = 1))+geom_hline(yintercept = mean(Grade), linetype = 2, size = 2)+geom_segment(x=Hours, xend = Hours, y = mean(Grade), yend = Grade,  col="blue")
+p <- ggplot(studentdata, aes(x=Hours, y=Grade))+geom_point()+geom_hline(yintercept = 0)+geom_vline(xintercept = 0)+theme_bw()+scale_x_continuous(limits = c(0,10), breaks=seq(0, 10, by = 1))+scale_y_continuous(limits = c(0,10), breaks=seq(0, 10, by = 1))+
+  geom_abline(intercept = Grade.Hours$coefficients[1], slope = Grade.Hours$coefficients[2], colour = "black", size = 1)+
+  geom_segment(x = Hours, xend = Hours, y = Grade,  yend = predict.lm(Grade.Hours, newdata = studentdata), colour = "blue")
+p
 ```
 
 ## Ordinary least squares {.smaller}
@@ -52,7 +62,7 @@ Linear regression models are estimated using the "ordinary least squares" method
 Can we simply add the prediction errors for the 92 students below?
 
 ```{r, fig.width=6, fig.asp=3/4, echo=FALSE}
-ggplot(studentdata, aes(x=Hours, y=Grade))+geom_point()+geom_hline(yintercept = 0)+geom_vline(xintercept = 0)+theme_bw()+scale_x_continuous(limits = c(0,10), breaks=seq(0, 10, by = 1))+scale_y_continuous(limits = c(0,10), breaks=seq(0, 10, by = 1))+geom_hline(yintercept = mean(Grade), linetype = 2, size = 2)+geom_segment(x=Hours, xend = Hours, y = mean(Grade), yend = Grade,  col="blue")
+p
 ```
 
 
@@ -60,14 +70,14 @@ ggplot(studentdata, aes(x=Hours, y=Grade))+geom_point()+geom_hline(yintercept = 
 
 **Problem:** Because the regression line, by definition, goes exactly through the "middle" of the data, the sum of all prediction errors is always exactly 0
 
-Sum of <font color = "blue">positive</font> prediction errors: `r predicted<- cijfer.uren$coefficients[1]+cijfer.uren$coefficients[2]*Uren; round(sum((Cijfer-predicted)[(Cijfer-predicted) > 0]),2)`
+Sum of <font color = "blue">positive</font> prediction errors: `r predicted<- Grade.Hours$coefficients[1]+Grade.Hours$coefficients[2]*Hours; round(sum((Grade-predicted)[(Grade-predicted) > 0]),2)`
 
-Sum of \alert{negative} prediction errors: `r round(sum((Cijfer-predicted)[(Cijfer-predicted) < 0]),2)`
+Sum of \alert{negative} prediction errors: `r round(sum((Grade-predicted)[(Grade-predicted) < 0]),2)`
 
 ```{r, fig.width=5, fig.asp=3/4, echo=FALSE,}
-ggplot(studentdata, aes(x=Uren, y=Cijfer))+geom_point()+geom_hline(yintercept = 0)+geom_vline(xintercept = 0)+theme_bw()+scale_x_continuous(limits = c(0,10), breaks=seq(0, 10, by = 1))+scale_y_continuous(limits = c(0,10), breaks=seq(0, 10, by = 1))+
-  geom_abline(intercept = cijfer.uren$coefficients[1], slope = cijfer.uren$coefficients[2], colour = "black", size = 1)+
-  geom_segment(x = Uren, xend = Uren, y = Cijfer,  yend = predict.lm(cijfer.uren, newdata = studentdata), colour = ifelse(Cijfer > predicted, "blue", "red"))
+ggplot(studentdata, aes(x=Hours, y=Grade))+geom_point()+geom_hline(yintercept = 0)+geom_vline(xintercept = 0)+theme_bw()+scale_x_continuous(limits = c(0,10), breaks=seq(0, 10, by = 1))+scale_y_continuous(limits = c(0,10), breaks=seq(0, 10, by = 1))+
+  geom_abline(intercept = Grade.Hours$coefficients[1], slope = Grade.Hours$coefficients[2], colour = "black", size = 1)+
+  geom_segment(x = Hours, xend = Hours, y = Grade,  yend = predict.lm(Grade.Hours, newdata = studentdata), colour = ifelse(Grade > predicted, "blue", "red"))
   
 ```
 
@@ -81,10 +91,12 @@ The positive errors are exactly negated by the negative errors
 * We can then find the regression line that gives the smallest "sum of squared errors"
 * That regression line also gives the smallest (non-squared) errors, so squaring them doesn't affect our results
 
+## Sum of Squared Errors
+
 Sum of Squared Prediction Errors (= Sum of Squared Errors, SSE):
 
 $$
-\sum{(Y_i - \hat{Y}_i)^2} = `r round(sum((Cijfer-predicted)^2),2)`
+\sum{(Y_i - \hat{Y}_i)^2} = `r round(sum((Grade-predicted)^2),2)`
 $$
 
 This is the first example of a **sum of squares**. You will see many more, whenever we're summing things that can be both positive and negative, and the formula usually looks like:
@@ -94,7 +106,7 @@ $$
 $$
 
 
-## Ordinary Least SSE
+## Ordinary Least Squares
 
 For linear regression, the coefficients can be calculated straightforwardly using matrix algebra (not part of this course)
 
@@ -116,8 +128,7 @@ By definition, the regression line is the line that best describes the data
 
 To determine the goodness of fit of our regression line, we compare its SSE to the sum of squares we would obtain if we did not use information from the predictor to predict our outcome
 
-* Remember: What value would you predict for every individual if you did not include hours studied as a predictor?
-    + The mean
+* If you did not include Hours as a predictor, you would predict the mean for each individual
 * A regression model without predictors is simply:
     + $Y_i = a + e_i$, where $e_i \sim N(0, SD_y)$
     + This is called a "null model" (no predictors)
@@ -127,10 +138,10 @@ To determine the goodness of fit of our regression line, we compare its SSE to t
 
 You would predict the mean value of Grade for each individual, $\bar{Y}$
 
-The sum of squared distances between the mean and individual observations is called <font color = "blue">Total Sum of Squares</font>, TSS: $\sum{(Y_i-\bar{Y}_i)^2} = `r round(sum((Cijfer-mean(Cijfer))^2),2)`$
+The sum of squared distances between the mean and individual observations is called <font color = "blue">Total Sum of Squares</font>, TSS: $\sum{(Y_i-\bar{Y}_i)^2} = `r round(sum((Grade-mean(Grade))^2),2)`$
 
 ```{r, fig.width=6, fig.asp=3/4, echo=FALSE}
-ggplot(studentdata, aes(x=Uren, y=Cijfer))+geom_point()+geom_hline(yintercept = 0)+geom_vline(xintercept = 0)+theme_bw()+scale_x_continuous(limits = c(0,10), breaks=seq(0, 10, by = 1))+scale_y_continuous(limits = c(0,10), breaks=seq(0, 10, by = 1))+geom_hline(yintercept = mean(Cijfer), linetype = 1)+geom_segment(x=Uren, xend = Uren, y = mean(Cijfer), yend = Cijfer,  col="blue")
+ggplot(studentdata, aes(x=Hours, y=Grade))+geom_point()+geom_hline(yintercept = 0)+geom_vline(xintercept = 0)+theme_bw()+scale_x_continuous(limits = c(0,10), breaks=seq(0, 10, by = 1))+scale_y_continuous(limits = c(0,10), breaks=seq(0, 10, by = 1))+geom_hline(yintercept = mean(Grade), linetype = 1)+geom_segment(x=Hours, xend = Hours, y = mean(Grade), yend = Grade,  col="blue")
 ```
 
 ## TSS is related to the variance
@@ -141,10 +152,10 @@ You've seen the TSS before; it is used to calculate the variance (lecture 1)
 * This is the "average" squared distance of individual observations to the mean of Y
 
 ```{r, fig.width=6, fig.asp=3/4, echo=FALSE}
-ggplot(studentdata, aes(x=Uren, y=Cijfer))+geom_point()+geom_hline(yintercept = 0)+geom_vline(xintercept = 0)+theme_bw()+scale_x_continuous(limits = c(0,10), breaks=seq(0, 10, by = 1))+scale_y_continuous(limits = c(0,10), breaks=seq(0, 10, by = 1))+geom_hline(yintercept = mean(Cijfer), linetype = 1)+geom_segment(x=Uren, xend = Uren, y = mean(Cijfer), yend = Cijfer,  col="blue")
+ggplot(studentdata, aes(x=Hours, y=Grade))+geom_point()+geom_hline(yintercept = 0)+geom_vline(xintercept = 0)+theme_bw()+scale_x_continuous(limits = c(0,10), breaks=seq(0, 10, by = 1))+scale_y_continuous(limits = c(0,10), breaks=seq(0, 10, by = 1))+geom_hline(yintercept = mean(Grade), linetype = 1)+geom_segment(x=Hours, xend = Hours, y = mean(Grade), yend = Grade,  col="blue")
 ```
 
-## Regression Sum of Squares
+## Regression Sum of Squares {.smaller}
 
 How large is the difference between the total sum of squares and the sum of squared errors?
 
@@ -160,7 +171,7 @@ $$
 
 So it follows: Total SS - Error SS = Regression SS
 
-`r round(sum((Cijfer-mean(Cijfer))^2),2)` - `r round(sum((Cijfer-predicted)^2),2)` = `r round(sum((Cijfer-mean(Cijfer))^2)-sum((Cijfer-predicted)^2),2)`
+`r round(sum((Grade-mean(Grade))^2),2)` - `r round(sum((Grade-predicted)^2),2)` = `r round(sum((Grade-mean(Grade))^2)-sum((Grade-predicted)^2),2)`
 
 ## Sum of Squares demo
 
@@ -187,49 +198,73 @@ We want to describe how well our regression model describes the data
 
 **Problem:** Sums of squares are hard to interpret and cannot be compared from one dataset to another
 
-* Larger samples increase the SS, but this does not 
+* Adding even one participant increases the SS, but does not mean the fit is worse
 
-<font color = "blue">Oplossing:</font> We standaardiseren de kwadratensommen.
+<font color = "blue">Solution:</font> We standardize the RSS
 
-## Verklaarde variantie
-Welk deel van de TOTALE kwadratensom (TSS) wordt verklaard door de regressielijn (RSS)?
+## Explained variance
 
+Which portion of the total sum of squares (TSS) is explained by the regression line (RSS)?
 
+$\frac{RSS}{TSS} = R^2$
 
-$\frac{RSS}{TSS} = \frac{TSS-SSE}{TSS} = R^2$
+This gives $R^2$, the proportion of **explained variance**
 
+## Explained variance
 
+Which portion of the total variance in the dependent variable is explained by the predictor?
 
-$R^2$ noemen we de proportie **verklaarde variantie**
+(see demo)
 
-## Verklaarde variantie
-Welk deel van de TOTALE spreiding in de afhankelijke variabele wordt verklaard door de waarden op de predictor?
+In our running example:
 
-(Zie nogmaals demo)
+$\frac{`r round(sum((Grade-mean(Grade))^2)-sum((Grade-predicted)^2),2)`}{`r round(sum((Grade-mean(Grade))^2),2)`} = `r round((sum((Grade-mean(Grade))^2)-sum((Grade-predicted)^2))/sum((Grade-mean(Grade))^2),2)`$
 
-In dit geval:
-$\frac{`r round(sum((Cijfer-mean(Cijfer))^2)-sum((Cijfer-predicted)^2),2)`}{`r round(sum((Cijfer-mean(Cijfer))^2),2)`} = `r round((sum((Cijfer-mean(Cijfer))^2)-sum((Cijfer-predicted)^2))/sum((Cijfer-mean(Cijfer))^2),2)`$
+# Tests
 
+## Model test
 
-# Toetsen
+Does the regression model explain significantly more variance than the null-model?
 
-## Is de regressie significant?
-Verklaren we significant meer variantie met de regressie dan met het gemiddelde?
+Remember:
 
-Hiervoor gaan we een toets uitvoeren.
+* Regression model: $Y_i = a + b * X_i + e_i$
+* Null model: $Y_i = a + e_i$ (where $a$ is just the mean of $Y$)
 
-* $H_0$: $R^2 = 0$
-* $H_A$: $R^2 > 0$
+## Steps for testing
 
-**Belangrijk:**
+## Steps for testing {.smaller}
 
-$R^2$ kan alleen maar positief zijn, DUS hebben we weer een kansverdeling nodig die alleen maar positief kan zijn.
+1. Formulate hypotheses  
+    + $H_0$: $R^2 = 0$, $H_A$: $R^2 > 0$
+2. Calculate test statistic
 
-## F-Toets
-We gebruiken de F-verdeling.
+**NOTE:** $R^2$ only takes positive values, so we need a probability distribution that only takes positive values. That's neither the Z- nor the t-distribution.
+
+## F-test
+
+<!--     + <font color = "gray">Describes how many standard errors away from the population statistic under the null hypothesis the sample statistic is</font> -->
+<!-- 3. Calculate p-value -->
+<!--     + <font color = "gray">Probability of observing a value at least as extreme as the sample statistic, if $H_0$ were true</font> -->
+<!-- 4.  Draw conclusion about null hypothesis -->
+<!--     + <font color = "gray">(Act as if) we reject or fail to reject it</font> -->
+
+Introducing the F-distribution
 
 ```{r, out.width="600px", out.height="450px"}
-knitr::include_graphics("./images/F_distribution.png")
+#knitr::include_graphics("./images/F_distribution.png")
+ggplot(data = data.frame(x = c(0, 5)), aes(x)) +
+  stat_function(fun = df, args = list(df1 = 2, df2 = 90)) +
+  ylab("Probability density") +
+  xlab("F") +
+  scale_y_continuous(breaks = NULL, expand = c(0,0)) +
+  geom_area(stat = "function", fun = df, fill = "red", alpha = .2, xlim = c(qf(.95, df1 = 2, df2=90, lower.tail = T), 5), args = list(df1 = 2, df2 = 90)) +
+  geom_segment(aes(
+    x = qf(.95, df1 = 2, df2=90, lower.tail = T),
+    xend = qf(.95, df1 = 2, df2=90, lower.tail = T),
+    y = 0,
+    yend = df(qf(.95, df1 = 2, df2=90, lower.tail = T), df1 = 2, df2 = 90)), colour = "red")+
+  theme_bw()
 ```
 
 <!--$F = \frac{MEAN of Squares Segression}{MEAN of Squares Error} = \frac{SSR/k}{SSE/(n-k)}$
@@ -237,169 +272,172 @@ knitr::include_graphics("./images/F_distribution.png")
 $df_1$: k
 $df_2$: n-k-->
 
-## F-Toets
+## F-test
 
-De F-toets is eigenlijk de verhouding van twee bronnen van variantie:
+The F-test is a ratio of two sources of variance:
 
 $$
-F = \frac{\sigma^2_{\text{regression}}}{\sigma^2_{\text{Error}}} = \frac{SSR/(p-1)}{SSE/(n-p)}
+F = \frac{\sigma^2_{\text{regression}}}{\sigma^2_{\text{Error}}} =  \frac{MS_{\text{regression}}}{MS_{\text{Error}}} = \frac{SSR/(p-1)}{SSE/(n-p)}
 $$
 
-Hierbij is p het aantal parameters van de regressievergelijking (de intercept en het hellingsgetal), en n het aantal proefpersonen.
+p: parameters ($a$ and $b$), n: number of participants
 
 * $df_1$: p-1
 * $df_2$: n-p
 
-Beide varianties kunnen enkel positief zijn, dus deze breuk ook - dus is het logisch dat we toetsen in de $F$-verdeling, die alleen positieve waarden heeft.
+Both SS can only be positive, so the F-statistic is always positive, so we use a probability distribution with only positive values.
 
-## Rapporteren
-Het regressiemodel was significant, $R^2 = `r tmp = summary(cijfer.uren); round(tmp$r.squared, 2)`, F(`r tmp$fstatistic[2]`, `r tmp$fstatistic[3]`) = `r round(tmp$fstatistic[1], 2)`, p < .001.$ Dit wil zeggen dat het aantal studieuren `r round(tmp$r.squared, 2)`*100% van de variantie in tentamencijfers verklaarde.
+## Reporting results
+
+The regression model explained significant variance in the outcome, $R^2 = `r tmp = summary(Grade.Hours); round(tmp[["r.squared"]], 2)`, F(`r tmp[["fstatistic"]][2]`, `r tmp[["fstatistic"]][3]`) = `r round(tmp[["fstatistic"]][1], 2)`, p < .001.$ This means that hours studied explained `r round(tmp$r.squared, 2)`*100% of the variance in exam grades.
 
 <!--`r round(pf(tmp$fstatistic[1], tmp$fstatistic[2], tmp$fstatistic[3], lower.tail = FALSE), 2)`$.-->
 
-## Coefficienten toetsen
-Je kan ook toetsen of de coefficienten (a en b) significant verschillen van 0.
+# Correlation
 
-Kunnen de intercept (a) en het hellingsgetal (b) positief/negatief zijn?
+## Correlation and regression
 
-## Coefficienten toetsen
-Omdat coefficienten zowel positief/negatief kunnen zijn, gebruiken we de t-verdeling:
+Consider the association between X and Y
 
-* $H_0$: $b = 0$
-* $H_A$: $b \neq 0$
+* If you consider one of them to be the outcome of the other, regression is the correct technique
+    + $R^2$ indicates the strength of association between them
+* What if you don't want to label one variable outcome and the other predictor?
 
-$$
-t = \frac{b}{SE_b}
-$$ 
+Correlation is a measure of the strength and direction of the linear relationship between two variables.
 
+## Correlation
 
-* $df$: n - k
+A standardized measure of the strength of linear association between two continuous variables
 
+* Standardized: ranges from [-1, 1]
+* Sample correlation: $r$
+* Population correlation: $\rho$
+* r = -1: Perfect negative association
+* r =  0: No association
+* r =  1: Perfect positive association
 
+## Correlation and regression
 
-```{r, out.width="500px", out.height="375px"}
-knitr::include_graphics("./images/2sidedtest.png")
-```
+Correlation and regression are very closely related
 
-## Rapporteren
-Het effect van studieuren op tentamencijfer was significant, $b = `r round(cijfer.uren$coefficients[2], 2)`, t(`r cijfer.uren$df.residual`) = `r round(summary(cijfer.uren)$coefficients[2,3], 2)`, p < .001.$ Dit wil zeggen dat voor ieder extra uur studeren, het tentamencijfer met `r round(cijfer.uren$coefficients[2], 2)` toenam.
+* $R^2$ (explained variance) for two is literally $r$, squared: the squared correlation coefficient
+    + For bivariate regression/correlation. The story is more complex for regression with 2+ predictors
+* In bivariate linear regression, the standardized regression coefficient *is* the correlation coefficient
+    + The standardized coefficient is covered in a future lesson
 
-<!--`r round(summary(cijfer.uren)$coefficients[2,4], 2)`$.-->
+## Output in SPSS
 
+![](images/sexshoesreg.png)
 
-# Assumpties
+## Correlation
 
-## Assumptie: Normaliteit
-Een aanname van regressie is dat de predictie errors <font color = "blue">normaal verdeeld</font> zijn, met een gemiddelde van 0. Is dit normaal?
+Correlation increases as:
 
-$\epsilon_i \sim N(0, \sigma)$
-
-```{r, fig.width=6, fig.asp=3/4, echo=FALSE}
-hist(Cijfer-predicted, main = "Histogram van prediction errors")
-```
-
-## Assumptie: Homoscedasticiteit
-Een tweede aanname van regressie is dat de predictie errors gelijk verdeeld zijn <font color = "blue">voor alle waarden van de predictor</font>!
-
-```{r, out.width = "850px", out.height="450px"}
-knitr::include_graphics("./images/homoscedasticiteit.png")
-```
-
-# Correlatie
-
-## Correlatie
-Correlatie: Hoe sterk is het **lineaire** verband tussen twee continue variabelen?
-
-De correlatiecoefficient r loopt van -1 naar 1
-
-* r = -1: Perfecte negatieve samenhang
-* r =  0: Geen verband
-* r =  1: Perfecte positieve samenhang
-
-## Correlatie
-
-De correlatie wordt sterker naarmate:
-
-* De punten dichter bij de lijn liggen
-* De lijn stijler omhoog/omlaag loopt
+* The points are closer to the regression line
+* The slope is steeper (whether positive or negative)
 
 ```{r, fig.width=5, fig.asp=3/4, echo=FALSE}
-cijfer.uren <- lm(Cijfer ~Uren, studentdata)
-ggplot(studentdata, aes(x=Uren, y=Cijfer))+geom_point()+geom_hline(yintercept = 0)+geom_vline(xintercept = 0)+theme_bw()+scale_x_continuous(limits = c(0,10), breaks=seq(0, 10, by = 1))+scale_y_continuous(limits = c(0,10), breaks=seq(0, 10, by = 1))+
-  geom_abline(intercept = cijfer.uren$coefficients[1], slope = cijfer.uren$coefficients[2], colour = "red", size = 2)
+Grade.Hours <- lm(Grade ~Hours, studentdata)
+ggplot(studentdata, aes(x=Hours, y=Grade))+geom_point()+geom_hline(yintercept = 0)+geom_vline(xintercept = 0)+theme_bw()+scale_x_continuous(limits = c(0,10), breaks=seq(0, 10, by = 1))+scale_y_continuous(limits = c(0,10), breaks=seq(0, 10, by = 1))+
+  geom_abline(intercept = Grade.Hours$coefficients[1], slope = Grade.Hours$coefficients[2], colour = "red", size = 2)
 ```
 
 
-## Correlatie
+## Correlation
 
-De correlatie wordt sterker naarmate:
+```{r}
+#| panel: fill
+fluidPage(fluidRow(
+  column(3, numericInput("a", 
+                  "a:", 
+                   value = 1.5,
+                   min = -10, 
+                   max = 10)),
+  column(3, numericInput("b", 
+                  "b:", 
+                   value = .5,
+                   min = -10, 
+                   max = 10)),
+  column(3, numericInput("SD", 
+                  "SD:", 
+                   value = 1,
+                   min = 0, 
+                   max = 10)),
+  column(3, numericInput("n", 
+                  "n:", 
+                   value = 30,
+                   min = 1, 
+                   max = 200)),
+),
+fluidRow(
+  column(12, plotOutput('plot', width = "1000px", height = "500px"))
+))
 
-* De punten dichter bij de lijn liggen
-* De lijn stijler omhoog/omlaag loopt
-
-
-[Hier heb ik ook een demo voor gemaakt...](https://cjvanlissa.shinyapps.io/Correlation/)
-
-## Correlatie
-
-<iframe src="https://cjvanlissa.shinyapps.io/Correlation/"></iframe>
-
-
-## Voorbeelden
-```{r, out.width="850px", out.height="500px"}
-knitr::include_graphics("./images/correlation2.jpg")
 ```
 
 
-## Pas op
-
-Het <font color = "blue">Anscombe quartet</font>: 
-
-Al deze voorbeelden hebben een correlatie van .70
-
-```{r, out.width="650px", out.height = "500px"}
-knitr::include_graphics("./images/anscombe.png")
+```{r}
+#| context: server
+output$plot <- renderPlot({
+  set.seed(1)
+  X = rnorm(input$n)
+  Y <- input$a + input$b*X + rnorm(input$n, sd = input$SD)
+  df_cor <- data.frame(
+    X = X,
+    Y = Y
+  )
+  res <- lm(X~Y, df_cor)
+  ggplot(df_cor, aes(x=X, y=Y))+
+    geom_point()+
+    #geom_hline(yintercept = 0)+geom_vline(xintercept = 0)+
+    theme_bw()+
+    scale_x_continuous(limits = c(-5,5)) +
+    scale_y_continuous(limits = c(-5,5)) +
+    stat_smooth(method = "lm",
+              formula = y ~ x,
+              geom = "smooth",
+              se=FALSE)+
+    #geom_abline(intercept = coef(res)[1], slope = coef(res)[2], colour = "red")+
+    geom_label(x = 5, y = -5, hjust = 1, vjust = 0, label = paste0("Yi = ", formatC(coef(res)[1], digits = 2, format = "f"), " + ", formatC(coef(res)[2], digits = 2, format = "f"), "*Xi + ei,\nr = ", formatC(cor(df_cor$X, df_cor$Y), digits = 2, format = "f")))
+})
 ```
 
-## Lineair
 
-Let op: Net als regressie werkt correlatie alleen voor **lineaire** (recht-lijnige) verbanden
+## Examples
 
-## Non-lineair
-Duidelijk sprake van samenhang, maar (lineaire) correlatie gaat niet werken:
+![](images/correlation2.jpg)
 
-```{r, out.width="650px", out.height = "500px"}
-knitr::include_graphics("./images/nonlinear_cor.png")
-```
+## Be careful
 
+The <font color = "blue">Anscombe quartet</font>: 
 
-<!-- 
+All examples below have a correlation of $r = .70$
 
--->
+![](images/anscombe.png)
 
-## Correlatie berekenen
+## Calculating Correlations {.smaller}
 
-**Step 1:** Bereken gemiddelde
+**Step 1:** Calculate means
 
 ```{r}
 df <- data.frame("$X_i$" = c(1,2,4,5,5,7), "$Y_i$" = c(0,2,3,2,11,12), stringsAsFactors = F, check.names = F)
 library(knitr)
 library(kableExtra)
-kable(df, escape = F, align=rep('c', ncol(df))) %>% kable_styling(bootstrap_options = "striped")
+kableExtra::kbl(df, escape = F, align=rep('c', ncol(df)), format = "markdown") |> kable_styling(bootstrap_options = "striped")
 ```
 
 $\text{Mean } X = \frac{\sum{X_i}}{n} = \frac{1+2+4+5+5+7}{ 6} = `r mean(df[,1])`$ 
 
 $\text{Mean } Y = \frac{\sum{Y_i}}{n} = \frac{0+2+3+2+11+12}{6} = `r mean(df[,2])`$ 
 
-## Bereken correlatie
+## Calculating Correlations {.smaller}
 
-**Step 2:** Bereken afwijkingen van gemiddelde
+**Step 2:** Calculate deviations from mean
 
 ```{r}
 df[["$(X_i-\\bar{X})$"]] <- df[,1]-mean(df[,1])
 df[["$(Y_i-\\bar{Y})$"]] <- df[,2]-mean(df[,2])
-kable(df, escape = F, align=rep('c', ncol(df))) %>% kable_styling(bootstrap_options = "striped")
+kableExtra::kbl(df, escape = F, align=rep('c', ncol(df)), format = "markdown") %>% kable_styling(bootstrap_options = "striped")
 ```
 
 $\text{Mean } X = \frac{\sum{X_i}}{n} = \frac{0+2+3+2+11+12}{6} = `r mean(df[,1])`$ 
@@ -407,22 +445,23 @@ $\text{Mean } X = \frac{\sum{X_i}}{n} = \frac{0+2+3+2+11+12}{6} = `r mean(df[,1]
 $\text{Mean } Y = \frac{\sum{Y_i}}{n} = \frac{0+2+3+2+11+12}{6} = `r mean(df[,2])`$ 
 
 
-## Bereken correlatie
+## Calculating Correlations {.smaller}
 
-**Step 3:** Afwijkingen kwadrateren
+**Step 3:** Square deviations
 
 ```{r}
 df[["$(X_i-\\bar{X})^2$"]] <- df[,3]^2
 df[["$(Y_i-\\bar{Y})^2$"]] <- df[,4]^2
-kable(df, escape = F, align=rep('c', ncol(df))) %>% kable_styling(bootstrap_options = "striped")
+kableExtra::kbl(df, escape = F, align=rep('c', ncol(df)), format = "markdown") %>% kable_styling(bootstrap_options = "striped")
+
 ```
 
-## Bereken correlatie
+## Calculating Correlations {.smaller}
 
-**Step 4:** Spreidingsmaten
+**Step 4:** Total sum of squares / variance / standard deviations
 
 ```{r}
-kable(df, escape = F, align=rep('c', ncol(df))) %>% kable_styling(bootstrap_options = "striped")
+kableExtra::kbl(df, escape = F, align=rep('c', ncol(df)), format = "markdown") %>% kable_styling(bootstrap_options = "striped")
 ```
   
   
@@ -432,506 +471,42 @@ $s^2 = var = \frac{\sum{(X_i-\bar{X})^2}}{n-1} = \frac{24}{5} = 4.8$
 
 $s = SD = \sqrt{s^2} = \sqrt{2.2}$
 
-## Bereken correlatie
+## Calculating Correlations {.smaller}
 
-**Step 5:** Bereken COvariantie
+**Step 5:** Calculate COvariance
 
 ```{r}
 df[["$(X_i-\\bar{X})(Y_i-\\bar{Y})$"]] <- df[,3]*df[,4]
-kable(df, escape = F, align=rep('c', ncol(df))) %>% kable_styling(bootstrap_options = "striped")
+kableExtra::kbl(df, escape = F, align=rep('c', ncol(df)), format = "markdown") |> kable_styling(bootstrap_options = "striped")
 ```
 
-## Bereken correlatie
+* Covariance is a rough, unstandardized measure of association
+* It is somewhat comparable to sums of squares (although technically it is a sum of products)
 
-**Step 6:** Standardiseer covariantie
+## Calculating Correlations {.smaller}
 
-**Correlatie:**
+**Step 6:** Standardize the covariance
+
+**Correlation:**
 
 $$
-r = \frac{\sum{(x_i - \bar{x})(y_i - \bar{y})}}{\sqrt{\sum{(x_i - \bar{x})^2} \sum{(y_i - \bar{y})^2}}}
+r = \frac{COV_{XY}}{SD_X * SD_Y}
 $$
 
-**Regressie coefficient:**
+**Regression coefficient:**
 
 $$
-b = \frac{\sum{(x_i - \bar{x})(y_i - \bar{y})}}{\sum{(x_i - \bar{x})^2}}
+b = \frac{COV_{XY}}{S^2_X} = \frac{COV_{XY}}{SD_X*SD_X} 
 $$
 
-## Correlatie en regressie
+## Calculating Correlations {.smaller}
 
-Reden dat we vandaag begonnen met regressie: 
+**Step 6:** Standardize the covariance
 
-$R^2$ (verklaarde variantie) **is** de gekwadrateerde correlatie coefficient
+Correlation and regression coefficients are just different ways to standardize the covariance
 
-Correlatie / regressie zijn twee manieren om de covariantie tussen twee variabelen te beschrijven
-
-*Wordt iets complexer met méér dan 2 variabelen, komende weken*
-
-
-
-## What is the GLM? {.smaller}
-
-A family of models to analyze the relationship between one outcome and one or more predictors
-
-* Today we introduce bivariate linear regression, one member of the family
-* Describes a linear relationship between a continuous outcome variable and a continuous predictor
-* Other family members can handle:
-    + Predictors of any measurement level (continuous or categorical)
-    + More than one predictor
-    + Transformations of Y
-    + Transformations of X
-    + Other error distributions than the normal distribution
-    + Etc.
-
-# Linear regression
-
-## Thought experiment...
-
-If I told you that last year's average exam grade was:
-
-$\bar{Y} = `r round(mean(Grade), 1)`$
-
-What grade would you expect to get for this year's exam?
-
-
-## Thought experiment...
-
-If I additionally told you that hours studied is strongly associated with the exam grade
-
-And you know that you studied far more than average
-
-Does that change your expectation for your grade?
-
-## What does this demonstrate?
-
-1. The mean is the best predictor (expected value) when there's no further relevant information
-2. If you DO have information about other variables that are **associated** with the outcome, you can use that information to improve your predictions
-
-This is regression.
-
-
-## Scatterplot
-
-- Visualization for two variables
-    + To show associations, both should be at least of ordinal measurement level
--	Sex and shoe size?
-- Travel time to TiU and monthly phone bill?
-- Hours of work and hours of study?
-- Hours of study and grade?
-
-## Scatterplot examples
-
-```{r, out.width = "800px"}
-knitr::include_graphics("images/scatterplots4.png")
-```
-
-
-## Null model
-
-If there were NO association, the mean $\bar{Y}$ would be the best prediction for each student:
-
-```{r, fig.width=6, fig.asp=3/4, echo=FALSE}
-ggplot(studentdata, aes(x=Hours, y=Grade))+geom_point()+geom_hline(yintercept = 0)+geom_vline(xintercept = 0)+theme_bw()+scale_x_continuous(limits = c(0,10), breaks=seq(0, 10, by = 1))+scale_y_continuous(limits = c(0,10), breaks=seq(0, 10, by = 1))+geom_hline(yintercept = mean(Grade), linetype = 2, size = 2)
-```
-
-
-
-## Link with standard deviation
-
-The mean of those prediction errors (squared) is the variance of "grade"
-
-Its square root is the SD of grade
-
-```{r, fig.width=6, fig.asp=3/4, echo=FALSE}
-ggplot(studentdata, aes(x=Hours, y=Grade))+geom_point()+geom_hline(yintercept = 0)+geom_vline(xintercept = 0)+theme_bw()+scale_x_continuous(limits = c(0,10), breaks=seq(0, 10, by = 1))+scale_y_continuous(limits = c(0,10), breaks=seq(0, 10, by = 1))+geom_hline(yintercept = mean(Grade), linetype = 2, size = 2)+geom_segment(x=Hours, xend = Hours, y = mean(Grade), yend = Grade,  col="blue")
-
-```
-
-## Association
-
-The points appear to follow a diagonal upward line, rather than the straight line of the mean:
-
-```{r, fig.width=6, fig.asp=3/4, echo=FALSE}
-cijfer.uren <- lm(Grade ~Hours, studentdata)
-ggplot(studentdata, aes(x=Hours, y=Grade))+geom_point()+geom_hline(yintercept = 0)+geom_vline(xintercept = 0)+theme_bw()+scale_x_continuous(limits = c(0,10), breaks=seq(0, 10, by = 1))+scale_y_continuous(limits = c(0,10), breaks=seq(0, 10, by = 1))+
-  geom_abline(intercept = cijfer.uren$coefficients[1], slope = cijfer.uren$coefficients[2], colour = "red", size = 2)
-```
-
-
-## Diagonal line
-
-The distances of points from a diagonal line are obviously smaller than from the straight line of the mean:
-
-```{r, fig.width=6, fig.asp=3/4, echo=FALSE,}
-ggplot(studentdata, aes(x=Hours, y=Grade))+geom_point()+geom_hline(yintercept = 0)+geom_vline(xintercept = 0)+theme_bw()+scale_x_continuous(limits = c(0,10), breaks=seq(0, 10, by = 1))+scale_y_continuous(limits = c(0,10), breaks=seq(0, 10, by = 1))+
-  geom_abline(intercept = cijfer.uren$coefficients[1], slope = cijfer.uren$coefficients[2], colour = "black", size = 1)+
-  geom_segment(x = Hours, xend = Hours, y = Grade,  yend = predict.lm(cijfer.uren, newdata = studentdata), colour = "red")
-  
-```
-
-
-## Prediction
-
-By following the line you can kind of guess what grade you might expect for a specific number of hours studied. These predictions are better than just using the mean:
-
-```{r, fig.width=6, fig.asp=3/4, echo=FALSE}
-cijfer.uren <- lm(Grade ~Hours, studentdata)
-ggplot(studentdata, aes(x=Hours, y=Grade))+geom_point()+geom_hline(yintercept = 0)+geom_vline(xintercept = 0)+theme_bw()+scale_x_continuous(limits = c(0,10), breaks=seq(0, 10, by = 1))+scale_y_continuous(limits = c(0,10), breaks=seq(0, 10, by = 1))+
-  geom_abline(intercept = cijfer.uren$coefficients[1], slope = cijfer.uren$coefficients[2], colour = "red", size = 2)+
-  geom_segment(x = 5, y = 0, xend = 5, yend = predict.lm(cijfer.uren, newdata = data.frame(Hours = 5)), colour = "green", size = 1, linetype = 2)+
-  geom_segment(x = 0, y = predict.lm(cijfer.uren, newdata = data.frame(Hours = 5)), xend = 5, yend = predict.lm(cijfer.uren, newdata = data.frame(Hours = 5)), colour = "green", size = 1, linetype = 2)
-```
-
-## Formula
-
-As you might remember from high school, a diagonal line is described by:
-
-<!--$y = 3 + 2X$-->
-
-$Y = a + bX$
-
-```{r, out.width = "600px", out.height="450px"}
-knitr::include_graphics("images/yabx.png")
-```
-
-## Coefficients
-
-The formula for a line is:
-
-$Y = a + bX$
-
-$a$ is the <font color = "blue">intercept</font>, where the line crosses the Y-axis
-
-* This is the predicted value when X equals 0
-
-$b$ is the <font color = "blue">slope</font>, how steeply the line in/decreases
-
-* Y increases by $b$ when X increases by 1
-
-
-## Prediction error
-
-We can use the line to predict values of $Y$ for individuals $_i$
-
-* This prediction $\hat{Y}_i$ is never identical to the observed value of that individual, $Y_i$
-* There is always some *prediction error*, $Y_i - \hat{Y}_i$
-
-```{r, fig.width=6, fig.asp=3/4, echo=FALSE}
-cijfer.uren <- lm(Grade ~Hours, studentdata)
-whichstud <- 71
-p <- ggplot(studentdata, aes(x=Hours, y=Grade))+geom_point()+geom_hline(yintercept = 0)+geom_vline(xintercept = 0)+theme_bw()+scale_x_continuous(limits = c(0,10), breaks=seq(0, 10, by = 1))+scale_y_continuous(limits = c(0,10), breaks=seq(0, 10, by = 1))+
-  geom_abline(intercept = cijfer.uren$coefficients[1], slope = cijfer.uren$coefficients[2], colour = "black", size = 1)+
-  geom_segment(x = studentdata[whichstud,2], y = 0, xend = studentdata[whichstud,2], yend = predict.lm(cijfer.uren, newdata = studentdata[whichstud,]), colour = "green", size = 1, linetype = 2)+
-  geom_segment(x = 0, y = predict.lm(cijfer.uren, newdata = studentdata[whichstud,]), xend = studentdata[whichstud,2], yend = predict.lm(cijfer.uren, newdata = studentdata[whichstud,]), colour = "green", size = 1, linetype = 2)+
-  geom_segment(x = studentdata[whichstud,2], y = predict.lm(cijfer.uren, newdata = studentdata[whichstud,]), xend = studentdata[whichstud,2], yend = studentdata[whichstud,1], colour = "red", size = 1, linetype = 2)+
-  geom_segment(x = 0, y = studentdata[whichstud,1], xend = studentdata[whichstud,2], yend = studentdata[whichstud,1], colour = "red", size = 1, linetype = 2)
-p
-```
-
-## Ordinary Least Squares {.smaller}
-
-We want to obtain the line that gives us the best possible predictions
-
-* There exist values of $a$ and $b$ that give us a line with the best possible predictions
-* These can be calculated using matrix algebra (not part of this course)
-* The resulting line goes *exactly through the middle* of the cloud of datapoints, which is why $e_i \sim N(\textbf{0}, \hat{\sigma}^2_e)$
-* This is called *ordinary least squares* regression
-    + Will be explained further, but squares refers to squared prediction errors
-
-```{r, fig.width=6, fig.asp=3/4, echo=FALSE,}
-ggplot(studentdata, aes(x=Hours, y=Grade))+geom_point()+geom_hline(yintercept = 0)+geom_vline(xintercept = 0)+theme_bw()+scale_x_continuous(limits = c(0,10), breaks=seq(0, 10, by = 1))+scale_y_continuous(limits = c(0,10), breaks=seq(0, 10, by = 1))+
-  geom_abline(intercept = cijfer.uren$coefficients[1], slope = cijfer.uren$coefficients[2], colour = "black", size = 1)+
-  geom_segment(x = Hours, xend = Hours, y = Grade,  yend = predict.lm(cijfer.uren, newdata = studentdata), colour = "red")
-```
-
-## Numeric example
-
-Substituting numeric values for the coefficients, the function to predict grade based on hours is:
-
-$\hat{Y}_i = `r round(cijfer.uren[["coefficients"]][1], 1)` + `r round(cijfer.uren[["coefficients"]][2], 1)`*X_i$
-
-Student 71 studies `r round(Hours[71], 1)` hours, so the predicted grade $\hat{Y}_{71}$ is:
-
-$\hat{Y}_{71} = `r round(cijfer.uren[["coefficients"]][1], 1)` + `r round(cijfer.uren[["coefficients"]][2], 1)` * `r round(Hours[71], 1)` = `r round((cijfer.uren[["coefficients"]][1] + Hours[71]*cijfer.uren[["coefficients"]][2]), 1)`$
-
-In reality student 71' grade was `r round(Grade[71], 1)`, so the prediction error was $Y_i - \hat{Y}_i = `r round(Grade[71], 1)` - `r round((cijfer.uren[["coefficients"]][1] + Hours[71]*cijfer.uren[["coefficients"]][2]), 1)` = `r round(Grade[71], 1)-round((cijfer.uren[["coefficients"]][1] + Hours[71]*cijfer.uren[["coefficients"]][2]), 1)`$
-
-```{r, fig.width=3, fig.asp=3/4, echo=FALSE}
-cijfer.uren <- lm(Grade ~Hours, studentdata)
-whichstud <- 71
-ggplot(studentdata, aes(x=Hours, y=Grade))+geom_point()+geom_hline(yintercept = 0)+geom_vline(xintercept = 0)+theme_bw()+scale_x_continuous(limits = c(0,10), breaks=seq(0, 10, by = 1))+scale_y_continuous(limits = c(0,10), breaks=seq(0, 10, by = 1))+
-  geom_abline(intercept = cijfer.uren$coefficients[1], slope = cijfer.uren$coefficients[2], colour = "black", size = 1)+
-  geom_segment(x = studentdata[whichstud,2], y = 0, xend = studentdata[whichstud,2], yend = predict.lm(cijfer.uren, newdata = studentdata[whichstud,]), colour = "green", size = 1, linetype = 2)+
-  geom_segment(x = 0, y = predict.lm(cijfer.uren, newdata = studentdata[whichstud,]), xend = studentdata[whichstud,2], yend = predict.lm(cijfer.uren, newdata = studentdata[whichstud,]), colour = "green", size = 1, linetype = 2)+
-  geom_segment(x = studentdata[whichstud,2], y = predict.lm(cijfer.uren, newdata = studentdata[whichstud,]), xend = studentdata[whichstud,2], yend = studentdata[whichstud,1], colour = "red", size = 1, linetype = 2)+
-  geom_segment(x = 0, y = studentdata[whichstud,1], xend = studentdata[whichstud,2], yend = studentdata[whichstud,1], colour = "red", size = 1, linetype = 2)
-
-```
-
-
-## Complete regression formula
-
-The formula $Y = a + bX$ describes the diagonal line
-
-It does not yet describe the prediction error
-
-The *linear regression* model expands the formula to include prediction error
-
-$Y_i = a + b*X_i +e_{i}$
-
-$e_{i}$ refers to the individual prediction error
-
-* We assume prediction errors are normally distributed around the regression line
-    + $e_i \sim N(0, \hat{\sigma}_e^2)$
-
-## Bivariate regression formula
-
-$Y_i = a + b*X_i +e_{i}$
-
-Symbol        | Interpretation
--------------- | -----------------------------------------------------
-$Y_i$          | Individual i's score on dependent variable Y
-$a$            | Coefficient, intercept of the regression line
-$b$            | Coefficient, slope of the regression line
-$X_i$          | Individual i's score on independent variable X
-$e_i$   | Individual i's prediction error
-
-
-## Bivariate regression formula
-
-$Y_i = a + b*X_i +e_{i}$
-
-In words, this formula says:
-
-"The individual values on variable Y are equal to the intercept, plus the slope times the individual values on the predictor X, plus individual prediction error."
-
-## Other notations
-
-$Y_i = a + b*X_i +e_{i}$
-
-Symbol        | Interpretation
--------------- | -----------------------------------------------------
-$Y_i$          | Outcome, dependent variable (DV)
-$a$            | $b_0, \beta_0$
-$b$            | $b_1, \beta_1$
-$X_i$          | Predictor, independent variable (IV)
-$e_i$   | $e_i$
-
-## Observed and predicted value
-
-$Y_i = a + b*X_i +e_{i}$
-
-"The individual values on variable Y are equal to the intercept, plus the slope times the individual values on the predictor X, plus individual prediction error."
-
-And also:
-
-"The individual values on variable Y are equal to the <font color = "blue">predicted values</font>, plus individual prediction errors"
-
-$Y_i = \hat{Y}_i + e_{i}$
-
-The predicted value is the value on the regression line:
-
-$\hat{Y}_i = a + b*X_i$
-
-# Coefficients
-
-## Testing coefficients
-
-You can perform hypothesis tests on the coefficients a and b
-
-* We use the t-test from last week
-* Most software by default uses a two-sided test with $H_0: \beta = 0$
-* But you can perform custom tests if you want
-
-## Testing coefficients {.smaller}
-
-Remember: hypotheses are statements about the population, so we use symbols for population parameters
-
-* Intercept is zero: $H_0: \beta_0 = 0$
-* Slope is zero: $H_0: \beta_1 = 0$
-
-We use the t-distribution because we typically don't know population variance of $X$ or $Y$
-  
-* Account for additional uncertainty, as explained last week
-* For samples of $n>30$, this is approximately the same as the Z-distribution
-
-$$
-t = \frac{b}{SE_b}
-$$ 
-
-* $df$: n - p, where p is the number of parameters (2: intercept & slope)
-
-```{r, out.width="500px", out.height="375px"}
-knitr::include_graphics("./images/2sidedtest.png")
-```
-
-## Testing coefficients SPSS
-
-* This tests the intercept and slope
-* Default null-hypothesis for the intercept is $H_0: \beta_0 = 0$
-    + Is the intercept significantly different from zero? No.
-* Default null-hypothesis for the intercept is $H_0: \beta_1 = 0$
-    + Is the slope significantly different from zero? Yes.
-
-```{r}
-knitr::include_graphics("images/spss_test_coef.png")
-```
-
-## Custom tests using SPSS
-
-Let's conduct a one-sided hypothesis, $H_0: \beta_1 \leq 0$
-
-* Our true belief, in this case, is that the effect will be positive, $H_a: \beta_1 > 0$
-* If the effect is in the direction of $H_a$, we can divide the p-value by 2 for a one-sided test
-* $p = .001/2 = .0005$ which we round to $p < .001$, so no practical difference
-
-```{r}
-knitr::include_graphics("images/spss_test_coef.png")
-```
-
-## Custom tests using SPSS
-
-Or you might wonder: if I would study 0 hours, should I expect a passing grade? $H_0: \beta_0 \leq 5.5$
-
-* $t = \frac{b_0-\beta_0}{SE_b} = \frac{1.31-5.5}{.97} = -4.32$
-* The effect is not in the direction of $H_a$; instead, it's congruent with $H_0$, so we will never reject it
-
-```{r}
-knitr::include_graphics("images/spss_test_coef.png")
-```
-
-## Reporting
-
-The effect of hours studied on exam grade was significant, $b = `r round(cijfer.uren[["coefficients"]][2], 2)`, t(`r cijfer.uren[["df.residual"]]`) = `r round(summary(cijfer.uren)[["coefficients"]][2,3], 2)`, p < .001.$ This means that for every additional hour studied, the expected grade increased by `r round(cijfer.uren[["coefficients"]][2], 2)` points.
-
-
-
-# Assumptions
-
-## Assumptions
-
-* A model is only valid if its assumptions are met
-* Otherwise it misrepresents the data
-  + Tests are misleading
-  + Inferences not justified
-* We can (try) to check assumptions
-    + But no evidence of violation is not the same as evidence of no violation
-
-## Assumption checks
-
-Dictionary definition: "something that you accept as true without question or proof"
-
-* Assumptions are statements about the population
-    + So we never really know if they're true
-* Assumption checks are limited to the sample
-* Tailoring your analysis based on assumption checks in the sample risks overfitting the model
-
-## Assumptions of linear regression
-
-* Model is correctly specified, which includes
-    + Linearity of relationship between X and Y
-    + Normality of residuals
-    + Direction of causality (if you want to interpret your model causally)
-* Homoscedasticity
-    + Residuals are equally distributed for all values of the predictor
-* Independence of observations
-
-## Linearity
-
-* Visual check
-  * Scatterplot: do the points follow a straight line?
-
-![](images/assumptions1.png)
-
-## Linearity 2
-
-* Residual plots
-
-```{r}
-knitr::include_graphics("images/residuals2.png")
-```
-
-## Violations of linearity
-
-* Curvilear
-* Outlier
-
-![](images/anscombe.png)
-
-
-## Normal residuals
-
-Why are residuals normally distributed?
-
-* Because they are the result of many random processes
-
-[https://www\.youtube\.com/watch?v=6YDHBFVIvIs&feature=youtu\.be&t=6](https://www.youtube.com/watch?v=6YDHBFVIvIs&feature=youtu.be&t=6)
-
-## Assessing normality
-
-* Histogram, "Normal P-P plot" or "Q-Q plot"
-* Kolmogorov-Smirnov / Shapiro-Wilkes test
-
-![](images/assumptions6.png)
-
-## Normality: Visual inspection
-
-::: {layout-ncol=2}
-![](images/assumptions4.png){width=25%}
-
-![](images/assumptions5.png){width=25%}
-:::
-
-## Homoscedasticity
-
-* Distribution of residuals $\epsilon_i$
-* equal variance for all predicted scores
-* Residual plot:
-  * Y:  _standardized_  residuals
-  * X:  _standardized_  predicted values
-
-## Homoscedasticity plots
-
-```{r}
-knitr::include_graphics("images/sausage_funnel.png")
-```
-
-
-## Independent observations
-
-* Scores should be independent of one another
-    + Every observation conveys unique information
-* If your observations are dependent, your "effective sample size" is lower
-    + This causes you to underestimate uncertainty about estimates
-* Assumption is satisfied with simple random sampling.
-
-## Independent observations {.smaller}
-
-* Examples of violations:
-  * Cheating on an exam
-  * Married couples
-  * Children within the same class (same teacher, background, etc)
-* Dependent observations are more similar than randomly sampled ones
-* So each conveys slightly less *unique information*
-    + E.g., 10 couples who are highly similar to each other
-    + If you compute standard errors by dividing by $\sqrt{20}$, they will be too small
-    + You will underestimate the uncertainty of your estimates
-* If you know  _why_  cases are dependent, there are solutions (not part of this course)
-
-## Dealing with assumption violations {.smaller}
-
-* Linear effects
-    + Transform variable (square, square root)
-    + Include quadratic term
-* Normality of residuals
-    + Increase sample size
-    + Use different outcome distribution (e.g., binomial)
-    + Use non-parametric approach
-    + Remove outliers
-* Homoscedasticity
-    + Account for source of heteroscedasticity
-    + Use non-parametric approach
-* Independent observations
-    + Account for group membership (not part of course)
-
-
+* Correlation is standardized with respect to X and Y
+    + Correlation of X with Y is the same as correlation of Y with X
+* Regression coefficient is only standardized with respect to X
+    + That's why its units are Y (a 1-step increase in X leads to $b$ steps increase in Y)
+    + That's why it's asymmetrical; regression slope of X on Y is different from Y on X

@@ -1,3 +1,7 @@
 .Rproj.user
 
 /.quarto/
+prepare_ss.R
+prepare_cn.R
+wvs.rdata
+varatt.rdata

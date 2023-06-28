@@ -40,6 +40,7 @@ book:
   page-footer: CC-BY (2023) Caspar J. Van Lissa
   chapters:
   - index.qmd
+  - data.qmd
   - introduction.qmd
   - probability.qmd
   - samplingdistribution.qmd
