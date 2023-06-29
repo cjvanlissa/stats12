@@ -140,17 +140,19 @@ To make sure that all students are equally involved in the making of the portfol
 
 ## Assignments 
 
-A description of the assignments follows below.
+Below is a description of the assignments.
 For each assignment, every element labeled with a lower case letter is graded fail (0 points), pass (1 point), or excellent (1.5 points).
 Grades are summed for each assignment, and rescaled from 1-10.
 The final grade is the average across assignments of the rescaled grades.
-Note that the assignments are **not** full-length papers!
-There is a stated word limit for each section.
+Note the stated word limit for each section.
 If you can write a good report with fewer words, that's fine.
 If you exceed the word limit however,
 your grade for that section cannot exceed a pass (1 point).
-The focus should be on motivating, reporting, interpreting, and discussing your analyses.
-For each analysis, state beforehand what your research question and hypotheses are.
+
+The focus of the assignments should me on motivating, reporting, interpreting, and discussing your analyses.
+You will get a good grade for well-reasoned and discussed analyses.
+
+See the Appendices section to access data sources for the assignment.
 
 ### Assignment 1
 

@@ -16,6 +16,35 @@ data <- data.frame(
   sex_dich = ordered(sample(c("Man", "Woman"), size = 100, replace = TRUE), levels = c("Woman", "Man"))
 )
 data$shoesize <- rnorm(100, mean = c(39, 43)[as.integer(data$sex_dich)], sd = 2)
+
+library(scales)
+require(gridExtra)
+set.seed(32)
+x1 <- rnorm(100)
+x1 <- rescale(x1, to = c(0,40))
+
+x2 <- rnorm(100)
+x2 <- round(rescale(x2, to = c(1,7)))
+
+y <- 20 - .25*x1 + 4*x2 + rnorm(100) 
+
+invdat <- data.frame(Work_hours=x1, Gender_role=x2, Involvement = y)
+rm(x1, x2, y)
+invdat <- matrix(c(1, .3, .24,
+                   .3, 1, .5,
+                   .24, .5, 1), nrow = 3, ncol = 3, byrow = TRUE)
+set.seed(76)
+invdat <- data.frame(mvtnorm::rmvnorm(60, sigma = invdat))
+names(invdat) <- c("Work_hours", "Gender_role", "Involvement")
+m_work <- lm(Involvement ~ Work_hours, invdat)
+m_gender <- lm(Involvement ~ Gender_role, invdat)
+m_both <- lm(Involvement ~ Gender_role+Work_hours, invdat)
+# data.frame(model = c("single", "both"),
+#            work = c(summary(m_work)$coefficients[2,4],
+#                     summary(m_both)$coefficients[3,4]),
+#            gender = c(summary(m_gender)$coefficients[2,4],
+#                       summary(m_both)$coefficients[2,4]))
+
 ```
 
 
@@ -45,11 +74,11 @@ $\hat{Y}_i = a + b_1*X_{1i}+ b_2*X_{2i}$
 
 ## Multiple regression
 
-Last week's model with two dummies was already an example of $\color{blue}{\text{multiple regression}}$.
+The model with two dummies is also an example of $\color{blue}{\text{multiple regression}}$.
 
-**Multiple regressie:** Regression with more than one predictor.
+**Multiple regression:** Regression with more than one predictor.
 
-It answers the question: What is the unique effect of one predictor, controlling for the effect of all other predictors?
+* Answers the question: What is the unique effect of one predictor, controlling for the effect of all other predictors?
 
 ## Multiple regression
 
@@ -86,7 +115,329 @@ $y_i = b_0 + b_1 * x_1 + b_2 * x_2 + \ldots + b_k * x_k + \epsilon_i$
 
 This will give you the **unique/partial effect** of each predictor, while keeping all other variables constant
 
-![](images/venn_reading.png)
+## A story of bubbles
+
+Imagine that these two circles represent the variance in two variables,
+for example, "Father involvement" and "Hours worked"
+
+```{r}
+ss_y = 43
+ss_x1 = 50
+ss_both_y_x1 = 3
+plot(euler(c("Involvement" = ss_y,
+             "Hours" = ss_x1)),
+     quantities = F)
+```
+
+## Visualizing covariance
+
+Imagine that "Father involvement" and "Hours worked" covary
+
+* There would be overlap in the circles (area C)
+* We can describe this overlap as correlation, or as a regression coefficient
+
+```{r}
+plot(euler(c("Involvement" = ss_y - ss_both_y_x1,
+             "Hours" = ss_x1 - ss_both_y_x1,
+             "Involvement&Hours" = ss_both_y_x1)),
+     quantities = c("A", "B", "C"))
+```
+
+## Visualizing covariance
+
+Now, let's say that "Father involvement" and "Gender role attitudes" **also** covary
+
+* There would also be overlap in these circles
+
+```{r}
+ss_x2 <- 30
+ss_both_y_x2 <- 4
+plot(euler(c("Involvement" = ss_y - ss_both_y_x2,
+             "Gender" = ss_x2 - ss_both_y_x2,
+             "Involvement&Gender" = ss_both_y_x2)),
+     quantities = LETTERS[1:3])
+```
+
+
+## Visualizing multiple regression
+
+Finally, imagine that Hours worked and Gender role attitudes both covary with Involvement, and also with one another (e.g., maybe more progressive fathers work fewer hours)
+
+```{r}
+all_pieces <- c(
+  Involvement = 305,
+  Gender = 202,
+  Hours = 124,
+  "Involvement&Gender" = 40,
+  "Involvement&Hours" = 14,
+  "Gender&Hours" = 20,
+  "Involvement&Gender&Hours" = 50
+)
+##       Y      X1      X2    X1&Y    X2&Y   X1&X2 Y&X1&X2 
+##   304.6   201.6   123.6    39.7    13.3    21.5    42.3
+
+plot(euler(all_pieces),
+     quantities = LETTERS[1:7])
+
+```
+
+
+## Coefficienten {.smaller .flexbox .vcenter}
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+w <- summary(m_work)$coefficients[,-2]
+w <- apply(w, 2, formatC, digits = 2, format = "f")
+G <- summary(m_gender)$coefficients[,-2]
+G <- apply(G, 2, formatC, digits = 2, format = "f")
+B <- summary(invmodel)$coefficients[,-2]
+B <- apply(B, 2, formatC, digits = 2, format = "f")
+```
+Variabele   | B           | t          | p  
+------------|-------------|------------|-------------
+(Intercept) | `r w[1,1]`  | `r w[1,2]` | `r w[1,3]`
+Work_hours    | `r w[2,1]`  | `r w[2,2]` | `r w[2,3]`
+
+
+Variabele   | B           | t          | p  
+------------|-------------|------------|-------------
+(Intercept) | `r G[1,1]`  | `r G[1,2]` | `r G[1,3]`
+Gender_roles | `r G[2,1]`  | `r G[2,2]` | `r G[2,3]`
+
+Variabele   | B           | t          | p  
+------------|-------------|------------|-------------
+(Intercept) | `r B[1,1]`  | `r B[1,2]` | `r B[1,3]`
+Work_hours    | `r B[2,1]`  | `r B[2,2]` | `r B[2,3]`
+Gender_roles | `r B[3,1]`  | `r B[3,2]` | `r B[3,3]`
+
+## Coefficienten
+Waarom is Work_hours eerst niet significant, en wel wanneer we Gender_roles toevoegen?
+
+Variabele   | B           | t          | p  
+------------|-------------|------------|-------------
+(Intercept) | `r w[1,1]`  | `r w[1,2]` | `r w[1,3]`
+Work_hours    | `r w[2,1]`  | `r w[2,2]` | `r w[2,3]`
+
+Variabele   | B           | t          | p  
+------------|-------------|------------|-------------
+(Intercept) | `r B[1,1]`  | `r B[1,2]` | `r B[1,3]`
+Work_hours    | `r B[2,1]`  | `r B[2,2]` | `r B[2,3]`
+Gender_roles | `r B[3,1]`  | `r B[3,2]` | `r B[3,3]`
+
+
+
+## Twee simpele regression voorbeelden
+Twee aparte simpele regressies, $\hat{Y}_i = a + b_1*X_1$
+
+```{r, fig.width=6.5, fig.asp=3/4, echo=FALSE, warning=FALSE, message=FALSE}
+
+werkplot1 <- ggplot(invdat, aes(x=Work_hours, y=Involvement))+
+  geom_point()+
+  geom_hline(yintercept = 0)+geom_vline(xintercept = 0)+
+  theme_bw()+
+  scale_x_continuous(limits = c(0,40), breaks=seq(0, 40, by = 5))+
+  scale_y_continuous(limits = c(0,50), breaks=seq(0, 50, by = 5))+
+  geom_abline(intercept = m_work$coefficients[1], slope = m_work$coefficients[2], colour = "black", size = 1)
+
+genderplot1 <- ggplot(invdat, aes(x=Gender_role, y=Involvement))+
+  geom_point()+
+  geom_hline(yintercept = 0)+geom_vline(xintercept = 0)+
+  theme_bw()+
+  scale_x_continuous(limits = c(0,7), breaks=seq(0, 7, by = 1))+
+  scale_y_continuous(limits = c(0,50), breaks=seq(0, 50, by = 5))+
+  geom_abline(intercept = m_gender$coefficients[1], slope = m_gender$coefficients[2], colour = "black", size = 1)
+
+grid.arrange(werkplot1, genderplot1, ncol=2)
+
+```
+
+
+## Multiple regression voorbeeld
+Een multiple regression, $\hat{Y}_i = a + b_1*X_1 + b_2*X_2$
+
+```{r, fig.width=6.5, fig.asp=3/4, echo=FALSE, warning=FALSE, message=FALSE}
+invmodel <- lm(Involvement ~ Work_hours + Gender_role, invdat)
+
+werkplot2 <- ggplot(invdat, aes(x=Work_hours, y=Involvement))+
+  geom_point()+
+  geom_hline(yintercept = 0)+geom_vline(xintercept = 0)+
+  theme_bw()+
+  scale_x_continuous(limits = c(0,40), breaks=seq(0, 40, by = 5))+
+  scale_y_continuous(limits = c(0,50), breaks=seq(0, 50, by = 5))+
+  geom_abline(intercept = invmodel$coefficients[1], slope = invmodel$coefficients[2], colour = "black", size = 1)
+
+genderplot2 <- ggplot(invdat, aes(x=Gender_role, y=Involvement))+
+  geom_point()+
+  geom_hline(yintercept = 0)+geom_vline(xintercept = 0)+
+  theme_bw()+
+  scale_x_continuous(limits = c(0,7), breaks=seq(0, 7, by = 1))+
+  scale_y_continuous(limits = c(0,50), breaks=seq(0, 50, by = 5))+
+  geom_abline(intercept = invmodel$coefficients[1], slope = invmodel$coefficients[3], colour = "black", size = 1)
+
+grid.arrange(werkplot2, genderplot2, ncol=2)
+
+```
+
+## Multiple regression voorbeeld 2
+Het lijkt alsof de lijnen wel de trend volgen, maar buiten de data vallen. 
+
+Dit is niet het geval: Het effect van Work_hours is gecontrolleerd voor het effect van Gender_role, en vice versa. 
+
+[$\color{red}{\text{Het wordt duidelijker als je dit als 3D plot visualiseert...}}$](https://plot.ly/~c.j.vanlissa/3.embed)
+
+```{r, fig.height=2, fig.width=4, echo=FALSE, warning=FALSE, message=FALSE}
+grid.arrange(werkplot2, genderplot2, ncol=2)
+
+```
+
+## Multiple regression 3D plot
+
+```{r, echo = FALSE, message=FALSE}
+library(plotly)
+library(reshape2)
+library(scales)
+require(gridExtra)
+set.seed(32)
+x1 <- rnorm(100)
+x1 <- rescale(x1, to = c(0,40))
+
+x2 <- rnorm(100)
+x2 <- round(rescale(x2, to = c(1,7)))
+
+y <- 20 - .25*x1 + 4*x2 + rnorm(100) 
+
+invdat <- data.frame(Work_hours=x1, Gender_role=x2, Involvement = y)
+rm(x1, x2, y)
+
+invmodel <- lm(Involvement ~ Work_hours + Gender_role, invdat)
+
+graph_reso <- .5
+
+#Setup Axis
+axis_x <- seq(min(invdat$Work_hours), max(invdat$Work_hours), by = graph_reso)
+axis_y <- seq(min(invdat$Gender_role), max(invdat$Gender_role), by = graph_reso)
+
+#Sample points
+inv_lm_surface <- expand.grid(Work_hours = axis_x, Gender_role = axis_y, KEEP.OUT.ATTRS = F)
+inv_lm_surface$Involvement <- predict.lm(invmodel, newdata = inv_lm_surface)
+inv_lm_surface <- acast(inv_lm_surface, Gender_role ~ Work_hours, value.var = "Involvement") #y ~ x
+
+invplot <- plot_ly() %>%
+  add_surface(x = axis_x, 
+                  y = axis_y, 
+                  z = inv_lm_surface, 
+                  type = "surface") %>%#, 
+                  #opacity = 1,
+                  #colors = c('#d1d1d1','#000000')) %>%
+  add_trace(x = invdat$Work_hours, 
+            y = invdat$Gender_role,
+            z = invdat$Involvement, 
+            type = "scatter3d", 
+            mode = "markers",
+            marker = list(color = "red"),
+            #color = coh$dance,
+            #colors = c("gray70", '#6d98f3'),
+            opacity = 1) %>%
+  layout(title = "Multiple regression demo",
+         scene = list(xaxis = list(title = 'Work_hours', range = c(0,40)),# ticktype = "array", tickvals = ticks),
+                      yaxis = list(title = 'Gender role', range = c(1,7)),# ticktype = "array", tickvals = ticks),
+                      zaxis = list(title = 'Involvement', range = c(0,50)),# ticktype = "array", tickvals = ticks),
+                      camera = list(eye = list(x = 2, y = -2, z = 1.25), zoom = 5),
+                      showlegend = FALSE))
+invplot
+```
+
+## Centreren
+> $a$: De $\color{blue}{\text{intercept}}$, voorspelde waarde wanneer **alle**  X-en gelijk zijn aan 0
+
+Dit is wat onhandig, omdat er bijna niemand is die 0 uur werkt, en helemaal niemand die 0 scoort op de Likert-schaal voor Gender_roles (1-7)
+
+## Centreren
+Daarom verschuiven we het nulpunt:
+
+$\text{Center}(Y_i) = Y_i - \bar{Y} = \text{observaties - gemiddelde}$
+
+```{r, fig.width=6, fig.asp=3/4, echo=FALSE, warning=FALSE, message=FALSE}
+scale_dat <- data.frame(Scaled = factor(c(rep(0, 100), rep(1, 100)), labels = c("Standaard", "Gecentreerd")), Gender_role = c(invdat$Gender_role, scale(invdat$Gender_role, scale = FALSE)))
+
+ggplot(scale_dat, aes(x=Gender_role, linetype = Scaled))+geom_histogram(alpha = 0, binwidth = 1, position = 'identity', size = 1, colour = "black")+scale_linetype_manual(values = c(3, 1))+theme_bw()+ theme(legend.position="none")
+
+```
+
+
+## Multiple regression na centreren
+Na het centreren zien de aparte plots van multiple regression er zo uit:
+
+```{r, fig.width=6.2, fig.asp=3/4, echo=FALSE, warning=FALSE, message=FALSE}
+invdat_cent <- invdat
+invdat_cent[,c(1,2)]<-lapply(invdat_cent[,c(1,2)], scale, scale = FALSE)
+invmodel_c <- lm(Involvement ~ Work_hours + Gender_role, invdat_cent)
+
+werkplot3 <- ggplot(invdat_cent, aes(x=Work_hours, y=Involvement))+
+  geom_point()+
+  geom_hline(yintercept = 0)+geom_vline(xintercept = 0)+
+  theme_bw()+
+  scale_x_continuous(limits = c(-20,20), breaks=seq(-20,20, by = 5))+
+  scale_y_continuous(limits = c(0,50), breaks=seq(0, 50, by = 5))+
+  geom_abline(intercept = invmodel_c$coefficients[1], slope = invmodel_c$coefficients[2], colour = "black", size = 1)
+
+genderplot3 <- ggplot(invdat_cent, aes(x=Gender_role, y=Involvement))+
+  geom_point()+
+  geom_hline(yintercept = 0)+geom_vline(xintercept = 0)+
+  theme_bw()+
+  scale_x_continuous(limits = c(-4,4), breaks=seq(-4,4, by = 1))+
+  scale_y_continuous(limits = c(0,50), breaks=seq(0, 50, by = 5))+
+  geom_abline(intercept = invmodel_c$coefficients[1], slope = invmodel_c$coefficients[3], colour = "black", size = 1)
+
+grid.arrange(werkplot3, genderplot3, ncol=2)
+
+```
+
+## Centreren
+Door te centreren kan je een betekenisvol nulpunt kiezen voor de predictoren, bijvoorbeeld het gemiddelde.
+
+
+## Dichotoom en continu
+Effect van geslacht en Gender_role op parental involvenment:
+
+```{r, fig.width=6, fig.asp=3/4, echo=FALSE, warning=FALSE, message=FALSE}
+library(scales)
+set.seed(32)
+n <- 178
+Geslacht <- rbinom(n, 1, .5)
+
+Gender_role <- 2*Geslacht+rnorm(n)
+Gender_role <- round(scales::rescale(Gender_role, to = c(1,7)))
+
+Involvement <- 5 + 15*Geslacht + 4*Gender_role + rnorm(n) 
+
+dichmodel <- lm(Involvement ~ Geslacht + Gender_role)
+m_gender <- lm(Involvement ~ Gender_role, invdat)
+
+
+ggplot(data.frame(Involvement, Geslacht = factor(Geslacht), Gender_role), aes(x=Gender_role, y=Involvement, colour = Geslacht))+
+  geom_point()+
+  theme_bw()+
+  scale_colour_manual(values = c("blue", "red"))+theme(legend.position = "none")
+
+```
+
+## Voorbeelden
+
+```{r out.height = "350px"}
+knitr::include_graphics("./Materials/Interactie.png", dpi = NA)
+```
+
+
+# Welke toets
+
+## Welke toets?
+
+* Percentage mensen met religieuze achtergrond > 50%
+* Mannen en vrouwen verschillen op inkomen?
+* Mannen en vrouwen verschillen op inkomen gecontroleerd op leeftijd?   
+* Laag vs midden vs hoog opgeleide mensen verschillen op inkomen?
+* Waar gebruik ik een gamma-toets voor?
+
+
 
 ## When to use?
 
