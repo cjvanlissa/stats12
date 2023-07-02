@@ -1,0 +1,1272 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="lecture9_files/libs/clipboard/clipboard.min.js"></script>
+<script src="lecture9_files/libs/quarto-html/tabby.min.js"></script>
+<script src="lecture9_files/libs/quarto-html/popper.min.js"></script>
+<script src="lecture9_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="lecture9_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="lecture9_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="lecture9_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="lecture9_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.3.427">
+
+  <meta name="author" content="Caspar J. van Lissa">
+  <meta name="dcterms.date" content="2023-07-01">
+  <title>Lecture 9 - GLM V Multiple Regression</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="lecture9_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="lecture9_files/libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" href="lecture9_files/libs/revealjs/dist/theme/quarto.css">
+  <link href="lecture9_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="lecture9_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="lecture9_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="lecture9_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+
+  .callout {
+    margin-top: 1em;
+    margin-bottom: 1em;  
+    border-radius: .25rem;
+  }
+
+  .callout.callout-style-simple { 
+    padding: 0em 0.5em;
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+    display: flex;
+  }
+
+  .callout.callout-style-default {
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+  }
+
+  .callout .callout-body-container {
+    flex-grow: 1;
+  }
+
+  .callout.callout-style-simple .callout-body {
+    font-size: 1rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-style-default .callout-body {
+    font-size: 0.9rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-titled.callout-style-simple .callout-body {
+    margin-top: 0.2em;
+  }
+
+  .callout:not(.callout-titled) .callout-body {
+      display: flex;
+  }
+
+  .callout:not(.no-icon).callout-titled.callout-style-simple .callout-content {
+    padding-left: 1.6em;
+  }
+
+  .callout.callout-titled .callout-header {
+    padding-top: 0.2em;
+    margin-bottom: -0.2em;
+  }
+
+  .callout.callout-titled .callout-title  p {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+    
+  .callout.callout-titled.callout-style-simple .callout-content  p {
+    margin-top: 0;
+  }
+
+  .callout.callout-titled.callout-style-default .callout-content  p {
+    margin-top: 0.7em;
+  }
+
+  .callout.callout-style-simple div.callout-title {
+    border-bottom: none;
+    font-size: .9rem;
+    font-weight: 600;
+    opacity: 75%;
+  }
+
+  .callout.callout-style-default  div.callout-title {
+    border-bottom: none;
+    font-weight: 600;
+    opacity: 85%;
+    font-size: 0.9rem;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-default div.callout-content {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-simple .callout-icon::before {
+    height: 1rem;
+    width: 1rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 1rem 1rem;
+  }
+
+  .callout.callout-style-default .callout-icon::before {
+    height: 0.9rem;
+    width: 0.9rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 0.9rem 0.9rem;
+  }
+
+  .callout-title {
+    display: flex
+  }
+    
+  .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  .callout.no-icon::before {
+    display: none !important;
+  }
+
+  .callout.callout-titled .callout-body > .callout-content > :last-child {
+    margin-bottom: 0.5rem;
+  }
+
+  .callout.callout-titled .callout-icon::before {
+    margin-top: .5rem;
+    padding-right: .5rem;
+  }
+
+  .callout:not(.callout-titled) .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  /* Callout Types */
+
+  div.callout-note {
+    border-left-color: #4582ec !important;
+  }
+
+  div.callout-note .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEU0lEQVRYCcVXTWhcVRQ+586kSUMMxkyaElstCto2SIhitS5Ek8xUKV2poatCcVHtUlFQk8mbaaziwpWgglJwVaquitBOfhQXFlqlzSJpFSpIYyXNjBNiTCck7x2/8/LeNDOZxDuEkgOXe++553zfefee+/OYLOXFk3+1LLrRdiO81yNqZ6K9cG0P3MeFaMIQjXssE8Z1JzLO9ls20MBZX7oG8w9GxB0goaPrW5aNMp1yOZIa7Wv6o2ykpLtmAPs/vrG14Z+6d4jpbSKuhdcSyq9wGMPXjonwmESXrriLzFGOdDBLB8Y6MNYBu0dRokSygMA/mrun8MGFN3behm6VVAwg4WR3i6FvYK1T7MHo9BK7ydH+1uurECoouk5MPRyVSBrBHMYwVobG2aOXM07sWrn5qgB60rc6mcwIDJtQrnrEr44kmy+UO9r0u9O5/YbkS9juQckLed3DyW2XV/qWBBB3ptvI8EUY3I9p/67OW+g967TNr3Sotn3IuVlfMLVnsBwH4fsnebJvyGm5GeIUA3jljERmrv49SizPYuq+z7c2H/jlGC+Ghhupn/hcapqmcudB9jwJ/3jvnvu6vu5lVzF1fXyZuZZ7U8nRmVzytvT+H3kilYvH09mLWrQdwFSsFEsxFVs5fK7A0g8gMZjbif4ACpKbjv7gNGaD8bUrlk8x+KRflttr22JEMRUbTUwwDQScyzPgedQHZT0xnx7ujw2jfVfExwYHwOsDTjLdJ2ebmeQIlJ7neo41s/DrsL3kl+W2lWvAga0tR3zueGr6GL78M3ifH0rGXrBC2aAR8uYcIA5gwV8zIE8onoh8u0Fca/ciF7j1uOzEnqcIm59sEXoGc0+z6+H45V1CvAvHcD7THztu669cnp+L0okAeIc6zjbM/24LgGM1gZk7jnRu1aQWoU9sfUOuhrmtaPIO3YY1KLLWZaEO5TKUbMY5zx8W9UJ6elpLwKXbsaZ4EFl7B4bMtDv0iRipKoDQT2sNQI9b1utXFdYisi+wzZ/ri/1m7QfDgEuvgUUEIJPq3DhX/5DWNqIXDOweC2wvIR90Oq3lDpdMIgD2r0dXvGdsEW5H6x6HLRJYU7C69VefO1x8Gde1ZFSJLfWS1jbCnhtOPxmpfv2LXOA2Xk2tvnwKKPFuZ/oRmwBwqRQDcKNeVQkYcOjtWVBuM/JuYw5b6isojIkYxyYAFn5K7ZBF10fea52y8QltAg6jnMqNHFBmGkQ1j+U43HMi2xMar1Nv0zGsf1s8nUsmUtPOOrbFIR8bHFDMB5zL13Gmr/kGlCkUzedTzzmzsaJXhYawnA3UmARpiYj5ooJZiUoxFRtK3X6pgNPv+IZVPcnwbOl6f+aBaO1CNvPW9n9LmCp01nuSaTRF2YxHqZ8DYQT6WsXT+RD6eUztwYLZ8rM+rcPxamv1VQzFUkzFXvkiVrySGQgJNvXHJAxiU3/NwiC03rSf05VBaPtu/Z7/B8Yn/w7eguloAAAAAElFTkSuQmCC');
+  }
+
+  div.callout-note.callout-style-default .callout-title {
+    background-color: #dae6fb
+  }
+
+  div.callout-important {
+    border-left-color: #d9534f !important;
+  }
+
+  div.callout-important .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEKklEQVRYCcVXTWhcVRS+575MJym48A+hSRFr00ySRQhURRfd2HYjk2SSTokuBCkU2o0LoSKKraKIBTcuFCoidGFD08nkBzdREbpQ1EDNIv8qSGMFUboImMSZd4/f9zJv8ibJMC8xJQfO3HPPPef7zrvvvnvviIkpC9nsw0UttFunbUhpFzFtarSd6WJkStVMw5xyVqYTvkwfzuf/5FgtkVoB0729j1rjXwThS7Vio+Mo6DNnvLfahoZ+i/o32lULuJ3NNiz7q6+pyAUkJaFF6JwaM2lUJlV0MlnQn5aTRbEu0SEqHUa0A4AdiGuB1kFXRfVyg5d87+Dg4DL6m2TLAub60ilj7A1Ec4odSAc8X95sHh7+ZRPCFo6Fnp7HfU/fBng/hi10CjCnWnJjsxvDNxWw0NfV6Rv5GgP3I3jGWXumdTD/3cbEOP2ZbOZp69yniG3FQ9z1jD7bnBu9Fc2tKGC2q+uAJOQHBDRiZX1x36o7fWBs7J9ownbtO+n0/qWkvW7UPIfc37WgT6ZGR++EOJyeQDSb9UB+DZ1G6DdLDzyS+b/kBCYGsYgJbSQHuThGKRcw5xdeQf8YdNHsc6ePXrlSYMBuSIAFTGAtQo+VuALo4BX83N190NWZWbynBjhOHsmNfFWLeL6v+ynsA58zDvvAC8j5PkbOcXCMg2PZFk3q8MjI7WAG/Dp9AwP7jdGBOOQkAvlFUB+irtm16I1Zw9YBcpGTGXYmk3kQIC/Cds55l+iMI3jqhjAuaoe+am2Jw5GT3Nbz3CkE12NavmzN5+erJW7046n/CH1RO/RVa8lBLozXk9uqykkGAyRXLWlLv5jyp4RFsG5vGVzpDLnIjTWgnRy2Rr+tDKvRc7Y8AyZq10jj8DqXdnIRNtFZb+t/ZRtXcDiVnzpqx8mPcDWxgARUqx0W1QB9MeUZiNrV4qP+Ehc+BpNgATsTX8ozYKL2NtFYAHc84fG7ndxUPr+AR/iQSns7uSUufAymwDOb2+NjK27lEFocm/EE2WpyIy/Hi66MWuMKJn8RvxIcj87IM5Vh9663ziW36kR0HNenXuxmfaD8JC7tfKbrhFr7LiZCrMjrzTeGx+PmkosrkNzW94ObzwocJ7A1HokLolY+AvkTiD/q1H0cN48c5EL8Crkttsa/AXQVDmutfyku0E7jShx49XqV3MFK8IryDhYVbj7Sj2P2eBxwcXoe8T8idsKKPRcnZw1b+slFTubwUwhktrfnAt7J++jwQtLZcm3sr9LQrjRzz6cfMv9aLvgmnAGvpoaGLxM4mAEaLV7iAzQ3oU0IvD5x9ix3yF2RAAuYAOO2f7PEFWCXZ4C9Pb2UsgDeVnFSpbFK7/IWu7TPTvBqzbGdCHOJQSxiEjt6IyZmxQyEJHv6xyQsYk//moVFsN2zP6fRImjfq7/n/wFDguUQFNEwugAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-important.callout-style-default .callout-title {
+    background-color: #f7dddc
+  }
+
+  div.callout-warning {
+    border-left-color: #f0ad4e !important;
+  }
+
+  div.callout-warning .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAETklEQVRYCeVWW2gcVRg+58yaTUnizqbipZeX4uWhBEniBaoUX1Ioze52t7sRq6APio9V9MEaoWlVsFasRq0gltaAPuxms8lu0gcviE/FFOstVbSIxgcv6SU7EZqmdc7v9+9mJtNks51NTUH84ed889/PP+cmxP+d5FIbMJmNbpREu4WUkiTtCicKny0l1pIKmBzovF2S+hIJHX8iEu3hZJ5lNZGqyRrGSIQpq15AzF28jgpeY6yk6GVdrfFqdrD6Iw+QlB8g0YS2g7dyQmXM/IDhBhT0UCiRf59lfqmmDvzRt6kByV/m4JjtzuaujMUM2c5Z2d6JdKrRb3K2q6mA+oYVz8JnDdKPmmNthzkAk/lN63sYPgevrguc72aZX/L9C6x09GYyxBgCX4NlvyGUHOKELlm5rXeR1kchuChJt4SSwyddZRXgvwMGvYo4QSlk3/zkHD8UHxwVJA6zjZZqP8v8kK8OWLnIZtLyCAJagYC4rTGW/9Pqj92N/c+LUaAj27movwbi19tk/whRCIE7Q9vyI6yvRpftAKVTdUjOW40X3h5OXsKCdmFcx0xlLJoSuQngnrJe7Kcjm4OMq9FlC7CMmScQANuNvjfP3PjGXDBaUQmbp296S5L4DrpbrHN1T87ZVEZVCzg1FF0Ft+dKrlLukI+/c9ENo+TvlTDbYFvuKPtQ9+l052rXrgKoWkDAFnvh0wTOmYn8R5f4k/jN/fZiCM1tQx9jQQ4ANhqG4hiL0qIFTGViG9DKB7GYzgubnpofgYRwO+DFjh0Zin2m4b/97EDkXkc+f6xYAPX0KK2I/7fUQuwzuwo/L3AkcjugPNixC8cHf0FyPjWlItmLxWw4Ou9YsQCr5fijMGoD/zpdRy95HRysyXA74MWOnscpO4j2y3HAVisw85hX5+AFBRSHt4ShfLFkIMXTqyKFc46xdzQM6XbAi702a7sy04J0+feReMFKp5q9esYLCqAZYw/k14E/xcLLsFElaornTuJB0svMuJINy8xkIYuL+xPAlWRceH6+HX7THJ0djLUom46zREu7tTkxwmf/FdOZ/sh6Q8qvEAiHpm4PJ4a/doJe0gH1t+aHRgCzOvBvJedEK5OFE5jpm4AGP2a8Dxe3gGJ/pAutug9Gp6he92CsSsWBaEcxGx0FHytmIpuqGkOpldqNYQK8cSoXvd+xLxXADw0kf6UkJNFtdo5MOgaLjiQOQHcn+A6h5NuL2s0qsC2LOM75PcF3yr5STuBSAcGG+meA14K/CI21HcS4LBT6tv0QAh8Dr5l93AhZzG5ZJ4VxAqdZUEl9z7WJ4aN+svMvwHHL21UKTd1mqvChH7/Za5xzXBBKrUcB0TQ+Ulgkfbi/H/YT5EptrGzsEK7tR1B7ln9BBwckYfMiuSqklSznIuoIIOM42MQO+QnduCoFCI0bpkzjCjddHPN/F+2Yu+sd9bKNpVwHhbS3LluK/0zgfwD0xYI5dXuzlQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-warning.callout-style-default .callout-title {
+    background-color: #fcefdc
+  }
+
+  div.callout-tip {
+    border-left-color: #02b875 !important;
+  }
+
+  div.callout-tip .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAADr0lEQVRYCe1XTWgTQRj9ZjZV8a9SPIkKgj8I1bMHsUWrqYLVg4Ue6v9BwZOxSYsIerFao7UiUryIqJcqgtpimhbBXoSCVxUFe9CTiogUrUp2Pt+3aUI2u5vdNh4dmMzOzHvvezuz8xNFM0mjnbXaNu1MvFWRXkXEyE6aYOYJpdW4IXuA4r0fo8qqSMDBU0v1HJUgVieAXxzCsdE/YJTdFcVIZQNMyhruOMJKXYFoLfIfIvVIMWdsrd+Rpd86ZmyzzjJmLStqRn0v8lzkb4rVIXvnpScOJuAn2ACC65FkPzEdEy4TPWRLJ2h7z4cArXzzaOdKlbOvKKX25Wl00jSnrwVxAg3o4dRxhO13RBSdNvH0xSARv3adTXbBdTf64IWO2vH0LT+cv4GR1DJt+DUItaQogeBX/chhbTBxEiZ6gftlDNXTrvT7co4ub5A6gp9HIcHvzTa46OS5fBeP87Qm0fQkr4FsYgVQ7Qg+ZayaDg9jhg1GkWj8RG6lkeSacrrHgDaxdoBiZPg+NXV/KifMuB6//JmYH4CntVEHy/keA6x4h4CU5oFy8GzrBS18cLJMXcljAKB6INjWsRcuZBWVaS3GDrqB7rdapVIeA+isQ57Eev9eCqzqOa81CY05VLd6SamW2wA2H3SiTbnbSxmzfp7WtKZkqy4mdyAlGx7ennghYf8voqp9cLSgKdqNfa6RdRsAAkPwRuJZNbpByn+RrJi1RXTwdi8RQF6ymDwGMAtZ6TVE+4uoKh+MYkcLsT0Hk8eAienbiGdjJHZTpmNjlbFJNKDVAp2fJlYju6IreQxQ08UJDNYdoLSl6AadO+fFuCQqVMB1NJwPm69T04Wv5WhfcWyfXQB+wXRs1pt+nCknRa0LVzSA/2B+a9+zQJadb7IyyV24YAxKp2Jqs3emZTuNnKxsah+uabKbMk7CbTgJx/zIgQYErIeTKRQ9yD9wxVof5YolPHqaWo7TD6tJlh7jQnK5z2n3+fGdggIOx2kaa2YI9QWarc5Ce1ipNWMKeSG4DysFF52KBmTNMmn5HqCFkwy34rDg05gDwgH3bBi+sgFhN/e8QvRn8kbamCOhgrZ9GJhFDgfcMHzFb6BAtjKpFhzTjwv1KCVuxHvCbsSiEz4CANnj84cwHdFXAbAOJ4LTSAawGWFn5tDhLMYz6nWeU2wJfIhmIJBefcd/A5FWQWGgrWzyORZ3Q6HuV+Jf0Bj+BTX69fm1zWgK7By1YTXchFDORywnfQ7GpzOo6S+qECrsx2ifVQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-tip.callout-style-default .callout-title {
+    background-color: #ccf1e3
+  }
+
+  div.callout-caution {
+    border-left-color: #fd7e14 !important;
+  }
+
+  div.callout-caution .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAACV0lEQVRYCdVWzWoUQRCuqp2ICBLJXgITZL1EfQDBW/bkzUMUD7klD+ATSHBEfAIfQO+iXsWDxJsHL96EHAwhgzlkg8nBg25XWb0zIb0zs9muYYWkoKeru+vn664fBqElyZNuyh167NXJ8Ut8McjbmEraKHkd7uAnAFku+VWdb3reSmRV8PKSLfZ0Gjn3a6Xlcq9YGb6tADjn+lUfTXtVmaZ1KwBIvFI11rRXlWlatwIAAv2asaa9mlB9wwygiDX26qaw1yYPzFXg2N1GgG0FMF8Oj+VIx7E/03lHx8UhvYyNZLN7BwSPgekXXLribw7w5/c8EF+DBK5idvDVYtEEwMeYefjjLAdEyQ3M9nfOkgnPTEkYU+sxMq0BxNR6jExrAI31H1rzvLEfRIdgcv1XEdj6QTQAS2wtstEALLG1yEZ3QhH6oDX7ExBSFEkFINXH98NTrme5IOaaA7kIfiu2L8A3qhH9zRbukdCqdsA98TdElyeMe5BI8Rs2xHRIsoTSSVFfCFCWGPn9XHb4cdobRIWABNf0add9jakDjQJpJ1bTXOJXnnRXHRf+dNL1ZV1MBRCXhMbaHqGI1JkKIL7+i8uffuP6wVQAzO7+qVEbF6NbS0LJureYcWXUUhH66nLR5rYmva+2tjRFtojkM2aD76HEGAD3tPtKM309FJg5j/K682ywcWJ3PASCcycH/22u+Bh7Aa0ehM2Fu4z0SAE81HF9RkB21c5bEn4Dzw+/qNOyXr3DCTQDMBOdhi4nAgiFDGCinIa2owCEChUwD8qzd03PG+qdW/4fDzjUMcE1ZpIAAAAASUVORK5CYII=');
+  }
+
+  div.callout-caution.callout-style-default .callout-title {
+    background-color: #ffe5d0
+  }
+
+  </style>
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">Lecture 9 - GLM V Multiple Regression</h1>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Caspar J. van Lissa 
+</div>
+</div>
+</div>
+
+  <p class="date">2023-07-01</p>
+</section>
+<section>
+<section id="recap" class="title-slide slide level1 center">
+<h1>Recap</h1>
+
+</section>
+<section id="two-categories" class="slide level2 smaller">
+<h2>Two+ categories</h2>
+<p>Remember: we can use bivariate linear regression to model two categories</p>
+<p><span class="math inline">\(\hat{Y}_i = a + b*X_i\)</span></p>
+<ul>
+<li>a: Mean of group 1</li>
+<li>b: Mean difference between groups 1 and 2</li>
+</ul>
+<p>For <strong>three+</strong> categories, we can <strong>expand</strong> the model:</p>
+<p><span class="math inline">\(\hat{Y}_i = a + b_1*X_{1i}+ b_2*X_{2i}\)</span></p>
+<ul>
+<li>a: Mean of group 1</li>
+<li><span class="math inline">\(b_1\)</span>: Mean difference between groups 1 and 2</li>
+<li><span class="math inline">\(b_2\)</span>: Mean difference between groups 1 and 3</li>
+</ul>
+</section>
+<section id="multiple-regression" class="slide level2">
+<h2>Multiple regression</h2>
+<p>The model with two dummies is also an example of <span class="math inline">\(\color{blue}{\text{multiple regression}}\)</span>.</p>
+<p><strong>Multiple regression:</strong> Regression with more than one predictor.</p>
+<ul>
+<li>Answers the question: What is the unique effect of one predictor, controlling for the effect of all other predictors?</li>
+</ul>
+</section>
+<section id="multiple-regression-1" class="slide level2">
+<h2>Multiple regression</h2>
+<p><span class="math inline">\(\hat{Y}_i = a + b_1*X_{1i}+ b_2*X_{2i}\)</span></p>
+<p>Last week, <span class="math inline">\(X_1\)</span> and <span class="math inline">\(X_2\)</span> were dummies (only 0 and 1 values)</p>
+<p>You can simply replace them with continuous predictors!</p>
+<p>You can expand the model with as many predictors as you like:</p>
+<p><span class="math inline">\(\hat{Y}_i = a + b_1*X_{1i}+ b_2*X_{2i} + b_3*X_{3i} + \dots + b_K*X_{Ki}\)</span></p>
+</section>
+<section id="parameter-interpretation" class="slide level2 smaller">
+<h2>Parameter interpretation</h2>
+<p><span class="math inline">\(\hat{Y}_i = a + b_1*X_{1i}+ b_2*X_{2i}\)</span></p>
+<p><span class="math inline">\(a\)</span> is the <span class="math inline">\(\color{blue}{\text{intercept}}\)</span></p>
+<ul>
+<li>Expected value when <strong>all</strong> predictors are equal to 0</li>
+<li>When using dummies, this is the mean value of the reference category</li>
+<li>When using continuous predictors, this is the expected value for someone who scores 0 on all predictors</li>
+</ul>
+<p><span class="math inline">\(b_1\)</span> and <span class="math inline">\(b_2\)</span> are <span class="math inline">\(\color{blue}{\text{slopes}}\)</span></p>
+<ul>
+<li>There’s one <span class="math inline">\(b\)</span> for each <span class="math inline">\(X\)</span></li>
+<li><span class="math inline">\(b\)</span> tells us how many points Y increases if X goes up by 1, while keeping <strong>all other</strong> X-values equal</li>
+</ul>
+</section>
+<section id="unique-effects" class="slide level2">
+<h2>Unique effects</h2>
+<p><strong>Aim:</strong> predict dependent variable Y from multiple predictors <span class="math inline">\(X_1, X_2, \ldots,X_k\)</span> with a linear model:</p>
+<p><span class="math inline">\(y_i = b_0 + b_1 * x_1 + b_2 * x_2 + \ldots + b_k * x_k + \epsilon_i\)</span></p>
+<p>This will give you the <strong>unique/partial effect</strong> of each predictor, while keeping all other variables constant</p>
+</section></section>
+<section>
+<section id="a-story-of-bubbles" class="title-slide slide level1 center">
+<h1>A story of bubbles</h1>
+
+</section>
+<section id="a-story-of-bubbles-1" class="slide level2">
+<h2>A story of bubbles</h2>
+<p>Imagine that these two circles represent the variance in two variables, for example, “Father involvement” and “Hours worked”</p>
+
+<img data-src="lecture9_files/figure-revealjs/unnamed-chunk-2-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"></section>
+<section id="visualizing-covariance" class="slide level2">
+<h2>Visualizing covariance</h2>
+<p>Imagine that “Father involvement” and “Hours worked” covary</p>
+<ul>
+<li>There would be overlap in the circles (area C)</li>
+<li>We can describe this overlap as correlation, or as a regression coefficient</li>
+</ul>
+
+<img data-src="lecture9_files/figure-revealjs/unnamed-chunk-3-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"></section>
+<section id="visualizing-covariance-1" class="slide level2">
+<h2>Visualizing covariance</h2>
+<p>Now, let’s say that “Father involvement” and “Gender role attitudes” <strong>also</strong> covary</p>
+<ul>
+<li>There would also be overlap in these circles</li>
+</ul>
+
+<img data-src="lecture9_files/figure-revealjs/unnamed-chunk-4-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"></section>
+<section id="visualizing-multiple-regression" class="slide level2">
+<h2>Visualizing multiple regression</h2>
+<p>Finally, imagine that Hours worked and Gender role attitudes both covary with Involvement, and also with one another (e.g., maybe more progressive fathers work fewer hours)</p>
+
+<img data-src="lecture9_files/figure-revealjs/unnamed-chunk-5-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"></section></section>
+<section>
+<section id="coefficients" class="title-slide slide level1 center">
+<h1>Coefficients</h1>
+
+</section>
+<section id="coefficients-1" class="slide level2 smaller flexbox vcenter">
+<h2>Coefficients</h2>
+<p><strong>Only work hours:</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th>Variabele</th>
+<th>B</th>
+<th>t</th>
+<th>p</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>(Intercept)</td>
+<td>16.90</td>
+<td>6.26</td>
+<td>0.00</td>
+</tr>
+<tr class="even">
+<td>Work_hours</td>
+<td>0.29</td>
+<td>2.05</td>
+<td>0.04</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Only gender roles:</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th>Variabele</th>
+<th>B</th>
+<th>t</th>
+<th>p</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>(Intercept)</td>
+<td>7.57</td>
+<td>1.50</td>
+<td>0.14</td>
+</tr>
+<tr class="even">
+<td>Gender_roles</td>
+<td>3.14</td>
+<td>2.90</td>
+<td>0.01</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Multiple regression:</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th>Variabele</th>
+<th>B</th>
+<th>t</th>
+<th>p</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>(Intercept)</td>
+<td>6.81</td>
+<td>1.34</td>
+<td>0.18</td>
+</tr>
+<tr class="even">
+<td>Work_hours</td>
+<td>0.17</td>
+<td>1.19</td>
+<td>0.24</td>
+</tr>
+<tr class="odd">
+<td>Gender_roles</td>
+<td>2.66</td>
+<td>2.32</td>
+<td>0.02</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="coefficients-2" class="slide level2 smaller">
+<h2>Coefficients</h2>
+<p>Why is work hours significant on its own, but not significant when we add gender roles?</p>
+<p><strong>Only work hours:</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th>Variabele</th>
+<th>B</th>
+<th>t</th>
+<th>p</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>(Intercept)</td>
+<td>16.90</td>
+<td>6.26</td>
+<td>0.00</td>
+</tr>
+<tr class="even">
+<td>Work_hours</td>
+<td>0.29</td>
+<td>2.05</td>
+<td>0.04</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Multiple regression:</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th>Variabele</th>
+<th>B</th>
+<th>t</th>
+<th>p</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>(Intercept)</td>
+<td>6.81</td>
+<td>1.34</td>
+<td>0.18</td>
+</tr>
+<tr class="even">
+<td>Work_hours</td>
+<td>0.17</td>
+<td>1.19</td>
+<td>0.24</td>
+</tr>
+<tr class="odd">
+<td>Gender_roles</td>
+<td>2.66</td>
+<td>2.32</td>
+<td>0.02</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="separate-bivariate-regression" class="slide level2">
+<h2>Separate bivariate regression</h2>
+<p>Two separate bivariate regression models, <span class="math inline">\(\hat{Y}_i = a + b_1*X_1\)</span></p>
+
+<img data-src="lecture9_files/figure-revealjs/unnamed-chunk-7-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"></section>
+<section id="multiple-regression-example" class="slide level2">
+<h2>Multiple regression example</h2>
+<p><span class="math inline">\(\hat{Y}_i = a + b_1*X_1 + b_2*X_2\)</span></p>
+
+<img data-src="lecture9_files/figure-revealjs/unnamed-chunk-8-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"></section>
+<section id="multiple-regression-example-1" class="slide level2">
+<h2>Multiple regression example</h2>
+<p>The lines are no longer “in the middle” of the data cloud?</p>
+<ul>
+<li>The effect of Work_hours is <em>controlled for</em> the effect of Gender_role, and vice versa</li>
+</ul>
+<p><a href="https://plot.ly/~c.j.vanlissa/3.embed"><span class="math inline">\(\color{red}{\text{This is clearer when you vidualize this as a 3D plot}}\)</span></a></p>
+
+<img data-src="lecture9_files/figure-revealjs/unnamed-chunk-9-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"></section>
+<section id="multiple-regression-3d-plot" class="slide level2">
+<h2>Multiple regression 3D plot</h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="plotly html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-cc23304310102ebfbd82" style="width:100%;height:480px;"></div>
+<script type="application/json" data-for="htmlwidget-cc23304310102ebfbd82">{"x":{"visdat":{"8d281f0840d2":["function () ","plotlyVisDat"]},"cur_data":"8d281f0840d2","attrs":{"8d281f0840d2":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"z":[[9.4738224429901656,9.5594054964195081,9.6449885498488541,9.7305716032781966,9.8161546567075408,9.9017377101368851,9.9873207635662276,10.072903816995572,10.158486870424916,10.244069923854259,10.329652977283605,10.415236030712947,10.500819084142289,10.586402137571636,10.671985191000978,10.75756824443032,10.843151297859666,10.928734351289009,11.014317404718355,11.099900458147697,11.18548351157704,11.271066565006386,11.356649618435728,11.442232671865071,11.527815725294417,11.613398778723759,11.698981832153102,11.784564885582448,11.87014793901179,11.955730992441133,12.041314045870479,12.126897099299821,12.212480152729167,12.29806320615851,12.383646259587852,12.469229313017198,12.554812366446541,12.640395419875883,12.725978473305229,12.811561526734572,12.897144580163914,12.98272763359326,13.068310687022603,13.153893740451949,13.239476793881291,13.325059847310634,13.41064290073998,13.496225954169322,13.581809007598665,13.667392061028011,13.752975114457353,13.838558167886696,13.924141221316042,14.009724274745384,14.095307328174727,14.180890381604073,14.266473435033415,14.352056488462761,14.437639541892104,14.523222595321446,14.608805648750792,14.694388702180134,14.779971755609477,14.865554809038823,14.951137862468165,15.036720915897508,15.122303969326854,15.207887022756196,15.293470076185542,15.379053129614885,15.464636183044227,15.550219236473573,15.635802289902916,15.721385343332258,15.806968396761604,15.892551450190947,15.978134503620289,16.063717557049635,16.149300610478978,16.234883663908324,16.320466717337666],[10.805783621390166,10.89136667481951,10.976949728248854,11.062532781678197,11.148115835107541,11.233698888536885,11.31928194196623,11.404864995395572,11.490448048824916,11.576031102254261,11.661614155683605,11.747197209112947,11.832780262542292,11.918363315971636,12.00394636940098,12.089529422830323,12.175112476259667,12.260695529689011,12.346278583118355,12.431861636547698,12.517444689977042,12.603027743406386,12.68861079683573,12.774193850265073,12.859776903694417,12.945359957123761,13.030943010553104,13.116526063982448,13.202109117411792,13.287692170841135,13.373275224270479,13.458858277699823,13.544441331129168,13.630024384558512,13.715607437987854,13.801190491417199,13.886773544846543,13.972356598275885,14.05793965170523,14.143522705134574,14.229105758563916,14.31468881199326,14.400271865422605,14.485854918851949,14.571437972281293,14.657021025710636,14.74260407913998,14.828187132569324,14.913770185998667,14.999353239428011,15.084936292857355,15.170519346286698,15.256102399716044,15.341685453145386,15.427268506574729,15.512851560004075,15.598434613433417,15.684017666862761,15.769600720292106,15.855183773721448,15.940766827150792,16.026349880580135,16.111932934009477,16.197515987438823,16.283099040868166,16.368682094297508,16.454265147726854,16.539848201156197,16.625431254585543,16.711014308014885,16.796597361444228,16.882180414873574,16.967763468302916,17.053346521732259,17.138929575161605,17.224512628590947,17.31009568202029,17.395678735449636,17.481261788878978,17.566844842308324,17.652427895737667],[12.137744799790166,12.22332785321951,12.308910906648855,12.394493960078197,12.480077013507543,12.565660066936886,12.65124312036623,12.736826173795574,12.822409227224917,12.907992280654261,12.993575334083605,13.079158387512948,13.164741440942292,13.250324494371636,13.33590754780098,13.421490601230323,13.507073654659667,13.592656708089011,13.678239761518356,13.763822814947698,13.849405868377042,13.934988921806386,14.020571975235731,14.106155028665073,14.191738082094417,14.277321135523762,14.362904188953104,14.448487242382448,14.534070295811793,14.619653349241135,14.705236402670479,14.790819456099824,14.876402509529168,14.961985562958512,15.047568616387855,15.133151669817199,15.218734723246543,15.304317776675886,15.38990083010523,15.475483883534574,15.561066936963917,15.646649990393261,15.732233043822605,15.817816097251949,15.903399150681294,15.988982204110636,16.07456525753998,16.160148310969326,16.245731364398665,16.331314417828011,16.416897471257357,16.502480524686696,16.588063578116042,16.673646631545388,16.759229684974727,16.844812738404073,16.930395791833419,17.015978845262762,17.101561898692104,17.18714495212145,17.272728005550793,17.358311058980135,17.443894112409481,17.529477165838827,17.615060219268166,17.700643272697512,17.786226326126858,17.871809379556197,17.957392432985543,18.042975486414889,18.128558539844228,18.214141593273574,18.29972464670292,18.385307700132259,18.470890753561605,18.556473806990951,18.64205686042029,18.727639913849636,18.813222967278982,18.898806020708324,18.984389074137667],[13.469705978190166,13.555289031619511,13.640872085048855,13.726455138478197,13.812038191907543,13.897621245336886,13.98320429876623,14.068787352195574,14.154370405624917,14.239953459054261,14.325536512483605,14.411119565912948,14.496702619342292,14.582285672771636,14.667868726200981,14.753451779630323,14.839034833059667,14.924617886489012,15.010200939918356,15.095783993347698,15.181367046777043,15.266950100206387,15.352533153635731,15.438116207065073,15.523699260494418,15.609282313923762,15.694865367353104,15.780448420782449,15.866031474211793,15.951614527641135,16.03719758107048,16.122780634499826,16.208363687929168,16.293946741358511,16.379529794787857,16.465112848217199,16.550695901646542,16.636278955075888,16.72186200850523,16.807445061934573,16.893028115363919,16.978611168793261,17.064194222222604,17.14977727565195,17.235360329081296,17.320943382510634,17.406526435939981,17.492109489369327,17.577692542798665,17.663275596228011,17.748858649657357,17.834441703086696,17.920024756516042,18.005607809945388,18.091190863374727,18.176773916804073,18.262356970233419,18.347940023662762,18.433523077092104,18.51910613052145,18.604689183950793,18.690272237380135,18.775855290809481,18.861438344238827,18.947021397668166,19.032604451097512,19.118187504526858,19.203770557956197,19.289353611385543,19.374936664814889,19.460519718244228,19.546102771673574,19.63168582510292,19.717268878532259,19.802851931961605,19.888434985390951,19.97401803882029,20.059601092249636,20.145184145678982,20.230767199108325,20.316350252537667],[14.801667156590169,14.887250210019513,14.972833263448855,15.058416316878199,15.143999370307544,15.229582423736886,15.315165477166232,15.400748530595575,15.486331584024919,15.571914637454263,15.657497690883606,15.74308074431295,15.828663797742294,15.914246851171637,15.999829904600983,16.085412958030325,16.170996011459668,16.256579064889014,16.342162118318356,16.427745171747699,16.513328225177045,16.598911278606387,16.684494332035733,16.770077385465076,16.855660438894418,16.941243492323764,17.026826545753107,17.112409599182449,17.197992652611795,17.283575706041137,17.36915875947048,17.454741812899826,17.540324866329168,17.625907919758514,17.711490973187857,17.797074026617199,17.882657080046545,17.968240133475888,18.05382318690523,18.139406240334576,18.224989293763919,18.310572347193261,18.396155400622607,18.48173845405195,18.567321507481296,18.652904560910638,18.738487614339981,18.824070667769327,18.909653721198669,18.995236774628012,19.080819828057358,19.1664028814867,19.251985934916046,19.337568988345389,19.423152041774731,19.508735095204077,19.59431814863342,19.679901202062762,19.765484255492108,19.851067308921451,19.936650362350793,20.022233415780139,20.107816469209482,20.193399522638828,20.27898257606817,20.364565629497513,20.450148682926859,20.535731736356201,20.621314789785544,20.70689784321489,20.792480896644232,20.878063950073575,20.963647003502921,21.049230056932263,21.134813110361609,21.220396163790952,21.305979217220294,21.39156227064964,21.477145324078982,21.562728377508325,21.648311430937671],[16.133628334990171,16.219211388419513,16.304794441848856,16.390377495278202,16.475960548707544,16.561543602136886,16.647126655566233,16.732709708995575,16.818292762424921,16.903875815854263,16.989458869283609,17.075041922712952,17.160624976142294,17.24620802957164,17.331791083000983,17.417374136430325,17.502957189859671,17.588540243289014,17.674123296718356,17.759706350147702,17.845289403577045,17.930872457006387,18.016455510435733,18.102038563865076,18.187621617294418,18.273204670723764,18.358787724153107,18.444370777582449,18.529953831011795,18.615536884441138,18.70111993787048,18.786702991299826,18.872286044729172,18.957869098158515,19.043452151587857,19.129035205017203,19.214618258446546,19.300201311875888,19.385784365305234,19.471367418734577,19.556950472163919,19.642533525593265,19.728116579022608,19.81369963245195,19.899282685881296,19.984865739310639,20.070448792739981,20.156031846169327,20.24161489959867,20.327197953028012,20.412781006457358,20.498364059886701,20.583947113316047,20.669530166745389,20.755113220174731,20.840696273604078,20.92627932703342,21.011862380462766,21.097445433892108,21.183028487321451,21.268611540750797,21.354194594180139,21.439777647609482,21.525360701038828,21.61094375446817,21.696526807897513,21.782109861326859,21.867692914756201,21.953275968185544,22.03885902161489,22.124442075044232,22.210025128473575,22.295608181902921,22.381191235332263,22.466774288761609,22.552357342190952,22.637940395620294,22.72352344904964,22.809106502478983,22.894689555908329,22.980272609337671],[17.465589513390171,17.551172566819513,17.636755620248856,17.722338673678202,17.807921727107544,17.893504780536887,17.979087833966233,18.064670887395575,18.150253940824921,18.235836994254264,18.32142004768361,18.407003101112952,18.492586154542295,18.578169207971641,18.663752261400983,18.749335314830326,18.834918368259672,18.920501421689014,19.006084475118357,19.091667528547703,19.177250581977045,19.262833635406388,19.348416688835734,19.433999742265076,19.519582795694419,19.605165849123765,19.690748902553107,19.77633195598245,19.861915009411796,19.947498062841138,20.03308111627048,20.118664169699827,20.204247223129173,20.289830276558515,20.375413329987857,20.460996383417204,20.546579436846546,20.632162490275888,20.717745543705234,20.803328597134577,20.888911650563919,20.974494703993265,21.060077757422608,21.14566081085195,21.231243864281296,21.316826917710639,21.402409971139981,21.487993024569327,21.57357607799867,21.659159131428012,21.744742184857358,21.830325238286701,21.915908291716047,22.001491345145389,22.087074398574732,22.172657452004078,22.25824050543342,22.343823558862766,22.429406612292109,22.514989665721451,22.600572719150797,22.68615577258014,22.771738826009482,22.857321879438828,22.942904932868171,23.028487986297513,23.114071039726859,23.199654093156202,23.285237146585544,23.37082020001489,23.456403253444233,23.541986306873575,23.627569360302921,23.713152413732264,23.79873546716161,23.884318520590952,23.969901574020295,24.055484627449641,24.141067680878983,24.226650734308329,24.312233787737672],[18.797550691790171,18.883133745219514,18.968716798648856,19.054299852078202,19.139882905507545,19.225465958936887,19.311049012366233,19.396632065795576,19.482215119224922,19.567798172654264,19.65338122608361,19.738964279512953,19.824547332942295,19.910130386371641,19.995713439800983,20.081296493230326,20.166879546659672,20.252462600089014,20.338045653518357,20.423628706947703,20.509211760377045,20.594794813806388,20.680377867235734,20.765960920665076,20.851543974094419,20.937127027523765,21.022710080953107,21.10829313438245,21.193876187811796,21.279459241241138,21.365042294670481,21.450625348099827,21.536208401529173,21.621791454958515,21.707374508387858,21.792957561817204,21.878540615246546,21.964123668675889,22.049706722105235,22.135289775534577,22.22087282896392,22.306455882393266,22.392038935822608,22.477621989251951,22.563205042681297,22.648788096110639,22.734371149539982,22.819954202969328,22.90553725639867,22.991120309828013,23.076703363257359,23.162286416686701,23.247869470116047,23.33345252354539,23.419035576974732,23.504618630404078,23.590201683833421,23.675784737262767,23.761367790692109,23.846950844121451,23.932533897550798,24.01811695098014,24.103700004409482,24.189283057838828,24.274866111268171,24.360449164697513,24.446032218126859,24.531615271556202,24.617198324985544,24.70278137841489,24.788364431844233,24.873947485273575,24.959530538702921,25.045113592132264,25.13069664556161,25.216279698990952,25.301862752420295,25.387445805849641,25.473028859278983,25.558611912708329,25.644194966137672],[20.129511870190171,20.215094923619514,20.300677977048856,20.386261030478202,20.471844083907545,20.557427137336887,20.643010190766233,20.728593244195576,20.814176297624922,20.899759351054264,20.98534240448361,21.070925457912953,21.156508511342295,21.242091564771641,21.327674618200984,21.413257671630326,21.498840725059672,21.584423778489015,21.670006831918357,21.755589885347703,21.841172938777046,21.926755992206388,22.012339045635734,22.097922099065077,22.183505152494419,22.269088205923765,22.354671259353108,22.44025431278245,22.525837366211796,22.611420419641139,22.697003473070481,22.782586526499827,22.868169579929173,22.953752633358516,23.039335686787858,23.124918740217204,23.210501793646547,23.296084847075889,23.381667900505235,23.467250953934577,23.55283400736392,23.638417060793266,23.724000114222608,23.809583167651951,23.895166221081297,23.980749274510639,24.066332327939982,24.151915381369328,24.23749843479867,24.323081488228013,24.408664541657359,24.494247595086701,24.579830648516047,24.66541370194539,24.750996755374732,24.836579808804078,24.922162862233421,25.007745915662767,25.093328969092109,25.178912022521452,25.264495075950798,25.35007812938014,25.435661182809483,25.521244236238829,25.606827289668171,25.692410343097514,25.77799339652686,25.863576449956202,25.949159503385545,26.034742556814891,26.120325610244233,26.205908663673576,26.291491717102922,26.377074770532264,26.46265782396161,26.548240877390953,26.633823930820295,26.719406984249641,26.804990037678984,26.89057309110833,26.976156144537672],[21.461473048590172,21.547056102019518,21.63263915544886,21.718222208878203,21.803805262307549,21.889388315736891,21.974971369166234,22.06055442259558,22.146137476024922,22.231720529454265,22.317303582883611,22.402886636312953,22.488469689742296,22.574052743171642,22.659635796600988,22.745218850030327,22.830801903459673,22.916384956889019,23.001968010318361,23.087551063747703,23.17313411717705,23.258717170606392,23.344300224035734,23.42988327746508,23.515466330894423,23.601049384323765,23.686632437753111,23.772215491182454,23.857798544611796,23.943381598041142,24.028964651470485,24.114547704899827,24.200130758329173,24.285713811758519,24.371296865187858,24.456879918617204,24.54246297204655,24.628046025475889,24.713629078905235,24.799212132334581,24.88479518576392,24.970378239193266,25.055961292622612,25.141544346051955,25.227127399481297,25.312710452910643,25.398293506339986,25.483876559769328,25.569459613198674,25.655042666628017,25.740625720057359,25.826208773486705,25.911791826916051,25.99737488034539,26.082957933774736,26.168540987204082,26.254124040633421,26.339707094062767,26.425290147492113,26.510873200921452,26.596456254350798,26.682039307780144,26.767622361209483,26.853205414638829,26.938788468068175,27.024371521497514,27.10995457492686,27.195537628356206,27.281120681785548,27.366703735214891,27.452286788644237,27.537869842073579,27.623452895502922,27.709035948932268,27.794619002361614,27.880202055790953,27.965785109220299,28.051368162649645,28.136951216078984,28.22253426950833,28.308117322937676],[22.793434226990172,22.879017280419518,22.96460033384886,23.050183387278203,23.135766440707549,23.221349494136891,23.306932547566234,23.39251560099558,23.478098654424922,23.563681707854265,23.649264761283611,23.734847814712953,23.820430868142296,23.906013921571642,23.991596975000988,24.077180028430327,24.162763081859673,24.248346135289019,24.333929188718361,24.419512242147704,24.50509529557705,24.590678349006392,24.676261402435735,24.761844455865081,24.847427509294423,24.933010562723766,25.018593616153112,25.104176669582454,25.189759723011797,25.275342776441143,25.360925829870485,25.446508883299828,25.532091936729174,25.61767499015852,25.703258043587859,25.788841097017205,25.874424150446551,25.96000720387589,26.045590257305236,26.131173310734582,26.216756364163921,26.302339417593267,26.387922471022613,26.473505524451955,26.559088577881298,26.644671631310644,26.730254684739986,26.815837738169328,26.901420791598674,26.987003845028017,27.072586898457359,27.158169951886705,27.243753005316051,27.32933605874539,27.414919112174736,27.500502165604082,27.586085219033421,27.671668272462767,27.757251325892113,27.842834379321452,27.928417432750798,28.014000486180144,28.099583539609483,28.185166593038829,28.270749646468175,28.356332699897514,28.44191575332686,28.527498806756206,28.613081860185549,28.698664913614891,28.784247967044237,28.86983102047358,28.955414073902922,29.040997127332268,29.126580180761614,29.212163234190953,29.297746287620299,29.383329341049645,29.468912394478984,29.55449544790833,29.640078501337676],[24.125395405390176,24.210978458819518,24.296561512248864,24.382144565678207,24.467727619107549,24.553310672536895,24.638893725966238,24.72447677939558,24.810059832824926,24.895642886254269,24.981225939683611,25.066808993112957,25.1523920465423,25.237975099971642,25.323558153400988,25.409141206830331,25.494724260259673,25.580307313689019,25.665890367118365,25.751473420547704,25.83705647397705,25.922639527406396,26.008222580835739,26.093805634265081,26.179388687694427,26.26497174112377,26.350554794553112,26.436137847982458,26.5217209014118,26.607303954841143,26.692887008270489,26.778470061699831,26.864053115129174,26.94963616855852,27.035219221987862,27.120802275417205,27.206385328846551,27.291968382275893,27.377551435705236,27.463134489134582,27.548717542563924,27.634300595993267,27.719883649422613,27.805466702851959,27.891049756281301,27.976632809710644,28.06221586313999,28.147798916569332,28.233381969998675,28.318965023428021,28.404548076857363,28.490131130286706,28.575714183716052,28.661297237145394,28.746880290574737,28.832463344004083,28.918046397433425,29.003629450862768,29.089212504292114,29.174795557721456,29.260378611150799,29.345961664580145,29.431544718009487,29.517127771438833,29.602710824868176,29.688293878297518,29.773876931726864,29.859459985156207,29.945043038585553,30.030626092014895,30.116209145444238,30.201792198873584,30.287375252302926,30.372958305732269,30.458541359161615,30.544124412590957,30.629707466020299,30.715290519449646,30.800873572878988,30.88645662630833,30.972039679737676],[25.457356583790176,25.542939637219519,25.628522690648865,25.714105744078207,25.79968879750755,25.885271850936896,25.970854904366238,26.05643795779558,26.142021011224926,26.227604064654269,26.313187118083611,26.398770171512957,26.4843532249423,26.569936278371642,26.655519331800988,26.741102385230331,26.826685438659673,26.912268492089019,26.997851545518365,27.083434598947704,27.16901765237705,27.254600705806396,27.340183759235739,27.425766812665081,27.511349866094427,27.59693291952377,27.682515972953112,27.768099026382458,27.853682079811801,27.939265133241143,28.024848186670489,28.110431240099832,28.196014293529174,28.28159734695852,28.367180400387863,28.452763453817205,28.538346507246551,28.623929560675894,28.709512614105236,28.795095667534582,28.880678720963925,28.966261774393267,29.051844827822613,29.137427881251959,29.223010934681302,29.308593988110644,29.39417704153999,29.479760094969333,29.565343148398675,29.650926201828021,29.736509255257364,29.822092308686706,29.907675362116052,29.993258415545395,30.078841468974737,30.164424522404083,30.250007575833425,30.335590629262768,30.421173682692114,30.506756736121456,30.592339789550799,30.677922842980145,30.763505896409487,30.849088949838833,30.934672003268176,31.020255056697518,31.105838110126864,31.191421163556207,31.277004216985553,31.362587270414895,31.448170323844238,31.533753377273584,31.619336430702926,31.704919484132269,31.790502537561615,31.876085590990957,31.9616686444203,32.047251697849646,32.132834751278992,32.218417804708331,32.304000858137677]],"type":"surface","x":[0,0.5,1,1.5,2,2.5,3,3.5,4,4.5,5,5.5,6,6.5,7,7.5,8,8.5,9,9.5,10,10.5,11,11.5,12,12.5,13,13.5,14,14.5,15,15.5,16,16.5,17,17.5,18,18.5,19,19.5,20,20.5,21,21.5,22,22.5,23,23.5,24,24.5,25,25.5,26,26.5,27,27.5,28,28.5,29,29.5,30,30.5,31,31.5,32,32.5,33,33.5,34,34.5,35,35.5,36,36.5,37,37.5,38,38.5,39,39.5,40],"y":[1,1.5,2,2.5,3,3.5,4,4.5,5,5.5,6,6.5,7],"inherit":true},"8d281f0840d2.1":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":[19.851062703120721,11.20435083560354,31.770832327513773,16.539715051657708,2.252936544289371,8.7998213038559179,15.545993825849058,21.146052364787767,16.265490486212318,31.181677386306678,24.571453938927284,8.0809478321406623,18.411531897575749,19.631331953412271,5.0527481399394354,32.225426511049747,12.785864750354648,23.052900218824437,22.452740091462875,16.881605113759889,5.0745546043048995,6.7384952628306838,22.002187056132556,23.579905658118982,25.703144543529778,0.27765482398644259,2.1597871938079081,2.4434495531115759,23.578567915462752,10.007750741940303,17.204422072736769,23.747896813697267,15.722118402220055,17.494987441158095,18.268787089023217,22.406243726349967,28.525795662871921,5.4714404467678541,23.037487433124792,16.871495802019105,14.722930768354912,4.7953288054266237,24.501670631072109,31.61884462532964,10.299846293929011,19.539353509371328,25.779261867858452,12.497194852007725,11.29473401950187,14.271540538480833,12.430511198289938,20.925394059024459,40,21.880308260837936,37.841162569889562,9.2199341685896314,0.22488447240180839,0,16.81183750879071,19.410079459381148],"y":[4.3600808232825043,3.9580110485075881,4.0906275539453851,3.9498052553126337,2.1529454375651911,5.1656087603046839,4.0345735819525714,5.8367874446729582,4.0668180946657007,5.6055831395901805,4.7716864410649569,5.3391610170010519,3.952971865208629,6.0866263695223175,2.5834687055153189,5.7106434819869749,4.6469570627872843,4.245476467837431,4.459504198184697,5.5140174509553583,5.6615266529942865,3.7093664861271103,4.3489855872832717,4.2310224867988842,4.7162867924399157,3.3560192631152841,3.8771329340788725,4.6101185605027686,4.3842783755417294,2.835051685856703,3.3678291128082662,4.6603684252922788,5.3774044962614935,3.6006295076299981,3.9644964521323742,5.7169986389137133,6.0068289362560918,6.6547656386345144,3.5241918672929078,4.9459110224225,2.2777321009743297,5.8146911529323972,4.8457586809341695,5.6982952157789768,5.0532226649894065,4.4939507520257802,4.7521216594185667,3.7674548838799193,5.2824640880602551,5.3040770515086404,3.2696418364861204,6.3335536811237105,6.4429218236412638,3.4327576827993571,7,3.0539196998058653,3.546051110899052,5.12559657522179,4.4776626277307265,1],"z":[21.309659295879989,21.974971382423174,17.605636649936347,23.389315579223762,12.227670993343953,23.084598433784574,11.685659958905523,34.83258146788959,2.2299957924607017,35.494576948895364,23.456737907795709,23.65686284367623,30.091451313625033,25.210173386294503,13.171599516813254,25.691462773869421,16.987246260637193,21.693860844370889,16.973127720613828,32.596378665943142,50,39.329504219165848,24.813071863027499,14.255870154879831,13.758955837183082,6.5992489151715388,19.551415057822087,24.757907627602112,22.640711777248995,5.8806269073449862,2.7505296409475295,21.3510353899329,12.83789852761911,9.140858287454046,8.5539912157028599,22.626421168172481,27.084238521188848,11.028549707425878,33.8535118484332,32.381636637539415,26.116760602805101,0,36.990123883164145,30.377938719704872,17.217340917031965,28.910559197985613,22.525413039555474,26.144527182791304,30.190743699721239,17.535037532370467,23.036446431700359,37.390813600812741,16.910595853918405,13.748676134361643,44.412068565262473,7.6723966236289174,26.803226449156881,15.589021871493202,26.502840357663221,19.941974013705046],"type":"scatter3d","mode":"markers","marker":{"color":"red"},"opacity":1,"inherit":true}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"title":"Multiple regression demo","scene":{"xaxis":{"title":"Work_hours","range":[0,40]},"yaxis":{"title":"Gender role","range":[1,7]},"zaxis":{"title":"Involvement","range":[0,50]},"camera":{"eye":{"x":2,"y":-2,"z":1.25},"zoom":5},"showlegend":false},"hovermode":"closest","showlegend":false,"legend":{"yanchor":"top","y":0.5}},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"colorbar":{"title":"","ticklen":2,"len":0.5,"lenmode":"fraction","y":1,"yanchor":"top"},"colorscale":[["0","rgba(68,1,84,1)"],["0.0416666666666667","rgba(70,19,97,1)"],["0.0833333333333333","rgba(72,32,111,1)"],["0.125","rgba(71,45,122,1)"],["0.166666666666667","rgba(68,58,128,1)"],["0.208333333333333","rgba(64,70,135,1)"],["0.25","rgba(60,82,138,1)"],["0.291666666666667","rgba(56,93,140,1)"],["0.333333333333333","rgba(49,104,142,1)"],["0.375","rgba(46,114,142,1)"],["0.416666666666667","rgba(42,123,142,1)"],["0.458333333333333","rgba(38,133,141,1)"],["0.5","rgba(37,144,140,1)"],["0.541666666666667","rgba(33,154,138,1)"],["0.583333333333333","rgba(39,164,133,1)"],["0.625","rgba(47,174,127,1)"],["0.666666666666667","rgba(53,183,121,1)"],["0.708333333333333","rgba(79,191,110,1)"],["0.75","rgba(98,199,98,1)"],["0.791666666666667","rgba(119,207,85,1)"],["0.833333333333333","rgba(147,214,70,1)"],["0.875","rgba(172,220,52,1)"],["0.916666666666667","rgba(199,225,42,1)"],["0.958333333333333","rgba(226,228,40,1)"],["1","rgba(253,231,37,1)"]],"showscale":true,"z":[[9.4738224429901656,9.5594054964195081,9.6449885498488541,9.7305716032781966,9.8161546567075408,9.9017377101368851,9.9873207635662276,10.072903816995572,10.158486870424916,10.244069923854259,10.329652977283605,10.415236030712947,10.500819084142289,10.586402137571636,10.671985191000978,10.75756824443032,10.843151297859666,10.928734351289009,11.014317404718355,11.099900458147697,11.18548351157704,11.271066565006386,11.356649618435728,11.442232671865071,11.527815725294417,11.613398778723759,11.698981832153102,11.784564885582448,11.87014793901179,11.955730992441133,12.041314045870479,12.126897099299821,12.212480152729167,12.29806320615851,12.383646259587852,12.469229313017198,12.554812366446541,12.640395419875883,12.725978473305229,12.811561526734572,12.897144580163914,12.98272763359326,13.068310687022603,13.153893740451949,13.239476793881291,13.325059847310634,13.41064290073998,13.496225954169322,13.581809007598665,13.667392061028011,13.752975114457353,13.838558167886696,13.924141221316042,14.009724274745384,14.095307328174727,14.180890381604073,14.266473435033415,14.352056488462761,14.437639541892104,14.523222595321446,14.608805648750792,14.694388702180134,14.779971755609477,14.865554809038823,14.951137862468165,15.036720915897508,15.122303969326854,15.207887022756196,15.293470076185542,15.379053129614885,15.464636183044227,15.550219236473573,15.635802289902916,15.721385343332258,15.806968396761604,15.892551450190947,15.978134503620289,16.063717557049635,16.149300610478978,16.234883663908324,16.320466717337666],[10.805783621390166,10.89136667481951,10.976949728248854,11.062532781678197,11.148115835107541,11.233698888536885,11.31928194196623,11.404864995395572,11.490448048824916,11.576031102254261,11.661614155683605,11.747197209112947,11.832780262542292,11.918363315971636,12.00394636940098,12.089529422830323,12.175112476259667,12.260695529689011,12.346278583118355,12.431861636547698,12.517444689977042,12.603027743406386,12.68861079683573,12.774193850265073,12.859776903694417,12.945359957123761,13.030943010553104,13.116526063982448,13.202109117411792,13.287692170841135,13.373275224270479,13.458858277699823,13.544441331129168,13.630024384558512,13.715607437987854,13.801190491417199,13.886773544846543,13.972356598275885,14.05793965170523,14.143522705134574,14.229105758563916,14.31468881199326,14.400271865422605,14.485854918851949,14.571437972281293,14.657021025710636,14.74260407913998,14.828187132569324,14.913770185998667,14.999353239428011,15.084936292857355,15.170519346286698,15.256102399716044,15.341685453145386,15.427268506574729,15.512851560004075,15.598434613433417,15.684017666862761,15.769600720292106,15.855183773721448,15.940766827150792,16.026349880580135,16.111932934009477,16.197515987438823,16.283099040868166,16.368682094297508,16.454265147726854,16.539848201156197,16.625431254585543,16.711014308014885,16.796597361444228,16.882180414873574,16.967763468302916,17.053346521732259,17.138929575161605,17.224512628590947,17.31009568202029,17.395678735449636,17.481261788878978,17.566844842308324,17.652427895737667],[12.137744799790166,12.22332785321951,12.308910906648855,12.394493960078197,12.480077013507543,12.565660066936886,12.65124312036623,12.736826173795574,12.822409227224917,12.907992280654261,12.993575334083605,13.079158387512948,13.164741440942292,13.250324494371636,13.33590754780098,13.421490601230323,13.507073654659667,13.592656708089011,13.678239761518356,13.763822814947698,13.849405868377042,13.934988921806386,14.020571975235731,14.106155028665073,14.191738082094417,14.277321135523762,14.362904188953104,14.448487242382448,14.534070295811793,14.619653349241135,14.705236402670479,14.790819456099824,14.876402509529168,14.961985562958512,15.047568616387855,15.133151669817199,15.218734723246543,15.304317776675886,15.38990083010523,15.475483883534574,15.561066936963917,15.646649990393261,15.732233043822605,15.817816097251949,15.903399150681294,15.988982204110636,16.07456525753998,16.160148310969326,16.245731364398665,16.331314417828011,16.416897471257357,16.502480524686696,16.588063578116042,16.673646631545388,16.759229684974727,16.844812738404073,16.930395791833419,17.015978845262762,17.101561898692104,17.18714495212145,17.272728005550793,17.358311058980135,17.443894112409481,17.529477165838827,17.615060219268166,17.700643272697512,17.786226326126858,17.871809379556197,17.957392432985543,18.042975486414889,18.128558539844228,18.214141593273574,18.29972464670292,18.385307700132259,18.470890753561605,18.556473806990951,18.64205686042029,18.727639913849636,18.813222967278982,18.898806020708324,18.984389074137667],[13.469705978190166,13.555289031619511,13.640872085048855,13.726455138478197,13.812038191907543,13.897621245336886,13.98320429876623,14.068787352195574,14.154370405624917,14.239953459054261,14.325536512483605,14.411119565912948,14.496702619342292,14.582285672771636,14.667868726200981,14.753451779630323,14.839034833059667,14.924617886489012,15.010200939918356,15.095783993347698,15.181367046777043,15.266950100206387,15.352533153635731,15.438116207065073,15.523699260494418,15.609282313923762,15.694865367353104,15.780448420782449,15.866031474211793,15.951614527641135,16.03719758107048,16.122780634499826,16.208363687929168,16.293946741358511,16.379529794787857,16.465112848217199,16.550695901646542,16.636278955075888,16.72186200850523,16.807445061934573,16.893028115363919,16.978611168793261,17.064194222222604,17.14977727565195,17.235360329081296,17.320943382510634,17.406526435939981,17.492109489369327,17.577692542798665,17.663275596228011,17.748858649657357,17.834441703086696,17.920024756516042,18.005607809945388,18.091190863374727,18.176773916804073,18.262356970233419,18.347940023662762,18.433523077092104,18.51910613052145,18.604689183950793,18.690272237380135,18.775855290809481,18.861438344238827,18.947021397668166,19.032604451097512,19.118187504526858,19.203770557956197,19.289353611385543,19.374936664814889,19.460519718244228,19.546102771673574,19.63168582510292,19.717268878532259,19.802851931961605,19.888434985390951,19.97401803882029,20.059601092249636,20.145184145678982,20.230767199108325,20.316350252537667],[14.801667156590169,14.887250210019513,14.972833263448855,15.058416316878199,15.143999370307544,15.229582423736886,15.315165477166232,15.400748530595575,15.486331584024919,15.571914637454263,15.657497690883606,15.74308074431295,15.828663797742294,15.914246851171637,15.999829904600983,16.085412958030325,16.170996011459668,16.256579064889014,16.342162118318356,16.427745171747699,16.513328225177045,16.598911278606387,16.684494332035733,16.770077385465076,16.855660438894418,16.941243492323764,17.026826545753107,17.112409599182449,17.197992652611795,17.283575706041137,17.36915875947048,17.454741812899826,17.540324866329168,17.625907919758514,17.711490973187857,17.797074026617199,17.882657080046545,17.968240133475888,18.05382318690523,18.139406240334576,18.224989293763919,18.310572347193261,18.396155400622607,18.48173845405195,18.567321507481296,18.652904560910638,18.738487614339981,18.824070667769327,18.909653721198669,18.995236774628012,19.080819828057358,19.1664028814867,19.251985934916046,19.337568988345389,19.423152041774731,19.508735095204077,19.59431814863342,19.679901202062762,19.765484255492108,19.851067308921451,19.936650362350793,20.022233415780139,20.107816469209482,20.193399522638828,20.27898257606817,20.364565629497513,20.450148682926859,20.535731736356201,20.621314789785544,20.70689784321489,20.792480896644232,20.878063950073575,20.963647003502921,21.049230056932263,21.134813110361609,21.220396163790952,21.305979217220294,21.39156227064964,21.477145324078982,21.562728377508325,21.648311430937671],[16.133628334990171,16.219211388419513,16.304794441848856,16.390377495278202,16.475960548707544,16.561543602136886,16.647126655566233,16.732709708995575,16.818292762424921,16.903875815854263,16.989458869283609,17.075041922712952,17.160624976142294,17.24620802957164,17.331791083000983,17.417374136430325,17.502957189859671,17.588540243289014,17.674123296718356,17.759706350147702,17.845289403577045,17.930872457006387,18.016455510435733,18.102038563865076,18.187621617294418,18.273204670723764,18.358787724153107,18.444370777582449,18.529953831011795,18.615536884441138,18.70111993787048,18.786702991299826,18.872286044729172,18.957869098158515,19.043452151587857,19.129035205017203,19.214618258446546,19.300201311875888,19.385784365305234,19.471367418734577,19.556950472163919,19.642533525593265,19.728116579022608,19.81369963245195,19.899282685881296,19.984865739310639,20.070448792739981,20.156031846169327,20.24161489959867,20.327197953028012,20.412781006457358,20.498364059886701,20.583947113316047,20.669530166745389,20.755113220174731,20.840696273604078,20.92627932703342,21.011862380462766,21.097445433892108,21.183028487321451,21.268611540750797,21.354194594180139,21.439777647609482,21.525360701038828,21.61094375446817,21.696526807897513,21.782109861326859,21.867692914756201,21.953275968185544,22.03885902161489,22.124442075044232,22.210025128473575,22.295608181902921,22.381191235332263,22.466774288761609,22.552357342190952,22.637940395620294,22.72352344904964,22.809106502478983,22.894689555908329,22.980272609337671],[17.465589513390171,17.551172566819513,17.636755620248856,17.722338673678202,17.807921727107544,17.893504780536887,17.979087833966233,18.064670887395575,18.150253940824921,18.235836994254264,18.32142004768361,18.407003101112952,18.492586154542295,18.578169207971641,18.663752261400983,18.749335314830326,18.834918368259672,18.920501421689014,19.006084475118357,19.091667528547703,19.177250581977045,19.262833635406388,19.348416688835734,19.433999742265076,19.519582795694419,19.605165849123765,19.690748902553107,19.77633195598245,19.861915009411796,19.947498062841138,20.03308111627048,20.118664169699827,20.204247223129173,20.289830276558515,20.375413329987857,20.460996383417204,20.546579436846546,20.632162490275888,20.717745543705234,20.803328597134577,20.888911650563919,20.974494703993265,21.060077757422608,21.14566081085195,21.231243864281296,21.316826917710639,21.402409971139981,21.487993024569327,21.57357607799867,21.659159131428012,21.744742184857358,21.830325238286701,21.915908291716047,22.001491345145389,22.087074398574732,22.172657452004078,22.25824050543342,22.343823558862766,22.429406612292109,22.514989665721451,22.600572719150797,22.68615577258014,22.771738826009482,22.857321879438828,22.942904932868171,23.028487986297513,23.114071039726859,23.199654093156202,23.285237146585544,23.37082020001489,23.456403253444233,23.541986306873575,23.627569360302921,23.713152413732264,23.79873546716161,23.884318520590952,23.969901574020295,24.055484627449641,24.141067680878983,24.226650734308329,24.312233787737672],[18.797550691790171,18.883133745219514,18.968716798648856,19.054299852078202,19.139882905507545,19.225465958936887,19.311049012366233,19.396632065795576,19.482215119224922,19.567798172654264,19.65338122608361,19.738964279512953,19.824547332942295,19.910130386371641,19.995713439800983,20.081296493230326,20.166879546659672,20.252462600089014,20.338045653518357,20.423628706947703,20.509211760377045,20.594794813806388,20.680377867235734,20.765960920665076,20.851543974094419,20.937127027523765,21.022710080953107,21.10829313438245,21.193876187811796,21.279459241241138,21.365042294670481,21.450625348099827,21.536208401529173,21.621791454958515,21.707374508387858,21.792957561817204,21.878540615246546,21.964123668675889,22.049706722105235,22.135289775534577,22.22087282896392,22.306455882393266,22.392038935822608,22.477621989251951,22.563205042681297,22.648788096110639,22.734371149539982,22.819954202969328,22.90553725639867,22.991120309828013,23.076703363257359,23.162286416686701,23.247869470116047,23.33345252354539,23.419035576974732,23.504618630404078,23.590201683833421,23.675784737262767,23.761367790692109,23.846950844121451,23.932533897550798,24.01811695098014,24.103700004409482,24.189283057838828,24.274866111268171,24.360449164697513,24.446032218126859,24.531615271556202,24.617198324985544,24.70278137841489,24.788364431844233,24.873947485273575,24.959530538702921,25.045113592132264,25.13069664556161,25.216279698990952,25.301862752420295,25.387445805849641,25.473028859278983,25.558611912708329,25.644194966137672],[20.129511870190171,20.215094923619514,20.300677977048856,20.386261030478202,20.471844083907545,20.557427137336887,20.643010190766233,20.728593244195576,20.814176297624922,20.899759351054264,20.98534240448361,21.070925457912953,21.156508511342295,21.242091564771641,21.327674618200984,21.413257671630326,21.498840725059672,21.584423778489015,21.670006831918357,21.755589885347703,21.841172938777046,21.926755992206388,22.012339045635734,22.097922099065077,22.183505152494419,22.269088205923765,22.354671259353108,22.44025431278245,22.525837366211796,22.611420419641139,22.697003473070481,22.782586526499827,22.868169579929173,22.953752633358516,23.039335686787858,23.124918740217204,23.210501793646547,23.296084847075889,23.381667900505235,23.467250953934577,23.55283400736392,23.638417060793266,23.724000114222608,23.809583167651951,23.895166221081297,23.980749274510639,24.066332327939982,24.151915381369328,24.23749843479867,24.323081488228013,24.408664541657359,24.494247595086701,24.579830648516047,24.66541370194539,24.750996755374732,24.836579808804078,24.922162862233421,25.007745915662767,25.093328969092109,25.178912022521452,25.264495075950798,25.35007812938014,25.435661182809483,25.521244236238829,25.606827289668171,25.692410343097514,25.77799339652686,25.863576449956202,25.949159503385545,26.034742556814891,26.120325610244233,26.205908663673576,26.291491717102922,26.377074770532264,26.46265782396161,26.548240877390953,26.633823930820295,26.719406984249641,26.804990037678984,26.89057309110833,26.976156144537672],[21.461473048590172,21.547056102019518,21.63263915544886,21.718222208878203,21.803805262307549,21.889388315736891,21.974971369166234,22.06055442259558,22.146137476024922,22.231720529454265,22.317303582883611,22.402886636312953,22.488469689742296,22.574052743171642,22.659635796600988,22.745218850030327,22.830801903459673,22.916384956889019,23.001968010318361,23.087551063747703,23.17313411717705,23.258717170606392,23.344300224035734,23.42988327746508,23.515466330894423,23.601049384323765,23.686632437753111,23.772215491182454,23.857798544611796,23.943381598041142,24.028964651470485,24.114547704899827,24.200130758329173,24.285713811758519,24.371296865187858,24.456879918617204,24.54246297204655,24.628046025475889,24.713629078905235,24.799212132334581,24.88479518576392,24.970378239193266,25.055961292622612,25.141544346051955,25.227127399481297,25.312710452910643,25.398293506339986,25.483876559769328,25.569459613198674,25.655042666628017,25.740625720057359,25.826208773486705,25.911791826916051,25.99737488034539,26.082957933774736,26.168540987204082,26.254124040633421,26.339707094062767,26.425290147492113,26.510873200921452,26.596456254350798,26.682039307780144,26.767622361209483,26.853205414638829,26.938788468068175,27.024371521497514,27.10995457492686,27.195537628356206,27.281120681785548,27.366703735214891,27.452286788644237,27.537869842073579,27.623452895502922,27.709035948932268,27.794619002361614,27.880202055790953,27.965785109220299,28.051368162649645,28.136951216078984,28.22253426950833,28.308117322937676],[22.793434226990172,22.879017280419518,22.96460033384886,23.050183387278203,23.135766440707549,23.221349494136891,23.306932547566234,23.39251560099558,23.478098654424922,23.563681707854265,23.649264761283611,23.734847814712953,23.820430868142296,23.906013921571642,23.991596975000988,24.077180028430327,24.162763081859673,24.248346135289019,24.333929188718361,24.419512242147704,24.50509529557705,24.590678349006392,24.676261402435735,24.761844455865081,24.847427509294423,24.933010562723766,25.018593616153112,25.104176669582454,25.189759723011797,25.275342776441143,25.360925829870485,25.446508883299828,25.532091936729174,25.61767499015852,25.703258043587859,25.788841097017205,25.874424150446551,25.96000720387589,26.045590257305236,26.131173310734582,26.216756364163921,26.302339417593267,26.387922471022613,26.473505524451955,26.559088577881298,26.644671631310644,26.730254684739986,26.815837738169328,26.901420791598674,26.987003845028017,27.072586898457359,27.158169951886705,27.243753005316051,27.32933605874539,27.414919112174736,27.500502165604082,27.586085219033421,27.671668272462767,27.757251325892113,27.842834379321452,27.928417432750798,28.014000486180144,28.099583539609483,28.185166593038829,28.270749646468175,28.356332699897514,28.44191575332686,28.527498806756206,28.613081860185549,28.698664913614891,28.784247967044237,28.86983102047358,28.955414073902922,29.040997127332268,29.126580180761614,29.212163234190953,29.297746287620299,29.383329341049645,29.468912394478984,29.55449544790833,29.640078501337676],[24.125395405390176,24.210978458819518,24.296561512248864,24.382144565678207,24.467727619107549,24.553310672536895,24.638893725966238,24.72447677939558,24.810059832824926,24.895642886254269,24.981225939683611,25.066808993112957,25.1523920465423,25.237975099971642,25.323558153400988,25.409141206830331,25.494724260259673,25.580307313689019,25.665890367118365,25.751473420547704,25.83705647397705,25.922639527406396,26.008222580835739,26.093805634265081,26.179388687694427,26.26497174112377,26.350554794553112,26.436137847982458,26.5217209014118,26.607303954841143,26.692887008270489,26.778470061699831,26.864053115129174,26.94963616855852,27.035219221987862,27.120802275417205,27.206385328846551,27.291968382275893,27.377551435705236,27.463134489134582,27.548717542563924,27.634300595993267,27.719883649422613,27.805466702851959,27.891049756281301,27.976632809710644,28.06221586313999,28.147798916569332,28.233381969998675,28.318965023428021,28.404548076857363,28.490131130286706,28.575714183716052,28.661297237145394,28.746880290574737,28.832463344004083,28.918046397433425,29.003629450862768,29.089212504292114,29.174795557721456,29.260378611150799,29.345961664580145,29.431544718009487,29.517127771438833,29.602710824868176,29.688293878297518,29.773876931726864,29.859459985156207,29.945043038585553,30.030626092014895,30.116209145444238,30.201792198873584,30.287375252302926,30.372958305732269,30.458541359161615,30.544124412590957,30.629707466020299,30.715290519449646,30.800873572878988,30.88645662630833,30.972039679737676],[25.457356583790176,25.542939637219519,25.628522690648865,25.714105744078207,25.79968879750755,25.885271850936896,25.970854904366238,26.05643795779558,26.142021011224926,26.227604064654269,26.313187118083611,26.398770171512957,26.4843532249423,26.569936278371642,26.655519331800988,26.741102385230331,26.826685438659673,26.912268492089019,26.997851545518365,27.083434598947704,27.16901765237705,27.254600705806396,27.340183759235739,27.425766812665081,27.511349866094427,27.59693291952377,27.682515972953112,27.768099026382458,27.853682079811801,27.939265133241143,28.024848186670489,28.110431240099832,28.196014293529174,28.28159734695852,28.367180400387863,28.452763453817205,28.538346507246551,28.623929560675894,28.709512614105236,28.795095667534582,28.880678720963925,28.966261774393267,29.051844827822613,29.137427881251959,29.223010934681302,29.308593988110644,29.39417704153999,29.479760094969333,29.565343148398675,29.650926201828021,29.736509255257364,29.822092308686706,29.907675362116052,29.993258415545395,30.078841468974737,30.164424522404083,30.250007575833425,30.335590629262768,30.421173682692114,30.506756736121456,30.592339789550799,30.677922842980145,30.763505896409487,30.849088949838833,30.934672003268176,31.020255056697518,31.105838110126864,31.191421163556207,31.277004216985553,31.362587270414895,31.448170323844238,31.533753377273584,31.619336430702926,31.704919484132269,31.790502537561615,31.876085590990957,31.9616686444203,32.047251697849646,32.132834751278992,32.218417804708331,32.304000858137677]],"type":"surface","x":[0,0.5,1,1.5,2,2.5,3,3.5,4,4.5,5,5.5,6,6.5,7,7.5,8,8.5,9,9.5,10,10.5,11,11.5,12,12.5,13,13.5,14,14.5,15,15.5,16,16.5,17,17.5,18,18.5,19,19.5,20,20.5,21,21.5,22,22.5,23,23.5,24,24.5,25,25.5,26,26.5,27,27.5,28,28.5,29,29.5,30,30.5,31,31.5,32,32.5,33,33.5,34,34.5,35,35.5,36,36.5,37,37.5,38,38.5,39,39.5,40],"y":[1,1.5,2,2.5,3,3.5,4,4.5,5,5.5,6,6.5,7],"frame":null},{"x":[19.851062703120721,11.20435083560354,31.770832327513773,16.539715051657708,2.252936544289371,8.7998213038559179,15.545993825849058,21.146052364787767,16.265490486212318,31.181677386306678,24.571453938927284,8.0809478321406623,18.411531897575749,19.631331953412271,5.0527481399394354,32.225426511049747,12.785864750354648,23.052900218824437,22.452740091462875,16.881605113759889,5.0745546043048995,6.7384952628306838,22.002187056132556,23.579905658118982,25.703144543529778,0.27765482398644259,2.1597871938079081,2.4434495531115759,23.578567915462752,10.007750741940303,17.204422072736769,23.747896813697267,15.722118402220055,17.494987441158095,18.268787089023217,22.406243726349967,28.525795662871921,5.4714404467678541,23.037487433124792,16.871495802019105,14.722930768354912,4.7953288054266237,24.501670631072109,31.61884462532964,10.299846293929011,19.539353509371328,25.779261867858452,12.497194852007725,11.29473401950187,14.271540538480833,12.430511198289938,20.925394059024459,40,21.880308260837936,37.841162569889562,9.2199341685896314,0.22488447240180839,0,16.81183750879071,19.410079459381148],"y":[4.3600808232825043,3.9580110485075881,4.0906275539453851,3.9498052553126337,2.1529454375651911,5.1656087603046839,4.0345735819525714,5.8367874446729582,4.0668180946657007,5.6055831395901805,4.7716864410649569,5.3391610170010519,3.952971865208629,6.0866263695223175,2.5834687055153189,5.7106434819869749,4.6469570627872843,4.245476467837431,4.459504198184697,5.5140174509553583,5.6615266529942865,3.7093664861271103,4.3489855872832717,4.2310224867988842,4.7162867924399157,3.3560192631152841,3.8771329340788725,4.6101185605027686,4.3842783755417294,2.835051685856703,3.3678291128082662,4.6603684252922788,5.3774044962614935,3.6006295076299981,3.9644964521323742,5.7169986389137133,6.0068289362560918,6.6547656386345144,3.5241918672929078,4.9459110224225,2.2777321009743297,5.8146911529323972,4.8457586809341695,5.6982952157789768,5.0532226649894065,4.4939507520257802,4.7521216594185667,3.7674548838799193,5.2824640880602551,5.3040770515086404,3.2696418364861204,6.3335536811237105,6.4429218236412638,3.4327576827993571,7,3.0539196998058653,3.546051110899052,5.12559657522179,4.4776626277307265,1],"z":[21.309659295879989,21.974971382423174,17.605636649936347,23.389315579223762,12.227670993343953,23.084598433784574,11.685659958905523,34.83258146788959,2.2299957924607017,35.494576948895364,23.456737907795709,23.65686284367623,30.091451313625033,25.210173386294503,13.171599516813254,25.691462773869421,16.987246260637193,21.693860844370889,16.973127720613828,32.596378665943142,50,39.329504219165848,24.813071863027499,14.255870154879831,13.758955837183082,6.5992489151715388,19.551415057822087,24.757907627602112,22.640711777248995,5.8806269073449862,2.7505296409475295,21.3510353899329,12.83789852761911,9.140858287454046,8.5539912157028599,22.626421168172481,27.084238521188848,11.028549707425878,33.8535118484332,32.381636637539415,26.116760602805101,0,36.990123883164145,30.377938719704872,17.217340917031965,28.910559197985613,22.525413039555474,26.144527182791304,30.190743699721239,17.535037532370467,23.036446431700359,37.390813600812741,16.910595853918405,13.748676134361643,44.412068565262473,7.6723966236289174,26.803226449156881,15.589021871493202,26.502840357663221,19.941974013705046],"type":"scatter3d","mode":"markers","marker":{"color":"red","line":{"color":"rgba(255,127,14,1)"}},"opacity":1,"error_y":{"color":"rgba(255,127,14,1)"},"error_x":{"color":"rgba(255,127,14,1)"},"line":{"color":"rgba(255,127,14,1)"},"frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</section></section>
+<section>
+<section id="centering" class="title-slide slide level1 center">
+<h1>Centering</h1>
+
+</section>
+<section id="centering-1" class="slide level2">
+<h2>Centering</h2>
+<blockquote>
+<p><span class="math inline">\(a\)</span>: The <span class="math inline">\(\color{blue}{\text{intercept}}\)</span>, expected value when <strong>all</strong> predictors are equal to 0</p>
+</blockquote>
+<p>But: almost nobody works 0 hours, and nobody scores 0 on the 1-7 point Likert-scale for Gender_roles</p>
+</section>
+<section id="centering-2" class="slide level2">
+<h2>Centering</h2>
+<p>That’s why we move the zero-point:</p>
+<p><span class="math inline">\(\text{Center}(Y_i) = Y_i - \bar{Y} = \text{observations - mean}\)</span></p>
+
+<img data-src="lecture9_files/figure-revealjs/unnamed-chunk-11-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"></section>
+<section id="multiple-regression-after-centering" class="slide level2">
+<h2>Multiple regression after centering</h2>
+<p>After centering, the separate plots look like this:</p>
+
+<img data-src="lecture9_files/figure-revealjs/unnamed-chunk-12-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"></section>
+<section id="centering-3" class="slide level2">
+<h2>Centering</h2>
+<p>By centering, you can choose a meaningful zero-point for your predictors</p>
+<ul>
+<li>For example, the mean value</li>
+</ul>
+<!-- ## Dichotoom en continu -->
+<!-- Effect van geslacht en Gender_role op parental involvenment: -->
+<!-- ```{r, fig.width=6, fig.asp=3/4, echo=FALSE, warning=FALSE, message=FALSE} -->
+<!-- library(scales) -->
+<!-- set.seed(32) -->
+<!-- n <- 178 -->
+<!-- Geslacht <- rbinom(n, 1, .5) -->
+<!-- Gender_role <- 2*Geslacht+rnorm(n) -->
+<!-- Gender_role <- round(scales::rescale(Gender_role, to = c(1,7))) -->
+<!-- Involvement <- 5 + 15*Geslacht + 4*Gender_role + rnorm(n)  -->
+<!-- dichmodel <- lm(Involvement ~ Geslacht + Gender_role) -->
+<!-- m_gender <- lm(Involvement ~ Gender_role, invdat) -->
+<!-- ggplot(data.frame(Involvement, Geslacht = factor(Geslacht), Gender_role), aes(x=Gender_role, y=Involvement, colour = Geslacht))+ -->
+<!--   geom_point()+ -->
+<!--   theme_bw()+ -->
+<!--   scale_colour_manual(values = c("blue", "red"))+theme(legend.position = "none") -->
+<!-- ``` -->
+<!-- ## Voorbeelden -->
+<!-- ```{r out.height = "350px"} -->
+<!-- knitr::include_graphics("./images/Interactie.png", dpi = NA) -->
+<!-- ``` -->
+<!-- # Welke toets -->
+<!-- ## Welke toets? -->
+<!-- * Percentage mensen met religieuze achtergrond > 50% -->
+<!-- * Mannen en vrouwen verschillen op inkomen? -->
+<!-- * Mannen en vrouwen verschillen op inkomen gecontroleerd op leeftijd?    -->
+<!-- * Laag vs midden vs hoog opgeleide mensen verschillen op inkomen? -->
+<!-- * Waar gebruik ik een gamma-toets voor? -->
+</section>
+<section id="when-to-use" class="slide level2">
+<h2>When to use?</h2>
+<p>When to use multiple regression?</p>
+<ul>
+<li>To make better predictions using all available predictors</li>
+<li>To compare relative importance of different predictors</li>
+<li>When theory implies multiple causes</li>
+<li>To improve causal inference by controlling for confounders</li>
+</ul>
+</section></section>
+<section>
+<section id="standardized-regression-coefficients" class="title-slide slide level1 center">
+<h1>Standardized regression coefficients</h1>
+
+</section>
+<section id="standardizing-regression-coefficients" class="slide level2">
+<h2>Standardizing regression coefficients</h2>
+<p><strong>Problem:</strong> We want to know how important different predictors are</p>
+<p><strong>Problem:</strong> We want to compare the effect of the same variable across two studies</p>
+<p>Solution: Standardize the regression coefficient to make them ~comparable</p>
+</section>
+<section id="what-is-standardized-regression-coefficient" class="slide level2">
+<h2>What is standardized regression coefficient</h2>
+<p>It’s just the regression coefficient you would get IF you carried out the analysis after standardizing the X and Y variables</p>
+<p>Instead of X and Y, we use Z-scores:</p>
+<p><span class="math inline">\(Z_x = (X - \bar{X}) / SD_x\)</span></p>
+<p><span class="math inline">\(Z_y = (Y - \bar{Y}) / SD_y\)</span></p>
+<p>Z-scores: mean = 0, SD = 1</p>
+<p>Z-scores lose the original units of a variable. The new unit is the SD: a Z-score of 1.3 means “1.3 standard deviations above the mean”</p>
+</section>
+<section id="interpretation" class="slide level2">
+<h2>Interpretation</h2>
+<p><strong>Unstandardized</strong></p>
+<p>A one-point increase in X is associated with a <span class="math inline">\(b\)</span>-point increase in Y</p>
+<p><strong>Standardized</strong></p>
+<p>A one-SD increase in X is associated with a <span class="math inline">\(\beta\)</span> SD increase in Y</p>
+</section>
+<section id="when-to-use-unstandardized-coefficients" class="slide level2">
+<h2>When to use (un)standardized coefficients?</h2>
+<p><strong>Unstandardized</strong></p>
+<ul>
+<li>If the units are meaningful/important (e.g., years, euros, centimeters, number of questions correct)</li>
+<li>If there are (clinical) cut-off scores</li>
+</ul>
+<p><strong>Standardized</strong></p>
+<ul>
+<li>When units are not meaningful (e.g., depression, need to belong, job satisfaction, Likert scales).</li>
+<li>If you want to compare effect sizes / variable importance</li>
+</ul>
+<!-- In this course, we will mostly focus on the unstandardized regression coefficient b -->
+</section></section>
+<section>
+<section id="causality" class="title-slide slide level1 center">
+<h1>Causality</h1>
+
+</section>
+<section id="causality-1" class="slide level2">
+<h2>Causality</h2>
+<ul>
+<li>Often, we want to find causal relationships: X -&gt; Y
+<ul>
+<li>Treatment, Policy decisions, Investments</li>
+</ul></li>
+<li>Causality can only be established using experiments, or assumed based on theory</li>
+<li>If we rely on theory, it is crucial that we correctly represent our theory in our analyses
+<ul>
+<li>If the theory is wrong, or incorrectly represented by the analysis, our results will be misleading</li>
+</ul></li>
+</ul>
+</section>
+<section id="bivariate-relationships" class="slide level2">
+<h2>Bivariate relationships</h2>
+<p>Possible relationships:</p>
+<ul>
+<li>There is no <strong>statistical</strong> way to distinguish which one is “true”</li>
+<li>That’s the realm of theory</li>
+</ul>
+
+<img data-src="lecture9_files/figure-revealjs/unnamed-chunk-13-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"></section>
+<section id="trivariate-relationships" class="slide level2">
+<h2>Trivariate relationships</h2>
+<ol type="1">
+<li>Common cause</li>
+<li>Indirect effect</li>
+<li>Collider</li>
+</ol>
+
+<img data-src="lecture9_files/figure-revealjs/unnamed-chunk-14-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"></section>
+<section id="common-cause" class="slide level2">
+<h2>Common cause</h2>
+<ul>
+<li>A and C share a common cause B</li>
+<li>Changes in B induce changes in both A and C, resulting in covariance between A and C</li>
+<li>If you only examine the relationship between A and C, it will be distorted by the effects of B</li>
+<li>In this context, B is a <strong>confounder</strong>
+<ul>
+<li>A confounder can create a spurious association, or distort a true causal relationship between A and C</li>
+</ul></li>
+<li>Identifying and controlling for confounders is integral to causal inference</li>
+</ul>
+</section>
+<section id="examples-confounding" class="slide level2">
+<h2>Examples confounding</h2>
+
+<img data-src="lecture9_files/figure-revealjs/unnamed-chunk-15-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"></section>
+<section id="examples-confounding-1" class="slide level2">
+<h2>Examples confounding</h2>
+
+<img data-src="lecture9_files/figure-revealjs/unnamed-chunk-16-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"></section>
+<section id="examples-confounding-2" class="slide level2">
+<h2>Examples confounding</h2>
+
+<img data-src="lecture9_files/figure-revealjs/unnamed-chunk-17-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"></section>
+<section id="indirect-effect" class="slide level2">
+<h2>Indirect effect</h2>
+<ul>
+<li>Also called mediation or chain relationship</li>
+<li>B is a process variable or intermediate step in the relationship between A and C</li>
+</ul>
+
+<img data-src="lecture9_files/figure-revealjs/unnamed-chunk-18-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"></section>
+<section id="partial-mediation-example" class="slide level2">
+<h2>Partial mediation example</h2>
+
+<img data-src="lecture9_files/figure-revealjs/unnamed-chunk-19-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"></section>
+<section id="colliding" class="slide level2">
+<h2>Colliding</h2>
+<blockquote>
+<p><strong>Colliding</strong>: If two unrelated variables separately cause a third variable, controlling for that third variable will create a spurious statistical relationship between the unrelated variables.</p>
+</blockquote>
+
+<img data-src="lecture9_files/figure-revealjs/unnamed-chunk-20-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"></section>
+<section id="example-collider" class="slide level2">
+<h2>Example collider</h2>
+
+<img data-src="lecture9_files/figure-revealjs/unnamed-chunk-21-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"></section>
+<section id="example-collider-1" class="slide level2">
+<h2>Example collider</h2>
+
+<img data-src="lecture9_files/figure-revealjs/unnamed-chunk-22-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"></section>
+<section id="example-collider-2" class="slide level2">
+<h2>Example collider</h2>
+
+<img data-src="lecture9_files/figure-revealjs/unnamed-chunk-23-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"></section>
+<section id="take-home-message" class="slide level2">
+<h2>Take-home message</h2>
+<p><strong>Assuming that your model is correctly specified,</strong></p>
+<ul>
+<li>Controlling for confounders improves causal inference</li>
+<li>Controlling for a collider biases (causal) inference</li>
+</ul>
+<p>So don’t put EVERYTHING in the model without good reason!</p>
+</section>
+<section id="further-reading" class="slide level2">
+<h2>Further reading</h2>
+
+<img data-src="https://imgs.xkcd.com/comics/correlation.png" class="r-stretch"><p>Image credit: XKCD</p>
+<ul>
+<li>Judea Pearl’s “The book of why?” - excellent holiday reading material!</li>
+<li><a href="https://theoreticalecology.wordpress.com/2019/04/14/mediators-confounders-colliders-a-crash-course-in-causal-inference/">This blog post</a></li>
+</ul>
+<p>
+<script type="application/shiny-prerendered" data-context="server-start">
+knitr::opts_chunk$set(echo = FALSE)
+library(ggplot2)
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server-extras">
+ojs_define <- function(..., .session = shiny::getDefaultReactiveDomain()) {
+  quos <- rlang::enquos(...)
+  vars <- rlang::list2(...)
+  nm <- names(vars)
+  if (is.null(nm)) {
+    nm <- rep_len("", length(vars))
+  }
+  mapply(function(q, nm, val) {
+    # Infer name, if possible
+    if (nm == "") {
+      tryCatch({
+        nm <- rlang::as_name(q)
+      }, error = function(e) {
+        code <- paste(collapse = "\n", deparse(rlang::f_rhs(q)))
+        stop("ojs_define() could not create a name for the argument: ", code)
+      })
+    }
+    .session$output[[nm]] <- val
+    outputOptions(.session$output, nm, suspendWhenHidden = FALSE)
+    .session$sendCustomMessage("ojs-export", list(name = nm))
+    NULL
+  }, quos, nm, vars, SIMPLIFY = FALSE, USE.NAMES = FALSE)
+  invisible()
+}
+</script>
+</p>
+<!--html_preserve-->
+<script type="application/shiny-prerendered" data-context="dependencies">
+{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["htmlwidgets"]},{"type":"character","attributes":{},"value":["1.6.2"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["www"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["htmlwidgets.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["htmlwidgets"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["1.6.2"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["plotly-binding"]},{"type":"character","attributes":{},"value":["4.10.2"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["htmlwidgets"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["plotly.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["plotly"]},{"type":"logical","attributes":{},"value":[false]},{"type":"character","attributes":{},"value":["4.10.2"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["typedarray"]},{"type":"character","attributes":{},"value":["0.1"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["htmlwidgets/lib/typedarray"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["typedarray.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["plotly"]},{"type":"logical","attributes":{},"value":[false]},{"type":"character","attributes":{},"value":["4.10.2"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["jquery"]},{"type":"character","attributes":{},"value":["3.5.1"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/jquery"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["jquery.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["crosstalk"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["1.2.0"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["crosstalk"]},{"type":"character","attributes":{},"value":["1.2.0"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["www"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["js/crosstalk.min.js"]},{"type":"character","attributes":{},"value":["css/crosstalk.min.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["crosstalk"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["1.2.0"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["plotly-htmlwidgets-css"]},{"type":"character","attributes":{},"value":["2.11.1"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["htmlwidgets/lib/plotlyjs"]}]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["plotly-htmlwidgets.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["plotly"]},{"type":"logical","attributes":{},"value":[false]},{"type":"character","attributes":{},"value":["4.10.2"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["plotly-main"]},{"type":"character","attributes":{},"value":["2.11.1"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["htmlwidgets/lib/plotlyjs"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["plotly-latest.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["plotly"]},{"type":"logical","attributes":{},"value":[false]},{"type":"character","attributes":{},"value":["4.10.2"]}]}]}
+</script>
+<!--/html_preserve-->
+<!--html_preserve-->
+
+<script type="application/shiny-prerendered" data-context="execution_dependencies">
+{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["packages"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["packages","version"]},"class":{"type":"character","attributes":{},"value":["data.frame"]},"row.names":{"type":"integer","attributes":{},"value":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137]}},"value":[{"type":"character","attributes":{},"value":["abind","backports","bain","base","bayesplot","blavaan","boot","callr","car","carData","checkmate","cli","coda","codetools","colorspace","compiler","CompQuadForm","crayon","crosstalk","curl","dagitty","data.table","datasets","dbscan","digest","dplyr","ellipsis","eulerr","evaluate","fansi","farver","fastDummies","fastmap","future","future.apply","generics","ggplot2","globals","glossary","glue","graphics","grDevices","grid","gridExtra","gsubfn","gtable","htmltools","htmlwidgets","httpuv","httr","igraph","inline","jsonlite","kableExtra","knitr","labeling","later","lattice","lavaan","lazyeval","lifecycle","listenv","loo","magrittr","MASS","Matrix","matrixStats","methods","mime","mnormt","MplusAutomation","munsell","mvtnorm","nlme","nonnest2","OpenMx","pander","parallel","parallelly","pbivnorm","pillar","pkgbuild","pkgconfig","plotly","plyr","polyclip","polylabelr","prettyunits","processx","progressr","promises","proto","ps","psych","purrr","quadprog","R6","RANN","Rcpp","RcppParallel","reshape2","rlang","rmarkdown","rstan","rstantools","rstudioapi","rvest","sandwich","scales","shiny","StanHeaders","stats","stats4","stringi","stringr","svglite","systemfonts","texreg","tibble","tidyr","tidyselect","tidySEM","tmvnsim","tools","utf8","utils","V8","vctrs","viridisLite","webexercises","webshot","withr","xfun","xml2","xtable","yaml","zoo"]},{"type":"character","attributes":{},"value":["1.4-5","1.4.1","0.2.8","4.3.0","1.10.0","0.4-7","1.3-28.1","3.7.3","3.1-2","3.0-5","2.2.0","3.6.1","0.19-4","0.2-19","2.1-0","4.3.0","1.4.3","1.5.2","1.2.0","5.0.1","0.3-1","1.14.8","4.3.0","1.1-11","0.6.31","1.1.2","0.3.2","7.0.0","0.21","1.0.4","2.1.1","1.6.3","1.1.1","1.32.0","1.11.0","0.1.3","3.4.2","0.16.2","1.0.0","1.6.2","4.3.0","4.3.0","4.3.0","2.3","0.7","0.3.3","0.5.5","1.6.2","1.6.11","1.4.6","1.4.3","0.3.19","1.8.5","1.3.4","1.43","0.4.2","1.3.1","0.21-8","0.6-15","0.2.2","1.0.3","0.9.0","2.6.0","2.0.3","7.3-60","1.5-4.1","1.0.0","4.3.0","0.12","2.1.1","1.1.0","0.5.0","1.2-1","3.1-162","0.5-5","2.21.8","0.6.5","4.3.0","1.36.0","0.6.0","1.9.0","1.4.0","2.0.3","4.10.2","1.8.8","1.10-4","0.2.0","1.1.1","3.8.1","0.13.0","1.2.0.1","1.0.0","1.7.5","2.3.3","1.0.1","1.5-8","2.5.1","2.6.1","1.0.10","5.1.7","1.4.4","1.1.1","2.22","2.21.8","2.3.1","0.14","1.0.3","3.0-2","1.2.1","1.7.4","2.26.26","4.3.0","4.3.0","1.7.12","1.5.0","2.1.1","1.0.4","1.38.6","3.2.1","1.3.0","1.2.0","0.2.5.4","1.0-2","4.3.0","1.2.3","4.3.0","4.3.0","0.6.2","0.4.2","1.1.0","0.5.4","2.5.0","0.39","1.3.4","1.8-4","2.3.7","1.8-12"]}]}]}
+</script>
+<!--/html_preserve-->
+<div class="footer footer-default">
+
+</div>
+</section></section>
+    </div>
+  </div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="lecture9_files/libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="lecture9_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="lecture9_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="lecture9_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="lecture9_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="lecture9_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="lecture9_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="lecture9_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="lecture9_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="lecture9_files/libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'smaller': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: false,
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
+    <script id="quarto-html-after-body" type="application/javascript">
+    window.document.addEventListener("DOMContentLoaded", function (event) {
+      const toggleBodyColorMode = (bsSheetEl) => {
+        const mode = bsSheetEl.getAttribute("data-mode");
+        const bodyEl = window.document.querySelector("body");
+        if (mode === "dark") {
+          bodyEl.classList.add("quarto-dark");
+          bodyEl.classList.remove("quarto-light");
+        } else {
+          bodyEl.classList.add("quarto-light");
+          bodyEl.classList.remove("quarto-dark");
+        }
+      }
+      const toggleBodyColorPrimary = () => {
+        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+        if (bsSheetEl) {
+          toggleBodyColorMode(bsSheetEl);
+        }
+      }
+      toggleBodyColorPrimary();  
+      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+      tabsets.forEach(function(tabset) {
+        const tabby = new Tabby('#' + tabset.id);
+      });
+      const isCodeAnnotation = (el) => {
+        for (const clz of el.classList) {
+          if (clz.startsWith('code-annotation-')) {                     
+            return true;
+          }
+        }
+        return false;
+      }
+      const clipboard = new window.ClipboardJS('.code-copy-button', {
+        text: function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+      });
+      clipboard.on('success', function(e) {
+        // button target
+        const button = e.trigger;
+        // don't keep focus
+        button.blur();
+        // flash "checked"
+        button.classList.add('code-copy-button-checked');
+        var currentTitle = button.getAttribute("title");
+        button.setAttribute("title", "Copied!");
+        let tooltip;
+        if (window.bootstrap) {
+          button.setAttribute("data-bs-toggle", "tooltip");
+          button.setAttribute("data-bs-placement", "left");
+          button.setAttribute("data-bs-title", "Copied!");
+          tooltip = new bootstrap.Tooltip(button, 
+            { trigger: "manual", 
+              customClass: "code-copy-button-tooltip",
+              offset: [0, -8]});
+          tooltip.show();    
+        }
+        setTimeout(function() {
+          if (tooltip) {
+            tooltip.hide();
+            button.removeAttribute("data-bs-title");
+            button.removeAttribute("data-bs-toggle");
+            button.removeAttribute("data-bs-placement");
+          }
+          button.setAttribute("title", currentTitle);
+          button.classList.remove('code-copy-button-checked');
+        }, 1000);
+        // clear code selection
+        e.clearSelection();
+      });
+      function tippyHover(el, contentFn) {
+        const config = {
+          allowHTML: true,
+          content: contentFn,
+          maxWidth: 500,
+          delay: 100,
+          arrow: false,
+          appendTo: function(el) {
+              return el.closest('section.slide') || el.parentElement;
+          },
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'light-border',
+          placement: 'bottom-start'
+        };
+          config['offset'] = [0,0];
+          config['maxWidth'] = 700;
+        window.tippy(el, config); 
+      }
+      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+      for (var i=0; i<noterefs.length; i++) {
+        const ref = noterefs[i];
+        tippyHover(ref, function() {
+          // use id or data attribute instead here
+          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+          try { href = new URL(href).hash; } catch {}
+          const id = href.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          return note.innerHTML;
+        });
+      }
+      const findCites = (el) => {
+        const parentEl = el.parentElement;
+        if (parentEl) {
+          const cites = parentEl.dataset.cites;
+          if (cites) {
+            return {
+              el,
+              cites: cites.split(' ')
+            };
+          } else {
+            return findCites(el.parentElement)
+          }
+        } else {
+          return undefined;
+        }
+      };
+      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+      for (var i=0; i<bibliorefs.length; i++) {
+        const ref = bibliorefs[i];
+        const citeInfo = findCites(ref);
+        if (citeInfo) {
+          tippyHover(citeInfo.el, function() {
+            var popup = window.document.createElement('div');
+            citeInfo.cites.forEach(function(cite) {
+              var citeDiv = window.document.createElement('div');
+              citeDiv.classList.add('hanging-indent');
+              citeDiv.classList.add('csl-entry');
+              var biblioDiv = window.document.getElementById('ref-' + cite);
+              if (biblioDiv) {
+                citeDiv.innerHTML = biblioDiv.innerHTML;
+              }
+              popup.appendChild(citeDiv);
+            });
+            return popup.innerHTML;
+          });
+        }
+      }
+    });
+    </script>
+    
+
+</body></html>

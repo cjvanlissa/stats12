@@ -45,6 +45,7 @@ $\hat{Y}_i = a + b*X_i$
 
 * a: Mean of group 1
 * b: Mean difference between groups 1 and 2
+* $X_i$ is a dummy variable (codes for membership of group 2)
 
 For **three+** categories, we can **expand** the model:
 
@@ -126,6 +127,10 @@ $\hat{Y}_i = a + b_1*X_{1i}+ b_2*X_{2i}$?
 
 p: 3 ($a, b_1, b_2$)
 
+## Some output
+
+![](images/regression_anova.png)
+
 # ANOVA
 
 ## What is ANOVA
@@ -134,8 +139,18 @@ p: 3 ($a, b_1, b_2$)
 
 One-way ANOVA has one categorical predictor and a continuous outcome
 
-* It provides an omnibus test of differences between group means
+* It provides an omnibus (overall) test of differences between group means
+* So... exactly what we've learned so far
+* For historical reasons, some fields call regression with dummies a "one-way ANOVA", and present the results in a particular way
+* It's important that you recognize this and interpret it appropriately
 
+## Some output
+
+![](images/anova_regression.png)
+
+## Compare to regression
+
+![](images/regression_anova.png)
 
 ## Step 1. Hypothesis {.smaller}
 
@@ -157,7 +172,7 @@ Significant ANOVA means that the means of at least two groups differ
     + Of course, since we compare two sources of variance, we'll use an F-test
 
 $$
-F = \frac{MS_B}{MS_W} = \frac{SSB / df_b}{SSW/df_w}
+F = \frac{MS_B}{MS_W} = \frac{SSB / df_b}{SSW/df_w} = \frac{SSR/df_r}{SSE/df_e}
 $$
 
 
@@ -170,7 +185,7 @@ How large are the between-group differences relative to the error variance?
 
 Sum  | Formula                         | Meaning
 -----|---------------------------------|---------------
-SST  | $\sum{(Y_i - \bar{Y})^2}$       | Variation of individuals wrt grand mean
+SST  | $\sum{(Y_i - \bar{Y})^2}$       | Variation of individual observations wrt grand mean
 SSB (SSR)  | $\sum{(\hat{Y}_i - \bar{Y})^2}$ | Variation of group means wrt grand mean
 SSW (SSE)  | $\sum{(Y_i - \hat{Y}_i)^2}$     | Variation of individuals wrt group means
 
@@ -187,9 +202,9 @@ The F-distribution has two degrees of freedom parameters:
 How to calculate the p-value?
 
 * Statistical software
+    + Excel: `=F.DIST.RT(x, degree_freedom1, degree_freedom2)`
+    + R: `pf(F_statistic, dataframe1, dataframe2, lower.tail = FALSE)`
 * Table in book
-* Excel: `=F.DIST.RT(x, degree_freedom1, degree_freedom2)`
-* R: `pf(F_statistic, dataframe1, dataframe2, lower.tail = FALSE)`
 
 ## Step 4. Conclusion
 
@@ -256,3 +271,25 @@ It's common to call $R^2$ for ANOVA models "eta squared", $\eta^2$
 | :-: | :-: |
 | Medium | 0.06 |
 | Large | 0.14 |
+
+
+## Interpretation
+
+![](images/regression_anova.png)
+
+## Interpretation {.smaller}
+
+Environment (urban vs. suburban vs. rural) had a significant effect on test scores, $R^2 = .21, F(2, 2130) = 284.65, p < .001$.
+
+The average test score for urban participants was $M = 61.75$, and this score differed significantly from zero, $t(2130) = 149.52, p < .001$.
+
+Compared to urban participants, both suburban participants ($M = 76.04$) and rural participants ($M = 64.05$) scored significantly higher, with $t(2130) = 23.00, p < .001$ and $t(2130) = 3.35, p < .001$, respectively.
+
+## Interpretation
+
+Important caveats:
+
+* Standardized regression coefficients do not make sense for dummies!
+    + "one SD difference in the dummy for rural living" is nonsense. 
+* Significance tests for dummies only make sense if you want to compare them to the reference group
+    + If you want to compare to another group, you have to use different dummies

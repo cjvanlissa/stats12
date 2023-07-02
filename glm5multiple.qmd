@@ -1,0 +1,94 @@
+# GLM-V: Multiple regression {#sec-glm5}
+
+```{r, include = FALSE}
+source("R/booktem_setup.R")
+source("R/my_setup.R")
+```
+
+## Multiple regression
+
+Multiple regression is a statistical technique that allows us to examine the relationship between one outcome and multiple predictors. It extends the concept of bivariate linear regression, where we model the relationship between two variables, to include more predictors. In the context of social science research, multiple regression helps us answer the question: What is the unique effect of one predictor, while controlling for the effects of all other predictors?
+
+As a matter of fact, last week's analyses for categorical variables with more than two categories were already an example of multiple regression. We included two dummy variables to represent a categorical variable with three categories. All that's new today is that we also consider the case where the multiple predictors are continuous variables. An important realization is that a regression model can be expanded to include as many predictors as needed. The general formula for multiple regression is $\hat{Y} = a + b_1X_1 + b_2X_2 + \ldots + b_KX_K$, where $\hat{Y}$ represents the predicted value of the dependent variable Y, $a$ is the intercept, and $b_{1 \ldots K}$ are the slopes for each predictor.
+
+When interpreting the regression coefficients, the intercept (a) represents the expected value of the dependent variable when all predictors are equal to 0. For dummy variables, this is the mean value of the reference category, while for continuous predictors, it represents the expected value for someone who scores 0 on all predictors. The regression coefficients (b1, b2, ..., bK) indicate how many units the dependent variable Y is expected to change when the corresponding predictor X increases by 1 unit, while holding all other predictors constant.
+
+Centering predictors can be useful in multiple regression. By centering, we shift the zero-point of the predictor to a meaningful value, such as the mean value on that predictor. This helps in interpretation, because the intercept now gives us the mean value on the outcome for someone who has an average score on all predictors.
+
+As previously explained, standardized regression coefficients drop the units of the predictor and outcome variable. They are calculated by transforming the predictors and outcome variable into z-scores with a mean of 0 and a standard deviation of 1, and performing the (multiple) regression analysis on those z-scores. Because the units of the variables are dropped, standardized coefficients make the effects of predictors comparable across different studies or variables with different measurement units. They represent the change in the dependent variable in terms of standard deviations when the corresponding predictor increases by 1 standard deviation.
+
+## Causality
+
+A statistical association between variables does not necessarily imply a causal relationship. Instead, causality is either assumed on theoretical grounds, or established using the experimental method. In an experiment, researchers manipulate an independent variable and observe its effects on the dependent variable. However, in many social science studies, experiments are not feasible or ethical, so researchers rely on observational data. In these cases, establishing causal relationships relies on theory and careful statistical analysis.
+
+One important concept in causal inference is the direction of effects. While statistical methods can identify associations between variables, determining the direction of causality is a causal assumption that cannot be estimated using statistics alone. The assumed direction of effects is often based on theory and prior knowledge of the subject matter. Researchers make informed assumptions about which variable is likely to have a causal effect on the other based on theoretical reasoning and empirical evidence.
+
+In the process of analyzing causal relationships, it is essential to consider the presence of confounders, mediators, and colliders. Confounders are variables that are associated with both the independent and dependent variables and can create a spurious association or distort the true causal relationship. Identifying and controlling for confounders is crucial to ensure accurate causal inference.
+
+Mediators, on the other hand, are variables that explain the relationship between the independent and dependent variables. They act as intermediate steps or process variables in the causal pathway. Understanding and analyzing mediation effects help us understand the underlying mechanisms through which the independent variable affects the dependent variable.
+
+Colliders are variables that are caused by both the independent and dependent variables. Controlling for colliders can lead to spurious statistical relationships between unrelated variables. It is essential to be cautious when including variables in the analysis and consider the causal structure of the variables involved.
+
+One important take-home message is that, in multiple regression, the distinction between confounders and colliders is crucial. Including confounders as control variables in multiple regression improves our inferences - but accidentally including a collider as control variable (severely) biases our inferences. You therefore have to carefully reason about each variable's role in relation to the other variables in the model.
+
+# Formative Test
+
+A formative test helps you assess your progress in the course, and helps you address any blind spots in your understanding of the material. If you get a question wrong, you will receive a hint on how to improve your understanding of the material.
+
+Complete the formative test ideally after you’ve seen the lecture, but before the lecture meeting in which we can discuss any topics that need more attention
+
+::: {.webex-check .webex-box}
+
+**Question 1**
+
+```{r, results='asis', echo = FALSE}
+mc("Suppose that I ask a random sample of 5 students how many pairs of shoes they have. The number of pairs are: 7, 6, 8, 6, and 8. What is the variance of these pairs of shoes?", 1, 4, 7, 2)
+```
+
+**Question 2**
+
+```{r, results='asis', echo = FALSE}
+mc("Six students work on a Statistics exam. They obtain the following grades: 8, 9, 5, 6, 7 and 8. The teacher calculates a certain statistic, which is equal to 7.5. Which statistic did the teacher calculate?", "Median","Mean", "Standard deviation", "Mode")
+```
+
+**Question 3**
+
+For which of the three scatterplots below is the correlation coefficient largest? `r mcq(c(answer = "A", "B", "C"))`
+
+::: {#fig-scatter layout-ncol=3}
+
+![A](images/lecture 73.png){width = 30%}
+
+![B](images/lecture 74.png){width = 30%}
+
+![C](images/lecture 76.png){width = 30%}
+
+Question 3 scatterplots
+:::
+
+```{r, results='asis', echo = FALSE}
+mc("Six students work on a Statistics exam. They obtain the following grades: 8, 9, 5, 6, 7 and 8. The teacher calculates a certain statistic, which is equal to 7.5. Which statistic did the teacher calculate?", "Median","Mean", "Standard deviation", "Mode")
+```
+:::
+
+`r hide("Show answers")`
+
+**Question 1**
+
+The variance is the sum of squared distances of observations to the mean, divided by the number of observations minus one. So calculate:
+
+$S_{X}^2= \frac{\sum_{i=1}^nX_i}{n} = \frac{(7 + 6 + 8 + 6 + 8)}{5} = 7$
+
+**Question 2**
+
+First rule out improbable answers; all grades are pretty close to each other, so it's impossible for the variance to be that high. We can see what the mode (most common value) is: it's 8. So we only choose between mean or median.
+
+Mean: calculate $\bar{X}= \frac{\sum_{i=1}^nX_i}{n} = \frac{8 + 9 + 5 + 6 + 7 + 8}{6} = 7.17$
+
+Median: order the numbers, note that there is an odd number, take the average of the two middle numbers. 5, 6, 7, 8, 8, 9 -> 7.5
+
+**Question 3**
+
+Correlation measures linear association, so eliminate option C. Option B shows a very small correlation - probably 0 or maybe .1. So the correct answer is A, which shows a moderate negative correlation.
+`r unhide()`
+

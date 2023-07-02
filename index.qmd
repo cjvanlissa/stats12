@@ -91,12 +91,12 @@ so if you have to miss either one, absolutely make sure you have caught up with 
 
 (Thu) Tra Lê
 
-## Teaching Philosophy
+<!-- ## Teaching Philosophy -->
 
-The corona crisis is challenging all of us to rethink how we teach and learn. But aside from the challenges, it also offers opportunities. In adapting this course, we kept two goals in mind: increasing the alignment between the way of teaching and the learning goals, and ensuring high-quality interaction among students and between the students and teachers while still using online communication. Based on these goals, we made the following changes:
+<!-- The corona crisis is challenging all of us to rethink how we teach and learn. But aside from the challenges, it also offers opportunities. In adapting this course, we kept two goals in mind: increasing the alignment between the way of teaching and the learning goals, and ensuring high-quality interaction among students and between the students and teachers while still using online communication. Based on these goals, we made the following changes: -->
 
-1. During the course, you will be working in learning teams to promote interaction among students and peer support
-2. The two in-person exams (4 hours each) are replaced with take-home assignments: Two group assignments, and one individual assignment.
+<!-- 1. During the course, you will be working in learning teams to promote interaction among students and peer support -->
+<!-- 2. The two in-person exams (4 hours each) are replaced with take-home assignments: Two group assignments, and one individual assignment. -->
 
 
 ### Why group assignments?
@@ -117,7 +117,7 @@ There are three portfolio registration deadlines. At this point, one group membe
 Portfolio assignments are well-suited for a skills-based course like Statistics 1 & 2.
 They also take a lot of the pressure off because you can work at your own pace, and keep improving the work until it is good enough. We entrust you with the responsibility of making  these portfolio assignments in good faith, without instrumental assistance from outside your group or plagiarism, so I kindly ask you to make good on this trust, and hand in original work to show what you’ve learned.
 
-### Use of AI for making assignments
+### Statement on using AI for assignments
 
 There is, in principle, nothing wrong with using AI-based tools like ChatGPT,
 as you will also have access to them in your working life - but be warned:

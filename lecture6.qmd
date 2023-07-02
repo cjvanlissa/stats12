@@ -322,12 +322,10 @@ Correlation and regression are very closely related
 
 * $R^2$ (explained variance) for two is literally $r$, squared: the squared correlation coefficient
     + For bivariate regression/correlation. The story is more complex for regression with 2+ predictors
-* In bivariate linear regression, the standardized regression coefficient *is* the correlation coefficient
-    + The standardized coefficient is covered in a future lesson
 
 ## Output in SPSS
 
-![](images/sexshoesreg.png)
+![](images/regression_correlation.png)
 
 ## Correlation
 
@@ -510,3 +508,28 @@ Correlation and regression coefficients are just different ways to standardize t
 * Regression coefficient is only standardized with respect to X
     + That's why its units are Y (a 1-step increase in X leads to $b$ steps increase in Y)
     + That's why it's asymmetrical; regression slope of X on Y is different from Y on X
+    
+# Standardized regression coefficient
+
+## Standardized regression coefficient
+
+Remember: The correlation coefficient is standardized by dropping the units of both variables
+
+The standardized regression coefficient does the same
+
+Consequently, in bivariate linear regression, the standardized regression coefficient *is* the correlation coefficient
+
+* This changes when we have >1 predictors (future lesson)
+
+## Computation of the standardized regression coefficient
+
+Compute Z-scores for predictor and outcome
+
+* $Z_X = \frac{X_i-\bar{X}}{SD_x}$, $Z_Y = \frac{Y_i-\bar{Y}}{SD_Y}$
+* Z-scores have mean 0 and SD 1
+
+Then perform regression with these Z-scores
+
+## SPSS output
+
+![](images/regression_correlation.png)

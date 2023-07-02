@@ -1,0 +1,394 @@
+---
+title: "Lecture 10 - GLM VI\nNested models"
+author:   "Caspar J. van Lissa"
+date:     "`r format(Sys.Date(), '%d %b %Y')`"
+format: revealjs
+#server: shiny
+---
+
+```{r}
+library(kableExtra)
+require(gridExtra)
+library(tidySEM)
+library(scales)
+library(eulerr)
+source("functions.r")
+options(knitr.kable.NA = '')
+
+invdat <- matrix(c(1, .3, .24,
+                   .3, 1, .5,
+                   .24, .5, 1), nrow = 3, ncol = 3, byrow = TRUE)
+set.seed(76)
+invdat <- data.frame(mvtnorm::rmvnorm(60, sigma = invdat))
+
+names(invdat) <- c("Work_hours", "Gender_role", "Involvement")
+
+invdat$Work_hours <- rescale(invdat$Work_hours, to = c(0,40))
+invdat$Gender_role <- rescale(invdat$Gender_role, to = c(1,7))
+invdat$Involvement <- rescale(invdat$Involvement, to = c(0,50))
+
+m_both <- lm(Involvement ~ Work_hours + Gender_role, invdat)
+
+m_work <- lm(Involvement ~ Work_hours, invdat)
+m_gender <- lm(Involvement ~ Gender_role, invdat)
+m_both <- lm(Involvement ~ Gender_role+Work_hours, invdat)
+```
+
+# Nested models
+
+## Definition
+
+> **Nested models** occur whenever you can obtain a simpler model by constraining some parameters of a more complex model to 0.
+
+Models are *nested* if they are identical, except that some parameters are constrained to 0
+
+## Example nested model
+
+You already saw this in our first class on bivariate regression:
+
+* 1. Regression model: $\hat{Y}_i = a + b_1 * X_1$
+* 2. Null model: $\hat{Y}_i = a$
+
+Model 2 (null model) is "nested" in model 1 (regression model)
+
+* Model 2 is "constrained": relative to model 1, parameter $b_1$ is fixed to 0
+* Model 1 is "unconstrained": relative to model 2, all parameters are free
+
+## Example nested model
+
+We can apply the same principle to multiple regression:
+
+* 1. $\hat{Y}_i = a + b_1 * X_1 + b_2 * X_2$
+* 2. $\hat{Y}_i = a + b_1 * X_1$
+
+Model 2 (one predictor) is "nested" in model 1 (multiple regression)
+
+* Model 2 is "constrained": relative to model 1, slope $b_2$ is fixed to 0
+* Model 1 is "unconstrained": relative to model 2, all parameters are free
+
+## Example {.smaller .flexbox .vcenter}
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+w <- summary(m_work)$coefficients[,-2]
+w <- apply(w, 2, formatC, digits = 2, format = "f")
+G <- summary(m_gender)$coefficients[,-2]
+G <- apply(G, 2, formatC, digits = 2, format = "f")
+B <- summary(m_both)$coefficients[,-2]
+B <- apply(B, 2, formatC, digits = 2, format = "f")
+```
+
+**Only work hours, $R^2 `r report(summary(m_work)[["r.squared"]])`$:**
+
+Variabele   | B           | t          | p  
+------------|-------------|------------|-------------
+(Intercept) | `r w[1,1]`  | `r w[1,2]` | `r w[1,3]`
+Work_hours    | `r w[2,1]`  | `r w[2,2]` | `r w[2,3]`
+
+**Only gender roles, $R^2 `r report(summary(m_gender)[["r.squared"]])`$:**
+
+Variabele   | B           | t          | p  
+------------|-------------|------------|-------------
+(Intercept) | `r G[1,1]`  | `r G[1,2]` | `r G[1,3]`
+Gender_roles | `r G[2,1]`  | `r G[2,2]` | `r G[2,3]`
+
+**Multiple regression, $R^2 `r report(summary(m_both)[["r.squared"]])`$:**
+
+Variabele   | B           | t          | p  
+------------|-------------|------------|-------------
+(Intercept) | `r B[1,1]`  | `r B[1,2]` | `r B[1,3]`
+Work_hours    | `r B[2,1]`  | `r B[2,2]` | `r B[2,3]`
+Gender_roles | `r B[3,1]`  | `r B[3,2]` | `r B[3,3]`
+
+## Nested models
+
+We might ask the question: Does adding gender roles to a model with only work hours significantly improve our ability to predict involvement?
+
+* We can determine this with a nested model test
+
+
+## Difference in $R^2$
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+W <- summary(m_work)
+W <- c(W$r.squared, W$df[1:2])
+W[2]<-W[2]-1
+W[1] <- formatC(W[1], digits = 2, format = "f")
+B <- summary(m_both)
+B <- c(B$r.squared, B$df[1:2])
+B[2]<-B[2]-1
+B[1] <- formatC(B[1], digits = 2, format = "f")
+diff <- as.numeric(B[1])-as.numeric(W[1])
+compare_aov <- anova(m_work, m_both)
+
+```
+
+$R^2$ always increases when we add predictors:
+
+Model                      | $R^2$     | df1      | df2  
+---------------------------|-----------|----------|-------------
+U: Hours and Gender roles | `r B[1]`  | `r B[2]` | `r B[3]`
+C: Hours                | `r W[1]`  | `r W[2]` | `r W[3]`
+
+\vspace{1cm}
+
+$\Delta R^2 = R^2_u - R^2_c = `r B[1]` - `r W[1]` = `r diff`$
+
+## {background-iframe="https://cjvanlissa.shinyapps.io/Polynomials/"}
+
+
+# Incremental F-test
+
+## Incremental F-test
+
+$\Delta R^2 = R^2_c - R^2_u = `r B[1]` - `r W[1]` = `r diff`$
+
+We use an F-test to determine whether the increase in $R^2$ is significant:
+
+$F = \frac{(SSE_c - SSE_u) / (df1_c - df1_u)}{SSE_u / df2_u}$
+
+
+## Reporting
+
+The model with work hours and gender role attitudes as predictors explained significantly more variance in the data than the model with only work hours, $\Delta R^2 = `r diff`, F(`r compare_aov[["Df"]][2]`, `r compare_aov[["Res.Df"]][2]` = `r round(compare_aov[["F"]][2], 2)`, p < .001)$.
+
+
+<!-- HIER -->
+
+
+
+# Nested models: Adding variables
+
+## Coefficients {.smaller .flexbox .vcenter}
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+library(scales)
+require(gridExtra)
+set.seed(32)
+x1 <- rnorm(100)
+x1 <- rescale(x1, to = c(0,40))
+
+x2 <- rnorm(100)
+x2 <- round(rescale(x2, to = c(1,7)))
+
+y <- 20 - .25*x1 + 4*x2 + rnorm(100) 
+
+invdat <- data.frame(Werkuren=x1, Genderrole=x2, Involvement = y)
+rm(x1, x2, y)
+workmodel <- lm(Involvement ~ Werkuren, invdat)
+gendermodel <- lm(Involvement ~ Genderrole, invdat)
+m_both <- lm(Involvement ~ Werkuren + Genderrole, invdat)
+w <- summary(workmodel)$coefficients[,-2]
+w <- apply(w, 2, formatC, digits = 2, format = "f")
+G <- summary(gendermodel)$coefficients[,-2]
+G <- apply(G, 2, formatC, digits = 2, format = "f")
+B <- summary(m_both)$coefficients[,-2]
+B <- apply(B, 2, formatC, digits = 2, format = "f")
+
+```
+
+$\text{Involvement}_i = b_0 + b_1*\text{Hours}_i +\epsilon_i$
+
+Variable | B | t | p  
+------------|-------------|------------|-------------
+(Intercept) | `r w[1,1]` | `r w[1,2]` | `r w[1,3]`
+Working hours | `r w[2,1]` | `r w[2,2]` | `r w[2,3]`
+
+$\text{Involvement}_i = b_0 + b_1*\text{Genderroles}_i +\epsilon_i$
+
+Variable | B | t | p  
+------------|-------------|------------|-------------
+(Intercept) | `r G[1,1]` | `r G[1,2]` | `r G[1,3]`
+Genderroles | `r G[2,1]` | `r G[2,2]` | `r G[2,3]`
+
+$\text{Involvement}_i = b_0 + b_1*\text{Hours}_i + b_2*\text{Genderroles}_i +\epsilon_i$
+
+Variable | B | t | p  
+------------|-------------|------------|-------------
+(Intercept) | `r B[1,1]` | `r B[1,2]` | `r B[1,3]`
+Working hours | `r B[2,1]` | `r B[2,2]` | `r B[2,3]`
+Genderroles | `r B[3,1]` | `r B[3,2]` | `r B[3,3]`
+
+## Coefficients
+
+Why is Work Hours not significant at first, and it is when we add genderroles?
+
+Variable | B | t | p  
+------------|-------------|------------|-------------
+(Intercept) | `r w[1,1]` | `r w[1,2]` | `r w[1,3]`
+Working hours | `r w[2,1]` | `r w[2,2]` | `r w[2,3]`
+
+Variable | B | t | p  
+------------|-------------|------------|-------------
+(Intercept) | `r B[1,1]` | `r B[1,2]` | `r B[1,3]`
+Working hours | `r B[2,1]` | `r B[2,2]` | `r B[2,3]`
+Genderroles | `r B[3,1]` | `r B[3,2]` | `r B[3,3]`
+
+<!-- Because the effect of genderroles is present in the data, but is lumped in with the "error" in model 1. Second model correctly assigns this part of the variance to the effect of genderroles, which also decreases the error variance-->
+
+## What are nested regression models?
+
+Model 1: $\hat{Y} =b_0 + b_1 * X_1$  
+Model 2: $\hat{Y} =b_0 + b_1 * X_1 + b_2*X_2$
+
+* All predictors in Model 1 are also in Model 2.
+* Model 1 is the ‘small’ model, Model 2 is the ‘larger’ model
+* Model 2 always explains equally well or better than Model 1
+
+![](images/Lecture 10_cj0.jpg)
+
+## Nested models
+
+Regression models are nested if they are identical, EXCEPT THAT some parameters are set equal to 0
+
+Thus:
+
+Model 1: $\hat{Y} =b_0 + b_1 * X_1 + \textbf{0}*X_2 = b_0 + b_1 * X_1$  
+Model 2: $\hat{Y} =b_0 + b_1 * X_1 + b_2*X_2$
+
+* Model 2 is "nested" in model 1.
+* Model 2 is "constrained": parameters fixed to zero
+* Model 1 is "unconstrained": all parameters are free
+
+
+## What do we use nested models for?
+
+1. Hierarchical regression analysis: adding (groups of) variables to the model step-by-step)
+2. Testing the overall effect of __categorical predictors__ >2 categories
+    + Because you need a test for the effect of multiple dummies, together
+
+
+## Difference in $R^2$
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+W <- summary(workmodel)
+W <- c(W$r.squared, W$df[1:2])
+W[2]<-W[2]-1
+W[1] <- formatC(W[1], digits = 2, format = "f")
+B <- summary(m_both)
+B <- c(B$r.squared, B$df[1:2])
+B[2]<-B[2]-1
+B[1] <- formatC(B[1], digits = 2, format = "f")
+diff <- as.numeric(B[1])-as.numeric(W[1])
+compare_aov <- anova(workmodel, m_both)
+
+```
+
+$R^2$ always increases when we add predictors:
+
+Model | $R^2$ | df1 | df2  
+---------------------------|-----------|----------|-------------
+C: Working Hours | `r W[1]` | `r W[2]` | `r W[3]`
+U: Working Hours and Genderroles | `r B[1]` | `r B[2]` | `r B[3]`
+
+
+$\Delta R^2 = R^2_u - R^2_c = `r B[1]` - `r W[1]` = `r diff`$
+
+# Incremental F-test
+
+## Incremental F-test
+
+$\Delta R^2 = R^2_u - R^2_c = `r B[1]` - `r W[1]` = `r diff`$
+
+We use an F-test to test whether the increase in $R^2$ is significant:
+
+
+$F = \frac{(SSE_c - SSE_u) / (df1_u - df1_c)}{SSE_u / df2_u}$
+
+
+## Report
+
+The model with hours of work and genderroles explained significantly more variance in the data than the model with hours of work only,
+
+$\Delta R^2 = `r diff`, F(`r compare_aov[["Df"]][2]`, `r compare_aov[["Res.Df"]][2]`) = `r round(compare_aov[["F"]][2], 2)`, p < .001$ 
+
+# Hierarchical Regression analysis
+
+## Hierarchical regression
+
+1. Start with a “basic model” 
+2. Step-by-step, add one or more predictors in the order as decided in advance (based on research question)
+3. After each step, you inspect the $\Delta R^2$
+4. Do the new predictors significantly increase $R^2$?
+
+## Model Comparison{.smaller}
+
+| Model Summary |  |  |  |  |
+| :-: | :-: | :-: | :-: | :-: |
+| Model | R | R Square | Adjusted R Square | Std. Error of the Estimate |
+| 1 | .390a | .152 | .116 | 11.527 |
+a. Predictors: (Constant), X2, X1
+
+| Model Summary |  |  |  |  |
+| :-: | :-: | :-: | :-: | :-: |
+| Model | R | R Square | Adjusted R Square | Std. Error of the Estimate |
+| 1 | .606a | .367 | .311 | 10.177 |
+a. Predictors: (Constant), X4, X3, X1, X2
+
+## Model comparison{.smaller}
+
+| Model | R | R Square | Adjusted R Square | Std. Error of the Estimate | Change Statistics |  |  |  |  |
+| :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
+|  |  |  |  |  | R Square Change | F Change | df1 | df2 | Sig. F Change |
+| 1 | .390a | .152 | .116 | 11.527 | .152 | 4.216 | 2 | 47 | .021 |
+| 2 | .606b | .367 | .311 | 10.177 | .215 | 7.645 | 2 | 45 | .001 |
+a. Predictors: (Constant), X2, X1
+b. Predictors: (Constant), X2, X1, X4, X3
+
+## Testing
+
+Test R-square difference with an F-test
+
+* R-square change $\Delta R^2$: how much did the R-square change compared to the previous model
+* df1 is the number of predictors that are added compared to the previous model (i.e., model 2 has two predictors more than model 1)
+* df2 is the degrees of freedom for the residuals
+* Sig. F Change = p value for the F-test for R-square change!
+
+
+## Null model{.smaller}
+
+* Null model: model without predictors (only intercept)
+
+Model 0: $\hat{Y} = b_0$, with $R^2_{M0} = 0$!  
+Model 1: $\hat{Y} = b_0 + b_1*X_1+b_2*X_2$, with $R^2_{M1} = .15$!
+
+| Model | R | R Square | Adjusted R Square | Std. Error of the Estimate | Change Statistics |  |  |  |  |
+| :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
+|  |  |  |  |  | R Square Change | F Change | df1 | df2 | Sig. F Change |
+| 1 | .390a | .152 | .116 | 11.527 | .152 | 4.216 | 2 | 47 | .021 |
+| 2 | .606b | .367 | .311 | 10.177 | .215 | 7.645 | 2 | 45 | .001 |
+a. Predictors: (Constant), X2, X1
+b. Predictors: (Constant), X2, X1, X4, X3
+
+## Understanding the model summary table
+
+* R-square gives the explained variance of the whole model
+* First model's R-square change is compared to the 0-model
+* Each subsequent model is compared to the previous model
+
+
+## Back to hierarchical...
+
+Problem: We want to know whether education has a **significant** effect on involvement, but it consists of two dummies. What do we test?
+
+Solution: Test both dummies at the same time using hierarchical regression analysis!
+
+## Regression with two dummies
+
+```{r, eval = TRUE}
+set.seed(1)
+invdat$SES <- factor(cut(invdat$Involvement + rnorm(nrow(invdat), sd = 26), 3), labels = c("Low", "Medium", "High"))
+df_inv <- data.frame(Involvement = invdat$Involvement, model.matrix(~SES, invdat)[, -1])
+res_ses <- lm_spss(Involvement ~ ., df_inv)
+haven::write_sav(invdat, "Lecture_10_-_Involvement.sav")
+```
+
+```{r}
+kableExtra::kbl(res_ses$Summary, caption = "Summary", digits = 2, row.names = FALSE) |> kable_styling(bootstrap_options = c("striped", "hover")) 
+
+```
+
+```{r}
+kableExtra::kbl(res_ses$ANOVA, caption = "ANOVA", digits = 2, row.names = FALSE) |> kable_styling(bootstrap_options = c("striped", "hover")) 
+
+```
+

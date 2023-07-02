@@ -369,8 +369,6 @@ knitr::include_graphics("images/spss_test_coef.png")
 
 The effect of hours studied on exam grade was significant, $b = `r round(cijfer.uren[["coefficients"]][2], 2)`, t(`r cijfer.uren[["df.residual"]]`) = `r round(summary(cijfer.uren)[["coefficients"]][2,3], 2)`, p < .001.$ This means that for every additional hour studied, the expected grade increased by `r round(cijfer.uren[["coefficients"]][2], 2)` points.
 
-
-
 # Assumptions
 
 ## Assumptions
