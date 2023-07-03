@@ -531,6 +531,10 @@ A one SD increase in X is associated with a $\beta$ SD increase in Y
 
 <!-- In this course, we will mostly focus on the unstandardized regression coefficient b -->
 
+# Multicolinearity
+
+## MAKE ME
+
 # Causality
 
 ## Causality

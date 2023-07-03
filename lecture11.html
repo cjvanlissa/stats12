@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="lecture10_files/libs/clipboard/clipboard.min.js"></script>
-<script src="lecture10_files/libs/quarto-html/tabby.min.js"></script>
-<script src="lecture10_files/libs/quarto-html/popper.min.js"></script>
-<script src="lecture10_files/libs/quarto-html/tippy.umd.min.js"></script>
-<link href="lecture10_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="lecture10_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="lecture10_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
-<link href="lecture10_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<script src="lecture11_files/libs/clipboard/clipboard.min.js"></script>
+<script src="lecture11_files/libs/quarto-html/tabby.min.js"></script>
+<script src="lecture11_files/libs/quarto-html/popper.min.js"></script>
+<script src="lecture11_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="lecture11_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="lecture11_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="lecture11_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="lecture11_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.3.427">
 
   <meta name="author" content="Caspar J. van Lissa">
-  <meta name="dcterms.date" content="2023-07-02">
-  <title>Lecture 10 - GLM VI Nested models</title>
+  <meta name="dcterms.date" content="2023-07-03">
+  <title>Lecture 11 - GLM VII Interaction effects</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="lecture10_files/libs/revealjs/dist/reset.css">
-  <link rel="stylesheet" href="lecture10_files/libs/revealjs/dist/reveal.css">
+  <link rel="stylesheet" href="lecture11_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="lecture11_files/libs/revealjs/dist/reveal.css">
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -31,11 +31,11 @@
       vertical-align: middle;
     }
   </style>
-  <link rel="stylesheet" href="lecture10_files/libs/revealjs/dist/theme/quarto.css">
-  <link href="lecture10_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
-  <link href="lecture10_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
-  <link href="lecture10_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-  <link href="lecture10_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <link rel="stylesheet" href="lecture11_files/libs/revealjs/dist/theme/quarto.css">
+  <link href="lecture11_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="lecture11_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="lecture11_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="lecture11_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
 
   .callout {
@@ -326,7 +326,7 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Lecture 10 - GLM VI Nested models</h1>
+  <h1 class="title">Lecture 11 - GLM VII Interaction effects</h1>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -336,256 +336,360 @@ Caspar J. van Lissa
 </div>
 </div>
 
-  <p class="date">2023-07-02</p>
+  <p class="date">2023-07-03</p>
 </section>
 <section>
-<section id="nested-models" class="title-slide slide level1 center">
-<h1>Nested models</h1>
+<section id="recap-regression" class="title-slide slide level1 center">
+<h1>Recap regression</h1>
 
 </section>
-<section id="definition" class="slide level2">
-<h2>Definition</h2>
+<section id="regression-model" class="slide level2">
+<h2>Regression model</h2>
+<p><span class="math inline">\(Y_i = a + b*X_i +e_{i}\)</span></p>
+<table>
+<thead>
+<tr class="header">
+<th>Symbol</th>
+<th>Interpretation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(Y_i\)</span></td>
+<td>Individual i’s score on dependent variable Y</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(a\)</span></td>
+<td>Coefficient, intercept of the regression line</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(b\)</span></td>
+<td>Coefficient, slope of the regression line</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(X_i\)</span></td>
+<td>Individual i’s score on independent variable X</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(e_i\)</span></td>
+<td>Individual i’s prediction error</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="regression-line" class="slide level2">
+<h2>Regression line</h2>
+<p><strong>Predicted value (describes regression line)</strong></p>
+<p><span class="math inline">\(\hat{Y}_i = a + b*X_i\)</span></p>
+<table>
+<colgroup>
+<col style="width: 20%">
+<col style="width: 79%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Symbol</th>
+<th>Interpretation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(\hat{Y}_i\)</span></td>
+<td>Individual i’s <strong>predicted</strong> score on dependent variable Y</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(a\)</span></td>
+<td>Coefficient, intercept of the regression line</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(b\)</span></td>
+<td>Coefficient, slope of the regression line</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(X_i\)</span></td>
+<td>Individual i’s score on independent variable X</td>
+</tr>
+</tbody>
+</table>
+<p>And:</p>
+<p><span class="math inline">\(Y_i = \hat{Y}_i +\epsilon_{i}\)</span></p>
+</section>
+<section id="the-road-so-far" class="slide level2">
+<h2>The road so far</h2>
+</section>
+<section id="regression-line-1" class="slide level2">
+<h2>Regression line</h2>
+<ul>
+<li><span class="math inline">\(Y_i = a + bX\)</span>: Bivariate linear regression</li>
+<li><span class="math inline">\(Y_i = a + bX\)</span> where <span class="math inline">\(X\)</span> is a dummy variable: comparing two groups, aka independent samples t-test</li>
+<li><span class="math inline">\(Y_i = a + b_1X_1 + \ldots + b_kX_k\)</span> where <span class="math inline">\(X_{1 \ldots k}\)</span> are dummy variables: comparing multiple groups, aka ANOVA</li>
+<li><span class="math inline">\(Y_i = a + b_1X_1 + \ldots + b_kX_k\)</span> where <span class="math inline">\(X_{1 \ldots k}\)</span> are continuous or dummy variables: multiple regression</li>
+</ul>
+<p>Last thing we did is extend the linear model with building blocks that look like <span class="math inline">\(+bX\)</span></p>
+</section>
+<section id="introducing-interaction" class="slide level2">
+<h2>Introducing: interaction</h2>
 <blockquote>
-<p><strong>Nested models</strong> occur whenever you can obtain a simpler model by constraining some parameters of a more complex model to 0.</p>
+<p><strong>Interaction:</strong> The effect of one predictor depends on the level of another predictor.</p>
 </blockquote>
-<p>Models are <em>nested</em> if they are identical, except that some parameters are constrained to 0</p>
-<ul>
-<li>All predictors in Model 1 are also in Model 2.</li>
-<li>Model 1 is the ‘smaller’ or ‘constrained’ model, Model 2 is the ‘larger’ or unconstrained model</li>
-<li>Model 2 always has better fit Model 1</li>
-</ul>
-</section>
-<section id="example-nested-model" class="slide level2">
-<h2>Example nested model</h2>
-<p>You already saw this in our first class on bivariate regression:</p>
-<ul>
-<li><ol type="1">
-<li>Null model: <span class="math inline">\(\hat{Y}_i = a\)</span>, which is the same as <span class="math inline">\(\hat{Y}_i = a + 0 * X_1\)</span> (so <span class="math inline">\(b_1 = 0\)</span>)</li>
-</ol></li>
-<li><ol start="2" type="1">
-<li>Regression model: <span class="math inline">\(\hat{Y}_i = a + b_1 * X_1\)</span></li>
-</ol></li>
-</ul>
-<p>Model 1 (null model) is “nested” in model 2 (regression model)</p>
-<ul>
-<li>Model 1 is “constrained”: relative to model 2, parameter <span class="math inline">\(b_1\)</span> is fixed to 0</li>
-<li>Model 2 is “unconstrained”: relative to model 1, all parameters are free</li>
-</ul>
-</section>
-<section id="example-nested-model-1" class="slide level2">
-<h2>Example nested model</h2>
-<p>We can apply the same principle to multiple regression:</p>
-<ul>
-<li><ol type="1">
-<li><span class="math inline">\(\hat{Y}_i = a + b_1 * X_1\)</span></li>
-</ol></li>
-<li><ol start="2" type="1">
-<li><span class="math inline">\(\hat{Y}_i = a + b_1 * X_1 + b_2 * X_2\)</span></li>
-</ol></li>
-</ul>
-<p>Model 1 (one predictor) is “nested” in model 2 (multiple regression)</p>
-<ul>
-<li>Model 1 is “constrained”: relative to model 2, slope <span class="math inline">\(b_2\)</span> is fixed to 0</li>
-<li>Model 2 is “unconstrained”: relative to model 1, all parameters are free</li>
-</ul>
-</section>
-<section id="example" class="slide level2 smaller flexbox vcenter">
-<h2>Example</h2>
-<p><strong>Only work hours, <span class="math inline">\(R^2 = 0.07\)</span>:</strong></p>
-<table>
-<thead>
-<tr class="header">
-<th>Variabele</th>
-<th>B</th>
-<th>t</th>
-<th>p</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>(Intercept)</td>
-<td>16.90</td>
-<td>6.26</td>
-<td>0.00</td>
-</tr>
-<tr class="even">
-<td>Work_hours</td>
-<td>0.29</td>
-<td>2.05</td>
-<td>0.04</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Only gender roles, <span class="math inline">\(R^2 = 0.13\)</span>:</strong></p>
-<table>
-<thead>
-<tr class="header">
-<th>Variabele</th>
-<th>B</th>
-<th>t</th>
-<th>p</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>(Intercept)</td>
-<td>7.57</td>
-<td>1.50</td>
-<td>0.14</td>
-</tr>
-<tr class="even">
-<td>Gender_roles</td>
-<td>3.14</td>
-<td>2.90</td>
-<td>0.01</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Multiple regression, <span class="math inline">\(R^2 = 0.15\)</span>:</strong></p>
-<table>
-<thead>
-<tr class="header">
-<th>Variabele</th>
-<th>B</th>
-<th>t</th>
-<th>p</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>(Intercept)</td>
-<td>6.81</td>
-<td>1.34</td>
-<td>0.18</td>
-</tr>
-<tr class="even">
-<td>Work_hours</td>
-<td>2.66</td>
-<td>2.32</td>
-<td>0.02</td>
-</tr>
-<tr class="odd">
-<td>Gender_roles</td>
-<td>0.17</td>
-<td>1.19</td>
-<td>0.24</td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="nested-models-1" class="slide level2">
-<h2>Nested models</h2>
-<p>We might ask the question: Does adding gender roles to a model with only work hours significantly improve our ability to predict involvement?</p>
-<ul>
-<li>We can determine this with a nested model test</li>
-</ul>
-</section>
-<section id="difference-in-r2" class="slide level2">
-<h2>Difference in <span class="math inline">\(R^2\)</span></h2>
-<p><span class="math inline">\(R^2\)</span> always increases when we add predictors:</p>
-<table>
-<thead>
-<tr class="header">
-<th>Model</th>
-<th><span class="math inline">\(R^2\)</span></th>
-<th>df1</th>
-<th>df2</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>C: Hours</td>
-<td>0.07</td>
-<td>1</td>
-<td>58</td>
-</tr>
-<tr class="even">
-<td>U: Hours and Gender roles</td>
-<td>0.15</td>
-<td>2</td>
-<td>57</td>
-</tr>
-</tbody>
-</table>
-<p><span class="math inline">\(\Delta R^2 = R^2_u - R^2_c = 0.15 - 0.07 = 0.08\)</span></p>
-</section>
-<section id="section" class="slide level2" data-background-iframe="https://cjvanlissa.shinyapps.io/Polynomials/">
-<h2></h2>
-</section></section>
-<section>
-<section id="incremental-f-test" class="title-slide slide level1 center">
-<h1>Incremental F-test</h1>
-
-</section>
-<section id="incremental-f-test-1" class="slide level2">
-<h2>Incremental F-test</h2>
-<p><span class="math inline">\(\Delta R^2 = R^2_c - R^2_u = 0.15 - 0.07 = 0.08\)</span></p>
-<p><span class="math inline">\(F = \frac{(SSR_u - SSR_c) / (df1_u-df1_c)}{SSE_u / df2_u}\)</span></p>
-<p>We use an F-test to determine whether the increase in <span class="math inline">\(R^2\)</span> is significant:</p>
-<ul>
-<li>Increase in R-square: <span class="math inline">\(\Delta R^2\)</span></li>
-<li><span class="math inline">\(SSR_u - SSR_c\)</span>: increase in variance explained by the model</li>
-<li><span class="math inline">\(df1_u-df1_c\)</span>: increase in the number of parameters</li>
-<li><span class="math inline">\(df2_u\)</span> degrees of freedom for the residuals for the unconstrained model</li>
-<li>Sig. F Change = p value for the F-test for R-square change!</li>
-</ul>
-</section>
-<section id="compare-to-basic-f-test" class="slide level2 smaller">
-<h2>Compare to basic F-test</h2>
-<p>Remember the F-test for bivariate regression:</p>
-<p><span class="math display">\[
-F = \frac{SSR/(p-1)}{SSE/(n-p)}
-\]</span></p>
-<p>Note that this is the same as an incremental F-test comparing the null model with the regression model:</p>
-<p><span class="math display">\[
-F = \frac{SSR/df1_u}{SSE/df2_u} = \frac{(SSR_u - SSR_c) / (df1_u -df1_c)}{SSE_u / df2_u} = \frac{(SSR_u - 0) / (df1_u - 0)}{SSE_u / df2_u}
-\]</span></p>
-</section>
-<section id="putting-it-together" class="slide level2">
-<h2>Putting it together</h2>
-<p>So, if you have two nested models, you could think of three comparisons:</p>
-<ol type="1">
-<li><span class="math inline">\(\hat{Y}_i = a\)</span> (the null model)</li>
-<li><span class="math inline">\(\hat{Y}_i = a + b_1 X_1\)</span> (bivariate regression)</li>
-<li><span class="math inline">\(\hat{Y}_i = a + b_1 X_1 + b_2X_2\)</span> (multiple regression)</li>
-</ol>
-<p>The F-test for the significance of the <span class="math inline">\(R^2\)</span> of model 2 is essentially an incremental F-test for <span class="math inline">\(\Delta R^2\)</span> between model 1 vs model 2</p>
-<p>Then there’s also an incremental F-test for <span class="math inline">\(\Delta R^2\)</span> between model 2 vs model 3</p>
-</section>
-<section id="reporting" class="slide level2">
-<h2>Reporting</h2>
-<p>The model with work hours and gender role attitudes as predictors explained significantly more variance in the data than the model with only work hours, <span class="math inline">\(\Delta R^2 = 0.08, F(1, 57 = 5.38, p &lt; .001)\)</span>.</p>
-</section>
-<section id="hierarchical-regression" class="slide level2">
-<h2>Hierarchical regression</h2>
-<ul>
-<li>Add predictors in blocks
-<ul>
-<li>If you represent a categorical predictor as dummies, all dummies must be included in the same block! Together, they represent one variable.</li>
-</ul></li>
-<li>Each block is added to preceding ones, so these models are nested</li>
-<li>Conduct incremental F-tests to determine whether each additional block significantly increases <span class="math inline">\(R^2\)</span></li>
-</ul>
-</section>
-<section id="why-hierarchical-regression" class="slide level2 smaller">
-<h2>Why hierarchical regression?</h2>
-<p>To determine whether theoretically relevant factors explain significant variance <em>above and beyond</em> demographic characteristics</p>
-<ul>
-<li>E.g.: you want to predict college achievement based on high school GPA while controlling for demographic factors
-<ul>
-<li>Block 1: Demographic factors (age, sex, neighborhood quality, SES)</li>
-<li>Block 2: GPA</li>
-</ul></li>
-</ul>
-<p>To determine whether a previously neglected factor explains additional variance</p>
-<ul>
-<li>E.g.: you want to show that your new scale of morality explains more variance in behavioral outcomes than an existing scale of morality
-<ul>
-<li>Block 1: Add all subscales of the old morality scale</li>
-<li>Block 2: Add all subscales of the new morality scale</li>
-</ul></li>
-</ul>
-<p>To test the overall effect of adding dummies for a <strong>categorical predictor</strong> with &gt;2 categories + You need one F-test for all dummies, together; not individual t-tests</p>
+<p>To represent this, we add a <em>special</em> building block to our regression equation:</p>
+<p><span class="math inline">\(Y = a + b_1X_1+ b_2X_2\)</span><font color="blue"><span class="math inline">\(+ b_3(X_1*X_2)\)</span></font></p>
+<!-- # Interactie -->
+<!-- ## Regressie met dichotome predictor -->
+<!-- Bijvoorbeeld: Verschil in parental Involvement tussen mannen (0) en vrouwen (1) -->
+<!-- * Dummy altijd coderen als 0 en 1 -->
+<!-- * Notatie: In dit college schrijven we $D_i$ voor dummies, in plaats van $X_i$ -->
+<!-- * In principe kan je natuurlijk elke letter gebruiken -->
+<!-- ## Regressie met dichotome predictor -->
+<!-- $Y_i = a + b*D_i +\epsilon_{i}$ -->
+<!-- Symbool        | Betekenis -->
+<!-- -------------- | ----------------------------------------------------- -->
+<!-- $Y_i$          |  -->
+<!-- $a$            |  -->
+<!-- $b$            |  -->
+<!-- $X_i, D_i, z_i$| De score op **dummy variabele D** voor individu i -->
+<!-- $\epsilon_i$   |  -->
+<!-- ## Regressie dichotome en continue predictor -->
+<!-- $Y_i = a + b_1*D_{1i} + b_2 * X_{2i}+\epsilon_{i}$ -->
+<!-- Bijvoorbeeld: -->
+<!-- * $Y_i$: Involvement -->
+<!-- * $D_1$: Geslacht -->
+<!-- * $X_2$: Gender role attitudes -->
+<!-- Hoe interpreteer je de a, b1 en b2 in deze regressie? -->
+<!-- ## Regressie dichotome en continue predictor -->
+<!-- $Y_i = a + b_1*D_{1i} + b_2 * X_{2i}+\epsilon_{i}$ -->
+<!-- * $a$: Wat is de verwachte waarde van Involvement, voor iemand die geslacht 0 heeft (man) en een 0 scoort op genderrole? -->
+<!-- * $b_1$: Wat is het verschil in Involvement tussen mannen (0) en vrouwen (1), als je genderrole gelijk houdt **aan 0**? -->
+<!-- * $b_2$: Wat is het effect van een toename van 1 punt op genderrole, als je geslacht gelijk houdt aan 0? -->
+<!-- ## Regressie dichotome en continue predictor -->
+<!-- $Y_i = a + b_1*D_{1i} + b_2 * X_{2i}+\epsilon_{i}$ -->
+<!-- Hier hebben mannen en vrouwen elk een eigen intercept: -->
+<!-- ```{r, fig.width=4.5, fig.asp=3/4, echo=FALSE, warning=FALSE, message=FALSE} -->
+<!-- library(scales) -->
+<!-- set.seed(32) -->
+<!-- n <- 178 -->
+<!-- Geslacht <- rbinom(n, 1, .5) -->
+<!-- Genderrole <- 2*Geslacht+rnorm(n) -->
+<!-- Genderrole <- round(scales::rescale(Genderrole, to = c(1,7))) -->
+<!-- Involvement <- 5 + 15*Geslacht + 4*Genderrole + rnorm(n)  -->
+<!-- dichmodel <- lm(Involvement ~ Geslacht + Genderrole) -->
+<!-- ggplot(data.frame(Involvement, Geslacht = factor(Geslacht), Genderrole), aes(x=Genderrole, y=Involvement, colour = Geslacht))+ -->
+<!--   geom_point()+ -->
+<!--   geom_abline(intercept = dichmodel$coefficients[1]+dichmodel$coefficients[2], slope = dichmodel$coefficients[3], colour = "red")+ -->
+<!--   geom_abline(intercept = dichmodel$coefficients[1], slope = dichmodel$coefficients[3], colour = "blue")+ -->
+<!--   theme_bw()+ -->
+<!--   scale_colour_manual(values = c("blue", "red"))+theme(legend.position = "none") -->
+<!-- ``` -->
+<!-- ## Verschillende regressielijnen -->
+<!-- Maar wat nou als mannen en vrouwen niet alleen een ander intercept, maar ook een ander hellingsgetal hebben? -->
+<!-- ```{r, fig.width=4.5, fig.asp=3/4, echo=FALSE, warning=FALSE, message=FALSE} -->
+<!-- #0 man 1 vrouw -->
+<!-- Involvement2 <- 5 + 30*Geslacht + 4*Genderrole + -3.8*Geslacht*Genderrole + rnorm(n)  -->
+<!-- involvement2model <- lm(Involvement2 ~ Geslacht * Genderrole) -->
+<!-- ggplot(data.frame(Involvement = Involvement2, Geslacht = factor(Geslacht), Genderrole), aes(x=Genderrole, y=Involvement, colour = Geslacht))+ -->
+<!--   geom_point()+ -->
+<!--   geom_abline(intercept = involvement2model$coefficients[1]+involvement2model$coefficients[2], slope = involvement2model$coefficients[3]+involvement2model$coefficients[4], colour = "red")+ -->
+<!--   geom_abline(intercept = involvement2model$coefficients[1], slope = involvement2model$coefficients[3], colour = "blue")+ -->
+<!--   theme_bw()+ -->
+<!--   scale_colour_manual(values = c("blue", "red"))+theme(legend.position = "none") -->
+<!-- ``` -->
+<!-- ## Interactie effect -->
+<!-- **Definitie interactie effect:** -->
+<!-- > Het effect van één variabele hangt af van de waarde van de andere variabele. -->
+<!-- In dit geval: Het hellingsgetal van Genderrole hangt af van Geslacht. -->
+<!-- ## Interactie effect -->
+<!-- Interactie-effect tussen geslacht (man = 0, vrouw = 1) en genderrole: -->
+<!-- $\hat{Y}_i = a + b_1*D_{1i} + b_2 * X_{2i}+ b_3 * (D_{1i} * X_{2i})$ -->
+<!-- Symbool        | Betekenis -->
+<!-- -------------- | --------------------------------------------------------------- -->
+<!-- $\hat{Y}_i$    | Voorspelde waarde op Y voor individu i  -->
+<!-- $a$            | Verwachte waarde voor mannen die 0 scoren op genderrole -->
+<!-- $b_1$          | Verschil tussen mannen en vrouwen die 0 scoren op genderrole -->
+<!-- $b_2$          | Effect van genderrole voor mannen -->
+<!-- $b_3$          | Verschil tussen mannen en vrouwen in het effect van genderrole -->
+<!-- ## Formule invullen -->
+<!-- $\hat{Y}_i = a + b_1*D_{1i} + b_2 * X_{2i}+ b_3 * (D_{1i} * X_{2i})$ -->
+<!-- **Invullen voor mannen:** -->
+<!-- * $$ -->
+<!--   \begin{aligned} -->
+<!--   \hat{Y}_i = &a + b_1*0 + b_2 * X_{2i}+ b_3 * (0 * X_{2i}) = \\ -->
+<!--               &a + b_2 * X_{2i} -->
+<!--   \end{aligned} -->
+<!--   $$ -->
+<!-- * Dus de regressielijn voor mannen is $a + b_2*X_{2i}$ -->
+<!-- **Invullen voor vrouwen:** -->
+<!-- * $$ -->
+<!--   \begin{aligned} -->
+<!--   \hat{Y}_i = &a + b_1*1 + b_2 * X_{2i}+ b_3 * (1 * X_{2i}) = \\ -->
+<!--    &a + b_1 + b_2 * X_{2i} + b_3 * X_{2i} -->
+<!--    \end{aligned} -->
+<!--    $$ -->
+<!-- * Dus de regressielijn voor vrouwen is $(a + b_1) + (b_2+ b_3) * X_{2i}$ -->
+<!-- <!--$\hat{Y}_i = a + b_1*1 + b_2 * X_{2i}+ b_3 * (1 * X_{2i}) =   -->
+<!--   a + b_1 + b_2 * X_{2i} + b_3 * X_{2i}$ -->
+<!-- -->
+<p>–&gt;</p>
+<!-- ## Voorbeelden -->
+<!-- Welke parameters zijn hier significant? -->
+<!-- $\hat{Y}_i = a + b_1D_{1i} + b_2X_{2i}+b3(D_{1i}X_{2i})$ -->
+<!-- ```{r out.height = "350px"} -->
+<!-- knitr::include_graphics("./Materials/Interactie.png", dpi = NA) -->
+<!-- ``` -->
+<!-- # Interactie met continue predictoren -->
+<!-- ## Dichotome vs continue moderator -->
+<!-- Als één van de interacterende variabelen dichotoom is krijg je **twee regressielijnen** -->
+<!-- Als beide interacterende variabelen continu zijn, krijg je een unieke regressielijn voor elke waarde van de moderator -->
+<!-- ## Dichotome vs continue moderator -->
+<!-- ```{r, fig.width=4.5, fig.asp=3/4, echo=FALSE, warning=FALSE, message=FALSE} -->
+<!-- library(scales) -->
+<!-- require(gridExtra) -->
+<!-- set.seed(32) -->
+<!-- x1 <- rnorm(100) -->
+<!-- x1 <- rescale(x1, to = c(0,40)) -->
+<!-- x2 <- rnorm(100) -->
+<!-- x2 <- round(rescale(x2, to = c(1,7))) -->
+<!-- y <- 2 + .10*x1 + .3*x2 + .30*x1*x2 + rnorm(100)  -->
+<!-- y <- rescale(y, to = c(1,7)) -->
+<!-- invdat <- data.frame(Involvement=x1, Warmth=x2, Adjustment = y) -->
+<!-- rm(x1, x2, y) -->
+<!-- invdat_cent <- invdat -->
+<!-- invdat_cent[,c(1,2)]<-lapply(invdat_cent[,c(1,2)], scale, scale = FALSE) -->
+<!-- invmodel_c <- lm(Adjustment ~ Involvement * Warmth, invdat_cent) -->
+<!-- werkplot3 <- ggplot(invdat_cent, aes(x=Involvement, y=Adjustment))+ -->
+<!--   geom_point()+ -->
+<!--   geom_hline(yintercept = 0)+geom_vline(xintercept = 0)+ -->
+<!--   theme_bw()+ -->
+<!--   scale_x_continuous(limits = c(-20,20), breaks=seq(-20,20, by = 5))+ -->
+<!--   scale_y_continuous(limits = c(0,7), breaks=seq(0, 7, by = .5))+ -->
+<!--   geom_abline(intercept = invmodel_c$coefficients[1], slope = invmodel_c$coefficients[2], colour = "red", size = 1)+ -->
+<!--   geom_abline(intercept = invmodel_c$coefficients[1], slope = invmodel_c$coefficients[2]+1*invmodel_c$coefficients[4], colour = "grey60", size = 1)+ -->
+<!--   geom_abline(intercept = invmodel_c$coefficients[1], slope = invmodel_c$coefficients[2]+3*invmodel_c$coefficients[4], colour = "grey50", size = 1)+ -->
+<!--   geom_abline(intercept = invmodel_c$coefficients[1], slope = invmodel_c$coefficients[2]+5*invmodel_c$coefficients[4], colour = "grey40", size = 1)+ -->
+<!--   geom_abline(intercept = invmodel_c$coefficients[1], slope = invmodel_c$coefficients[2]-1*invmodel_c$coefficients[4], colour = "grey70", size = 1)+ -->
+<!--   geom_abline(intercept = invmodel_c$coefficients[1], slope = invmodel_c$coefficients[2]-3*invmodel_c$coefficients[4], colour = "grey80", size = 1)+ -->
+<!--   geom_abline(intercept = invmodel_c$coefficients[1], slope = invmodel_c$coefficients[2]+7*invmodel_c$coefficients[4], colour = "grey30", size = 1) -->
+<!-- genderplot3 <- ggplot(invdat_cent, aes(x=Warmth, y=Adjustment))+ -->
+<!--   geom_point()+ -->
+<!--   geom_hline(yintercept = 0)+geom_vline(xintercept = 0)+ -->
+<!--   theme_bw()+ -->
+<!--   scale_x_continuous(limits = c(-4,4), breaks=seq(-4,4, by = 1))+ -->
+<!--   scale_y_continuous(limits = c(0,7), breaks=seq(0, 7, by = .5))+ -->
+<!--   geom_abline(intercept = invmodel_c$coefficients[1], slope = invmodel_c$coefficients[3], colour = "red", size = 1)+ -->
+<!--   geom_abline(intercept = invmodel_c$coefficients[1], slope = invmodel_c$coefficients[3]+8*invmodel_c$coefficients[4], colour = "grey60", size = 1)+ -->
+<!--   geom_abline(intercept = invmodel_c$coefficients[1], slope = invmodel_c$coefficients[3]+16*invmodel_c$coefficients[4], colour = "grey50", size = 1)+ -->
+<!--   geom_abline(intercept = invmodel_c$coefficients[1], slope = invmodel_c$coefficients[3]+24*invmodel_c$coefficients[4], colour = "grey40", size = 1)+ -->
+<!--   geom_abline(intercept = invmodel_c$coefficients[1], slope = invmodel_c$coefficients[3]-8*invmodel_c$coefficients[4], colour = "grey70", size = 1)+ -->
+<!--   geom_abline(intercept = invmodel_c$coefficients[1], slope = invmodel_c$coefficients[3]-16*invmodel_c$coefficients[4], colour = "grey80", size = 1)+ -->
+<!--   geom_abline(intercept = invmodel_c$coefficients[1], slope = invmodel_c$coefficients[3]-24*invmodel_c$coefficients[4], colour = "grey90", size = 1) -->
+<!-- grid.arrange(werkplot3, genderplot3, ncol=2) -->
+<!-- ``` -->
+<!-- ## Multiple regressie ZONDER interactie -->
+<!-- ```{r, echo = FALSE, message=FALSE} -->
+<!-- library(plotly) -->
+<!-- library(reshape2) -->
+<!-- library(scales) -->
+<!-- require(gridExtra) -->
+<!-- set.seed(32) -->
+<!-- x1 <- rnorm(100) -->
+<!-- x1 <- rescale(x1, to = c(0,40)) -->
+<!-- x2 <- rnorm(100) -->
+<!-- x2 <- round(rescale(x2, to = c(1,7))) -->
+<!-- y <- 20 - .25*x1 + 4*x2 + rnorm(100)  -->
+<!-- invdat <- data.frame(Werkuren=x1, Genderrole=x2, Involvement = y) -->
+<!-- rm(x1, x2, y) -->
+<!-- invmodel <- lm(Involvement ~ Werkuren + Genderrole, invdat) -->
+<!-- graph_reso <- .5 -->
+<!-- #Setup Axis -->
+<!-- axis_x <- seq(min(invdat$Werkuren), max(invdat$Werkuren), by = graph_reso) -->
+<!-- axis_y <- seq(min(invdat$Genderrole), max(invdat$Genderrole), by = graph_reso) -->
+<!-- #Sample points -->
+<!-- inv_lm_surface <- expand.grid(Werkuren = axis_x, Genderrole = axis_y, KEEP.OUT.ATTRS = F) -->
+<!-- inv_lm_surface$Involvement <- predict.lm(invmodel, newdata = inv_lm_surface) -->
+<!-- inv_lm_surface <- acast(inv_lm_surface, Genderrole ~ Werkuren, value.var = "Involvement") #y ~ x -->
+<!-- invplot <- plot_ly() %>% -->
+<!--   add_surface(x = axis_x,  -->
+<!--                   y = axis_y,  -->
+<!--                   z = inv_lm_surface,  -->
+<!--                   type = "surface") %>%#,  -->
+<!--                   #opacity = 1, -->
+<!--                   #colors = c('#d1d1d1','#000000')) %>% -->
+<!--   add_trace(x = invdat$Werkuren,  -->
+<!--             y = invdat$Genderrole, -->
+<!--             z = invdat$Involvement,  -->
+<!--             type = "scatter3d",  -->
+<!--             mode = "markers", -->
+<!--             marker = list(color = "red"), -->
+<!--             #color = coh$dance, -->
+<!--             #colors = c("gray70", '#6d98f3'), -->
+<!--             opacity = 1) %>% -->
+<!--   layout(title = "Multiple regression demo", -->
+<!--          scene = list(xaxis = list(title = 'Werkuren', range = c(0,40)),# ticktype = "array", tickvals = ticks), -->
+<!--                       yaxis = list(title = 'Gender role', range = c(1,7)),# ticktype = "array", tickvals = ticks), -->
+<!--                       zaxis = list(title = 'Involvement', range = c(0,50)),# ticktype = "array", tickvals = ticks), -->
+<!--                       camera = list(eye = list(x = 2, y = -2, z = 1.25), zoom = 5), -->
+<!--                       showlegend = FALSE)) -->
+<!-- invplot -->
+<!-- ``` -->
+<!-- ## Multiple regressie MET interactie -->
+<!-- ```{r, echo = FALSE, message=FALSE} -->
+<!-- set.seed(32) -->
+<!-- x1 <- rnorm(100) -->
+<!-- x1 <- rescale(x1, to = c(0,40)) -->
+<!-- x2 <- rnorm(100) -->
+<!-- x2 <- round(rescale(x2, to = c(1,7))) -->
+<!-- y <- 2 + .10*x1 + -1*x2 + 2*x1*x2 + rnorm(100)  -->
+<!-- y <- rescale(y, to = c(1,7)) -->
+<!-- invdat <- data.frame(Involvement=x1, Warmth=x2, Adjustment = y) -->
+<!-- rm(x1, x2, y) -->
+<!-- invdat[,c(1,2)]<-lapply(invdat[,c(1,2)], function(x){ -->
+<!--   c(scale(x, scale = FALSE))}) -->
+<!-- invmodel <- lm(Adjustment ~ Involvement * Warmth, invdat) -->
+<!-- graph_reso <- .5 -->
+<!-- #Setup Axis -->
+<!-- axis_x <- c(seq(min(invdat$Involvement), max(invdat$Involvement), by = graph_reso)) -->
+<!-- axis_y <- c(seq(min(invdat$Warmth), max(invdat$Warmth), by = graph_reso)) -->
+<!-- #Sample points -->
+<!-- inv_lm_surface <- expand.grid(Involvement = axis_x, Warmth = axis_y, KEEP.OUT.ATTRS = F) -->
+<!-- inv_lm_surface$Adjustment <- predict.lm(invmodel, newdata = inv_lm_surface) -->
+<!-- inv_lm_surface <- acast(inv_lm_surface, Warmth ~ Involvement, value.var = "Adjustment") #y ~ x -->
+<!-- invplot <- plot_ly() %>% -->
+<!--   add_surface(x = axis_x,  -->
+<!--                   y = axis_y,  -->
+<!--                   z = inv_lm_surface,  -->
+<!--                   type = "surface") %>%#,  -->
+<!--                   #opacity = 1, -->
+<!--                   #colors = c('#d1d1d1','#000000')) %>% -->
+<!--   add_trace(x = invdat$Involvement,  -->
+<!--             y = invdat$Warmth, -->
+<!--             z = invdat$Adjustment,  -->
+<!--             type = "scatter3d",  -->
+<!--             mode = "markers", -->
+<!--             marker = list(color = "red"), -->
+<!--             #color = coh$dance, -->
+<!--             #colors = c("gray70", '#6d98f3'), -->
+<!--             opacity = 1) %>% -->
+<!--   layout(title = "Multiple regression demo", -->
+<!--          scene = list(xaxis = list(title = 'Involvement', range = c(-25,25)),# ticktype = "array", tickvals = ticks), -->
+<!--                       yaxis = list(title = 'Warmth', range = c(-4,4)),# ticktype = "array", tickvals = ticks), -->
+<!--                       zaxis = list(title = 'Adjustment', range = c(0,7)),# ticktype = "array", tickvals = ticks), -->
+<!--                       camera = list(eye = list(x = 2, y = -2, z = 1.25), zoom = 5), -->
+<!--                       showlegend = FALSE)) -->
+<!-- invplot -->
+<!-- ``` -->
+<!-- ## Centreren -->
+<!-- Omdat nu het effect van X1 afhangt van de waarde van X2, en andersom, is **centreren essentieel** -->
+<!-- * Anders oninterpreteerbare coefficienten -->
+<!-- * Ook verhoogt het (kunstmatig) de multicolineariteit -->
+<!-- Als je centreert is de interpretatie: -->
+<!-- * a: Gemiddelde waarde van Y voor mensen die gemiddeld scoren op alle predictoren -->
+<!-- * b1: hellingsgetal van predictor 1, voor mensen die gemiddeld scoren op predictor 2 -->
+<!-- * b2: hellingsgetal van predictor 2, voor mensen die gemiddeld scoren op predictor 1 -->
+<!-- ## Centreren -->
+<!-- Reviews van een artikel waar ik bij betrokken ben: -->
+<!-- > **Reply to reviewer comments by reviewer 1**   -->
+<!--   I am still very concerned about multicollinearity. The threshold of VIF = 10 is too big, 3 is more proper. I recommend the authors to follow the method (Zuur et al., 2010). -->
+<!-- > *We understand that the reviewer is still concerned about multicollinearity in our -->
+<!-- previous analysis; we have made further efforts to address this concern. Although the original manuscript showed some VIFs >3 and >10, this is because we used only uncentered predictors in the model, including for the interaction term. This leads to artificial multicollinearity between the interaction term and its constituent terms. After centering, all VIFs are <2.5* -->
 <div class="footer footer-default">
 
 </div>
@@ -594,19 +698,19 @@ F = \frac{SSR/df1_u}{SSE/df2_u} = \frac{(SSR_u - SSR_c) / (df1_u -df1_c)}{SSE_u 
   </div>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
-  <script src="lecture10_files/libs/revealjs/dist/reveal.js"></script>
+  <script src="lecture11_files/libs/revealjs/dist/reveal.js"></script>
   <!-- reveal.js plugins -->
-  <script src="lecture10_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
-  <script src="lecture10_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
-  <script src="lecture10_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
-  <script src="lecture10_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="lecture10_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  <script src="lecture11_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="lecture11_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="lecture11_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="lecture11_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="lecture11_files/libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
-  <script src="lecture10_files/libs/revealjs/plugin/notes/notes.js"></script>
-  <script src="lecture10_files/libs/revealjs/plugin/search/search.js"></script>
-  <script src="lecture10_files/libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="lecture10_files/libs/revealjs/plugin/math/math.js"></script>
+  <script src="lecture11_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="lecture11_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="lecture11_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="lecture11_files/libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>

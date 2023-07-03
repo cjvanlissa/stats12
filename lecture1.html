@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="lecture10_files/libs/clipboard/clipboard.min.js"></script>
-<script src="lecture10_files/libs/quarto-html/tabby.min.js"></script>
-<script src="lecture10_files/libs/quarto-html/popper.min.js"></script>
-<script src="lecture10_files/libs/quarto-html/tippy.umd.min.js"></script>
-<link href="lecture10_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="lecture10_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="lecture10_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
-<link href="lecture10_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<script src="lecture1_files/libs/clipboard/clipboard.min.js"></script>
+<script src="lecture1_files/libs/quarto-html/tabby.min.js"></script>
+<script src="lecture1_files/libs/quarto-html/popper.min.js"></script>
+<script src="lecture1_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="lecture1_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="lecture1_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="lecture1_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="lecture1_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.3.427">
 
   <meta name="author" content="Caspar J. van Lissa">
-  <meta name="dcterms.date" content="2023-07-02">
-  <title>Lecture 10 - GLM VI Nested models</title>
+  <meta name="dcterms.date" content="2023-07-03">
+  <title>Lecture 1 - Introduction to Statistics</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="lecture10_files/libs/revealjs/dist/reset.css">
-  <link rel="stylesheet" href="lecture10_files/libs/revealjs/dist/reveal.css">
+  <link rel="stylesheet" href="lecture1_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="lecture1_files/libs/revealjs/dist/reveal.css">
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -31,11 +31,11 @@
       vertical-align: middle;
     }
   </style>
-  <link rel="stylesheet" href="lecture10_files/libs/revealjs/dist/theme/quarto.css">
-  <link href="lecture10_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
-  <link href="lecture10_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
-  <link href="lecture10_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-  <link href="lecture10_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <link rel="stylesheet" href="lecture1_files/libs/revealjs/dist/theme/quarto.css">
+  <link href="lecture1_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="lecture1_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="lecture1_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="lecture1_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
 
   .callout {
@@ -326,7 +326,7 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Lecture 10 - GLM VI Nested models</h1>
+  <h1 class="title">Lecture 1 - Introduction to Statistics</h1>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -336,257 +336,679 @@ Caspar J. van Lissa
 </div>
 </div>
 
-  <p class="date">2023-07-02</p>
+  <p class="date">2023-07-03</p>
+</section>
+<section class="slide level2">
+
+<!-- ## Today -->
+<!--   * Lecture 1: Introduction -->
+<!--     * Welcome -->
+<!--     * Research Methodology and Data Analysis -->
+<!--     * Samples versus Populations -->
+<!--     * Measurement and Measurement Levels -->
+<!--     * Descriptive Statistics and Graphs -->
+<!--   * Literature covered -->
+<!--     * Chapter 2: sections 2\.1\-2\.4\, 2\.6\-2\.8\, 2\.11\.1\, 2\.12 and Appendix 2A -->
+<!--     * Chapter 4: sections 4\.1\-4\.5\, 4\.9\, 4\.12\-4\.13 -->
+<!--     * Chapter 7: section 7\.1 -->
+<!-- ## Welcome everyone -->
+<!-- ## COURSE OVERVIEW -->
+<!-- * What can you expect for this course? -->
+<!--   * 14 lectures -->
+<!--     * 10 common lectures\, 4 major specific lectures -->
+<!--   * 11 lab sessions -->
+<!-- * What will the examination look like? -->
+<!--   * Multiple choice exam \(1\-10\) -->
+<!--   * SPSS test \(Pass/ Fail\) -->
+<!-- * What more do we offer you? -->
+<!--   * Short lecture quizzes -->
+<!--   * Midterm quiz -->
+<!--   * Practice exams online -->
+<!--   * Practice workbook online -->
+<!-- ![](images/Lecture 10.wmf) -->
+<!-- Major\-specific part -->
+<!-- ![](images/Lecture 11.wmf) -->
+<!-- ![](images/Lecture 12.wmf) -->
+<!-- * What do I expect from you? -->
+<!--   * Active participation during lectures and lab sessions -->
+<!--   * Read the syllabus before contacting me with questions -->
+<!--   * Be on time -->
+<!-- * Preparation -->
+<!--   * Lecture: Read the literature -->
+<!--   * Lab session: https://bps\.uvt\.nl \(if you want\) -->
+<!-- ![](images/Lecture 13.png) -->
 </section>
 <section>
-<section id="nested-models" class="title-slide slide level1 center">
-<h1>Nested models</h1>
+<section id="introduction" class="title-slide slide level1 center">
+<h1>Introduction</h1>
 
 </section>
-<section id="definition" class="slide level2">
-<h2>Definition</h2>
-<blockquote>
-<p><strong>Nested models</strong> occur whenever you can obtain a simpler model by constraining some parameters of a more complex model to 0.</p>
-</blockquote>
-<p>Models are <em>nested</em> if they are identical, except that some parameters are constrained to 0</p>
+<section id="why-statistics" class="slide level2">
+<h2>Why statistics?</h2>
+<p>You grew up in the “digital age”. There is data about your entire life…</p>
+<p><a href="https://www.google.com/maps/timeline">Google Timeline</a></p>
+</section>
+<section id="and-everybody-wants-your-data" class="slide level2">
+<h2>And everybody wants your data</h2>
+
+<img data-src="images/Everybodywantsyourdata.png" style="width:60.0%" class="r-stretch quarto-figure-center"></section>
+<section id="what-can-you-do-with-data" class="slide level2">
+<h2>What can you do with data?</h2>
 <ul>
-<li>All predictors in Model 1 are also in Model 2.</li>
-<li>Model 1 is the ‘smaller’ or ‘constrained’ model, Model 2 is the ‘larger’ or unconstrained model</li>
-<li>Model 2 always has better fit Model 1</li>
+<li>Data literacy is increasingly important in many jobs</li>
+<li>You can get insights from data to
+<ul>
+<li>Better understand social life</li>
+<li>Predict sales and optimize marketing</li>
+<li>Explore what activity in the brain is associated with observed behavior</li>
+</ul></li>
+<li>Data analysis is one of the most marketable concrete skills we teach at university</li>
 </ul>
 </section>
-<section id="example-nested-model" class="slide level2">
-<h2>Example nested model</h2>
-<p>You already saw this in our first class on bivariate regression:</p>
+<section id="difference-between-methods-and-statistics" class="slide level2">
+<h2>Difference between Methods and Statistics</h2>
+<p>Methods is about the procedures of research:</p>
 <ul>
-<li><ol type="1">
-<li>Null model: <span class="math inline">\(\hat{Y}_i = a\)</span>, which is the same as <span class="math inline">\(\hat{Y}_i = a + 0 * X_1\)</span> (so <span class="math inline">\(b_1 = 0\)</span>)</li>
-</ol></li>
-<li><ol start="2" type="1">
-<li>Regression model: <span class="math inline">\(\hat{Y}_i = a + b_1 * X_1\)</span></li>
-</ol></li>
-</ul>
-<p>Model 1 (null model) is “nested” in model 2 (regression model)</p>
-<ul>
-<li>Model 1 is “constrained”: relative to model 2, parameter <span class="math inline">\(b_1\)</span> is fixed to 0</li>
-<li>Model 2 is “unconstrained”: relative to model 1, all parameters are free</li>
+<li>What actions do we take to collect good data</li>
+<li>Which participants to include</li>
+<li>How to measure what we want to measure</li>
+<li>How to design studies that are suitable for answering our research questions</li>
 </ul>
 </section>
-<section id="example-nested-model-1" class="slide level2">
-<h2>Example nested model</h2>
-<p>We can apply the same principle to multiple regression:</p>
+<section id="difference-between-methods-and-statistics-1" class="slide level2">
+<h2>Difference between Methods and Statistics</h2>
+<p>Statistics is about analyzing data</p>
 <ul>
-<li><ol type="1">
-<li><span class="math inline">\(\hat{Y}_i = a + b_1 * X_1\)</span></li>
-</ol></li>
-<li><ol start="2" type="1">
-<li><span class="math inline">\(\hat{Y}_i = a + b_1 * X_1 + b_2 * X_2\)</span></li>
-</ol></li>
+<li><strong>Descriptive statistics</strong>: describing/summarizing data</li>
+<li><strong>Inferential statistics</strong>: Making best guesses about the population from a smaller sample</li>
+<li><strong>Statistical modeling</strong>: Representing a theory mathematically</li>
+<li>Predicting important outcomes (sales, well-being, neurological disorders)</li>
+<li>Exploring data to find interesting patterns</li>
+<li>Performing tests to answer theoretical research questions</li>
 </ul>
-<p>Model 1 (one predictor) is “nested” in model 2 (multiple regression)</p>
-<ul>
-<li>Model 1 is “constrained”: relative to model 2, slope <span class="math inline">\(b_2\)</span> is fixed to 0</li>
-<li>Model 2 is “unconstrained”: relative to model 1, all parameters are free</li>
-</ul>
-</section>
-<section id="example" class="slide level2 smaller flexbox vcenter">
-<h2>Example</h2>
-<p><strong>Only work hours, <span class="math inline">\(R^2 = 0.07\)</span>:</strong></p>
-<table>
-<thead>
-<tr class="header">
-<th>Variabele</th>
-<th>B</th>
-<th>t</th>
-<th>p</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>(Intercept)</td>
-<td>16.90</td>
-<td>6.26</td>
-<td>0.00</td>
-</tr>
-<tr class="even">
-<td>Work_hours</td>
-<td>0.29</td>
-<td>2.05</td>
-<td>0.04</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Only gender roles, <span class="math inline">\(R^2 = 0.13\)</span>:</strong></p>
-<table>
-<thead>
-<tr class="header">
-<th>Variabele</th>
-<th>B</th>
-<th>t</th>
-<th>p</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>(Intercept)</td>
-<td>7.57</td>
-<td>1.50</td>
-<td>0.14</td>
-</tr>
-<tr class="even">
-<td>Gender_roles</td>
-<td>3.14</td>
-<td>2.90</td>
-<td>0.01</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Multiple regression, <span class="math inline">\(R^2 = 0.15\)</span>:</strong></p>
-<table>
-<thead>
-<tr class="header">
-<th>Variabele</th>
-<th>B</th>
-<th>t</th>
-<th>p</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>(Intercept)</td>
-<td>6.81</td>
-<td>1.34</td>
-<td>0.18</td>
-</tr>
-<tr class="even">
-<td>Work_hours</td>
-<td>2.66</td>
-<td>2.32</td>
-<td>0.02</td>
-</tr>
-<tr class="odd">
-<td>Gender_roles</td>
-<td>0.17</td>
-<td>1.19</td>
-<td>0.24</td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="nested-models-1" class="slide level2">
-<h2>Nested models</h2>
-<p>We might ask the question: Does adding gender roles to a model with only work hours significantly improve our ability to predict involvement?</p>
-<ul>
-<li>We can determine this with a nested model test</li>
-</ul>
-</section>
-<section id="difference-in-r2" class="slide level2">
-<h2>Difference in <span class="math inline">\(R^2\)</span></h2>
-<p><span class="math inline">\(R^2\)</span> always increases when we add predictors:</p>
-<table>
-<thead>
-<tr class="header">
-<th>Model</th>
-<th><span class="math inline">\(R^2\)</span></th>
-<th>df1</th>
-<th>df2</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>C: Hours</td>
-<td>0.07</td>
-<td>1</td>
-<td>58</td>
-</tr>
-<tr class="even">
-<td>U: Hours and Gender roles</td>
-<td>0.15</td>
-<td>2</td>
-<td>57</td>
-</tr>
-</tbody>
-</table>
-<p><span class="math inline">\(\Delta R^2 = R^2_u - R^2_c = 0.15 - 0.07 = 0.08\)</span></p>
-</section>
-<section id="section" class="slide level2" data-background-iframe="https://cjvanlissa.shinyapps.io/Polynomials/">
-<h2></h2>
 </section></section>
 <section>
-<section id="incremental-f-test" class="title-slide slide level1 center">
-<h1>Incremental F-test</h1>
+<section id="dictionary-of-basic-concepts" class="title-slide slide level1 center">
+<h1>Dictionary of basic concepts</h1>
 
 </section>
-<section id="incremental-f-test-1" class="slide level2">
-<h2>Incremental F-test</h2>
-<p><span class="math inline">\(\Delta R^2 = R^2_c - R^2_u = 0.15 - 0.07 = 0.08\)</span></p>
-<p><span class="math inline">\(F = \frac{(SSR_u - SSR_c) / (df1_u-df1_c)}{SSE_u / df2_u}\)</span></p>
-<p>We use an F-test to determine whether the increase in <span class="math inline">\(R^2\)</span> is significant:</p>
+<section id="tabular-data" class="slide level2">
+<h2>Tabular data</h2>
+<p>Most data in the social sciences is tabular, where each row represents an individual <span class="math inline">\(i\)</span> observation, and each column <span class="math inline">\(j\)</span> represents that individual’s data on several variables:</p>
+
+<img data-src="images/assumptions19.png" style="width:100.0%" class="r-stretch quarto-figure-center"></section>
+<section id="about-observations-population" class="slide level2">
+<h2>About observations: Population</h2>
+<p><strong>Population:</strong></p>
 <ul>
-<li>Increase in R-square: <span class="math inline">\(\Delta R^2\)</span></li>
-<li><span class="math inline">\(SSR_u - SSR_c\)</span>: increase in variance explained by the model</li>
-<li><span class="math inline">\(df1_u-df1_c\)</span>: increase in the number of parameters</li>
-<li><span class="math inline">\(df2_u\)</span> degrees of freedom for the residuals for the unconstrained model</li>
-<li>Sig. F Change = p value for the F-test for R-square change!</li>
-</ul>
-</section>
-<section id="compare-to-basic-f-test" class="slide level2 smaller">
-<h2>Compare to basic F-test</h2>
-<p>Remember the F-test for bivariate regression:</p>
-<p><span class="math display">\[
-F = \frac{SSR/(p-1)}{SSE/(n-p)}
-\]</span></p>
-<p>Note that this is the same as an incremental F-test comparing the null model with the regression model:</p>
-<p><span class="math display">\[
-F = \frac{SSR/df1_u}{SSE/df2_u} = \frac{(SSR_u - SSR_c) / (df1_u -df1_c)}{SSE_u / df2_u} = \frac{(SSR_u - 0) / (df1_u - 0)}{SSE_u / df2_u}
-\]</span></p>
-</section>
-<section id="putting-it-together" class="slide level2">
-<h2>Putting it together</h2>
-<p>So, if you have two nested models, you could think of three comparisons:</p>
-<ol type="1">
-<li><span class="math inline">\(\hat{Y}_i = a\)</span> (the null model)</li>
-<li><span class="math inline">\(\hat{Y}_i = a + b_1 X_1\)</span> (bivariate regression)</li>
-<li><span class="math inline">\(\hat{Y}_i = a + b_1 X_1 + b_2X_2\)</span> (multiple regression)</li>
-</ol>
-<p>The F-test for the significance of the <span class="math inline">\(R^2\)</span> of model 2 is essentially an incremental F-test for <span class="math inline">\(\Delta R^2\)</span> between model 1 vs model 2</p>
-<p>Then there’s also an incremental F-test for <span class="math inline">\(\Delta R^2\)</span> between model 2 vs model 3</p>
-</section>
-<section id="reporting" class="slide level2">
-<h2>Reporting</h2>
-<p>The model with work hours and gender role attitudes as predictors explained significantly more variance in the data than the model with only work hours, <span class="math inline">\(\Delta R^2 = 0.08, F(1, 57 = 5.38, p &lt; .001)\)</span>.</p>
-</section>
-<section id="hierarchical-regression" class="slide level2">
-<h2>Hierarchical regression</h2>
+<li>The complete set of objects of interest
 <ul>
-<li>Add predictors in blocks
-<ul>
-<li>If you represent a categorical predictor as dummies, all dummies must be included in the same block! Together, they represent one variable.</li>
+<li>E.g., all people in NL, all students in this class</li>
 </ul></li>
-<li>Each block is added to preceding ones, so these models are nested</li>
-<li>Conduct incremental F-tests to determine whether each additional block significantly increases <span class="math inline">\(R^2\)</span></li>
-</ul>
-</section>
-<section id="why-hierarchical-regression" class="slide level2 smaller">
-<h2>Why hierarchical regression?</h2>
-<p>To determine whether theoretically relevant factors explain significant variance <em>above and beyond</em> demographic characteristics</p>
+<li>Number of individuals in the population: N
 <ul>
-<li>E.g.: you want to predict college achievement based on high school GPA while controlling for demographic factors
-<ul>
-<li>Block 1: Demographic factors (age, sex, neighborhood quality, SES)</li>
-<li>Block 2: GPA</li>
+<li>N = 17.53 million, N = 75</li>
 </ul></li>
 </ul>
-<p>To determine whether a previously neglected factor explains additional variance</p>
+</section>
+<section id="about-observations-sample" class="slide level2">
+<h2>About observations: Sample</h2>
+<p><strong>Sample:</strong></p>
 <ul>
-<li>E.g.: you want to show that your new scale of morality explains more variance in behavioral outcomes than an existing scale of morality
+<li>Observed part of the population</li>
+<li>Number of observations: <em>n</em></li>
+</ul>
+</section>
+<section id="about-variables-construct" class="slide level2">
+<h2>About variables: Construct</h2>
+<p><strong>Construct:</strong></p>
 <ul>
-<li>Block 1: Add all subscales of the old morality scale</li>
-<li>Block 2: Add all subscales of the new morality scale</li>
+<li>Abstract feature of interest for the population
+<ul>
+<li>E.g., Short Term Memory, intelligence, perseverance, education</li>
 </ul></li>
 </ul>
-<p>To test the overall effect of adding dummies for a <strong>categorical predictor</strong> with &gt;2 categories + You need one F-test for all dummies, together; not individual t-tests</p>
-<div class="footer footer-default">
+<p><strong>Operational definition:</strong></p>
+<ul>
+<li>Concrete measurable representation of the construct
+<ul>
+<li>E.g., Number of words recalled, the Wechsler Adult Intelligence Scale (WAIS), ability to withstand a tasty treat, highest degree obtained</li>
+</ul></li>
+</ul>
+</section>
+<section id="about-variables-variable" class="slide level2">
+<h2>About variables: Variable</h2>
+<p><strong>Variable:</strong></p>
+<ul>
+<li>(Mathematical) placeholder for specific values</li>
+<li>E.g., <code>WAIS</code> is a variable representing scores on the WAIS</li>
+<li>You can refer to a variable without (yet) knowing its specific values</li>
+</ul>
+<p><em>Data:</em></p>
+<ul>
+<li>Specific values of a variable</li>
+<li>Example of data: Jen’s score on the variable <code>WAIS</code> is 138</li>
+</ul>
+</section></section>
+<section>
+<section id="role-of-data-in-scientific-research" class="title-slide slide level1 center">
+<h1>Role of data in scientific research</h1>
+
+</section>
+<section id="empirical-cycle" class="slide level2">
+<h2>Empirical cycle</h2>
+<p>De Groot (1961)</p>
+
+<img data-src="images/empirical%20cycle.png" style="width:100.0%" class="r-stretch quarto-figure-center"></section>
+<section id="relationship-between-theory-and-empiricism" class="slide level2">
+<h2>Relationship between theory and empiricism</h2>
+
+<img data-src="lecture1_files/figure-revealjs/unnamed-chunk-6-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"></section>
+<section id="relationship-between-theory-and-empiricism-1" class="slide level2">
+<h2>Relationship between theory and empiricism</h2>
+<p>Theory:</p>
+<p>Construct A influences construct B</p>
+<ul>
+<li>E.g., being exposed to war increases depression</li>
+</ul>
+<p>Empirical test:</p>
+<p>Variable A predicts variable B</p>
+<ul>
+<li>E.g., being deployed (yes/no) predicts scores on the SCL-90 depression questionnaire</li>
+</ul>
+</section>
+<section id="sampling-theory" class="slide level2">
+<h2>Sampling theory</h2>
+
+<img data-src="images/sample_population.png" style="width:90.0%" class="r-stretch quarto-figure-center"></section>
+<section id="samples-why" class="slide level2">
+<h2>Samples: why?</h2>
+<ul>
+<li>We want to make a claim about the population</li>
+<li>It is not possible to access the entire population</li>
+<li>We observe a part of the population: the <em>sample</em></li>
+<li>Sample statistics are also our best guess about population parameters
+<ul>
+<li>Of course, sample statistics are not <em>equal to</em> population parameters</li>
+<li>You will learn ways to express uncertainty about your best guess</li>
+</ul></li>
+</ul>
+</section>
+<section id="samples-why-1" class="slide level2">
+<h2>Samples: why?</h2>
+<ul>
+<li>If the sample is <em>representative</em> of the population, your best guess will generalize better to the entire population and to new samples</li>
+<li>The best way to get a representative sample is <em>random sampling</em><br>
+</li>
+<li>Random sample:
+<ul>
+<li>Every population individual has the same probability of being included</li>
+</ul></li>
+</ul>
+</section>
+<section id="non-random-samples" class="slide level2">
+<h2>Non-random samples</h2>
+<ul>
+<li>Probability of inclusion unknown to the researcher</li>
+<li>Examples: convenience sampling, snowball sampling, cluster sampling</li>
+<li>Sampling bias
+<ul>
+<li>E.g., Individuals that are easy to access ave higher probability of being included</li>
+</ul></li>
+</ul>
+</section></section>
+<section>
+<section id="measurement-level" class="title-slide slide level1 center">
+<h1>Measurement level</h1>
+
+</section>
+<section id="noir-measurement-levels" class="slide level2">
+<h2>NOIR measurement levels</h2>
+<p>Measurement level: What kind of information is contained in a variable?</p>
+<p>Mnemonic: <code>n o i r</code> = black in French</p>
+<p>Subsequent levels carry incremental information</p>
+</section>
+<section id="noir-measurement-levels-1" class="slide level2">
+<h2>NOIR measurement levels</h2>
+<p><small></small></p><small>
+<ul>
+<li>Nominal
+<ul>
+<li>Categories; values differ in name only (e.g., majors)</li>
+</ul></li>
+<li>Ordinal
+<ul>
+<li>Categories; additionally, values have meaningful order (e.g., SES groups, bachelor year 1, 2, 3)</li>
+</ul></li>
+<li>Interval
+<ul>
+<li>Numeric; additionally, distance between values is meaningful</li>
+<li>A step from 1 to 2 is equally large as a step from 2 to 3, or 5 to 6</li>
+</ul></li>
+<li>Ratio
+<ul>
+<li>Numeric; additionally has a meaningful zero-point</li>
+<li>Because of this, ratios between two values are also meaningful</li>
+</ul></li>
+</ul>
+</small><p><small></small></p>
+</section>
+<section id="interval-v-ratio" class="slide level2">
+<h2>Interval v Ratio</h2>
+<ul>
+<li>Celsius and Fahrenheit are interval scales</li>
+<li>Kelvin is a ratio scale</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/Thermo1.png" style="width:100.0%" height="400"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="interval-v-ratio-1" class="slide level2">
+<h2>Interval v Ratio</h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/Thermo2.png" style="width:100.0%" height="400"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="measurement-level-matters" class="slide level2">
+<h2>Measurement level matters</h2>
+<ul>
+<li>Measurement level is a property of the construct and of the operational definition
+<ul>
+<li>Ideally, the measurement level of the construct and its variable are the same</li>
+<li>E.g., sex assigned at birth: nominal</li>
+<li>E.g., gender identification: ordinal or continuous</li>
+</ul></li>
+<li>Measurement level determines what statistics and analyses you can use</li>
+</ul>
+</section>
+<section id="other-common-distinctions" class="slide level2">
+<h2>Other common distinctions</h2>
+<ul>
+<li>Categorical variables: Nominal, Ordinal</li>
+<li>Continuous variables: Interval, Ratio</li>
+<li>Qualitative variable: Difference in kind, Nominal</li>
+<li>Quantitative variables: Differences in degree; ordinal, interval, ratio</li>
+</ul>
+<p>Edge cases:</p>
+<ul>
+<li>Number of children (discrete ratio)</li>
+<li>Political orientation from liberal to conservative (ordinal, but which is higher/lower?)</li>
+</ul>
+</section></section>
+<section>
+<section id="descriptive-statistics" class="title-slide slide level1 center">
+<h1>Descriptive statistics</h1>
+
+</section>
+<section id="descriptive-statistics-1" class="slide level2 smaller">
+<h2>Descriptive Statistics</h2>
+<ul>
+<li>Descriptive statistics summarize data across a sample</li>
+<li>You nearly always examine them to get a sense of your dataset
+<ul>
+<li>E.g., which major is most common among LAS students?</li>
+<li>How old are my students, on average?</li>
+<li>How much do the ages of my students vary?</li>
+<li>What’s the gender distribution?</li>
+</ul></li>
+<li>Descriptive statistics <em>may</em> also be relevant to answer research questions
+<ul>
+<li>E.g.: When evaluating exam questions: Is the proportion of correct answers on this MC question greater than chance?</li>
+</ul></li>
+</ul>
+</section>
+<section id="distributions" class="slide level2">
+<h2>Distributions</h2>
+<table>
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Type of variable</th>
+<th style="text-align: center;">Central tendency</th>
+<th style="text-align: center;">Graph</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">Nominal</td>
+<td style="text-align: center;">Frequency distribution</td>
+<td style="text-align: center;">Bar chart</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Ordinal</td>
+<td style="text-align: center;">(Cumulative) frequency distribution</td>
+<td style="text-align: center;">Bar chart</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Interval/ratio</td>
+<td style="text-align: center;">(Normal) probability distribution</td>
+<td style="text-align: center;">Histogram, density plot</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="a-nominal-variable" class="slide level2">
+<h2>A nominal variable</h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<table data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Major</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Frequency</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Percent</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">BE</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">0.07</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CN</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: right;">0.33</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">SS</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">0.60</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</section>
+<section id="bar-chart" class="slide level2">
+<h2>Bar chart</h2>
+
+<img data-src="lecture1_files/figure-revealjs/unnamed-chunk-11-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"></section>
+<section id="an-ordinal-variable" class="slide level2">
+<h2>An ordinal variable</h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<table data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">SES</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Frequency</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Percent</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Cumulative</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Low</td>
+<td style="text-align: right;">32</td>
+<td style="text-align: right;">0.43</td>
+<td style="text-align: right;">0.43</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Medium</td>
+<td style="text-align: right;">36</td>
+<td style="text-align: right;">0.48</td>
+<td style="text-align: right;">0.91</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">High</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">0.09</td>
+<td style="text-align: right;">1.00</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</section>
+<section id="bar-chart-1" class="slide level2">
+<h2>Bar chart</h2>
+
+<img data-src="lecture1_files/figure-revealjs/unnamed-chunk-13-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"></section>
+<section id="a-continuous-variable" class="slide level2">
+<h2>A continuous variable</h2>
+
+<img data-src="lecture1_files/figure-revealjs/unnamed-chunk-14-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"></section>
+<section id="measures-of-central-tendency" class="slide level2">
+<h2>Measures of central tendency</h2>
+<p>What is the average or most common response?</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Type of measure</th>
+<th style="text-align: center;">Type of variable</th>
+<th style="text-align: center;">Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">Mode</td>
+<td style="text-align: center;">Nominal/Ordinal</td>
+<td style="text-align: center;">Most common value</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Median</td>
+<td style="text-align: center;">Ordinal/Continuous</td>
+<td style="text-align: center;">Middle value/50th percentile</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Mean</td>
+<td style="text-align: center;">Continuous</td>
+<td style="text-align: center;">Average value</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="measures-of-dispersion" class="slide level2">
+<h2>Measures of dispersion</h2>
+<p>How much variability is there in responses?</p>
+<table>
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Type of measure</th>
+<th style="text-align: center;">Type of variable</th>
+<th style="text-align: center;">Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">Frequency table</td>
+<td style="text-align: center;">Nominal</td>
+<td style="text-align: center;">Count/percentage of responses</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Range</td>
+<td style="text-align: center;">Ordinal/continuous</td>
+<td style="text-align: center;">Minimum to maximum value</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Variance</td>
+<td style="text-align: center;">Continuous</td>
+<td style="text-align: center;">Mean squared distance of observations to the mean</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="median-and-mode-for-ordinal-variable" class="slide level2">
+<h2>Median and Mode for ordinal variable</h2>
+<p><strong>Median:</strong> middle value</p>
+<p>Example 1: ( <em>n</em> = unequal): 4, 5, 6, 7, 8, 9, 9 -&gt; median is 7</p>
+<p>Example 2: ( <em>n</em> = equal): 4, 5, 6, 8, 9, 9 -&gt; median 7 (mean of the two middle values)</p>
+<p><strong>Mode:</strong> Most frequent score; 9 in both examples</p>
+</section>
+<section id="mean-median-mode-for-continuous-variable" class="slide level2">
+<h2>Mean, median, mode for continuous variable</h2>
+
+<img data-src="images/Lecture%20111.png" class="r-stretch"><p>The average Australian is a millionaire</p>
+<p>But… most Australians are not!</p>
+<p><a href="https://www.volkskrant.nl/columns-opinie/australiers-zijn-gemiddeld-miljonair-maar-daar-hebben-de-meeste-australiers-helemaal-niks-aan~b8aa3fd3/">https://www.volkskrant.nl/columns-opinie/australiers-zijn-gemiddeld-miljonair-maar-daar-hebben-de-meeste-australiers-helemaal-niks-aan~b8aa3fd3/</a></p>
+</section>
+<section id="skewed-distributions" class="slide level2">
+<h2>Skewed Distributions</h2>
+
+<!-- __Q:__  Can you think of variables that typically have skewed distributions? -->
+<!-- ![](images/Lecture 113.png) -->
+<!-- ![](images/Lecture 114.png) -->
+<!-- ![](images/Lecture 115.png) -->
+<!-- ![](images/Lecture 116.jpg) -->
+<!-- ![](images/Lecture 117.png) -->
+<!-- ![](images/Lecture 118.png) -->
+<img data-src="images/Lecture%20112.png" class="r-stretch"></section>
+<section id="mean-variance" class="slide level2">
+<h2>Mean, variance</h2>
+
+<img data-src="lecture1_files/figure-revealjs/unnamed-chunk-15-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"></section></section>
+<section>
+<section id="bivariate-descriptives" class="title-slide slide level1 smaller center">
+<h1>Bivariate descriptives</h1>
+<p>Describing associations</p>
+<table>
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">&nbsp;</th>
+<th style="text-align: center;">Nominal</th>
+<th style="text-align: center;">Ordinal</th>
+<th style="text-align: center;">Interval/Ratio</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">Nominal</td>
+<td style="text-align: center;">Contingency Table</td>
+<td style="text-align: center;">Contingency Table</td>
+<td style="text-align: center;">Contingency table</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Ordinal</td>
+<td style="text-align: center;">&nbsp;</td>
+<td style="text-align: center;">Contingency Table<br>Spearman’s correlation</td>
+<td style="text-align: center;">Biserial Correlation</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Interval/Ratio</td>
+<td style="text-align: center;">&nbsp;</td>
+<td style="text-align: center;">&nbsp;</td>
+<td style="text-align: center;">Pearson Correlation Coefficient<br>Scatter plot</td>
+</tr>
+</tbody>
+</table>
+<!-- |   | Nominal | Ordinal | Interval/Ratio | -->
+<!-- | :-: | :-: | :-: | :-: | -->
+
+<!-- | Nominal | Contingency Table | Contingency Table | Contingency table | -->
+<!-- | Ordinal |   | Contingency Table<br />Spearman’s correlation | Biserial Correlation | -->
+<!-- | Interval/Ratio |   |   | Pearson Correlation Coefficient<br />Scatter plot | -->
+</section>
+<section id="contingency-table" class="slide level2">
+<h2>Contingency table</h2>
+
+<img data-src="images/Lecture%20120.png" class="r-stretch"><p>Is there an association between gender and education?</p>
+</section>
+<section id="correlation" class="slide level2">
+<h2>Correlation</h2>
+<blockquote>
+<p><strong>Correlation:</strong> A standardized measure of the strength of linear association between two continuous variables.</p>
+</blockquote>
+<ul>
+<li>Standardized: ranges from [-1, 1]</li>
+<li>Sample correlation: <span class="math inline">\(r\)</span></li>
+<li>Population correlation: <span class="math inline">\(\rho\)</span></li>
+<li>r = -1: Perfect negative association</li>
+<li>r = 0: No association</li>
+<li>r = 1: Perfect positive association</li>
+</ul>
+</section>
+<section id="correlations" class="slide level2">
+<h2>Correlations</h2>
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<p><img data-src="images/Lecture%20121.png"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<p><img data-src="images/Lecture%20122.png"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<p><img data-src="images/Lecture%20123.png"></p>
+</div>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<p><img data-src="images/Lecture%20124.png"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<p><img data-src="images/Lecture%20125.png"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="section" class="slide level2">
+<h2></h2>
+
+<img data-src="images/Lecture%20121.png" class="r-stretch"><ul>
+<li>Is there an association?</li>
+<li>What is the direction of the association?</li>
+<li>How strong is the association?</li>
+</ul>
+</section>
+<section id="weakno-association" class="slide level2">
+<h2>Weak/no association</h2>
+
+<img data-src="images/Lecture%20122.png" class="r-stretch"></section>
+<section id="strong-positive-association" class="slide level2">
+<h2>Strong positive association</h2>
+
+<img data-src="images/Lecture%20123.png" class="r-stretch"></section>
+<section id="moderate-negative-association" class="slide level2">
+<h2>Moderate negative association</h2>
+
+<img data-src="images/Lecture%20124.png" class="r-stretch"></section>
+<section id="non-linear-association" class="slide level2">
+<h2>Non-linear association</h2>
+<p>Outside of the scope of this course</p>
+
+<!-- # On causality -->
+<!-- ## Correlation vs causation -->
+<!-- * Statistics is *not* about proving causality! -->
+<!--   + "Correlation does not equal causation" -->
+<!-- * A statistical association between X and Y could be because -->
+<!--   + X causes Y -->
+<!--   + Or Y causes X -->
+<!--   + Or X and Y share common causes -->
+<!--   + Or pure coincidence -->
+<!-- The Book of Why: The New Science of Cause and Effect -->
+<img data-src="images/Lecture%20125.png" class="r-stretch"><div class="footer footer-default">
 
 </div>
 </section></section>
@@ -594,19 +1016,19 @@ F = \frac{SSR/df1_u}{SSE/df2_u} = \frac{(SSR_u - SSR_c) / (df1_u -df1_c)}{SSE_u 
   </div>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
-  <script src="lecture10_files/libs/revealjs/dist/reveal.js"></script>
+  <script src="lecture1_files/libs/revealjs/dist/reveal.js"></script>
   <!-- reveal.js plugins -->
-  <script src="lecture10_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
-  <script src="lecture10_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
-  <script src="lecture10_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
-  <script src="lecture10_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="lecture10_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  <script src="lecture1_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="lecture1_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="lecture1_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="lecture1_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="lecture1_files/libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
-  <script src="lecture10_files/libs/revealjs/plugin/notes/notes.js"></script>
-  <script src="lecture10_files/libs/revealjs/plugin/search/search.js"></script>
-  <script src="lecture10_files/libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="lecture10_files/libs/revealjs/plugin/math/math.js"></script>
+  <script src="lecture1_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="lecture1_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="lecture1_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="lecture1_files/libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>

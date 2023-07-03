@@ -475,46 +475,28 @@ Describing associations
 
 Is there an association between gender and education?
 
-## Scatterplot
+## Correlation
 
+> **Correlation:** A standardized measure of the strength of linear association between two continuous variables.
+
+* Standardized: ranges from [-1, 1]
+* Sample correlation: $r$
+* Population correlation: $\rho$
+* r = -1: Perfect negative association
+* r =  0: No association
+* r =  1: Perfect positive association
+
+## Correlations
+
+::: {layout-nrow=2}
 ![](images/Lecture 121.png)
-
-* Is there an association?
-* What is the direction of the association?
-* How strong is the association?
-
-## Weak/no association
 
 ![](images/Lecture 122.png)
 
-## Strong positive association
-
 ![](images/Lecture 123.png)
-
-## Moderate negative association
 
 ![](images/Lecture 124.png)
 
-## Non-linear association
-
-Outside of the scope of this course
-
 ![](images/Lecture 125.png)
-
-<!-- # On causality -->
-
-<!-- ## Correlation vs causation -->
-
-<!-- * Statistics is *not* about proving causality! -->
-<!--   + "Correlation does not equal causation" -->
-<!-- * A statistical association between X and Y could be because -->
-<!--   + X causes Y -->
-<!--   + Or Y causes X -->
-<!--   + Or X and Y share common causes -->
-<!--   + Or pure coincidence -->
-
-
-
-
-<!-- The Book of Why: The New Science of Cause and Effect -->
+:::
 

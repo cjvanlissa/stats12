@@ -1,0 +1,76 @@
+# GLM-VI: Nested models {#sec-glm6}
+
+```{r, include = FALSE}
+source("R/booktem_setup.R")
+source("R/my_setup.R")
+```
+
+Nested models refer to models that are identical, except for the fact that some parameters are constrained to zero in one of them, while all parameters are free in the other. The smaller or constrained model model is said to be "nested in" the larger or unconstrained model, meaning that all predictors in the smaller model are also present in the larger model. By definition, the unconstrained model always provides a better fit than the constrained model.
+
+Incremental F-tests are used to determine whether the increase in $R^2$ between two nested models is statistically significant. Recall that $R^2$ represents the proportion of variance in the dependent variable explained by the predictors in the model. The incremental F-test compares the variation in the dependent variable explained by an unconstrained model with the variation explained by a constrained model. The F-test assesses whether the increase in R-squared is greater than what would be expected by chance alone, indicating the significance of adding additional predictors to the model.
+
+Hierarchical regression refers to an approach where predictors are added to a regression model in blocks, allowing us to assess the additional variance explained by each block of predictors with an incremental F-test. Each block represents a set of predictors, and they are added to the model in a stepwise manner. This approach is useful when we want to determine the significance of adding a single categorical predictor which is represented by multiple dummy variables, or when we want to test whether adding some predictors (e.g., theoretically relevant variables) explain significant variance above and beyond other variables (e.g., demographic covariates). By conducting incremental F-tests at each step, we can assess the significance of adding each block of predictors and their contribution to the overall model.
+
+In summary, nested models allow us to compare models with different levels of complexity, incremental F-tests help us determine the significance of adding predictors to a model, and hierarchical regression enables the examination of additional variance explained by different blocks of predictors. These concepts are valuable tools in statistical analysis and can provide insights into the relationships between variables and the predictive power of a model.
+
+# Formative Test
+
+A formative test helps you assess your progress in the course, and helps you address any blind spots in your understanding of the material. If you get a question wrong, you will receive a hint on how to improve your understanding of the material.
+
+Complete the formative test ideally after you’ve seen the lecture, but before the lecture meeting in which we can discuss any topics that need more attention
+
+::: {.webex-check .webex-box}
+
+**Question 1**
+
+```{r, results='asis', echo = FALSE}
+mc("Suppose that I ask a random sample of 5 students how many pairs of shoes they have. The number of pairs are: 7, 6, 8, 6, and 8. What is the variance of these pairs of shoes?", 1, 4, 7, 2)
+```
+
+**Question 2**
+
+```{r, results='asis', echo = FALSE}
+mc("Six students work on a Statistics exam. They obtain the following grades: 8, 9, 5, 6, 7 and 8. The teacher calculates a certain statistic, which is equal to 7.5. Which statistic did the teacher calculate?", "Median","Mean", "Standard deviation", "Mode")
+```
+
+**Question 3**
+
+For which of the three scatterplots below is the correlation coefficient largest? `r mcq(c(answer = "A", "B", "C"))`
+
+::: {#fig-scatter layout-ncol=3}
+
+![A](images/lecture 73.png){width = 30%}
+
+![B](images/lecture 74.png){width = 30%}
+
+![C](images/lecture 76.png){width = 30%}
+
+Question 3 scatterplots
+:::
+
+```{r, results='asis', echo = FALSE}
+mc("Six students work on a Statistics exam. They obtain the following grades: 8, 9, 5, 6, 7 and 8. The teacher calculates a certain statistic, which is equal to 7.5. Which statistic did the teacher calculate?", "Median","Mean", "Standard deviation", "Mode")
+```
+:::
+
+`r hide("Show answers")`
+
+**Question 1**
+
+The variance is the sum of squared distances of observations to the mean, divided by the number of observations minus one. So calculate:
+
+$S_{X}^2= \frac{\sum_{i=1}^nX_i}{n} = \frac{(7 + 6 + 8 + 6 + 8)}{5} = 7$
+
+**Question 2**
+
+First rule out improbable answers; all grades are pretty close to each other, so it's impossible for the variance to be that high. We can see what the mode (most common value) is: it's 8. So we only choose between mean or median.
+
+Mean: calculate $\bar{X}= \frac{\sum_{i=1}^nX_i}{n} = \frac{8 + 9 + 5 + 6 + 7 + 8}{6} = 7.17$
+
+Median: order the numbers, note that there is an odd number, take the average of the two middle numbers. 5, 6, 7, 8, 8, 9 -> 7.5
+
+**Question 3**
+
+Correlation measures linear association, so eliminate option C. Option B shows a very small correlation - probably 0 or maybe .1. So the correct answer is A, which shows a moderate negative correlation.
+`r unhide()`
+
