@@ -93,3 +93,358 @@ Median: order the numbers, note that there is an odd number, take the average of
 Correlation measures linear association, so eliminate option C. Option B shows a very small correlation - probably 0 or maybe .1. So the correct answer is A, which shows a moderate negative correlation.
 `r unhide()`
 
+# Tutorial
+
+## ANOVA
+
+For this assignment, we will use the data file 5groups.sav Download 5groups.sav. Please open it in SPSS.
+
+As you have seen in the previous assignments, this file contains the measurements of the y variable for 5 different groups. So far, we have - at most - compared two groups at once. This time, we will compare the means of all 5 groups simultaneously using an Analysis of Variance (ANOVA).
+
+ANOVA is often used to examine the results of experimental research where different groups receive different manipulations of an independent variable, and a continuous dependent variable is measured. In that case, rejecting the null hypothesis indicates a causal effect of the manipulated independent variable on the dependent variable.
+
+Let's say the 5 groups in our data file have received 5 different types of training, and the dependent variable y measures the effect of the training.
+
+We will now perform an ANOVA to see if these trainings have an equal effectiveness.
+
+The null hypothesis of the ANOVA with 5 groups is as follows:
+
+$H_0: \mu_1 = \mu_2 = \mu_3 = \mu_4 = \mu_5$
+
+That is, the null hypothesis states that the population means of all five groups are the same. Rejecting the null hypothesis implies that at least one one of these means is different from the rest.
+
+Let's run the analysis!
+
+Navigate to Analyze > General Linear Model > Univariate.
+Choose y as the dependent variable.
+Choose group as the fixed factor.
+Now click on the "Options" button and check the two boxes named "Descriptive statistics" and "Homogeneity tests".
+Finally, click "Paste" to paste the syntax into the syntax editor, and run it from there.
+ 
+You should end up with the following syntax:
+
+```
+    UNIANOVA y BY group
+      /METHOD=SSTYPE(3)
+      /INTERCEPT=INCLUDE
+      /PRINT=HOMOGENEITY DESCRIPTIVE
+      /CRITERIA=ALPHA(.05)
+      /DESIGN=group.
+```
+ 
+
+The first table in the output we will inspect is the "Descriptive Statistics" table. This table displays the means and standard deviations of the variable y for each of the five groups.
+
+Do you think the population standard deviations are different for each group? If they are, why could that pose a problem for our analysis?
+
+One of the assumptions of ANOVA is homoscedasticity. In this case, that means that the population of each group has the same variance (and hence, the same standard deviation). This assumption is also called "homogeneity of variance" (= translation of homoscedasticity). Of course the variance in each sample will differ somewhat. If these differences are significant, there is evidence to doubt our assumption. That's why we asked SPSS to perform "Homogeneity tests".
+
+
+Note that the SD’s of groups 1 and 2 are quite different from the SD’s of groups 3, 4, 5.
+ 
+The next table shows the output of Levene's test. You might remember using Levene's test for comparing the variances of two groups in the context of the independent samples t-test. This time, it tests whether the variance of all 5 groups should be considered equal.
+
+Is there a reason to doubt the assumption of homoscedasticity based on Levene's test? Note: Use the Levene’s test “Based on mean”. `mcq(c(answer = "Yes", "No"))`
+
+
+If Levene's test is significant, there is evidence that the population variances of at least 2 of the groups differ.
+This is evidence against our assumption.
+This could pose a problem for our analysis.
+We may choose to use a version of the analysis that is robust to violations of this assumption instead, but that makes our analysis dependent on the data (= no longer confirmatory). Instead, we could discuss the violation, and compare results with and without a robust test. 
+
+For now, we continue with interpreting the output of the final table. There's a lot of information, but for now we are only interested in the Sig. value of the "Corrected Model" in the first row. This is the two-sided p-value we can use to test our null hypothesis.
+
+What is the two-sided p-value? Do you reject the null hypothesis? What does that mean?
+
+`r hide("Answer")`
+The p-value is <.001. This is smaller than 0.05. Therefore, we reject the null hypothesis, which was: $H_0: \mu1=\mu2=\mu3=\mu4=\mu5$
+
+This means that the means of at least two groups are different. Note that we do not yet know for which groups the means differ!
+`r unhide()`
+
+
+Finally, there's an interesting nugget of information below the final table. It's called R Squared. This shows the total amount of variance in y that is explained by group membership.
+
+What is the value of R Squared? `r fitb(.57, num = T, tol = .01)`
+
+
+By rule of thumb, what is the magnitude of this value (small, medium, or large)?
+
+Cohen (1988) proposed the following guidelines for interpreting the magnitude of R2:
+
+Size	| R2
+------|------
+Small	| 0.01
+Medium	| 0.06
+Large	| 0.138
+
+
+## ANOVA using regression
+
+This time, we will conduct the ANOVA using the regression interface.
+
+When we conduct ANOVA using regression, we still test the null hypothesis mentioned before:
+
+$H_0: \mu_1 = \mu_2 = \mu_3 = \mu_4 = \mu_5$
+
+A different way to phrase this when using regression is to state that all regression coefficients will be zero:
+
+$H_0: \beta_0 =\beta_1 = \beta_2 = \beta_3 = \beta_4$
+
+Or to say that the explained variance will be zero:
+
+$H_0: \rho^2 =0$
+
+All of these hypotheses are interchangeable and imply that the means of all five groups are the same. If this is not the case, each of these null-hypotheses would be rejected.
+Rejecting these null hypothesis implies that at least one one of these means is different from the rest.
+
+To test the differences between groups, we first create dummy variables. Let's make them for all categories, but we will mostly use group 1 as reference category.
+When making dummies, it's most convenient to use syntax:
+
+```
+RECODE group (1=1) (2=0) (3=0) (4=0) (5=0) INTO dgroup1.
+RECODE group (1=0) (2=1) (3=0) (4=0) (5=0) INTO dgroup2.
+RECODE group (1=0) (2=0) (3=1) (4=0) (5=0) INTO dgroup3.
+RECODE group (1=0) (2=0) (3=0) (4=1) (5=0) INTO dgroup4.
+RECODE group (1=0) (2=0) (3=0) (4=0) (5=1) INTO dgroup5.
+EXECUTE.
+```
+
+
+Create the necessary syntax for a regression with the dummy variable that compares the means of group 1 against all other groups.
+
+You can find the dialog for the regression under Analyze > Regression > Linear
+
+In the SPSS dialog you have to specify the Dependent and Independent variable. In our case, the independent variables are all dummies we created, except for the reference category! Use category 1 as reference category.
+ 
+Compare your syntax to the correct syntax:
+
+```
+REGRESSION
+  /MISSING LISTWISE
+  /STATISTICS COEFF OUTS R ANOVA
+  /CRITERIA=PIN(.05) POUT(.10)
+  /NOORIGIN 
+  /DEPENDENT y
+  /METHOD=ENTER dgroup2 dgroup3 dgroup4 dgroup5.
+```
+
+Also compare this syntax to the one we used for t-test using regression. What is the only difference?
+
+Which test statistic do you use to determine the significance of your ANOVA? `r mcq(c(answer = "F", "t for the Constant", "All of the ts", "R2")[sample.int(4)])`
+
+What is the value of the test statistic? `r fitb(14.783, num = T, tol .01)`
+
+Compare this output to the output of your previous ANOVA!
+
+Which parts are the same? Which parts are different?
+
+`r hide("Answer")`
+The F-test is identical to the one from the ANOVA. What's different is that the regression also gives us t-tests for the difference between each group and the reference group. By changing the reference group, we can make all possible comparisons.
+
+`r unhide()`
+
+Note that, unlike the t-test interface, the regression interface does not provide a Levene's test.
+This is one reason you might want to use the t-test interface.
+The regression interface provides a more generic way to test the assumption of homoscedasticity: a residual plot.
+
+Go back through the regression interface, but this time click the Plots button and plot the predicted value (X = ZPRED) against the residual value (Y = ZRESID). 
+
+Alternatively, just add this line to your syntax (make sure to remove the period . from what was previously the last line):
+
+```
+  /SCATTERPLOT=(*ZRESID ,*ZPRED).
+```
+
+If the assumption of homoscedasticity is met, we should see that the dots in this plot are equally distributed around the zero line for all values on the X-axis. In this case, we see some differences that could lead us to question the assumption. However, we don't get an actual test, which is a pity. Thus, you could use the ANOVA interface if you want this test.
+
+
+## One-Way ANOVA
+
+We have prepared the following data file for this assignment: hiking.sav Download hiking.sav. Please download it and open it in SPSS.
+
+The data file describes the result of a fictitious experiment in which a hiking guide has displayed five different types of behavior towards different groups of hikers. The treatment that each person received from the guide is recorded in the variable behavior.
+
+The dependent variable of this experiment is feeling. Higher scores on this variable indicate a more positive attitude of a participant towards the guide. In this assignment, we will use ANOVA to determine whether the mean score on the dependent variable differs between the five experimental conditions.
+
+
+What type of design do we use for this experiment? `r mcq(c("answer" = "Between-subjects design", "Within-subjects design", "Combination of the two")[sample.int(3)])`
+
+As you will have noticed, the data file contains a third variable named weather, which can be either good or bad. For now, we will only look at the results obtained during good weather. Hence, we will use "Select cases" to select only those participants with a value of 1 on the weather variable.
+
+Click Data > Select Cases and select "If condition is satisfied" and click the "If"-button. Now enter the following condition into the equation box:
+
+weather = 1
+
+Now click "Continue" and "Paste" to paste the resulting syntax into the syntax editor. Select Run > All to run it.
+
+ 
+Verify that half of the participants have been crossed out in the Data View.
+
+ 
+We are now ready to perform an ANOVA with the 50 remaining participants.
+
+To run an ANOVA in SPSS there are multiple options. We will use the module "General Linear Model", which encompasses ANOVA and all of its extensions which we will discuss later on (factorial ANOVA, ANCOVA, and repeated measurements). 
+
+Anyway, let's first create the basic syntax.
+
+Analyze > General Linear Model > Univariate
+Choose feeling as the dependent variable and behavior as the fixed factor
+Click on the "Options" button and check the two boxes named "Descriptive" and "Homogeneity tests".
+After clicking "Paste" you should get the following syntax:
+
+```
+UNIANOVA feeling BY behavior    
+    /METHOD=SSTYPE(3)   
+    /INTERCEPT=INCLUDE   
+    /PRINT=DESCRIPTIVE HOMOGENEITY    
+    /CRITERIA=ALPHA(.05)   
+    /DESIGN=behavior.   
+```
+ 
+
+What is the p-value of the Levene's test? Use the Levene’s test “Based on mean” again. `r fitb(.611, num=T, tol = .01)`
+
+Do we have reason to question the assumption of equal population variances? `r mcq(c("Yes", answer = "No"))`
+
+In ANOVA, we distinguish between three sources of variation: the Sums of Squares total (SSt), the Sums of Squares between (SSb, or SSR) and the Sums of Squares within (SSw, or SSE).
+
+What does the Sum of squares total mean (phrase your answer in your own words)? Look up the value of the SSt in the ANOVA output and write it down as well. 
+
+What does the Sum of squares between entail (phrase your answer in your own words)? Look up the value of the SSb in the ANOVA output, and write it down as well. 
+
+
+What does the Sums of squares within entail (phrase your answer in your own words)? Look up the value of the SSw in the ANOVA output, and write it down as well.
+
+`r hide("Answer")`
+
+The Between Groups Sum of squares or SSb is equal to 18.330 and simply give the squared distance of individual scores to the mean, summed together. In other words, it shows how much variability there is in the group means. If all group means would be equal to each other, the SSb equals 0. 
+
+
+The SSw here is 38.405. It tells us how much the individual scores within a group deviate from the group mean. In other words, it shows how much variability there is within the groups. The is the variation that is independent from the experimental effect (because variation within groups cannot be caused by differences in experimental conditions). 
+
+The SSt tells us how much the invidual scores deviate from the grand mean. In other words, it shows how much variability there is in the dependent variable in total.
+
+Recall that SSB is the same as SSR; it can be found in the row "Corrected Model", column Type III Sums of Squares.
+
+Recall that the SSW is the same as SSE; it islabeled "Error" in the column Type III Sums of Squares.
+
+
+`r unhide()`
+
+
+How do we use the different types of Sum of Squares to calculate the F statistic?
+
+`r longmcq(c(
+  answer = "$\frac{SSB/dfb}{SSW/dfw}$",
+  $\frac{SSB}{SSW}$,
+  "$\frac{SSW/dfw}{SSB/dfb}$",
+  $\frac{SSW}{SSB}$
+)[sample.int(4)])`
+
+`r hide("Answer")`
+
+We can calculate F using the following formula:
+
+$F = \frac{MSb}{MSw}$
+
+The MSb and MSw give the between group variance and within group variance, respectively. They can be calculated using the following formula's:
+
+$MSb = \frac{SSb}{k-1}$, $MSw = \frac{SSw}{N-k}$
+
+`r unhide()`
+
+Again, consider the table Tests of Between Subjects, which represents the results of ANOVA.
+
+What is the F-value of the ANOVA? `r fitb(5.369, num = T, tol = .01)`
+
+The degrees of freedom between (dfb) are `r fitb(4, num = T)` and the degrees of freedom within (dfw) are `r fitb(45, num = T)`. 
+
+dfb = k-1
+
+dfw = N-k
+
+Again consider the table Tests of Between Subjects
+
+What is the p-value of the ANOVA? `r fitb(.001, num = T, tol = .001)`
+
+You can find the p-value of the ANOVA in the table named "Tests of Between-Subjects Effects". The p-value is equal to the Sig.-value in the first row of this table.
+
+What can you conclude from this? 
+
+Write down a statistical conclusion and a conclusion within the context of this research example.
+
+`r hide("Answer")`
+
+The p-value is smaller than our alpha level (0.05). Therefore, we can conclude that there was a statistically significant difference in positive attitude between the groups, based on the behaviour the guide displayed towards them, (F(4,45) = 5.369, p = .001).
+
+`r unhide()`
+
+
+What is the proportion of variance explained by behavior? `r fitb(.323, num = T, tol = .01)`
+
+
+How would you describe this number in words? So what does it mean? 
+
+Remark: Cohen formulated some rules of thumb for interpreting the $R^2$
+How would you qualify the strength of the effect based on Cohen's rules of thumb? And why should we not take the rules of thumb too seriously?
+
+Cohen (1988) proposed the following guidelines for interpreting the magnitude of $R^2$
+
+Size  | $R^2$
+--------|------------
+Small      | 0.01
+Medium  | 0.06
+Large      | 0.14
+
+Note that, in ANOVA, $R^2$ is also called $\eta^2$ (eta squared) is a measure of effect size, it indicates the amount of variance in thedependen t variable that is explained by the independent variable(s). In our case, 32.3% of the variance in feeling is explained by behaviour. According to Cohen’s guidelines this is a large effect size (see slide 28). However, these guidelines are rather arbitrary,  which Cohen himself also stresses.
+
+
+The correct conclusion so far is that the five groups differ significantly on the dependent variable feeling. However, we do not yet know which groups differ.
+
+## One-Way ANOVA using regression
+
+In this assignment, we will conduct the same ANOVA using the regression interface.
+
+To test the differences between groups, we first create dummy variables. Let's make them for all categories, but we will mostly use group 1 as reference category.
+When making dummies, it's most convenient to use syntax.
+Let's give the dummies informative names this time:
+
+```
+RECODE behavior (1=1) (2=0) (3=0) (4=0) (5=0) INTO rushing.
+RECODE behavior (1=0) (2=1) (3=0) (4=0) (5=0) INTO stories.
+RECODE behavior (1=0) (2=0) (3=1) (4=0) (5=0) INTO insulting.
+RECODE behavior (1=0) (2=0) (3=0) (4=1) (5=0) INTO jokes.
+RECODE behavior (1=0) (2=0) (3=0) (4=0) (5=1) INTO singing.
+EXECUTE.
+```
+
+Create the necessary syntax for a regression with the dummy variable that compares the means of the rushing group against all other groups.
+
+You can find the dialog for the regression under Analyze > Regression > Linear
+
+In the SPSS dialog you have to specify the Dependent and Independent variable. In our case, the independent variables are all dummies we created, except for the reference category! Use category 1 as reference category.
+ 
+Compare your syntax to the correct syntax:
+
+```
+REGRESSION
+  /MISSING LISTWISE
+  /STATISTICS COEFF OUTS R ANOVA
+  /CRITERIA=PIN(.05) POUT(.10)
+  /NOORIGIN 
+  /DEPENDENT feeling
+  /METHOD=ENTER stories insulting jokes singing.
+```
+
+
+Can you find all three of the aforementioned sources of variation in the output? The Sums of Squares total (SSt), the Sums of Squares between (SSb, or SSR) and the Sums of Squares within (SSw, or SSE).
+
+Compare the results to those of the One-Way ANOVA interface.
+
+`r hide("Answer")`
+In the ANOVA table, the Regression Sum of Squares is identical to the "Between Groups Sum of Squares" from the One-Way ANOVA interface.
+The Residual Sum of Squares is identical to the "Within Groups Sum of Squares" from the One-Way ANOVA interface.
+And the Total Sums of Squares are also the same.
+
+`r unhide()`

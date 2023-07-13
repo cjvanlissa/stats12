@@ -149,7 +149,9 @@ source("functions.R")
 
 ## Defining probability
 
-For any *random experiment* the probability of an outcome is defined as the proportion of times this outcome occurs
+**Probability:** How likely something is to occur.
+
+* Specifically, the proportion of times we expect to observe an outcome in a *random experiment* that could be repeated many times
 
 *Random experiment*
 
@@ -173,7 +175,7 @@ Not probability:
 
 **Random variable**: An unknown value that follows some probability distribution.
 
-*Disambiguation: Last lecture we learned that the term "variable" is also used as a placeholder for some unknown number.*
+*Disambiguation: Last lecture we used "variable" as a placeholder for some unknown number.*
 
 -   The outcome of a coin toss is a random variable
 -   It is discrete because it has only two possible outcomes
@@ -202,6 +204,8 @@ A probability distribution is similar, but
 
 ## Discrete distributions
 
+-   Probability mass function
+    - 100% of the probability mass is distributed among finite discrete outcomes
 -   Finite number of outcomes
     - Dutch student / foreign student
     - Student has tattoos / no tattoos
@@ -268,9 +272,9 @@ kable(df, escape = FALSE, align = rep('l', length(df[,1])), format = "markdown")
 
 ## Marginal frequency distribution
 
-<font color = "orange">For the variable "Tattoo":</font> How many people do / don't have one?
+<font color = "orange">For the variable "Tattoo":</font> How many people do / don't have one? $P(Tattoo)$
 
-<font color = "purple">For the variable "Dutch":</font> How many students are Dutch / International?
+<font color = "purple">For the variable "Dutch":</font> How many students are Dutch / International? $P(Dutch)$
 
 ```{r}
 df <- data.frame("Dutch" = c("No", "Yes", "<b>Total column</b>"),
@@ -291,7 +295,7 @@ kable(df, escape = FALSE, align = rep('l', length(df[,1]))) %>%
 
 Frequency distribution of one variable, for specific value of the other variable
 
-E.g.: What is the conditional frequency distribution of Tattoos <font color = "purple">**for Dutch students?**</font>
+E.g.: What is the conditional frequency distribution of Tattoos <font color = "purple">**for Dutch students?**</font> $P(Tattoo | Dutch)$
 
 ```{r}
 df <- data.frame("Dutch" = c("No", "Yes", "<b>Total column</b>"),
@@ -310,7 +314,7 @@ kable(df, escape = FALSE, align = rep('l', length(df[,1]))) %>%
 
 Frequency of a combination of two (or more) variables
 
-E.g.: What is the frequency of <font color = "purple">**Dutch students with a tattoo**</font>?
+E.g.: What is the frequency of <font color = "purple">**Dutch students with a tattoo**</font>? $P(Dutch \cap Tattoo)$
 
 ```{r}
 df <- data.frame("Dutch" = c("No", "Yes", "<b>Total column</b>"),
@@ -336,7 +340,7 @@ Which frequencies and which total you use depends on what probability distributi
 
 Divide marginal totals by the <font color = "orange">global total</font>
 	
-E.g.: What is the <font color = "purple">marginal probability distribution of having a tattoo</font>?
+E.g.: What is the <font color = "purple">marginal probability distribution of having a tattoo</font>? $P(Tattoo)$
 
 ```{r}
 df <- data.frame("Dutch" = c("No", "Yes", "<b>Total column</b>"),
@@ -381,7 +385,7 @@ kable(df, escape = FALSE, align = rep('l', length(df[,1]))) %>%
 
 Divide the cell frequency by the <font color = "orange">global total</font>
 
-E.g.: What is the joint probability of someone being <font color = "purple">Dutch and having a tattoo</font>?
+E.g.: What is the joint probability of someone being <font color = "purple">Dutch and having a tattoo</font>? $P(Dutch \cap Tattoo)$
 
 
 ```{r}
@@ -413,7 +417,8 @@ kable(df, escape = FALSE, align = rep('l', length(df[,1]))) %>%
 
 * Infinite possible outcomes
 * No exact probability for specific values
-* Continuous probability distribution describes how likely each outcome is
+* Continuous *probability density function* describes how likely each outcome is
+    + Cf. probability mass function for discrete outcomes
 * Surface area determines probability
 * Many probability distributions exist
 * This course covers only one...
@@ -447,7 +452,9 @@ knitr::include_graphics("images/Lecture 29.png")
 |   3   |  0.5  | 1.5 |
 |   4   |  2.0  | 1.0 |
 
-## {background-iframe="https://statdist.com/distributions/normal"}
+## App
+
+<https://statdist.com/distributions/normal>
 
 <!-- ## Normal distribution: Location and scale -->
 

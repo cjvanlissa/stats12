@@ -1,0 +1,85 @@
+---
+title: "Untitled"
+editor: visual
+---
+
+```{r, include = FALSE}
+source("R/booktem_setup.R")
+source("R/my_setup.R")
+```
+
+```{r, eval = FALSE}
+
+add_mcs <- function(filename){
+  qs <- read.csv(filename, stringsAsFactors = FALSE)
+  out <- c('::: {.webex-check .webex-box}')
+  
+  for(i in 1:nrow(qs)){
+    add <- c(paste0("**Question ", i, "**"), 
+             '```{r, results="asis", echo = FALSE}',
+             paste0('mc("', qs[i,1], '", ', paste0('"', as.character(qs[i,-1]), '"', collapse = ","), ')\n```'))
+    out <- c(out, add)
+  }
+  out <- c(out, ":::")
+  cat(out, sep = "\n\n")
+}
+```
+
+```{r results='asis', eval = FALSE}
+add_mcs("questions1.csv")
+```
+
+
+```{r, results="asis", echo = FALSE, eval = FALSE}
+add_mcs <- function(filename){
+  qs <- read.csv(filename, stringsAsFactors = FALSE)
+  cat('::: {.webex-check .webex-box}\n\n')
+  for(i in 1:nrow(qs)){
+    cat(paste0("**Question ", i, "**\n\n"))
+    do.call(mc, args = as.list(unname(qs[i,])))
+    cat("\n\n")
+  }
+  cat(":::\n")
+}
+add_mcs("questions1.csv")
+```
+
+```{r, results="asis", echo = FALSE}
+add_mcs <- function(filename){
+  qs <- read.csv(filename, stringsAsFactors = FALSE)
+  cat('::: {.webex-check .webex-box}\n\n')
+  for(i in 1:nrow(qs)){
+    cat(paste0("**Question ", i, "**\n\n"))
+    Args <- as.vector(unname(qs[i,]))
+    Args <- Args[!(is.na(Args) | Args == "")]
+    Args <- trimws(Args)
+    Args <- as.list(Args)
+    do.call(mc, args = Args)
+    cat("\n\n")
+  }
+  cat(":::\n\n")
+  hide("Show answers")
+  for(i in 1:nrow(qs)){
+    cat(paste0("**Question ", i, "**\n\n"))
+    Args <- qs[i,]
+    Args <- Args[!(is.na(Args) | Args == "")]
+    Args <- as.character(Args)
+    cat(tail(Args, 1))
+    cat("\n\n")
+  }
+  unhide()
+  cat('\n\n')
+}
+add_mcs("questions1.csv")
+```
+
+```{r results='asis'}
+add_mcs("questions1.csv")
+```
+
+
+|	Popcorn consumption		
+	Yes	No	Total
+Mean Girls	151	90	241
+Other	1678	2130	3808
+Total	1829	2220	4049

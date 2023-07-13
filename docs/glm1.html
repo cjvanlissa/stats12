@@ -5,7 +5,7 @@
 <meta name="generator" content="quarto-1.3.427">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="description" content="Book Description">
-<title>Statistics 1 and 2 - 5&nbsp; GLM-I: Linear Regression</title>
+<title>Statistics 1 and 2 - 6&nbsp; GLM-I: Linear Regression</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -58,7 +58,7 @@ ul.task-list li input[type="checkbox"] {
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
+}</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
 <link rel="stylesheet" href="include/booktem.css">
 <link rel="stylesheet" href="include/webex.css">
 <link rel="stylesheet" href="include/glossary.css">
@@ -72,7 +72,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./glm1.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">GLM-I: Linear Regression</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./glm1.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">GLM-I: Linear Regression</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -133,26 +133,32 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./tutorial1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Lab 1: Introduction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./probability.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Probability Distributions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Probability Distributions</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./samplingdistribution.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">The Sampling Distribution</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">The Sampling Distribution</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./testing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Hypothesis Testing</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Hypothesis Testing</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./glm1.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">GLM-I: Linear Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">GLM-I: Linear Regression</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -183,11 +189,30 @@ ul.task-list li input[type="checkbox"] {
 </nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+<li>
+<a href="#tutorial" id="toc-tutorial" class="nav-link active" data-scroll-target="#tutorial"><span class="header-section-number">7</span> Tutorial</a>
+  <ul class="collapse">
+<li><a href="#regression-analysis" id="toc-regression-analysis" class="nav-link" data-scroll-target="#regression-analysis"><span class="header-section-number">7.1</span> Regression Analysis</a></li>
+  <li>
+<a href="#assumptions" id="toc-assumptions" class="nav-link" data-scroll-target="#assumptions"><span class="header-section-number">7.2</span> Assumptions</a>
+  <ul class="collapse">
+<li><a href="#scatterplot" id="toc-scatterplot" class="nav-link" data-scroll-target="#scatterplot"><span class="header-section-number">7.2.1</span> Scatterplot</a></li>
+  <li><a href="#regression-diagnostics" id="toc-regression-diagnostics" class="nav-link" data-scroll-target="#regression-diagnostics"><span class="header-section-number">7.2.2</span> Regression Diagnostics</a></li>
+  <li><a href="#linearity" id="toc-linearity" class="nav-link" data-scroll-target="#linearity"><span class="header-section-number">7.2.3</span> Linearity</a></li>
+  <li><a href="#normality" id="toc-normality" class="nav-link" data-scroll-target="#normality"><span class="header-section-number">7.2.4</span> Normality</a></li>
+  <li><a href="#homoscedasticity" id="toc-homoscedasticity" class="nav-link" data-scroll-target="#homoscedasticity"><span class="header-section-number">7.2.5</span> Homoscedasticity</a></li>
+  </ul>
+</li>
+  </ul>
+</li>
+  </ul></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
-<h1 class="title"><span id="sec-glm1" class="quarto-section-identifier"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">GLM-I: Linear Regression</span></span></h1>
+<h1 class="title"><span id="sec-glm1" class="quarto-section-identifier"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">GLM-I: Linear Regression</span></span></h1>
 </div>
 
 
@@ -208,10 +233,97 @@ ul.task-list li input[type="checkbox"] {
 <p>Hypothesis tests can be conducted on the regression coefficients to determine their significance. The default null hypothesis for the intercept is that it is equal to zero, while the null hypothesis for the slope is also zero. The t-test is commonly used, with the degrees of freedom being n - p, where n is the sample size and p is the number of parameters. By testing the coefficients, we can determine the statistical significance of the relationship between the predictor and the outcome.</p>
 <p>While linear regression offers valuable insights, it is essential to consider the assumptions underlying the model. These assumptions include linearity of the relationship between the predictor and the outcome, normality of residuals (prediction errors), homoscedasticity (equal variance of residuals), and independence of observations. Violations of these assumptions can affect the validity of the model and lead to misleading results. Checking and addressing these assumptions is crucial for accurate and reliable regression analysis.</p>
 <p>Linear regression is a powerful tool for analyzing the relationship between variables, and a building block for many more advanced analysis techniques. It allows us to make predictions based on available information and understand the strength and significance of the relationship between a continuous predictor and continuous outcome. By considering the assumptions and conducting hypothesis tests, we can ensure the validity of our regression models and draw meaningful conclusions from the analysis.</p>
+<section id="tutorial" class="level1" data-number="7"><h1 data-number="7">
+<span class="header-section-number">7</span> Tutorial</h1>
+<section id="regression-analysis" class="level2" data-number="7.1"><h2 data-number="7.1" class="anchored" data-anchor-id="regression-analysis">
+<span class="header-section-number">7.1</span> Regression Analysis</h2>
+<p>In this assignment we will make a start with regression analysis.</p>
+<p>We will go through the different steps of running and interpreting a regression analysis.</p>
+<p>Open the file Work.sav to get started.</p>
+<p>Consider the following research question: “Does variety at work predict pleasure at work?”</p>
+<p>What is the dependent variable in this case? <select class="webex-select"><option value="blank"></option>
+<option value="answer">Pleasure</option>
+<option value="">Variety</option></select></p>
+<p>To answer the research question, we will run a linear regression analysis.</p>
+<p>Select the following menu item: Analyze &gt; Regression &gt; Linear</p>
+<p>Choose the dependent variable (scpleasure) and independent variable (scvariety). Paste and run the syntax.</p>
+<p>If you look in the output, you will see that SPSS shows four tables in the output file.</p>
+<p>In the table labeled “Model Summary” we can find the R2 value. R2 indicates the total proportion of explained variance in the dependent variable in the model; this is the focus of next week’s class.</p>
+<p>What proportion of the variance Emotional pressure (scpleasure) is explained by our single predictor Variety at work (scvariety)? <input class="webex-solveme nospaces" data-tol="0.01" size="5" data-answer="[&quot;0.195&quot;,&quot;.195&quot;]"></p>
+<p>Consider the unstandardized Coefficients in the table labeled “Coefficients”.</p>
+<p>What is the value of the intercept (b0) for the regression line? <input class="webex-solveme nospaces" data-tol="0.01" size="6" data-answer="[&quot;-9.024&quot;]"></p>
+<p>How should we interpret the intercept (or “constant”) within the context of this analysis?</p>
+<div id="radio_IGDVSIWBCG" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_IGDVSIWBCG" value="answer"><span>Someone who reports zero Variety at work (meaning a score of 0 on scvariety) has an expected value of this many points on Pleasure.</span></label><label><input type="radio" autocomplete="off" name="radio_IGDVSIWBCG" value=""><span>Everyone who reports zero Variety at work (meaning a score of 0 on scvariety) has a value of this many points on Pleasure.</span></label><label><input type="radio" autocomplete="off" name="radio_IGDVSIWBCG" value=""><span>The sample average of Pleasure is this many points</span></label><label><input type="radio" autocomplete="off" name="radio_IGDVSIWBCG" value=""><span>For every point in Variety at work, we expect an increase of this many points in Pleasure.</span></label>
+</div>
+<p>Consider the unstandardized regression coefficients again.</p>
+<p>What is the value of the regression coefficient of scpleasure on scemoti (b1)? <input class="webex-solveme nospaces" data-tol="0.01" size="5" data-answer="[&quot;0.618&quot;,&quot;.618&quot;]"></p>
+<p>How should we interpret the regression coefficient of scvariety within the context of this analysis?</p>
+<div id="radio_MCXTOVSKLK" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_MCXTOVSKLK" value=""><span>If someone’s score on Variety at work increases with 1 SD, their score on Pleasure increases by this many SDs.</span></label><label><input type="radio" autocomplete="off" name="radio_MCXTOVSKLK" value=""><span>This is the sample average of Pleasure</span></label><label><input type="radio" autocomplete="off" name="radio_MCXTOVSKLK" value="answer"><span>If someone’s score on Variety at work increases with 1 point, their score on Pleasure increases by this many points.</span></label><label><input type="radio" autocomplete="off" name="radio_MCXTOVSKLK" value=""><span>This is the sample average score of Variety at work.</span></label>
+</div>
+<p>The “Coefficients” table also shows whether or not the effect of scvariety on scpleasure is significant.</p>
+<p>What is the p-value for the regression coefficient for scvariety? <input class="webex-solveme nospaces" data-tol="0.01" size="1" data-answer="[&quot;0&quot;]"></p>
+<p>Can we conclude that the effect of scvariety on scpleasure is significant? (use <span class="math inline">\(\alpha\)</span> = .05). <select class="webex-select"><option value="blank"></option>
+<option value="answer">Yes</option>
+<option value="">No</option></select></p>
+</section><section id="assumptions" class="level2" data-number="7.2"><h2 data-number="7.2" class="anchored" data-anchor-id="assumptions">
+<span class="header-section-number">7.2</span> Assumptions</h2>
+<p>Recall that regression assumes linearity, normality of residuals, homoscedasticity (equal variance of residuals), and independence of observations. We will check each of these assumptions in turn, except for independence of observations because this is a property of our sampling method and cannot be checked statistically.</p>
+<section id="scatterplot" class="level3" data-number="7.2.1"><h3 data-number="7.2.1" class="anchored" data-anchor-id="scatterplot">
+<span class="header-section-number">7.2.1</span> Scatterplot</h3>
+<p>A scatter plot can provide some insight into linearity.</p>
+<p>To make a scatter plot: Graphs &gt; Legacy Dialogs &gt; Scatter/Dot &gt; Simple Scatter</p>
+<p>Place variety at work on the X axis and emotional pressure on the Y axis.</p>
+<p>Is the assumption of linearity met in this case? <select class="webex-select"><option value="blank"></option>
+<option value="answer">Yes</option>
+<option value="">No</option></select></p>
+</section><section id="regression-diagnostics" class="level3" data-number="7.2.2"><h3 data-number="7.2.2" class="anchored" data-anchor-id="regression-diagnostics">
+<span class="header-section-number">7.2.2</span> Regression Diagnostics</h3>
+<p>Aside from the scatterplot, we can check the assumptions of regression by requesting additional options in the analysis.</p>
+<p>Go back to the analysis dialog via Analyze –&gt; Regression –&gt; Linear. Verify that you still have the correct predictor and outcome.</p>
+<p>Then, click the Plots button. You want a plot of the predicted values against the residual values, so put ZPRED in the X box and ZRESID in the Y box.</p>
+<p>Also check the boxes for a Histogram and normal probability plot, then hit continue.</p>
+<p>Now paste and run the syntax. You should see the following added to your previous regression syntax:</p>
+<pre><code>  /SCATTERPLOT=(*ZRESID ,*ZPRED)
+  /RESIDUALS HISTOGRAM(ZRESID) NORMPROB(ZRESID)</code></pre>
+</section><section id="linearity" class="level3" data-number="7.2.3"><h3 data-number="7.2.3" class="anchored" data-anchor-id="linearity">
+<span class="header-section-number">7.2.3</span> Linearity</h3>
+<p>How can we test linearity using this additional output?</p>
+<p>First, we can use the “Normal P-P plot”. If the relationship is perfectly linear, all dots should be on the diagonal line. If the points are deviating from the line, the relationship is not perfectly linear. Small deviations are OK; for example, the plot below shows a linear association:</p>
+<p><img src="images/assumptions4.png" class="img-fluid"></p>
+<p>Does the P-P plot for your regression give cause for concern for violation of the assumption of linearity? <select class="webex-select"><option value="blank"></option>
+<option value="">Yes</option>
+<option value="answer">No</option>
+<option value="">Unclear</option></select></p>
+</section><section id="normality" class="level3" data-number="7.2.4"><h3 data-number="7.2.4" class="anchored" data-anchor-id="normality">
+<span class="header-section-number">7.2.4</span> Normality</h3>
+<p>One way to check normality is by examining the histogram of residuals. This histogram displays a normal curve by default. If the observed residuals deviate strongly from this histogram, there may be a problem.</p>
+<p>The plot below shows a residual histogram with some minor deviations from normality (too few scores near the mean). This is probably still fine:</p>
+<p><img src="images/assumptions5.png" class="img-fluid"></p>
+<p>Does the residual histogram for your regression give cause for concern for violation of the assumption of normal residuals? <select class="webex-select"><option value="blank"></option>
+<option value="answer">Yes</option>
+<option value="">No</option>
+<option value="">Unclear</option></select></p>
+</section><section id="homoscedasticity" class="level3" data-number="7.2.5"><h3 data-number="7.2.5" class="anchored" data-anchor-id="homoscedasticity">
+<span class="header-section-number">7.2.5</span> Homoscedasticity</h3>
+<p>We examine homoscedasticity using a plot of standardized predicted values against standardized residuals. We want residuals to be identically distributed on the Y-axis for all values on the X-axs. In other words, this scatterplot should look like a dot cloud (no pattern) around the zero line (left picture below), and not like a pattern (right picture below).</p>
+<p><img src="images/residuals2.png" class="img-fluid"></p>
+<p>Does the scatterplot for standardized predicted values against residual values for your regression give cause for concern for violation of the assumption of homoscedasticity? <select class="webex-select"><option value="blank"></option>
+<option value="answer">Yes</option>
+<option value="">No</option>
+<option value="">Unclear</option></select></p>
+<p>Write up a discussion of potential violations of the assumptions for your regression, then check your answer.</p>
+<div class="webex-solution">
+<button>
+Explanation
+</button>
+<p>We observed that the observed scores deviated from the P-P plot in an S-shaped pattern. We further observed that, in a histogram of standardized residuals, the observed residuals were right-skewed. Finally, we observed less variance around the regression line for low scores and more variance around the regression line for high scores.</p>
+<p>These findings give cause for concern of violations of the assumptions of regression. <em>One potential explanation is that the effect might be quadratic instead of linear. (Optional)</em></p>
+</div>
 
 
-
-</main><!-- /main --><script>
+</section></section></section></main><!-- /main --><script>
 
 /* update total correct if #webex-total_correct exists */
 update_total_correct = function() {
@@ -997,7 +1109,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="./testing.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Hypothesis Testing</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Hypothesis Testing</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

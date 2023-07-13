@@ -1,0 +1,1123 @@
+# Lab 1: Introduction
+
+```{r, include = FALSE}
+source("R/booktem_setup.R")
+source("R/my_setup.R")
+```
+
+## One-Way ANOVA
+
+Open hiking.sav in SPSS.
+
+The data file describes the result of a fictitious experiment. A hiking guide has displayed five different types of behavior towards different groups of hikers. The treatment that each person received from the guide is recorded in the variable behavior.
+
+The dependent variable of this experiment is feeling. Higher scores on this variable indicate a more positive attitude of a participant towards the guide. In this assignment, we will use ANOVA to determine whether the mean score on the dependent variable differs between the five experimental conditions.
+
+ 
+As you will have noticed, the data file contains a third variable named weather which can be either good or bad. For now, we will only look at the results obtained during good weather. Hence, we will use “Select cases” to select only those participants with a value of 1 on the weather variable.
+
+Click Data > Select Cases and select “If condition is satisfied” and click the “If”-button. Now enter the following condition into the equation box:
+
+weather = 1
+
+Now click “Continue” and “Paste” to paste the resulting syntax into the syntax editor. Select Run > All to run it. You should now see in the Data View tab that half of the participants have been crossed out.
+
+ 
+
+
+We are now ready to perform an ANOVA with the 50 remaining participants. Click Analyze > General Linear Model > Univariate and choose feeling as the dependent variable and behavior as the fixed factor. Click on the “Options” button and check the two boxes named “Descriptive statistics” and “Homogeneity tests”. After clicking “Paste” you should get the following syntax:
+
+```
+UNIANOVA feeling BY behavior
+  /METHOD=SSTYPE(3)
+  /INTERCEPT=INCLUDE
+  /PRINT=HOMOGENEITY DESCRIPTIVE
+  /CRITERIA=ALPHA(.05)
+  /DESIGN=behavior.
+```
+
+
+Run the syntax and inspect the output.
+
+What is the p-value of the Levene’s test? `r fitb(0.611, num = T, tol = .01)`
+
+Is there any evidence that the assumption of homoscedasticity (equal population variances) might be violated?
+
+`r hide("Answer")`
+No, because Levene’s test is not significant (p > $\alpha$).
+
+`r unhide()`
+ 
+
+What is the p-value of the ANOVA? `r fitb(0.001, num = T, tol = .01)`
+
+`r hide("Explanation")`
+This answer is incorrect. You can find the p-value for the overall F-test of the ANOVA in the table named “Tests of Between-Subjects Effects” in the first row (“Corrected Model”) and in the third row (“behavior”).
+`r unhide()`
+
+
+What is the appropriate conclusion when the overall F-test for an ANOVA is significant?
+
+`r longmcq(c(
+answer = "Not all group means are equal to each other.",
+"All group means are different.",
+"Not all group variances are equal to each other.",
+"All group variances are different."
+)[sample.int(4)])`
+
+
+What is the proportion of variance explained by behavior? `r fitb(0.323, num = T, tol = .01)`
+
+Cohen (1988) proposed the following guidelines for interpreting the magnitude of $\eta^2$:
+
+Size | $\eta^2$
+-----|---------
+Small|     0.01
+Medium| 0.06
+Large  |   0.14
+
+Does this indicate a small, medium, or large effect? `r mcq(c("small", "medium", answer = "large"))`
+
+Note, however, that $\eta^2$ is the same as $R^2$, which has different rules of thumb. This illustrates how arbitrary such guidelines are.
+
+
+## Contrasts
+
+As explained before, ANOVA gives us an omnibus test of between-group differences. A significant test means that at least some of the means are not equal. 
+
+But a crucial question is: which means are different from each other? We can use contrasts to answer this question.
+
+Suppose we are interested in the average difference in feelings between a guide who sings, and a guide who tells jokes.
+
+Formulate H0 and H1 for this specific comparison, then check your answer.
+
+`r hide("Answer")`
+Hypotheses for this research question:
+
+$H_0: \mu_{sing} = \mu_{joke}$
+
+$H_1: \mu_{sing} \ne \mu_{joke}$
+
+`r unhide()`
+
+Translate H0 into a contrast:
+
+Translated to contrasts:
+
+$H_0 =$ `r fitb(0, num = T)` $*\mu_{rush} +$
+`r fitb(0, num = T)` $*\mu_{story +}$
+`r fitb(0, num = T)` $*\mu_{insult +}$
+`r fitb(1, num = T)` $*\mu_{joke +}$
+`r fitb(-1, num = T)` $*\mu_{sing +}$
+ 
+We can evaluate the contrast using the `\CONTRAST` command in SPSS syntax.
+
+First, we will make a basic ANOVA syntax.
+
+Analyze > Compare means > One-way ANOVA.
+
+Select feeling in the dependent list, and choose behavior as the factor.
+Paste the syntax. It should look like this:
+
+```
+ONEWAY feeling BY behavior
+  /ES=OVERALL
+  /MISSING ANALYSIS
+  /CRITERIA=CILEVEL(0.95).
+```
+
+Next, we need to add the command for the contrast.
+
+Consult the lecture slides for an example of the syntax for running contrasts. SPSS requires you to, basically, just list the numbers with which you want to multiply the means in the order of the value labels (see Variable view).
+
+So if you want to compare rushing with telling stories, and this is the order of the labels:
+
+rushing |	telling stories |	insulting	| making jokes | singing
+--------|-----------------|-----------|--------------|---------
+1 |	-1 |	0 |	0 |	0
+
+
+Then this would be the syntax for the contrast:
+
+```
+ONEWAY feeling BY behavior
+  /CONTRAST = 1 -1 0 0 0
+  /ES=OVERALL
+  /MISSING ANALYSIS
+  /CRITERIA=CILEVEL(0.95).
+```
+
+Now, modify the syntax for comparing the joking and singing groups.
+
+Run the syntax when you've adapted it.
+ 
+
+First, consult the table labeled ANOVA. What does the F-test test?
+
+`r longmcq(c(
+answer = "The overall significance effect of behavior on feeling.",
+"The  significance of the contrast.",
+"The significance of the variance of feeling.",
+"Between-groups homoscedasticity (equality of variances)."
+)[sample.int(4)])`
+
+
+Consult the output of Contrasts Tests.
+
+What is the (absolute) value of the contrast? `r fitb(.6365, num = T, tol = .01)`
+
+How can we interpret this contrast value?
+
+`r longmcq(c(
+answer = "It is the mean difference between the two groups.",
+"It is the test statistic for the contrast.",
+"It is the difference between 1 and -1, standardized by the between-groups variance.",
+"It is an F ratio."
+)[sample.int(4)])`
+
+Report the results of the statistical test for the contrast and draw a conclusion.
+
+`r hide("Answer")`
+
+On average, there is no significant difference between the group that had a singing guide (M =  6.4611) and the group that had a guide making jokes (M = 6.2620) regarding the feelings of the participants about the guide, t(45) = -0.482, p = .632.
+`r unhide()`
+ 
+
+Now, suppose we had planned to pairwise compare the three groups for which the guide showed positive behavior (i.e., telling stories, telling jokes, and singing). This means that we want to compare these three groups in all possible pairs.
+
+How many comparisons do we have to make? `r fitb(3, num = T)`
+
+What is the syntax for each of these comparisons?
+
+`r hide("Answer")`
+```
+  /CONTRAST = 0 -1 0 1 0
+  /CONTRAST = 0 -1 0 0 1
+  /CONTRAST = 0 0 0 -1 1
+```
+
+`r unhide()`
+
+Run the syntax.
+
+
+Consult the output of the tests of contrasts. Before we are going to draw conclusions, we need to take care of the experiment-wise significance level at which we want to test.
+
+Explain in your own words what the experiment-wise alpha level refers to.
+
+Suppose we want to test at an experiment-wise alpha of .10, what should be the alpha per comparison if a Bonferroni correction is used?
+
+General answer comments
+The experiment-wise alpha level sets the total risk of Type I error for the experiment.
+However, when doing multiple tests on one sample, like when using contrasts, the level of risk of a Type I error increases with every test. To correct for this, we can use an adjusted alpha-level, for example by applying a Bonferroni correction.
+When we want to use an experiment-wise alpha of .10 and we are making 3 comparisons, we should use an alpha of .10 / 3 = .033 per comparison when applying a Bonferroni correction.
+ 
+
+
+Consult the output and draw conclusions.
+
+
+Is any of the contrasts significant when tested at an αEW=0.10?
+
+(I.e., use the αPC you calculated in the previous step for each of the contrasts.)
+
+
+Correct answer
+  No 
+  Yes 
+General answer comments
+When using an experiment-wise alpha level of .10, we should conclude that non of the contrasts in our sample are significant.
+This means that, when using αEW = .10, we should conclude that, on average, there is no significant difference between any of the groups that got positive behavior from the guide regarding the feelings of the participants about the guide.
+ 
+
+Unanswered
+Finally, we can make a more complex comparison. If we compare the behavior of the guide we see three positive behaviors, and two negative behaviors. Suppose we had planned to compare positive against negative behavior using a complex contrast.
+
+Write down H0 and H1 to test the specific research hypothesis the average feelings towards the guide under positive guide-behavior differ from the average feeling under negative behavior of the guide.
+
+Transform H0 into a contrast.
+
+General answer comments
+H0: \mu_pos=\mu_neg
+H1: \mu_pos\ne\mu_neg
+
+H0: 3∗\murush - 2∗\mustory + 3∗\muinsult-2∗\mujoke-2∗\musing = 0
+ 
+
+Unanswered
+Change the syntax (remove all old contrasts). Consult the output and summarize the results. Do we have convincing evidence that for the feeling of the hikers it matters whether the guide shows positive or negative behaviors? Substantiate your answer. Use α=.05.
+
+The contrast values could be: 3 -2 3 -2 -2 
+
+
+General answer comments
+When using an experiment-wise alpha level of .05, we should conclude that the contrast is significant.
+This means that, when using α = .05, we should conclude that, on average, there is a significant difference between the groups who have a guide who shows positive behavior vs a guide who shows negative behavior regarding the feelings of the participants about the guide, t(45) = −4.266, p < .001.
+Thus, we found sufficient evidence to believe that, in the population, positive behavior leads to more positive feelings than negative behavior.
+ 
+## Post Hoc Tests
+
+When the ANOVA is significant, you may proceed with follow-up analyses in which you compare group means.
+
+A distinction is made between planned comparisons and post-hoc comparisons. What is the difference?
+
+A distinction is made between ‘simple’ comparisons and complex comparisons. What is the difference?
+
+General answer comments
+Planned comparisons and post-hoc comparisons
+
+A planned comparison is a comparison one has decided to do regardless of the results of the main analysis.
+On the contrary, a post-hoc comparison can be decided upon after inspecting the results of the main analysis. One usually only does post-hoc tests if a particular comparison might be interesting.
+After all, “Post-hoc” means “after the event”.
+Simple comparisons and complex comparisons
+
+A simple comparison includes two groups (i.e., two cells) only.
+A complex comparison is an evaluation that involves comparing some combination of two or more groups against one or more other groups.
+ 
+
+Unanswered
+Post-hoc comparisons are meant to be performed after you’ve obtained the results (“post hoc” means “after the event”). However, in doing so, we have to take care of the potential increase of the Type-I errors due to performing multiple tests.
+
+For the post-hoc test, we may look at all pairwise comparisons. However, with an increasing number of tests, the risk of Type I errors also increases. Therefore, we need to keep the ‘overall’ Type I error rate under control. Or in other words, we need to take care of the experiment-wise Type I error.
+
+
+What is the experiment-wise Type I error?
+
+General answer comments
+The experiment-wise Type I error rate is the probability of making one or more false discoveries (Type I errors) when performing multiple hypothesis tests on the same dataset.
+
+The experiment-wise error rate differs from the test-wise error rate, which is the probability of making a Type I error when performing a specific test or comparison.
+
+ 
+
+
+What is the value of the experiment-wise Type I error rate if we would use an alpha of .05 for each comparison?
+
+Experiment-wise Type I error: P(at least 1 Type I error) = 1 − (1 − α)number of tests 
+
+
+Correct Answers
+0.401 (with margin: 0)
+ 
+
+
+Suppose we want to keep the αEW at the 5% level by using a Bonferroni corrected adjusted alpha level per comparison (αPC).
+
+
+What αPC (i.e., alpha level per comparison) should we use per comparison?
+
+ 
+The number of pairwise comparisons we can make when we have 5 groups, is equal to: (k∗(k−1))/2
+
+Correct Answers
+0.005 (with margin: 0)
+ 
+
+Unanswered
+we need use an alpha level of .005 (0.05/10) per comparison.
+
+
+Now, verify that when you test five hypotheses at an alpha level of 0.005 that the αEW is less than .05.
+
+General answer comments
+The αpc is 0.005∗5=.025
+This alpha-level is indeed lower than .05.
+ 
+
+Unanswered
+What is a downside of using Bonferroni corrected tests?
+General answer comments
+The Bonferroni test is conservative.
+
+This means that the power of the test (the probability of rejecting the null hypothesis when it is indeed false; i.e. making the correct decision) is likely to be reduced.
+
+ 
+
+
+Now we will do the post-hoc tests. The Bonferroni corrected post-hoc test is quite conservative (which was the answer to the previous question). That’s why we prefer to carry out the Tukey test. The Tukey test can be used to make pairwise comparisons post-hoc (i.e., simple contrasts) and is less conservative than the Bonferroni post-hoc test.
+
+Let’s get going! 
+
+Navigate to Analyze > General Linear Model > Univariate (the dialog should still have the previous values filled in). Click the button “Post Hoc”, choose behavior and tick the “Tukey” checkbox. Paste and run the syntax.
+
+ 
+
+Unanswered
+The Tukey post-hoc comparisons produce two additional tables of output, of which the final one named “Homogeneous Subsets” is the most useful. It displays the means of the dependent variable (in this case feeling) in a number of different columns. Means that are displayed in different columns differ significantly, while means that are displayed in the same column do not. Easy, right?
+
+
+After looking at the output, describe in your own words how the five groups differ from each other.
+
+General answer comments
+There are two columns because there are two “homogeneous subsets”.
+Means that are displayed in the same column, do not differ from each other significantly.
+
+For instance, the mean of group that was insulted by the guide is 4.8094. This mean does not differ significantly from the mean of the group that was rushed (5.4646), because these two numbers are displayed in the same column.
+
+On the other hand, means that are not displayed in the same
+column do differ. For instance, the mean of the insulted group
+(4.8094) differs significantly from the mean of the group that got
+told stories by the guide (6.1012).
+
+Sometimes it helps to draw a line, and an ellipse for each of the
+subsets. Groups who are notin the same ellipse, differ significantly
+from one another.
+
+
+## Scheffé Contrasts
+
+In the previous assignment you have performed Tukey post-hoc comparisons. This is the easiest way to see how groups differ. However, there is a drawback. Tukey comparisons are always pairwise, never comparing more than two groups at once. However, we may want to do a post-hoc comparison that is more ‘complex’.
+
+Based on the ANOVA of the hiking data (assignment 2) (hiking.sav Download hiking.sav), we might suspect that the two groups with the lowest feeling scores differ significantly from the two groups with the highest feeling scores. To test this specific post-hoc comparison, we will use a Scheffé contrast (i.e. post-hoc complex comparison). Click next when you’re ready.
+
+ 
+
+Unanswered
+Before we actually can do the comparison, we have to formalize the contrast. Our goal is to compare the mean of the two highest means with the two lowest means.
+
+What are the two groups with the lowest means; what the two groups with the highest means?
+
+Write down the comparison in terms of \mu's. Think of the lecture examples.
+
+Write down the contrast coefficients.
+
+General answer comments
+Group 1 and group 3 have the lowest means, and group 4 and 5 have the highest means.
+
+Hence, we want to make the following comparison:
+
+(\mu1+\mu3)/2=(\mu4+\mu5)/2
+
+
+This amounts to testing:
+
+0.5*\mu1+ 0*\mu2 + 0.5*\mu3- 0.5*\mu4 - 0.5*\mu5 = 0
+
+
+Hence, the contrast coefficients are: 0.5, 0, 0.5, -0.5, -0.5
+
+ 
+
+
+In the previous step, we wrote down the contrast coefficients as fractions, but that’s not always convenient. Your are always allowed to multiply the coefficients with a constant to have values that are integers (whole numbers).
+
+In this case we may multiply the coefficients by two to have integers:
+
+Hence, we can multiply each of contrast-coefficients (1/2,0,1/2,−1/2,−1/2) by 2 which gives (1,0,1,−1,−1). Although the values are different, you will still be testing the same contrast.
+
+ 
+
+
+In this case we will use the General Linear Model for testing the contrast. The advantage of this approach is that we can use it for more complex designs. The disadvantage is that it does not give the results for the test when equal variances are not assumed. However, since the Levene’s test was not significant, this is not a problem here.
+
+All right, let’s start with making up the basic syntax (Analyze > General LInear model > Univariate). Choose feeling as the dependent variable, and behavior as the fixed factor. Note that we’re still only analyzing the people that participated in good weather.
+
+The syntax should look like this:
+
+UNIANOVA feeling BY behavior
+/METHOD=SSTYPE(3)
+/INTERCEPT=INCLUDE
+/PRINT=DESCRIPTIVE HOMOGENEITY
+/CRITERIA=ALPHA(.05)
+/DESIGN=behavior.
+
+ 
+
+
+We will now add the following option to this syntax:
+
+CONTRAST(behavior) = special(1 0 1 -1 -1)
+
+ 
+
+Notice that the numbers are the contrast coefficients we derived in the previous step.
+
+ 
+
+
+After adding the contract sub-command to the oneway command, the resulting syntax now looks like this:
+
+UNIANOVA feeling BY behavior
+/METHOD=SSTYPE(3)
+/INTERCEPT=INCLUDE
+/PRINT=DESCRIPTIVE HOMOGENEITY
+/CONTRAST(behavior) = special(1 0 1 -1 -1)
+/CRITERIA=ALPHA(.05)
+/DESIGN=behavior.
+
+ 
+
+
+Before we proceed, a word of caution: the contrast option is normally used for a priori (or planned) contrasts. A priori contrasts are specific comparisons that are determined before seeing the data. You are NOT allowed to look at the data before devising a priori contrasts! Ignoring this principle is a questionable research practice known as Data DredgingLinks to an external site..
+
+In this case, we have already seen the data and we are only allowed to perform post-hoc comparisons. Scheffé is a particular type of post-hoc comparison, and it is perfectly valid in this situation. It just so happens that in order to perform a Scheffé test, we need some output generated by the contrast option.
+
+However, to decide about significance we either need to know the adjusted alpha-level, or have an adjusted p-value. Unfortunately, neither of the two options is provided in SPSS, so we have to do something differently…
+
+ 
+
+
+To test the significance of a Scheffé contrast, we will resort to the use of critical values (!).
+
+We have seen how we can use the critical value from a 
+�
+-table to decide whether the 
+�
+-test is significant. We will use the same principle here, but now for the 
+�
+-distribution instead of the 
+�
+-distribution.
+
+What we will do, is compare the observed 
+�
+-value for the contrast with an adjusted critical 
+�
+-value. If the observed 
+�
+-value is larger than the adjusted critical 
+�
+-value, the Scheffé contrast is significant.
+
+ 
+
+
+Consult the output and look for the section “Custom Hypothesis Test”. This section gives the result of the contrast.
+
+Consult the table. Verify that the Contrast Estimate equals the difference between the means of groups 1 and 3 on the one hand, and the means of groups 4 and 5 on the other hand.
+
+Calculate the 
+�
+-value (check the lecture slides for the formula).
+
+
+What is the 
+�
+-value?
+
+Correct Answers
+17.569 (with margin: 0)
+ 
+
+
+Now, we need to compare the calculated 
+�
+-value with the critical value!
+
+The critical 
+�
+-value of a Scheffé contrast is the regular critical 
+�
+-value of an ANOVA (with K−1 and N−K degrees of freedom) multiplied by K−1. 
+�
+ is the number of groups and N
+�
+ the total number of participants.
+
+So to do the Scheffé test, you first have to find the uncorrected critical value. Then you need to multiply that value with K−1 to get the corrected critical value. You can use this corrected critical value to decide about significance.
+
+You may use an online tool to find the regular critical value of the 
+�
+-test (see link below).
+
+[F−Calculator](https://www.danielsoper.com/statcalc/calculator.aspx?id=4)
+
+
+What is the corrected critical 
+�
+-value you will use for testing our Scheffé contrast? (Use 
+�
+=0.05 and round to two decimal places.)
+
+Correct Answers
+10.32 (with margin: 0)
+ 
+
+
+Now that we know both the 
+�
+-value and the critical 
+�
+-value of our Scheffé contrast, we can determine whether the contrast is significant and give a conclusion.
+
+
+Is the contrast significant?
+
+Correct answer
+  Yes. The F-value is higher than the critical F-value. 
+  Yes. The F-value is lower than the critical F-value. 
+  No. The F-value is lower than the critical F-value. 
+  No. The F-value is higher than the critical F-value. 
+ 
+
+Unanswered
+What is your conclusion of the hiking experiment (based on this last assignment)?
+General answer comments
+Participants who are guided by a guide that shows negative behaviors (i.e., rushing and insulting) feel less positive about a guide than participants who are guided by a guide that shows positive behaviors (i.e., joking and singing).
+
+## Predictors with 3+ Categories
+
+
+Today, we will practice again with regression analysis and categorical variables and ANOVA.
+Additionally, we will introduce contrasts.
+
+ 
+
+
+We will start working with the dataset PublicParticipation.sav Download PublicParticipation.sav.
+
+This data set contains (fictional) data on the following variables:
+
+income (higher scores, higher income)
+public participation (i.e. being a member of school boards, municipal councilor, etc.)
+education
+age
+gender (0 = females; 1 = males)
+In our analysis, we want to work with the categorical predictor Education. More specifically, we want to use the categorical variable Education and continuous variable Age to predict dependent variable Public Participation.
+
+The categorical variable Education has 3 levels: low, middle, and high. If we want to include such a variable, we need to use two dummy variables!
+
+ 
+
+
+SPSS does not have an option to create the dummies automatically, so we have to do it ourselves. For the dummy coding we use the dummy coding shown in the table below.
+
+S12Fig2.jpg
+
+Which group is the reference group according to this table?
+
+Correct answer
+  Low 
+  Middle 
+  High 
+ 
+
+
+The low education group is the reference group!
+
+Now, let’s make the dummies. To do so, we use the option Recode into different variables.
+
+To create the first dummy proceed as follows:
+
+Transform > Recode into different variable 
+Give a name to the output variable (say D1) and click on change
+Now specify old and new values. Old value 1 becomes new value 1, and “all other values” (see the option below at left) becomes new value 0. Click add.
+Paste and run the syntax.
+Verify that SPSS added a column labeled D1, which takes on the value 1 if the person had middle education and 0 otherwise.
+
+ 
+
+
+How would you transform the old values for the variable Education (Score 0, 1 and 2) into the new values for D2?
+
+Take some time to think about it and create the other dummy yourself, name it D2.
+
+If you get stuck, check the more information buttons.
+
+ 
+
+
+ 
+
+
+We are now ready for the regression analysis.
+
+We want to run a hierarchical regression analysis. Model 1 only includes Age. Model 2 includes Age and Education (the 2 dummy variables). Thus, we have the following nested models:
+
+Model 1: Y′=b0+b1Age
+Model 2: Y′=b0+b1Age+b2D1+b3D2
+We these nested models we can test the effect of Education on Public Participantion, controlled for Age.
+
+ 
+
+
+Run the hierarchical regression analysis
+
+Analyze > regression > linear
+Select public participation as the dependent and only age as the independent. Click on next.
+Now select the two dummies we have created in the previous step. The two dummies together represent education.
+Via Statistics ask for the R-change statistics.
+Consult the output to answer the questions in the next steps.
+
+ 
+
+
+Education and age together explain ______ % of the total variance.
+
+
+Fill in the value below. Round to one decimal place.
+
+Correct Answers
+9.7 (with margin: 0)
+ 
+
+
+Three researchers tested the significance of the direct effect of education, controlled for age. Researcher I used an alpha of 10%, researcher II an alpha of 5% and researcher an alpha of 1%.
+
+
+Which of the researchers will conclude that Education has a significant effect on public participation?
+
+`r hide("Answer")`
+If we want to draw conclusions on the significance of a categorical variable with three or more categories, we must look at the R2-change instead of the regression coefficients.
+`r unhide()`
+
+
+Correct answer
+  None of the researchers 
+  Researcher I 
+  Researcher II 
+  Researcher III 
+General answer comments
+From the F-test we can conclude that the R2-change (from Model 1 to Model 2) is not significant at any of the significance levels the researchers use, this means that we do not have evidence of a direct effect of Education on Public Participation controlled for Age, F(2,38) = .895, p = .417.
+ 
+
+Unanswered
+Consult the table with the regression coefficients.
+
+
+Write down the general estimated regression model for Model 2.
+
+General answer comments
+Public Participation′=10.478+ .097 ∗Age -2.042 ∗D1 -3.071 ∗D2
+ 
+
+Unanswered
+Write down the estimated model for each of the three groups.
+
+Then make a graph of the regression equations. Put age on the X-axis, the predicted public participation on the Y-axis, and draw the lines for each education group.
+
+General answer comments
+Low education:
+
+Public Participation′=10.478+ .097 ∗Age -2.042 ∗0 -3.071 ∗0
+
+Public Participation′=10.478+ .097 ∗Age
+
+Middle education:
+
+Public Participation′=10.478+ .097 ∗Age -2.042 ∗1 -3.071 ∗0
+Public Participation′=8.436 + .097 ∗Age
+
+High education:
+
+Public Participation′=10.478+ .097 ∗Age -2.042 ∗0 -3.071 ∗1
+
+Public Participation′=7.407+ .097 ∗Age
+
+Picture1.png
+
+ 
+
+
+Suppose we have two persons, both are 40 years old, but one had middle level education and the other had high-level education.
+
+
+What is the expected difference in public participation between these two persons? (round to 3 decimal places)
+
+Correct Answers
+1.029 (with margin: 0)
+General answer comments
+40 year old with middle education:
+
+Public Participation^′=10.478+ .097 ∗40 -2.042 ∗1 -3.071 ∗0
+
+Public Participation^′=12.316
+
+40 year old with high education:
+
+Public Participation^′=10.478+ .097 ∗40 -2.042 ∗0 -3.071 ∗1
+
+Public Participation^′=11.287
+
+Difference = 12.316 – 11.287 = 1.029
+
+ 
+
+
+The researchers conclude:
+
+“Controlled for age, low educated people in the sample show highest level of public participation.”
+
+
+Is this a valid conclusion?
+
+Correct answer
+  Yes 
+  No 
+## Bla 
+
+In this assignment we work with the PublicParticipation.sav data.
+It contains (fictional) data on the following variables:  income (higher scores, more income), public participation, education, age, and gender (0 = females; 1 = males). Public participation involves being member of school boards, municipal councillor, etc.
+
+In this assignment we will see how we can model interaction between a continuous predictor and a dichotomous predictor. 
+
+Suppose we are interested in relationship between age and public participation, and we want to know if the relationship is moderated by gender. 
+An interaction model is conceptually represented as follows (these two diagrams are interchangeable):
+
+::: {layout-ncol=2}
+
+![](images/y_on_x1x2int2.png)
+
+![](images/y_on_x1x2int1.png)
+
+
+:::
+
+
+Modeling Interactions
+
+The regression model for testing the interaction is:
+
+$Y' = b_{0} + b_{1}X + b_{2}D_{g} + b_{3}XD_{g}$
+
+where  X = age, and D_g = gender (0 = women; 1 = men). Notice that women are our reference group.
+
+To model interaction we need to create a new variable, which is the product of the dummy variable (gender in our case) and  (age in our case).
+
+This is best done via syntax, but to use the graphical interface proceed as follows: 
+
+via Transform > compute variable 
+
+Give the new variable a name (i.e., the target variable), say GenderTAge. 
+
+Then specify the product at the right (see more information button). Click on Paste, select and run the code. Check in Data View whether the product term was added correctly.
+
+Alternatively, the syntax is:
+
+```
+COMPUTE GenderTAge = Gender * Age.
+EXECUTE.
+```
+
+Now run the regression analysis that includes the interaction effect.
+
+**Important:** Just like with dummies you must include all dummies that belong to the same variable in the model together, with an interaction term, you must always include its constituent variables as well. This is because the interaction term only *modifies* the effect of its constituent variables; the effect of those constituent variables must thus also be in the model.
+
+So, if you add variable intXTZ into the model, you must also include X and Z.
+
+Via analyze > regression > linear; choose age, gender and GenderTAge as the independent variables, and public participation as the dependent variable. 
+
+Consult the table Regression coefficients. Write down the general estimated model.
+
+Finish the following equation, then check your answer.
+
+$\text{Public Participation' = .....}$
+
+
+`r hide("Answer")`
+$\text{Public Participation}′ = 3.252 + 0.137*\text{Age} + 12.439*\text{Gender} − 0.116*\text{Gender}*\text{Age}$
+
+`r unhide()` 
+
+Now write down the estimated models down for women and men separately. Hint: fill in 0 and 1 in the general estimated model mentioned in the previous step, then simplify the formula.
+
+Complete the equations for women (W) and men (M):
+
+$\text{PP}_W'=$ `r fitb(3.252, num = T, tol = .01)` $+$ `r fitb(0.137, num = T, tol = .01)` $*\text{Age}$
+
+$\text{PP}_M'=$ `r fitb(15.691, num = T, tol = .01)` $+$ `r fitb(0.021, num = T, tol = .01)` $*\text{Age}$
+
+Now draw (on a piece of paper) a graph of the results. That is, put age on the x-axis, the predicted public participation on the y-axis, and draw separate regression lines for males and females.
+
+True or false
+
+In the sample, age has a positive effect on public participation for women but a negative effect for men? `r torf(FALSE)`
+
+
+The researchers tested at the 5% level and concluded:
+
+"We have convincing evidence that the population effect of age on public participation is different for men and women." `r torf(FALSE)`
+
+The estimated regression model was:
+
+$Y'= 3.252 + 0.137Age + 12.439D_g - 0.116(Age \times D_g)$
+
+What would the regression equation look like if we would have used the men as the reference group? Use logic to answer this question, instead of re-running the analysis.
+
+$Y'=$ `r fitb(15.691, num = T, tol = .01)` $+$ `r fitb(0.021, num = T, tol = .01)` $*\text{Age}+$
+`r fitb(-12.439, num = T, tol = .01)`
+$*D_g+$
+`r fitb(.116, num = T, tol = .01)`
+$*(\text{Age} \times D_g)$
+
+<!-- LaTeX: ŷ = 15.691 + .021Age - 12.439D_{g}  + .116AgeD_{g}  -->
+
+
+To verify our answer to the previous question, we will recode the variable Gender such that males are scored 0 (= reference group) and females are scored 1.
+
+Proceed as follows:
+
+- via Transform > Recode into different variables 
+
+- Select Gender.
+
+- Give a name to the new output variable (say GenderFem), give a label (say: "Gender (ref=males)" click on change.
+
+- Specify old and new values: old value 0 becomes 1 and old value 1 becomes 0 (don't forget to click on add in between).
+
+- Click OK. Verify that SPSS added a new column with a dummy variable where males are the reference group.
+
+- Compute the product variable for the interaction between age and gender but now use the dummy having males as reference group.
+
+- Rerun the regression analysis, but now using the new gender variable and interaction term. If you're answer in the previous step is correct you should find the values back in the table Regression Coefficients.
+
+
+
+
+## Categorical Predictors with Three or more Categories
+
+The categorical predictor Education has three levels (low, middle, high). If we want to include such a variable we need to use dummies.
+
+Code the dummy variables as follows:
+
+Value | D1 | D2
+------|----|------
+Low   |0   |0
+Middle   |1   |0
+High   |0   |1
+
+Which group is the reference group according to this coding? `r mcq(c(answer = "Low", "Middle", "High"))`
+
+
+Use syntax to create the dummies.
+
+We are now ready for the regression analysis.
+
+Run a hierarchical regression analysis with public participation as dependent variable. Model 1 only includes age. Model 2 includes age and the dummies. So we have the following nested models:
+
+This model does not include the interaction effects yet! This means that we assume that the regression lines are parallel to one another. In the next assignment we check whether this assumption is reasonable.
+
+Proceed as follows: 
+
+- via analyze > regression > linear. 
+- Select public participation as the dependent variable and only age as the independent variable. Click on next. 
+- Now select the two dummies we have created in the previous step. The two dummies together represent education. Always enter dummies into the model together!
+- Via Statistics ask for the R-change statistics.
+
+Consult the output and answer the questions in the next few steps. 
+
+Education and age together explain  `r fitb(9.7, num = T, tol = .1)` % of the total variance.
+
+What is the value of the test statistic that tests the unique effect of education, controlled for age? `r fitb(.895, num = T, tol = .01)` 
+
+Report the results for the unique effect of education, then check your answer.
+
+`r hide("Answer")`
+Education does not have a significant unique effect on public participation after controlling for age, $\Delta R^2 = .04, F(2,38) = 0.895, p = .417$. 
+
+`r unhide()`
+ 
+ 
+Consult the table with the regression coefficients. 
+
+Write down the estimated regression equation of Model 2. 
+
+`r hide("Answer")`
+$PublicParticipation'\:=\:10.478\:+\:.097\:\cdot \:Age\:-\:2.042\:\cdot \:D1\:-\:3.071\:\cdot \:D2$
+`r unhide()`
+
+Write down the estimated model for each of the three groups.
+
+Then make a graph of the regression equations. Put age on the x-axis, the predicted public participation on the y-axis, and draw the lines for each education group. 
+
+`r hide("Answer")`
+The models were:
+
+$PP'_l = 10.478 + .097Age$
+
+$PP'_m = (10.478-2.042) + .097Age = 8.436 + .097Age$
+
+$PP'_h = (10.478-3.071) + .097Age = 7.407 + .097Age$
+
+Did you get it right?
+
+`r unhide()` 
+
+Suppose we have two persons, both are 40 years old, but one had middle level education and the other had high-level education.
+
+What is the expected (absolute) difference in public participation between these two persons? `r fitb(1.029, num = T, tol = .01)`
+
+The researchers conclude:
+
+"Controlled for age, low educated people in the sample show highest level of public participation".
+
+Is this a valid conclusion? `r torf(FALSE)`
+
+
+## Interaction with more than Two Categories
+
+In the previous assignment, we assumed that the effect of Age on Public participation was equal for each of the education level groups. However, we do not know whether this assumption is reasonable. In this assignment, we will check whether the interaction effect between Age and Education level is statistically significant or not.
+ 
+Create the two interaction terms using syntax, with the Compute variable command. Note that we need two interaction terms: D1Tage and D2Tage.
+ 
+
+We are now ready for the regression analysis.
+
+Run a hierarchical regression analysis. Model 1 only includes age and the two dummy variables. Model 2 additionally includes the interaction terms. 
+
+Write down the formulas for the two nested models, then check your answer.
+
+`r hide("Answer")`
+
+- Model 1: $Y'= b_0 + b_1Age + b_2D_1 + b_3 D_2$
+- Model 2: $Y'= b_0 + b_1Age + b_2D_1 + b_3 D_2 + b_4D_1Age + b_5 D_2Age$
+
+`r unhide()`
+
+Proceed as follows (or, preferably, use syntax): 
+
+- via analyze > regression > linear. 
+- Select public participation as the dependent and age, D1 and D2 as the independent variables. Click on next. 
+- Now select the two interaction terms we have created in the previous step. The two interaction terms together represent the interaction effect between education and age.
+- Via Statistics ask for the R-change statistics.
+
+Consult the output and answer the questions in the next few steps. 
+
+ Before we carry out any of the significance tests, let's take a look at the coefficients table. Look at the unstandardized coefficients in Model2. First, write down the entire estimated model.
+
+Complete the following equation:
+
+$Y'=$ `r fitb(11.426, num = T, tol = .01)` 
+$+$ `r fitb(.073, num = T, tol = .01)` $*Age+$
+`r fitb(-5.19, num = T, tol = .01)` $*D_{middle}+$
+`r fitb(1.577, num = T, tol = .01)` $*D_{high}+$
+`r fitb(.067, num = T, tol = .01)` $*(D_{middle}*Age)+$
+`r fitb(-.088, num = T, tol = .01)` $*(D_{high}*Age)$
+
+
+
+Next, write down the estimated model for each of the three education groups.
+
+Remember, fill in 0 and 1 for the dummy variables, then simplify:
+
+
+$Y_{low}'=$ `r fitb(11.426, num = T, tol = .01)` 
+$+$ `r fitb(.073, num = T, tol = .01)` $*Age$
+
+$Y_{middle}'=$ `r fitb(6.236, num = T, tol = .01)` 
+$+$ `r fitb(.14, num = T, tol = .01)` $*Age$
+
+
+$Y_{high}'=$ `r fitb(13.003, num = T, tol = .01)` 
+$+$ `r fitb(-.015, num = T, tol = .01)` $*Age$
+
+Now, answer the following questions.
+
+ 
+
+True or False? 
+
+The effect of Age on Publication Participation in the sample is positive for all education groups. `r torf(FALSE)`
+
+For which group is the effect of Age on publication participation the strongest? `r mcq(c("Low", answer = "Middle", "High"))`
+
+
+We inspected the estimated model. But is there a significant interaction effect to begin with? To answer that question we inspect the Model Summary Table. 
+
+First of all, write down the $R^2$ for the model without- and with interactions. What do these numbers mean?
+
+Without interactions: `r fitb(.097, num = T, tol = .01)`
+With interactions: `r fitb(.127, num = T, tol = .01)` 
+
+
+Finish the following sentence:
+
+Model 2 with the interaction effects explains an additional `r fitb(3, num = T, tol = .1)` % of the variance in Public Participation compared to Model 1 (on top of what was already explained by the main effects of Age and Education).
+
+
+We will now carry out the F-change test. Write down the null hypothesis and alternative hypothesis that we test with this F-change test.
+
+
+`r hide("Answer")`
+$H_0:\:R^2\:=\:0$
+
+$H_1:\:R^2 \ne 0$
+
+`r unhide()`
+
+
+Write down the F-value, the df and the p-value.
+
+* F-value: `r fitb(.618, num = T, tol = .01)` 
+* df: (`r fitb(2, num = T)` , `r fitb(36, num = T)` )
+* p-value: `r fitb(.545, num = T, tol = .01)` 
+ 
+
+True or false: there is a significant interaction effect: `r torf(FALSE)`
+
+True or False: As a follow-up analysis, we should perform a simple effects analysis. `r torf(FALSE)`
+
+Interpret the results of Model 1 (without interaction) and report your results.
+
+`r hide("Answer")`
+There is no evidence for a significant effect of Age and Education on Participation, $R^2 = .10, F(3, 38) = 1.36, p = .27$.
+
+`r unhide()`
+
+
+## Interaction Effects
+
+In this assignment, you will examine whether the effect of relationship with coworkers (sccowork; higher score = better relationship) on the emotional pressure at work (scemoti) has an interation effect with gender (0 = male, 1 = female).
+
+If there is an interaction effect, the effect of sccowork on scemoti depends on the value of the variable gender. 
+
+Open Work.sav. 
+
+ 
+To be able to examine the interaction effect, you should first create a product variable. 
+
+- Go to Transform > Compute Variable
+- Give a name to the new product variable in Target Variable (GenderTRelco for example).
+- In Nummeric Expression you need to specify how the new variable should be computed. You have to enter gender * sccowork to compute the product of gender and sccowork. 
+- Paste and run the syntax, and check whether the product variable was added
+
+ 
+
+Conduct a multiple regression analysis (using Analyze > Regression > Linear) with scemoti as dependent variable. The independent variables are the main effects (gender and sccowork) and the interaction effect (genderTsccowork).
+
+What is the p-value of the interaction effect? `r fitb(0.083, num = T, tol = .01)`
+
+True or false: The interaction effect is significant at $\alpha = .10$ `r torf(TRUE)`
+ 
+
+The regression equation for the entire sample is:
+
+$\text{scemoti}'=$ `r fitb(27.166, num = T, tol = .01)` 
+$+$ `r fitb(-7.103, num = T, tol = .01)` $*\text{Gender}+$
+`r fitb(-.237, num = T, tol = .01)` $*\text{Relationship}+$
+`r fitb(.439, num = T, tol = .01)` $*(\text{Gender}*\text{Relationship})$
+
+
+For males, the value of Gender is 0. That means that GenderTRelco is also 0. The regression equation for males then becomes:
+
+$\text{scemoti}'=$ `r fitb(27.166, num = T, tol = .01)` 
+`r fitb(-.237, num = T, tol = .01)` $*\text{Relationship}$
+
+For females, the value of Gender is 1. What is the regression equation for females?
+
+$\text{scemoti}'=$ `r fitb(20.063, num = T, tol = .01)` 
+$+$ 
+`r fitb(0.202, num = T, tol = .01)` $*\text{Relationship}$
+
+Draw (on paper, not in SPSS) a schematic graph of the interaction effect. Put relationship with coworkers on the X-axis, and emotional pressure on the Y-axis. Draw a schematic regression line for each group. 
+
+
+In what group is the effect of relationship with coworkers on emotional pressure the strongest: males or females? `r mcq(c(answer = "Males", "Females"))` 
+
+
+In practice, you'd often want to know whether the effects within the groups are significant.
+
+Can you use the output of this regression analysis to draw conclusions about the significance of the effect within each group? `r mcq(c("No", answer = "Yes, but only for the group of males", "Yes, but only for the group of females", "Yes, for both groups"))`
+
+At this moment, we don't have enough information in the output yet to test the effect within the female group. But we can test the effect within the male group! 
+
+What is the p-value of the effect of sccowork on scemoti within the male group? `r fitb(0.237, num = T, tol = .01)`
+
+To test the significance within the the group of females, we can simply switch the reference groups. 
+
+- Make a new dummy variable called `male`, on which males score 1, and females 0
+- Compute a new product variable: `COMPUTE maleTsccowork = male * sccowork.`
+
+Perform a new regression analysis with these predictors. This is exactly the same analysis, but now with women as reference group instead of men.
+
+Look at the table with the estimated coefficients. What is the p-value of the effect of sccowork on scemoti within the female group? `r fitb(0.187, num = T, tol = .01)`

@@ -1,0 +1,2088 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="Lecture2_files/libs/clipboard/clipboard.min.js"></script>
+<script src="Lecture2_files/libs/quarto-html/tabby.min.js"></script>
+<script src="Lecture2_files/libs/quarto-html/popper.min.js"></script>
+<script src="Lecture2_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="Lecture2_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="Lecture2_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="Lecture2_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="Lecture2_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.3.427">
+
+  <meta name="author" content="Caspar J. van Lissa">
+  <meta name="dcterms.date" content="2023-07-12">
+  <title>Lecture 2 - Probability Distributions</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="Lecture2_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="Lecture2_files/libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" href="Lecture2_files/libs/revealjs/dist/theme/quarto.css">
+  <link href="Lecture2_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="Lecture2_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="Lecture2_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="Lecture2_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+
+  .callout {
+    margin-top: 1em;
+    margin-bottom: 1em;  
+    border-radius: .25rem;
+  }
+
+  .callout.callout-style-simple { 
+    padding: 0em 0.5em;
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+    display: flex;
+  }
+
+  .callout.callout-style-default {
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+  }
+
+  .callout .callout-body-container {
+    flex-grow: 1;
+  }
+
+  .callout.callout-style-simple .callout-body {
+    font-size: 1rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-style-default .callout-body {
+    font-size: 0.9rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-titled.callout-style-simple .callout-body {
+    margin-top: 0.2em;
+  }
+
+  .callout:not(.callout-titled) .callout-body {
+      display: flex;
+  }
+
+  .callout:not(.no-icon).callout-titled.callout-style-simple .callout-content {
+    padding-left: 1.6em;
+  }
+
+  .callout.callout-titled .callout-header {
+    padding-top: 0.2em;
+    margin-bottom: -0.2em;
+  }
+
+  .callout.callout-titled .callout-title  p {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+    
+  .callout.callout-titled.callout-style-simple .callout-content  p {
+    margin-top: 0;
+  }
+
+  .callout.callout-titled.callout-style-default .callout-content  p {
+    margin-top: 0.7em;
+  }
+
+  .callout.callout-style-simple div.callout-title {
+    border-bottom: none;
+    font-size: .9rem;
+    font-weight: 600;
+    opacity: 75%;
+  }
+
+  .callout.callout-style-default  div.callout-title {
+    border-bottom: none;
+    font-weight: 600;
+    opacity: 85%;
+    font-size: 0.9rem;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-default div.callout-content {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-simple .callout-icon::before {
+    height: 1rem;
+    width: 1rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 1rem 1rem;
+  }
+
+  .callout.callout-style-default .callout-icon::before {
+    height: 0.9rem;
+    width: 0.9rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 0.9rem 0.9rem;
+  }
+
+  .callout-title {
+    display: flex
+  }
+    
+  .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  .callout.no-icon::before {
+    display: none !important;
+  }
+
+  .callout.callout-titled .callout-body > .callout-content > :last-child {
+    margin-bottom: 0.5rem;
+  }
+
+  .callout.callout-titled .callout-icon::before {
+    margin-top: .5rem;
+    padding-right: .5rem;
+  }
+
+  .callout:not(.callout-titled) .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  /* Callout Types */
+
+  div.callout-note {
+    border-left-color: #4582ec !important;
+  }
+
+  div.callout-note .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEU0lEQVRYCcVXTWhcVRQ+586kSUMMxkyaElstCto2SIhitS5Ek8xUKV2poatCcVHtUlFQk8mbaaziwpWgglJwVaquitBOfhQXFlqlzSJpFSpIYyXNjBNiTCck7x2/8/LeNDOZxDuEkgOXe++553zfefee+/OYLOXFk3+1LLrRdiO81yNqZ6K9cG0P3MeFaMIQjXssE8Z1JzLO9ls20MBZX7oG8w9GxB0goaPrW5aNMp1yOZIa7Wv6o2ykpLtmAPs/vrG14Z+6d4jpbSKuhdcSyq9wGMPXjonwmESXrriLzFGOdDBLB8Y6MNYBu0dRokSygMA/mrun8MGFN3behm6VVAwg4WR3i6FvYK1T7MHo9BK7ydH+1uurECoouk5MPRyVSBrBHMYwVobG2aOXM07sWrn5qgB60rc6mcwIDJtQrnrEr44kmy+UO9r0u9O5/YbkS9juQckLed3DyW2XV/qWBBB3ptvI8EUY3I9p/67OW+g967TNr3Sotn3IuVlfMLVnsBwH4fsnebJvyGm5GeIUA3jljERmrv49SizPYuq+z7c2H/jlGC+Ghhupn/hcapqmcudB9jwJ/3jvnvu6vu5lVzF1fXyZuZZ7U8nRmVzytvT+H3kilYvH09mLWrQdwFSsFEsxFVs5fK7A0g8gMZjbif4ACpKbjv7gNGaD8bUrlk8x+KRflttr22JEMRUbTUwwDQScyzPgedQHZT0xnx7ujw2jfVfExwYHwOsDTjLdJ2ebmeQIlJ7neo41s/DrsL3kl+W2lWvAga0tR3zueGr6GL78M3ifH0rGXrBC2aAR8uYcIA5gwV8zIE8onoh8u0Fca/ciF7j1uOzEnqcIm59sEXoGc0+z6+H45V1CvAvHcD7THztu669cnp+L0okAeIc6zjbM/24LgGM1gZk7jnRu1aQWoU9sfUOuhrmtaPIO3YY1KLLWZaEO5TKUbMY5zx8W9UJ6elpLwKXbsaZ4EFl7B4bMtDv0iRipKoDQT2sNQI9b1utXFdYisi+wzZ/ri/1m7QfDgEuvgUUEIJPq3DhX/5DWNqIXDOweC2wvIR90Oq3lDpdMIgD2r0dXvGdsEW5H6x6HLRJYU7C69VefO1x8Gde1ZFSJLfWS1jbCnhtOPxmpfv2LXOA2Xk2tvnwKKPFuZ/oRmwBwqRQDcKNeVQkYcOjtWVBuM/JuYw5b6isojIkYxyYAFn5K7ZBF10fea52y8QltAg6jnMqNHFBmGkQ1j+U43HMi2xMar1Nv0zGsf1s8nUsmUtPOOrbFIR8bHFDMB5zL13Gmr/kGlCkUzedTzzmzsaJXhYawnA3UmARpiYj5ooJZiUoxFRtK3X6pgNPv+IZVPcnwbOl6f+aBaO1CNvPW9n9LmCp01nuSaTRF2YxHqZ8DYQT6WsXT+RD6eUztwYLZ8rM+rcPxamv1VQzFUkzFXvkiVrySGQgJNvXHJAxiU3/NwiC03rSf05VBaPtu/Z7/B8Yn/w7eguloAAAAAElFTkSuQmCC');
+  }
+
+  div.callout-note.callout-style-default .callout-title {
+    background-color: #dae6fb
+  }
+
+  div.callout-important {
+    border-left-color: #d9534f !important;
+  }
+
+  div.callout-important .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEKklEQVRYCcVXTWhcVRS+575MJym48A+hSRFr00ySRQhURRfd2HYjk2SSTokuBCkU2o0LoSKKraKIBTcuFCoidGFD08nkBzdREbpQ1EDNIv8qSGMFUboImMSZd4/f9zJv8ibJMC8xJQfO3HPPPef7zrvvvnvviIkpC9nsw0UttFunbUhpFzFtarSd6WJkStVMw5xyVqYTvkwfzuf/5FgtkVoB0729j1rjXwThS7Vio+Mo6DNnvLfahoZ+i/o32lULuJ3NNiz7q6+pyAUkJaFF6JwaM2lUJlV0MlnQn5aTRbEu0SEqHUa0A4AdiGuB1kFXRfVyg5d87+Dg4DL6m2TLAub60ilj7A1Ec4odSAc8X95sHh7+ZRPCFo6Fnp7HfU/fBng/hi10CjCnWnJjsxvDNxWw0NfV6Rv5GgP3I3jGWXumdTD/3cbEOP2ZbOZp69yniG3FQ9z1jD7bnBu9Fc2tKGC2q+uAJOQHBDRiZX1x36o7fWBs7J9ownbtO+n0/qWkvW7UPIfc37WgT6ZGR++EOJyeQDSb9UB+DZ1G6DdLDzyS+b/kBCYGsYgJbSQHuThGKRcw5xdeQf8YdNHsc6ePXrlSYMBuSIAFTGAtQo+VuALo4BX83N190NWZWbynBjhOHsmNfFWLeL6v+ynsA58zDvvAC8j5PkbOcXCMg2PZFk3q8MjI7WAG/Dp9AwP7jdGBOOQkAvlFUB+irtm16I1Zw9YBcpGTGXYmk3kQIC/Cds55l+iMI3jqhjAuaoe+am2Jw5GT3Nbz3CkE12NavmzN5+erJW7046n/CH1RO/RVa8lBLozXk9uqykkGAyRXLWlLv5jyp4RFsG5vGVzpDLnIjTWgnRy2Rr+tDKvRc7Y8AyZq10jj8DqXdnIRNtFZb+t/ZRtXcDiVnzpqx8mPcDWxgARUqx0W1QB9MeUZiNrV4qP+Ehc+BpNgATsTX8ozYKL2NtFYAHc84fG7ndxUPr+AR/iQSns7uSUufAymwDOb2+NjK27lEFocm/EE2WpyIy/Hi66MWuMKJn8RvxIcj87IM5Vh9663ziW36kR0HNenXuxmfaD8JC7tfKbrhFr7LiZCrMjrzTeGx+PmkosrkNzW94ObzwocJ7A1HokLolY+AvkTiD/q1H0cN48c5EL8Crkttsa/AXQVDmutfyku0E7jShx49XqV3MFK8IryDhYVbj7Sj2P2eBxwcXoe8T8idsKKPRcnZw1b+slFTubwUwhktrfnAt7J++jwQtLZcm3sr9LQrjRzz6cfMv9aLvgmnAGvpoaGLxM4mAEaLV7iAzQ3oU0IvD5x9ix3yF2RAAuYAOO2f7PEFWCXZ4C9Pb2UsgDeVnFSpbFK7/IWu7TPTvBqzbGdCHOJQSxiEjt6IyZmxQyEJHv6xyQsYk//moVFsN2zP6fRImjfq7/n/wFDguUQFNEwugAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-important.callout-style-default .callout-title {
+    background-color: #f7dddc
+  }
+
+  div.callout-warning {
+    border-left-color: #f0ad4e !important;
+  }
+
+  div.callout-warning .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAETklEQVRYCeVWW2gcVRg+58yaTUnizqbipZeX4uWhBEniBaoUX1Ioze52t7sRq6APio9V9MEaoWlVsFasRq0gltaAPuxms8lu0gcviE/FFOstVbSIxgcv6SU7EZqmdc7v9+9mJtNks51NTUH84ed889/PP+cmxP+d5FIbMJmNbpREu4WUkiTtCicKny0l1pIKmBzovF2S+hIJHX8iEu3hZJ5lNZGqyRrGSIQpq15AzF28jgpeY6yk6GVdrfFqdrD6Iw+QlB8g0YS2g7dyQmXM/IDhBhT0UCiRf59lfqmmDvzRt6kByV/m4JjtzuaujMUM2c5Z2d6JdKrRb3K2q6mA+oYVz8JnDdKPmmNthzkAk/lN63sYPgevrguc72aZX/L9C6x09GYyxBgCX4NlvyGUHOKELlm5rXeR1kchuChJt4SSwyddZRXgvwMGvYo4QSlk3/zkHD8UHxwVJA6zjZZqP8v8kK8OWLnIZtLyCAJagYC4rTGW/9Pqj92N/c+LUaAj27movwbi19tk/whRCIE7Q9vyI6yvRpftAKVTdUjOW40X3h5OXsKCdmFcx0xlLJoSuQngnrJe7Kcjm4OMq9FlC7CMmScQANuNvjfP3PjGXDBaUQmbp296S5L4DrpbrHN1T87ZVEZVCzg1FF0Ft+dKrlLukI+/c9ENo+TvlTDbYFvuKPtQ9+l052rXrgKoWkDAFnvh0wTOmYn8R5f4k/jN/fZiCM1tQx9jQQ4ANhqG4hiL0qIFTGViG9DKB7GYzgubnpofgYRwO+DFjh0Zin2m4b/97EDkXkc+f6xYAPX0KK2I/7fUQuwzuwo/L3AkcjugPNixC8cHf0FyPjWlItmLxWw4Ou9YsQCr5fijMGoD/zpdRy95HRysyXA74MWOnscpO4j2y3HAVisw85hX5+AFBRSHt4ShfLFkIMXTqyKFc46xdzQM6XbAi702a7sy04J0+feReMFKp5q9esYLCqAZYw/k14E/xcLLsFElaornTuJB0svMuJINy8xkIYuL+xPAlWRceH6+HX7THJ0djLUom46zREu7tTkxwmf/FdOZ/sh6Q8qvEAiHpm4PJ4a/doJe0gH1t+aHRgCzOvBvJedEK5OFE5jpm4AGP2a8Dxe3gGJ/pAutug9Gp6he92CsSsWBaEcxGx0FHytmIpuqGkOpldqNYQK8cSoXvd+xLxXADw0kf6UkJNFtdo5MOgaLjiQOQHcn+A6h5NuL2s0qsC2LOM75PcF3yr5STuBSAcGG+meA14K/CI21HcS4LBT6tv0QAh8Dr5l93AhZzG5ZJ4VxAqdZUEl9z7WJ4aN+svMvwHHL21UKTd1mqvChH7/Za5xzXBBKrUcB0TQ+Ulgkfbi/H/YT5EptrGzsEK7tR1B7ln9BBwckYfMiuSqklSznIuoIIOM42MQO+QnduCoFCI0bpkzjCjddHPN/F+2Yu+sd9bKNpVwHhbS3LluK/0zgfwD0xYI5dXuzlQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-warning.callout-style-default .callout-title {
+    background-color: #fcefdc
+  }
+
+  div.callout-tip {
+    border-left-color: #02b875 !important;
+  }
+
+  div.callout-tip .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAADr0lEQVRYCe1XTWgTQRj9ZjZV8a9SPIkKgj8I1bMHsUWrqYLVg4Ue6v9BwZOxSYsIerFao7UiUryIqJcqgtpimhbBXoSCVxUFe9CTiogUrUp2Pt+3aUI2u5vdNh4dmMzOzHvvezuz8xNFM0mjnbXaNu1MvFWRXkXEyE6aYOYJpdW4IXuA4r0fo8qqSMDBU0v1HJUgVieAXxzCsdE/YJTdFcVIZQNMyhruOMJKXYFoLfIfIvVIMWdsrd+Rpd86ZmyzzjJmLStqRn0v8lzkb4rVIXvnpScOJuAn2ACC65FkPzEdEy4TPWRLJ2h7z4cArXzzaOdKlbOvKKX25Wl00jSnrwVxAg3o4dRxhO13RBSdNvH0xSARv3adTXbBdTf64IWO2vH0LT+cv4GR1DJt+DUItaQogeBX/chhbTBxEiZ6gftlDNXTrvT7co4ub5A6gp9HIcHvzTa46OS5fBeP87Qm0fQkr4FsYgVQ7Qg+ZayaDg9jhg1GkWj8RG6lkeSacrrHgDaxdoBiZPg+NXV/KifMuB6//JmYH4CntVEHy/keA6x4h4CU5oFy8GzrBS18cLJMXcljAKB6INjWsRcuZBWVaS3GDrqB7rdapVIeA+isQ57Eev9eCqzqOa81CY05VLd6SamW2wA2H3SiTbnbSxmzfp7WtKZkqy4mdyAlGx7ennghYf8voqp9cLSgKdqNfa6RdRsAAkPwRuJZNbpByn+RrJi1RXTwdi8RQF6ymDwGMAtZ6TVE+4uoKh+MYkcLsT0Hk8eAienbiGdjJHZTpmNjlbFJNKDVAp2fJlYju6IreQxQ08UJDNYdoLSl6AadO+fFuCQqVMB1NJwPm69T04Wv5WhfcWyfXQB+wXRs1pt+nCknRa0LVzSA/2B+a9+zQJadb7IyyV24YAxKp2Jqs3emZTuNnKxsah+uabKbMk7CbTgJx/zIgQYErIeTKRQ9yD9wxVof5YolPHqaWo7TD6tJlh7jQnK5z2n3+fGdggIOx2kaa2YI9QWarc5Ce1ipNWMKeSG4DysFF52KBmTNMmn5HqCFkwy34rDg05gDwgH3bBi+sgFhN/e8QvRn8kbamCOhgrZ9GJhFDgfcMHzFb6BAtjKpFhzTjwv1KCVuxHvCbsSiEz4CANnj84cwHdFXAbAOJ4LTSAawGWFn5tDhLMYz6nWeU2wJfIhmIJBefcd/A5FWQWGgrWzyORZ3Q6HuV+Jf0Bj+BTX69fm1zWgK7By1YTXchFDORywnfQ7GpzOo6S+qECrsx2ifVQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-tip.callout-style-default .callout-title {
+    background-color: #ccf1e3
+  }
+
+  div.callout-caution {
+    border-left-color: #fd7e14 !important;
+  }
+
+  div.callout-caution .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAACV0lEQVRYCdVWzWoUQRCuqp2ICBLJXgITZL1EfQDBW/bkzUMUD7klD+ATSHBEfAIfQO+iXsWDxJsHL96EHAwhgzlkg8nBg25XWb0zIb0zs9muYYWkoKeru+vn664fBqElyZNuyh167NXJ8Ut8McjbmEraKHkd7uAnAFku+VWdb3reSmRV8PKSLfZ0Gjn3a6Xlcq9YGb6tADjn+lUfTXtVmaZ1KwBIvFI11rRXlWlatwIAAv2asaa9mlB9wwygiDX26qaw1yYPzFXg2N1GgG0FMF8Oj+VIx7E/03lHx8UhvYyNZLN7BwSPgekXXLribw7w5/c8EF+DBK5idvDVYtEEwMeYefjjLAdEyQ3M9nfOkgnPTEkYU+sxMq0BxNR6jExrAI31H1rzvLEfRIdgcv1XEdj6QTQAS2wtstEALLG1yEZ3QhH6oDX7ExBSFEkFINXH98NTrme5IOaaA7kIfiu2L8A3qhH9zRbukdCqdsA98TdElyeMe5BI8Rs2xHRIsoTSSVFfCFCWGPn9XHb4cdobRIWABNf0add9jakDjQJpJ1bTXOJXnnRXHRf+dNL1ZV1MBRCXhMbaHqGI1JkKIL7+i8uffuP6wVQAzO7+qVEbF6NbS0LJureYcWXUUhH66nLR5rYmva+2tjRFtojkM2aD76HEGAD3tPtKM309FJg5j/K682ywcWJ3PASCcycH/22u+Bh7Aa0ehM2Fu4z0SAE81HF9RkB21c5bEn4Dzw+/qNOyXr3DCTQDMBOdhi4nAgiFDGCinIa2owCEChUwD8qzd03PG+qdW/4fDzjUMcE1ZpIAAAAASUVORK5CYII=');
+  }
+
+  div.callout-caution.callout-style-default .callout-title {
+    background-color: #ffe5d0
+  }
+
+  </style>
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+  
+  <script src="Lecture2_files/libs/kePrint-0.0.1/kePrint.js"></script>
+  <link href="Lecture2_files/libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">Lecture 2 - Probability Distributions</h1>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Caspar J. van Lissa 
+</div>
+</div>
+</div>
+
+  <p class="date">2023-07-12</p>
+</section>
+<section class="slide level2">
+
+<!-- * Today we’ll discuss… -->
+<!--   * Probabilities -->
+<!--   * Normal distribution -->
+<!--   * Readings for today: Chapter 6 (6.1-6.10) -->
+<!-- | Week number  | Dates | Monday | Tuesday | Wednesday | Thursday | Friday | Notes | -->
+<!-- | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | -->
+<!-- | 35 | 30 Aug – 3 Sep  | Lecture 1 |   |   | Lab session 1 |   |   | -->
+<!-- | 36 | 6 Sep – 10 Sep | Lecture 2 |   |   | Lab session 2 |   |   | -->
+<!-- | 37 | 13 Sep – 17 Sep | Lecture 3 |   |   |   |   | Home-practice practical this week | -->
+<!-- | 38 | 20 Sep – 24 Sep  | Lecture 4 |   |   | Lab session 3 |   |   | -->
+<!-- | 39 | 27 Sep – 1 Oct | Lecture 5 |   |   | Lab session 4 |   |   | -->
+<!-- | 40 | 4 Oct – 8 Oct | Lecture 6 |   |   |   |   |   | -->
+<!-- | 41 | 11 Oct – 15 Oct | Lecture 7 |   |   | Lab session 5 |   |   | -->
+<!-- | 42 | 18 Oct – 22 Oct | No lectures this week |  |  |  |  |   | -->
+<!-- | 43 | 25 Oct – 29 Oct | Lecture 8 |   |   | Lab session 6 |   |   | -->
+<!-- | 44 | 1 Nov – 5 Nov | Lecture 9 |   |   | Lab session 7 |   |   | -->
+<!-- | 45 | 8 Nov – 12 Nov | Lecture 10 |   |   | Lab session 8 |   | Voluntary exam after lecture 10 | -->
+<!-- ## Quiz lecture 1 -->
+<!-- ## Question 1 -->
+<!-- Suppose that I ask a random sample of 5 students how many pairs of shoes they have. The number of pairs are: 7, 6, 8, 6, and 8. -->
+<!-- What is the variance of these pairs of shoes? -->
+<!-- 4 -->
+<!-- 7 -->
+<!-- 1 -->
+<!-- 2 -->
+<!-- ## Question 1 - answer -->
+<!-- ## Question 2 -->
+<!-- Six students work on a Statistics exam. They obtain the following grades: 8, 9, 5, 6, 7 and 8. The teacher calculates a certain statistic, which is equal to 7.5. -->
+<!-- Which statistic did the teacher calculate? -->
+<!-- Mean -->
+<!-- Standard deviation -->
+<!-- Median -->
+<!-- Mode -->
+<!-- ## Question 2 - answer -->
+<!-- Six students work on a Statistics exam. They obtain the following grades: 8, 9, 5, 6, 7 and 8. The teacher calculates a certain statistic, which is equal to 7.5. -->
+<!-- Which statistic did the teacher calculate? -->
+<!-- Mean; Mean = (8 + 9 + 5 + 6 + 7 + 8)/6 = 43/6 = 7.17 -->
+<!-- Standard deviation; 1.47 -->
+<!-- Median; 5, 6, 7, 8, 8, 9  7.5 -->
+<!-- Mode; 8 -->
+<!-- ## Question 3 -->
+<!-- For which of the three scatterplots below is the correlation coefficient largest? -->
+<!-- ![](images/Lecture 20.png) -->
+<!-- ![](images/Lecture 21.png) -->
+<!-- ![](images/Lecture 22.png) -->
+<!-- ## Question 3 - ANSWER -->
+<!-- For which of the three scatterplots below is the correlation coefficient largest? -->
+<!-- ![](images/Lecture 23.png) -->
+<!-- ![](images/Lecture 24.png) -->
+<!-- ![](images/Lecture 25.png) -->
+<!-- ## Question 4 -->
+<!-- Bob investigates the relationship between number of COVID-19 vaccine doses had and the amount of headache people have. He concludes that there is a linear relationship, and the correlation coefficient  _r_  is equal to +0.17. -->
+<!-- What can Bob conclude? -->
+<!-- Larger number of vaccine doses cause more headache. -->
+<!-- Larger number of vaccine doses cause less headache. -->
+<!-- None of the above. -->
+<!-- ## Question 4 - answer -->
+<!-- Bob investigates the relationship between number of COVID-19 vaccine doses had and the amount of headache people have. He concludes that there is a linear relationship, and the correlation coefficient  _r_  is equal to +0.17. -->
+<!-- What can Bob conclude? -->
+<!-- Larger number of vaccine doses cause more headache. -->
+<!-- Larger number of vaccine doses cause less headache. -->
+<!-- _None of the above._ -->
+</section>
+<section>
+<section id="probability" class="title-slide slide level1 center">
+<h1>Probability</h1>
+
+</section>
+<section id="defining-probability" class="slide level2">
+<h2>Defining probability</h2>
+<p><strong>Probability:</strong> How likely something is to occur.</p>
+<ul>
+<li>Specifically, the proportion of times we expect to observe an outcome in a <em>random experiment</em> that could be repeated many times</li>
+</ul>
+<p><em>Random experiment</em></p>
+<ul>
+<li>Could theoretically be repeated an infinite number of times</li>
+<li>Before I flip a coin, the coinflip is a random experiment with <span class="math inline">\(P_{heads} = .5\)</span>, or 50%</li>
+<li>After I flip the coin, it’s no longer random; it’s fixed (either 100% or 0%)</li>
+</ul>
+</section>
+<section id="examples-probability" class="slide level2">
+<h2>Examples probability</h2>
+<p>Probability:</p>
+<ul>
+<li>of a baby being born male, <span class="math inline">\(p_{male} = .51\)</span></li>
+<li>of rolling a 7 with two dice in Catan, <span class="math inline">\(p_7 = .167\)</span></li>
+</ul>
+<p>Not probability:</p>
+<ul>
+<li>The probability that there is life on other planets is either 100% or 0%</li>
+<li>Even if you don’t know which is correct</li>
+</ul>
+</section>
+<section id="random-variables" class="slide level2">
+<h2>Random variables</h2>
+<p><strong>Random variable</strong>: An unknown value that follows some probability distribution.</p>
+<p><em>Disambiguation: Last lecture we used “variable” as a placeholder for some unknown number.</em></p>
+<ul>
+<li>The outcome of a coin toss is a random variable</li>
+<li>It is discrete because it has only two possible outcomes</li>
+<li>The probability distributions is
+<ul>
+<li>P(X = heads) = 0.5</li>
+<li>P(X = tails) = 0.5</li>
+<li>Together: 1.0, so all possible outcomes are covered</li>
+</ul></li>
+</ul>
+</section></section>
+<section>
+<section id="discrete-probability-distributions" class="title-slide slide level1 center">
+<h1>Discrete probability distributions</h1>
+
+<img data-src="images/Lecture%2028.gif" style="width:80.0%" class="r-stretch"></section>
+<section id="frequency-vs-probability" class="slide level2">
+<h2>Frequency vs probability</h2>
+<p>Frequency distributions</p>
+<ul>
+<li>Summarize observed outcomes in a sample</li>
+<li>E.g., the number of Dutch/foreign students in this class</li>
+</ul>
+<p>A probability distribution is similar, but</p>
+<ul>
+<li>Can be interpreted as the (estimated) probability of observing these outcomes in the future</li>
+<li>E.g., if I select a random student in this class, what’s the probability that they will be Dutch?</li>
+</ul>
+<!-- ## Random sample -->
+</section>
+<section id="discrete-distributions" class="slide level2">
+<h2>Discrete distributions</h2>
+<ul>
+<li>Probability mass function
+<ul>
+<li>100% of the probability mass is distributed among finite discrete outcomes</li>
+</ul></li>
+<li>Finite number of outcomes
+<ul>
+<li>Dutch student / foreign student</li>
+<li>Student has tattoos / no tattoos</li>
+<li>Describe using contingency table or bar chart</li>
+</ul></li>
+</ul>
+<!-- -   Each has a probability -->
+<!--     -   $p_{tattoo} = .36$, $p_{\text{no tattoo}} = .64$ -->
+<!--     -   $p_{Dutch} = .70$, $p_{\text{foreign}} = .30$ -->
+
+<!-- -   Describe using table or bar chart -->
+<!-- ```{r} -->
+<!-- tab = data.frame(Value = c("Tattoo", "No tattoo"), Probability = c(.36, .64)) -->
+<!-- knitr::kable(tab, digits = 2) -->
+<!-- ``` -->
+
+<!-- ## Cross table -->
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+
+<div id="aszckanvft" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#aszckanvft table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#aszckanvft thead, #aszckanvft tbody, #aszckanvft tfoot, #aszckanvft tr, #aszckanvft td, #aszckanvft th {
+  border-style: none;
+}
+
+#aszckanvft p {
+  margin: 0;
+  padding: 0;
+}
+
+#aszckanvft .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#aszckanvft .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#aszckanvft .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#aszckanvft .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#aszckanvft .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#aszckanvft .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#aszckanvft .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#aszckanvft .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#aszckanvft .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#aszckanvft .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#aszckanvft .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#aszckanvft .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#aszckanvft .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#aszckanvft .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#aszckanvft .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#aszckanvft .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#aszckanvft .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#aszckanvft .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#aszckanvft .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#aszckanvft .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#aszckanvft .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#aszckanvft .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#aszckanvft .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#aszckanvft .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#aszckanvft .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#aszckanvft .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#aszckanvft .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#aszckanvft .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#aszckanvft .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#aszckanvft .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#aszckanvft .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#aszckanvft .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#aszckanvft .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#aszckanvft .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#aszckanvft .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#aszckanvft .gt_left {
+  text-align: left;
+}
+
+#aszckanvft .gt_center {
+  text-align: center;
+}
+
+#aszckanvft .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#aszckanvft .gt_font_normal {
+  font-weight: normal;
+}
+
+#aszckanvft .gt_font_bold {
+  font-weight: bold;
+}
+
+#aszckanvft .gt_font_italic {
+  font-style: italic;
+}
+
+#aszckanvft .gt_super {
+  font-size: 65%;
+}
+
+#aszckanvft .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#aszckanvft .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#aszckanvft .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#aszckanvft .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#aszckanvft .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#aszckanvft .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#aszckanvft .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+    
+    <tr class="gt_col_headings gt_spanner_row">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="2" colspan="1" scope="col" id=""></th>
+      <th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="2" scope="colgroup" id="Tattoo">
+        <span class="gt_column_spanner">Tattoo</span>
+      </th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="2" colspan="1" scope="col" id="Total">Total</th>
+    </tr>
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="No">No</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Yes">Yes</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="label" class="gt_row gt_left">Dutch</td>
+<td headers="stat_1" class="gt_row gt_center"></td>
+<td headers="stat_2" class="gt_row gt_center"></td>
+<td headers="stat_0" class="gt_row gt_center"></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;No</td>
+<td headers="stat_1" class="gt_row gt_center">16</td>
+<td headers="stat_2" class="gt_row gt_center">5</td>
+<td headers="stat_0" class="gt_row gt_center">21</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;Yes</td>
+<td headers="stat_1" class="gt_row gt_center">24</td>
+<td headers="stat_2" class="gt_row gt_center">29</td>
+<td headers="stat_0" class="gt_row gt_center">53</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">Total</td>
+<td headers="stat_1" class="gt_row gt_center">40</td>
+<td headers="stat_2" class="gt_row gt_center">34</td>
+<td headers="stat_0" class="gt_row gt_center">74</td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
+</div>
+</div>
+</section>
+<section id="indexing-contingency-tables" class="slide level2">
+<h2>Indexing contingency tables</h2>
+<p><span class="math inline">\(i\)</span>: row</p>
+<p><span class="math inline">\(j\)</span>: column</p>
+<p><span class="math inline">\(f\)</span>: frequency (number of observations)</p>
+<p><span class="math inline">\(f_{i,j}\)</span>: frequency in the cell in row <span class="math inline">\(i\)</span>, column <span class="math inline">\(j\)</span></p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><span class="math inline">\(i\)</span></th>
+<th style="text-align: left;"><span class="math inline">\(j = 1\)</span></th>
+<th style="text-align: left;"><span class="math inline">\(j = 2\)</span></th>
+<th style="text-align: left;"><b>Margin rows</b></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(i = 1\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(f_{1,1}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(f_{1,2}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(f_{1,+}\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(i = 2\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(f_{2,1}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(f_{2,2}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(f_{2,+}\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><b>Margin columns</b></td>
+<td style="text-align: left;"><span class="math inline">\(f_{+,1}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(f_{+,2}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(f_{+,+}\)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="marginal-frequency-distribution" class="slide level2">
+<h2>Marginal frequency distribution</h2>
+<p>Separate frequency distribution of each variable in contingency table</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><span class="math inline">\(i\)</span></th>
+<th style="text-align: left;"><span class="math inline">\(j = 1\)</span></th>
+<th style="text-align: left;"><span class="math inline">\(j = 2\)</span></th>
+<th style="text-align: left;"><b>Margin rows</b></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(i = 1\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(f_{1,1}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(f_{1,2}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(f_{1,+}\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(i = 2\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(f_{2,1}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(f_{2,2}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(f_{2,+}\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><b>Margin columns</b></td>
+<td style="text-align: left;"><span class="math inline">\(f_{+,1}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(f_{+,2}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(f_{+,+}\)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="marginal-frequency-distribution-1" class="slide level2">
+<h2>Marginal frequency distribution</h2>
+<p><font color="orange">For the variable “Tattoo”:</font> How many people do / don’t have one? <span class="math inline">\(P(Tattoo)\)</span></p>
+<p><font color="purple">For the variable “Dutch”:</font> How many students are Dutch / International? <span class="math inline">\(P(Dutch)\)</span></p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<table class="table table-striped" data-quarto-postprocess="true" style="margin-left: auto; margin-right: auto;">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th" style="text-align: left; empty-cells: hide; border-bottom: hidden;"></th>
+<th colspan="2" data-quarto-table-cell-role="th" style="text-align: center; border-bottom: hidden; padding-bottom: 0; padding-left: 3px; padding-right: 3px;"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Tattoo
+</div></th>
+<th data-quarto-table-cell-role="th" style="text-align: left; empty-cells: hide; border-bottom: hidden;"></th>
+</tr>
+<tr class="odd">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Dutch</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">No</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Yes</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Total row</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">16</td>
+<td style="text-align: left;">5</td>
+<td style="text-align: left;"><span style=" font-weight: bold;    color: purple !important;">21</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Yes</td>
+<td style="text-align: left;">24</td>
+<td style="text-align: left;">29</td>
+<td style="text-align: left;"><span style=" font-weight: bold;    color: purple !important;">53</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Total column</strong></td>
+<td style="text-align: left;"><span style=" font-weight: bold;    color: orange !important;">40</span></td>
+<td style="text-align: left;"><span style=" font-weight: bold;    color: orange !important;">34</span></td>
+<td style="text-align: left;">74</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</section>
+<section id="conditional-frequency-distribution" class="slide level2">
+<h2>Conditional frequency distribution</h2>
+<p>Frequency distribution of one variable, for specific value of the other variable</p>
+<p>E.g.: What is the conditional frequency distribution of Tattoos <font color="purple"><strong>for Dutch students?</strong></font> <span class="math inline">\(P(Tattoo | Dutch)\)</span></p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<table class="table table-striped" data-quarto-postprocess="true" style="margin-left: auto; margin-right: auto;">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th" style="text-align: left; empty-cells: hide; border-bottom: hidden;"></th>
+<th colspan="2" data-quarto-table-cell-role="th" style="text-align: center; border-bottom: hidden; padding-bottom: 0; padding-left: 3px; padding-right: 3px;"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Tattoo
+</div></th>
+<th data-quarto-table-cell-role="th" style="text-align: left; empty-cells: hide; border-bottom: hidden;"></th>
+</tr>
+<tr class="odd">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Dutch</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">No</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Yes</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Total row</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">16</td>
+<td style="text-align: left;">5</td>
+<td style="text-align: left;">21</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Yes</td>
+<td style="text-align: left;"><span style=" font-weight: bold;    color: purple !important;">24</span></td>
+<td style="text-align: left;"><span style=" font-weight: bold;    color: purple !important;">29</span></td>
+<td style="text-align: left;">53</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Total column</strong></td>
+<td style="text-align: left;">40</td>
+<td style="text-align: left;">34</td>
+<td style="text-align: left;">74</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</section>
+<section id="joint-frequency-distribution" class="slide level2">
+<h2>Joint frequency distribution</h2>
+<p>Frequency of a combination of two (or more) variables</p>
+<p>E.g.: What is the frequency of <font color="purple"><strong>Dutch students with a tattoo</strong></font>? <span class="math inline">\(P(Dutch \cap Tattoo)\)</span></p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<table class="table table-striped" data-quarto-postprocess="true" style="margin-left: auto; margin-right: auto;">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th" style="text-align: left; empty-cells: hide; border-bottom: hidden;"></th>
+<th colspan="2" data-quarto-table-cell-role="th" style="text-align: center; border-bottom: hidden; padding-bottom: 0; padding-left: 3px; padding-right: 3px;"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Tattoo
+</div></th>
+<th data-quarto-table-cell-role="th" style="text-align: left; empty-cells: hide; border-bottom: hidden;"></th>
+</tr>
+<tr class="odd">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Dutch</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">No</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Yes</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Total row</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">16</td>
+<td style="text-align: left;">5</td>
+<td style="text-align: left;">21</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Yes</td>
+<td style="text-align: left;">24</td>
+<td style="text-align: left;"><span style=" font-weight: bold;    color: purple !important;">29</span></td>
+<td style="text-align: left;">53</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Total column</strong></td>
+<td style="text-align: left;">40</td>
+<td style="text-align: left;">34</td>
+<td style="text-align: left;">74</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</section>
+<section id="frequencies-to-probabilities" class="slide level2">
+<h2>Frequencies to probabilities</h2>
+<p>Divide frequencies by a total to get a probability distribution</p>
+<p>Which frequencies and which total you use depends on what probability distribution you want</p>
+</section>
+<section id="marginal-probability-distribution" class="slide level2">
+<h2>Marginal probability distribution</h2>
+<p>Divide marginal totals by the <font color="orange">global total</font></p>
+<p>E.g.: What is the <font color="purple">marginal probability distribution of having a tattoo</font>? <span class="math inline">\(P(Tattoo)\)</span></p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<table class="table table-striped" data-quarto-postprocess="true" style="margin-left: auto; margin-right: auto;">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th" style="text-align: left; empty-cells: hide; border-bottom: hidden;"></th>
+<th colspan="2" data-quarto-table-cell-role="th" style="text-align: center; border-bottom: hidden; padding-bottom: 0; padding-left: 3px; padding-right: 3px;"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Tattoo
+</div></th>
+<th data-quarto-table-cell-role="th" style="text-align: left; empty-cells: hide; border-bottom: hidden;"></th>
+</tr>
+<tr class="odd">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Dutch</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">No</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Yes</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Total row</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">16</td>
+<td style="text-align: left;">5</td>
+<td style="text-align: left;"><span style=" font-weight: bold;    color: purple !important;">21 / 74 = 0.28</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Yes</td>
+<td style="text-align: left;">24</td>
+<td style="text-align: left;">29</td>
+<td style="text-align: left;"><span style=" font-weight: bold;    color: purple !important;">53 / 74 = 0.72</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Total column</strong></td>
+<td style="text-align: left;">40</td>
+<td style="text-align: left;">34</td>
+<td style="text-align: left;"><span style=" font-weight: bold;    color: orange !important;">74</span></td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</section>
+<section id="conditional-probability-distribution" class="slide level2">
+<h2>Conditional probability distribution</h2>
+<p>Divide the row- or column frequencies by the <font color="orange">marginal total</font></p>
+<p>E.g.: What is the conditional probability of <font color="purple">having a tattoo for international students</font>?</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<table class="table table-striped" data-quarto-postprocess="true" style="margin-left: auto; margin-right: auto;">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th" style="text-align: left; empty-cells: hide; border-bottom: hidden;"></th>
+<th colspan="2" data-quarto-table-cell-role="th" style="text-align: center; border-bottom: hidden; padding-bottom: 0; padding-left: 3px; padding-right: 3px;"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Tattoo
+</div></th>
+<th data-quarto-table-cell-role="th" style="text-align: left; empty-cells: hide; border-bottom: hidden;"></th>
+</tr>
+<tr class="odd">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Dutch</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">No</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Yes</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Total row</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">16</td>
+<td style="text-align: left;">5</td>
+<td style="text-align: left;">21</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Yes</td>
+<td style="text-align: left;"><span style=" font-weight: bold;    color: purple !important;">24 / 53 = 0.45</span></td>
+<td style="text-align: left;"><span style=" font-weight: bold;    color: purple !important;">29 / 53 = 0.55</span></td>
+<td style="text-align: left;"><span style=" font-weight: bold;    color: orange !important;">53</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Total column</strong></td>
+<td style="text-align: left;">40</td>
+<td style="text-align: left;">34</td>
+<td style="text-align: left;">74</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</section>
+<section id="joint-probability-distribution" class="slide level2">
+<h2>Joint probability distribution</h2>
+<p>Divide the cell frequency by the <font color="orange">global total</font></p>
+<p>E.g.: What is the joint probability of someone being <font color="purple">Dutch and having a tattoo</font>? <span class="math inline">\(P(Dutch \cap Tattoo)\)</span></p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<table class="table table-striped" data-quarto-postprocess="true" style="margin-left: auto; margin-right: auto;">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th" style="text-align: left; empty-cells: hide; border-bottom: hidden;"></th>
+<th colspan="2" data-quarto-table-cell-role="th" style="text-align: center; border-bottom: hidden; padding-bottom: 0; padding-left: 3px; padding-right: 3px;"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Tattoo
+</div></th>
+<th data-quarto-table-cell-role="th" style="text-align: left; empty-cells: hide; border-bottom: hidden;"></th>
+</tr>
+<tr class="odd">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Dutch</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">No</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Yes</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Total row</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">16</td>
+<td style="text-align: left;">5</td>
+<td style="text-align: left;">21</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Yes</td>
+<td style="text-align: left;"><span style=" font-weight: bold;    color: purple !important;">24 / 74 = 0.32</span></td>
+<td style="text-align: left;">29</td>
+<td style="text-align: left;">53</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Total column</strong></td>
+<td style="text-align: left;">40</td>
+<td style="text-align: left;">34</td>
+<td style="text-align: left;"><span style=" font-weight: bold;    color: orange !important;">74</span></td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</section></section>
+<section>
+<section id="continuous-probability-distributions" class="title-slide slide level1 center">
+<h1>Continuous probability distributions</h1>
+
+<!-- ::: {layout-ncol=2} -->
+<!-- ![](images/Lecture 28.gif){width=80%} -->
+<!-- ![](images/Lecture 27.gif){width=80%} -->
+<!-- ::: -->
+<img data-src="images/Lecture%2027.gif" style="width:80.0%" class="r-stretch"></section>
+<section id="continuous-probability-distributions-1" class="slide level2">
+<h2>Continuous probability distributions</h2>
+<ul>
+<li>Infinite possible outcomes</li>
+<li>No exact probability for specific values</li>
+<li>Continuous <em>probability density function</em> describes how likely each outcome is
+<ul>
+<li>Cf. probability mass function for discrete outcomes</li>
+</ul></li>
+<li>Surface area determines probability</li>
+<li>Many probability distributions exist</li>
+<li>This course covers only one…</li>
+</ul>
+</section>
+<section id="normal-distribution" class="slide level2">
+<h2>Normal Distribution</h2>
+<p>Theoretical distribution for continuous variables</p>
+<p>Bell-shaped, symmetric, from -infinity to +infinity</p>
+<p>You can use it to describe (=model) real data</p>
+<p>Two parameters:</p>
+<ul>
+<li>Mean <span class="math inline">\(\mu\)</span> (“mu”): Most common / average value</li>
+<li>Standard deviation <span class="math inline">\(\sigma\)</span> (“sigma”): Average deviation from the mean</li>
+</ul>
+
+<img data-src="images/Lecture%2029.png" style="width:40.0%" class="r-stretch quarto-figure-center"></section>
+<section id="examples-of-normal-distributions" class="slide level2">
+<h2>Examples of Normal Distributions</h2>
+
+<img data-src="images/Lecture%20212.png" class="r-stretch"><table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Dist.</th>
+<th style="text-align: center;">μ</th>
+<th style="text-align: center;">σ</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">–1.0</td>
+<td style="text-align: center;">0.5</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">0.5</td>
+<td style="text-align: center;">0.5</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">0.5</td>
+<td style="text-align: center;">1.5</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">2.0</td>
+<td style="text-align: center;">1.0</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="app" class="slide level2">
+<h2>App</h2>
+<p><a href="https://statdist.com/distributions/normal" class="uri">https://statdist.com/distributions/normal</a></p>
+<!-- ## Normal distribution: Location and scale -->
+<!-- ```{r eval = FALSE} -->
+<!-- library(shiny) -->
+<!-- numericInput( -->
+<!--   inputId = "mean", -->
+<!--   label = "Mean:", -->
+<!--   value = 0, -->
+<!--   min = -4, -->
+<!--   max = 4, -->
+<!--   step = .2 -->
+<!-- ); numericInput( -->
+<!--   inputId = "sd", -->
+<!--   label = "Standard deviation:", -->
+<!--   value = 1, -->
+<!--   min = 0, -->
+<!--   max = 2, -->
+<!--   step = .2 -->
+<!-- ) -->
+<!-- plotOutput("normdist") -->
+<!-- ``` -->
+<!-- ```{r eval = FALSE} -->
+<!-- #| context: server -->
+<!-- library(2) -->
+<!-- output$normdist <- renderPlot({ p1 <- (data = data.frame(x = c(-5, 5)), aes(x)) + -->
+<!--   stat_function(fun = dnorm, n = 101, args = list(mean = input$mean, sd = input$sd)) + ylab("Probability density") + -->
+<!--   scale_y_continuous(breaks = NULL) -->
+<!-- p1 + theme_bw() -->
+<!-- }) -->
+<!-- ``` -->
+</section>
+<section id="standard-normal-distribution-z-distribution" class="slide level2">
+<h2>Standard Normal Distribution (Z-distribution)</h2>
+<p><span class="math inline">\(Z \sim N(\mu = 0, \sigma^2 = 1)\)</span> (so also <span class="math inline">\(\sigma = 1\)</span>)</p>
+<ul>
+<li>We can standardize any normal distribution to the <em>Z</em>-distribution</li>
+<li>This removes the units of measurement of our original variable</li>
+<li>Standardizing allows us to calculate probabilities more easily</li>
+<li>Stats books contain probability values for the Z-distribution</li>
+<li>We can always convert back to the original units</li>
+</ul>
+</section>
+<section id="standard-normal-distribution" class="slide level2">
+<h2>Standard Normal Distribution</h2>
+<p><span class="math inline">\(Z \sim N(\mu = 0, \sigma = 1)\)</span></p>
+
+<img data-src="images/Lecture%20213.png" class="r-stretch"></section>
+<section id="x-to-z-and-vice-versa" class="slide level2">
+<h2>X to Z and vice versa</h2>
+<p>You can standardize values of any normally distributed variable</p>
+<p><span class="math inline">\(Z = \frac{X-\mu_x}{\sigma_x}\)</span></p>
+<p><strong>Standardizing:</strong> Removing the original units of measurement</p>
+<p>And reverse it to get the units back; for any Z-value:</p>
+<p><span class="math inline">\(X = \mu_x + (Z*\sigma_x)\)</span></p>
+</section>
+<section id="properties-of-normal-distribution" class="slide level2">
+<h2>Properties of normal distribution</h2>
+<ul>
+<li>The distribution is symmetric</li>
+</ul>
+
+<img data-src="images/Lecture%20222.png" class="r-stretch"><p><span class="math inline">\(P(Z &lt; -1.64) = P(Z &gt; 1.64) = 0.05\)</span></p>
+</section>
+<section id="properties-2" class="slide level2">
+<h2>Properties 2</h2>
+<ul>
+<li>Total surface area is 1</li>
+<li>We can find areas by taking the complement (1-something)</li>
+</ul>
+<p><span class="math inline">\(P(Z &lt; 1.64) = .95\)</span></p>
+
+<img data-src="images/Lecture%20223.png" style="width:50.0%" class="r-stretch quarto-figure-center"><p>So <span class="math inline">\(P(Z &gt; 1.64) = 1-.95 = .05\)</span></p>
+</section>
+<section id="properties-3" class="slide level2">
+<h2>Properties 3</h2>
+<ul>
+<li>Areas can be added</li>
+</ul>
+<p><span class="math inline">\(P(Z &gt; 0) = .5\)</span></p>
+<p><span class="math inline">\(P(-.5&lt; Z &lt; 0) = .19\)</span></p>
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img data-src="images/Lecture%20224.png"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img data-src="images/Lecture%20225.png"></p>
+</div>
+</div>
+</div>
+<p>So <span class="math inline">\(P(Z &gt; -.5) = .5+.19 = .69\)</span></p>
+</section>
+<section id="properties-4" class="slide level2">
+<h2>Properties 4</h2>
+<p>Standard percentages for mean, +/- 1, 2, 3 SD</p>
+<ul>
+<li>50% of distribution is below <span class="math inline">\(\mu\)</span>, 50% above</li>
+</ul>
+
+<img data-src="Lecture2_files/figure-revealjs/unnamed-chunk-14-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"></section>
+<section id="percentiles" class="slide level2">
+<h2>Percentiles</h2>
+<p>The <span class="math inline">\(k\)</span>-th percentile is the score below which <span class="math inline">\(k\)</span> percent of scores fall</p>
+<p>So in the standard normal distribution:</p>
+<ul>
+<li>The mean/median is the 50th percentile, because <span class="math inline">\(P(Z &lt; 0) = .5\)</span></li>
+<li>We call the 25th and 75th percentile the first and third <em>quartile</em></li>
+<li>+1SD is the 84th percentile, because <span class="math inline">\(P(Z &lt; 1) = .84\)</span></li>
+</ul>
+</section>
+<section id="percentiles-for-x-scores" class="slide level2">
+<h2>Percentiles for X-scores</h2>
+<p>Let’s apply this to <span class="math inline">\(IQ \sim N(\mu = 100, \sigma = 15)\)</span></p>
+<ul>
+<li>What percentile corresponds to IQ &lt; 120?</li>
+<li><span class="math inline">\(Z = \frac{120-100}{15} = 1.33\)</span></li>
+<li><span class="math inline">\(P(Z&lt;1.33) \approx .90\)</span>, so 90th percentile</li>
+</ul>
+
+<img data-src="Lecture2_files/figure-revealjs/unnamed-chunk-15-1.png" style="width:70.0%" class="r-stretch quarto-figure-center"></section></section>
+<section>
+<section id="describing-data" class="title-slide slide level1 center">
+<h1>Describing data</h1>
+
+</section>
+<section id="a-simple-model" class="slide level2">
+<h2>A simple model</h2>
+<p>We can use the normal distribution as a <em>model</em> for the distribution of an observed variable</p>
+
+<img data-src="images/Lecture%20216.png" style="width:70.0%" class="r-stretch quarto-figure-center"></section>
+<section id="a-simple-model-1" class="slide level2">
+<h2>A simple model</h2>
+<p>“We assume variable X to be normally distributed”</p>
+<p>This allows us to:</p>
+<ul>
+<li>Summarize people’s values with just a mean and SD</li>
+<li>Calculate probabilities of observing certain scores using table</li>
+</ul>
+</section>
+<section id="models-can-be-wrong" class="slide level2">
+<h2>Models can be wrong</h2>
+<p>Of course, the assumption can be wrong</p>
+
+<img data-src="images/Lecture%20110.png" style="width:70.0%" class="r-stretch quarto-figure-center"><ul>
+<li>“All models are wrong, but some are useful” (Box)</li>
+<li>In this example, mean, SD, and probabilities are going to misrepresent our data somewhat (i.e.: not very useful)</li>
+</ul>
+</section>
+<section id="what-if-the-model-is-wrong" class="slide level2">
+<h2>What if the model is wrong?</h2>
+<p>Solution:</p>
+<ul>
+<li>Choose a different probability distribution (not part of this course)</li>
+<li>Comment that the assumption of normality may be violated (e.g., in Discussion section)</li>
+</ul>
+<!-- ## Personality of 501 psychology students -->
+<!-- ![](images/Lecture 216.png) -->
+<!-- ![](images/Lecture 217.png) -->
+<!-- ![](images/Lecture 218.png) -->
+<!-- ![](images/Lecture 219.png) -->
+</section></section>
+<section>
+<section id="exercises" class="title-slide slide level1 center">
+<h1>Exercises</h1>
+
+</section>
+<section id="exercises-1" class="slide level2">
+<h2>Exercises</h2>
+<p>Neuroticism is distributed <span class="math inline">\(N(\mu = 50, \sigma = 10)\)</span></p>
+<p>What is the probability that a randomly chosen person has a neuroticism score of 60 or higher?</p>
+<p>Complete the sentence: “95% of the population scores between … and … on neuroticism.</p>
+</section>
+<section id="solutions" class="slide level2">
+<h2>Solutions</h2>
+<p>What is the probability that a randomly chosen person has a neuroticism score of 60 or higher?</p>
+
+<img data-src="Lecture2_files/figure-revealjs/unnamed-chunk-18-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"></section>
+<section id="solutions-1" class="slide level2">
+<h2>Solutions</h2>
+<p>Complete the sentence: “95% of the population scores between … and … on neuroticism.</p>
+
+<img data-src="Lecture2_files/figure-revealjs/unnamed-chunk-19-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"></section>
+<section id="calculate-z-values-and-p-values" class="slide level2">
+<h2>Calculate Z-values and p-values</h2>
+<ol type="1">
+<li><strong>Draw the problem</strong></li>
+<li>Check if the solution is (close to) a standard value like +/-SD</li>
+<li>If not, calculate Z-score</li>
+<li>Find p-value
+<ul>
+<li>In Z-table</li>
+<li>Using an online calculator, e.g.&nbsp;https://onecompiler.com/r: <code>pnorm(zscore, mean, sd, lower.tail = TRUE)</code></li>
+<li>Using Excel formula: <code>=NORM.DIST(zscore, mean, sd, TRUE)</code></li>
+</ul></li>
+</ol>
+</section>
+<section id="more-difficult-example" class="slide level2">
+<h2>More difficult example</h2>
+<p><strong>Example:</strong> Assume height is distributed</p>
+<p><span class="math inline">\(\text{Height}\sim N(\mu = 180, \sigma = 20)\)</span></p>
+<ul>
+<li>What percentage of the population is taller than 212cm?</li>
+</ul>
+<p>Step 1: Draw the problem</p>
+<p>Step 2: Standard solution? Not really</p>
+
+<img data-src="images/Lecture%20220.png" style="width:50.0%" class="r-stretch quarto-figure-center"></section>
+<section id="calculate-p-value" class="slide level2">
+<h2>Calculate p-value</h2>
+<p>Step 3: Calculate Z-score</p>
+<ul>
+<li><span class="math inline">\(Z = \frac{212 - 180}{20} = 1.6\)</span></li>
+</ul>
+<p>Step 4: Find p-value</p>
+<ul>
+<li>To the <strong>right</strong> of 1.6</li>
+<li>Excel: <code>=1-NORM.DIST(1.6, 0, 1, TRUE)</code></li>
+<li>R: <code>pnorm(1.6, 0, 1, lower.tail = FALSE)</code></li>
+<li>Table (next slide)</li>
+</ul>
+</section>
+<section id="z-table" class="slide level2">
+<h2>Z-table</h2>
+
+<img data-src="images/Lecture%20221.png" style="width:100.0%" class="r-stretch quarto-figure-center"><p><strong>Conclusion:</strong> 5.48% of the population is taller than 212cm.</p>
+<div class="footer footer-default">
+
+</div>
+</section></section>
+    </div>
+  </div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="Lecture2_files/libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="Lecture2_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="Lecture2_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="Lecture2_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="Lecture2_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="Lecture2_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="Lecture2_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="Lecture2_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="Lecture2_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="Lecture2_files/libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'smaller': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: false,
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
+    <script id="quarto-html-after-body" type="application/javascript">
+    window.document.addEventListener("DOMContentLoaded", function (event) {
+      const toggleBodyColorMode = (bsSheetEl) => {
+        const mode = bsSheetEl.getAttribute("data-mode");
+        const bodyEl = window.document.querySelector("body");
+        if (mode === "dark") {
+          bodyEl.classList.add("quarto-dark");
+          bodyEl.classList.remove("quarto-light");
+        } else {
+          bodyEl.classList.add("quarto-light");
+          bodyEl.classList.remove("quarto-dark");
+        }
+      }
+      const toggleBodyColorPrimary = () => {
+        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+        if (bsSheetEl) {
+          toggleBodyColorMode(bsSheetEl);
+        }
+      }
+      toggleBodyColorPrimary();  
+      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+      tabsets.forEach(function(tabset) {
+        const tabby = new Tabby('#' + tabset.id);
+      });
+      const isCodeAnnotation = (el) => {
+        for (const clz of el.classList) {
+          if (clz.startsWith('code-annotation-')) {                     
+            return true;
+          }
+        }
+        return false;
+      }
+      const clipboard = new window.ClipboardJS('.code-copy-button', {
+        text: function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+      });
+      clipboard.on('success', function(e) {
+        // button target
+        const button = e.trigger;
+        // don't keep focus
+        button.blur();
+        // flash "checked"
+        button.classList.add('code-copy-button-checked');
+        var currentTitle = button.getAttribute("title");
+        button.setAttribute("title", "Copied!");
+        let tooltip;
+        if (window.bootstrap) {
+          button.setAttribute("data-bs-toggle", "tooltip");
+          button.setAttribute("data-bs-placement", "left");
+          button.setAttribute("data-bs-title", "Copied!");
+          tooltip = new bootstrap.Tooltip(button, 
+            { trigger: "manual", 
+              customClass: "code-copy-button-tooltip",
+              offset: [0, -8]});
+          tooltip.show();    
+        }
+        setTimeout(function() {
+          if (tooltip) {
+            tooltip.hide();
+            button.removeAttribute("data-bs-title");
+            button.removeAttribute("data-bs-toggle");
+            button.removeAttribute("data-bs-placement");
+          }
+          button.setAttribute("title", currentTitle);
+          button.classList.remove('code-copy-button-checked');
+        }, 1000);
+        // clear code selection
+        e.clearSelection();
+      });
+      function tippyHover(el, contentFn) {
+        const config = {
+          allowHTML: true,
+          content: contentFn,
+          maxWidth: 500,
+          delay: 100,
+          arrow: false,
+          appendTo: function(el) {
+              return el.closest('section.slide') || el.parentElement;
+          },
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'light-border',
+          placement: 'bottom-start'
+        };
+          config['offset'] = [0,0];
+          config['maxWidth'] = 700;
+        window.tippy(el, config); 
+      }
+      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+      for (var i=0; i<noterefs.length; i++) {
+        const ref = noterefs[i];
+        tippyHover(ref, function() {
+          // use id or data attribute instead here
+          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+          try { href = new URL(href).hash; } catch {}
+          const id = href.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          return note.innerHTML;
+        });
+      }
+      const findCites = (el) => {
+        const parentEl = el.parentElement;
+        if (parentEl) {
+          const cites = parentEl.dataset.cites;
+          if (cites) {
+            return {
+              el,
+              cites: cites.split(' ')
+            };
+          } else {
+            return findCites(el.parentElement)
+          }
+        } else {
+          return undefined;
+        }
+      };
+      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+      for (var i=0; i<bibliorefs.length; i++) {
+        const ref = bibliorefs[i];
+        const citeInfo = findCites(ref);
+        if (citeInfo) {
+          tippyHover(citeInfo.el, function() {
+            var popup = window.document.createElement('div');
+            citeInfo.cites.forEach(function(cite) {
+              var citeDiv = window.document.createElement('div');
+              citeDiv.classList.add('hanging-indent');
+              citeDiv.classList.add('csl-entry');
+              var biblioDiv = window.document.getElementById('ref-' + cite);
+              if (biblioDiv) {
+                citeDiv.innerHTML = biblioDiv.innerHTML;
+              }
+              popup.appendChild(citeDiv);
+            });
+            return popup.innerHTML;
+          });
+        }
+      }
+    });
+    </script>
+    
+
+</body></html>

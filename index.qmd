@@ -29,19 +29,29 @@ library(DT)
 DT::datatable(schedule[order(schedule$Week, decreasing = FALSE), ], rownames = FALSE, options = list(pageLength = nrow(schedule)))
 ```
 
-## Literature & Software
+## This GitBook
 
 **You do not need a book for this course!** 
 
-All essential information is contained within this GitBook.
+All essential information is contained within this GitBook:
+
+* A summary of each week's material
+* YouTube lectures by me
+* Additional YouTube tutorials not by me
+* Formative tests to test how prepared you are for the final exam
+* Tutorial exercises for the lab session
+
+
+
+## Software {#sec-software}
 
 During lab sessions, you work on the exercises and your portfolio using the commercial SPSS software installed on university computers.
 
 If you want to use your own computer instead, you might consider trying some free alternatives to SPSS:
 
-* PSPP, which is designed to be nearly identical to SPSS with all the same basic functionality: https://www.gnu.org/software/pspp/pspp.html
+* PSPP, which is designed to be nearly identical to SPSS with all the same basic functionality: <https://www.gnu.org/software/pspp/pspp.html>
 * JASP, which is more modern, looks nicer and is very easy to use – but looks less similar to SPSS: 
-https://jasp-stats.org/
+<https://jasp-stats.org/>
 
 
 ## Learning goals

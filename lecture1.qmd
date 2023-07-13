@@ -392,6 +392,18 @@ How much variability is there in responses?
 | Range | Ordinal/continuous | Minimum to maximum value |
 | Variance | Continuous | Mean squared distance of observations to the mean |
 
+## Calculating the variance
+
+Variance:
+
+$$
+S_X^2 = \frac{\sum_{i=1}^n(X_i-\bar{X})^2}{n-1}
+$$
+
+Units of $S^2$ are squared; if you measured height in $CM$, $S^2_{height}$ is expressed in $CM^2$
+
+Standard deviation (SD): $S_X = \sqrt{S_X^2}$
+
 ## Median and Mode for ordinal variable
 
 __Median:__  middle value

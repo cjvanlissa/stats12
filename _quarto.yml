@@ -4,6 +4,7 @@ project:
   resources: resources
 execute:
   freeze: auto
+  warnings: false
 book:
   title: Statistics 1 and 2
   subtitle: ''
@@ -41,6 +42,7 @@ book:
   chapters:
   - index.qmd
   - introduction.qmd
+  - tutorial1.qmd
   - probability.qmd
   - samplingdistribution.qmd
   - testing.qmd

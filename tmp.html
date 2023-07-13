@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.427">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>tmp</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="tmp_files/libs/clipboard/clipboard.min.js"></script>
+<script src="tmp_files/libs/quarto-html/quarto.js"></script>
+<script src="tmp_files/libs/quarto-html/popper.min.js"></script>
+<script src="tmp_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="tmp_files/libs/quarto-html/anchor.min.js"></script>
+<link href="tmp_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="tmp_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="tmp_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="tmp_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="tmp_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+
+
+<section id="lab-1-introduction" class="level1">
+<h1>Lab 1: Introduction</h1>
+<section id="working-with-syntax" class="level2">
+<h2 class="anchored" data-anchor-id="working-with-syntax">Working with Syntax</h2>
+<p>Up until now, we ran the analyses by “click-and-point” via the menu. This is a good starting point if you have never worked with SPSS before, but it is not to be recommended for professional use. A better way is to use so called syntax. In this assignment we will learn how to prepare and save SPSS syntax for doing the analyses. Syntax is a series of “commands” that tells SPSS what to do. Active knowledge and use of syntax is important for several reasons:</p>
+<ul>
+<li>First, efficiency: it makes life easier. Once you have the syntax, you can easily redo the whole analysis without going through all the points-and-clicks again.</li>
+<li>Second, communication: When you work together on research projects, it is important that you exactly understand the analyses that were done, even if you didn’t do the analyses yourself. By using syntax, all team members can see what has been done and how.</li>
+<li>Third, documentation &amp; data management: As a researcher you are responsible for data storage and management (!). This not only includes storage of data, but also documentation of the all the steps and analyses you did to come to your results (e.g., handling missing values, detection of outlying values). Ideally, you should provide the materials such that other researchers can easily replicate your analyses starting from the raw data file. Working with SPSS syntax is a great way to do so.</li>
+<li>Fourth, necessity: some statistical procedures are only available via SPSS syntax (e.g., simple effects analysis in MANOVA).</li>
+</ul>
+<p>First, we will see how to set-up a basic syntax via the menu. Once you have the basic syntax, you can modify it to your own needs and preferences.</p>
+<p>To get there, we will use the data file LAS-CNS_stress.sav Download LAS-CNS_stress.sav.</p>
+<p>Download and open the data file in SPSS.</p>
+<p>We will now generate the syntax for computing basic descriptive statistics for the variable optimism.</p>
+<p>Navigate to Analyze &gt; Descriptive statistics &gt; Descriptives. Select the variable (i.e., optimism) for which you want the descriptives. But instead of OK, now click on PASTE. SPSS will open the syntax editor and adds new syntax.</p>
+<p>Carefully inspect the syntax and try to “read” what it says.</p>
+<p>To run the syntax, select the commands with your mouse and click on the big green “Play button” in the top menu.</p>
+<p>You will see that SPSS now executes the commands that you selected and includes the descriptives in the output.</p>
+<p>(The SPSS output does not pop up automatically. If you go to the output, you will see that the command worked though.)</p>
+<p>The next step in preparing our first syntax is to add comments. These comments should clarify the syntax and give general information (e.g., when was the syntax last modified, who did the modifications, etc.).</p>
+<p>Comments are text lines that start with an * and ends with a dot. Comments are printed in grey.</p>
+<p>REMARK: the dot at the end of your text line is really important. If you do not add it, your syntax will run work properly!</p>
+<p>Add comments including the following information:</p>
+<ul>
+<li>When was the syntax made?</li>
+<li>Who made syntax?</li>
+<li>What does the syntax do?</li>
+</ul>
+<p>After including the comments, run the complete syntax including the comment line (by selecting and running it, or via top menu Run &gt; All).</p>
+<p>If the syntax runs correctly, the comments were correctly included.</p>
+<p>I hope everything went well so far! In case you want to see if you’re on the right track you may consult the PDF file ExamplesSPSSsyntax.pdf Download ExamplesSPSSsyntax.pdf. This file contains the print screens of the syntax you should have created in the different steps.</p>
+<p>Now we will change the syntax itself. Suppose we not only want to have the descriptives for optimism, but also for negative emotions and satisfaction. This can easily be accomplished by adding the variable names to the variable list in the syntax.</p>
+<p>Modify the syntax, and then run the syntax.</p>
+<p>Check the output and see that the descriptives for the other variables are now also displayed.</p>
+<p>Using the syntax we can further tailor the analyses to our own preferences. Suppose we want to have a table with only the means and standard deviations. This can easily be accomplished in SPSS syntax by removing MIN and MAX from the statistics list. Do this, rerun the syntax, and check that SPSS produces tables with only means and SDs.</p>
+<p>We may also want to have statistics that SPSS does not report by default. For example, we may want to have the variances. This can also easily be done in SPSS. Add the VARIANCE to the statistics list.</p>
+<p>Change and rerun the syntax, and see that the output also includes the variance.</p>
+<p>In practice, you don’t know all the commands by heart. SPSS offers help functions. If you highlight the command (e.g., statistics) and click on the button with the paper and the question mark in the top menu. SPSS opens a help file.</p>
+<p>Use the help function to modify the syntax such that SPSS produces a table that also reports the range (e.g., the difference between the largest and smallest value).</p>
+<p>Answer the following question using the new syntax.</p>
+<p>What is the range for Life satisfaction? <input class="webex-solveme nospaces" size="2" data-answer="[&quot;44&quot;]"></p>
+<p>You may have noticed that the SPSS help function is quite technical. So if the SPSS help function doesn’t help you, just search online for instructions.</p>
+<p>I hope you already noticed the added value of syntax. It may take a bit more effort to get used to work with syntax rather than with the menu, but it definitely pays off the effort!</p>
+</section>
+<section id="independent-samples-t-test" class="level2">
+<h2 class="anchored" data-anchor-id="independent-samples-t-test">Independent Samples T-Test</h2>
+<p>In this assignment we will use the data file 5groups.sav Download 5groups.sav. Download the file and open it in SPSS.</p>
+<p>This time, we will compare the means of the variable y of two specific groups: group 1 and group 4. To test the difference between two sample means, we will use the t-test for independent samples.</p>
+<p>What is the null hypothesis of this test? And what is the alternative hypothesis?</p>
+<div class="webex-solution">
+<button>
+Answer
+</button>
+<p><span class="math inline">\(H_0: \mu_1=\mu_4\)</span>, against <span class="math inline">\(H_1: \mu_1\ne\mu_4\)</span></p>
+</div>
+<p>Create the necessary syntax for the t-test that compares the means of group 1 and group 4.</p>
+<p>You can find the dialog for the two-sample t-test under Analyze &gt; Compare Means &gt; Independent Samples T Test</p>
+<p>In the SPSS dialog you have to specify which two groups you want to compare. In our case, it’s group 1 and group 4. After placing the variable in the box named “Grouping Variable”, click the button named “Define Groups” to define the groups.</p>
+<p>Compare your syntax to the correct syntax:</p>
+<div class="webex-solution">
+<button>
+Answer
+</button>
+<p>T-TEST GROUPS=group(1 4) /MISSING=ANALYSIS /VARIABLES=y /CRITERIA=CI(.95).</p>
+</div>
+<p>One of the assumptions of the independent samples t-test is homoscedasticity (equal variances for all levels of the predictor). We can compare the sizes of the variances of the two groups with a simple F-test, which we call Levene’s test.</p>
+<p>Have a look at Levene’s test and try to interpret it. Discuss with your group what null-hypothesis is being tested here.</p>
+<p>What is the p-value of the Levene’s test? <input class="webex-solveme nospaces" data-tol="0.004" size="4" data-answer="[&quot;0.05&quot;,&quot;.05&quot;]"></p>
+<p>What do you conclude from this? What’s the practical use of the outcome of this test?</p>
+<div class="webex-solution">
+<button>
+Explanation
+</button>
+<p>Levene’s test is not significant. Remember that the null hypothesis of Levene’s test is that the population variances of the group are equal. As the p-value is not significant, we cannot reject the null hypothesis. Consequently, there is no evidence that the population variances of two groups are unequal. Thus, there is no reason to question the assumption.</p>
+</div>
+<p>Now you will have to decide on the outcome of the actual t-test. SPSS reports two versions: one that assumes equal variances (top row) and one that relaxes this assumption (bottom row).</p>
+<p>You should pick one of these. In principle, you should decide which one you will use before seeing the results - although if there is clear evidence of violation of assumptions, you might want to discuss in your report whether the results change if you use the robust version (bottom row).</p>
+<p>For now remember: we assume equal variances.</p>
+<p>What is the two-sided p-value? <input class="webex-solveme nospaces" data-tol="0.001" size="5" data-answer="[&quot;0.021&quot;,&quot;.021&quot;]"></p>
+<p>Do you reject the null hypothesis of this t-test at alpha 0.05? <select class="webex-select"><option value="blank"></option><option value="answer">Yes</option><option value="">No</option></select></p>
+</section>
+<section id="anova" class="level2">
+<h2 class="anchored" data-anchor-id="anova">ANOVA</h2>
+<p>For this assignment, we will use the data file 5groups.sav Download 5groups.sav. Please open it in SPSS.</p>
+<p>As you have seen in the previous assignments, this file contains the measurements of the y variable for 5 different groups. So far, we have - at most - compared two groups at once. This time, we will compare the means of all 5 groups simultaneously using an Analysis of Variance (ANOVA).</p>
+<p>ANOVA is often used to examine the results of experimental research where different groups receive different manipulations of an independent variable, and a continuous dependent variable is measured. In that case, rejecting the null hypothesis indicates a causal effect of the manipulated independent variable on the dependent variable.</p>
+<p>Let’s say the 5 groups in our data file have received 5 different types of training, and the dependent variable y measures the effect of the training.</p>
+<p>We will now perform an ANOVA to see if these trainings have an equal effectiveness.</p>
+<p>The null hypothesis of the ANOVA with 5 groups is as follows:</p>
+<p><span class="math inline">\(H_0: \mu_1 = \mu_2 = \mu_3 = \mu_4 = \mu_5\)</span></p>
+<p>That is, the null hypothesis states that the population means of all five groups are the same. Rejecting the null hypothesis implies that at least one one of these means is different from the rest.</p>
+<p>Let’s run the analysis!</p>
+<p>Navigate to Analyze &gt; General Linear Model &gt; Univariate. Choose y as the dependent variable. Choose group as the fixed factor. Now click on the “Options” button and check the two boxes named “Descriptive statistics” and “Homogeneity tests”. Finally, click “Paste” to paste the syntax into the syntax editor, and run it from there.</p>
+<p>You should end up with the following syntax:</p>
+<pre><code>    UNIANOVA y BY group
+      /METHOD=SSTYPE(3)
+      /INTERCEPT=INCLUDE
+      /PRINT=HOMOGENEITY DESCRIPTIVE
+      /CRITERIA=ALPHA(.05)
+      /DESIGN=group.</code></pre>
+<p>The first table in the output we will inspect is the “Descriptive Statistics” table. This table displays the means and standard deviations of the variable y for each of the five groups.</p>
+<p>Do you think the population standard deviations are different for each group? If they are, why could that pose a problem for our analysis?</p>
+<p>One of the assumptions of ANOVA is homoscedasticity. In this case, that means that the population of each group has the same variance (and hence, the same standard deviation). This assumption is also called “homogeneity of variance” (= translation of homoscedasticity). Of course the variance in each sample will differ somewhat. If these differences are significant, there is evidence to doubt our assumption. That’s why we asked SPSS to perform “Homogeneity tests”.</p>
+<p>Note that the SD’s of groups 1 and 2 are quite different from the SD’s of groups 3, 4, 5.</p>
+<p>The next table shows the output of Levene’s test. You might remember using Levene’s test for comparing the variances of two groups in the context of the independent samples t-test. This time, it tests whether the variance of all 5 groups should be considered equal.</p>
+<p>Is there a reason to doubt the assumption of homoscedasticity based on Levene’s test? Note: Use the Levene’s test “Based on mean”. <code>mcq(c(answer = "Yes", "No"))</code></p>
+<p>If Levene’s test is significant, there is evidence that the population variances of at least 2 of the groups differ. This is evidence against our assumption. This could pose a problem for our analysis. We may choose to use a version of the analysis that is robust to violations of this assumption instead, but that makes our analysis dependent on the data (= no longer confirmatory). Instead, we could discuss the violation, and compare results with and without a robust test.</p>
+<p>For now, we continue with interpreting the output of the final table. There’s a lot of information, but for now we are only interested in the Sig. value of the “Corrected Model” in the first row. This is the two-sided p-value we can use to test our null hypothesis.</p>
+<p>What is the two-sided p-value? Do you reject the null hypothesis? What does that mean?</p>
+<div class="webex-solution">
+<button>
+Answer
+</button>
+<p>The p-value is &lt;.001. This is smaller than 0.05. Therefore, we reject the null hypothesis, which was: <span class="math inline">\(H_0: \mu1=\mu2=\mu3=\mu4=\mu5\)</span></p>
+<p>This means that the means of at least two groups are different. Note that we do not yet know for which groups the means differ!</p>
+</div>
+<p>Finally, there’s an interesting nugget of information below the final table. It’s called R Squared. This shows the total amount of variance in y that is explained by group membership.</p>
+<p>What is the value of R Squared? <input class="webex-solveme nospaces" data-tol="0.01" size="4" data-answer="[&quot;0.57&quot;,&quot;.57&quot;]"></p>
+<p>By rule of thumb, what is the magnitude of this value (small, medium, or large)?</p>
+<p>Cohen (1988) proposed the following guidelines for interpreting the magnitude of R2:</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Size</th>
+<th>R2</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Small</td>
+<td>0.01</td>
+</tr>
+<tr class="even">
+<td>Medium</td>
+<td>0.06</td>
+</tr>
+<tr class="odd">
+<td>Large</td>
+<td>0.138</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="one-way-anova" class="level2">
+<h2 class="anchored" data-anchor-id="one-way-anova">One-Way ANOVA</h2>
+<p>QuestionEdit this question Delete this question We have prepared the following data file for this assignment: hiking.sav Download hiking.sav. Please download it and open it in SPSS.</p>
+<p>The data file describes the result of a fictitious experiment in which a hiking guide has displayed five different types of behavior towards different groups of hikers. The treatment that each person received from the guide is recorded in the variable behavior.</p>
+<p>The dependent variable of this experiment is feeling. Higher scores on this variable indicate a more positive attitude of a participant towards the guide. In this assignment, we will use ANOVA to determine whether the mean score on the dependent variable differs between the five experimental conditions.</p>
+<p>Move To…This element is a more accessible alternative to drag &amp; drop reordering. Press Enter or Space to move this question. Question1 ptsEdit this question Delete this question For this experiment, do we use a between-subjects design, a within-subjects design, or a combination of the two? Correct answer Between-subjects design Indeed! We are comparing between people. Within-subjects design Mixed design (combination of the two) Wrong answer comments This answer is incorrect. Note that we are comparing between people.</p>
+<p>Move To…This element is a more accessible alternative to drag &amp; drop reordering. Press Enter or Space to move this question. QuestionEdit this question Delete this question As you will have noticed, the data file contains a third variable named weather, which can be either good or bad. For now, we will only look at the results obtained during good weather. Hence, we will use “Select cases” to select only those participants with a value of 1 on the weather variable.</p>
+<p>Click Data &gt; Select Cases and select “If condition is satisfied” and click the “If”-button. Now enter the following condition into the equation box:</p>
+<p>weather = 1 Now click “Continue” and “Paste” to paste the resulting syntax into the syntax editor. Select Run &gt; All to run it.</p>
+<p>Verify that half of the participants have been crossed out in the Data View.</p>
+<p>Move To…This element is a more accessible alternative to drag &amp; drop reordering. Press Enter or Space to move this question. QuestionEdit this question Delete this question We are now ready to perform an ANOVA with the 50 remaining participants.</p>
+<p>To run an ANOVA in SPSS there are multiple options. We will use the module “General Linear Model”, which encompasses ANOVA and all of its extensions which we will discuss later on (factorial ANOVA, ANCOVA, and repeated measurements).</p>
+<p>Anyway, let’s first create the basic syntax.</p>
+<p>Analyze &gt; General Linear Model &gt; Univariate Choose feeling as the dependent variable and behavior as the fixed factor Click on the “Options” button and check the two boxes named “Descriptive” and “Homogeneity tests”. After clicking “Paste” you should get the following syntax: UNIANOVA feeling BY behavior<br>
+/METHOD=SSTYPE(3)<br>
+/INTERCEPT=INCLUDE<br>
+/PRINT=DESCRIPTIVE HOMOGENEITY<br>
+/CRITERIA=ALPHA(.05)<br>
+/DESIGN=behavior.</p>
+<p>Move To…This element is a more accessible alternative to drag &amp; drop reordering. Press Enter or Space to move this question. Question1 ptsEdit this question Delete this question What is the p-value of the Levene’s test? Use the Levene’s test “Based on mean” again. Correct Answers 0.611 (with margin: 0) Correct! Wrong answer comments This answer is incorrect. Make sure you selected the cases correctly, as well as that you looked at the correct Levene’s test.</p>
+<p>Move To…This element is a more accessible alternative to drag &amp; drop reordering. Press Enter or Space to move this question. UnansweredQuestion1 ptsEdit this question Delete this question Do we have reason to question the assumption of equal population variances? Why?</p>
+<p>If Levene’s test is not statistically significant, there is no evidence that this assumption is violated. You can find the output of Levene’s test in the table named “Test of Homogeneity of Variances”.</p>
+<p>General answer comments We can assume equal population variances, as Levene’s test is not statistically significant (p is smaller than 0.05).</p>
+<p>Move To…This element is a more accessible alternative to drag &amp; drop reordering. Press Enter or Space to move this question. UnansweredQuestion1 ptsEdit this question Delete this question In ANOVA, we distinguish between three sources of variation: the Sums of Squares total (SSt), the Sums of Squares between (SSb) and the Sums of Squares within (SSw).</p>
+<p>What does the Sums of squares total entail (phrase your answer in your own words)? Look up the value of the SSt in the ANOVA output and write it down as well.</p>
+<p>General answer comments The Sums of squares is equal to 18.330 and simply give the squared distance of individual scores to the mean, summed together. The SSt tells us how much the invidual scores deviate from the grand mean. In other words, it shows how much variability there is in the dependent variable in total.</p>
+<p>Move To…This element is a more accessible alternative to drag &amp; drop reordering. Press Enter or Space to move this question. UnansweredQuestion1 ptsEdit this question Delete this question What does the Sums of squares between entail (phrase your answer in your own words)? Look up the value of the SSb in the ANOVA output, and write it down as well.</p>
+<p>Recall that SSB is the same as SSR; it can be found in the row “Corrected Model”, column Type III Sums of Squares.</p>
+<p>General answer comments The SSb here is 4.582 and tells us how much the group means deviate from the grand mean (weighted by the group size). In other words, it shows how much variability there is in the group means. If all group means would be equal to each other, the SSb equals 0.</p>
+<p>Move To…This element is a more accessible alternative to drag &amp; drop reordering. Press Enter or Space to move this question. UnansweredQuestion1 ptsEdit this question Delete this question What does the Sums of squares within entail (phrase your answer in your own words)? Look up the value of the SSw in the ANOVA output, and write it down as well.</p>
+<p>Recall that the SSW is the same as SSE; it islabeled “Error” in the column Type III Sums of Squares.</p>
+<p>General answer comments The SSw here is 38.405. It tells us how much the individual scores within a group deviate from the group mean. In other words, it shows how much variability there is within the groups. The is the variation that is independent from the experimental effect (because variation within groups cannot be caused by differences in experimental conditions).</p>
+<p>Move To…This element is a more accessible alternative to drag &amp; drop reordering. Press Enter or Space to move this question. UnansweredQuestion1 ptsEdit this question Delete this question How do we use the different types of Sum of Squares to calculate the F statistic? General answer comments We can calculate F using the following formula:</p>
+<p>LaTeX: F = � = � � � � � �</p>
+<p>The MSb and MSw give the between group variance and within group variance, respectively. They can be calculated using the following formula’s:</p>
+<p>LaTeX: MSb = � � � = � � � � − 1</p>
+<p>LaTeX: MSw = � � � = � � � � − �</p>
+<p>Move To…This element is a more accessible alternative to drag &amp; drop reordering. Press Enter or Space to move this question. Question1 ptsEdit this question Delete this question Again, consider the table Tests of Between Subjects, which represents the results of ANOVA.</p>
+<p>What is the F-value of the ANOVA?</p>
+<p>Correct Answers 5.369 (with margin: 0) Correct! Wrong answer comments This answer is incorrect. Make sure you are looking at the correct value.</p>
+<p>Move To…This element is a more accessible alternative to drag &amp; drop reordering. Press Enter or Space to move this question. UnansweredQuestion1 ptsEdit this question Delete this question Write down the value of the degrees of freedom between (dfb) and the degrees of freedom within (dfw).</p>
+<p>dfb = k-1</p>
+<p>dfw = N-k</p>
+<p>General answer comments Degrees of freedom between: 4 Degrees of freedom within: 45</p>
+<p>Move To…This element is a more accessible alternative to drag &amp; drop reordering. Press Enter or Space to move this question. UnansweredQuestion1 ptsEdit this question Delete this question Again consider the table Tests of Between Subjects</p>
+<p>What is the p-value of the ANOVA?</p>
+<p>You can find the p-value of the ANOVA in the table named “Tests of Between-Subjects Effects”. The p-value is equal to the Sig.-value in the first row of this table.</p>
+<p>General answer comments The p-value is equal to .001.</p>
+<p>Move To…This element is a more accessible alternative to drag &amp; drop reordering. Press Enter or Space to move this question. UnansweredQuestion1 ptsEdit this question Delete this question The p-value of the ANOVA is 0.001. What can you conclude from this? Use LaTeX: = 0.05 � = 0.05 !</p>
+<p>Write down a statistical conclusion and a conclusion within the context of this research example.</p>
+<p>General answer comments The p-value is smaller than our alpha level (0.05). Therefore, we can conclude that there was a statistically significant difference in positive attitude between the groups, based on the behaviour the guide displayed towards them, (F(4,45) = 5.369, p = .001). ​</p>
+<p>Move To…This element is a more accessible alternative to drag &amp; drop reordering. Press Enter or Space to move this question. Question1 ptsEdit this question Delete this question What is the proportion of variance explained by behavior? Do not round your answer.</p>
+<p>Correct Answers 0.323 (with margin: 0) Correct! Wrong answer comments This answer is incorrect. Note that LaTeX: R^{2} � 2 is the proportion of variance explained.</p>
+<p>Move To…This element is a more accessible alternative to drag &amp; drop reordering. Press Enter or Space to move this question. UnansweredQuestion1 ptsEdit this question Delete this question LaTeX: R^2 � 2 is 0.323. This means that LaTeX: ^2 � 2 is equal to 0.323. How would you describe this number in words? So what does it represent?</p>
+<p>Remark: Cohen formulated some rules of thumb for interpreting the LaTeX: R^2 � 2 . You can find the rules of thumb under the more info section. How would you qualify the strength of the effect based on Cohen’s rules of thumb? And why should we not take the rules of thumb too seriously?</p>
+<p>Cohen (1988) proposed the following guidelines for interpreting the magnitude of LaTeX: R^2 � 2 :</p>
+<p>Size | LaTeX: R^2 � 2</p>
+<p>——–|———— Small | 0.01 Medium | 0.06 Large | 0.14</p>
+<p>General answer comments η2 (eta squared) is a measure of effect size, it indicates the amount of variance in thedependen t variable that is explained by the independent variable(s). In our case, 32.3% of the variance in feeling is explained by behaviour. According to Cohen’s guidelines this is a large effect size (see slide 28). However, these guidelines are rather arbitrary, which Cohen himself also stresses. ​ ​</p>
+<p>Move To…This element is a more accessible alternative to drag &amp; drop reordering. Press Enter or Space to move this question. QuestionEdit this question Delete this question Let’s summarize what we’ve done so far…</p>
+<p>The correct conclusion so far is that the five groups differ significantly on the dependent variable feeling. However, we do not yet know which groups differ.</p>
+<p>Students from the major Cognitive Neuroscience will learn how to use planned comparisons and post-hoc comparisons to figure out which groups differ from one another. For them, this example comes back in a later lab session.</p>
+<p>Students from the majors Social Sciences and Business and Economics will learn how to use regression analysis and dummy variables. With these techniques, you can also check which groups differ from one another.</p>
+<p>Something to look forward too ;-)</p>
+<p>For today, you’ve worked enough! Well done!</p>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

@@ -1,0 +1,450 @@
+# Lab 1: Introduction
+
+```{r, include = FALSE}
+source("R/booktem_setup.R")
+source("R/my_setup.R")
+```
+
+## Multiple Regression
+
+This assignment revolves around multiple regression with more than two predictors.
+
+Use the data file called LAS_SS_Work.sav. These data were about work characteristics.
+
+Open the date file in SPSS to get started!
+
+Consider the following research question(s):
+
+"To what extent do variety at work, learning possibilities, and independence at work explain pleasure at work, and which of these explanatory characteristics is most important?"
+
+
+What are the independent variables in this research question? 
+
+`r longmcq(c(answer = "variety, learning possibilities, independence",
+"variety, learning possibilities, independence, pleasure",
+"pleasure",
+"variety")[sample.int(4))`
+
+Let's now run a multiple regression analysis to get the output we need to answer our research question.
+
+Navigate to Analyze > Regression > Linear.
+Enter the dependent variable (pleasure at work).
+Enter the independent variables (variety at work, learning possibilities, independence at work).
+Paste and run the syntax.
+
+In the next steps we will go over the output from this analysis.
+
+ 
+What percentage of the total variance in work pleasure is explained by variety at work, learning possibilities, and independence at work altogether? `r fitb(26.9, num = T, tol = .1)`
+ 
+Which of the following statements correctly summarizes the F-test for the R2 in this analysis?
+
+`r longmcq(c(answer = "R-square is significant, F(3, 118) = 14.455, p < .001", "R-square is not significant, F(3, 121) = 14.455, p < .001", "R-square is significant, F(3, 121) = 14.455, p < .001", "R-square is not significant, F(3, 118) = 14.455, p < .001")[sample.int(4)])` 
+ 
+
+Consider the "Coefficients" table.
+
+
+What is the unstandardized regression coefficient for the effect of variety at work on work pleasure? `r fitb(0.272, num = T, tol = .01)`
+
+Describe the effect of variety at work on work pleasure as precise as possible.
+
+In other words, how should we interpret the unstandardized regression coefficient for variety at work?
+
+`r hide("Answer")`
+When variety at work increases with one unit and the other two variables stay constant, pleasure at work increases with .272 units.
+`r unhide()`
+
+Now, consider the effect of independence at work on work pleasure.
+
+What is the standardized regression coefficient of the effect of independence at work on work pleasure? `r fitb(0.107, num = T, tol = .01)`
+ 
+
+Describe the effect the effect of independence at work on work pleasure as precise as possible using the standardized regression coefficient.
+
+In other words, how should we interpret the standardized coefficient for this predictor?
+
+`r hide("Answer")`
+When independence at work increases with one SD and the other two variables stay constant, pleasure at work increases with .107 SDs.
+`r unhide()`
+ 
+
+Which of the predictors has a significant partial effect on pleasure at work when using α =.10? `r mcq(c(answer = "Variety at work and Learning possibilities", "Learning possibilities", "Variety at work", "Independence at work", "None")[sample.int(5)])`
+
+In the final couple of steps we went through the output displayed in the "Coefficients" table. Before you proceed with the next assignment, please review the following aspects in the answers your gave:
+
+* When you wrote down the effect of variety at work on pleasure at work in unstandardized form, did you include that it is the effect of the IV on the DV controlled for the other two variables? If not, please keep in mind that this is very important! In multiple regression, all effects are partial (unique) effects, controlling for the other predictors.
+* When you wrote down the effect of independence at work on pleasure at work in standardized form, did you indicate that it is the effect in standard deviations, and, again, did you include that it is the effect of IV on the DV controlled for the other two variables (i.e., 1 SD change in independent variable independence at work leads to a .107 SDs change in the predicted score for pleasure at work, controlled for the other variables)?
+
+
+## Unique Contributions
+
+Use the data file called LAS_SS_Work.sav. These data were about work characteristics.
+
+In this assignment, we will look more closely at how to evaluate the “added value” of one predictor in addition to the other predictors in an analysis explaining the dependent variable. Or, put the other way around, how much we lose if we would remove a certain predictor from the model.
+ 
+We will again consider the analysis in which we predicted pleasure at work by the three predictors learning possibilities, independence at work, and variety at work.
+
+We want to know how much the variable variety at work adds to predicting work pleasure.
+
+Run the two analyses specified below:
+
+Run the regression analysis using all three predictors.
+
+Run the regression analysis analysis with only learning possibilities and independence at work as predictors.
+
+Inspect the R2 of both regression analyses.
+
+
+What happened with the R2 when variety was removed?
+
+`r hide("Answer")`
+With all three predictors included, R-square equals .269 (see slide 3)
+With Variety at Work removed, R-square equals .248.
+So, R-square decreased with .021, indicating that Variety at Work uniquely explains 2.1% of the total variance in Pleasure at Work.
+`r unhide()`
+
+
+Let's do the same for the other two predictors; that is, check how much the R2 changes if you would remove the predictor from the model.
+
+Write down the changes below.
+
+`r hide("Answer")`
+With Learning Possibilities removed, R square equals .211. R-square decreased with .058, which means that Learning
+Possibilities uniquely explains 5.8% of the total variance in Pleasure at Work.
+With Independence at Work removed, R square equals .260. R-square decreased with .009, which means that Independence at Work uniquely explains 0.9% of the total variance in Pleasure at Work.
+`r unhide()`
+ 
+Which predictor explained the least unique variance, controlling for the other two? `r mcq(c(answer = "Independence at work", "Variety at work", "Learning possibilities")[sample.int(3)])`  
+  
+## Hierarchical Regression Analysis
+
+In this assignment we will carry out a hierarchical regression analysis, which is a structured way to compare nested models in linear regression analysis.
+ 
+With hierarchical regression analysis we are able to compare two (or more) nested models. Consider the model below:
+
+$Y′ = b0 + b1X1 + b2X2 + b4X4 + b5X5 + b7X7$
+
+
+Which of the following models is/are nested within the larger model presented above?
+
+`r longmcq(c(answer = "$Y′=b0+b1X1+b2X2+b4X4$", "$Y′=b0+b1X1+b3X3+b4X4$", "$Y′=b0+b1X1+b2X2+b6X6$")[sample.int(3)])`
+
+We will now get back to our data on work characteristics using the data file LAS_SS_Work.sav.
+
+
+Consider the following situation in which researchers are interested in clusters of variables:
+
+Researchers are interested in the effect of “Health” (i.e., mental pressure, physical demands, and emotional pressure) and “Social Environment” (i.e., relationship with coworkers, and relationship with supervisors) on the Need for recovery.
+
+We will address this research question in a number of steps.
+
+First, we will look at the full model (i.e., the model that has all health and social environment predictors).
+
+Run the regression analysis in which you regress Need for recovery on the three health variables (i.e., mental pressure, physical demands, and emotional pressure) and the two social environment variables (i.e., relationship with coworkers, and relationship with supervisors).
+
+
+What is the R2 of the full model? `r fitb(0.22, num = T, tol = .01)`
+
+Now we want to test the significance of the clusters of variables. We will first look at the Health variables (emotional pressure, physical demands, & mental pressure). We want to test whether Health has a direct effect on Need for recovery controlled for the social environment predictors.
+
+To accomplish this, we have to do a hierarchical regression analysis, in which we compare two nested models: a small one, and a larger one.
+
+Write down what these two models look like.
+
+How many predictors does the smaller model contain? `r fitb(2, num = T)`
+
+How many predictors does the larger model contain? `r fitb(5, num = T)`
+
+`r hide("Answer")`
+
+* Small model: $Recover_i = b0 + b1 * sccowork_i + b2 * scsuperv_i + e_i$
+* Large model: $Recover_i = b0 + b1 * sccowork_i + b2 * scsuperv_i + b3 *scmental_i + b4* scphys_i + b5* scemoti_i + e_i$
+
+The small model has 2 predictors and the large model has 5 predictors. The large model has three predictors more than the small model.
+`r unhide()`
+
+
+Now run the hierarchical regression analysis in SPSS!
+
+Navigate to Analyze > Regression > Linear
+
+Click on "Reset" to start from scratch.
+
+Select Need for Recovery as the dependent variable.
+
+Select only the Social Environment variables (i.e., Relationship with coworkers and Relationship with supervisors) as the independent variables (this is the small model). This is block 1 of 1.
+
+Click on "Next". Select the three Health variables (i.e., emotional pressure, physical demands, and mental pressure) and add those to this second block.
+
+**Important:** Now click on the button "Statistics" to request the R2 change.
+
+Paste and run the syntax. Note the following new elements:
+
+```
+  /STATISTICS COEFF OUTS R ANOVA CHANGE
+  /METHOD=ENTER sccowork scsuperv
+  /METHOD=ENTER scmental scphys scemoti.
+```
+
+The `CHANGE` command asks for $R^2$ change statistics, and the two rows of `/METHOD=ENTER` sequentially add blocks of predictors to the model (enter them into the model).
+ 
+
+Let's inspect the table labeled "Model Summary" first.
+
+
+What percentage of the total variance in Need for recovery is explained by the small model? `r fitb(10.7, num = T, tol = .1)`
+
+How much of the total variance in Need for recovery is explained by the large model? `r fitb(22, num = T, tol = .1)`
+
+What is the R2-change from Model 1 to Model 2? `r fitb(11.3, num = T, tol = .1)`
+
+The Model Summary table also reports the results of the F-tests, which tests whether the change in R2 is significant.
+
+Write down the null and alternative hypothesis that are evaluated by these F-tests, then check your answer?
+
+`r hide("Answer")`
+$H_0: \Delta R^2 = 0$
+
+$H_0: \Delta R^2 \ne 0$
+ 
+`r unhide()`
+
+
+Suppose three researchers use the output to see whether the R2-change is significant. Researcher I tests at the 10% level, Researcher II tests at the 5% level, and Researcher III tests at the 1% level.
+
+
+Which of the researchers will conclude that there is a significant result? `r mcq(c("Only researcher I", "Only researcher II", "Only researcher III", answer = "All three researchers")[sample.int(4)])` 
+
+Suppose the researchers summarized the result as follows:
+
+“Health variables explain 11.3% of the variance in need for recovery.” `r mcq(c("Yes", answer = "No")`
+
+`r hide("Explanation")`
+The correct interpretation is:
+
+“The health variables explain an additional 11.3% of the total variance in Need to recover, on top of what is already explained by the social environment variables.”
+
+Alternatively, you may summarize the result as:
+
+“The health variables uniquely explain 11.3% of the total variance in Need to recover, while controlling for the social environment variables.”
+
+Since the R2-change was significant, we have evidence that “Health” had a direct effect on the Need to recover.
+`r unhide()`
+ 
+
+Now test whether the social environment variables have an effect on need to recover (while controlling for the health variables). Summarize the results (include all relevant statistics: test statistics, degrees of freedom, p-values).
+
+Include in your answer:
+
+The R2 of the Small and Full model.
+
+The R2-change and whether or not it is significant (use a significance level of .05).
+
+A substantive interpretation of the R2-change (within the context of this assignment).
+
+
+The first step is to run the hierarchical regression analysis, with the health variables in Block 1 and the social environment variables in Block 2.
+
+`r hide("Answer")`
+The model with social environment variables explains 14.2% of the total variance in Need for Recovery.
+Health variables explain an additional 7.8% of variance in Need for Recovery, and this difference significantly differs from zero, $\Delta R^2 = .08, F(2,116) = 5.800, p = .004$. This means that the social environment variables uniquely explain 7.8% of the total variance in Need for Recovery, while controlling for the health variables. The total explained variance in Need for Recovery is 22.0%, which is significantly different from zero, $F(5, 116) = 6.536, p < .001$.
+
+`r unhide()`
+
+## Dummies and Continuous Predictors
+
+In this assignment we will predict a continuous outcome variable from a dichotomous predictor (i.e. gender).
+
+The data file that we will use is PublicParticipation.sav.
+
+This data file contains data on the following variables:
+
+* income (higher score = higher income)
+* public participation (i.e. being a member of school boards, municipal councilor, etc.)
+* education
+* age
+* gender (0 = females; 1 = males)
+
+We want to test the following research question:
+
+"Are there gender differences in Public Participation?"
+
+
+To answer this research questions, we can use an independent samples t-test.
+
+Run an independent samples t-test to answer the research question (consult the information button in case you forgot how to run an independent samples t-test.)
+
+Consult the output to answer the questions in the next steps.
+
+Analyze > Compare means > Independent samples t-test.
+
+Choose Public Participation as the dependent variable.
+
+The grouping variable is Gender. Define the groups: group 1 = 0 (i.e., women) and group 2 = 1 (i.e., men).
+
+Paste and run the syntax.
+
+What is the mean difference between men and women? `r fitb(6.502, num = T, tol = .01)`
+
+<!-- HIER -->
+Consult the table Group Statistics.
+
+“In the sample, men score on average `r fitb(6.5, num = T, tol = .1)` points higher on public participation than women.”
+
+Which of the following statements correctly summarizes the results of Levene’s test (use α=.05)?
+
+`r longmcq(c(answer = "Levene's test is not significant, no evidence against the assumption of homoscedasticity", "Levene's test is significant, evidence against assumption of homoscedasticity."))`
+
+
+The researchers conclude:
+
+“We have convincing evidence that the population means of public participation differs between males and females.”
+
+
+Is this a valid conclusion? `r mcq(c(answer = "Yes", "No"))`
+
+Report the test results, then check your answer.
+
+`r hide("Explanation")`
+The mean level of public participation differs between males ($M = 16.54$) and females ($M = 9.95$), $t(41) = -4.942, p <.001$.
+
+`r unhide()`
+ 
+What is the (absolute) value of the t-statistic? `r fitb(4.942, num = T, tol = .01)`
+ 
+From the results of the t-test the researchers would conclude that males on average have higher levels of public participation than females.
+
+But, of course, we don’t know for sure, because we did not test the entire population. Which error type could the researchers have made? `r mcq(c(answer = "Type I error ", "Type II error", "Type I or Type II error "))`
+ 
+### Examining Income
+
+In the previous steps, we used the independent sample’s t-test to test for mean differences in public participation and found a significant result. Results suggested that males show higher levels of public participation. However, males and females may differ not only in gender, but also in other characteristics that explain differences in public participation. In particular, the researchers hypothesize that income differences may play a role as well. Research has shown that income is positively associated with public participation. So if males and females differ in income (on average), the gender differences in public participation may be partly due to income differences.
+
+In other words, according to the researchers income may be a `r mcq(c(answer = "confounder", "moderator", "collider", "predictor")[sample.int(4)])` of the effect of gender.
+
+Before we proceed, let’s first check whether the groups differ on income. Request the means for the variable income for both males and females separately.
+
+Do the males and females in the sample differ in average income?
+
+Take your existing syntax for gender differences in Participation, and change it to test for income differences instead:
+
+```
+T-TEST GROUPS=Gender(0 1)
+  /MISSING=ANALYSIS
+  /VARIABLES=Income
+  /ES DISPLAY(TRUE)
+  /CRITERIA=CI(.95).
+```
+
+Is there a difference in income? `r mcq(c(answer = "Yes", "No"))`
+
+The next step is to study gender differences controlled for income differences. This is not possible via the independent samples t-test interface, but it is possible when specifying our model using regression analyses. Regression analysis allows us to study gender differences controlling for other variables.
+
+
+
+### Add continuous predictor
+
+Before we proceed with the regression analysis including income (we will do this in the next assignment), we will first see what the regression model looks like if we would only use gender as the only predictor in the model.
+
+Run a regression analysis using Public Participation as the dependent variable, and gender as the independent variable (Analyze > regression > linear). Note that the variable gender is already dummy coded.
+
+Inspect the table with Coefficients.
+
+ 
+What is the regression slope of gender? `r fitb(6.502, num = T, tol = .01)`
+
+Compare the value to the mean difference from ; what do you see?
+
+Recall that the independent samples t-test is the exact same test as the t-test for the regression slope of a dummy variable.
+
+Compare the value of the t-statistic in the regression with the value of t-statistic in the independent samples t-test (you may ignore the minus signs). What do you see?
+
+The regression coefficient of gender is 6.502. This is the same as the difference in means of Public Participation between males and females.
+The t-statistic of the regression coefficient is 4.942. The t-statistic in the independent samples t-test was -4.942. As we can ignore the minus sign (just make sure to check which group is higher than the other), we can conclude they are equal.
+ 
+What percentage of the total variance in public participation is explained by gender? `r fitb(37.3, num = T, tol = .1)`
+ 
+Recall that the independent samples t-test and regression analysis with a dummy variable predictor are completely equivalent; SPSS just offers different interfaces to the same linear model.
+
+We need to use the regression interface when we want to add other predictors (e.g., income) to see if the gender differences are confounded by other characteristics, and we can calculate the R2 value to evaluate the size of the effect of gender.
+
+
+Next, we want to know whether there are differences in public participation between men and women with the same income level.
+
+In other words: let's look at gender differences in public participation controlled for income.
+
+Run a regression analysis of public participation on income and gender (analyze -> regression -> linear). Consult the output and answer the following questions:
+
+
+Gender and income jointly explain  `r fitb(57.3, num = T, tol = .1)`% of the variance in public participation.
+ 
+Which of the following alternatives correctly report the F-statistic testing the significance of the R2? `r mcq(c(answer = "F(2,40)=26.845, p < 0.001", "F(2,42)=26.845, p < 0.001")` 
+ 
+The researchers conclude:
+
+“On average, women score 4.818 points higher on public participation than men.”
+
+
+Is this a valid conclusion? `r mcq(c(answer="No", "Yes"))`
+
+`r hide("Explanation")`
+I hope you concluded that the researchers' conclusion is incorrect.
+
+They should have said:
+
+“On average, women score 4.818 points less on public participation than men of an equal income level”
+
+So, if we take two groups of men and women with the same income (= "controlling for income"), then we expect a mean difference of 4.818 in public participation.
+
+`r unhide()`
+ 
+Is there evidence of gender differences, while controlling for income differences when testing at $\alpha = .01$? `r mcq(c(answer = "Yes", "No"))`
+
+Write down the complete regression equation, then check your answer below.
+
+`r hide("Answer")`
+The regression equation is as follows:
+
+$\text{Participation}_i = 5.762 + 3.475*\text{Income}_i+ 4.818 * \text{Gender}_i+e_i$
+
+`r unhide()`
+
+Suppose we have a man with an income of 3.0 and a woman with an income of 2.0, what is the predicted difference in public participation? `r fitb(8.293, num = T, tol = .01)`
+
+`r hide("Explanation")`
+Man with an income of 3 has a predicted score of:
+
+Public Participation′=5.762+3.475∗3+4.818 ∗1
+
+Public Participation′=21.005
+
+Woman with an income of 2 has a predicted score of:
+
+Public Participation′=5.762+3.475∗2+4.818 ∗ 0
+
+Public Participation′=12.712
+
+Difference = 21,005 – 12,712
+
+Difference = 8.293
+
+`r unhide()`
+
+We previously computed the mean difference in public participation for men and women, which was 6.50.
+
+Why is this previous mean difference not the same as the effect of gender that we find in this most recent regression analysis?
+
+`r hide("Answer")`
+The mean difference as observed in the sample is the mean difference without controlling for income differences.
+
+However, as we have seen, men and women also differ in the average income, and income differences between males and females may also explain differences in public participation. In the regression analyses, we controlled for income differences, which means that we “filtered out” the effect of income (the correct way to say it: we partialed out income effects). After controlling for income the effect of gender is somewhat smaller. Hence, the difference in public participation in the sample means is partly due to income differences.
+`r unhide()`
+ 
+One researcher argues that there are gender differences in public participation, and gender differences in income, and that income additionally has an effect on public participation.
+
+In this theoretical model, income is a `r mcq(c(answer = "Mediator", "Confounder", "Moderator", "Common cause")[sample.int(4)])`
+
+### Nested Models
+
+Finally, we might want to know how much unique variance is explained by gender, *after* controlling for income. To this end, we would perform a nested model test.

@@ -83,3 +83,142 @@ Median: order the numbers, note that there is an odd number, take the average of
 Correlation measures linear association, so eliminate option C. Option B shows a very small correlation - probably 0 or maybe .1. So the correct answer is A, which shows a moderate negative correlation.
 `r unhide()`
 
+
+# Tutorial
+
+## Independent Samples T-Test
+
+In this assignment we will use the data file 5groups.sav Download 5groups.sav. Download the file and open it in SPSS.
+ 
+This time, we will compare the means of the variable y of two specific groups: group 1 and group 4. To test the difference between two sample means, we will use the t-test for independent samples.
+
+
+What is the null hypothesis of this test? And what is the alternative hypothesis?
+
+`r hide("Answer")`
+
+$H_0: \mu_1=\mu_4$, against $H_1: \mu_1\neq \mu_4$
+
+`r unhide()`
+
+Create the necessary syntax for the t-test that compares the means of group 1 and group 4.
+
+You can find the dialog for the two-sample t-test under Analyze > Compare Means > Independent Samples T Test
+
+In the SPSS dialog you have to specify which two groups you want to compare. In our case, it's group 1 and group 4. After placing the variable in the box named "Grouping Variable", click the button named "Define Groups" to define the groups.
+ 
+
+Compare your syntax to the correct syntax:
+
+`r hide("Answer")`
+
+T-TEST GROUPS=group(1 4)
+  /MISSING=ANALYSIS
+  /VARIABLES=y
+  /CRITERIA=CI(.95).
+`r unhide()`
+
+
+One of the assumptions of the independent samples t-test is homoscedasticity (equal variances for all levels of the predictor). We can compare the sizes of the variances of the two groups with a simple F-test, which we call Levene's test.
+
+Have a look at Levene's test and try to interpret it. Discuss with your group what null-hypothesis is being tested here.
+
+
+What is the p-value of the Levene's test? `r fitb(.05, num = T, tol = .004)`
+
+
+What do you conclude from this? What's the practical use of the outcome of this test?
+
+`r hide("Explanation")`
+Levene’s test is not significant.
+Remember that the null hypothesis of Levene’s test is that the population variances of the group are equal. As the p-value is not significant, we cannot reject the null hypothesis. Consequently, there is no evidence that the population variances of two groups are unequal.
+Thus, there is no reason to question the assumption.
+`r unhide()`
+ 
+Now you will have to decide on the outcome of the actual t-test. SPSS reports two versions: one that assumes equal variances (top row) and one that relaxes this assumption (bottom row).
+
+You should pick one of these. In principle, you should decide which one you will use before seeing the results - although if there is clear evidence of violation of assumptions, you might want to discuss in your report whether the results change if you use the robust version (bottom row).
+
+For now remember: we assume equal variances.
+
+What is the two-sided p-value? `r fitb(.021, num = T, tol = .001)`
+
+Do you reject the null hypothesis of this t-test at alpha 0.05? `r mcq(c(answer = "Yes", "No"))`
+
+
+## Regression with dummies
+
+We will now perform the exact same analysis, but with regression and dummies.
+ 
+To test the difference between group 1 and group 4, we first create a dummy variable to distinguish these two groups. Use group 1 as reference category.
+You can use either Transform -> Recode into different variables, or syntax:
+
+```
+RECODE group (1=0) (4=1) INTO dgroup4.
+EXECUTE.
+```
+
+Note that all other groups are coded as missing on this variable, which is exactly what we want!
+
+We will use regression to perform our t-test. The hypothesis is the same as in the previous assignment, but you could also rewrite it in terms of regression coefficient(s). What is the null hypothesis of this test in terms of regression coefficient(s)? And what is the alternative hypothesis?
+
+`r hide("Answer")`
+
+$H_0: \beta_{group1 vs group2}=0$ which is the same as $H_0: \mu_{group1} = \mu_{group2}$, versus $H_1: \beta_{group1 vs group2} \neq 0$ which is the same as $H_0: \mu_{group1} \ne \mu_{group2}$
+
+`r unhide()`
+
+Create the necessary syntax for a regression with the dummy variable that compares the means of group 1 and group 4.
+
+You can find the dialog under Analyze > Regression > Linear
+
+In the SPSS dialog you have to specify the Dependent and Independent variable. In our case, the independent variable is the dummy we created.
+ 
+Compare your syntax to the correct syntax:
+
+```
+REGRESSION
+  /MISSING LISTWISE
+  /STATISTICS COEFF OUTS R ANOVA
+  /CRITERIA=PIN(.05) POUT(.10)
+  /NOORIGIN 
+  /DEPENDENT y
+  /METHOD=ENTER dgroup4.
+```
+
+Note that, unlike the t-test interface, the regression interface does not provide a Levene's test.
+This is one reason you might want to use the t-test interface.
+The regression interface provides a more generic way to test the assumption of homoscedasticity: a residual plot.
+
+Go back through the regression interface, but this time click the Plots button and plot the predicted value (X = ZPRED) against the residual value (Y = ZRESID).
+
+Your syntax will now say:
+
+```
+REGRESSION
+  /MISSING LISTWISE
+  /STATISTICS COEFF OUTS R ANOVA
+  /CRITERIA=PIN(.05) POUT(.10)
+  /NOORIGIN 
+  /DEPENDENT y
+  /METHOD=ENTER dgroup4
+  /SCATTERPLOT=(*ZRESID ,*ZPRED)
+```
+
+If the assumption of homoscedasticity is met, we should see that the dots in this plot are equally distributed around the zero line for all values on the X-axis. In this case, we see much narrower spread on the right side than on the left side.
+
+What can you conclude from this, and does it match your conclusion from Levene's test?
+
+Now you will have to decide on the outcome of the actual t-test.
+
+Remember that the t-test of the dummy variable should be the same as the t-test we conducted before. Verify that this is true.
+
+What is the two-sided p-value? `r fitb(.021, num = T, tol = .001)`
+
+We see one more t-test: for the "(Constant)" or intercept. How do we interpret this?
+
+`r longmcq(c(
+answer = "The mean value in Group 1 is 7, and this differs significantly from zero.",
+"The mean value in Group 4 is 7, and this differs significantly from zero.",
+"The mean value across both Groups is 7, and this differs significantly from zero.",
+"The mean difference between both Groups is 7, and this differs significantly from zero.")[sample.int(4)])`

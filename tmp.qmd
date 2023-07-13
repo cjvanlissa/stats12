@@ -1,0 +1,373 @@
+# Lab 1: Introduction
+
+```{r, include = FALSE}
+source("R/booktem_setup.R")
+source("R/my_setup.R")
+```
+
+## Working with Syntax
+
+Up until now, we ran the analyses by "click-and-point" via the menu. This is a good starting point if you have never worked with SPSS before, but it is not to be recommended for professional use. A better way is to use so called syntax. In this assignment we will learn how to prepare and save SPSS syntax for doing the analyses. Syntax is a series of "commands" that tells SPSS what to do. Active knowledge and use of syntax is important for several reasons:
+
+- First, efficiency: it makes life easier. Once you have the syntax, you can easily redo the whole analysis without going through all the points-and-clicks again.
+- Second, communication: When you work together on research projects, it is important that you exactly understand the analyses that were done, even if you didn't do the analyses yourself. By using syntax, all team members can see what has been done and how.
+- Third, documentation & data management: As a researcher you are responsible for data storage and management (!).  This not only includes storage of data, but also documentation of the all the steps and analyses you did to come to your results (e.g., handling missing values, detection of outlying values). Ideally, you should provide the materials such that other researchers can easily replicate your analyses starting from the raw data file. Working with SPSS syntax is a great way to do so.
+- Fourth, necessity: some statistical procedures are only available via SPSS syntax (e.g., simple effects analysis in MANOVA).
+
+First, we will see how to set-up a basic syntax via the menu. Once you have the basic syntax, you can modify it to your own needs and preferences.
+
+To get there, we will use the data file LAS-CNS_stress.sav Download LAS-CNS_stress.sav.
+
+Download and open the data file in SPSS.
+
+We will now generate the syntax for computing basic descriptive statistics for the variable optimism.
+
+Navigate to Analyze > Descriptive statistics > Descriptives.
+Select the variable (i.e., optimism) for which you want the descriptives.
+But instead of OK, now click on PASTE. SPSS will open the syntax editor and adds new syntax.
+
+Carefully inspect the syntax and try to "read" what it says.
+ 
+To run the syntax, select the commands with your mouse and click on the big green "Play button" in the top menu.
+
+You will see that SPSS now executes the commands that you selected and includes the descriptives in the output.
+
+(The SPSS output does not pop up automatically. If you go to the output, you will see that the command worked though.)
+
+The next step in preparing our first syntax is to add comments. These comments should clarify the syntax and give general information (e.g., when was the syntax last modified, who did the modifications, etc.). 
+
+Comments are text lines that start with an * and ends with a dot. Comments are printed in grey.
+
+REMARK: the dot at the end of your text line is really important. If you do not add it, your syntax will run work properly!
+
+Add comments including the following information:
+
+- When was the syntax made?
+- Who made syntax? 
+- What does the syntax do?
+
+After including the comments, run the complete syntax including the comment line (by selecting and running it, or via top menu Run > All).
+
+If the syntax runs correctly, the comments were correctly included.
+
+I hope everything went well so far! In case you want to see if you're on the right track you may consult the PDF file ExamplesSPSSsyntax.pdf Download ExamplesSPSSsyntax.pdf. This file contains the print screens of the syntax you should have created in the different steps. 
+ 
+Now we will change the syntax itself. Suppose we not only want to have the descriptives for optimism, but also for negative emotions and satisfaction. This can easily be accomplished by adding the variable names to the variable list in the syntax.
+
+Modify the syntax, and then run the syntax.
+
+Check the output and see that the descriptives for the other variables are now also displayed.
+
+Using the syntax we can further tailor the analyses to our own preferences. Suppose we want to have a table with only the means and standard deviations. This can easily be accomplished in SPSS syntax by removing MIN and MAX from the statistics list. Do this, rerun the syntax, and check that SPSS produces tables with only means and SDs.
+ 
+We may also want to have statistics that SPSS does not report by default. For example, we may want to have the variances. This can also easily be done in SPSS. Add the VARIANCE to the statistics list.
+
+Change and rerun the syntax, and see that the output also includes the variance.
+
+In practice, you don't know all the commands by heart. SPSS offers help functions. If you highlight the command (e.g., statistics) and click on the button with the paper and the question mark in the top menu. SPSS opens a help file.
+
+Use the help function to modify the syntax such that SPSS produces a table that also reports the range (e.g., the difference between the largest and smallest value). 
+
+
+Answer the following question using the new syntax.
+
+What is the range for Life satisfaction? `r fitb(44, num = T)`
+
+You may have noticed that the SPSS help function is quite technical. So if the SPSS help function doesn't help you, just search online for instructions. 
+ 
+I hope you already noticed the added value of syntax. It may take a bit more effort to get used to work with syntax rather than with the menu, but it definitely pays off the effort! 
+ 
+
+## Independent Samples T-Test
+
+In this assignment we will use the data file 5groups.sav Download 5groups.sav. Download the file and open it in SPSS.
+ 
+This time, we will compare the means of the variable y of two specific groups: group 1 and group 4. To test the difference between two sample means, we will use the t-test for independent samples.
+
+
+What is the null hypothesis of this test? And what is the alternative hypothesis?
+
+`r hide("Answer")`
+
+$H_0: \mu_1=\mu_4$, against $H_1: \mu_1\ne\mu_4$
+
+`r unhide()`
+
+Create the necessary syntax for the t-test that compares the means of group 1 and group 4.
+
+You can find the dialog for the two-sample t-test under Analyze > Compare Means > Independent Samples T Test
+
+In the SPSS dialog you have to specify which two groups you want to compare. In our case, it's group 1 and group 4. After placing the variable in the box named "Grouping Variable", click the button named "Define Groups" to define the groups.
+ 
+Compare your syntax to the correct syntax:
+
+`r hide("Answer")`
+
+T-TEST GROUPS=group(1 4)
+  /MISSING=ANALYSIS
+  /VARIABLES=y
+  /CRITERIA=CI(.95).
+`r unhide()`
+
+
+One of the assumptions of the independent samples t-test is homoscedasticity (equal variances for all levels of the predictor). We can compare the sizes of the variances of the two groups with a simple F-test, which we call Levene's test.
+
+Have a look at Levene's test and try to interpret it. Discuss with your group what null-hypothesis is being tested here.
+
+
+What is the p-value of the Levene's test? `r fitb(.05, num = T, tol = .004)`
+
+
+What do you conclude from this? What's the practical use of the outcome of this test?
+
+`r hide("Explanation")`
+Levene’s test is not significant.
+Remember that the null hypothesis of Levene’s test is that the population variances of the group are equal. As the p-value is not significant, we cannot reject the null hypothesis. Consequently, there is no evidence that the population variances of two groups are unequal.
+Thus, there is no reason to question the assumption.
+`r unhide()`
+ 
+Now you will have to decide on the outcome of the actual t-test. SPSS reports two versions: one that assumes equal variances (top row) and one that relaxes this assumption (bottom row).
+
+You should pick one of these. In principle, you should decide which one you will use before seeing the results - although if there is clear evidence of violation of assumptions, you might want to discuss in your report whether the results change if you use the robust version (bottom row).
+
+For now remember: we assume equal variances.
+
+What is the two-sided p-value? `r fitb(.021, num = T, tol = .001)`
+
+Do you reject the null hypothesis of this t-test at alpha 0.05? `r mcq(c(answer = "Yes", "No"))`
+
+## ANOVA
+
+For this assignment, we will use the data file 5groups.sav Download 5groups.sav. Please open it in SPSS.
+
+As you have seen in the previous assignments, this file contains the measurements of the y variable for 5 different groups. So far, we have - at most - compared two groups at once. This time, we will compare the means of all 5 groups simultaneously using an Analysis of Variance (ANOVA).
+
+ANOVA is often used to examine the results of experimental research where different groups receive different manipulations of an independent variable, and a continuous dependent variable is measured. In that case, rejecting the null hypothesis indicates a causal effect of the manipulated independent variable on the dependent variable.
+
+Let's say the 5 groups in our data file have received 5 different types of training, and the dependent variable y measures the effect of the training.
+
+We will now perform an ANOVA to see if these trainings have an equal effectiveness.
+
+The null hypothesis of the ANOVA with 5 groups is as follows:
+
+$H_0: \mu_1 = \mu_2 = \mu_3 = \mu_4 = \mu_5$
+
+That is, the null hypothesis states that the population means of all five groups are the same. Rejecting the null hypothesis implies that at least one one of these means is different from the rest.
+
+Let's run the analysis!
+
+Navigate to Analyze > General Linear Model > Univariate.
+Choose y as the dependent variable.
+Choose group as the fixed factor.
+Now click on the "Options" button and check the two boxes named "Descriptive statistics" and "Homogeneity tests".
+Finally, click "Paste" to paste the syntax into the syntax editor, and run it from there.
+ 
+You should end up with the following syntax:
+
+```
+    UNIANOVA y BY group
+      /METHOD=SSTYPE(3)
+      /INTERCEPT=INCLUDE
+      /PRINT=HOMOGENEITY DESCRIPTIVE
+      /CRITERIA=ALPHA(.05)
+      /DESIGN=group.
+```
+ 
+
+The first table in the output we will inspect is the "Descriptive Statistics" table. This table displays the means and standard deviations of the variable y for each of the five groups.
+
+Do you think the population standard deviations are different for each group? If they are, why could that pose a problem for our analysis?
+
+One of the assumptions of ANOVA is homoscedasticity. In this case, that means that the population of each group has the same variance (and hence, the same standard deviation). This assumption is also called "homogeneity of variance" (= translation of homoscedasticity). Of course the variance in each sample will differ somewhat. If these differences are significant, there is evidence to doubt our assumption. That's why we asked SPSS to perform "Homogeneity tests".
+
+
+Note that the SD’s of groups 1 and 2 are quite different from the SD’s of groups 3, 4, 5.
+ 
+The next table shows the output of Levene's test. You might remember using Levene's test for comparing the variances of two groups in the context of the independent samples t-test. This time, it tests whether the variance of all 5 groups should be considered equal.
+
+Is there a reason to doubt the assumption of homoscedasticity based on Levene's test? Note: Use the Levene’s test “Based on mean”. `mcq(c(answer = "Yes", "No"))`
+
+
+If Levene's test is significant, there is evidence that the population variances of at least 2 of the groups differ.
+This is evidence against our assumption.
+This could pose a problem for our analysis.
+We may choose to use a version of the analysis that is robust to violations of this assumption instead, but that makes our analysis dependent on the data (= no longer confirmatory). Instead, we could discuss the violation, and compare results with and without a robust test. 
+
+For now, we continue with interpreting the output of the final table. There's a lot of information, but for now we are only interested in the Sig. value of the "Corrected Model" in the first row. This is the two-sided p-value we can use to test our null hypothesis.
+
+What is the two-sided p-value? Do you reject the null hypothesis? What does that mean?
+
+`r hide("Answer")`
+The p-value is <.001. This is smaller than 0.05. Therefore, we reject the null hypothesis, which was: $H_0: \mu1=\mu2=\mu3=\mu4=\mu5$
+
+This means that the means of at least two groups are different. Note that we do not yet know for which groups the means differ!
+`r unhide()`
+
+
+Finally, there's an interesting nugget of information below the final table. It's called R Squared. This shows the total amount of variance in y that is explained by group membership.
+
+What is the value of R Squared? `r fitb(.57, num = T, tol = .01)`
+
+
+By rule of thumb, what is the magnitude of this value (small, medium, or large)?
+
+Cohen (1988) proposed the following guidelines for interpreting the magnitude of R2:
+
+Size	| R2
+------|------
+Small	| 0.01
+Medium	| 0.06
+Large	| 0.138
+
+
+
+
+## One-Way ANOVA
+
+We have prepared the following data file for this assignment: hiking.sav Download hiking.sav. Please download it and open it in SPSS.
+
+The data file describes the result of a fictitious experiment in which a hiking guide has displayed five different types of behavior towards different groups of hikers. The treatment that each person received from the guide is recorded in the variable behavior.
+
+The dependent variable of this experiment is feeling. Higher scores on this variable indicate a more positive attitude of a participant towards the guide. In this assignment, we will use ANOVA to determine whether the mean score on the dependent variable differs between the five experimental conditions.
+
+
+What type of design do we use for this experiment? `r mcq(c("answer" = "Between-subjects design", "Within-subjects design", "Combination of the two")[sample.int(3)])`
+
+As you will have noticed, the data file contains a third variable named weather, which can be either good or bad. For now, we will only look at the results obtained during good weather. Hence, we will use "Select cases" to select only those participants with a value of 1 on the weather variable.
+
+Click Data > Select Cases and select "If condition is satisfied" and click the "If"-button. Now enter the following condition into the equation box:
+
+weather = 1
+
+Now click "Continue" and "Paste" to paste the resulting syntax into the syntax editor. Select Run > All to run it.
+
+ 
+Verify that half of the participants have been crossed out in the Data View.
+
+ 
+We are now ready to perform an ANOVA with the 50 remaining participants.
+
+To run an ANOVA in SPSS there are multiple options. We will use the module "General Linear Model", which encompasses ANOVA and all of its extensions which we will discuss later on (factorial ANOVA, ANCOVA, and repeated measurements). 
+
+Anyway, let's first create the basic syntax.
+
+Analyze > General Linear Model > Univariate
+Choose feeling as the dependent variable and behavior as the fixed factor
+Click on the "Options" button and check the two boxes named "Descriptive" and "Homogeneity tests".
+After clicking "Paste" you should get the following syntax:
+
+```
+UNIANOVA feeling BY behavior    
+    /METHOD=SSTYPE(3)   
+    /INTERCEPT=INCLUDE   
+    /PRINT=DESCRIPTIVE HOMOGENEITY    
+    /CRITERIA=ALPHA(.05)   
+    /DESIGN=behavior.   
+```
+ 
+
+What is the p-value of the Levene's test? Use the Levene’s test “Based on mean” again. `r fitb(.611, num=T, tol = .01)`
+
+Do we have reason to question the assumption of equal population variances? `r mcq(c("Yes", answer = "No"))`
+
+In ANOVA, we distinguish between three sources of variation: the Sums of Squares total (SSt), the Sums of Squares between (SSb, or SSR) and the Sums of Squares within (SSw, or SSE).
+
+What does the Sum of squares total mean (phrase your answer in your own words)? Look up the value of the SSt in the ANOVA output and write it down as well. 
+
+What does the Sum of squares between entail (phrase your answer in your own words)? Look up the value of the SSb in the ANOVA output, and write it down as well. 
+
+
+What does the Sums of squares within entail (phrase your answer in your own words)? Look up the value of the SSw in the ANOVA output, and write it down as well.
+
+
+General answer comments
+The SSw here is 38.405. It tells us how much the individual scores within a group deviate from the group mean. In other words, it shows how much variability there is within the groups. The is the variation that is independent from the experimental effect (because variation within groups cannot be caused by differences in experimental conditions). 
+
+
+`r hide("Answer")`
+The Sums of squares is equal to 18.330 and simply give the squared distance of individual scores to the mean, summed together. The SSt tells us how much the invidual scores deviate from the grand mean. In other words, it shows how much variability there is in the dependent variable in total. 
+
+The SSb here is 4.582 and tells us how much the group means deviate from the grand mean (weighted by the group size). In other words, it shows how much variability there is in the group means. If all group means would be equal to each other, the SSb equals 0. 
+
+The SSw here is 38.405. It tells us how much the individual scores within a group deviate from the group mean. In other words, it shows how much variability there is within the groups. The is the variation that is independent from the experimental effect (because variation within groups cannot be caused by differences in experimental conditions). 
+
+Recall that SSB is the same as SSR; it can be found in the row "Corrected Model", column Type III Sums of Squares.
+
+Recall that the SSW is the same as SSE; it islabeled "Error" in the column Type III Sums of Squares.
+
+
+`r unhide()`
+
+
+How do we use the different types of Sum of Squares to calculate the F statistic?
+
+`r longmcq(c(
+  answer = "$\frac{SSB/dfb}{SSW/dfw}$",
+  $\frac{SSB}{SSW}$,
+  "$\frac{SSW/dfw}{SSB/dfb}$",
+  $\frac{SSW}{SSB}$
+)[sample.int(4)])`
+
+`r hide("Answer")`
+
+We can calculate F using the following formula:
+
+$F = \frac{MSb}{MSw}$
+
+The MSb and MSw give the between group variance and within group variance, respectively. They can be calculated using the following formula's:
+
+$MSb = \frac{SSb}{k-1}$, $MSw = \frac{SSw}{N-k}$
+
+`r unhide()`
+
+Again, consider the table Tests of Between Subjects, which represents the results of ANOVA.
+
+What is the F-value of the ANOVA? `r fitb(5.369, num = T, tol = .01)`
+
+The degrees of freedom between (dfb) are `r fitb(4, num = T)` and the degrees of freedom within (dfw) are `r fitb(45, num = T)`. 
+
+dfb = k-1
+
+dfw = N-k
+
+Again consider the table Tests of Between Subjects
+
+What is the p-value of the ANOVA? `r fitb(.001, num = T, tol = .001)`
+
+You can find the p-value of the ANOVA in the table named "Tests of Between-Subjects Effects". The p-value is equal to the Sig.-value in the first row of this table.
+
+What can you conclude from this? 
+
+Write down a statistical conclusion and a conclusion within the context of this research example.
+
+`r hide("Answer")`
+
+The p-value is smaller than our alpha level (0.05). Therefore, we can conclude that there was a statistically significant difference in positive attitude between the groups, based on the behaviour the guide displayed towards them, (F(4,45) = 5.369, p = .001).
+
+`r unhide()`
+
+
+What is the proportion of variance explained by behavior? `r fitb(.323, num = T, tol = .01)`
+
+
+How would you describe this number in words? So what does it mean? 
+
+Remark: Cohen formulated some rules of thumb for interpreting the $R^2$
+How would you qualify the strength of the effect based on Cohen's rules of thumb? And why should we not take the rules of thumb too seriously?
+
+Cohen (1988) proposed the following guidelines for interpreting the magnitude of $R^2$
+
+Size  | $R^2$
+--------|------------
+Small      | 0.01
+Medium  | 0.06
+Large      | 0.14
+
+Note that, in ANOVA, $R^2$ is also called $\eta^2$ (eta squared) is a measure of effect size, it indicates the amount of variance in thedependen t variable that is explained by the independent variable(s). In our case, 32.3% of the variance in feeling is explained by behaviour. According to Cohen’s guidelines this is a large effect size (see slide 28). However, these guidelines are rather arbitrary,  which Cohen himself also stresses.
+
+
+
+Let's summarize what we've done so far...
+
+The correct conclusion so far is that the five groups differ significantly on the dependent variable feeling. However, we do not yet know which groups differ.
+
