@@ -1013,6 +1013,93 @@ There is no evidence for a significant effect of Age and Education on Participat
 `r unhide()`
 
 
+## Categorical Predictors 2
+
+We will practice some more with interactions using a new dataset.
+
+In this assignment, you will analyze the data file Work.sav Download Work.savto find out whether position (administrative, policy making and executive) has an effect on pleasure in work, controlled for differences in reward (after all, some positions are rewarded more than others...). 
+
+Click on "Next" to start the assignment.
+
+ 
+Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
+Question1 ptsEdit this question Delete this question
+Because position is a categorical (rather than continuous) variable, you need to recode them into dummy variables. Because the variable has three categories, you need to create two dummy variables. You can recode position into two dummy variables in the following way:
+
+LAS_9_SS_4_Dummies.jpg
+
+Which group is the reference group?
+
+ 
+A dummy variable is a variable that can only contain the values 0 or 1. In a regression analysis it is used to indicate the absence or presence of a categorical effect. A regular variable that contains K possible values can be represented by K-1 dummy variables.
+
+The reference category is the category of the original variable that is represented by a score of 0 on (all) the dummy variable(s).
+
+Correct answer
+  Administrative 
+Correct!
+  Policy making 
+  Executive 
+Wrong answer comments
+This answer is incorrect. Remember that the reference group is the group that is coded zero on the dummy variables.
+ 
+Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
+QuestionEdit this question Delete this question
+First, you should use RECODE to create DumA.
+
+- Open Transform > Recode into Different Variables
+- Choose the variable you want to recode (position in this case)
+- Name the new variable DumA in Output Variable 
+- Now click on Old and New Values to open the menu where you will specify how the values need to be recoded
+- Recode the old value '2' into '1'. Recode all other values into 0 and System- or user-missing into System missing. 
+- Click on continue and paste the syntax
+
+
+ 
+Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
+QuestionEdit this question Delete this question
+Now create the dummy variable DumB. You can do that using the menu like you did for DumA, but you also could simply change the syntax you recorded for the creation of DumA. 
+
+Make sure you run the syntax and check in Data View whether the created dummy variables are correctly specified.
+
+ The syntax for the recoding of position into DumA is (if you did the previous step correctly):
+
+RECODE position (2=1) (MISSING=SYSMIS) (ELSE=0) INTO DumA.
+EXECUTE.
+
+
+
+ 
+Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
+Question1 ptsEdit this question Delete this question
+Now you can perform the multiple regression analysis. Open the linear regression menu (Analyze > Regression > Linear), and choose scpleasure as dependent variable. Choose screward and the dummy variables of position as independent variables.
+
+Look at the estimated regression coefficients for the dummy variables in the sample (don't look at the significance tests for now).
+
+At which position type do employees experience the least pleasure in their work, controlled for reward? 
+
+
+
+  Administrative 
+Correct answer
+  Policy Making 
+Correct!
+  Executive 
+Wrong answer comments
+This answer is incorrect. Remember you can look at the regression coefficients to figure out the answer to this question. 
+ 
+Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
+UnansweredQuestion1 ptsEdit this question Delete this question
+The correct answer was people in policy making. Explain how you can come to that conclusion.
+General answer comments
+See the PDF document for more information.
+ 
+Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
+UnansweredQuestion1 ptsEdit this question Delete this question
+Describe shortly how you would test whether position has a significant effect on pleasure at work, controlled for differences in reward. 
+General answer comments
+See the PDF document for a description of how to test this.
+
 ## Interaction Effects
 
 In this assignment, you will examine whether the effect of relationship with coworkers (sccowork; higher score = better relationship) on the emotional pressure at work (scemoti) has an interation effect with gender (0 = male, 1 = female).

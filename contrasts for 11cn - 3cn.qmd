@@ -1,0 +1,396 @@
+# Lab 1: Introduction
+
+```{r, include = FALSE}
+source("R/booktem_setup.R")
+source("R/my_setup.R")
+```
+
+## Bivariate Regression (RECAP)
+
+Researchers are interested in the relationship between age and depression.
+
+They hypothesized that older people are more vulnerable to depressive thoughts than younger people.
+
+To test their research hypothesis, they collected data in a random sample of 164 persons from the general population. Open the dataset HADShealthyGroup.sav Download HADShealthyGroup.sav.
+
+ 
+Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
+QuestionEdit this question Delete this question
+Run a linear regression analysis using age as the independent variable and depression as the dependent variable.
+
+Proceed as follows:
+
+Navigate to Analyze > Regression > Linear
+Select the correct dependent and independent variable.
+Paste and run the syntax.
+ 
+Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
+Question1 ptsEdit this question Delete this question
+How much of the total variance in Depression is explained by Age?
+Correct Answers
+0.02 (with margin: 0)
+ 
+Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
+UnansweredQuestion1 ptsEdit this question Delete this question
+What can you say about the effect size? Would you say it’s a lot?
+General answer comments
+To me, 2% of explained variance does not seem like a lot. There are probably better predictors of depression (i.e., predictors that explain more of the variance in depression).
+ 
+Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
+Question1 ptsEdit this question Delete this question
+Is the explained variance significant at the 10% level?
+Correct answer
+  No 
+  Yes 
+General answer comments
+To conclude anything about the significance of the proportion explain variance of this model, we can look at the ANOVA table or ask SPSS to show the R2-change. This shows us that the explained variance in this model is not significant compared to an empty model (i.e. including no predictors), F(1,140) = 2.836, p = .094.
+ 
+Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
+UnansweredQuestion1 ptsEdit this question Delete this question
+Write down the estimated regression line using the unstandardized coefficients.
+In other words, complete:
+
+Y′=…
+
+Write down, in your own words, the interpretation of all regression coefficients.
+
+General answer comments
+𝑌′=1.885+0.023∗𝐴𝑔𝑒
+
+Constant: The predicted basic level of depression score (when age would be 0).
+
+ 
+Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
+Question1 ptsEdit this question Delete this question
+Consult the table with the coefficients again
+
+Can we conclude from this table that the effect of age is significant at the 10% level?
+
+Correct answer
+  Yes 
+  No 
+General answer comments
+To conclude whether the effect of Age on Depression is significant, we look at the t-test for the estimated coefficient.
+
+We should conclude that the effect of Age on Depression is significant when using α=.10, t(140) = 1.684, p = .094.
+
+ 
+Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
+UnansweredQuestion1 ptsEdit this question Delete this question
+One of the assumptions of bivariate regression analysis is that the relationship between the independent and dependent variable is linear.
+
+State in your own words what this assumption entails.
+
+General answer comments
+The assumption of a linear relationship entails that the relationship between the variables can be described with a straight line.
+ 
+Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
+Question1 ptsEdit this question Delete this question
+How would you evaluate the assumption of linearity graphically? Do it for the data at hand.
+
+If the assumption is not met, speculate about other possible relationships between age and depression.
+
+ 
+
+
+Correct answer
+  Non-linear 
+  Linear 
+General answer comments
+The scatter plot does not have the shape of a cigar, so it does not unambiguously suggest a linear relationship. Thus, you may doubt whether the relationship between age and depression is best described by a linear model.
+Perhaps the relationship is quadratic. Especially persons in middle ages may be vulnerable to depressive thoughts.
+Next to the plot, you find both the estimated linear trend and a non-linear trend. It seems that the quadratic curve fits better with the data. Moreover, the quadratic model explains 6% of the variance, whereas the linear model only 2%.
+ 
+Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
+UnansweredQuestion1 ptsEdit this question Delete this question
+Run a regression analysis using Age as the independent variable and Anxiety as the dependent variable.
+
+Summarize the results.
+
+Include in your answer the proportion of explained variance (R-square), a description of the effect based on the estimated regression coefficients, and evaluate the significance of the effect of age on anxiety.
+
+General answer comments
+The proportion explained variance in Anxiety by Age is .071. The explained variance in this model is not significant compared to an empty model (i.e. including no predictors), F(1,140) = 0.710, p = .401.
+
+The effect is Age on Anxiety is negative (β = -0.013), meaning that anxiety decreases with age.
+However, the effect of Age on Anxiety is not significant when using α=.05, t(140) = -0.842, p = .401.
+
+## ANOVA (RECAP)
+
+Consider the following hypothetical research situation…
+
+Researchers are interested in effects of stereotyping on cognitive performance. For their research they performed a quasi-experiment. They selected three schools and asked girls from eight grade to do a math test. However, the teacher in School A says that boys do particularly well on the test (i.e., negative stereotyping for girls). In School B the teachers says that girls do particularly well on the test (i.e., positive stereotyping for girls). In the third school, the teacher gives gender-neutral information (control group).
+
+Afterwards the researchers compare the average math grades across the three groups. Because the schools may also differ in the student population, researchers also measured scholastic aptitude and use that as a covariate in the analysis.
+
+Open the dataset stereotyping.sav Download stereotyping.sav.
+
+ 
+Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
+UnansweredQuestion1 ptsEdit this question Delete this question
+Explain in your own words what a covariate is and why it is important to include those in neuro-psychological research (2 reasons).
+General answer comments
+Covariates are explanatory variables that exist naturally within research units. What differentiates them from independent variables is that they are of no primary interest in an investigation but cause nuisances that must be dealt with.
+
+It is important to include covariates in neuro-psychological research because it allows the researcher to be more confident in the conclusions drawn from the study, and helps explain variance in the outcome variable that would otherwise be considered error variance.
+
+ 
+Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
+UnansweredQuestion1 ptsEdit this question Delete this question
+Mention two often-used covariates in research.
+General answer comments
+Gender and Age are two covariates that are often used in research.
+ 
+Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
+UnansweredQuestion1 ptsEdit this question Delete this question
+Let’s start analyzing the math scores using an ANOVA, thus ignoring any covariates for now.
+
+Compute the means across the three groups (Analyze à Compare means à Means.
+Select MATH for the dependent list and STEREO as the independent.
+Paste and run the syntax.
+Inspect the table that displays the mean differences between the groups.
+
+What is the first impression of stereotyping that we have from the mean differences?
+
+General answer comments
+The table shows that no stereotyping results in the lowest mean score on the math test. Positive stereotyping results in the highest mean score, and negative stereotyping is in between.
+ 
+Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
+UnansweredQuestion1 ptsEdit this question Delete this question
+Run an ANOVA (Analyze -> general linear model -> univariate). Select MATH as the dependent variable and STEREO as fixed factor.
+
+What are the null and alternative hypothesis of the ANOVA?
+
+General answer comments
+H0: μ1 = μ2 = μ3
+H1: not μ1 = μ2 = μ3
+ 
+Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
+Question1 ptsEdit this question Delete this question
+Is the effect of stereotyping significant (use α=0.05)?
+Correct answer
+  Yes 
+  No 
+General answer comments
+Yes, the F-test for the effect of Stereotyping on Math performance is significant, F(2,27) = 5.614, p = .009. Hence, we reject H0.
+
+We have convincing evidence that, also at the population level, the means differ.
+
+In other words, we have convincing evidence that the mean differences in math performance are not the result of sampling fluctuations but reflect true differences due to the manipulation (i.e. stereotyping).
+
+ 
+Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
+Question1 ptsEdit this question Delete this question
+How large is the R-square?
+Correct Answers
+0.294 (with margin: 0)
+ 
+Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
+UnansweredQuestion1 ptsEdit this question Delete this question
+What is the interpretation of the R-square?
+General answer comments
+The R2 is 0.294.
+
+This means that 29.4% of the variance in Math performance is explained by the Stereotyping.
+
+ 
+Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
+QuestionEdit this question Delete this question
+Verify that the R-square equals the ratio of the Sums of Squares for STEREO to the (corrected) total.
+ 
+Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
+QuestionEdit this question Delete this question
+Test whether there is an effect of stereotyping (regardless of whether it is positive or negative stereotyping).
+
+
+ 
+Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
+UnansweredQuestion1 ptsEdit this question Delete this question
+Is the effect of stereotyping (regardless of whether it is positive or negative stereotyping) significant?
+
+Report the Levene’s test, significance of the contrast that you tested, and an interpretation of the difference between the two means.
+
+General answer comments
+The Levene’s test is not significant (p = .805), so we can assume equal variances.
+ 
+Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
+UnansweredQuestion1 ptsEdit this question Delete this question
+Test the mean math score for each experimental group against the control group; that is, you have to test two planned contrasts.
+
+Are the means different when tested at an experiment-wise alpha of .05 and using a Bonferroni corrected alpha per test? Substantiate your answer.
+
+General answer comments
+The contrast is significant at α = .05.
+
+These results suggest that stereotyping (positive/negative) results in better math performance than non-stereotyping.   
+
+## ANCOVA
+
+The next step is to add scholastic aptitude as a covariate in our analysis.
+
+In the lecture, we considered two situations in which ANCOVA is used; one in which the covariate was not related to the grouping variable, and one in which the covariate is associated.
+
+Which situation do we have in this study?
+To answer the question, you need to ask for some additional statistics in SPSS.
+
+General answer comments
+We can check if the covariate is associated with the experimental factor by inspecting the means of the experimental groups on the covariate, or by running a one-way ANOVA.
+
+The covariate is associated with the grouping variable, and thus mean differences in math between the three groups may be confounded by mean differences in scholastic aptitude between the three groups.
+
+ 
+Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
+UnansweredQuestion1 ptsEdit this question Delete this question
+A meaningful covariate is a variable that is associated with the outcome variable. However, ANCOVA also assumes homogeneity in regression.
+
+What does this assumption entail?
+Explain the assumption in the context of the study on stereotyping.
+
+General answer comments
+The assumption of homogeneity in regression states that the within-group effect of the covariate is the same across groups. That is, the covariate does not interact with the grouping variable.
+
+In this study, the assumption states that the effect of scholastic aptitude is independent of the experimental condition.
+
+ 
+Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
+Question1 ptsEdit this question Delete this question
+The assumption of homogeneity in regression states that the within-group effect of the covariate is the same across groups; that is, the covariate does not interact with the grouping variable. In this study, the assumption states that the effect of scholastic aptitude does not depend on the experimental condition.
+
+Before we carry out the actual ANCOVA, we should first check whether there is a significant interaction. We can check whether there is a significant interaction effect using the following syntax:
+
+    UNIANOVA SA BY STEREO WITH MATH
+      /METHOD=SSTYPE(3)
+      /INTERCEPT=INCLUDE
+      /PRINT=DESCRIPTIVE PARAMETER HOMOGENEITY
+      /CRITERIA=ALPHA(.05)
+      /DESIGN=STEREO MATH MATH*STEREO.
+
+Copy and run the syntax. Go to the table "Tests of Between-Subjects Effects". Take a look at the row STEREO*MATH.
+
+Do we find a significant interaction effect?
+
+Correct answer
+  No 
+  Yes 
+General answer comments
+No, there is no significant interaction effect. This means that we can run the actual ANCOVA, without the interaction term.
+ 
+Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
+QuestionEdit this question Delete this question
+Since there is no significant interaction effect, we can run the actual ANCOVA, without the interaction term.
+
+Let’s run an ANCOVA, proceed as follows:
+
+Navigate to Analyze > General linear model ? Univariate
+Select MATH as the dependent variable, STEREO as fixed factor, and SA as the covariate.
+Also, via OPTIONS ask for the Parameter estimates.
+Paste and run the syntax.
+ 
+Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
+UnansweredQuestion1 ptsEdit this question Delete this question
+Consider the Tests of Between Subjects Effects table (henceforth referred to as the “ANCOVA table”) and the FF-test for the grouping factor (STEREO).
+
+What conclusions can be drawn from the F-test?
+
+General answer comments
+The F-test is a test of the effect of Stereotyping on Math performance controlled for Scholastic aptitude. Conceptually, it tests whether differences in the adjusted means in Math performance are significant. Adjusted means are the means we would expect if the group had an average level of Scholastic aptitude.
+
+In other words, it tests the differences in the hypothetical situation we would have had three groups that had exactly the same level of Scholastic aptitude.
+
+The F-test is not significant, F(2,26) = 2.333, p = .117, which means that, controlled for Scholastic aptitude, we don’t have convincing evidence that Stereotyping had an effect on Match performance.
+
+ 
+Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
+UnansweredQuestion1 ptsEdit this question Delete this question
+Compare the results ANOVA and ANCOVA. What important difference do we see and how would you explain those?
+General answer comments
+The ANOVA suggested a significant effect, whereas once controlled for Scholastic aptitude (ANCOVA) the effect was no longer significant.
+
+Thus, the mean differences between the experimental groups we saw before were indeed confounded with differences in Scholastic aptitude!
+
+ 
+Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
+UnansweredQuestion1 ptsEdit this question Delete this question
+Consult the table parameter estimates.
+
+Explain the meaning of estimated parameter for scholastic aptitude.
+
+General answer comments
+The parameter estimate for Scholastic aptitude is 0.470. The effect is significant when using α = .05.
+
+It is the pooled within-group regression effect of Scholastic aptitude on Math performance, controlled for Stereotyping.
+Thus, if Scholastic aptitude increases by one unit, the predicted Math score increases by .470 units, while controlling for Stereotyping.
+
+ 
+Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
+Question1 ptsEdit this question Delete this question
+Based on the Parameters Estimates and the group-specific means, compute the adjusted group means (for each of the groups!) on MATH for an average scholastic aptitude.
+
+What is the adjusted group mean for the group that received the Negative Stereotype manipulation? Round your answer to three decimal places.
+
+$\bar{Y}_k^{adj} = \bar{Y}_k -b_w(\bar{X}_k- \bar{X})$
+
+ To use the formula, you need to know the group means on MATH (you computed it before), you have to know the group means and overall mean SA (you can compute them via means), and the regression effect which is given in the table with parameter estimates: b=0.470.
+
+
+
+Correct Answers
+6.359 (with margin: 0)
+ 
+Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
+Question1 ptsEdit this question Delete this question
+Where you able to calculate all adjusted means?
+
+(Check the information button anyway.)
+
+![](images/Figure13-1.png)
+
+Correct answer
+  Yes 
+Correct answer
+  No 
+ 
+Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
+UnansweredQuestion1 ptsEdit this question Delete this question
+Rerun the ANCOVA. Now via OPTIONS also ask for the estimated means. You do so by selecting stereo in the list of Display Means for (at the top of the menu). Look in the table Estimated Marginal Means and verify your answer to the previous question.
+
+Write down in your own words – and as precise as possible – the meaning of adjusted means.
+
+General answer comments
+The estimated marginal means (i.e., the adjusted means) are the group means if all groups would’ve had an average of 6.20 on the covariate.
+ 
+Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
+Question1 ptsEdit this question Delete this question
+Finally, we want to look at several effect size estimates.
+
+How much of the variance in Math do SA and STEREO explain?
+
+Correct Answers
+0.421 (with margin: 0)
+ 
+Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
+Question1 ptsEdit this question Delete this question
+Controlled for SA, how much of the remaining variance in Math does STEREO explain?
+
+(Use the formula mentioned in the lecture slides to calculate the partial η2)
+
+Correct Answers
+0.152 (with margin: 0)
+ 
+Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
+Question1 ptsEdit this question Delete this question
+Verify your answer by running the ANCOVA again. Now, in options, select the box Estimates if effect size.
+
+Does SPSS report the same partial η2?
+
+Correct answer
+  Yes 
+  No 
+General answer comments
+It should, though.
+ 
+Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
+UnansweredQuestion1 ptsEdit this question Delete this question
+Could you summarize your findings of the ANCOVA in a few brief sentences?
+
+Mention the significance tests, (un)adjusted means and the effect size estimates.    

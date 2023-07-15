@@ -272,9 +272,9 @@ kable(df, escape = FALSE, align = rep('l', length(df[,1])), format = "markdown")
 
 ## Marginal frequency distribution
 
-<font color = "orange">For the variable "Tattoo":</font> How many people do / don't have one? $P(Tattoo)$
+<font color = "orange">For the variable "Tattoo":</font> How many people do / don't have one? 
 
-<font color = "purple">For the variable "Dutch":</font> How many students are Dutch / International? $P(Dutch)$
+<font color = "purple">For the variable "Dutch":</font> How many students are Dutch / International?
 
 ```{r}
 df <- data.frame("Dutch" = c("No", "Yes", "<b>Total column</b>"),
@@ -295,7 +295,7 @@ kable(df, escape = FALSE, align = rep('l', length(df[,1]))) %>%
 
 Frequency distribution of one variable, for specific value of the other variable
 
-E.g.: What is the conditional frequency distribution of Tattoos <font color = "purple">**for Dutch students?**</font> $P(Tattoo | Dutch)$
+E.g.: What is the conditional frequency distribution of Tattoos <font color = "purple">**for Dutch students?**</font>
 
 ```{r}
 df <- data.frame("Dutch" = c("No", "Yes", "<b>Total column</b>"),
@@ -314,7 +314,7 @@ kable(df, escape = FALSE, align = rep('l', length(df[,1]))) %>%
 
 Frequency of a combination of two (or more) variables
 
-E.g.: What is the frequency of <font color = "purple">**Dutch students with a tattoo**</font>? $P(Dutch \cap Tattoo)$
+E.g.: What is the frequency of <font color = "purple">**Dutch students with a tattoo**</font>?
 
 ```{r}
 df <- data.frame("Dutch" = c("No", "Yes", "<b>Total column</b>"),
@@ -340,7 +340,7 @@ Which frequencies and which total you use depends on what probability distributi
 
 Divide marginal totals by the <font color = "orange">global total</font>
 	
-E.g.: What is the <font color = "purple">marginal probability distribution of having a tattoo</font>? $P(Tattoo)$
+E.g.: What is the <font color = "purple">marginal probability distribution of being Dutch</font>? $P(Dutch)$
 
 ```{r}
 df <- data.frame("Dutch" = c("No", "Yes", "<b>Total column</b>"),
@@ -361,7 +361,7 @@ kable(df, escape = FALSE, align = rep('l', length(df[,1]))) %>%
 
 Divide the row- or column frequencies by the <font color = "orange">marginal total</font>
 
-E.g.: What is the conditional probability of <font color = "purple">having a tattoo for international students</font>?
+E.g.: What is the conditional probability of <font color = "purple">having a tattoo for international students</font>?  $P(Tattoo | Dutch)$
 
 
 ```{r}

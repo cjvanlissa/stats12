@@ -1,0 +1,255 @@
+# Lab 1: Introduction
+
+```{r, include = FALSE}
+source("R/booktem_setup.R")
+source("R/my_setup.R")
+```
+
+Consider the following item:
+
+How much time did you spend studying for this Quiz?
+
+1. less than 10 hours
+2. 10 hours or more, but less than 20 hours
+3. 20 hours or more
+
+What is the measurement level of the data obtained with this item? `r mcq(c("Ratio", "Nominal", answer = "Ordinal", "Interval"))`
+
+Frida investigates the relationship between gender and neuroticism. To investigate this, she draws a random sample and lets the participants fill out a questionnaire. This questionnaire contains both a question about the gender of the participants and a neuroticism scale consisting of 10 questions.
+
+ 
+
+What type of research design does Frida use? `r mcq(c("Experimental", "Quasi-experimental", answer = "Correlational"))`
+ 
+ 
+Consider the following (fictional) contingency table from SPSS concerning the favorite drinks of liberal arts students:
+
+Study * Drink Crosstabulation
+
+![](images/studyxdrink.png)
+
+$P(Wine | Cognitive Neuroscience)$ is a `r mcq(c(answer = "conditional", "marginal", "joint", "partial")[sample.int(4)])` probability.
+
+Compute:  $P(Wine | Cognitive Neuroscience) = $ is... `r mcq(c("Less than 0.10", "Equal to or larger than 0.10 but less than 0.25", answer = "Equal to or larger than 0.25 but less than 0.50", "Equal to or larger than 0.50 but less than 0.75", "More than 0.75"))`
+
+ 
+Consider time spent biking per day. Suppose that in the population daily time (in minutes) spent biking is normally distributed with a mean of 38 and a standard deviation of 5. What is the probability that a randomly chosen person from the population spends less than 40 minutes biking? `r mcq(c("Less than 0.15", "Equal to or larger than 0.15 but less than 0.50", answer = "Equal to or larger than 0.50 but less than 0.85", "Equal to or larger than 0.85"))`
+
+`r hide("Explanation")`
+
+1. $\:P\left(X>40\right) = \, ?$
+2. $\:Z\:=\frac{40-38}{5}=0.4$
+3. $\,P (X > 40) = P(Z > 0.4) = 0.3446$
+4. $\:P\left(X<40\right)=P(Z < 0.4) = 1-0.3446=0.6554$
+
+`r unhide()`
+
+Let X be normally distributed in the population,  $X \sim N(\mu= 370, \sigma = 60)$. What is the probability that the mean of a random sample of 25 persons is lower than 340?
+
+`r longmcq(c(answer= "Less than 0.05", "Equal to or larger than 0.05 but less than 0.25", 
+  "Equal to or larger than 0.25 but less than 0.50",
+  "Equal to or larger than 0.50"))`
+
+`r hide("Explanation")`
+
+1. $\,\sigma_{\bar{X}}=\frac{\sigma}{\sqrt{N}} = \frac{60}{\sqrt{25}}\:=\:\frac{60}{5}\:=\:12$
+2. $\,P\left(X < 340 \right)?$
+3. $\:Z\:=\:\frac{340-370}{12} = -2.5$
+4. $\:P\left(X<340\right)=P\left(<-2.5\right) =0.0062$
+
+`r unhide()`
+
+Consider the situation where we repeatedly draw samples of a particular size N from the same population an infinite number of times. Evaluate the correctness of the following statements:
+
+ 
+
+I. The sample means across samples show more variation when the sample size (N) is large than when the sample size is small. `r torf(FALSE)`
+
+II. We need multiple samples to derive the sampling distribution of the mean. `r torf(FALSE)`
+
+ 
+Benny obtained a statistically significant effect at the 5% level.
+
+True or False?
+
+Benny can be 95% sure that the null hypothesis is false. `r torf(FALSE)`
+
+`r hide("Explanation")`
+
+Answer: The statement is False. We never interpret p-values as evidence for hypotheses. The p-value is the probability of observing a result at least as extreme as we observed, if the null hypothesis were true.
+
+`r unhide()`
+ 
+Bjorn carried out a statistical test. Unknowingly, he made a Type-II error. What happened?
+
+`r longmcq(c(
+"Bjorn rejected the null hypothesis, while in reality the null hypothesis was true",
+"Bjorn rejected the null hypothesis, while in reality the null hypothesis was false",
+"Bjorn retained the null hypothesis, while in reality the null hypothesis was true", 
+answer = "Bjorn retained the null hypothesis, while in reality the null hypothesis was false"))`
+
+
+Consider the following SPSS output of a one sample t-test. Some values may be deliberately removed from the output.
+
+![](images/2020-11-14_1.png)
+
+
+What is the null hypothesis tested by the one-sample t-test? `r mcq(c("H0: mu=1.5", answer = H0: mu=5", "H0: mu=6.5", "H0: mu=35")[sample.int(4)])`
+
+Researchers are interested in the effect of emotions on perseverance. Twenty respondents were randomly divided into two groups. One group (Group 1) had to watch a sad movie, the other (Group 2) a happy (feel-good) movie. After seeing the movie, the students had to work on an extremely difficult puzzle. The researchers measured how many minutes the respondents worked on the puzzle before they gave up. The longer they worked on the puzzle, the higher their perseverance (the puzzle was exactly the same in both groups). Consider the output of an independent samples t-test for testing equality of means (H0: $\mu_1=\mu_2$) below.
+
+![](images/Q10.png)
+
+
+
+What can the researchers conclude for both tests)?
+
+`r longmcq(c("In the sample, people who watch a sad movie have more perseverance than people who watch a happy movie.", answer = 
+  "In the sample, people who watch a sad movie have less perseverance than people who watch a happy movie.","People who watch a sad movie have significantly more perseverance than people who watch a happy movie.", "People who watch a sad movie have significantly less perseverance than people who watch a happy movie.")[sample.int(4)])`
+ 
+Use the following description for questions 11 and 12
+
+Experimental psychologists study whether Specific types of music can increase speed in which students solve simple math problems. Students work on 5 problems and time is measured in seconds. Before they start working on the math problems, students are assigned to one out of four conditions. In those conditions, students either listen to Techno, K-pop, Classical Music, or cricket sounds. The psychologists obtained the following output. Some values may be deliberately removed from the output.
+
+![](images/Q11+12.png)
+
+![](images/Q11+12.2_masked-1.png)
+
+What is the F-value for the overall F-test? `r fitb(2.265, num = T, tol = .01)`
+
+`r hide("Answer")`
+
+
+$F = \frac{\text{MS}_\text{B}}{\text{MS}_\text{W}} = \frac{(\frac{\text{SS}_\text{B}}{{df}_\text{B}})}{(\frac{\text{SS}_\text{W}}{{df}_\text{W}})} =\frac{(\frac{1854.475}{3})}{(\frac{9826.300}{36})} = \frac{618.1583}{272.9528} = 2.265$
+
+`r unhide()`
+ 
+Experimental psychologists study whether Specific types of music can increase speed in which students solve simple math problems. Students work on 5 problems and time is measured in seconds. Before they start working on the math problems, students are assigned to one out of four conditions. In those conditions, students either listen to Techno, K-pop, Classical Music, or cricket sounds. The psychologists obtained the following output.
+
+![](images/Q11+12.png)
+
+Q11+12.2_masked-1.png
+
+A researcher used the output to test whether there are significant mean differences in Speed between the groups.
+
+True or false?
+
+The researcher finds a significant effect. `r torf(FALSE)`
+
+
+`r hide("Explanation")`
+Answer: p = .098, which is larger than 0.05.
+
+`r unhide()`
+
+Displayed are two scatter plots in which the relationship is displayed between variable X and variable Y. In which of the following situations is correlation coefficient r the strongest? `r mcq(c("A", answer = "B"))`
+
+![](images/2020-11-14_4.png)
+
+
+Use the following description for questions 14 and 15
+
+Some other psychologists are also interested in reaction times, and whether reaction times are related to perfectionism. In this second study, they draw a random sample of 40 students, and measure reaction time and perfectionism. They perform simple regression analysis, with reaction time as dependent variable and perfectionism as independent variable. The psychologists obtained the following output.
+
+![](images/Q14_1.png)
+
+![](images/Q14.2_1.png)
+
+Reaction time explains `r fitb(22.8, num = T, tol = .3)``% of the total variance in perfectionism.
+
+
+ 
+Some other psychologists are also interested in reaction times, and whether reaction times are related to perfectionism. In this second study, they draw a random sample of 40 students, and measure reaction time and perfectionism. They perform simple regression analysis, with reaction time as dependent variable and perfectionism as independent variable. The psychologists obtained the following output.
+
+![](images/Q14.png)
+
+![](images/Q14.2.png)
+
+In the sample was a person with a score of 10 on perfectionism. She worked for 95 seconds on the problems. What would be the prediction error for this person? `r mcq(c("178.030", "36.008", answer = "-15.298", "-26.008"))` 
+
+`r hide("Explanation")`
+
+$Y'=119.038-0.874\times10=110.298$
+
+
+$e=Y-Y' = 95-110.268=-15.298$
+
+`r unhide()`
+
+A researcher runs a regression analysis with X as the independent variable and Y as the dependent variable. The R-square of the model was 0.30. He computed the variance of the observed Y values, which was 40.0. He also computed for every person the predicted value Y’, and the variance of the predicted values. What was the variance of the predicted values Y’? `r mcq(c(answer = "12.0", "28.0", "30.0", "40.0", "There is not enough information to answer the questions"))` 
+  
+<!-- `r hide("Explanation")` -->
+
+<!-- 2020-11-14 (6).png -->
+ 
+Researchers find the following output for a multiple regression analysis in which they regress Y on X1 and X2.
+
+![](images/Q17.png)
+
+What is the correct interpretation of the Beta for X1?
+
+`r longmcq(c(answer = "If X1 increases with one standard deviation, Y’ will increase with .616 standard deviations, while keeping X2 constant.", "If X1 increases with one standard deviation, Y’ will increase with .616 standard deviations.", "If X1 increases with one unit, Y’ will increase with .616 units, while keeping X2 constant.", "If X1 increases with one unit, Y’ will increase with .616 units.")[sample.int(4)])`
+
+  
+
+Researchers carry out a hierarchical regression analysis. They found the following output.
+
+![](images/2020-11-14_8.png)
+
+How much of the variance in Y does Model 1 explain? `r mcq(c(answer = ".015", ".040", ".221", ".389", ".755"))` 
+  
+`r hide("Explanation")`
+
+$R^2_{model3}=.506$
+
+$R_{model1}^2=.506-.046-.445=.015$
+
+`r unhide()`
+
+Researchers carry out a hierarchical regression analysis. They found the following output.
+
+![](images/2020-11-14_8.png)
+
+Based on the reported output, which of the following conclusions can we draw?
+
+`r longmcq(c(
+  "When tested at the 5% significance level, Model 3 does not explain significantly more variance than Model 1.",
+answer = 
+  "When tested at the 5% significance level, Model 2 does explain significantly more variance than Model 1.", 
+  "When tested at the 5% significance level, Model 1 does explain significantly more variance than the null model.", 
+  "None of the abovementioned conclusions are justified given the reported output.")[sample.int(4)])`
+
+ 
+Political Orientation is a categorical variable having four categories: Confessional, Neo-liberal, Populistic, and Socialist. The variable is used as an independent variable in a linear regression analysis with Institutional Confidence as the dependent variable and income as control variable. The following coding of Political Orientation was used:
+
+Political Orientation | D1 | D2 | D3
+----------------------|----|----|----
+Group 1: Confessional | 1 | 0 |0
+Group 2: Neo-liberal  | 0|0|0
+Group 3: Populistic|0|1|0
+Group 4: Socialist|0|0|1
+
+The general model is as follows
+
+$\text{Institutional Confidence'} = b_0 + b_1 \, \text{income} + b_2\, D_1 + b_3 \, D_2 + b_4 \,D_3$
+
+
+What is the model for the Populistic Political Orientation group? `r mcq(c("A", answer = "B", "C", "D"))`
+
+A. $\text{Institutional Confidence'} = (b_0 + b_3) \, \text{income}$
+B. $\text{Institutional Confidence'} = (b_0 + b_3) \, + b_1 \, \text{income}$
+C. $\text{Institutional Confidence'} = b_3 \, + b_1 \, \text{income}$
+D. $\text{Institutional Confidence'} = b_0 \, + b_3 \, \text{income}$
+  
+
+`r hide("Explanation")`
+
+
+$$
+\text{Institutional Confidence'} = b_0 + b_1 \, \text{income} + b_2\, D_1 + b_3 \, D_2 + b_4 \,D_3 \\
+= b_0 + b_1 \, \text{income} + b_2\, 0 + b_3 \, 1 + b_4 \,0 \\
+= b_0 + b_1 \, \text{income} + b_3 \\
+= (b_0 + b_3) + b_1 \, \text{income}
+$$
+
+`r unhide()`

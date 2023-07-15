@@ -1,0 +1,327 @@
+# Lab 1: Introduction
+
+```{r, include = FALSE}
+source("R/booktem_setup.R")
+source("R/my_setup.R")
+```
+
+## PCA
+
+
+This time, you will use SPSS to analyze the following data file: emotionnormsdata_belgium (1).sav Download emotionnormsdata_belgium (1).sav.
+
+Please download the file and open it in SPSS.
+
+Figure10-1.png
+
+The data file consists of data from the International College Survey 2001 (Diener and colleagues, 2001). In this survey, data on emotions was collected for 41 countries. The data you’ll analyze in this assignment is about norms for experiencing/expressing 12 emotions in Belgium. The questionnaire the participants filled out looked like this:
+
+Figure10.png
+
+Click “Next” to go to the first questions.
+
+ 
+Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
+Question1 ptsEdit this question Delete this question
+Let’s look at the data. The first two columns contain the number of the participant and the nation, so you don’t need to include them in the analysis. You may notice there is some missing data, but SPSS will handle this automatically so you don’t need to worry about that. The data is not standardized, but if you check correlation matrix later when you do the analysis, it corresponds to standardized data.
+
+Suppose we are only interested in summarizing the data, making use of the correlation pattern in it.
+
+Which method would you use?
+
+Correct answer
+  Principal Component Analysis 
+  Explanatory Factor Analysis 
+  Confirmatory Factor Analysis 
+  Path Analysis 
+ 
+Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
+Question1 ptsEdit this question Delete this question
+You need to do a Principal Component Analysis (PCA).
+
+Navigate to Analyze → Dimension Reduction → Factor in SPSS
+
+In the tab Extraction: choose the correct method.
+Also enable the option Scree plot and specify which variables need to be included in the analysis. Now, run the analysis.
+Take a look at the output.
+
+According to the Kaiser criterion (eigenvalue > 1; the default method), you should retain three components. But how many components do you have to retain according to the scree plot rule?
+
+Correct answer
+  2 
+  1 
+  3 
+  4 
+ 
+Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
+Question1 ptsEdit this question Delete this question
+Redo the analysis with the number of components you need to retain according to your answer in the previous step.
+
+You can specify the number of components in the Extraction menu of the Factor Analysis window.
+Click Fixed number of factors and enter the number of components (2).
+Run the analysis and look at the loadings in the Component matrix.
+
+Is this solution easy to interpret?
+
+Correct answer
+  No 
+  Yes 
+ 
+Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
+Question1 ptsEdit this question Delete this question
+The two principal components seem to correspond with positive emotions (appropriate and valued), and negative emotions (inappropriate and not valued), but there is not enough simple structure (too many variables have a high loading on both components).
+
+Redo the analysis again (with two components) and choose Direct Oblimin in the Rotation menu. This is an oblique rotation.
+
+Take a look at the component loadings in the Pattern matrix.
+
+Which component would you label Positive Emotions?
+
+Correct answer
+  Component 2 
+  Component 1 
+ 
+Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
+QuestionEdit this question Delete this question
+Compare the component loadings in the Pattern Matrix with the loadings in the Component Matrix.
+
+We now observe that the loadings resemble a simple structure more closely than before the rotation: the low loadings are lower and the high loadings are higher.
+
+Note: Due to the oblique rotation, the loadings are no longer equal to item-component correlations.
+
+Carry on to the next step!
+
+ 
+Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
+Question1 ptsEdit this question Delete this question
+The ratings for expressing negative emotions are summarized in rotated component 1 and the ratings for expressing positive emotions are summarized in rotated component 2.
+
+What is the correlation between these two rotated components?
+
+Correct Answers
+0.143 (with margin: 0)
+ 
+Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
+Question1 ptsEdit this question Delete this question
+Redo the Principal Component Analysis again one last time to save the component scores in the data set. Open Scores in the Factor Analysis window, check the Save as variables checkbox. Have a look at these component scores (now added to your data set): these are the scores for each person on the two components.
+
+What is the component score for the first person on the first component?
+
+Correct Answers
+1.937 (with margin: 0)
+ 
+Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
+Question1 ptsEdit this question Delete this question
+Take a look at the table Total Variance Explained.
+
+How much of the variance do the two components together account for?
+
+Correct Answers
+51.575 (with margin: 0)
+ 
+Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
+Question1 ptsEdit this question Delete this question
+How much of the variance in the item stress is accounted for by the two components?
+Correct Answers
+0.505 (with margin: 0)
+ 
+Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
+Question1 ptsEdit this question Delete this question
+Which item has the highest unicity?
+Correct answer
+  Pride 
+  Cheerful 
+  Anger 
+  Happy 
+
+## Factor Analysis (a)
+
+We will move on to work with Exploratory Factor Analysis.
+
+For this second assignment you will perform an Exploratory Factor Analysis (EFA) in SPSS on a set of 18 items. These items measure Tolerance and are part of the European Value Survey (EVS).
+
+ 
+Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
+UnansweredQuestion1 ptsEdit this question Delete this question
+Explain in your own words when we decide to use Exploratory Factor Analysis and when we decide to use Principal Component Analysis.
+General answer comments
+PCA is a data reduction technique. We use it when we want to summarize information in the items.
+
+EFA is used to identify latent variables underlying the measured items. EFA is typically used when a questionnaire has not been validated yet. When we use EFA, we usually do not know exactly which item belongs to which dimension (although we might have an idea based on our theory).
+
+ 
+Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
+UnansweredQuestion1 ptsEdit this question Delete this question
+When do we use Confirmatory Factor Analysis?
+General answer comments
+CFA is used when we DO know which items belong to which dimension. With CFA we can then check whether the model that we have in mind corresponds with what we see in the data.
+ 
+Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
+QuestionEdit this question Delete this question
+Back to our example!
+
+The Tolerance questionnaire is displayed in the figure below.
+
+Take a few minutes to read the items carefully.
+
+Figure11.png
+
+ 
+Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
+QuestionEdit this question Delete this question
+Open the file evs (1).sav Download evs (1).sav in SPSS.
+
+We are ready for the analysis!
+
+ 
+Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
+QuestionEdit this question Delete this question
+To check whether we are allowed to carry out factor analysis and to know how many factors we should select, we first run another quick PCA.
+
+Most important in this first analysis is that you pick the correct method and that you ask for the Scree plot and KMO index.
+
+Proceed as follows:
+
+Select Factor via Analyze -> Dimension Reduction.
+Drag all items of the tolerance scale into the ‘items’ window.
+Go to Descriptives and select the options “Coefficients” and “KMO and Bartlett’s test of sphericity”.
+Then, go to extraction and select “unrotated factor solution” and “scree plot”.
+Paste and run the syntax.
+ 
+Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
+Question1 ptsEdit this question Delete this question
+Consult the output.
+
+Write down the value of the KMO index (round down to three decimal points).
+
+Correct Answers
+0.906 (with margin: 0)
+ 
+Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
+Question1 ptsEdit this question Delete this question
+Evaluate the factorability. Finish the following sentence:
+
+The factorability, as determined by the KMO index, is…
+
+Correct answer
+  Marvelous 
+  Middling 
+  Mediocre 
+  Unacceptable 
+  Miserable 
+  Meritorious 
+ 
+Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
+Question1 ptsEdit this question Delete this question
+The scale consists of 18 items.
+
+How many factors can you extract at maximum?
+
+Correct answer
+  6 
+  18 
+  1 
+  2 
+  3 
+  17 
+  9 
+General answer comments
+A factor consists of at least 3 items.
+
+A factor consisting of just one single item does not make sense, because it will not explain more variance that that one single item would.
+
+A factor consisting of 2 items cannot be reliable. Also, it would then just be a bivariate correlation, not a factor.
+
+ 
+Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
+Question1 ptsEdit this question Delete this question
+How many factors would you want to select based on the scree plot?
+Correct Answers
+2 (with margin: 0)
+ 
+Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
+Question1 ptsEdit this question Delete this question
+How many factors would you want to select based on Kaiser’s criterium?
+Correct Answers
+3 (with margin: 0)
+General answer comments
+For Kaiser’s criterion, we base the selection of the factors on the Eigenvalues. We select the number of factors, for which the Eigenvalue’s are larger than 1.
+
+In this example, Catell’s scree plot and Kaiser’s criterion are not in accordance: using Catell’s scree plot we would have to select 2 factors and using Kaiser’s criterion we would have to select 3 factors.
+
+Figure 11-1.png
+
+## Factor Analysis (b)
+
+Step 3: Estimate the Loadings and Choose Factor Rotation.
+
+Open the menu for factor analysis again: Analyze --> Dimension Reduction.
+
+In the tab Extraction: Ask for Principal Axis Factoring and choose the number of factors you want to extract based on Kaiser’s criterion (3).
+In the tab Rotation: Tick the box Direct Oblimin. You do not have to change the Delta value.
+In the tab Options: The interpretation of the pattern matrix is easier if you suppress all coefficients in that table that are small (or low as we call it, so values < 0.30). To do so, click on options and ask SPSS to suppress the small coefficients.
+In the tab Descriptives: Ask for the reproduced matrix.
+Paste and run the syntax.
+ 
+Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
+Question1 ptsEdit this question Delete this question
+When we interpret the output of the factor analysis, we inspect 4 tables: the pattern matrix, the communalities, the factor correlation matrix, and the reproduced correlation matrix.
+
+We will start with the pattern matrix.
+
+Inspect the factor loadings in the pattern matrix.
+
+Which item has the highest absolute factor loading on Factor 2?
+
+Correct Answers
+Divorce 
+divorce 
+ 
+Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
+Question1 ptsEdit this question Delete this question
+Does the factor solution follow a simple structure?
+Correct answer
+  Somewhat, yes 
+  Yes, totally 
+  No, not at all 
+General answer comments
+The solution almost follows a simple structure. Only for the item Accepting a bribe we see high factor loadings on both factors.
+ 
+Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
+Question1 ptsEdit this question Delete this question
+Inspect the communalities table.
+
+How much of the variance in the item “suicide” do the factors explain?
+
+Correct Answers
+0.343 (with margin: 0)
+ 
+Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
+Question1 ptsEdit this question Delete this question
+Check the correlations between the three factors.
+
+Are the factors highly correlated?
+
+Correct answer
+  Yes 
+  No 
+General answer comments
+The correlations between the factors are pretty high. All of the (absolute values of the) correlations are larger than .3.
+ 
+Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
+Question1 ptsEdit this question Delete this question
+Inspect the residual correlations.
+
+How many residual correlations have an absolute value larger than .05?
+
+Correct Answers
+18 (with margin: 0)
+ 
+Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
+UnansweredQuestion1 ptsEdit this question Delete this question
+Take a look at the pattern matrix again.
+
+Can you think of a meaningful label for each of the factors? (Take into consideration whether the loadings are positive or negative)
+
+ 
+Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this

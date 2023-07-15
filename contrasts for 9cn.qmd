@@ -364,6 +364,10 @@ EXECUTE.
 
 What does the final contrast encode? `r mcq(c(answer = "joke", "story",  "pos", "all")[sample.int(4))` versus `r mcq(c(answer = "sing", "joke",  "pos", "all")[sample.int(4))`
 
+Now, we have to account for the relative sample sizes of these groups to ensure that we can interpret the coefficients as the difference between the means of those combinations of groups.
+
+
+
 
 ## Adjusting for Multiple Comparisons
 

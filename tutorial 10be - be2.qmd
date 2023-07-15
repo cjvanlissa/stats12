@@ -1,0 +1,365 @@
+# Lab 1: Introduction
+
+```{r, include = FALSE}
+source("R/booktem_setup.R")
+source("R/my_setup.R")
+```
+
+## Probability, Odds, and Logits
+
+We will start this session on logistic regression with some theoretical exercises. This way, you will learn how to work with probability, odds, and logits.
+ 
+Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
+Question1 ptsEdit this question Delete this question
+The given probability is P = 0.36.
+
+What are the corresponding odds? Round your answer to three decimals points.
+
+Please find the formula’s below:
+
+![](images/Figure4-1.png)
+
+Correct Answers
+0.563 (with margin: 0.005)
+ 
+Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
+Question1 ptsEdit this question Delete this question
+Again, the given probability is P = 0.36.
+
+What are the corresponding logits? Round your answer to three decimals points.
+
+Figure4.png
+
+Correct Answers
+-0.575 (with margin: 0.005)
+ 
+Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
+Question1 ptsEdit this question Delete this question
+The given logit is – 2.7.
+
+What are the corresponding odds? Round your answer to three decimal points.
+
+Figure4.png
+
+Correct Answers
+0.067 (with margin: 0.005)
+ 
+Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
+Question1 ptsEdit this question Delete this question
+Again, the given logit is – 2.7.
+
+What is the corresponding probability? Round your answer to three decimal points.
+
+Figure4.png
+
+Correct Answers
+0.063 (with margin: 0.005)
+ 
+Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
+UnansweredQuestion1 ptsEdit this question Delete this question
+Explain in your own words when and why we should carry out logistic regression analysis.
+General answer comments
+We carry out logistic regression analysis when we want to carry out regression analysis and we have a dichotomous outcome variable (i.e., a dependent variable with two answer categories). In that case we cannot use linear regression because several of the assumptions of linear regression are violated.
+ 
+Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
+QuestionEdit this question Delete this question
+In a study concerning the smoking behavior amongst adolescents, a logistic regression analysis is conducted to check the effect of the image of smoking (Image) on smoking behavior (Smoking).
+
+Image: to what degree the young adult thinks smoking is perceived as “cool”.
+The variable image is measured on a scale from 10 to 30, in which higher scores indicate that smoking is perceived as cooler.
+
+Smoking: whether or not the adolescent smokes.
+0 = the adolescent is a non-smoker
+1 = the adolescent is a smoker
+ 
+Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
+UnansweredQuestion1 ptsEdit this question Delete this question
+Below you can find part of the output the researchers retrieved.
+
+![](images/Figure 5-2.png)
+
+Let’s first, write down the estimated regression model.
+
+General answer comments
+Figure 6.png
+
+$Logit(Smoking = 1) = -5.65 + 0.28*Image$
+ 
+Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
+Question1 ptsEdit this question Delete this question
+What is the probability that you randomly select an adolescent with a score of 15 on image who smokes?
+Round your answer to two decimal points.
+
+ 
+
+
+
+Correct Answers
+0.33 (with margin: 0.005)
+ 
+Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
+UnansweredQuestion1 ptsEdit this question Delete this question
+Take a look at the regression coefficient.
+
+![](images/Figure 5-1-1.png)
+
+Imagine that one's score on Image will increase from 15 to 16.
+
+To what degree will the logit and odds change?
+
+And what can you conclude about the increase in probability?
+
+ 
+
+
+General answer comments
+The logit increases with 0.284. So −1.387+0.284=−1.103
+
+The odds increase with a factor 1.328. So, the odds become 0.25×1.328=0.332
+
+By just looking at the output, it is unclear what will exactly happen with the probability. We DO know that the probability will increase because the logits and the odds increase.
+
+If we would calculate the probability by hand, we would see that the probability increases with 0.05.
+
+ 
+Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
+UnansweredQuestion1 ptsEdit this question Delete this question
+As you can see, the logit follows a linear function, the odds follow an exponential function, and probability follows a logistic function (perhaps less clear from the example but see the graphs below for an illustration). It is nice to work with a linear model (i.e., work with the logits), but from an interpretation point of view odds and probabilities are nicer to work with.
+
+
+![](images/Figure 7-1.png)
+
+
+## Logistic Regression
+
+Today we will study whether the probability to pass a Statistics course depends on exam fear and the math grade obtained in high school (prior math ability).
+
+Open LAS BE LR.sav Download LAS BE LR.sav.
+
+In the table below you find the variables included in this fictional data set.
+
+![](images/Figure 8-1.png)
+
+ 
+Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
+QuestionEdit this question Delete this question
+We want to study the following research question:
+
+Does the probability of passing the statistics exam depend on exam stress and math ability?
+
+To answer this question, we first need to dichotomize the dependent variable. We will create the new dependent variable Passed (0 = fail, 1 = pass), where a 5.5 or higher counts as a pass. Use the following steps:
+
+Navigate to Transform → Recode into different variables.
+Select GradeStats as input variable and use Passed as the name for the new recoded variable. Do not forget to click on CHANGE.
+Click on Old and new values and specify the recoding in such a way that all grades of 5.5 or higher will get the new value 1 and all grades lower than 5.5 (i.e., all other grades) the value 0.
+Paste and run the syntax.
+Go to variable view and specify the value labels.
+ 
+Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
+QuestionEdit this question Delete this question
+Obtain the frequency distribution for Passed (via Analyze --> Descriptive Statistics --> Frequencies).
+
+Verify that 82.2% of the students passed. (If not, something may have gone wrong in your recoding, and you should redo the recoding).
+
+ 
+Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
+QuestionEdit this question Delete this question
+We will use logistic regression to study the effect of exam stress and math ability on the probability to pass. Take the following steps:
+
+Navigate to Analyze --> Regression --> Binary logistic regression
+Select Passed as dependent variable and ExamStress and Math as independent variables (in SPSS called “covariates”).
+Paste and run the syntax.
+ 
+Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
+UnansweredQuestion1 ptsEdit this question Delete this question
+Inspect the output corresponding to Block 1. Take a look at the table “Variables in the Equation”.
+
+What would be good description of the effects on the sample level? (i.e., what the effect of ExamStress and Math on the probability to pass looks like).
+
+General answer comments
+Turns out Exam Stress has a negative effect on the probability to pass (controlled for Math grade), and Math a positive effect (controlled for Exam Stress). 
+ 
+Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
+Question1 ptsEdit this question Delete this question
+What is the value of the regression coefficient for the variable Exam Stress?
+Correct Answers
+-0.025 (with margin: 0.005)
+ 
+Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
+UnansweredQuestion1 ptsEdit this question Delete this question
+Give a detailed interpretation of this number.
+General answer comments
+If we would increase one unit in Exam Stress the logits to pass the exam will decrease with 0.025, while keeping the variable Math constant.
+ 
+Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
+Question1 ptsEdit this question Delete this question
+Do the independent variables Math and Exam Stress together have a significant effect on the probability to pass? (Use table Omnibus Test).
+Correct answer
+  Yes 
+  No 
+General answer comments
+When we inspect the model test, we see that, together, Exam Stress and Math grade have a significant effect on the probability to pass, χ2(2) = 81.043, p < .001.
+ 
+Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
+Question1 ptsEdit this question Delete this question
+Second, carry out the significance tests for the individual predictors as well. (Use table Variables in the equation)
+
+Is there a significant effect of Math on the probability to pass, controlled for Exam stress? And for the predictor Exam Stress?
+
+Correct answer
+  Controlled for Exam stress, Math grade has a significant effect on the probability to pass. 
+  Controlled for Math grade, Exam stress has a significant effect on the probability to pass. 
+General answer comments
+When we inspect the separate regression coefficients together, we see that:
+
+Controlled for Exam stress, Math grade has a significant effect on the probability to pass, χ2(1)=54.500, p<.001.
+Controlled for Math grade, Exam stress has no significant effect on the probability to pass, χ2(1)=0.040, p=.841.
+ 
+ 
+## Logistic Regression with Categorical Predictor
+
+Now, we will carry out a logistic regression analysis to study whether the probability to pass can be predicted from the amount of preparation (Preparation), controlled for prior math ability (Math).
+
+But…. the variable Preparation is a nominal (categorical) variable. We’ve learned in multiple regression that a nominal variable cannot be included in a regression analysis right away. We need to recode the variable into several dummy variables. The variable Preparation has three categories, so we need two dummy variables. This also applies to logistic regression with categorical variables as predictors.
+
+The beauty of logistic regression, however, is that SPSS can automatically carry out the dummy coding for you! So for logistic regression, we do not need to make the dummy variables manually (like we did in multiple regression analysis).
+
+ 
+Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
+QuestionEdit this question Delete this question
+Take the following approach to carry out the analysis.
+
+Navigate to Analyze --> Regression --> Binary Logistic
+Select Math as covariate.
+Select Preparation as covariate and click on the button Categorical in the upper right. SPSS opens a new window.
+Select Preparation as categorical variable. SPSS now knows it has to use dummy coding for this variable.
+However, we run into a peculiarity of SPSS. By default, the program selects the group with the highest score as the reference group. In our example, this would be the students who read the book and made the exercises. Even though the choice for the reference group is arbitrary - as long as you know which group is the reference group for interpretation purposes - in practice you often prefer a particular group as reference point. In this case we could, for example, prefer to use “only reading the book” as the reference group. Fortunately, we can alter the reference group easily by selecting the option “first” under Reference Category. Click on CHANGE. SPSS then changes the dummy coding.
+Paste and run the syntax.
+ 
+Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
+QuestionEdit this question Delete this question
+For your information: You changed the reference group to “only read the book”. This means that you will compare the other groups to this reference group. As such, the analysis is based on the following dummy coding:
+
+![](images/Figure 9-1.png)
+
+ 
+Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
+Question1 ptsEdit this question Delete this question
+Take a look at the table Variables in the Equation.
+
+SPSS gives three results that refer to the effect of Preparation on the probability to Pass. We ignore the first row for now and start with taking a look at the second and third row. The results for the row preparation for the exam (1) describe the effect on the probability to pass for the group who only did the exercises (preparation=1) compared to the reference group (=group that only read the book). Preparation for the exam (2) describes the effect on the probability to pass for the group who read the book AND made the exercises (preparation=2) compared to the reference group.
+
+Inspect the estimated regression coefficients. Consider the results on the sample level.
+
+Which group has the highest estimated probability to pass?
+
+Correct answer
+  Students who read the book and did the exercises. 
+  Student who only read the book. 
+  Students who only did the exercises. 
+ 
+Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
+Question1 ptsEdit this question Delete this question
+Which group has the lowest estimated probability to pass (controlled for math ability)?
+Correct answer
+  Student who only read the book. 
+  Students who read the book and did the exercises. 
+  Students who only did the exercises. 
+ 
+Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
+Question1 ptsEdit this question Delete this question
+Evaluate the following statement:
+
+Controlled for Math Grade, the difference in predicted odds for a person who only read the book and a person who read the book and made the exercises is 2.576.
+
+Correct answer
+  The statement is false 
+  The statement is true 
+  No answer text provided. 
+General answer comments
+This statement was False. Controlled for Math Grade, the predicted odds for a person who read the book and made the exercises is 2.576 times larger than the predicted odds for a person who only read the book.
+ 
+Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
+Question1 ptsEdit this question Delete this question
+By hand, calculate the probability that the third person in the file (respID=3) passes the exam. Round your answer to three decimal points.
+
+ 
+
+
+
+Correct Answers
+0.752 (with margin: 0.005)
+ 
+Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
+Question1 ptsEdit this question Delete this question
+Imagine that you do not know whether this person passed the exam or not.
+
+Based on your answer in the previous step, what would you predict based on the logistic regression model?
+
+Correct answer
+  The student passes 
+  The student fails 
+General answer comments
+Based on our model the predicted probability was 0.7515. This means that the probability to pass is higher than the probability to fail. Therefore, the best prediction would be that the student passed the exam.
+ 
+Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
+QuestionEdit this question Delete this question
+SPSS can easily calculate the probability to pass. Carry out the logistic regression analysis again, but also take the following additional steps.
+
+Click on the SAVE button in the menu for logistic regression.
+Select Probabilities under the header Predicted Values.
+Click on continue.
+SPSS adds a new variable to the data file, which gives the predicted probability for each person. Check whether you calculated the predicted probability for person 3 correctly.
+
+ 
+Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
+Question1 ptsEdit this question Delete this question
+Imagine that we would have used this model to predict the probability to pass for the students in this sample before they even made the exam. Say we would send a letter to students who were predicted to fail the exam, in which they would be convinced to study really hard for the exam. For all students that DID NOT receive the letter, which proportion of students actually should have needed a letter? Round your number to three decimal points.
+
+
+Correct Answers
+0.141 (with margin: 0.005)
+General answer comments
+Of the 370 students who did not receive a letter, 52 should have gotten a letter, because they failed the exam (14.1%). As you can see, the model is not completely flawless in making predictions.
+ 
+Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
+UnansweredQuestion1 ptsEdit this question Delete this question
+What is worse in your opinion? Not sending letters to people who DO need them, or sending letters to people who actually do NOT need them? Why?
+
+
+## Hierarchical Logistic Regression
+
+In this assignment we will compare the following two models against each other.
+
+Model1:Logit(Pass) = b0+b1∗Math
+
+Model2:Logit(Pass) = b0+b1∗Math+b2∗ExamStress+b3∗Evaluation
+
+Later on, we want to carry out a model comparison test to check whether the larger model predicts the probability of passing the exam better than the smaller model.
+
+What would be the df for the model comparison test, in which we compare the larger model 2 to the smaller model 1?
+
+  1 
+Correct answer
+  2 
+  3 
+ 
+Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
+QuestionEdit this question Delete this question
+Now we will carry out the model comparison test. Take the following steps.
+
+Navigate to Analyze -> Regression -> Binary Logistic
+Select Math as predictor (covariates).
+Click on Next (upper right); we can now indicate which block of predictors we like to add in addition to the variables added in the first model.
+Enter ExamStress and Evaluation as predictors (covariates).
+Paste and run the syntax.
+ 
+Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
+QuestionEdit this question Delete this question
+Inspect the output. SPSS organizes the output in three blocks. The results in Block 0 refer to the null model without any predictors. Usually, these results are not that interesting. Block 1 refers to the results of Model 1 and Block to the results of Model 2.
+ 
+Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
+UnansweredQuestion1 ptsEdit this question Delete this question
+Take a look at the results of the model comparison test. Does adding predictors ExamStress and Evaluation lead to better predictions, compared to a model with only high school math grade as predictor? Substantiate your answer and mention the appropriate statistics.
+General answer comments
+From the output we can see that adding predictors Exam stress and Evaluation does not lead to a better model (χ2 (2) = 1.297, p = .523).
