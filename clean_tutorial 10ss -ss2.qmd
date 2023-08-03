@@ -1,0 +1,348 @@
+# Lab 1: Introduction
+
+```{r, include = FALSE}
+source("R/booktem_setup.R")
+source("R/my_setup.R")
+```
+
+## Norm Violating Behaviors
+
+In this assignment we are going to take a look at scale that measures whether people engage in norm violating behaviors.
+
+The scale consists of the following items:
+
+* Joyriding
+* Taking soft drugs
+* Accepting a bribe
+* Throwing away litter
+* Driving under influence of alcohol
+* Smoking in public places
+* Speeding over limit
+* Euthanasia
+
+Open the datafile evs.sav.
+
+ 
+
+In SPSS, navigate to Analyze --> Scale --> Reliability Analysis.
+
+Select the seven items that are in this scale.
+
+Then go to statistics and select the options “Item”, “Scale” and “Scale if item deleted”. Click on continue.
+
+Now paste and run the syntax.
+
+ 
+
+What is the value of Cronbach’s Alpha? `r fitb(0.693, num = T, tol = .01)`
+
+Finish the following sentence.
+
+This Cronbach’s Alpha is `r mcq(c(answer = "Questionable", "Adequate", "Good","Poor")[sample.int(4)])` 
+ 
+
+Cronbach’s Alpha is an estimate of the scale reliability.
+
+Describe in your own words what scale reliability entails.
+
+`r hide("Answer")`
+The reliability of a scale shows the internal consistency of the answers on all items on a scale.
+ 
+`r unhide()`
+
+Look at the “Item-Total Statistics” table.
+
+What does the last column “Cronbach’s alpha if Item Deleted” tell you?
+
+`r hide("Answer")`
+
+The values in the column “Cronbach’s Alpha if item deleted” shows the Cronbach’s Alpha of the scale if one of the items would be deleted. In other words, it shows what the impact on the reliability of the scale would be if a certain item would be excluded from the scale.
+ 
+`r unhide()`
+
+If you would were examining the psychometric properties of this scale, which items would you consider to give cause for concern?
+
+`r hide("Answer")`
+
+We look at the Cronbach’s Alpha if item deleted to see the internal consistency of a scale without that item.
+
+Given the Cronbach’s Alpha of our original scale (.693), the table shows the only deleting the item “Euthenasia” would result in a higher Cronbach’s Alpha.
+
+We might thus question whether this item belongs in the scale or not.
+
+`r unhide()`
+
+ 
+
+
+## Machiavellianism
+
+In this assignment we will look into the latent concept Machiavellianism.
+
+The personality trait of Machiavellianism is part of what's called the "dark triad", a personality type that is characterized by deceitfulness, cynicism, and an absence of morality and empathy.
+
+Open the datafile shortmach2.sav Download shortmach2.sav. The data file contains data on Machiavellianism and some other variables.
+
+ 
+
+The included Machiavellianism scale consists of the following 20 items. These items are scored on a 1-5 Likert scale ranging from "Disagree" to "Agree".
+
+Q1. Never tell anyone the real reason you did something unless it is useful to do so.
+
+Q2. The best way to handle people is to tell them what they want to hear.
+
+Q3. One should take action only when sure it is morally right.
+
+Q4. Most people are basically good and kind.
+
+Q5. It is safest to assume that all people have a vicious streak, and it will come out when they are given a chance.
+
+Q6. Honesty is the best policy in all cases.
+
+Q7. There is no excuse for lying to someone else.
+
+Q8. Generally speaking, people won't work hard unless they're forced to do so.
+
+Q9. All in all, it is better to be humble and honest than to be important and dishonest.
+
+Q10. When you ask someone to do something for you, it is best to give the real reasons for wanting it rather than giving reasons which carry more weight.
+
+Q11. Most people who get ahead in the world lead clean, moral lives.
+
+Q12. Anyone who completely trusts anyone else is asking for trouble.
+
+Q13. The biggest difference between most criminals and other people is that the criminals are stupid enough to get caught.
+
+Q14. Most people are brave.
+
+Q15. It is wise to flatter important people.
+
+Q16. It is possible to be good in all respects.
+
+Q17. P.T. Barnum was wrong when he said that there's a sucker born every minute.
+
+Q18. It is hard to get ahead without cutting corners here and there.
+
+Q19. People suffering from incurable diseases should have the choice of being put painlessly to death.
+
+Q20. Most people forget more easily the death of their parents than the loss of their property.
+
+ 
+
+Items can be indicative or contra-indicative of a certain trait.
+
+Which items are contra-indicative to the trait Machiavellianism?
+
+ 
+`r hide("Answer")`
+In this assignment, the following questions are contra-indicative:
+Q3, Q4, Q6, Q7, Q9, Q10, Q11, Q14, Q16, and Q17.
+
+If an item is contra indicative, low scores on these items indicate a lot of Machiavellianist traits, whereas high scores indicate not so much of an endorsement of Machiavellianist traits in one’s personality.
+`r unhide()`
+
+We need to recode contraindicative items before we carry out reliability analysis.
+
+However, just to see what happens, let’s first carry out a reliability analysis with all original (i.e. not recoded) variables.
+
+Take the following steps:
+
+Analyze --> Scale --> Reliability Analysis
+
+Select the 20 items (Q1A - Q20A)
+
+Click on Statistics
+
+Under Descriptives, select Items, Scale, and Scale if item deleted
+
+Under Inter-Item, select Correlations
+
+Paste and run the syntax
+ 
+What is the estimated reliability? `r fitb(.233, num = T, tol = .01)`
+
+True or false: This scale can be considered reliable. `r torf(FALSE)`
+
+This low reliability might be a result of the fact that we have not recoded our contra-indicative items yet. We can also see this in the inter-item correlation table; many of the items are negatively correlated! Let’s rectify this.
+
+We have to recode all contraindicative items. Use syntax to do so, and check your answer below.
+
+`r hide("Answer")`
+
+```
+COMPUTE Q3r = 6-Q3A.
+EXECUTE.
+```
+
+`r unhide()`
+
+ 
+For the second person in the dataset, the original score on Q4A was `r fitb(4, num=T)` and the score on the recoded variable Q4r was `r fitb(2, num=T)`.
+
+Based on this comparison, do you think you successfully recoded the variable?
+
+
+We will now run the reliability analysis including the recoded items. Chnge your syntax, or re-run the analysis via the visual interface.
+
+What is the value of Cronbach’s Alpha? `r fitb(.887, num = T, tol = .01)`
+
+This Cronbach’s Alpha is `r mcq(c("Questionable", "Adequate", answer = "Good","Poor")[sample.int(4)])` 
+
+
+ Check the corrected item total correlations.
+
+Which of these items has the smallest association with other items in the scale? (Type its name) `r fitb("Q19")`
+ 
+Explain why you think it makes sense (or not) that this item is correlated the least with the rest of the scale.
+
+`r hide("Answer")`
+
+This item-total correlation of Q19 is .255.
+
+Item Q19 reads: “People suffering from incurable diseases should have the choice of being put painlessly to death”.
+
+One could argue that a high score on this item should relate to a low score on the scale for agreeing with this item nowadays might actually show empathy with those suffering.
+
+`r unhide()`
+
+Inspect Cronbach’s alpha if item deleted. If you had to remove one item based on this Cronbach’s alpha if item deleted, which item would it be? (Type its original name) `r fitb("Q17")`
+
+
+`r hide("Explanation")`
+
+Based on the Cronbach’s Alpha if item deleted, we would delete the item that would result in the greatest increase in Cronbach’s Alpha if it would be deleted.
+
+We find the highest Cronbach’s Alpha if item deleted for the item Q17r (.889).
+
+Therefore, based on the Cronbach’s Alpha if item deleted, we would delete item Q17r.
+
+`r unhide()`
+ 
+
+Taking everything into consideration, would you remove any items from the Machiavellianism scale?
+
+`r hide("Explanation")`
+
+Taking the statistical output into consideration, we might want to consider removing item Q17r or item Q19.
+
+We do so for two reasons:
+
+1. They both correlate less than .3 with the other items on the scale, and
+2. have a Cronbach’s Alpha if item deleted higher than .887 (the current Cronbach’s Alpha of the scale).
+
+Please note that we should always take into consideration theoretical reasons as well when deciding to delete an item from a scale. In this assignment, however, we base our conclusions on statistical reasons only.
+
+ 
+
+You might want to consider removing item Q17 or Q19. They both correlate less than .3 with the rest of the scale, and have an Alpha if item removed higher than .887.
+
+`r unhide()`
+
+We always remove items one by one. We start with the worst item. After removing a bad item from a scale, the item-statistics will change a little. It might be that the item-statistics improve, and that there is no need to remove the second item.
+
+However, since the differences are not that big and the scale reliability is pretty high, we will keep both items in our scale for the remainder of this assignment.
+
+
+Once we finished reliability analysis, we can use the scale in other analyses.
+
+In order to do that, we need to arrive at a total scale score. So, we need one score for each person in the dataset that tells what their score is on the personality trait Machiavellianism.
+
+There are several methods of obtaining such a total score, but one straightforward and easy way is to calculate the sum score.
+
+Navigate to Transform -> Compute Variable.
+
+Give a new name to the sum score in the box Target Variable, such as Mach.
+
+In the box Numeric Expression, enter all variables and add together (i.e., Q1A + Q2A + Q3r …. + Q20A). Ensure that you use the recoded variables for the contra-indicative items!
+
+Paste and run the syntax.
+ 
+
+We will now use our newly developed scale in a regression analysis! In this analysis we will try to explain Machiavellianism based on the variables Gender (0=men; 1=women), Age and Voted (0=Voted in past election, 1= Not voted in past election).
+
+Navigate to Analyze --> Regression --> Linear
+
+Enter the sumscore Mach as dependent variable
+
+Enter Gender, Age, and Voted as independent variables
+
+Paste and run the syntax
+
+Inspect the Model Summary table. How much of the variance in Machiavellianism do the variables Gender, Age and Voted explain? `r fitb(0.126, num = T, tol = .01)`
+
+True or false: Gender, Age and Voting together explain a significant amount of variance in the variable Machiavellianism. `r torf(TRUE)`
+
+
+Inspect the table Coefficients and take a look at the partial effects. Which of the variables does not have a significant partial effect on Machiavellianism? `r mcq(c("Gender", "Age", answer = "Voting"))` 
+
+
+Controlled for Age and Voting, which group (men or women) scores higher on the Machiavellianism scale? `r mcq(c(answer = "Men", "Women"))` 
+
+`r hide("Explanation")`
+Given that in the variable Gender men are coded as 0 and women are coded as 1, and that the regressions coefficient for Gender is negative (-7.440), we should conclude that men score higher on Machiavellianism than women, controlled for Age and Voting.
+ 
+`r unhide()`
+
+Finish the following sentence.
+
+Controlled for Gender and Voting, if we would increase one year in age, the predicted score on the Machiavellianism scale would `r mcq(c(answer = "Decrease with 0.294 units.", "Increase with 0.294 units.", "Increase with 0.243 units.", "Decrease with 0.243 units.")[sample.int(4)])` 
+  
+  
+## Solidarity
+
+In this assignment, you will evaluate the reliability of a scale measuring solidarity.
+
+Download and open the following data file: solidarity.sav.
+
+ 
+
+You’ve practiced with reliability analysis in the previous assignments. Now you can use that knowledge to evaluate the reliability of the solidarity scale more independently.
+
+Include all eleven items that are part of the scale (v266 to v276). 
+
+
+
+Inspect the output of the reliability analysis.
+
+True or false: You have to recode questions. `r torf(FALSE)`
+
+
+`r hide("Explanation")`
+We check if we should recode any items by looking at how they are phrased. To do so, we don’t necessarily need to look at the output.
+
+We could, however, also use the inter-item correlations displayed in the output to check if we should recode items. If any of the inter-item correlations are negative, this should be in indication for contra-indicative items.
+
+`r unhide()`
+ 
+
+What is the reliability of the scale? `r fitb(.847, num = T, tol = .01)`
+
+
+
+If you had to remove one item from the scale based on Cronbach’s Alpha if item deleted, which one would you pick? Type the name: `r fitb("Q80E")`
+
+
+Can you think of other reasons for removing this item?
+
+`r hide("Explanation")`
+
+
+Comparing the content of item Q80E to the content of the other questions in the scale, we can conclude that the content of this item is off-topic. This is a theoretical reason for excluding item Q80E from the scale.
+`r unhide()`
+ 
+
+Which item is most typical for the scale? Type its name: `r fitb("Q79D")`
+
+`r hide("Explanation")`
+
+We can tell from the higher item-total correlation, that tells us that this item has the strongest correlation with all other variables on the scale.
+
+Also, the reliability of the scale would decrease most if this item would be deleted from the scale.
+
+`r unhide()` 
+
+Last, construct sum scores on the scale for all individuals (via Transform -> Compute). Make sure you do not include the one item we discussed previously!
+
+Once you created the sum score, have SPSS show the mean for this total score.
+
+What is the mean value of the sum score? `r fitb(27.897, num = T, tol = .1)`

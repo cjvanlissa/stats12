@@ -1,0 +1,52 @@
+# Z-table
+
+Table gives the right-tail probability corresponding to a Z-value of the value in the Z-column plus the value in the column name, which indicates the second digit of the Z-score.
+
+```{r echo = FALSE, out.width="40%"}
+library(ggplot2)
+ggplot(data = data.frame(x = c(-4, 4)), aes(x)) +
+  stat_function(fun = dnorm, args = list(mean = 0, sd = 1)) +
+  ylab("Probability density") +
+  xlab("Z") +
+  scale_y_continuous(breaks = NULL, expand = c(0,0)) +
+  scale_x_continuous(breaks = c(-4:4)) +
+  geom_vline(xintercept = 0, color = "black") +
+  geom_area(stat = "function", fun = dnorm, fill = "red", alpha = .2, xlim = c(2, 4), args = list(mean = 0, sd = 1))+
+  geom_segment(aes(x = 2, xend = 2, y = 0, yend = dnorm(2)), color = "red")+
+  theme_bw()
+```
+
+```{r echo = FALSE}
+x <- seq(0, 3, by = .1)
+y <- seq(0, .09, by = .01)
+
+tab <- t(sapply(x, function(i){
+  pnorm(i+y, lower.tail = FALSE)
+}))
+
+tab <- data.frame(Z = as.character(x), tab)
+names(tab)[-1] <- y
+library(DT)
+DT::datatable(tab, rownames = FALSE, options = list(ordering=F, pageLength = nrow(tab))) |>
+  DT::formatRound(columns=names(tab)[-1], digits=3)
+```
+
+# t-table
+
+Table gives the t-value corresponding to the right-tail probability indicated by the columns.
+
+```{r echo = FALSE}
+x <- 1:30
+y <- c(.40, .25, .10, .05, .025, .01, .005, .001)
+
+tab <- t(sapply(x, function(i){
+  qt(y, df = i, lower.tail = FALSE)
+}))
+
+tab <- data.frame(df = as.character(x), tab)
+names(tab)[-1] <- paste0("p = ", y)
+library(DT)
+DT::datatable(tab, rownames = FALSE, options = list(ordering=F, pageLength = nrow(tab))) |>
+  DT::formatRound(columns=names(tab)[-1], digits=3)
+```
+

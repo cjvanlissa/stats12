@@ -42,13 +42,13 @@ book:
   chapters:
   - index.qmd
   - introduction.qmd
-  - tutorial1.qmd
   - probability.qmd
   - samplingdistribution.qmd
   - testing.qmd
   - glm1.qmd
   appendices:
   - data.qmd
+  - probability_tables.qmd
   - references.qmd
 bibliography: include/references.bib
 csl: include/apa.csl

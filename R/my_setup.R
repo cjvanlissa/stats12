@@ -1,4 +1,11 @@
 # book-specific code to include on every page
+
+answer <- function(x){
+  cat('`r hide("Answer")`')
+  cat(x)
+  cat('`r unhide()`')
+}
+
 add_mcs <- function(filename){
   qs <- read.csv(filename, stringsAsFactors = FALSE, header = FALSE)
   cat('::: {.webex-check .webex-box}\n\n')

@@ -1,42 +1,71 @@
-Week,Activity,Topic
-35,lectures,"Variables, measurement levels, parameters and statistics, and sampling designs."
-36,lectures,Describing data with a probability distribution
-37,lectures,Sampling distribution of the mean and the standard error.
-38,lectures,"Testing: Hypotheses, p-values, Type I, Type II errors and Power. Z-test and (one-sample) t-test."
-39,lectures,General Linear Model (GLM) I: Bivariate regression 
-40,lectures,"GLM II: Sums of squares, explained variance, and correlation"
-41,lectures,GLM III: Differences between two groups: dummy variables and two-sample t-test 
-,,
-43,lectures,GLM IV: Differences between more groups: dummy variables and ANOVA
-44,lectures,GLM V: More than one predictor - multiple regression analysis
-45,lectures,GLM VI: Comparing nested models
-46,lectures,Major BE: GLM VII: Interaction effects (moderation analysis)
-47,lectures,Major BE: GLM VIII: Regression with binary outcomes - logistic regression
-48,lectures,Major BE: Logistic regression (II)
-49,lectures,Major BE: Interval estimation and testing 
-46,lectures,Major SS: GLM VII: Interaction effects (moderation analysis)
-47,lectures,"Major SS: Psychometrics I: Reliability and validity, reliability analysis"
-48,lectures,"Major SS: Psychometrics II: Reliability and validity, factor analysis"
-49,lectures,"Major SS: Psychometrics III: Reliability and validity, factor analysis"
-46,lectures,"Major CN: GLM IV+: Effect size, post-hoc tests and planned comparison in ANOVA"
-47,lectures,Major CN: GLM IV+: Factorial designs and interaction effects in ANOVA 
-48,lectures,Major CN: GLM IV+: ANCOVA (ANOVA with continuous control variables)
-49,lectures,Major CN: GLM IV+: Repeated measures ANOVA
-35,Lab session,Introduction to SPSS
-36,Lab session,SPSS skills and normal distribution
-37,Lab session,Home practice session: normal distribution and sampling distribution
-38,Lab session,Hypothesis testing and one-sample t-test
-39,Lab session,"p-value, effect size, independent samples t-test"
-41,Lab session,"ANOVA, correlations and regression analysis"
-43,Lab session,Regression analysis
-44,Lab session,MRA
-45,Lab session,Model comparison & dummies
-46,Lab session,Major BE: Moderation
-46,Lab session,Major CN: Contrasts and post hoc tests 
-46,Lab session,Major SS: Moderation
-47,Lab session,Major CN: Factorial ANOVA
-47,Lab session,Major SS: Reliability
-48,Lab session,Major BE: Logistic regression
-48,Lab session,Major CN: ANCOVA
-49,Lab session,Major BE: 
-49,Lab session,Major SS: PCA & EFA
+Week,Activity,Day,Topic
+35,Exams,Friday,Register group for Assignment 1
+38,Exams,Friday,Deadline Assignment 1
+39,Exams,Friday,Register group for Assignment 2
+45,Exams,Friday,Deadline Assignment 2
+46,Exams,Friday,Register group for Assignment 3
+49,Exams,Friday,Deadline Assignment 3
+,,,
+35,lectures,Monday,"Variables, measurement levels, parameters and statistics, and sampling designs."
+36,lectures,Monday,Describing data with a probability distribution
+37,lectures,Monday,Sampling distribution of the mean and the standard error.
+38,lectures,Monday,"Testing: Hypotheses, p-values, Type I, Type II errors and Power. Z-test and (one-sample) t-test."
+39,lectures,Monday,General Linear Model (GLM) I: Bivariate regression 
+40,lectures,Monday,"GLM II: Sums of squares, explained variance, and correlation"
+41,lectures,Monday,GLM III: Differences between two groups: dummy variables and two-sample t-test 
+,,,
+43,lectures,Monday,GLM IV: Differences between more groups: dummy variables and ANOVA
+44,lectures,Monday,GLM V: More than one predictor - multiple regression analysis
+45,lectures,Monday,GLM VI: Comparing nested models
+46,lectures,Monday,Major BE: GLM VII: Interaction effects (moderation analysis)
+47,lectures,Monday,Major BE: GLM VIII: Regression with binary outcomes - logistic regression
+48,lectures,Monday,Major BE: Logistic regression (II)
+49,lectures,Monday,Major BE: Interval estimation and testing 
+46,lectures,Monday,Major SS: GLM VII: Interaction effects (moderation analysis)
+47,lectures,Monday,"Major SS: Psychometrics I: Reliability and validity, reliability analysis"
+48,lectures,Monday,"Major SS: Psychometrics II: Reliability and validity, factor analysis"
+49,lectures,Monday,"Major SS: Psychometrics III: Reliability and validity, factor analysis"
+46,lectures,Monday,"Major CN: GLM IV+: Effect size, post-hoc tests and planned comparison in ANOVA"
+47,lectures,Monday,Major CN: GLM IV+: Factorial designs and interaction effects in ANOVA 
+48,lectures,Monday,Major CN: GLM IV+: ANCOVA (ANOVA with continuous control variables)
+49,lectures,Monday,Major CN: GLM IV+: Repeated measures ANOVA
+,,,
+35,Lab session,Thursday,BE Introduction to SPSS
+36,Lab session,Friday,BE SPSS skills and normal distribution
+37,Lab session,Saturday,BE Normal distribution and sampling distribution
+38,Lab session,Sunday,BE Hypothesis testing and one-sample t-test
+39,Lab session,Monday,"BE p-value, effect size, independent samples t-test"
+41,Lab session,Tuesday,"BE ANOVA, correlations and regression analysis"
+43,Lab session,Wednesday,BE Regression analysis
+44,Lab session,Thursday,BE MRA
+45,Lab session,Friday,BE Model comparison & dummies
+,,,
+35,Lab session,Wednesday,SS Introduction to SPSS
+36,Lab session,Wednesday,SS SPSS skills and normal distribution
+37,Lab session,Wednesday,SS Normal distribution and sampling distribution
+38,Lab session,Wednesday,SS Hypothesis testing and one-sample t-test
+39,Lab session,Wednesday,"SS p-value, effect size, independent samples t-test"
+41,Lab session,Wednesday,"SS ANOVA, correlations and regression analysis"
+43,Lab session,Wednesday,SS Regression analysis
+44,Lab session,Wednesday,SS MRA
+45,Lab session,Wednesday,SS Model comparison & dummies
+,,,
+35,Lab session,Wednesday,CN Introduction to SPSS
+36,Lab session,Wednesday,CN SPSS skills and normal distribution
+37,Lab session,Wednesday,CN Normal distribution and sampling distribution
+38,Lab session,Wednesday,CN Hypothesis testing and one-sample t-test
+39,Lab session,Wednesday,"CN p-value, effect size, independent samples t-test"
+41,Lab session,Wednesday,"CN ANOVA, correlations and regression analysis"
+43,Lab session,Wednesday,CN Regression analysis
+44,Lab session,Wednesday,CN MRA
+45,Lab session,Wednesday,CN Model comparison & dummies
+,,,
+46,Lab session,,Major BE: Moderation
+46,Lab session,,Major CN: Contrasts and post hoc tests 
+46,Lab session,,Major SS: Moderation
+47,Lab session,,Major CN: Factorial ANOVA
+47,Lab session,,Major SS: Reliability
+48,Lab session,,Major BE: Logistic regression
+48,Lab session,,Major CN: ANCOVA
+49,Lab session,,Major BE: 
+49,Lab session,,Major SS: PCA & EFA

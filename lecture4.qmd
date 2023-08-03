@@ -115,7 +115,7 @@ In the previous example, all you need to test the hypothesis is one piece of evi
 * This allows you to test hypotheses in the presence of uncertainty
 
 
-## Intuitive example, adapted
+## Intuitive example, adapted {.smaller}
 
 1. Observation: 6% of Brand X cars have trouble starting within the first year.
 2. Theory: The battery has too low capacity.
@@ -155,17 +155,63 @@ Hypothesis:
 * Assumption about the state of the world that is put to the test
 * Must be made before seeing the results
 
+## Problem of Induction
+
+You cannot derive general rules from specific evidence
+
+* If you've only ever seen white swans, you might develop a theory that *all swans are white*
+* But black swans do exist, so your theory would be wrong
+* No matter how much evidence you observe 
+
+## Deduction and Induction {.smaller}
+
+Deduction: 'top down', from theory to specific observations
+
+* Premise: All humans are mortal.
+* Premise: Socrates is human.
+* Conclusion: Socrates is mortal.
+
+If the premises are true, then the conclusion must be true
+
+Inductive: 'bottom up', from specific observations to general theory
+
+* Premise: All swans I have observed were white
+* Conclusion: Therefore, all swans are white
+
+The conclusion can be (in this case, is) wrong
+
+## Problem of Induction
+
+Can't go from specific observations to general rules
+
+* Because the same evidence could be explained by multiple rules
+
+![](images/shadow_hidden.jpg)
+
+## Reveal
+
+![](images/shadow.jpg)
+
 ## Falsificationism {.smaller}
 
-Testing builds on Popper's falsificationism
+Popper: "solved" problem of induction by introducing falsificationism
 
-* Tests can only cast doubt on hypotheses, not provide evidence for them
-* Therefore, the tested hypothesis is often the **opposite** of what the researcher believes
-* You will see a lot of "null hypotheses":
+* Scientific theories must be testable and conceivable proven false
+* Tests cast doubt on hypotheses, not provide evidence for them
+* E.g.: Observing one black swan rejects theory that "all swans are white"
+
+## Falsificationism and Testing {.smaller}
+
+How Popper is applied in statistical inference:
+
+* We formulate a "null hypothesis", whose sole purpose is to be rejected
+* This null hypothesis is the **opposite** of what the researcher believes
+    + We could argue about whether this makes sense
+* You will see a lot of "nil hypotheses":
     + Hypothesis that a value / difference / effect is equal to zero
-    + If this hypothesis is rejected, we act as if there **is** a non-zero effect
-    + Software often uses null hypotheses by default
-* Criticism: the hypothesis is a "straw man", nobody believes it, its only purpose is to be rejected
+    + Rejecting this hypothesis implies acting as if there **is** a non-zero effect
+    + Software often uses nil hypotheses by default
+* Criticism: null hypothesis is a "straw man", nobody believes it
 * Alternatives: Bayesian statistics, informative hypothesis tests, smallest effect of interest
 
 ## What kind of hypotheses?
@@ -174,7 +220,7 @@ Equality hypotheses:
 
 * $H: \mu = 0$
 * $H: \mu = 6.4$, which is the same as $H: \mu - 6.4 = 0$
-* $H: \mu_1 = \mu_2$, which is the same as $H: (\mu_1 - \mu2) = 0$
+* $H: \mu_1 = \mu_2$, which is the same as $H: (\mu_1 - \mu_2) = 0$
 
 Inequality hypotheses
 
@@ -221,9 +267,7 @@ $Z = \frac{M - \mu_0}{SE_\mu}$
 
 ## Calculate test statistic
 
-```{r out.height = "200px"}
-knitr::include_graphics("images/hypothesistest.png", dpi = NA)
-```
+![](images/hypothesistest.png)
 
 E.g.: $H_0: \mu = 6.4, SE_\mu = .2$, and $M = 6.8$
 
@@ -261,11 +305,10 @@ $P(Data | H_0)$
 * P-values give you the probability of observing certain data, ASSUMING THAT $H_0$ is true
 * They do NOT give you the probability of $H_0$ being true or false!
 
-$p = .0001$
+* $p = .0001$
     + Correct: it's extremely unlikely to observe these data if we assume that $H_0$ is true
     + INCORRECT: there's a (1-.0001) = .9999 probability that $H_0$ is false
-
-$p = .75$:
+* $p = .75$:
     + Correct: it's very common to observe these data if $H_0$ is true
     + Incorrect: 75% probability that $H_0$ is true
 
@@ -276,12 +319,12 @@ To make probability statements about hypotheses, you need to use a different (Ba
 First, determine if you need the probability in one tail, or both
 
 * One-sided hypothesis ($H_0: \mu \leq / \geq$? One tailed
-* Two-sided hypothesis ($H_0: \mu = $)? Two-tailed
+* Two-sided hypothesis ($H_0: \mu =$)? Two-tailed
 
 SPSS (and many other programs) only give two-tailed p-value
 
 * If the effect is in the hypothesized direction, divide $p/2$
-    + If not, it's non-significant, but you don't know the $p$
+    + If not, it's non-significant
 
 ## What to do with the p-value?
 
@@ -324,7 +367,7 @@ We don't reject $H_0$ when:
 
 This means that the data are unsurprising, assuming $H_0$ is true
 
-## Critical Values
+## Critical Values {.smaller}
 
 Critical values are the Z-values corresponding to the chosen $\alpha$ level
 
@@ -357,13 +400,13 @@ You could make two errors:
 df <- data.frame("Decision" = c("Reject H0", "Accept H0"), "Ha" = c("Correct decision!", "<font color = 'red'>Type II error: $\\beta$</font>"), "H0" = c("<font color = 'red'>Type I error: $\\alpha$</font>", "Correct decision!"), check.names = FALSE)
 #df <- df[2:1, c("Decision", "H0", "Ha")]
 library(kableExtra)
-kable(df, escape = FALSE, align = rep('l', length(df[,1]))) |>
+kable(df, escape = FALSE, align = rep('l', length(df[,1])), format = "markdown") |>
   kable_styling("striped") |>
   add_header_above(c(" " = 1, "Truth in population" = 2))
   
 ```
 
-## Alpha en beta
+## Alpha and beta
 
 Alpha is the risk of a false-positive finding
 

@@ -390,10 +390,14 @@ output$plot <- renderPlot({
 ## Central limit theorem
 
 * As the number of samples increases, the sampling distribution approaches a normal distribution, $\bar{X} \sim N(\mu, SE_\mu)$
+    + The samples must be **large enough** (typically > 30)
 * The mean of $M_{1\ldots k}$ converges to the population value $\mu$
 * This happens **regardless of the distribution of the data** (not normal? no problem)
-* The samples must be **large enough** (typically > 30)
-* This applies to other statistics than means too
+
+<!-- ## Galton Board -->
+
+<!-- * Normal distribution appears for any process that is influenced by many independent random  -->
+<!-- https://www.youtube.com/shorts/TwctT3Ncm1w -->
 
 ## The standard error
 
@@ -402,8 +406,8 @@ The sampling distribution is $\sim N(\mu, SE_\mu)$
 * $SE_\mu$ is its standard deviation
   + To avoid confusion with the SD of the *data*, we call it *standard error*, or SE
 * SE gives us the average sampling error
-  + "When we estimate $\mu$ using $M$, how wrong are we on average?"
 * Think of this as a measure of uncertainty of $M$ as an estimate of $\mu$
+  + "When we estimate $\mu$ using $M$, how wrong are we on average?"
   + If $SE_\mu$ is very small, our guesses of $\mu$ are very accurate
 
 ## Properties of the standard error {.smaller}
@@ -419,6 +423,18 @@ $SE_M = \frac{\sigma}{\sqrt{n}}$
   + Again, the sample mean $M$ will be a perfect estimate of $\mu$
   + So the SE goes to zero
   
+## The rationale for inference {.smaller}
+
+* I used the mean as an example
+* This applies to all other statistics, not just means
+* The key lessons are:
+    + Sample statistics can be used to estimate population parameters
+    + Those sample statistics have a hypothetical distribution that we could observe if we took very many samples
+    + The standard distribution of that hypothetical sampling distribution is called the standard error, and it is a measure of uncertainty about our estimate
+    + We can use that standard error for statistical tests
+* Basically, any statistic has a standard error; you learned to manually calculate the one for the mean. For other statistics the same logic applies, but the formulas may differ.
+* You will use statistical software to calculate the standard errors for other statistics
+
 ## Thought experiment
 
 * There are two elevators
@@ -457,11 +473,11 @@ Last lecture we calculated probabilities using the normal distribution
 Today, we have talked about 3 types of normal distributions (remember interactive demo):
 
 1. Population distribution of $X \sim N(\mu, \sigma)$
-  + Typically unknown
+    + Typically unknown
 2. Distribution of data in one sample, $X \sim N(M, SD)$
-  + Typically observed
+    + Typically observed
 3. Sampling distribution of the means of many hypothetical samples from the population: $\bar{X} \sim N(\mu, SE_\mu)$
-  + We know its theoretical properties, we estimate its parameters from the sample
+    + We know its theoretical properties, we estimate its parameters from the sample
 
 
 ## Confidence intervals {.smaller}
@@ -641,12 +657,6 @@ ggplot(data = data.frame(x = c(-3, 3)), aes(x)) +
 <!--   *  -->
 
 <!-- ![](images/Lecture 312.png) -->
-
-  * IQ is normally distributed with mean 100 and SD of 15\. What is the probability that the  _mean_  IQ of a randomly chosen group of 9 persons exceeds 106?
-
-![](images/Lecture 313.png)
-
-  * Weekly fruit consumption \(i\.e\.\, pieces of fruit\) is normally distributed with mean 10\.5 and an SD of 6\.4\. What is the probability that the  _mean_  fruit consumption of 16 randomly chosen persons is less than 7\.78?
 
 
 

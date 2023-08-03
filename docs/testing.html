@@ -5,7 +5,7 @@
 <meta name="generator" content="quarto-1.3.427">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="description" content="Book Description">
-<title>Statistics 1 and 2 - 5&nbsp; Hypothesis Testing</title>
+<title>Statistics 1 and 2 - 4&nbsp; Hypothesis Testing</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -67,12 +67,13 @@ ul.task-list li input[type="checkbox"] {
 </head>
 <body class="nav-sidebar floating">
 
+
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./testing.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Hypothesis Testing</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./testing.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Hypothesis Testing</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -133,32 +134,26 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./tutorial1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Lab 1: Introduction</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./probability.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Probability Distributions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Probability Distributions</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./samplingdistribution.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">The Sampling Distribution</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">The Sampling Distribution</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./testing.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Hypothesis Testing</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Hypothesis Testing</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./glm1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">GLM-I: Linear Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">GLM-I: Linear Regression</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -178,6 +173,12 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./probability_tables.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Z-table</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
@@ -192,12 +193,25 @@ ul.task-list li input[type="checkbox"] {
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#formative-test" id="toc-formative-test" class="nav-link active" data-scroll-target="#formative-test"><span class="header-section-number">6</span> Formative Test</a></li>
+<li><a href="#lecture" id="toc-lecture" class="nav-link active" data-scroll-target="#lecture"><span class="header-section-number">5</span> Lecture</a></li>
+  <li><a href="#formative-test" id="toc-formative-test" class="nav-link" data-scroll-target="#formative-test"><span class="header-section-number">6</span> Formative Test</a></li>
+  <li>
+<a href="#tutorial" id="toc-tutorial" class="nav-link" data-scroll-target="#tutorial"><span class="header-section-number">7</span> Tutorial</a>
+  <ul class="collapse">
+<li><a href="#assignment-1-hypothesis-testing---formulating-hypotheses" id="toc-assignment-1-hypothesis-testing---formulating-hypotheses" class="nav-link" data-scroll-target="#assignment-1-hypothesis-testing---formulating-hypotheses"><span class="header-section-number">7.1</span> Assignment 1: Hypothesis Testing - Formulating Hypotheses</a></li>
+  <li><a href="#assignment-2-test-statistics-alpha-and-significance" id="toc-assignment-2-test-statistics-alpha-and-significance" class="nav-link" data-scroll-target="#assignment-2-test-statistics-alpha-and-significance"><span class="header-section-number">7.2</span> Assignment 2: Test Statistics, Alpha and Significance</a></li>
+  <li><a href="#assignment-3-z-test" id="toc-assignment-3-z-test" class="nav-link" data-scroll-target="#assignment-3-z-test"><span class="header-section-number">7.3</span> Assignment 3: Z-test</a></li>
+  <li><a href="#quiz" id="toc-quiz" class="nav-link" data-scroll-target="#quiz"><span class="header-section-number">7.4</span> Quiz</a></li>
+  <li><a href="#assignment-4-z-test-and-alpha-levels" id="toc-assignment-4-z-test-and-alpha-levels" class="nav-link" data-scroll-target="#assignment-4-z-test-and-alpha-levels"><span class="header-section-number">7.5</span> Assignment 4: Z-test and Alpha-levels</a></li>
+  <li><a href="#quiz-1" id="toc-quiz-1" class="nav-link" data-scroll-target="#quiz-1"><span class="header-section-number">7.6</span> Quiz</a></li>
+  <li><a href="#assignment-5-p-values" id="toc-assignment-5-p-values" class="nav-link" data-scroll-target="#assignment-5-p-values"><span class="header-section-number">7.7</span> Assignment 5: P-values</a></li>
+  </ul>
+</li>
   </ul></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
-<h1 class="title"><span id="sec-testing" class="quarto-section-identifier"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Hypothesis Testing</span></span></h1>
+<h1 class="title"><span id="sec-testing" class="quarto-section-identifier"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Hypothesis Testing</span></span></h1>
 </div>
 
 
@@ -228,69 +242,384 @@ ul.task-list li input[type="checkbox"] {
 <p>When interpreting p-values, it’s crucial to understand that they give the probability of observing certain data assuming the null hypothesis is true, rather than providing the probability of the null hypothesis being true or false. The p-value is then compared to a pre-determined significance level (usually denoted as alpha) to make a decision about accepting or rejecting the null hypothesis.</p>
 <p>Rejecting the null hypothesis indicates that the observed data is unlikely to occur if the null hypothesis were true. On the other hand, failing to reject the null hypothesis means that the observed data is not surprising or does not provide sufficient evidence to reject it.</p>
 <p>When testing hypotheses, we can make two types of errors: A Type I error refers to rejecting the null hypothesis when it is true (a false-positive conclusion), while Type II error refers to accepting the null hypothesis when it is false (failing to detect a true effect).</p>
-<section id="formative-test" class="level1" data-number="6"><h1 data-number="6">
+<section id="lecture" class="level1" data-number="5"><h1 data-number="5">
+<span class="header-section-number">5</span> Lecture</h1>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/-1J2Ge0B3Ro" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</section><section id="formative-test" class="level1" data-number="6"><h1 data-number="6">
 <span class="header-section-number">6</span> Formative Test</h1>
 <p>A formative test helps you assess your progress in the course, and helps you address any blind spots in your understanding of the material. If you get a question wrong, you will receive a hint on how to improve your understanding of the material.</p>
 <p>Complete the formative test ideally after you’ve seen the lecture, but before the lecture meeting in which we can discuss any topics that need more attention</p>
+<div class="cell" data-layout-align="center">
 <div class="webex-check webex-box">
 <p><strong>Question 1</strong></p>
-<div class="cell" data-layout-align="center">
-Suppose that I ask a random sample of 5 students how many pairs of shoes they have. The number of pairs are: 7, 6, 8, 6, and 8. What is the variance of these pairs of shoes?
-<div id="radio_MTEVLEGNYH" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_MTEVLEGNYH" value=""><span>7</span></label><label><input type="radio" autocomplete="off" name="radio_MTEVLEGNYH" value="answer"><span>1</span></label><label><input type="radio" autocomplete="off" name="radio_MTEVLEGNYH" value=""><span>2</span></label><label><input type="radio" autocomplete="off" name="radio_MTEVLEGNYH" value=""><span>4</span></label>
-</div>
+For a two-tailed Z-test of the sample mean, the p-value is the probability of finding a more extreme sample mean than the observed sample mean, if the alternative hypothesis were true.
+<div id="radio_VGSTPNYNMJ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_VGSTPNYNMJ" value=""><span>TRUE</span></label><label><input type="radio" autocomplete="off" name="radio_VGSTPNYNMJ" value="answer"><span>FALSE</span></label>
 </div>
 <p><strong>Question 2</strong></p>
-<div class="cell" data-layout-align="center">
-Six students work on a Statistics exam. They obtain the following grades: 8, 9, 5, 6, 7 and 8. The teacher calculates a certain statistic, which is equal to 7.5. Which statistic did the teacher calculate?
-<div id="radio_GXUJUCRISV" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_GXUJUCRISV" value=""><span>Mode</span></label><label><input type="radio" autocomplete="off" name="radio_GXUJUCRISV" value=""><span>Mean</span></label><label><input type="radio" autocomplete="off" name="radio_GXUJUCRISV" value=""><span>Standard deviation</span></label><label><input type="radio" autocomplete="off" name="radio_GXUJUCRISV" value="answer"><span>Median</span></label>
-</div>
+A researcher performs a Z-test to test the hypotheses H0: mu = 0 versus H1: mu &gt; 0. She finds a test statistic of Z = 2.03 and a one-tailed p-value of 0.02. Statement: If the researcher had performed a two-tailed Z-test, the value of the two-tailed p-value would have been halved: 0.01.
+<div id="radio_KHEVMQENRY" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_KHEVMQENRY" value="answer"><span>FALSE</span></label><label><input type="radio" autocomplete="off" name="radio_KHEVMQENRY" value=""><span>TRUE</span></label>
 </div>
 <p><strong>Question 3</strong></p>
-<p>For which of the three scatterplots below is the correlation coefficient largest? <select class="webex-select"><option value="blank"></option>
-<option value="answer">A</option>
-<option value="">B</option>
-<option value="">C</option></select></p>
-<div id="fig-scatter" class="quarto-layout-panel">
-<figure class="figure"><div class="quarto-layout-row quarto-layout-valign-top">
-<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
-<p><img src="images/lecture 73.png" class="img-fluid figure-img" alt="A">{width = 30%}</p>
+Chris expects that people who have bungee jumped will score high on average on the Big 5 personality trait ‘Openness to Experience’. Openness to Experience has been measured on a 10 point scale (1= not at all open, 10 = extremely open). He takes a random sample of 45 persons who have bungee jumped and observes a mean of 6 and SD of 1.954. He tests the following hypotheses: H0: mu =&lt; 5.5 versus H1: mu &gt; 5.5 with a one-sample t-test. He assumes that Openness to Experience is normally distributed in the population. What is the smallest significance level for which Chris can reject the null hypothesis?
+<div id="radio_SBJJBQWLMI" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_SBJJBQWLMI" value=""><span>Cannot reject H0</span></label><label><input type="radio" autocomplete="off" name="radio_SBJJBQWLMI" value=""><span>0.01</span></label><label><input type="radio" autocomplete="off" name="radio_SBJJBQWLMI" value="answer"><span>0.05</span></label><label><input type="radio" autocomplete="off" name="radio_SBJJBQWLMI" value=""><span>0.1</span></label>
 </div>
-<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
-<p><img src="images/lecture 74.png" class="img-fluid figure-img" alt="B">{width = 30%}</p>
+<p><strong>Question 4</strong></p>
+What is the purpose of inferential statistics?
+<div id="radio_MTWNRBAVRI" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_MTWNRBAVRI" value=""><span>Calculating sample statistics</span></label><label><input type="radio" autocomplete="off" name="radio_MTWNRBAVRI" value=""><span>Estimation of population parameters</span></label><label><input type="radio" autocomplete="off" name="radio_MTWNRBAVRI" value=""><span>Testing the null hypothesis</span></label><label><input type="radio" autocomplete="off" name="radio_MTWNRBAVRI" value="answer"><span>Using sample data to infer properties of the population</span></label>
 </div>
-<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
-<p><img src="images/lecture 76.png" class="img-fluid figure-img" alt="C">{width = 30%}</p>
+<p><strong>Question 5</strong></p>
+What is the standard error?
+<div id="radio_KPNMCHBMXV" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_KPNMCHBMXV" value=""><span>The spread of the sample data</span></label><label><input type="radio" autocomplete="off" name="radio_KPNMCHBMXV" value=""><span>An estimate of the uncertainty about the average of the sample values</span></label><label><input type="radio" autocomplete="off" name="radio_KPNMCHBMXV" value=""><span>An estimate of the uncertainty about the sample statistic</span></label><label><input type="radio" autocomplete="off" name="radio_KPNMCHBMXV" value="answer"><span>An estimate of the average sampling error when estimating a population parameter using a sample statistic</span></label>
 </div>
+<p><strong>Question 6</strong></p>
+What is a hypothesis in the context of statistical testing?
+<div id="radio_SELGKFRYGO" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_SELGKFRYGO" value="answer"><span>A proposition about the population that can be tested in a sample</span></label><label><input type="radio" autocomplete="off" name="radio_SELGKFRYGO" value=""><span>An explanation for observed phenomena</span></label><label><input type="radio" autocomplete="off" name="radio_SELGKFRYGO" value=""><span>Something you want to know about the population</span></label><label><input type="radio" autocomplete="off" name="radio_SELGKFRYGO" value=""><span>A statement that some parameter is equal to zero</span></label>
 </div>
-<p></p><figcaption class="figure-caption">Figure&nbsp;6.1: Question 3 scatterplots</figcaption><p></p>
-</figure>
+<p><strong>Question 7</strong></p>
+What is meant by ‘power’ in statistical testing?
+<div id="radio_RDWUXKVCYI" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_RDWUXKVCYI" value=""><span>The probability of committing a Type I error</span></label><label><input type="radio" autocomplete="off" name="radio_RDWUXKVCYI" value=""><span>The probability of committing a Type II error</span></label><label><input type="radio" autocomplete="off" name="radio_RDWUXKVCYI" value="answer"><span>The probability of correctly finding a true effect</span></label><label><input type="radio" autocomplete="off" name="radio_RDWUXKVCYI" value=""><span>The probability of rejecting the null hypothesis</span></label>
 </div>
-<div class="cell" data-layout-align="center">
-Six students work on a Statistics exam. They obtain the following grades: 8, 9, 5, 6, 7 and 8. The teacher calculates a certain statistic, which is equal to 7.5. Which statistic did the teacher calculate?
-<div id="radio_CMIBEEBKBZ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_CMIBEEBKBZ" value=""><span>Mode</span></label><label><input type="radio" autocomplete="off" name="radio_CMIBEEBKBZ" value=""><span>Standard deviation</span></label><label><input type="radio" autocomplete="off" name="radio_CMIBEEBKBZ" value="answer"><span>Median</span></label><label><input type="radio" autocomplete="off" name="radio_CMIBEEBKBZ" value=""><span>Mean</span></label>
+<p><strong>Question 8</strong></p>
+You want to test if the mean height of a sample of 50 students is significantly different from the population mean of 65 inches. The sample mean is 68 inches, and the standard deviation is 2 inches. What is the calculated t-value for this hypothesis test?
+<div id="radio_HHPZNWCTQU" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_HHPZNWCTQU" value=""><span>1.50</span></label><label><input type="radio" autocomplete="off" name="radio_HHPZNWCTQU" value=""><span>240.42</span></label><label><input type="radio" autocomplete="off" name="radio_HHPZNWCTQU" value="answer"><span>10.61</span></label><label><input type="radio" autocomplete="off" name="radio_HHPZNWCTQU" value=""><span>75.00</span></label>
 </div>
+<p><strong>Question 9</strong></p>
+You want to test if the average time spent on a particular task is different from 30 minutes. You collect a sample of 25 participants, and the sample mean time spent on the task is 28 minutes with a standard deviation of 3 minutes. Conducting a two-tailed t-test, what is the calculated t-value?
+<div id="radio_HDCGFJKECW" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_HDCGFJKECW" value="answer"><span>-3.33</span></label><label><input type="radio" autocomplete="off" name="radio_HDCGFJKECW" value=""><span>3.33</span></label><label><input type="radio" autocomplete="off" name="radio_HDCGFJKECW" value=""><span>-16.67</span></label><label><input type="radio" autocomplete="off" name="radio_HDCGFJKECW" value=""><span>-0.67</span></label>
 </div>
 </div>
 <div class="webex-solution">
 <button>
-Show answers
+Show explanations
 </button>
 <p><strong>Question 1</strong></p>
-<p>The variance is the sum of squared distances of observations to the mean, divided by the number of observations minus one. So calculate:</p>
-<p><span class="math inline">\(S_{X}^2= \frac{\sum_{i=1}^nX_i}{n} = \frac{(7 + 6 + 8 + 6 + 8)}{5} = 7\)</span></p>
+<p>When calculating a test statistic, we assume the null hypothesis to be true - not the alternative hypothesis.</p>
 <p><strong>Question 2</strong></p>
-<p>First rule out improbable answers; all grades are pretty close to each other, so it’s impossible for the variance to be that high. We can see what the mode (most common value) is: it’s 8. So we only choose between mean or median.</p>
-<p>Mean: calculate <span class="math inline">\(\bar{X}= \frac{\sum_{i=1}^nX_i}{n} = \frac{8 + 9 + 5 + 6 + 7 + 8}{6} = 7.17\)</span></p>
-<p>Median: order the numbers, note that there is an odd number, take the average of the two middle numbers. 5, 6, 7, 8, 8, 9 -&gt; 7.5</p>
+<p>The p-value for a two-tailed test is twice as large as for a one-tailed test (because you have the same one-tailed probability in both tails). For two-tailed tests, if the observed effect is in the direction of the alternative hypothesis, you can half the two-tailed p-value.</p>
 <p><strong>Question 3</strong></p>
-<p>Correlation measures linear association, so eliminate option C. Option B shows a very small correlation - probably 0 or maybe .1. So the correct answer is A, which shows a moderate negative correlation.</p>
+<p>Divide the standard deviation by the square root of 45 to get the standard error. Then, divide the difference between the observed mean of 6 and the hypothesized mean of 5.5 by that standard error to get the test statistic. Then, find the critical t-values for a one-sided test with the three alpha levels mentioned in the answers in the t-distribution for 44 degrees of freedom (n - 1). Note that the answer is .05!</p>
+<p><strong>Question 4</strong></p>
+<p>Inferential statistics involves using sample data to make inferences or draw conclusions about the larger population from which the sample was drawn. It allows researchers to make educated guesses about population parameters based on the information collected from the sample. Calculating sample statistics is a step in the inferential process, but it is not the primary purpose of inferential statistics. Testing the null hypothesis is another inferential procedure, but it is a specific type of hypothesis testing, and not the overall purpose of inferential statistics.</p>
+<p><strong>Question 5</strong></p>
+<p>The standard error is a measure of the uncertainty associated with the sample statistic as estimator of the population parameter. It represents how much the sample statistic is expected to vary from one sample to another if multiple samples were drawn from the same population.</p>
+<p><strong>Question 6</strong></p>
+<p>In statistical testing, a hypothesis is a testable proposition about the population that can be examined using sample data. It is a statement or assumption that researchers put to the test to determine if there is evidence to support it or not. The hypothesis is formulated based on the theory or observations made about the population.</p>
+<p><strong>Question 7</strong></p>
+<p>Power in statistical testing refers to the probability of correctly detecting a true effect or relationship between variables. It is the likelihood of finding a significant result in a study when the effect being investigated truly exists in the population. It is important to have sufficient power in a study to avoid false-negative findings, where we fail to reject the null hypothesis when there is a real effect. Power is one minus the probability of committing a Type II error, or 1-beta.</p>
+<p><strong>Question 8</strong></p>
+<p>To calculate the t-value for this hypothesis test, you can use the formula: t = (sample mean - population mean) / (standard deviation / square root of sample size). Plugging in the values, t = (68 - 65) / (2 / sqrt(50)) = 10.61.</p>
+<p><strong>Question 9</strong></p>
+<p>The t-value for a two-tailed t-test can be calculated using the formula: t = (sample mean - population mean) / (standard deviation / square root of sample size). In this case, the population mean is 30 minutes. Plugging in the values, t = (28 - 30) / (3 / sqrt(25)) = -3.33.</p>
 </div>
+</div>
+</section><section id="tutorial" class="level1" data-number="7"><h1 data-number="7">
+<span class="header-section-number">7</span> Tutorial</h1>
+<section id="assignment-1-hypothesis-testing---formulating-hypotheses" class="level2" data-number="7.1"><h2 data-number="7.1" class="anchored" data-anchor-id="assignment-1-hypothesis-testing---formulating-hypotheses">
+<span class="header-section-number">7.1</span> Assignment 1: Hypothesis Testing - Formulating Hypotheses</h2>
+<p>Discuss with your portfolio group the logic behind hypothesis testing, and how it relates to your personal (and group’s) research interests.</p>
+<p>Consider the following three research descriptions. Formulate H0 and H1 in words. Discuss your answers with your group members.</p>
+<p>Researchers want to know whether it matters for test performance if an exam is completed on a computer or using paper and pencil. Hence, the research question reads: Is there an effect of the type of administration (computer or paper and pencil) on the test performance?</p>
+<p>What would be the H0 and HA for this study?</p>
+<div class="webex-solution">
+<button>
+Show answer
+</button>
+<p>This appears to be an undirected hypothesis about a mean difference for two independent samples, without a clearly specified alternative hypothesis. Thus, we could state:</p>
+<p><span class="math inline">\(H_0: \mu_{computer} = \mu_{paper}\)</span> <span class="math inline">\(H_A: \mu_{computer} \neq \mu_{paper}\)</span></p>
+</div>
+<p>Researchers want to know whether the alcohol consumption among Dutch students differs from the alcohol consumption in the general Dutch population. Using CBS statistics, they know that in the general population the average alcohol consumption is 5.6 glasses a week. The question is whether the average alcohol consumption among students is different from this national average.</p>
+<p>What would be the H0 and H1 for this study?</p>
+<div class="webex-solution">
+<button>
+Show answer
+</button>
+<p>This appears to be an undirected hypothesis about the difference between a mean and a hypothesized value, without a clearly specified alternative hypothesis. Thus, we could state:</p>
+<p><span class="math inline">\(H_0: \mu = 5.6\)</span> <span class="math inline">\(H_A: \mu \neq 5.6\)</span></p>
+</div>
+<p>Researchers want to study whether social isolation is associated with income.</p>
+<p>What would be the H0 and H1 for this study?</p>
+<div class="webex-solution">
+<button>
+Show answer
+</button>
+<p>This appears to be an undirected hypothesis about an association between two variables, without a clearly specified alternative hypothesis. We could thus state:</p>
+<p><span class="math inline">\(H_0: \rho = 0\)</span> <span class="math inline">\(H_A: \rho \neq 0\)</span></p>
+</div>
+<p>Formulating the hypothesis is an important very first step in hypotheses testing. Continue with the next assignment, in which we will go through the steps of a hypothesis test.</p>
+</section><section id="assignment-2-test-statistics-alpha-and-significance" class="level2" data-number="7.2"><h2 data-number="7.2" class="anchored" data-anchor-id="assignment-2-test-statistics-alpha-and-significance">
+<span class="header-section-number">7.2</span> Assignment 2: Test Statistics, Alpha and Significance</h2>
+<p>In this assignment we will go through the steps of a hypothesis test.</p>
+<p>While going through the steps we will come across the most important concepts related to hypothesis testing.</p>
+<p>For the next steps, we consider the following situation:</p>
+<p>Suppose we are interested in the personality profile of musicians; that is, we want to know whether, on average, personality characteristics of musicians differ from those of the general population. For now, we’ll only focus on Openness. We pretend that we have collected data among 25 musicians using a validated scale for which previous research has shown that in the general population the scores are normally distributed with mean 50 and SD 15. It is our task to test whether the mean of Openness for musicians differs from the mean in the general population. To keep things simple, we assume that in the population of musicians the SD is the same as in the general population; that is, we assume that LaTeX: <span class="math inline">\(\sigma = 15\)</span>.</p>
+<p>Let openness be the variable of interest. Let <span class="math inline">\(\mu_{musicians}\)</span> represent the mean openness in the population of musicians. The hypothesis test amounts to testing:</p>
+<p><span class="math inline">\(H0: \mu_{musicians} = 50\)</span></p>
+<p><span class="math inline">\(H1: \mu_{musicians} \neq 50\)</span></p>
+<p>Now, when we do the hypothesis test, we seek for evidence against the null hypothesis. More specifically, our testing procedure starts with the assumption that H0 represents the truth and as long as we don’t have convincing evidence that our assumption is false we stick to that assumption.</p>
+<p>The question is, however, when do we have convincing evidence against H0?</p>
+<p>Finding evidence against H0 works as follows:</p>
+<p>If H0 is true, we expect mean values close to H0. And, if we observe a mean value that is much different from the value under H0, we have convincing evidence against H0. If this happens, we reject H0 as representing the truth and accept the alternative hypothesis, H1.</p>
+<p>Hypothesis testing fits Popper’s philosophy of falsification. He introduced this well-known analogy to explain the logic of falsificationism:</p>
+<ol type="1">
+<li>Suppose we assume that all Swans are white, <span class="math inline">\(H_0: Swans = white\)</span>
+</li>
+<li>We would then not expect to observe black ones.</li>
+<li>If we do observe black swans, our initial hypothesis is called into question.</li>
+<li>The number of white swans we see (= observations consistent with the hypothesis) does not provide evidence for <span class="math inline">\(H_0\)</span>, because there could always be a black swan out there we haven’t observed yet.</li>
+</ol>
+<p>So, the next questions are:</p>
+<p>What are the sample values we can expect under H0? When is evidence “convincing” enough? To answer the first question we have to go back to sampling distributions!</p>
+<p>For the second question, we need a criterion. We have to realize that even if H0 is true, sample values can be far off just by sampling fluctuations (i.e., by chance). The common criterion is: if the observed value is among the 5% most unlikely samples under H0 (i.e.&nbsp;if H0 is true), we reject the null hypothesis.</p>
+<p>Let’s go back to our example about musicians.</p>
+<p>Let X be openness. Under H0 we assume that X is normally distributed with mean 50 and SD equal to 15.</p>
+<p>What are the mean and standard deviation of the sampling distribution of the mean under H0 given that the sample size is 25? And what do we call the standard deviation of the sampling distribution?</p>
+<p>(Use what you have learned in the previous lectures. Hint: first make a drawing of the situation, then do the computations).</p>
+<div class="webex-solution">
+<button>
+Explanation
+</button>
+<p>Sampling distribution:</p>
+<ul>
+<li>Mean: <span class="math inline">\(\mu = 50\)</span>
+</li>
+<li>Standard error ( =SD of sampling distribution!): <span class="math inline">\(\sigma_\bar{X} = \frac{15}{\sqrt{25}}= 3\)</span>
+</li>
+</ul>
+</div>
+<p>Suppose we want to indicate sample means that are unlikely if H0 would be true. In particular, we want to know how far the sample mean must be from the hypothesized mean to be among the 5% of all possible samples under H0 that are furthest away from the hypothesized means.</p>
+<p>What should the value of the sample mean be to fall within the 5% most deviant samples if the sample size is 25?</p>
+<div class="webex-solution">
+<button>
+Explanation
+</button>
+<p>We are talking about the distribution of the mean; so we need to work with the sampling distribution. We want to know the cut offs that mark the 2.5% highest and 2.5% lowest means. We first have to find the Z-values: they are 1.96 for the highest 2.5%, and (by symmetry) -1.96 marks the 2.5% lowest.</p>
+<p>Hence, to be among the 5% of all possible sample means that are most unlikely under H0, the sample mean should be:</p>
+<p>larger than 50+1.96 x 3 = 55.88 or smaller than 50-1.96 x 3 = 44.12</p>
+</div>
+<p>Let’s do some more exercises on the Z-test.</p>
+<p>Suppose the mean for Openness we found in our sample was 59.</p>
+<p>If we use a significance level of 5%, would we reject the null hypothesis? <select class="webex-select"><option value="blank"></option>
+<option value="answer">Yes</option>
+<option value="">No</option></select></p>
+<p>In the previous step we used cut offs for the sample means to decide about significance. The cut off scores were obtained via the Z-distribution. However, doing all these computations is not necessary (there’s a shortcut!!). In fact, if we know the Z-value for the sample, we can easily find out if the sample is among the 5% of the most unlikely sample means. We only have to compare the value with 1.96 and -1.96 to see whether that is the case.</p>
+<p>In this course, we will use Z-values for different purposes. In these specific calculations, Z is used as a <em>Test Statistic</em>. A test statistic quantifies evidence against the null hypothesis. In this case, the Z test statistic expresses how far away from the mean under the null hypothesis the observed mean is, in terms of the number of standard errors.</p>
+<p>The Z test-statistic follows the standard normal distribution. The values 1.96 and -1.96 are called the critical values and they mark the 5% most unlikely sample means under H0. In other words, the critical values mark the reject region for H0.</p>
+<p>So, if we compute the Z-value for the sample mean, and if that sample value of Z falls in the rejection region, we reject H0 (we found something that is unlikely enough to no longer believe H0 is true). If H0 is rejected we speak of a significant result. See the graph below:</p>
+<p><img src="images/LAS_3_2_Graph-1-1.jpg" class="img-fluid"></p>
+<p>Following these steps to test a mean is one example of performing a <em>“Z-test”</em>!</p>
+<p>We can use the Z-test to test hypotheses about the population mean if we know the population <span class="math inline">\(\sigma\)</span>.</p>
+<p>The test statistic for the Z-test is:</p>
+<p><span class="math inline">\(z = \frac{\bar{X}-\mu_{H_0}}{\sigma_\bar{X}}\)</span></p>
+<p>This statistic is computed using the mean from the sample, the hypothesized mean under H0 and <span class="math inline">\(\sigma\)</span>.</p>
+<p>H0 is rejected at the 5% significance level if z is either larger than 1.96 or smaller than -1.96.</p>
+<p>So far, we rejected the null hypothesis if the sample is among the 5% most unlikely sample means under H0. This 5% was called the significance level, and is denoted as <span class="math inline">\(\alpha = .05\)</span>. However, we could just as well choose 1% or .5%.</p>
+<p>What would be the critical values for the Z-test if one tests at <span class="math inline">\(\alpha = .01\)</span>? <input class="webex-solveme nospaces" data-tol="0.01" size="4" data-answer="[&quot;2.33&quot;]"></p>
+<p>What would be the critical values for the Z-test if one tests at <span class="math inline">\(\alpha = .5\%\)</span>? <input class="webex-solveme nospaces" data-tol="0.01" size="4" data-answer="[&quot;2.58&quot;]"></p>
+<p>For historical reasons, social scientists tend to use <span class="math inline">\(\alpha = 0.05\)</span> as a default. So in this course, if alpha is not explicitly stated, assume <span class="math inline">\(\alpha = 0.05\)</span>.</p>
+<p>When we test hypotheses we reject H0 if the sample we find is unlikely if H0 is true. However, the flip side is that, even though H0 is true, we may find a sample that is much different by chance, and erroneously reject H0. Or, in other words, we could make an error. Rejecting H0 while it is true in reality is called a Type I error!</p>
+<p>Consider the following:</p>
+<ol type="1">
+<li>If H0 is true, and you test at <span class="math inline">\(\alpha = 0.05\)</span>, what is the probability of committing a Type I error?</li>
+<li>What is the link between the <span class="math inline">\(\alpha\)</span>-level and type I error rate?</li>
+</ol>
+<div class="webex-solution">
+<button>
+Explanation
+</button>
+<ol type="1">
+<li><p>If H0 is really true (i.e., H0 should not be rejected), then the probability that the sample mean is among the 5% most unlikely is equal to 5%.</p></li>
+<li><p>The alpha level specifies the risk of a Type I error. So if one tests at an alpha level of .05, it means that one accepts a risk of 5% to commit a Type I error.</p></li>
+</ol>
+</div>
+<p>Properties of the Z-test:</p>
+<p>Used to test hypotheses about the mean in a population, assuming <span class="math inline">\(\sigma\)</span> known.</p>
+<p>The test-statistic equals <span class="math inline">\(z = \frac{\bar{X}-\mu}{\sigma_{\bar{X}}}\)</span></p>
+<p>The test statistic is normally distributed.</p>
+</section><section id="assignment-3-z-test" class="level2" data-number="7.3"><h2 data-number="7.3" class="anchored" data-anchor-id="assignment-3-z-test">
+<span class="header-section-number">7.3</span> Assignment 3: Z-test</h2>
+<p>In this assignment we will apply the Z-test.</p>
+<p>This assignment first presents an example, followed by two practice questions.</p>
+<p>A researcher wants to test <span class="math inline">\(H_0: \mu = 50\)</span> against <span class="math inline">\(H_1: \mu \neq 50\)</span></p>
+<p>Data are available from a random sample of 26 respondents. The mean was 53.7. The researcher assumes the SD in the population is 8.5. Perform all steps of the Z-test.</p>
+<div class="webex-solution">
+<button>
+Explanation
+</button>
+<p>Step 1: Formulate hypotheses</p>
+<p><span class="math inline">\(H_0: \mu = 50\)</span> <span class="math inline">\(H_1: \mu \neq 50\)</span></p>
+<p>Step 2: Compute test statistic</p>
+<p>Standard error: <span class="math inline">\(\frac{8.5}{\sqrt{26}}=1.667\)</span></p>
+<p>Test statistic: <span class="math inline">\(z = \frac{53.7-50}{1.667}=2.212\)</span></p>
+<p>Step 3: Decide about significance</p>
+<p><span class="math inline">\(\alpha = .05\)</span>, so critical values +/- 1.96.</p>
+<p>Our test statistic exceeds this critical value.</p>
+<p>The sample mean thus falls in the rejection region, and we should conclude that the test is significant so <span class="math inline">\(H_0\)</span> s rejected.</p>
+<p>Step 4: Draw conclusion</p>
+<p>We have convincing evidence that the population mean differs from 50.</p>
+</div>
+<p>A researcher wants to test whether the population mean is equal to 80. Data are available from a random sample of 60 respondents. The mean was 74. The researchers assume the SD in the population is 40. Perform and report all steps of the Z-test. What is the resulting p-value? <input class="webex-solveme nospaces" data-tol="0.01" size="4" data-answer="[&quot;0.12&quot;,&quot;.12&quot;]"></p>
+<p>A researcher wants to test whether the population mean is equal to 500. Data are available from a random sample of 75 respondents. The mean was 546. The researchers assume that the SD in the population is 200. Perform all steps of the Z-test. Use <span class="math inline">\(\alpha = .01\)</span>. Perform and report all steps.</p>
+<div class="webex-solution">
+<button>
+Show answer
+</button>
+<p>Step 1: Hypotheses: <span class="math inline">\(H_0: \mu=500\)</span>, <span class="math inline">\(H_1: \mu \neq 500\)</span></p>
+<p>step 2: Compute Statistic:</p>
+<ul>
+<li>standard error: <span class="math inline">\(\frac{200}{\sqrt{75}} = 23.094\)</span>
+</li>
+<li>test statistic: <span class="math inline">\(z = \frac{546-500}{23.094}=1.992\)</span>
+</li>
+</ul>
+<p>Step 3: Decide about significance.</p>
+<p>Z does not exceed +/- 2.576. This means that Z does not fall in the reject region when tested at the 1% significance level. The test is not significant.</p>
+<p>Step 4: Draw conclusion</p>
+<p><span class="math inline">\(H_0\)</span> is not rejected.</p>
+</div>
+</section><section id="quiz" class="level2" data-number="7.4"><h2 data-number="7.4" class="anchored" data-anchor-id="quiz">
+<span class="header-section-number">7.4</span> Quiz</h2>
+<div class="webex-check webex-box">
+<p>“The null and alternative hypothesis are deduced from the data.” <select class="webex-select"><option value="blank"></option>
+<option value="">TRUE</option>
+<option value="answer">FALSE</option></select></p>
+<p>“When performing a hypothesis test, we start by assuming <span class="math inline">\(H_0\)</span> is true.” <select class="webex-select"><option value="blank"></option>
+<option value="answer">TRUE</option>
+<option value="">FALSE</option></select></p>
+<p>“If we reject <span class="math inline">\(H_0\)</span> with <span class="math inline">\(\alpha=0.05\)</span>, then we will also reject it at <span class="math inline">\(\alpha=0.10\)</span>, assuming all other quantities are held constant.” <select class="webex-select"><option value="blank"></option>
+<option value="answer">TRUE</option>
+<option value="">FALSE</option></select></p>
+<div class="webex-solution">
+<button>
+Explanation
+</button>
+<p>The critical values of <span class="math inline">\(\alpha =0.05\)</span> are +/- 1.96. Hence, if <span class="math inline">\(H_0\)</span> is rejected it means that z in the sample is larger than 1.96 or smaller than -1.96.”</p>
+<p>The critical values of <span class="math inline">\(\alpha =0.1\)</span> are +/- 1.645. This means that for rejecting <span class="math inline">\(H_0\)</span> at this alpha level, that z should be larger than 1.645 or smaller than -1.645. That is implied by the fact that it exceeds +/- 1.96.</p>
+</div>
+<p>“If we reject <span class="math inline">\(H_0\)</span>, then <span class="math inline">\(H_0\)</span> is surely wrong.” <select class="webex-select"><option value="blank"></option>
+<option value="">TRUE</option>
+<option value="answer">FALSE</option></select></p>
+<div class="webex-solution">
+<button>
+Explanation
+</button>
+<p>We should always be aware of the possibility of making a Type I error. The probability of making a Type I error is equal to <span class="math inline">\(\alpha\)</span>.</p>
+</div>
+<p>“Increasing the sample size n (and holding all the rest constant) decreases the probability of a Type I error.” <select class="webex-select"><option value="blank"></option>
+<option value="">TRUE</option>
+<option value="answer">FALSE</option></select></p>
+<div class="webex-solution">
+<button>
+Explanation
+</button>
+<p>Increasing the sample size n (and holding all the rest constant) does not decrease the probability of a Type I error.</p>
+<p>The Type I error is determined by the alpha level.</p>
+<p>If our sample is among the 5% most unlikely sample means of all possible sample means with the same size under <span class="math inline">\(H_0\)</span>, whatever that sample size N may be.</p>
+<p>Increasing the sample size n (and holding all the rest constant) does not decrease the probability of a Type I error.</p>
+</div>
+</div>
+</section><section id="assignment-4-z-test-and-alpha-levels" class="level2" data-number="7.5"><h2 data-number="7.5" class="anchored" data-anchor-id="assignment-4-z-test-and-alpha-levels">
+<span class="header-section-number">7.5</span> Assignment 4: Z-test and Alpha-levels</h2>
+<p>In this assignment we will practice some more with the Z-test, meanwhile we will review important concepts of hypothesis testing. In particular, we will look at significance levels.</p>
+<p>To test hypotheses, we need to specify the “significance level”, usually denoted by <span class="math inline">\(\alpha\)</span>. The significance level is our <em>decision criterion</em> to reject H0.</p>
+<p>The most common choice is .05. But what does this criterion exactly entail?</p>
+<p>Discuss with your group what an <span class="math inline">\(\alpha\)</span> level entails.</p>
+<div class="webex-solution">
+<button>
+Explanation
+</button>
+<p>If we test at an <span class="math inline">\(\alpha\)</span> of .05 it means that we are willing to reject H0 in favor of H1 if our sample mean belongs to the 5% most extreme scores (2.5% in each tail) under the null hypothesis.</p>
+<p>If indeed the sample mean is among this 5%, it means that we have observed a sample in a range that is quite unlikely if the null hypothesis would be true and, therefore, justifies rejection of the null hypothesis.</p>
+</div>
+<p>In the previous assignments you already used the critical values for the Z-test for specific alpha levels.</p>
+<p>For two-tailed tests, it holds that if the absolute value of Z exceeds the critical value, we may reject <span class="math inline">\(H_0\)</span>.</p>
+<p>Let <span class="math inline">\(Z_\text{crit}\)</span> be the critical value. For the Z-test it holds that:</p>
+<ul>
+<li>
+<span class="math inline">\(Z_\text{crit} = 1.65\)</span>, if <span class="math inline">\(\alpha = 0.10\)</span> (two-tailed)</li>
+<li>
+<span class="math inline">\(Z_\text{crit} = 1.96\)</span>, if <span class="math inline">\(\alpha = 0.05\)</span> (two-tailed)</li>
+<li>
+<span class="math inline">\(Z_\text{crit} = 2.58\)</span>, if <span class="math inline">\(\alpha = 0.01\)</span> (two-tailed)</li>
+</ul></section><section id="quiz-1" class="level2" data-number="7.6"><h2 data-number="7.6" class="anchored" data-anchor-id="quiz-1">
+<span class="header-section-number">7.6</span> Quiz</h2>
+<div class="webex-check webex-box">
+<p>Researchers want to test whether <span class="math inline">\(\mu=70\)</span>. They assume that <span class="math inline">\(\sigma = 10\)</span>. Researchers found a mean of 72 in a random sample of 40 persons.</p>
+<p>True or false:</p>
+<p><span class="math inline">\(H_0\)</span> can be rejected at one of the three levels discussed above (<span class="math inline">\(\alpha = .10, .05, .01\)</span>. <select class="webex-select"><option value="blank"></option>
+<option value="">TRUE</option>
+<option value="answer">FALSE</option></select></p>
+<p>“If the two-tailed test is significant at the 5% level, it will also be significant at the 1% level (keeping everything else fixed).” <select class="webex-select"><option value="blank"></option>
+<option value="">TRUE</option>
+<option value="answer">FALSE</option></select></p>
+<p>“If the two-tailed test is not significant at the 10% level, it won’t be significant at the 5% level either (keeping everything else fixed).” <select class="webex-select"><option value="blank"></option>
+<option value="answer">TRUE</option>
+<option value="">FALSE</option></select></p>
+<p>“If the two-tailed test is not significant at the 5% level, it could still be significant at the 5% level (keeping everything else fixed).” <select class="webex-select"><option value="blank"></option>
+<option value="answer">TRUE</option>
+<option value="">FALSE</option></select></p>
+<p>“If the two-tailed test is significant at the 1% level, it might not be significant at the 5% level (keeping everything else fixed).” <select class="webex-select"><option value="blank"></option>
+<option value="">TRUE</option>
+<option value="answer">FALSE</option></select></p>
+</div>
+</section><section id="assignment-5-p-values" class="level2" data-number="7.7"><h2 data-number="7.7" class="anchored" data-anchor-id="assignment-5-p-values">
+<span class="header-section-number">7.7</span> Assignment 5: P-values</h2>
+<p>We will now focus on the interpretation of the p-values and how to use the p-values to decide about significance.</p>
+<p>Consider the following situation:</p>
+<p>Scores on a test measuring confidence in police are normally distributed in the general population, with <span class="math inline">\(\mu = 500\)</span> and an <span class="math inline">\(\sigma = 50\)</span>. Researchers want to know if the average confidence level is different for those who have been a victim of crime. They collect data for 60 victims. They find a sample mean of 511. They test <span class="math inline">\(H_0: \mu = 500\)</span> against <span class="math inline">\(H_1: \mu \neq 500\)</span>, while assuming that the population variance is <span class="math inline">\(\sigma = 50\)</span>.</p>
+<p>Compute the p-value. Draw a graph for the two-tailed p-value. Write down in your own words and as precise as possible the interpretation of the p-value in the answer box below. Then, discuss your response with your group.</p>
+<div class="webex-solution">
+<button>
+Explanation
+</button>
+<ul>
+<li>The p-value represents the proportion of all possible sample means that are further away from our hypothesized mean than the observed sample mean is.</li>
+<li>We have the sampling distribution with <span class="math inline">\(\mu = 500\)</span> and <span class="math inline">\(\sigma_\bar{X} = \frac{50}{\sqrt{60}} = 6.455\)</span>.</li>
+<li>First, we compute the right-tail area: <span class="math inline">\(P(\bar{X} &gt; 511) = P(Z &gt; 1.70) = 0.0446\)</span>.</li>
+<li>Hence, 4.66% of all possible samples is further away from <span class="math inline">\(H_0\)</span> on the right side.</li>
+<li>Second, we compute the left-tail area. These are the sample means that are more than 11 points from the hypothesized mean to the left <span class="math inline">\(P(\bar{X} &lt; 489) = P(Z &lt; -1.70) = 0.0446\)</span>.</li>
+<li>Hence, the two-tailed p-value is 0.0892.</li>
+</ul>
+</div>
+<p>Is the test significant at the 5% level? <select class="webex-select"><option value="blank"></option>
+<option value="">TRUE</option>
+<option value="answer">FALSE</option></select></p>
+<p>Is it significant at the 1% level? <select class="webex-select"><option value="blank"></option>
+<option value="">TRUE</option>
+<option value="answer">FALSE</option></select></p>
+<p>Researchers test whether <span class="math inline">\(\mu = 90\)</span>. They assume that <span class="math inline">\(\sigma=21\)</span>. The sample mean was 85. Sample size was 50.</p>
+<p>What is the two-tailed p-value? <input class="webex-solveme nospaces" data-tol="0.002" size="5" data-answer="[&quot;0.046&quot;,&quot;.046&quot;]"></p>
+<p>What is the highest level at which the test is significant? <select class="webex-select"><option value="blank"></option>
+<option value="">0.1</option>
+<option value="">0.005</option>
+<option value="">0.01</option>
+<option value="answer">0.05</option></select></p>
+<p>Researchers test whether <span class="math inline">\(\mu = 35\)</span>. They assume <span class="math inline">\(\sigma =16\)</span>. The sample mean was 38. Sample size was 64.</p>
+<p>Compute the two-tailed p-value and indicate which of the following statements is true.</p>
+<div id="radio_WRPZANJQOA" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_WRPZANJQOA" value="answer"><span>The test is not significant at 10%, not significant at 5% and not significant at 1%.</span></label><label><input type="radio" autocomplete="off" name="radio_WRPZANJQOA" value=""><span>The test is significant at the 10% and 5% level, but not at the 1% level.</span></label><label><input type="radio" autocomplete="off" name="radio_WRPZANJQOA" value=""><span>The test is significant at the 10%, 5% level, and 1% level.</span></label><label><input type="radio" autocomplete="off" name="radio_WRPZANJQOA" value=""><span>The test is significant at the 10% level, but not at 5% or 1% level.</span></label>
+</div>
+<p>Consider these true- or false statements:</p>
+<p>If a two-tailed p-value is .0567 then the test is significant at the 10% level but not at the 5% level. <select class="webex-select"><option value="blank"></option>
+<option value="answer">TRUE</option>
+<option value="">FALSE</option></select></p>
+<p>If a two-tailed test is significant at the 5% level but not at the 1% level, then the two-tailed p-value will be less than 0.01. <select class="webex-select"><option value="blank"></option>
+<option value="">TRUE</option>
+<option value="answer">FALSE</option></select></p>
+<p>A two-tailed p-value of 0.060 indicates that we have 6% chance that the null hypothesis is true. <select class="webex-select"><option value="blank"></option>
+<option value="">TRUE</option>
+<option value="answer">FALSE</option></select></p>
 
 
-</section></main><!-- /main --><script>
+</section></section></main><!-- /main --><script>
 
 /* update total correct if #webex-total_correct exists */
 update_total_correct = function() {
@@ -1076,12 +1405,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="./samplingdistribution.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">The Sampling Distribution</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">The Sampling Distribution</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./glm1.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">GLM-I: Linear Regression</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">GLM-I: Linear Regression</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

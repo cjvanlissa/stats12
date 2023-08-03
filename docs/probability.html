@@ -5,7 +5,7 @@
 <meta name="generator" content="quarto-1.3.427">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="description" content="Book Description">
-<title>Statistics 1 and 2 - 3&nbsp; Probability Distributions</title>
+<title>Statistics 1 and 2 - 2&nbsp; Probability Distributions</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -27,7 +27,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./samplingdistribution.html" rel="next">
-<link href="./tutorial1.html" rel="prev">
+<link href="./introduction.html" rel="prev">
 <link href="./images/logos/favicon.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -67,12 +67,13 @@ ul.task-list li input[type="checkbox"] {
 </head>
 <body class="nav-sidebar floating">
 
+
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./probability.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Probability Distributions</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./probability.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Probability Distributions</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -133,32 +134,26 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./tutorial1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Lab 1: Introduction</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./probability.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Probability Distributions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Probability Distributions</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./samplingdistribution.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">The Sampling Distribution</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">The Sampling Distribution</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./testing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Hypothesis Testing</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Hypothesis Testing</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./glm1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">GLM-I: Linear Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">GLM-I: Linear Regression</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -178,6 +173,12 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./probability_tables.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Z-table</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
@@ -192,8 +193,9 @@ ul.task-list li input[type="checkbox"] {
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li>
-<a href="#formative-test" id="toc-formative-test" class="nav-link active" data-scroll-target="#formative-test"><span class="header-section-number">4</span> Formative Test</a>
+<li><a href="#lecture" id="toc-lecture" class="nav-link active" data-scroll-target="#lecture"><span class="header-section-number">3</span> Lecture</a></li>
+  <li>
+<a href="#formative-test" id="toc-formative-test" class="nav-link" data-scroll-target="#formative-test"><span class="header-section-number">4</span> Formative Test</a>
   <ul class="collapse">
 <li><a href="#popcorn-consumption-table" id="toc-popcorn-consumption-table" class="nav-link" data-scroll-target="#popcorn-consumption-table"><span class="header-section-number">4.0.1</span> Popcorn consumption Table</a></li>
   </ul>
@@ -252,7 +254,7 @@ ul.task-list li input[type="checkbox"] {
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
-<h1 class="title"><span id="sec-probability" class="quarto-section-identifier"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Probability Distributions</span></span></h1>
+<h1 class="title"><span id="sec-probability" class="quarto-section-identifier"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Probability Distributions</span></span></h1>
 </div>
 
 
@@ -276,7 +278,10 @@ ul.task-list li input[type="checkbox"] {
 <p>The <em>standard</em> normal distribution, also known as the Z-distribution, is a standardized version of the normal distribution, rescaled to have a mean of 0 and a standard deviation of 1. Standardizing normal distributions allows us to calculate probabilities more easily using standard normal distribution tables or calculators. We can then convert these probabilities back to the original units if needed.</p>
 <p>Probability distributions can be used as models to describe/approximate the distribution of real data. Behind the scenes, we do this any time we describe the distribution of scores on a variable using its mean and standard deviation. While we often assumpe that variables are normally distributed, that assumption is not always accurate. For example, depression symptoms do not follow a normal distribution: Most people score near-zero on depression symptoms, and few people have higher scores (but these are also not normally distributed). In such cases of violations of the assumption of normality, the mean and standard deviation are not very informative. You may use other descriptive statistics, consider different probability distributions (outside the scope of this course), or discuss the limitations of the assumption of normality.</p>
 <p>In conclusion, probability distributions provide a way to represent the probabilities associated with different outcomes of a random variable, whether discrete or continuous. By using probability distributions, we can report descriptive statistics, calculate probabilities, and make predictions about future observations.</p>
-<section id="formative-test" class="level1" data-number="4"><h1 data-number="4">
+<section id="lecture" class="level1" data-number="3"><h1 data-number="3">
+<span class="header-section-number">3</span> Lecture</h1>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/p9QWOXR4OT8" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</section><section id="formative-test" class="level1" data-number="4"><h1 data-number="4">
 <span class="header-section-number">4</span> Formative Test</h1>
 <p>A formative test helps you assess your progress in the course, and helps you address any blind spots in your understanding of the material. If you get a question wrong, you will receive a hint on how to improve your understanding of the material.</p>
 <p>Complete the formative test ideally after you’ve seen the lecture, but before the lecture meeting in which we can discuss any topics that need more attention</p>
@@ -284,38 +289,38 @@ ul.task-list li input[type="checkbox"] {
 <div class="webex-check webex-box">
 <p><strong>Question 1</strong></p>
 An HR advisor is looking for new employees for LEGO. He thinks it is important for them to be creative. Creativity is normally distributed in the population, with a mean of 180 and a standard deviation of 25. A higher score indicates higher creativity. The advisor only wants to select applicants that belong to the 0.015 proportion of most creative people. What cut-off/boundary score for creativity should the HR advisor use?
-<div id="radio_AUBMVYAOPH" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_AUBMVYAOPH" value="answer"><span>234.25</span></label><label><input type="radio" autocomplete="off" name="radio_AUBMVYAOPH" value=""><span>125.75</span></label><label><input type="radio" autocomplete="off" name="radio_AUBMVYAOPH" value=""><span>206.13</span></label><label><input type="radio" autocomplete="off" name="radio_AUBMVYAOPH" value=""><span>180.38</span></label>
+<div id="radio_WZBBUVRVVA" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_WZBBUVRVVA" value=""><span>180.38</span></label><label><input type="radio" autocomplete="off" name="radio_WZBBUVRVVA" value=""><span>206.13</span></label><label><input type="radio" autocomplete="off" name="radio_WZBBUVRVVA" value=""><span>125.75</span></label><label><input type="radio" autocomplete="off" name="radio_WZBBUVRVVA" value="answer"><span>234.25</span></label>
 </div>
 <p><strong>Question 2</strong></p>
 What is probability?
-<div id="radio_DIPNZNQQJZ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_DIPNZNQQJZ" value=""><span>The proportion of times an outcome was observed in a sample.</span></label><label><input type="radio" autocomplete="off" name="radio_DIPNZNQQJZ" value="answer"><span>The proportion of times an outcome would be observed in a random experiment, if it were repeated many times.</span></label><label><input type="radio" autocomplete="off" name="radio_DIPNZNQQJZ" value=""><span>A measure of association between two categorical variables.</span></label><label><input type="radio" autocomplete="off" name="radio_DIPNZNQQJZ" value=""><span>The subjective chance of observing a specific outcome in a single random experiment.</span></label>
+<div id="radio_CCFCFGOPQW" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_CCFCFGOPQW" value=""><span>The proportion of times an outcome was observed in a sample.</span></label><label><input type="radio" autocomplete="off" name="radio_CCFCFGOPQW" value=""><span>A measure of association between two categorical variables.</span></label><label><input type="radio" autocomplete="off" name="radio_CCFCFGOPQW" value="answer"><span>The proportion of times an outcome would be observed in a random experiment if it were repeated many times.</span></label><label><input type="radio" autocomplete="off" name="radio_CCFCFGOPQW" value=""><span>The subjective chance of observing a specific outcome in a single random experiment.</span></label>
 </div>
 <p><strong>Question 3</strong></p>
 What is a random experiment?
-<div id="radio_EKQECPGCWT" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_EKQECPGCWT" value=""><span>A naturally occurring experiment; for example, comparing participants who grow up in an area where the drinking water is rich in a particular mineral with control participants from another area.</span></label><label><input type="radio" autocomplete="off" name="radio_EKQECPGCWT" value=""><span>Any process with multiple potential outcomes where the probability of each outcome is unknown.</span></label><label><input type="radio" autocomplete="off" name="radio_EKQECPGCWT" value=""><span>An example of the experimental method, where people are assigned to a treatment- or control group.</span></label><label><input type="radio" autocomplete="off" name="radio_EKQECPGCWT" value="answer"><span>A process with multiple potential outcomes that could be repeated under similar conditions.</span></label>
+<div id="radio_WORADJMPTT" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_WORADJMPTT" value="answer"><span>A process with multiple potential outcomes that could be repeated under similar conditions.</span></label><label><input type="radio" autocomplete="off" name="radio_WORADJMPTT" value=""><span>A naturally occurring experiment; for example comparing participants who grow up in an area where the drinking water is rich in a particular mineral with control participants from another area.</span></label><label><input type="radio" autocomplete="off" name="radio_WORADJMPTT" value=""><span>An example of the experimental method where people are assigned to a treatment- or control group.</span></label><label><input type="radio" autocomplete="off" name="radio_WORADJMPTT" value=""><span>Any process with multiple potential outcomes where the probability of each outcome is unknown.</span></label>
 </div>
 <p><strong>Question 4</strong></p>
 What are discrete random variables?
-<div id="radio_PEBJRNSJYG" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_PEBJRNSJYG" value=""><span>Variables with a probability distribution.</span></label><label><input type="radio" autocomplete="off" name="radio_PEBJRNSJYG" value=""><span>Variables with an infinite number of possible outcomes.</span></label><label><input type="radio" autocomplete="off" name="radio_PEBJRNSJYG" value="answer"><span>Variables with a finite or countable number of possible outcomes.</span></label><label><input type="radio" autocomplete="off" name="radio_PEBJRNSJYG" value=""><span>Variables with a normal distribution.</span></label>
+<div id="radio_GOPMGLQUSU" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_GOPMGLQUSU" value="answer"><span>Variables with a finite or countable number of possible outcomes.</span></label><label><input type="radio" autocomplete="off" name="radio_GOPMGLQUSU" value=""><span>Variables with an infinite number of possible outcomes.</span></label><label><input type="radio" autocomplete="off" name="radio_GOPMGLQUSU" value=""><span>Variables with a normal distribution.</span></label><label><input type="radio" autocomplete="off" name="radio_GOPMGLQUSU" value=""><span>Variables with a probability distribution.</span></label>
 </div>
 <p><strong>Question 5</strong></p>
 What information is contained in a frequency distribution?
-<div id="radio_UXGHUDNKPV" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_UXGHUDNKPV" value=""><span>A measure of association between two categorical variables.</span></label><label><input type="radio" autocomplete="off" name="radio_UXGHUDNKPV" value="answer"><span>A summary of the observed counts of discrete outcomes in a sample.</span></label><label><input type="radio" autocomplete="off" name="radio_UXGHUDNKPV" value=""><span>A summary of the observed counts of discrete outcomes in the population.</span></label><label><input type="radio" autocomplete="off" name="radio_UXGHUDNKPV" value=""><span>A summary of observed probabilities of discrete outcomes in a sample.</span></label>
+<div id="radio_BYMVZTIOYD" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_BYMVZTIOYD" value=""><span>A summary of the observed counts of discrete outcomes in the population.</span></label><label><input type="radio" autocomplete="off" name="radio_BYMVZTIOYD" value=""><span>A summary of observed probabilities of discrete outcomes in a sample.</span></label><label><input type="radio" autocomplete="off" name="radio_BYMVZTIOYD" value=""><span>A measure of association between two categorical variables.</span></label><label><input type="radio" autocomplete="off" name="radio_BYMVZTIOYD" value="answer"><span>A summary of the observed counts of discrete outcomes in a sample.</span></label>
 </div>
 <p><strong>Question 6</strong></p>
 What is the standard normal distribution?
-<div id="radio_LTCQLUXJSC" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_LTCQLUXJSC" value=""><span>A contingency table summarizing two categorical variables.</span></label><label><input type="radio" autocomplete="off" name="radio_LTCQLUXJSC" value=""><span>A probability distribution where the total probability sums to 1.</span></label><label><input type="radio" autocomplete="off" name="radio_LTCQLUXJSC" value=""><span>Any continuous distribution with infinite possible outcomes.</span></label><label><input type="radio" autocomplete="off" name="radio_LTCQLUXJSC" value="answer"><span>A standardized version of the normal distribution with a mean of 0 and a standard deviation of 1.</span></label>
+<div id="radio_XPGQRFISJY" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_XPGQRFISJY" value=""><span>A probability distribution where the total probability sums to 1.</span></label><label><input type="radio" autocomplete="off" name="radio_XPGQRFISJY" value=""><span>Any continuous distribution with infinite possible outcomes.</span></label><label><input type="radio" autocomplete="off" name="radio_XPGQRFISJY" value=""><span>A contingency table summarizing two categorical variables.</span></label><label><input type="radio" autocomplete="off" name="radio_XPGQRFISJY" value="answer"><span>A standardized version of the normal distribution with a mean of 0 and a standard deviation of 1.</span></label>
 </div>
 <p><strong>Question 7</strong></p>
-A researcher is interested in the relationship between movie watched and popcorn consumption. She counts the number of people who consume popcorn during a movie, and whether they have watched “Mean Girls”. The results are presented in the table below this quiz. What is P(Popcorn|Mean Girls), rounded to 3 decimal places?
-<div id="radio_ORFABLHICI" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_ORFABLHICI" value=""><span>0.06</span></label><label><input type="radio" autocomplete="off" name="radio_ORFABLHICI" value=""><span>0.08</span></label><label><input type="radio" autocomplete="off" name="radio_ORFABLHICI" value="answer"><span>0.63</span></label><label><input type="radio" autocomplete="off" name="radio_ORFABLHICI" value=""><span>0.04</span></label>
+A researcher is interested in the relationship between movie watched and popcorn consumption. She counts the number of people who consume popcorn during a movie, and whether they have watched Mean Girls or not. The results are presented in the table below this quiz. What is P(Popcorn|Mean Girls), rounded to 3 decimal places?
+<div id="radio_PHRWTXMBJK" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_PHRWTXMBJK" value=""><span>0.08</span></label><label><input type="radio" autocomplete="off" name="radio_PHRWTXMBJK" value=""><span>0.06</span></label><label><input type="radio" autocomplete="off" name="radio_PHRWTXMBJK" value=""><span>0.04</span></label><label><input type="radio" autocomplete="off" name="radio_PHRWTXMBJK" value="answer"><span>0.63</span></label>
 </div>
 </div>
 <div class="webex-solution">
@@ -323,9 +328,9 @@ A researcher is interested in the relationship between movie watched and popcorn
 Show explanations
 </button>
 <p><strong>Question 1</strong></p>
-<p>Find the Z-score that matches a right tail probability of .015, and calculate <span class="math inline">\((Z*25) + 180\)</span></p>
+<p>Find the Z-score that matches a right tail probability of .015 and calculate <span class="math inline">\((Z*25) + 180\)</span></p>
 <p><strong>Question 2</strong></p>
-<p>(The frequentist definition of) probability builds upon the idea that you could theoretically repeat the random experiment many times, and calculate the proportion of times a given outcome is observed</p>
+<p>(The frequentist definition of) probability builds upon the idea that you could theoretically repeat the random experiment many times and calculate the proportion of times a given outcome is observed</p>
 <p><strong>Question 3</strong></p>
 <p>A random experiment is a process with multiple potential outcomes that could theoretically be repeated many times under similar conditions.</p>
 <p><strong>Question 4</strong></p>
@@ -395,7 +400,37 @@ Show explanations
 <li>if you want to know, see for example Wikipedia</li>
 </ul>
 <p>Normal distributions are distributions for continuous random variables.</p>
-<p>Let’s first have another look at the graphs of the distribution. Under the information button you can find a figure which shows different examples of normal distributions.</p>
+<p>Let’s first have another look at different examples of normal distributions:</p>
+<p><img src="images/Lecture 212.png" class="img-fluid"></p>
+<table class="table">
+<thead><tr class="header">
+<th style="text-align: center;">Dist.</th>
+<th style="text-align: center;">μ</th>
+<th style="text-align: center;">σ</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">–1.0</td>
+<td style="text-align: center;">0.5</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">0.5</td>
+<td style="text-align: center;">0.5</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">0.5</td>
+<td style="text-align: center;">1.5</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">2.0</td>
+<td style="text-align: center;">1.0</td>
+</tr>
+</tbody>
+</table>
 <p>Inspection of the graphs of the bell-shape distributions shows that it is a symmetric distribution. We also see that the distributions differ in location (the point on the x-axis where it reaches its maximum) and the spread. In other words, the distribution is characterized by two parameters: the mean and standard deviation. The mean is denoted by the Greek letter <span class="math inline">\(\mu\)</span> (pronounced as “moo”) and standard deviation is denoted by the Greek letter <span class="math inline">\(\sigma\)</span> (pronounced as “sigma”).</p>
 <p>Compare the distributions and see how the parameters determine the location (mean) and spread (standard deviation).</p>
 <section id="quiz" class="level3" data-number="5.1.1"><h3 data-number="5.1.1" class="anchored" data-anchor-id="quiz">
@@ -403,14 +438,14 @@ Show explanations
 <div class="webex-check webex-box">
 <p>Correctly complete the sentence below by filling in the gaps:</p>
 <p>Given the example “A student guesses the correct answer to 10 multiple choice questions with four answer categories each” the random experiment is <select class="webex-select"><option value="blank"></option>
-<option value="answer">guessing the correct answer</option>
 <option value="">the 4 answer categories</option>
 <option value="">the correct answer</option>
+<option value="answer">guessing the correct answer</option>
 <option value="">the number of correct answers</option></select> and the random variable is <select class="webex-select"><option value="blank"></option>
-<option value="">guessing the correct answer</option>
-<option value="answer">the number of correct answers</option>
 <option value="">the 4 answer categories</option>
-<option value="">the correct answer</option></select>.</p>
+<option value="">the correct answer</option>
+<option value="">guessing the correct answer</option>
+<option value="answer">the number of correct answers</option></select>.</p>
 <p>Are the following random variables discrete or continuous?</p>
 <p>Number of heads in 10 throws with a fair coin is continuous. <select class="webex-select"><option value="blank"></option>
 <option value="">TRUE</option>
@@ -442,22 +477,22 @@ Show explanations
 <div class="webex-check webex-box">
 <p>Complete the following sentences:</p>
 <p>IQ scores are normally distributed with mean 100 and an SD of 15. This means that 95% of the persons in the population has an IQ in between <select class="webex-select"><option value="blank"></option>
-<option value="">15</option>
-<option value="">85</option>
 <option value="">55</option>
+<option value="">85</option>
+<option value="">15</option>
 <option value="answer">70</option></select> and <select class="webex-select"><option value="blank"></option>
-<option value="">100</option>
+<option value="">145</option>
 <option value="">115</option>
 <option value="answer">130</option>
-<option value="">145</option></select>.</p>
+<option value="">100</option></select>.</p>
 <p>Students loan after completing the bachelor is normally distributed with mean 1500 Euros and an SD of 150. This means that 68% of the students ends up with a loan between <select class="webex-select"><option value="blank"></option>
-<option value="">1000</option>
-<option value="">1485</option>
+<option value="answer">1350</option>
 <option value="">1200</option>
-<option value="answer">1350</option></select> and <select class="webex-select"><option value="blank"></option>
-<option value="">1515</option>
+<option value="">1485</option>
+<option value="">1000</option></select> and <select class="webex-select"><option value="blank"></option>
 <option value="answer">1650</option>
 <option value="">1800</option>
+<option value="">1515</option>
 <option value="">1450</option></select>.</p>
 <p>What is the mean of the standard normal distribution? <input class="webex-solveme nospaces" size="1" data-answer="[&quot;0&quot;]"></p>
 <p>What is the SD of the standard normal distribution? <input class="webex-solveme nospaces" size="1" data-answer="[&quot;1&quot;]"></p>
@@ -583,12 +618,12 @@ Explanations
 <span class="header-section-number">5.2.1</span> Quiz</h3>
 <div class="webex-check webex-box">
 <p>Is the first item in the DS14 an indicator of NA or SI? <select class="webex-select"><option value="blank"></option>
-<option value="answer">SI</option>
-<option value="">NA</option></select></p>
+<option value="">NA</option>
+<option value="answer">SI</option></select></p>
 <p>Go to the data view in SPSS and inspect the data.</p>
 <p>Do you see any missings? <select class="webex-select"><option value="blank"></option>
-<option value="answer">Yes</option>
-<option value="">No</option></select></p>
+<option value="">No</option>
+<option value="answer">Yes</option></select></p>
 <p>What is the valid N of the variable age? <input class="webex-solveme nospaces" size="2" data-answer="[&quot;77&quot;]"></p>
 <p>How many system missings do we have on gender? <input class="webex-solveme nospaces" size="1" data-answer="[&quot;8&quot;]"></p>
 </div>
@@ -1580,13 +1615,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="./tutorial1.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Lab 1: Introduction</span></span>
+      <a href="./introduction.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to Statistics</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./samplingdistribution.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">The Sampling Distribution</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">The Sampling Distribution</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

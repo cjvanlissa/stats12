@@ -1,0 +1,1391 @@
+---
+title: "Psychometrics II: Dimension Reduction"
+author:   "Caspar J. van Lissa"
+date:     "`r format(Sys.Date(), '%d %b %Y')`"
+format: revealjs
+#server: shiny
+---
+
+```{r}
+library(kableExtra)
+require(gridExtra)
+library(tidySEM)
+library(scales)
+library(ggplot2)
+source("functions.r")
+options(knitr.kable.NA = '')
+df <- foreign::read.spss("data/emotions.sav", to.data.frame = TRUE)
+df <- df[complete.cases(df), ]
+df[1:2] <- NULL
+```
+
+<!-- Lit: -->
+
+<!-- Gently Clarifying the Application of Horn’s Parallel Analysis to -->
+<!-- Principal Component Analysis Versus Factor Analysis -->
+<!-- Alexis Dinno -->
+
+
+# Dimension Reduction
+
+## Recap
+
+Last week, we discussed how you can use multiple items to measure a single underlying construct
+
+Today, we will look at three methods for reducing multiple items to a smaller number of variables
+
+## Overview
+
+We will discuss three techniques, and you will learn two of them
+
+* Principal Components Analysis (PCA)
+* Exploratory Factor Analysis (EFA)
+* <font color = "gray">Confirmatory Factor Analysis (CFA)</font>
+
+Throughout this lecture, assume that we have $k$ items and $n$ participants
+
+## Principal Component Analysis (PCA) {.smaller}
+
+- PCA is a data rotation technique
+- It transforms $k$ original items into $k$ uncorrelated *components*
+- These components are linear combinations of the original items
+- You can use PCA for dimension reduction
+    + If a small number of components explain nearly all of the variance in the items, you can use only those to represent the variance in the items
+    + E.g., 10 items about extraversion, 1 component explains most of the variance - keep that 1 component and drop the remaining 9
+
+<!-- ## When to use PCA -->
+
+<!-- 1. Dimension Reduction: Simplify complex data sets by reducing the number of variables, when you have no theory of measurement -->
+<!-- 2. Avoiding Multicollinearity: PCA eliminates multicollinearity among the retained components, making them suitable for regression models. -->
+
+
+## Exploratory Factor Analysis (EFA) {.smaller}
+
+- EFA is a latent variable method
+    + Assumes that latent variables *cause* people's responses to the items
+    + E.g., extraversion causes people to respond positively to questions about partying and socializing
+- EFA models the item covariance matrix as a function of a fixed number of factors    
+- EFA is *exploratory* because all items are allowed to *load on* (contribute to) all factors
+    + Determine number of factors
+    + Determine which items belong to which factor
+    + In practice, for good questionnaires, items will load highly on one factor and low on all others
+
+
+## Confirmatory Factor Analysis
+
+- CFA assumes a "measurement model" 
+    + Known number of factors
+    + Known which items measures which factor
+    + E.g., 10 items each for 5 personality factors; assume that each set of items only contributes to its factor
+- Test whether a hypothesized measurement model fits the data well
+- This is outside of the scope of this course, but important to know it exists
+
+## Key Differences {.smaller}
+
+<!-- and variance explanation. -->
+
+1. Purpose:
+   - PCA is used for dimensionality reduction
+   - EFA *explores* the relationships of items with latent constructs
+   - CFA *tests a theory* about which items relate to which latent constructs
+2. Assumption:
+   - PCA does not assume latent variables. Dropping components assumes that those components are irrelevant or error variance
+   - EFA assumes that all items are caused by a smaller number of latent variables
+   - CFA assumes that specific items are caused by specific latent variables
+3. Interpretation:
+   - PCA components are mathematical constructs with no further meaning.
+   - EFA factors represent theoretical latent constructs.
+   - CFA factors represent known theoretical latent constructs.
+   
+## Visual comparison
+
+```{r}
+#| eval = FALSE
+library(tidySEM)
+
+indic <- paste0("X", 1:9)
+pc <- paste0("PC", 1:9)
+
+edg <- expand.grid(indic, pc)
+names(edg) <- c("from", "to")
+lo <- cbind(indic, rep("", 9), pc)
+class(lo) <- c("layout_matrix", class(lo))
+# lo <- do.call(get_layout, c(as.list(indic), as.list(pc), list(rows = 9)))
+
+p1 <- prepare_graph(edges = edg, layout = lo, angle = 0)
+
+
+# EFA ---------------------------------------------------------------------
+
+indic <- paste0("X", 1:9)
+fa <- paste0("F", 1:3)
+err <- paste0("e", 1:9)
+edg <- expand.grid(fa, indic)
+names(edg) <- c("from", "to")
+edg <- rbind(edg, data.frame(from = err, to = indic))
+lo <- matrix(c(err, indic, "",  "F1", "", "", "F2", "", "", "F3", ""), ncol = 3, byrow = F)
+class(lo) <- c("layout_matrix", class(lo))
+p2 <- prepare_graph(edges = edg, layout = lo, angle = 0)
+p2$nodes$shape[grepl("^(e|F)", p2$nodes$name)] <- "oval"
+
+# p2$nodes$name[1:9] <- paste0("F", 1:9)
+# p2$nodes$label[1:9] <- paste0("F", 1:9)
+
+# p2$edges$to <- gsub("PC", "F", p2$edges$to, fixed = TRUE)
+# pcomb <- tidySEM:::merge.sem_graph(p1, p2)
+
+# CFA ---------------------------------------------------------------------
+
+p3 <- p2
+p3$edges <- p3$edges[-which(p3$edges$from == "F1" & !grepl("[1-3]", p3$edges$to)), ]
+p3$edges <- p3$edges[-which(p3$edges$from == "F2" & !grepl("[4-6]", p3$edges$to)), ]
+p3$edges <- p3$edges[-which(p3$edges$from == "F3" & !grepl("[7-9]", p3$edges$to)), ]
+
+plot(p3)
+# p2$edges$to <- gsub("PC", "F", p2$edges$to, fixed = TRUE)
+pcomb <- tidySEM:::merge.sem_graph(p1, p2, p3, nrow = 1)
+
+library(ggplot2)
+p <- plot(pcomb) + geom_text(aes(x = c(4, 11.6, 19.2), y = 19.5, label = c("PCA", "EFA", "CFA"))) + geom_hline(yintercept = 19)
+ggsave("images/pcaefacfa.svg", p, width = 600, height = 400, units = "px", dpi = 60)
+
+```
+
+![](images/pcaefacfa.svg)
+
+# Principal Components Analysis
+
+## What is PCA?
+
+* A technique that rotates the data so that the largest amount of variance aligns with the first component, secondmost variance with the second component, etc
+* Components are by definition uncorrelated
+* Used for dimensionality by dropping components that explain little variance
+      + Can we summarize many items using few components without losing much information?
+* Derived using “simple” matrix algebra.
+
+<!-- ## How does PCA work? -->
+
+<!-- 1. Calculate the correlation matrix -->
+<!-- 2. Calculate the eigenvectors and eigenvalues of the covariance matrix. -->
+<!--     + Eigenvectors describe how the data are rotated to get each component -->
+<!--     + Eigenvalues describe the amount of variance explained by new componens -->
+<!-- 3. For dimension reduction: Select the top # components with highest eigenvalues -->
+
+<!-- You lose some information by dropping components, but ideally, that lost variance should be small relative to the variance explained by the retained components -->
+
+<!-- * So you want high Eigenvalues for retained components, low Eigenvalues for dropped components -->
+
+## Demonstration {.smaller}
+
+```{r}
+#| eval = FALSE
+library(ggplot2)
+set.seed(565)
+df <- mvtnorm::rmvnorm(7, mean = c(5, 5), sigma = matrix(c(10, 9, 9, 10), nrow = 2))
+
+df <- data.frame(df)
+res_pc <- princomp(df)
+
+res_lm <- lm(df[[2]]~df[[1]])
+mx1 <- mean(df$X1)
+xend <- mx1+1
+ystart <- res_lm$coefficients[1] + mx1*res_lm$coefficients[2]
+yend <- res_lm$coefficients[1] + (mx1+1)*res_lm$coefficients[2]
+
+m <- matrix(c(0, 1, -1, 0), nrow = 2)
+vec <- c(xend, yend) -c(mx1, ystart)
+add <- m %*% vec
+xend2 <- mx1+add[1]
+yend2 <- ystart+add[2]
+
+df_arrows <- data.frame(
+  xstart = c(mx1, mx1, 0, 0),
+  xend = c(xend, xend2, 3, 0),
+  ystart = c(ystart, ystart, 0, 0),
+  yend = c(yend, yend2, 0, 3),
+  color = rep(c("red", "green"), 2),
+  panel = c(rep(c("Original data", "PCA rotation"), each = 2))
+)
+
+df$panel <- "Original data"
+
+df2 <- data.frame(res_pc$scores)
+names(df2) <- paste0("X", 1:2)
+df2$panel <- "PCA rotation"
+df <- rbind(df, df2)
+
+p1 <- ggplot(df[df$panel == "Original data", ], aes (x = X1, y = X2)) +
+    geom_point(size = 2, color = "purple") +
+    geom_smooth(method = lm, se = FALSE, color = "red", linetype = 3)+
+    geom_segment(data = df_arrows[df_arrows$panel == "Original data", ], aes(x = xstart, xend = xend, y = ystart,
+                                                                             yend = yend, color = color), size = 1, arrow = arrow(angle = 30, length = unit(0.25, "inches"),
+                                                                                                                                  ends = "last", type = "open"))+
+    scale_x_continuous(limits = c(0, 10), expand = c(0,0), breaks = seq(0, 10, by = 2))+
+    scale_y_continuous(limits = c(0, 10), expand = c(0,0), breaks = seq(0, 10, by = 2))+
+    theme_bw() +
+    scale_color_manual(values = c("red" = "red", "green" = "green"))+
+    coord_fixed() + theme(legend.position = "none")
+
+p2 <- ggplot(df[df$panel == "PCA rotation", ], aes (x = X1, y = X2)) +
+  geom_point(size = 2, color = "purple") +
+  geom_segment(data = df_arrows[df_arrows$panel == "PCA rotation", ], aes(x = xstart, xend = xend, y = ystart,
+                                                                           yend = yend, color = color), size = 1, arrow = arrow(angle = 30, length = unit(0.25, "inches"),
+                                                                                                                                ends = "last", type = "open"))+
+  scale_x_continuous(limits = c(-10, 10), expand = c(0,0))+
+  scale_y_continuous(limits = c(-10, 10), expand = c(0,0))+
+  theme_bw() +
+  scale_color_manual(values = c("red" = "red", "green" = "green"))+
+  coord_fixed() + theme(legend.position = "none") +
+  labs(x = "PC1", y = "PC2")
+
+df_x <- data.frame(x = unlist(df[1:7, 1:2]), Variable = ordered(rep(names(df)[1:2], each = 7), levels = c("X2", "X1")))
+p3 <- ggplot(df_x, aes(x = x, y = Variable)) +
+  geom_point(color = "purple", size = 2) +
+  geom_hline(aes(yintercept = Variable))+
+  xlab("Value")+
+  theme_bw()
+
+df_pc <- data.frame(x = unlist(df[8:14, 1:2]), Variable = ordered(rep(c("PC1", "PC2"), each = 7), levels = c("PC2", "PC1")))
+p4 <- ggplot(df_pc, aes(x = x, y = Variable)) +
+  geom_point(color = "purple", size = 2) +
+  geom_hline(aes(yintercept = Variable))+
+  xlab("Value")+
+  theme_bw()
+ggsave("images/pca_unrotated.svg", p1, height = 2.8, width = 2.8, units = "in")
+ggsave("images/pca_rotated.svg", p2, height = 2.8, width = 2.8, units = "in")
+ggsave("images/pca_unrotated_proj.svg", p3, height = 2.8, width = 2.8, units = "in")
+ggsave("images/pca_rotated_proj.svg", p4, height = 2.8, width = 2.8, units = "in")
+
+```
+
+::: {layout-ncol=2}
+
+![](images/pca_unrotated.svg)
+
+![](images/pca_rotated.svg)
+
+![](images/pca_unrotated_proj.svg)
+
+![](images/pca_rotated_proj.svg)
+
+:::
+
+
+## Ways to understand PCA
+
+* Rotation of data
+* Way to reproduce the correlation matrix
+    + The first component best reproduces the correlation matrix R
+    + Adding each further component reproduces it better
+    + Using all components perfectly reproduces the correlation matrix
+* Lower-dimensional representation of the data (i.e., explain k items with <k components)
+* Lossy compression of data
+
+
+## Compressing Photo with PCA
+
+```{r}
+#| eval = FALSE
+library(jpeg)
+
+####### read photo #######
+photo <- readJPEG("C:/Users/vanlissa/Dropbox/Pictures/pasfoto.jpg")
+
+####### Creating separated matrix for every RGB color scale #######
+r <- photo[,,1]
+g <- photo[,,2]
+b <- photo[,,3]
+
+####### Introducing PCA method #######
+r.pca <- prcomp(r, center = F)
+g.pca <- prcomp(g, center = F)
+b.pca <- prcomp(b, center = F)
+
+rgb.pca <- list(r.pca, g.pca, b.pca)
+
+
+
+for (i in c(5, 10, 250, 500)) {
+  pca.img <- sapply(rgb.pca, function(j) {
+    compressed.img <- j$x[,1:i] %*% t(j$rotation[,1:i])
+  }, simplify = 'array')
+  writeJPEG(pca.img, paste('c:/tmp/photo_', round(i,0), '_components.jpg', sep = ''))
+}
+```
+
+Each row of image treated as a "variable", 1875 rows
+
+::: {layout-ncol=3}
+
+![10 Components](images/photo_10_components.jpg)
+
+![200 Components](images/photo_200_components.jpg)
+
+![1000 Components](images/photo_1000_components.jpg)
+
+![](images/pca_rotated_proj.svg)
+
+:::
+
+
+## Example {.smaller}
+
+Data on six items related to mental health in 300 individuals
+
+Correlation matrix:
+
+```{r}
+#| results: asis
+dat <- c(.449, .443, .296, .314, .326,
+.446, .312, .264, .25,
+.279, .258, .282,
+.467, .516, 
+.497)
+mat <- matrix(1, nrow = 6, ncol = 6)
+mat[upper.tri(mat)] <- dat
+mat[lower.tri(mat)] <- t(mat)[lower.tri(mat)]
+rownames(mat) <- colnames(mat) <- c("Anxious", "Tense", "Restless", "Depressed", "Useless", "Unhappy")
+e <- eigen(mat)
+e$vectors <- -1*e$vectors
+L <- e$values #placing the eigenvalues in L
+p = 6
+Vm <- matrix(0, nrow = p, ncol = p) #creating a p x p matrix with zeroes.
+#Vm is an orthogonal matrix since all correlations between variable are 0.
+diag(Vm) <- L #
+kableExtra::kbl(mat, digits = 2)
+```
+
+## How to Apply PCA
+
+* Start with equal number of Components as Items (e.g., 6 Items: 6 Components)
+* Rotate the data, so that Component 1 explains most variance, Component 2 secondmost variance, etc
+* Drop all Components that do not explain “a lot” of variance, e.g., drop 2-6
+* You now explain most of the variance with a smaller set of components: Dimension reduction
+
+## Eigenvalues
+
+> **Eigenvalue:** The eigenvalue $\lambda$ reflects how much variance a component explains.
+
+* Each item contributes 1 to the total variance
+* The sum of all Eigenvalues is equal to the number of items $k$, so $\sum_{j = 1}^k \lambda_j = k$
+* The proportion of variance in items explained by each component is equal to the Eigenvalue divided by the number of items, so $r^2 = \lambda / k$
+
+## Number of Components 1
+
+Strategy 1:  __Kaiser’s criterion __
+
+* All components with Eigenvalue > 1
+* I.e., this component explains more variance than a single item
+* Objective but influenced by characteristics of your dataset
+    + Not good in all cases
+
+How many factors would we choose for our example, based on this rule?
+
+<!-- ![](images/lecture1315.png) -->
+
+## Example: Kaiser's criterion
+
+```{r}
+# res_pca <- psych::principal(mat, nfactors = 6, rotate = "none", n.obs = 300)
+# res_pca <- princomp(mat)
+
+df <- data.frame(Component = 1:6, Eigenvalue = e$values, Variance = (e$values/6)*100)
+df$Cumulative <- cumsum(df$Variance)
+#df$Variance <- round(df$Variance)
+kableExtra::kbl(df, digits = 2)
+```
+
+
+## Number of components 2
+
+Strategy 2:  Catell’s scree plot
+
+* Choose the number of factors for which the Eigenvalue is  above the "elbow" (inflection point)
+* Draw a line through the scree
+* Subjective, but often very helpful
+
+<!-- ![](images/scree.png) -->
+
+## Example: Scree plot
+
+```{r}
+ggplot(df, aes(x = Component, y = Eigenvalue)) +
+  geom_point()+
+  geom_line(group = 1) +
+  geom_hline(yintercept = 1, color = "red", linetype = 2)+
+  theme_bw()
+```
+
+
+
+
+## Number of components 3
+
+Strategy 3: Horn's Parallel Analysis (1965)
+
+* Conduct many PCAs on random (fake) data with same number of cases and variables as real data
+* Retain components whose Eigenvalue exceeds the 95th percentile of Eigenvalues of random data
+* This is the best data-driven strategy
+
+## Example: Parallel analysis
+
+```{r}
+meh <- capture.output({tab_par <- EFA.dimensions::PARALLEL(6, 300)})
+tab_par <- tab_par$eigenvalues
+colnames(tab_par) <- c("PC", "Mean EV", "95 percentile")
+tab_par <- cbind(tab_par, Observed = e$values)
+kableExtra::kbl(tab_par, digits = 2) |>
+    kableExtra::row_spec(1, bold = T, color = "white", background = "green")
+```
+
+
+## Number of components 4
+
+Strategy 4: Use  __theoretical knowledge__ about the number of components underlying the data
+
+<!-- E.g., we measured soil nitrogen in five different ways -->
+
+<!-- * We reduce those 5 variables to one principal component -->
+
+We measured mental health using 6 indicators
+
+* But I know that these relate to anxiety and depression (2 components)
+* Note that in our example, the data-driven criteria do not give 2 components!
+
+<!-- ## Example -->
+
+<!-- Let's consider a dataset with four variables: A, B, C, and D. -->
+
+<!-- | A | B | C | D | -->
+<!-- |---|---|---|---| -->
+<!-- | 1 | 2 | 3 | 4 | -->
+<!-- | 4 | 3 | 2 | 1 | -->
+<!-- | 2 | 4 | 3 | 1 | -->
+<!-- | 3 | 1 | 4 | 2 | -->
+
+<!-- ## Standardize the data -->
+
+<!-- We need to standardize the data to have mean 0 and standard deviation 1. -->
+
+<!-- ## Calculate the covariance matrix -->
+
+<!-- The covariance matrix for the standardized data is: -->
+
+<!-- \[ -->
+<!-- \begin{bmatrix} -->
+<!-- 1 & 0.5 & -0.5 & 0 \\ -->
+<!-- 0.5 & 1 & -0.5 & -1 \\ -->
+<!-- -0.5 & -0.5 & 1 & 0.5 \\ -->
+<!-- 0 & -1 & 0.5 & 1 -->
+<!-- \end{bmatrix} -->
+<!-- \] -->
+
+<!-- ## Calculate eigenvectors and eigenvalues -->
+
+<!-- The eigenvectors and eigenvalues of the covariance matrix are: -->
+
+<!-- \[ -->
+<!-- \text{Eigenvectors} = -->
+<!-- \begin{bmatrix} -->
+<!-- 0.5 & -0.5 & -0.5 & 0.5 \\ -->
+<!-- 0.5 & 0.5 & -0.5 & -0.5 \\ -->
+<!-- 0.5 & 0.5 & 0.5 & 0.5 \\ -->
+<!-- 0.5 & -0.5 & 0.5 & -0.5 -->
+<!-- \end{bmatrix} -->
+<!-- \] -->
+
+<!-- \[ -->
+<!-- \text{Eigenvalues} = \begin{bmatrix} 2 & 1 & 0.5 & 0 \end{bmatrix} -->
+<!-- \] -->
+
+<!-- ## Select top k eigenvectors -->
+
+<!-- Let's say we want to retain the first two principal components (k = 2). -->
+
+<!-- The top two eigenvectors are: -->
+
+<!-- \[ -->
+<!-- \begin{bmatrix} -->
+<!-- 0.5 & -0.5 \\ -->
+<!-- 0.5 & 0.5 \\ -->
+<!-- 0.5 & 0.5 \\ -->
+<!-- 0.5 & -0.5 -->
+<!-- \end{bmatrix} -->
+<!-- \] -->
+
+<!-- ## Project data onto selected eigenvectors -->
+
+<!-- We can now project our original data onto the first two eigenvectors to obtain the principal components. -->
+
+
+
+<!-- ## Conclusion -->
+
+<!-- - PCA is a powerful technique for dimensionality reduction and data visualization. -->
+<!-- - It helps in identifying important patterns and relationships within the data. -->
+<!-- - By retaining the top k principal components, we can effectively reduce the dimensionality of the data while preserving most of its variability. -->
+
+
+
+<!-- ## Data Requirements -->
+
+<!-- - PCA requires continuous data. -->
+<!-- - EFA can handle both continuous and categorical data. -->
+
+<!-- ## Rotation -->
+
+<!-- - PCA components are orthogonal (uncorrelated). -->
+<!-- - EFA factors are typically rotated to achieve simple structure and enhance interpretability. -->
+
+<!-- ## Use Cases -->
+
+<!-- - Use PCA when you want to reduce the number of variables and explain most of the variance in the data. -->
+<!-- - Use EFA when you want to uncover underlying constructs and study the relationships between variables. -->
+
+<!-- ## Conclusion -->
+
+<!-- - PCA and EFA are both valuable tools in data analysis but serve different purposes. -->
+<!-- - PCA focuses on variance explanation and dimensionality reduction. -->
+<!-- - EFA aims to identify latent constructs and explore the underlying structure of the data. -->
+
+
+<!-- HIER -->
+
+
+
+
+## PCA Loadings {.smaller}
+
+* "Component Matrix"
+* Correlations between the original variable $i$ and the component $j$, $L_{i,j}$
+* Range from -1 to +1
+* They help us interpret the PCA components
+
+```{r}
+#| results: asis
+loadings <- e$vectors %*% sqrt(Vm)
+tab_load <- loadings
+tab_load_pca <- tab_load
+rownames(tab_load) <- rownames(mat)
+colnames(tab_load) <- paste0("PC", 1:ncol(tab_load))
+kableExtra::kbl(tab_load, digits = 2)
+```
+
+## Eigenvalues
+
+* Column sums of squared loadings are the Eigenvalues
+    + E.g., column sum of squared loadings for the first component = first Eigenvalue
+
+## Communalities {.smaller}
+
+> **Communality $h_{j}^2$:** proportion of variance in an item explained by $m$ components.
+
+Communality $h_{j}^2$ for item $j$ is calculated as the row sum of squared loadings. For $m$ selected components:
+
+$$
+h_j^2 = \sum_{i = 1}^m L_{j,i}^2
+$$
+
+* When $m$ is equal to number of items $k$, communalities are all 1
+    + Components are just a rotation of the data, so 100% of variance is explained
+* When $m$ is smaller than $k$, the communality is < 1
+
+
+
+
+## Communalities example {.smaller}
+
+```{r}
+#| results: asis
+tab_com <- tab_load^2
+tab_com <- data.frame(tab_com)
+tab_com <- rbind(tab_com, colSums(tab_com))
+tab_com$Explained <- rowSums(tab_com)
+rownames(tab_com) <- c(rownames(mat), "Colsum")
+kableExtra::kbl(tab_com[-nrow(tab_com),], digits = 2)
+```
+
+## Communalities 2 components
+
+```{r}
+#| results: asis
+tab_com <- tab_load^2
+tab_com <- data.frame(tab_com)
+tab_com <- tab_com[,1:2, drop = FALSE]
+tab_com <- rbind(tab_com, colSums(tab_com))
+tab_com$Explained <- rowSums(tab_com)
+rownames(tab_com) <- c(rownames(mat), "Colsum")
+kableExtra::kbl(tab_com[-nrow(tab_com),], digits = 2)
+```
+
+
+## Unicity
+
+> **Unicity:** The variance NOT explained by $m$ components.
+
+If $m$ is equal to the number of items $k$, unicity is 0
+
+If $m$ is smaller than $k$, the unicity is one minus the communality
+
+* E.g. below: unicity of "Anxious" is $1-.73 = .27$
+
+
+```{r}
+#| results: asis
+kableExtra::kbl(head(tab_com[-nrow(tab_com),], 3), digits = 2)
+```
+
+
+## Reproduced correlations
+
+> **Reproduced correlation** between two variables is equal to the sum - over components/factors - of the product of the unrotated loadings on those components
+
+E.g., for two components:
+
+$\hat{r}_{Anx,Tense} = (L_{Anx,PC1}*L_{Tense,PC1}) + (L_{Anx,PC2}*L_{Tense,PC2})$
+
+Where $r$ is the correlation and $L$ is the loading
+
+```{r}
+#| results: asis
+rownames(tab_load) <- rownames(mat)
+kableExtra::kbl(head(tab_load[, 1:2], 3), digits = 2)
+```
+
+
+## Reproduced correlations {.smaller}
+
+For two principal components (Diagonal: communalities)
+
+```{r}
+#| results: asis
+tab_rep <- mat
+vc <- e$vectors
+vc[, 3:6] <- 0
+tab_rep[] <- vc %*% Vm %*% t(vc)
+tab_res <- mat-tab_rep
+diag(tab_res) <- NA
+tab_rep[] <- formatC(tab_rep, digits = 2, format = "f")
+# colorize the diagonal elements in table with non-ints
+library(kableExtra)
+for (i in 1:(ncol(tab_rep))) {
+  tab_rep[i,i] <- cell_spec(tab_rep[i, i], bold=T, background = "lightgray")
+}
+
+# kable(df, "markdown", escape = F) %>% 
+#   kable_styling(bootstrap_options = "striped", full_width = F) 
+
+kableExtra::kbl(tab_rep, digits = 2, format = "markdown", escape = F) 
+```
+
+## Residual correlations {.smaller}
+
+Difference between observed and reproduced correlations: $R_{resid} = R - \hat{R}$
+
+```{r}
+#| results: asis
+options(knitr.kable.NA = '')
+kableExtra::kbl(tab_res, digits = 2) 
+```
+
+## Reproduced correlations {.smaller}
+
+Four principal components (Diagonal: communalities)
+
+```{r}
+#| results: asis
+tab_rep <- mat
+vc <- e$vectors
+vc[, 5:6] <- 0
+tab_rep[] <- vc %*% Vm %*% t(vc)
+tab_res <- mat-tab_rep
+diag(tab_res) <- NA
+tab_rep[] <- formatC(tab_rep, digits = 2, format = "f")
+# colorize the diagonal elements in table with non-ints
+library(kableExtra)
+for (i in 1:(ncol(tab_rep))) {
+  tab_rep[i,i] <- cell_spec(tab_rep[i, i], bold=T, background = "lightgray")
+}
+
+# kable(df, "markdown", escape = F) %>% 
+#   kable_styling(bootstrap_options = "striped", full_width = F) 
+
+kableExtra::kbl(tab_rep, digits = 2, format = "markdown", escape = F) 
+```
+
+## Residual correlations 4 components {.smaller}
+
+
+```{r}
+#| results: asis
+options(knitr.kable.NA = '')
+kableExtra::kbl(tab_res, digits = 2) 
+```
+
+
+
+# Exploratory Factor Analysis
+
+## Example {.smaller}
+
+Data on 12 items related to emotions in 117 individuals
+
+Correlation matrix:
+
+<font size = 4>
+```{r}
+#| results: asis
+df <- foreign::read.spss("data/emotions.sav", to.data.frame = TRUE)
+df <- df[complete.cases(df), ]
+df[1:2] <- NULL
+kableExtra::kbl(cor(df), digits = 2)
+```
+</font>
+
+## Exploratory factor analysis {.smaller}
+
+* Assume the existence of latent variables that cause item responses
+    + Suitable technique when your theory implies the existence of latent variables
+* Seeks to explain covariances/correlations between items
+* Unexplained variance is attributed to *measurement error*
+    + Aligns with test theory: Suitable technique when you assume that your items measure constructs with error
+* Suitable technique when a questionnaire has not been validated yet
+    + Otherwise, use confirmatory factor analysis
+
+## Estimating a Latent Variable Model 
+
+* PCA is just data rotation; only requires matrix algebra
+* EFA is a *model* about latent variables; loadings and error variances are unknown parameters that must be estimated
+
+We consider two estimation methods:
+
+* Principal Axis Factoring (PAF)
+    + Long considered default in SPSS
+    + Iterative procedure also based in matrix algebra
+    + Gives a solution even when model is too complex or data are non-normal (but do we want this?)
+* Maximum Likelihood (ML)
+    + Same estimator used for CFA
+    + Works well when data are multivariate normal
+    + Does not work when model is too complex
+    + Offers test of model fit!
+
+
+## Factor Loadings {.smaller}
+
+* "Factor Matrix"
+* Correlations between item and factor
+* Range from -1 to +1
+
+```{r}
+#| results: asis
+res_fa <- psych::fa(df, nfactors = 2, rotate="none", method = "pa")
+loadings <- unclass(res_fa$loadings)
+tab_load <- loadings
+rownames(tab_load) <- names(df)
+colnames(tab_load) <- paste0("FA", 1:ncol(tab_load))
+tab_load_fa <- tab_load
+kableExtra::kbl(tab_load, digits = 2)
+```
+
+## Eigenvalues {.smaller}
+
+Eigenvalues are still the column sums of squared loadings
+
+<font color = "red">In PCA, Eigenvalues represent portions of the total variance and sum to the number of indicators $k$</font>
+
+* They will always be smaller than the Eigenvalues, because some variance is error variance
+    + The sum of Eigenvalues is < $k$
+    + Eigenvalues can be negative
+* They will differ dependent on the number of extracted factors!
+
+
+```{r}
+tab_com <- tab_load^2
+
+tab_eigens <- rbind("Column sum" = colSums(tab_com),
+                    Eigenvalues = eigen(cor(df))$values[1:ncol(tab_com)])
+kableExtra::kbl(tab_eigens, digits = 2)
+```
+
+## Selecting number of Factors
+
+**Problem:** Eigenvalues depend on number of extracted factors
+
+* You can take a cue from Kaiser's criterion and Scree plot for PCA
+* You can use Horn's Parallel Analysis (1965), but:
+    + Difficult to implement in SPSS
+    + Solution also changes depending on number of chosen factors
+
+## Theoretical Knowledge
+
+EFA is a model-based approach, so it makes sense to use theory to guide choice of number of factors
+
+We measured emotions using 12 indicators
+
+* I theorize that these break down into positive and negative emotions (2 factors)
+
+## Model Fit Test
+
+If you use factor extraction method "Maximum Likelihood", you obtain a chi-square model fit test
+
+* A significant test means that the model-implied correlation matrix significantly deviates from the observed correlation matrix
+    + In other words: Significant test -> bad model!
+* This test can be used to evaluate a theoretical model
+
+For our 2-factor example: $\chi^2(43) = 81.12, p < .001$
+
+
+## Bayesian Information Criterion
+
+You can compute the BIC from Maximum Likelihood output:
+
+* A relative model fit index that balances model fit (chi-square) and model complexity
+* It prefers simple models with good-enough fit
+* No absolute cutoff; use it to compare models and choose the one with lowest BIC
+
+## Calculate BIC
+
+<!-- https://docs.tibco.com/pub/stat/14.0.0/doc/html/UsersGuide/GUID-D1C6BF83-A6E9-4981-9188-1F0AA3888B42.html -->
+
+1. Perform EFA with ML estimation for all solutions you want to compare (e.g., 1, 2, 3-factor)
+2. Write down chi-square values in a spreadsheet
+3. For each model, calculate degrees of freedom
+    + $df = ((k - m)^2 - (k + m))/2$, where $k$ is the number of items and $m$ is the number of factors
+4. For each model, calculate the BIC
+    + $BIC = \chi^2 - df ∗ log(n)$
+    
+## Example
+
+We have data from 117 participants on 12 emotion indicators
+
+```{r}
+tab_bic <- data.frame(Factors = 1:3, matrix(c(81.122, 43, 238.332,	54, 46.279,	33), byrow = T, nrow = 3))
+names(tab_bic)[2:3] <- c("Chi2", "df")
+tab_bic$BIC <- tab_bic$Chi2 - tab_bic$df * log(117)
+kableExtra::kbl(tab_bic, digits = 2) |>
+    kableExtra::row_spec(1, bold = T, color = "white", background = "green")
+```
+
+A one-factor model has the lowest BIC!
+
+## Maximum Number of Factors
+
+**Problem:** You must have fewer model parameters than observed datapoints
+
+**Solution:** You can use the $df$ to determine a maximum number of factors!
+
+* A model with $df < 0$ could not be estimated using ML
+* Although it remains possible using other methods (e.g., principal axis factoring), such a model is likely too complex for the data
+
+```{r}
+tab_df <- matrix((((12 - 1:11)^2 - (12 + 1:11))/2), nrow = 1)
+rownames(tab_df) <- "df"
+colnames(tab_df) <- 1:11
+kableExtra::kbl(tab_df) |>
+    kableExtra::column_spec(9:12, bold = T, color = "white", background = "red")
+```
+
+## Communalities and Unicity {.smaller}
+
+> **Communality $h_{j}^2$:** proportion of variance in an item accounted for by $m$ factors.
+
+* <font color ="red">PCA can explain 100% of variance in items when using all components, so communality for all components is 1.</font>
+* EFA **cannot** explain 100% of variance in items because some variance is measurement error
+* Communalities are always < 1 because of error variance
+    + Unicity is always larger than 0
+* "Initial" estimate of communalities is the squared multiple correlation coefficient with all other items ($r^2$, so a measure of explained variance)
+    + Note that this has nothing to do with the EFA model!
+
+
+# Rotation
+
+## Interpreting Factor Loadings {.smaller}
+
+**Goal:** We want to interpret the pattern of factor loadings.
+
+* Are there items that load highly on only one factor?
+* Can we try to "name" factors based on high-loading indicators?
+* Relates to validity: Relevant items load on the same construct
+* We can do this for both PCA and EFA
+
+## Factor loadings in the perfect world
+
+
+```{r}
+tab_ideal <- structure(list(FA1 = c(0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1), FA2 = c(1, 
+1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0)), row.names = c("happy", "cheerful", 
+"pride", "gratitude", "love", "sad", "jealous", "worry", "stress", 
+"anger", "guilt", "shame"), class = "data.frame")
+kableExtra::kbl(tab_ideal)
+```
+
+
+No doubts which factor an item belongs to
+
+* Perfect loading on only ONE dimension, rest of the loadings 0
+* Easy interpretation
+
+But in practice, we don’t get that
+
+## Real-life Factor Loadings 
+
+<font size = 3>
+```{r}
+kableExtra::kbl(tab_load_fa, digits = 2)
+```
+</font>
+
+* FA1 - negative emotions? But what about cheerful and pride?
+* FA2 - positive?
+
+
+## Interpreting PCA Loadings {.smaller}
+
+Or from our PCA example, let's interpret a 2-component solution:
+
+* PC1 - all mental health symptoms?
+* PC2 - A bit of anxiety? Low unhappiness?
+* This is confusing!
+
+```{r}
+tab_load_pca <- tab_load_pca[,1:2]
+rownames(tab_load_pca) <- rownames(mat)
+colnames(tab_load_pca) <- paste0("PC", 1:2)
+kableExtra::kbl(tab_load_pca, digits = 2)
+```
+
+## Introducing Rotation
+
+> **Rotation:** Just like PCA rotates the correlation matrix of the data, rotation rotates the loadings matrix of PCA/EFA until the pattern of loadings is easier to interpret.
+
+* Rotation simplifies and improves interpretability of the loadings
+* Rotation applies a linear transformation to the original factor loadings
+* Goal is to obtain high loadings for each item on only one factor
+    + Reducing cross-loadings
+
+## Orthogonal rotation
+
+> **Orthogonal Rotation:** Components/factors are uncorrelated with each other.
+
+* The factors are distinct and independent
+* High loadings for one factor are not associated with high loadings on another factor
+* Most common technique: VARIMAX rotation
+* Maximizes the variance of the squared loadings within each factor
+    + Loadings are either very high or very low, with little in between
+* The rotated factor matrix can be interpreted as factor loadings and as correlations between the items and factors
+
+## Varimax rotation demo
+
+```{r}
+#| eval = FALSE
+library(ggplot2)
+library(ggrepel)
+# res_fa_varmax <- psych::fa(df, nfactors = 2, rotate="varimax", method = "pa")
+# df_load <- unclass(res_fa$loadings)
+df_load <- tab_load_pca
+varmax <- varimax(df_load)
+#df_load <- rbind(df_load, varmax$loadings)
+df_load <- data.frame(df_load)
+df_load$Item <- gsub(".1", "", rownames(df_load), fixed = T)
+#df_load$Rotation <- rep(c("Original", "Varimax"), each = nrow(df_load)/2)
+#names(df_load)[1:2] <- paste0("PC", 1:2)
+rot <- c(-1,0) %*% varmax$rotmat
+# c(1,0) %*% varmax$rotmat
+# 
+# c(0,-1) %*% varmax$rotmat
+# c(0,1) %*% varmax$rotmat
+
+
+df_cross <- data.frame(
+  x = c(-1, 0, rot[1], -1*rot[2]),
+  y = c(0, -1, rot[2], rot[1]),
+  xend = c(1, 0, -1*rot[1],rot[2]),
+  yend = c(0, 1, -1*rot[2],-1*rot[1]),
+  Rotation = rep(c("Original", "Varimax"), each = 2)
+)
+
+
+p1 <- ggplot(df_load, aes(x = PC1, y = PC2, label = Item)) +
+  scale_x_continuous(limits = c(-1,1), expand = c(0,0))+
+  scale_y_continuous(limits = c(-1,1), expand = c(0,0))+
+  coord_fixed()+
+  geom_segment(data = df_cross, aes(x = x, y = y, xend = xend, yend = yend, color = Rotation), inherit.aes = FALSE)+
+  geom_point() +
+  ggrepel::geom_text_repel(alpha = .5)+
+  theme_bw()
+
+ggsave("images/pca_varimax.svg", p1, height = 7, width = 7, units = "in")
+
+```
+
+![](images/pca_varimax.svg)
+
+## As a Table
+
+```{r}
+df_load <- tab_load_pca
+#df_load <- principal(df, nfactors = 2, rotate = "none", method = "pc")$loadings
+varmax <- unclass(varimax(df_load)$loadings)
+colnames(varmax) <- paste0("RC", 1:2)
+kableExtra::kbl(varmax, digits = 2)
+```
+
+
+## Oblique Rotation
+
+* Factors are allowed to be correlated with each other
+    + It's possible that high loadings for one factor are associated with high loadings for another factor
+* In social science, many factors are probably correlated!
+    + Oblique rotation is considered to be default by many
+
+## Oblique Rotation ctd.
+
+**Note:** factor loadings and item/factor correlations are now distinct!
+
+**Pattern matrix**
+
+* Factor loadings
+* Each row is a regression equation describing the standardized item as a function of the factors
+* $X_1 = L_{1,1}*F1 + L_{1,2}*F2+\epsilon$
+* The loading of each item is a regression coefficient, controlled for the effect of all other items
+
+**Structure matrix**
+
+* Bivariate correlations between the items and factors
+* $r_{X_1, F1}$
+* Not controlled for other items
+
+<!-- Gorsuch (1983) and Thompson (1983) describe concepts and procedures for interpreting the factors with these matrices. -->
+
+<!-- Gorsuch, R.L. (1983). Factor Analysis (2nd Ed.). Hillsdale NJ: Erlbaum. -->
+
+<!-- Thompson, B. (2004). Exploratory and Confirmatory Factor Analysis. Washington DC: American Psychological Association. -->
+
+## Demonstration Oblimin
+
+```{r}
+#| eval = FALSE
+library(ggplot2)
+library(ggrepel)
+df_load <- tab_load_pca
+oblmn <- GPArotation::oblimin(df_load)
+unclass(GPArotation::Varimax(df_load))
+#df_load <- rbind(df_load, oblmn$loadings)
+df_load <- data.frame(df_load)
+df_load$Item <- gsub(".1", "", rownames(df_load), fixed = T)
+#df_load$Rotation <- rep(c("Original", "Varimax"), each = nrow(df_load)/2)
+#names(df_load)[1:2] <- paste0("PC", 1:2)
+rothor1 <- oblmn$Phi %*% oblmn$Th %*% matrix(c(-1,0), ncol = 1)
+rothor2 <- oblmn$Phi %*% oblmn$Th %*% matrix(c(1,0), ncol = 1)
+rotver1 <- oblmn$Phi %*% oblmn$Th %*% matrix(c(0,-1), ncol = 1)
+rotver2 <- oblmn$Phi %*% oblmn$Th %*% matrix(c(0,1), ncol = 1)
+# c(1,0) %*% oblmn$rotmat
+# 
+# c(0,-1) %*% oblmn$rotmat
+# c(0,1) %*% oblmn$rotmat
+
+
+df_cross <- data.frame(
+  x = c(-1, 0, rothor1[1], rotver1[1]),
+  y = c(0, -1, rothor1[2], rotver1[2]),
+  xend = c(1, 0, rothor2[1], rotver2[1]),
+  yend = c(0, 1, rothor2[2], rotver2[2]),
+  Rotation = rep(c("Original", "Oblimin"), each = 2)
+)
+
+
+p1 <- ggplot(df_load, aes(x = PC1, y = PC2, label = Item)) +
+  scale_x_continuous(limits = c(-1.2,1.2), expand = c(0,0))+
+  scale_y_continuous(limits = c(-1.2,1.2), expand = c(0,0))+
+  coord_fixed()+
+  geom_segment(data = df_cross, aes(x = x, y = y, xend = xend, yend = yend, color = Rotation), inherit.aes = FALSE)+
+  geom_point() +
+  ggrepel::geom_text_repel(alpha = .5)+
+  theme_bw()
+
+ggsave("images/pca_oblimin.svg", p1, height = 7, width = 7, units = "in")
+
+```
+
+![](images/pca_oblimin.svg)
+
+
+## As a Table
+
+```{r}
+df_load <- tab_load_pca
+#df_load <- principal(df, nfactors = 2, rotate = "none", method = "pc")$loadings
+obmn <- unclass(GPArotation::oblimin(df_load)$loadings)
+kableExtra::kbl(obmn, digits = 2)
+```
+
+## 
+ For oblique rotations, where the factors are allowed to correlate (oblimin or promax in SPSS), then the loadings and correlations are distinct. The pattern matrix holds the loadings. Each row of the pattern matrix is essentially a regression equation where the standardized observed variable is expressed as a function of the factors. The loadings are the regression coefficients. The structure matrix holds the correlations between the variables and the factors.
+
+Interpretation of a set of oblique factors involves both the pattern and structure matrices, as well as the factor correlation matrix. The latter matrix contains the correlations among all pairs of factors in the solution. It is automatically printed for an oblique solution when the rotated factor matrix is printed.
+
+Gorsuch (1983) and Thompson (1983) describe concepts and procedures for interpreting the factors with these matrices.
+
+Gorsuch, R.L. (1983). Factor Analysis (2nd Ed.). Hillsdale NJ: Erlbaum.
+
+Thompson, B. (2004). Exploratory and Confirmatory Factor Analysis. Washington DC: American Psychological Association.
+
+## Which type of Rotation?
+
+Choice depends on theory and research goals:
+
+Trying to reduce multicollinearity? -> Orthogonal rotation
+
+Constructing a scale of likely correlated dimensions? -> Oblique rotation
+
+In this example, it makes theoretical sense that anxiety and depression are correlated
+
+## Report Factor/Component Correlations
+
+If we allow factors/components to be correlated, we should report those correlations
+
+In this example, the rotated components (anxiety and depression) correlate $r = .40$
+
+## Word of Warning
+
+* Rotated loadings can no longer be interpreted as correlations of item with the factor
+* Recall that PCA is a specific rotation of the data
+* There is only one correct PCA solution for each dataset
+    + It can exactly reproduce the data
+* Rotation loses these properties
+* Clearly report that you performed PCA followed by a varimax rotation
+
+<!-- https://stats.stackexchange.com/questions/612/is-pca-followed-by-a-rotation-such-as-varimax-still-pca#:~:text=After%20an%20orthogonal%20rotation%20(such,with%20maximal%20variance%20etc.). -->
+
+
+
+
+## Reliability Analysis
+
+If you extract multiple components/factors, you can perform reliability analysis for each subscale
+
+
+# Questionnaires
+
+Is our questionnaire unidimensional? Or are there multiple dimensions?
+
+![](images/lecture130.png)
+
+
+
+
+
+## PCA use cases
+
+To reduce dimensionality of the data when we do not have a theory about underlying latent variables
+
+* E.g., family socio-economic status
+    + Mother's education, father's education
+    + Mother's income, father's income
+    + Mother's occupation prestige, father's occupation prestige
+* Is there a latent variable "family socio-economic status" that causes these things?
+* Rather, these items all cause (not caused by) family SES
+* Use PCA to extract a single dimension that explains most variance in the items
+
+To deal with multicollinearity
+
+
+
+
+
+
+
+# EFA Assumption Checks
+
+## Multicollinearity
+
+<!-- http://users.sussex.ac.uk/~andyf/factor.pdf -->
+
+We mostly apply factor analysis when we expect clusters of items to be correlated (=multicollinear)
+
+* Paradoxically, problems arise when multicollinearity is too high
+    + Especially when multiple items are perfectly linearly dependent
+    + You can exactly reproduce the score of a variable using other variable(s)
+* It becomes difficult to determine the unique contribution of the collinear items to the factor model
+
+We can check for multicollinearity using the **determinant**
+
+* Determinant between .00001 and 1 is good
+* Many items -> smaller determinants
+
+## Proportion of Common Variance
+
+Kaiser-Meyer-Olkin (KMO) statistic is an estimate of the proportion of common variance among items
+
+* Higher proportion -> more suitable for factor analysis
+
+Value | Interpretation
+------|----------------
+0.00 to 0.49 | unacceptable
+0.50 to 0.59 | miserable
+0.60 to 0.69 | mediocre
+0.70 to 0.79 | middling
+0.80 to 0.89 | meritorious
+0.90 to 1.00 | marvelous
+
+# Confirmatory Factor Analysis
+
+## One word about CFA
+
+If your theory implies a one-factor solution, EFA with ML estimation is the same as CFA
+
+* You can use the Chi-square test to test if your model fits the data well
+    + It is very sensitive to sample size, so will reject good models
+* Alternatively, compute RMSEA - a model fit index that accounts for sample size
+    + Values < .08 are good
+    
+$$
+RMSEA = \frac{\sqrt{\chi^2 - df}}{\sqrt{(n - 1)*df}}
+$$
+## Latent Variable Reliability {.smaller}
+
+Recall that Cronbach's alpha assumes that each items is equally important
+
+* I.e., all factor loadings should be identical
+* Factor analysis tests that assumption
+* Obviously, it is rarely true
+
+We can compute latent variable reliability, allowing for different factor loadings!
+
+* This is called McDonald's Omega (or composite reliability)
+
+$$
+\omega = \frac{SSL}{SSL+SSR} = \frac{\text{Sum of Squared Loadings}}{SSL + \text{Sum of  Squared Residuals}}
+$$
+
+Calculate SSL as: $SSL = (\sum_{j=0}^k L_{1,k})^2$ (first sum loadings, then square sum)
+
+Calculate SSR as: $SSR = 1-\sum_{j=0}^k L_{1,k}^2$ (first square loadings, then sum)
+
+
+
+# Scale Scores
+
+## Scale Scores
+
+You've previously learned about:
+
+**Sum scores**
+
+* $X = \sum_{j=1}^k x_j$
+* $X = 1*x_1 + 1*x_2 + \ldots + 1*x_k$
+
+**Mean scores**
+
+* $X = \frac{\sum_{j=1}^k x_j}{k}$
+* $X = (1*x_1 + 1*x_2 + \ldots + 1*x_k)/k$
+
+In both of these approaches, all items contribute equally
+
+## PCA Scores
+
+For each component:
+
+* Multiply standardized item scores with factor loadings for that component
+* Divide resulting variable by Eigenvalue of that component
+
+<!-- as.matrix(scale(data)) %*% t(pracma::pinv(loadings))) -->
+
+
+# How to analyse these scores: CTT
+
+* Or: Sumscore =  <span style="color:#FF0000">1</span> \*X1 \+  <span style="color:#FF0000">1</span> \*X2 \+  <span style="color:#FF0000">1</span> \*X3….\+  <span style="color:#FF0000">1</span> \*X14  (Unweighted sum\!)
+* <span style="color:#FF0000"></span>  <span style="color:#FF0000"> All variables have the same weight\!\!:</span>
+  * __Online behavior __ =  <span style="color:#FF0000">w</span> .X1 \+  <span style="color:#FF0000">w</span>  <span style="color:#FF0000">.</span> X2 \+ … \+  <span style="color:#FF0000">w</span> .X14
+    * We have to calculate the sumscore  _separately_  _ _  _for_  _ _  _every_  _ _  _dimension_
+    * That’s why, when using classical test theory (and calculating an unweighted sumscore), we don’t need to know what items belong to which dimension
+    * This is different in PCA: we give an item a different weight for every dimension
+
+# PCA: components
+
+* Not calculating a sum score, but trying to find patterns in the data
+  * Based on these patterns, we find components
+  * Components = dimensions of the construct
+  * To which dimensions does an item belong?  higher weight for this dimension\!
+* A  <span style="color:#FF0000">component</span>  is thus representative for a subconstruct (a dimension)
+  * e.g., NEO big five  the 5 personality traits
+
+# PCA: component scores & component loadings
+
+  * Component \#1 =  <span style="color:#EA2D00">w</span>  <span style="color:#EA2D00">1</span> .XZ1 \+  <span style="color:#EA2D00">w</span>  <span style="color:#EA2D00">2</span>  <span style="color:#EA2D00">.</span> XZ2 \+ … \+  <span style="color:#EA2D00">w</span>  <span style="color:#EA2D00">14</span> .XZ14 		(XZ  Standardized variables\!)
+  * _	(For example: _  <span style="color:#EA2D00"> _0_ </span>  <span style="color:#EA2D00"> _._ </span>  _XZ \+ _  <span style="color:#EA2D00"> _0.5_ </span>  <span style="color:#EA2D00"> _._ </span>  _XZ \+ … \+ _  <span style="color:#EA2D00"> _0.5_ </span>  _._  _XZ14)_
+  * Component \#2 =  <span style="color:#EA2D00">w2</span>  <span style="color:#EA2D00">1</span> .XZ1 \+  <span style="color:#EA2D00">w2</span>  <span style="color:#EA2D00">2</span>  <span style="color:#EA2D00">.</span> XZ2 \+ … \+  <span style="color:#EA2D00">w2</span>  <span style="color:#EA2D00">14</span> .XZ14
+  * _	(For example: _  <span style="color:#EA2D00"> _0.8_ </span>  <span style="color:#EA2D00"> _._ </span>  _XZ \+ _  <span style="color:#EA2D00"> _0.1_ </span>  <span style="color:#EA2D00"> _._ </span>  _XZ \+ … \+ _  <span style="color:#EA2D00"> _0.1_ </span>  _._  _XZ14)_
+* PCA calculates for every item a weight w1, w2, w3 , w4 , …, w14 for every component (we call this a component loading)
+  * The loading is a correlation between component and item
+  * Indicates which dimension an item measures: if item 1 belongs to component/dimension1, then this item will get a high weight for this component and a very low weight for the second component/dimension
+
+  * Component\#1 =  <span style="color:#EA2D00">w</span>  <span style="color:#EA2D00">1</span> .XZ1 \+  <span style="color:#EA2D00">w</span>  <span style="color:#EA2D00">2</span>  <span style="color:#EA2D00">.</span> XZ2 \+ … \+  <span style="color:#EA2D00">w</span>  <span style="color:#EA2D00">14</span> .XZ14 		(XZ  Standardized variables\!)
+  * _	(For example: _  <span style="color:#EA2D00"> _0_ </span>  <span style="color:#EA2D00"> _._ </span>  _XZ \+ _  <span style="color:#EA2D00"> _0.5_ </span>  <span style="color:#EA2D00"> _._ </span>  _XZ \+ … \+ _  <span style="color:#EA2D00"> _0.5_ </span>  _._  _XZ14)_
+  * Component\#2 =  <span style="color:#EA2D00">w2</span>  <span style="color:#EA2D00">1</span> .XZ1 \+  <span style="color:#EA2D00">w2</span>  <span style="color:#EA2D00">2</span>  <span style="color:#EA2D00">.</span> XZ2 \+ … \+  <span style="color:#EA2D00">w2</span>  <span style="color:#EA2D00">14</span> .XZ14
+  * _	(For example: _  <span style="color:#EA2D00"> _0.8_ </span>  <span style="color:#EA2D00"> _._ </span>  _XZ \+ _  <span style="color:#EA2D00"> _0.1_ </span>  <span style="color:#EA2D00"> _._ </span>  _XZ \+ … \+ _  <span style="color:#EA2D00"> _0.1_ </span>  _._  _XZ14)_
+  * We can calculate component scores for every respondent: a score on C1 and score on C2
+  * _The _  _answers_  _ on _  _the_  _ items (XZ1, XZ2, etc..) are _  _weighted_  _ _  _based_  _ on _  _the_  _ component _  _loadings_  _. _  _By_  _ _  _doing_  _ _  _so_  _, items _  _that_  _ _  _measure_  _ _  _dimension_  _ 1 (component 1) _  _contribute_  _ _  _the_  _ most _  _to_  _ _  _the_  _ _  _calculation_  _ of _  _the_  _ component score _  _for_  _ _  _the_  _ first _  _dimension_  _. _
+
+## How does this work? What does SPSS do??
+
+  * Component\#1 =  <span style="color:#FF0000">w</span>  <span style="color:#FF0000">1</span> .XZ1 \+  <span style="color:#FF0000">w</span>  <span style="color:#FF0000">2</span> .XZ2 \+ … \+  <span style="color:#FF0000">w</span>  <span style="color:#FF0000">14</span> .XZ14
+  * _	(For example: _  <span style="color:#FF0000"> _0_ </span>  _._  _XZ1 \+ _  <span style="color:#FF0000"> _0.5_ </span>  _._  _XZ2 \+ … \+ _  <span style="color:#FF0000"> _0.5_ </span>  <span style="color:#FF0000"> _._ </span>  _XZ14)_
+* Finding the  <span style="color:#FF0000">weighted</span>  sum scores with weights  <span style="color:#FF0000">w</span>  <span style="color:#FF0000">1</span>  <span style="color:#FF0000">, w</span>  <span style="color:#FF0000">2</span>  <span style="color:#FF0000">, … w</span>  <span style="color:#FF0000">14</span> , such that we can explain as much variance as possible
+* Variance = information\!
+* This score is then “principal component\#1”
+
+
+# Steps for Data Reduction
+
+## Step 1: Choose Model
+
+PCA, EFA or CFA?
+
+* Which best fits your theory and goals?
+* Which estimator?
+    + PCA -> PCA, EFA -> recommend ML
+
+## Step 2: Check Assumptions
+
+* Sample size large enough? $n > 150$, preferably $300+$
+* Scatterplots to check linear relationship between items and bivariate normal distribution
+* Report item descriptive statistics and correlation matrix
+
+For EFA:
+
+* Inspect determinant, $.00001 < det < 1$
+* Inspect KMO, > .60
+
+## Step 3: Determine number of factors
+
+* __Theory__ (particularly for EFA and CFA)
+* Kaiser’s criterion (PCA and maybe EFA)
+* Scree plot (PCA and maybe EFA)
+* Parallel analysis (PCA and maybe EFA)
+* Interpretability (see next step)
+
+## Step 3: Check fit
+
+* How much variance does each factor explain in total?
+* How well do the factors explain the variance of items?
+    + Communalities
+* Residual correlations
+    + If many residual correlations are large (e.g., > .05), there might be a problem with those items, or it might be better to add factors
+* Optionally conduct chi-square test of model fit
+* Optionally compute RMSEA as objective fit index
+* Optionally compute BIC as relative fit index to compare multiple models
+
+## Step 4: Interpret loadings
+
+* Can you name the factors based on pattern of loadings?
+    + Ignore absolute loadings < .30
+* Consider rotation to improve interpretability
+    + Orthogonal if you want uncorrelated factors, e.g. to deal with multicollinearity
+    + Oblique if you want correlated factors, e.g. for psychological constructs
+* (If using oblique rotation): Report factors correlations
+
+## Step 5: Optional Use Scales
+
+* Compute latent variable reliability
+* Export factor scores

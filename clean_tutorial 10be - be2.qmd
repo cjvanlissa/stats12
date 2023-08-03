@@ -1,0 +1,304 @@
+# Lab 1: Introduction
+
+```{r, include = FALSE}
+source("R/booktem_setup.R")
+source("R/my_setup.R")
+```
+
+## Probability, Odds, and Logits
+
+We will start this session on logistic regression with some theoretical exercises. This way, you will learn how to work with probability, odds, and logits.
+ 
+The given probability is P = 0.36.
+
+What are the corresponding odds? `r fitb(0.563, num = T, tol = .01)`
+
+Please find the formula’s below:
+
+Goal | Function
+-----|----------
+Probability -> Odds | $odds = P/(1-P)$
+Odds -> Probability | $P = odds/(1+Odds)$
+Odds -> Logit | $logit = \ln(odds)$
+Logit -> Odds | $odds = e^{logit}$
+
+ 
+
+Again, the given probability is P = 0.36.
+
+What are the corresponding logits? `r fitb(-0.575, num = T, tol = .01)`
+
+The given logit is – 2.7.
+
+What are the corresponding odds? `r fitb(0.067, num = T, tol = .01)`
+
+
+Again, the given logit is – 2.7. `r fitb(0.063, num = T, tol = .01)`
+
+
+
+Discuss with your group mates when and why we should carry out logistic regression analysis.
+
+`r hide("Explanation")`
+
+We carry out logistic regression analysis when we want to carry out regression analysis and we have a dichotomous outcome variable (i.e., a dependent variable with two answer categories). In that case we cannot use linear regression because several of the assumptions of linear regression are violated.
+`r unhide()` 
+
+In a study concerning the smoking behavior amongst adolescents, a logistic regression analysis is conducted to check the effect of the image of smoking (Image) on smoking behavior (Smoking).
+
+Image: to what degree the young adult thinks smoking is perceived as “cool”.
+The variable image is measured on a scale from 10 to 30, in which higher scores indicate that smoking is perceived as cooler.
+
+Smoking: whether or not the adolescent smokes.
+
+* 0 = the adolescent is a non-smoker
+* 1 = the adolescent is a smoker
+ 
+
+Below you can find part of the output the researchers retrieved.
+
+![](images/Figure 5-2.png)
+
+First, write down the estimated regression model.
+
+`r hide("Answer")`
+
+
+$Logit(Smoking = 1) = -5.65 + 0.28*Image$
+ 
+`r unhide()`
+
+What is the probability that an adolescent with a score of 15 on image smokes? `r fitb(0.33, num = T, tol = .01)`
+ 
+Take a look at the regression coefficient.
+
+![](images/Figure 5-1-1.png)
+
+Imagine that one's score on Image will increase from 15 to 16.
+
+To what degree will the logit and odds change?
+
+And what can you conclude about the increase in probability?
+
+
+
+`r hide("Answer")`
+The logit increases with 0.284. So −1.387+0.284=−1.103
+
+The odds increase with a factor 1.328. So, the odds become 0.25×1.328=0.332
+
+By just looking at the output, it is unclear what *exactly* will happen with the probability. We DO know that the probability will increase because the logits and the odds increase.
+
+If we would calculate the probability by hand, we would see that the probability increases with 0.05.
+
+`r unhide()`
+
+As you can see, the logit follows a linear function, the odds follow an exponential function, and probability follows a logistic function (perhaps less clear from the example but see the graphs below for an illustration). It is nice to work with a linear model (i.e., work with the logits), but from an interpretation point of view odds and probabilities are nicer to work with.
+
+
+![](images/Figure 7-1.png)
+
+
+## Logistic Regression
+
+Today we will study whether the probability to pass a Statistics course depends on exam fear and the math grade obtained in high school (prior math ability).
+
+Open LAS BE LR.sav.
+
+In the table below you find the variables included in this fictional data set.
+
+
+We want to study the following research question:
+
+Does the probability of passing the statistics exam depend on exam stress and math ability?
+
+To answer this question, we first need to dichotomize the dependent variable. 
+This is an unusual step, because dichotomizing variables loses information!
+Still, for the purpose of the present exercise, we will do so.
+We will create the new dependent variable Passed (0 = fail, 1 = pass), where a 5.5 or higher counts as a pass. Use the following steps:
+
+Navigate to Transform → Recode into different variables.
+Select GradeStats as input variable and use Passed as the name for the new recoded variable. Do not forget to click on CHANGE.
+Click on Old and new values and specify the recoding in such a way that all grades of 5.5 or higher will get the new value 1 and all grades lower than 5.5 (i.e., all other grades) the value 0.
+Paste and run the syntax.
+Go to variable view and specify the value labels.
+ 
+
+Obtain the frequency distribution for Passed (via Analyze --> Descriptive Statistics --> Frequencies).
+
+What percentage of students passed? `r fitb(82.2, num = T, tol = .2)`%
+
+
+We will use logistic regression to study the effect of exam stress and math ability on the probability to pass. Take the following steps:
+
+Navigate to Analyze --> Regression --> Binary logistic regression
+Select Passed as dependent variable and ExamStress and Math as independent variables (in SPSS called “covariates”).
+Paste and run the syntax.
+ 
+
+
+Inspect the output corresponding to Block 1. Take a look at the table “Variables in the Equation”.
+
+What would be good description of the effects on the sample level? (i.e., what the effect of ExamStress and Math on the probability to pass looks like).
+
+`r hide("Answer")`
+Turns out Exam Stress has a negative effect on the probability to pass (controlled for Math grade), and Math a positive effect (controlled for Exam Stress). 
+ 
+`r unhide()`
+
+What is the value of the regression coefficient for the variable Exam Stress? `r fitb(-0.025, num = T, tol =0.005)`
+ 
+
+
+Give a detailed interpretation of this number.
+
+`r hide("Answer")`
+
+If we would increase one unit in Exam Stress the logits to pass the exam will decrease with 0.025, while keeping the variable Math constant.
+ 
+`r unhide()`
+
+True or false: The independent variables Math and Exam Stress together have a significant effect on the probability to pass. `r torf(TRUE)`
+
+`r hide("Explanation")`
+
+When we inspect the model test, we see that, together, Exam Stress and Math grade have a significant effect on the probability to pass, χ2(2) = 81.043, p < .001.
+`r unhide()` 
+
+Second, carry out the significance tests for the individual predictors as well.
+
+True or false: There is a significant effect of Math on the probability to pass, controlled for Exam stress. `r torf(TRUE)`
+
+True or false: There is a significant effect of Exam stress on the probability to pass, controlled for Math. `r torf(FALSE)`
+
+`r hide("Explanation")`
+
+When we inspect the separate regression coefficients together, we see that:
+
+Controlled for Exam stress, Math grade has a significant effect on the probability to pass, χ2(1)=54.500, p<.001.
+Controlled for Math grade, Exam stress has no significant effect on the probability to pass, χ2(1)=0.040, p=.841.
+ 
+`r unhide()`
+
+## Logistic Regression with Categorical Predictor
+
+Now, we will carry out a logistic regression analysis to study whether the probability to pass can be predicted from the amount of preparation (Preparation), controlled for prior math ability (Math).
+
+But... the variable Preparation is a nominal (categorical) variable. Use dummy coding to include it in the model. The variable Preparation has three categories. Create all three dummy variables!
+
+Take the following approach to carry out the analysis.
+
+Navigate to Analyze --> Regression --> Binary Logistic
+
+Select Math as covariate.
+
+Select the dummies for Preparation as covariates. At this stage, use “only reading the book” as the reference group.
+
+Paste and run the syntax.
+ 
+
+Take a look at the table Variables in the Equation.
+
+
+Inspect the estimated regression coefficients. Consider the results on the sample level, ignoring inferential statistics for now.
+
+Which group has the highest estimated probability to pass? `r mcq(c(answer = "Students who read the book and did the exercises.", "Student who only read the book.", "Students who only did the exercises.")[sample.int(3)])` 
+ 
+
+Which group has the lowest estimated probability to pass (controlled for math ability)? `r mcq(c(answer =  "Student who only read the book.", "Students who read the book and did the exercises.", "Students who only did the exercises.")[sample.int(3)])` 
+
+Write down the full model equation, filling in the values of coefficients. Then check your answer.
+
+`r hide("Answer")`
+$logit_{passed} = -5.833 + .300*D_{exercises} + .946*D_{both} + .999 * Math$
+
+
+
+`r unhide()`
+ 
+Controlled for Math Grade, what is the difference in predicted odds between people who only read the book and people who read the book and made the exercises? `r fitb(2.576, num = T, tol = .01)`
+
+
+`r hide("Explanation")`
+Take the exponent of the regression coefficient for the dummy for people who read the book and made the exercises (see table).
+`r unhide()`
+ 
+
+By hand, calculate the probability that the third person in the file (respID=3) passes the exam. `r fitb(0.752, num = T, tol = .01)`
+ 
+
+Imagine that you do not know whether this person passed the exam or not.
+
+True or false: Based on your answer in the previous step and using a decision threshold of .5, you would predict this student to pass. `r torf(TRUE)`
+
+
+SPSS can easily calculate the probability to pass. 
+
+Either use the visual interface: 
+
+Click on the SAVE button in the menu for logistic regression.
+
+Select Probabilities under the header Predicted Values.
+
+Click on continue.
+
+Or add this line of code to your model:
+
+```
+  /SAVE=PRED
+```
+
+SPSS adds a new variable to the data file, which gives the predicted probability for each person. Check whether you calculated the predicted probability for person 3 correctly.
+
+ 
+
+Imagine that we would have used this model to predict the probability to pass for the students in this sample before they even made the exam. Use a decision threshold of .5 to classify students as those likely to pass vs fail. 
+
+Out of all students that were classified as "pass", which proportion actually failed? `r fitb(0.141, num = T, tol = .01)`
+
+`r hide("Explanation")`
+Of the 370 students who were predicted to pass, 52 failed the exam (.141). As you can see, the model is not completely flawless in making predictions.
+ 
+`r unhide()`
+
+What is worse in your opinion? Incorrectly predicting that students will pass (when they end up failing), or incorrectly predicting that students will fail (when they end up passing)? Why?
+
+If you chose a different decision criteria to predict passing - say .7, what would happen to the proportion of students that were classified as "pass", but actually failed? `r mcq(c(answer = "gets smaller", "gets bigger", "stays the same", "can't say")[sample.int(4)])`
+
+
+## Hierarchical Logistic Regression
+
+In this assignment we will compare the following two models against each other.
+
+* Model1: $Logit(Pass) = b0+b1∗Math$
+* Model2: $Logit(Pass) = b0+b1∗Math+b2∗ExamStress+b3∗Evaluation$
+
+Later on, we want to carry out a model comparison test to check whether the larger model predicts the probability of passing the exam better than the smaller model.
+
+What would be the regression df for the model comparison test, in which we compare the larger model 2 to the smaller model 1? `r fitb(2, num = T)`
+
+Now we will carry out the model comparison test. Take the following steps.
+
+Navigate to Analyze -> Regression -> Binary Logistic
+
+Select Math as predictor (covariates).
+
+Click on Next (upper right); we can now indicate which block of predictors we like to add in addition to the variables added in the first model.
+
+Enter ExamStress and Evaluation as predictors (covariates).
+
+Paste and run the syntax.
+ 
+
+Inspect the output. SPSS organizes the output in three blocks. The results in Block 0 refer to the null model without any predictors. Note that this null model also exists when you use the "Linear Regression" interface, but it's not featured in the output.
+
+Block 1 refers to the results of Model 1 and Block to the results of Model 2.
+ 
+
+Take a look at the results of the model comparison test. 
+
+What test statistic is used to compare nested logistic regression models? `r mcq(c(answer = "Chi squared", "F", "t", "Z")[sample.int(4)])`
+
+What is the value of the appropriate test statistic for comparing models 1 and 2? `r fitb(1.297, num = T, tol = .01)`
+
+True or false: Adding predictors ExamStress and Evaluation lead to significantly better predictions, compared to a model with only high school math grade as predictor. `r torf(FALSE)`

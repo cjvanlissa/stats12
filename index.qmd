@@ -18,9 +18,19 @@ Communication about the course occurs through Canvas (Login with your student ID
 
 The **course schedule** is available on Osiris. For an overview of the content, see below:
 
-```{r, results = "asis", echo = FALSE}
+```{r}
+#| results = "asis",
+#| echo = FALSE,
+#| cache = FALSE
 schedule <- read.csv("schedule.csv")
-library(DT)
+schedule$Date <- as.Date(paste(2023, schedule$Week, 1, sep="-"), "%Y-%U-%u")
+addthis <- c(0:5)
+names(addthis) <- c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday")
+schedule$Date <- schedule$Date+addthis[schedule$Day]
+schedule$Date <- format(schedule$Date, format = "%d-%m-%Y")
+schedule <- schedule[!is.na(schedule$Week), c("Week", "Activity", "Date", "Topic")]
+
+suppressWarnings(library(DT))
 # library(lubridate)
 # mdy(isoweek(4))
 # lubridate::isoweek(as.Date("13-09-2021", format = "%d-%m-%Y"))
@@ -29,18 +39,28 @@ library(DT)
 DT::datatable(schedule[order(schedule$Week, decreasing = FALSE), ], rownames = FALSE, options = list(pageLength = nrow(schedule)))
 ```
 
-## This GitBook
+## Using this GitBook
 
 **You do not need a book for this course!** 
 
-All essential information is contained within this GitBook:
+All essential information is contained within this GitBook. To ensure that you always have access to the GitBook, it is recommended that you download it to your local computer as follows:
 
-* A summary of each week's material
-* YouTube lectures by me
-* Additional YouTube tutorials not by me
-* Formative tests to test how prepared you are for the final exam
-* Tutorial exercises for the lab session
+1. Go to <https://github.com/cjvanlissa/stats12>
+2. Click the green Code button
+3. Select "Download ZIP" (see figure below)
+4. Save the ZIP archive to your drive
+5. Right-click the downloaded file, and select "Extract here" (or similar option, depending on your operating system)
+6. You should now have a folder with the contents of the book.
+7. Inside this folder is a shortcut titled "Launch book". Double-clicking this should launch the book in your browser.
+8. The "data" folder contains all SPSS datasets you need for the course.
+9. The "pdfs" folder contains all PDF files you need for the course.
 
+![](images/downloadgitbook.png)
+<!-- * A summary of each week's material -->
+<!-- * YouTube lectures created for this course -->
+<!-- * Links to external YouTube tutorials -->
+<!-- * Formative tests to test how prepared you are for the final exam -->
+<!-- * Tutorial exercises for the lab session -->
 
 
 ## Software {#sec-software}

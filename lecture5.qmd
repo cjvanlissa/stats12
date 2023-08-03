@@ -2,7 +2,9 @@
 title: "Lecture 5 - General Linear Model (GLM) I"
 author:   "Caspar J. van Lissa"
 date:     "`r format(Sys.Date(), '%d %b %Y')`"
-format: revealjs
+format: 
+  revealjs:
+    self-contained: true
 server: shiny
 ---
 
@@ -326,6 +328,8 @@ $$
 
 * $df$: n - p, where p is the number of parameters (2: intercept & slope)
 
+## Visualization
+
 ```{r, out.width="500px", out.height="375px"}
 knitr::include_graphics("./images/2sidedtest.png")
 ```
@@ -391,13 +395,13 @@ Dictionary definition: "something that you accept as true without question or pr
 
 ## Assumptions of linear regression
 
-* Model is correctly specified, which includes
+1. Model is correctly specified, which includes
     + Linearity of relationship between X and Y
     + Normality of residuals
     + Direction of causality (if you want to interpret your model causally)
-* Homoscedasticity
+1. Homoscedasticity
     + Residuals are equally distributed for all values of the predictor
-* Independence of observations
+1. Independence of observations
 
 ## Linearity
 
