@@ -1,0 +1,1549 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.427">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="description" content="Book Description">
+<title>Statistics 1 and 2 - 18&nbsp; Dimension Reduction</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./confint.html" rel="next">
+<link href="./reliability_validity.html" rel="prev">
+<link href="./images/logos/favicon.png" rel="icon" type="image/png">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark"><script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
+<link rel="stylesheet" href="include/booktem.css">
+<link rel="stylesheet" href="include/webex.css">
+<link rel="stylesheet" href="include/glossary.css">
+<link rel="stylesheet" href="include/style.css">
+<link rel="stylesheet" href="c:/gitbook_stats12/include/webex.css">
+</head>
+<body class="nav-sidebar floating">
+
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./data_reduction.html"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Dimension Reduction</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Statistics 1 and 2</a> 
+        <div class="sidebar-tools-main">
+    <div class="dropdown">
+      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Share"><i class="bi bi-share"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+<li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=%7Curl%7C">
+              <i class="bi bi-bi-twitter pe-1"></i>
+            Twitter
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=%7Curl%7C">
+              <i class="bi bi-bi-facebook pe-1"></i>
+            Facebook
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=%7Curl%7C">
+              <i class="bi bi-bi-linkedin pe-1"></i>
+            LinkedIn
+            </a>
+          </li>
+      </ul>
+</div>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Overview</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to Statistics</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./probability.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Probability Distributions</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./samplingdistribution.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">The Sampling Distribution</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./testing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Hypothesis Testing</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glm1_regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">GLM-I: Linear Regression</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glm2_sum_squares.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">GLM-II: Sums of Squares</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glm3binary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">GLM-III: Binary Predictors</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glm4anova.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">GLM-IV: ANOVA</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glm5multiple.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">GLM-V: Multiple regression</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glm6nested.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">GLM-VI: Nested models</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glm7interaction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">GLM-VII: Interaction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./logistic.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">GLM VIII - Logistic Regression</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glm_contrasts.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">GLM: Contrasts</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./factorial.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">GLM: Factorial ANOVA</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ancova.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">GLM: ANCOVA</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./rmanova.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">GLM: Repeated Measures ANOVA</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./reliability_validity.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Reliability and Validity</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data_reduction.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Dimension Reduction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./confint.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">BE2 - Confidence Intervals</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data for Portfolio</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./probability_tables.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Z-table</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+    </ul>
+</div>
+</nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+<li><a href="#principal-components-analysis-pca" id="toc-principal-components-analysis-pca" class="nav-link active" data-scroll-target="#principal-components-analysis-pca"><span class="header-section-number">18.1</span> Principal Components Analysis (PCA)</a></li>
+  <li><a href="#exploratory-factor-analysis-efa" id="toc-exploratory-factor-analysis-efa" class="nav-link" data-scroll-target="#exploratory-factor-analysis-efa"><span class="header-section-number">18.2</span> Exploratory Factor Analysis (EFA)</a></li>
+  <li><a href="#confirmatory-factor-analysis-cfa" id="toc-confirmatory-factor-analysis-cfa" class="nav-link" data-scroll-target="#confirmatory-factor-analysis-cfa"><span class="header-section-number">18.3</span> Confirmatory Factor Analysis (CFA)</a></li>
+  <li><a href="#comparing-method" id="toc-comparing-method" class="nav-link" data-scroll-target="#comparing-method"><span class="header-section-number">18.4</span> Comparing Method</a></li>
+  <li><a href="#principal-components-analysis" id="toc-principal-components-analysis" class="nav-link" data-scroll-target="#principal-components-analysis"><span class="header-section-number">18.5</span> Principal Components Analysis</a></li>
+  <li>
+<a href="#exploratory-factor-analysis" id="toc-exploratory-factor-analysis" class="nav-link" data-scroll-target="#exploratory-factor-analysis"><span class="header-section-number">18.6</span> Exploratory Factor Analysis</a>
+  <ul class="collapse">
+<li><a href="#selecting-the-number-of-factors" id="toc-selecting-the-number-of-factors" class="nav-link" data-scroll-target="#selecting-the-number-of-factors"><span class="header-section-number">18.6.1</span> Selecting the Number of Factors</a></li>
+  </ul>
+</li>
+  <li><a href="#efa-assumption-checks" id="toc-efa-assumption-checks" class="nav-link" data-scroll-target="#efa-assumption-checks"><span class="header-section-number">18.7</span> EFA Assumption Checks</a></li>
+  <li><a href="#rotating-factor-loadings" id="toc-rotating-factor-loadings" class="nav-link" data-scroll-target="#rotating-factor-loadings"><span class="header-section-number">18.8</span> Rotating Factor Loadings</a></li>
+  <li><a href="#estimating-factor-scores" id="toc-estimating-factor-scores" class="nav-link" data-scroll-target="#estimating-factor-scores"><span class="header-section-number">18.9</span> Estimating Factor Scores</a></li>
+  <li><a href="#lecture" id="toc-lecture" class="nav-link" data-scroll-target="#lecture"><span class="header-section-number">19</span> Lecture</a></li>
+  <li><a href="#formative-test" id="toc-formative-test" class="nav-link" data-scroll-target="#formative-test"><span class="header-section-number">20</span> Formative Test</a></li>
+  <li>
+<a href="#tutorial" id="toc-tutorial" class="nav-link" data-scroll-target="#tutorial"><span class="header-section-number">21</span> Tutorial</a>
+  <ul class="collapse">
+<li><a href="#pca" id="toc-pca" class="nav-link" data-scroll-target="#pca"><span class="header-section-number">21.1</span> PCA</a></li>
+  <li><a href="#exploratory-factor-analysis-1" id="toc-exploratory-factor-analysis-1" class="nav-link" data-scroll-target="#exploratory-factor-analysis-1"><span class="header-section-number">21.2</span> Exploratory Factor Analysis</a></li>
+  <li>
+<a href="#exploratory-factor-analysis-ii" id="toc-exploratory-factor-analysis-ii" class="nav-link" data-scroll-target="#exploratory-factor-analysis-ii"><span class="header-section-number">21.3</span> Exploratory Factor Analysis II</a>
+  <ul class="collapse">
+<li><a href="#model-selection-using-the-bic" id="toc-model-selection-using-the-bic" class="nav-link" data-scroll-target="#model-selection-using-the-bic"><span class="header-section-number">21.3.1</span> Model Selection using the BIC</a></li>
+  <li><a href="#latent-variable-reliability" id="toc-latent-variable-reliability" class="nav-link" data-scroll-target="#latent-variable-reliability"><span class="header-section-number">21.3.2</span> Latent Variable Reliability</a></li>
+  <li><a href="#model-fit" id="toc-model-fit" class="nav-link" data-scroll-target="#model-fit"><span class="header-section-number">21.3.3</span> Model Fit</a></li>
+  </ul>
+</li>
+  </ul>
+</li>
+  </ul></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<h1 class="title"><span id="sec-factoranalysis" class="quarto-section-identifier"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Dimension Reduction</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header><p>In the previous section, we explored how multiple items can be used to measure a single underlying construct. Today, we will delve into three powerful techniques for reducing multiple items to a smaller number of variables: Principal Components Analysis (PCA), Exploratory Factor Analysis (EFA), and a little bit of Confirmatory Factor Analysis (CFA). Our focus will be on PCA and EFA, as they are particularly useful for understanding underlying structures in social science research. This section will primarily discuss Principal Components Analysis (PCA) and Exploratory Factor Analysis (EFA). These techniques help us explore relationships among items and identify latent constructs that explain the observed patterns in data. They serve as effective tools for dimensionality reduction, enabling us to summarize complex datasets with a smaller set of variables. While we do introduce CFA and reflect on its relationship to EFA, a more in-depth discussion of CFA is beyond the scope of this course.</p>
+<p>Throughout this lecture, assume that we have k items and n participants. Let’s now dive into the details of different data reduction methods.</p>
+<section id="principal-components-analysis-pca" class="level2" data-number="18.1"><h2 data-number="18.1" class="anchored" data-anchor-id="principal-components-analysis-pca">
+<span class="header-section-number">18.1</span> Principal Components Analysis (PCA)</h2>
+<p>PCA is a data rotation technique designed to transform original items into uncorrelated components. These components represent linear combinations of the original items. The primary goal of PCA is dimension reduction, where a small number of components are used to explain most of the variance in the items. This allows us to represent the variance in the items more efficiently. For instance, if ten items measure extraversion, and one component explains most of the variance, we can retain that one component and discard the remaining nine.</p>
+</section><section id="exploratory-factor-analysis-efa" class="level2" data-number="18.2"><h2 data-number="18.2" class="anchored" data-anchor-id="exploratory-factor-analysis-efa">
+<span class="header-section-number">18.2</span> Exploratory Factor Analysis (EFA)</h2>
+<p>Unlike PCA, EFA is a latent variable method that assumes that latent variables (factors) cause people’s responses to the items. For example, extraversion may cause individuals to respond positively to questions about partying and socializing. EFA models the item covariance matrix as a function of a fixed number of factors. It is called “exploratory” because all items are allowed to load on (contribute to) all factors, without a predefined structure. In practice, well-constructed questionnaires will exhibit high loadings of items on one factor and low loadings on others.</p>
+</section><section id="confirmatory-factor-analysis-cfa" class="level2" data-number="18.3"><h2 data-number="18.3" class="anchored" data-anchor-id="confirmatory-factor-analysis-cfa">
+<span class="header-section-number">18.3</span> Confirmatory Factor Analysis (CFA)</h2>
+<p>Confirmatory Factor Analysis (CFA) tests a theory about the specific associations between latent variables and observed indicators. Unlike Principal Components Analysis (PCA) and Exploratory Factor Analysis (EFA), which are exploratory, CFA is a confirmatory approach that tests how well a hypothesized measurement model fits the data. In CFA, researchers specify a theoretical model that defines the relationships between observed variables and latent constructs (factors). These latent constructs are not directly measured but are assumed to explain the correlations among the observed variables. The primary goal of CFA is to evaluate whether the data support the hypothesized model. By doing so, researchers can determine if their theoretical model fits the observed data well, providing evidence for the validity of the underlying construct and the measurement instrument. CFA is part of a family of statistical modeling techniques known as “Structural Equation Modeling” (SEM).</p>
+</section><section id="comparing-method" class="level2" data-number="18.4"><h2 data-number="18.4" class="anchored" data-anchor-id="comparing-method">
+<span class="header-section-number">18.4</span> Comparing Method</h2>
+<p>Purpose:</p>
+<ul>
+<li>PCA: Dimensionality reduction.</li>
+<li>EFA: Exploration of relationships among items and identification of latent constructs.</li>
+<li>CFA: Testing a predefined theory about which items relate to specific latent constructs.</li>
+</ul>
+<p>Assumption:</p>
+<ul>
+<li>PCA: Does not assume latent variables; dropping components assumes they are irrelevant or represent error variance.</li>
+<li>EFA: Assumes all items are caused by a smaller number of latent variables (factors).</li>
+<li>CFA: Assumes specific items are caused by specific latent variables.</li>
+</ul>
+<p>Interpretation:</p>
+<ul>
+<li>PCA: Components are mathematical constructs with no further meaning.</li>
+<li>EFA: Factors represent theoretical latent constructs.</li>
+<li>CFA: Factors represent known theoretical latent constructs.</li>
+</ul></section><section id="principal-components-analysis" class="level2" data-number="18.5"><h2 data-number="18.5" class="anchored" data-anchor-id="principal-components-analysis">
+<span class="header-section-number">18.5</span> Principal Components Analysis</h2>
+<p>PCA is a data rotation technique that aligns the largest amount of variance with the first component, the second-largest variance with the second component, and so on. These components are uncorrelated by definition, and they serve as linear combinations of the original items. The primary use of PCA is dimension reduction by retaining only components that explain a significant amount of variance, thus providing a lower-dimensional representation of the data.</p>
+<p>We can understand PCA in different ways. Firstly, as rotation of the data. PCA rotates the data so that the first component best reproduces the correlation matrix, and each subsequent component improves the reproduction. Secondly, we can understand PCA as a way to summarize k items using fewer than k components, without significant information loss (lossy compression of data).</p>
+<p>Selecting the Number of Components:</p>
+<p>Various strategies exist to determine the number of components to retain, including Kaiser’s criterion (Eigenvalue &gt; 1), Cattell’s scree plot (inflection point), and Horn’s Parallel Analysis (comparison with random data’s Eigenvalues). Additionally, theoretical knowledge about the underlying data can guide the choice of components.</p>
+<p>Interpreting PCA Loadings:</p>
+<p>Interpreting PCA loadings can be challenging, especially in cases where multiple components are correlated. Orthogonal rotation, such as Varimax, can be employed to simplify the pattern of loadings and improve interpretability. However, it is essential to remember that rotated loadings should not be directly interpreted as correlations between items and factors as in PCA.</p>
+</section><section id="exploratory-factor-analysis" class="level2" data-number="18.6"><h2 data-number="18.6" class="anchored" data-anchor-id="exploratory-factor-analysis">
+<span class="header-section-number">18.6</span> Exploratory Factor Analysis</h2>
+<p>EFA is a model-based approach that assumes the existence of latent variables that cause item responses. It is suitable when you expect clusters of items to be correlated (multicollinear) and seeks to explain correlations between items. EFA assumes that unexplained variance in the items can be attributed to measurement error. This aligns with test theory, where it is assumed that observed items measure latent constructs with error. EFA is particularly suitable when there is a theoretical basis for assuming the existence of latent variables, such as when developing a new questionnaire that has not been validated yet. However, if a theoretical model already exists, Confirmatory Factor Analysis (CFA) may be more appropriate.</p>
+<p>To conduct EFA, we estimate the unknown factor loadings. Two common estimation methods are Principal Axis Factoring (PAF) and Maximum Likelihood (ML). PAF is a default method in SPSS and is based on an iterative procedure involving matrix algebra. It provides a solution even when the model is complex or the data are non-normal. On the other hand, ML is the same estimator used for CFA and works well when the data are multivariate normal. However, ML may not perform well when the model is overly complex (which is not necessarily a bad thing). ML estimation also allows for a test of model fit, which is useful for evaluating the appropriateness of the chosen model.</p>
+<p>Factor loadings represent the correlations between each item and the extracted factors. They indicate the strength and direction of the relationship between the observed item and the underlying factor. Factor loadings range from -1 to +1, with values closer to 1 indicating a stronger relationship. In our example, we can see the factor loadings in a factor matrix, where each row corresponds to an item and each column corresponds to a factor. The factor loadings help us identify which items load more strongly on specific factors.</p>
+<p>We can compute Eigenvalues in EFA just as in PCA by taking the column sums of the squared loadings and indicate the amount of variance explained by each factor. Eigenvalues are always smaller than the initial eigenvalues obtained in Principal Component Analysis (PCA) because some variance is now attributed to error variance. Consequently, the sum of the Eigenvalues is also less than the number of indicators, and some Eigenvalues may even be negative.</p>
+<p>Similarly, communalities in EFA are always &lt; 1 because EFA assumes the existence of error variance.</p>
+<section id="selecting-the-number-of-factors" class="level3" data-number="18.6.1"><h3 data-number="18.6.1" class="anchored" data-anchor-id="selecting-the-number-of-factors">
+<span class="header-section-number">18.6.1</span> Selecting the Number of Factors</h3>
+<p>Determining the appropriate number of factors to extract is a critical step in EFA. Researchers often use eigenvalues as a cue to determine the number of factors to extract, similar to the Kaiser’s criterion and Scree plot used in PCA - but note that in EFA, this can be misleading as Eigenvalues now depend on the number of extracted factors. Also, by default, SPSS applies Kaiser’s criterion and the Scree plot to PCA Eigenvalues, even if you request EFA!</p>
+<p>An alternative criterion for determining the number of factors is using theoretical knowledge to guide the decision. For example, if emotions are believed to break down into positive and negative emotions, we may choose to extract two factors. Additionally, the chi-square test can be used to evaluate the appropriateness of different factor solutions and assist in selecting the best-fitting model. To directly compare models, one can compute the Bayesian Information Criterion (BIC) - a relative model fit index designed for comparing models, which balances model fit and complexity. It is computed from the chi square as follows:</p>
+<p><span class="math display">\[
+BIC = \chi^2 - df ∗ log(n)
+\]</span></p>
+</section></section><section id="efa-assumption-checks" class="level2" data-number="18.7"><h2 data-number="18.7" class="anchored" data-anchor-id="efa-assumption-checks">
+<span class="header-section-number">18.7</span> EFA Assumption Checks</h2>
+<p>Before conducting exploratory factor analysis (EFA), it is good practice to perform several assumption checks to ensure the validity and appropriateness of the analysis. One critical aspect to consider is multicollinearity. While factor analysis aims to identify clusters of items that are correlated, excessive multicollinearity can lead to issues. This occurs when multiple items are perfectly linearly dependent, meaning that one item’s score can be exactly reproduced using other variables. In such cases, it becomes difficult to discern the unique contribution of collinear items to the underlying factor model. To detect multicollinearity, researchers can examine the determinant, a value between 0 and 1. It has been argued that the determinant should be greater than 0.00001, which indicates multicollinearity is not too high.</p>
+<p>Another assumption check for EFA is the proportion of common variance among items. The Kaiser-Meyer-Olkin (KMO) statistic provides an estimate of this proportion. A higher KMO value indicates that more of the variance among items can be explained by common factors, making the data more suitable for factor analysis. Researchers can interpret the KMO value as follows:</p>
+<table class="table">
+<thead><tr class="header">
+<th>Value</th>
+<th>Interpretation</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>0.00 to 0.49</td>
+<td>unacceptable</td>
+</tr>
+<tr class="even">
+<td>0.50 to 0.59</td>
+<td>miserable</td>
+</tr>
+<tr class="odd">
+<td>0.60 to 0.69</td>
+<td>mediocre</td>
+</tr>
+<tr class="even">
+<td>0.70 to 0.79</td>
+<td>middling</td>
+</tr>
+<tr class="odd">
+<td>0.80 to 0.89</td>
+<td>meritorious</td>
+</tr>
+<tr class="even">
+<td>0.90 to 1.00</td>
+<td>marvelous</td>
+</tr>
+</tbody>
+</table></section><section id="rotating-factor-loadings" class="level2" data-number="18.8"><h2 data-number="18.8" class="anchored" data-anchor-id="rotating-factor-loadings">
+<span class="header-section-number">18.8</span> Rotating Factor Loadings</h2>
+<p>In factor analysis, we aim to interpret the underlying structure of observed variables. The pattern of factor loadings is crucial in this process, helping us identify items that load highly on specific factors and potentially naming those factors based on high-loading indicators. In a perfect world, factor loadings would be clear and straightforward, with each item loading highly on only one factor. However, real-life factor loadings are not always so clear-cut, making interpretation more challenging.</p>
+<p>To improve interpretability, we use rotation, which applies a linear transformation to the original factor loadings. Two main types of rotation are orthogonal and oblique rotation. Orthogonal rotation produces uncorrelated factors. The most common technique is VARIMAX rotation, which maximizes the variance of the squared loadings within each factor. Oblique rotation allows factors to correlate; the most common technique is oblimin rotation. In the social sciences, it is often sensible to allow factors to correlate (e.g., different personality dimensions are probably associated).</p>
+<p>One-Factor EFA and One-Factor CFA:</p>
+<p>Although this course is not about confirmatory factor analysis, it is nevertheless useful to know that a one-factor EFA model is identical to a one-factor CFA model. In other words, if our theory implies a one-factor model, we can use exploratory factor analysis (EFA) with maximum likelihood (ML) estimation to test that model. While EFA aims to identify underlying factors without any preconceived hypotheses about their association with items, CFA tests a hypothesized model - in this case, that one factor explains all item scores. CFA with ML estimation produces a chi-square test that can be used to assess model fit. Note, however, that this test can be sensitive to sample size and may reject good models. Researchers can also use the Root Mean Square Error of Approximation (RMSEA) as an alternative model fit index, where values below 0.08 indicate good fit. RMSEA is calculated from the chi square as:</p>
+<p><span class="math display">\[
+RMSEA = \frac{\sqrt{\chi^2 - df}}{\sqrt{(n - 1)*df}}
+\]</span></p>
+<p>Treating a one-factor EFA as CFA also allows us to estimate latent variable reliability. Recall that Cronbach’s alpha assumes that all items are equally important. This means that it assumes that all factor loadings are the same. Factor analysis tests this assumption. Especially when factor loadings differ, it may be useful to compute latent variable reliability instead, using McDonald’s Omega (or composite reliability). It allows for different factor loadings, making it more appropriate for cases where items have varying contributions to the latent variable. The formula for McDonald’s Omega is:</p>
+<p><span class="math display">\[
+\omega = \frac{SSL}{SSL+SSR} = \frac{\text{Sum of Squared Loadings}}{SSL + \text{Sum of  Squared Residuals}}
+\]</span></p>
+<p>Calculate SSL as: <span class="math inline">\(SSL = (\sum_{j=0}^k L_{1,k})^2\)</span> (first sum loadings, then square sum)</p>
+<p>Calculate SSR as: <span class="math inline">\(SSR = 1-\sum_{j=0}^k L_{1,k}^2\)</span> (first square loadings, then sum)</p>
+</section><section id="estimating-factor-scores" class="level2" data-number="18.9"><h2 data-number="18.9" class="anchored" data-anchor-id="estimating-factor-scores">
+<span class="header-section-number">18.9</span> Estimating Factor Scores</h2>
+<p>In many cases, researchers want to conduct further analyses using idividuals’ scores on components or latent variables. In previous sections, we learned about two common methods for obtaining scale scores from multiple items: sum scores and mean scores. In sum scores, we add up the responses from each item to create a total score for each individual. Similarly, in mean scores, we take the average of the responses from all items to obtain a score. In both cases, all items contribute equally to the final scale score. However, this approach assumes that all items are equally important, which might not always be the case. PCA and EFA both allow us to determine whether items are indeed equally important. We can also try to compute scale scores that take differences in item loadings into account.</p>
+<p>For PCA, computing such scores is straightforward; these are simply given by multiplying the loadings for one component with the observed item scores. Since this is not a latent variable technique, there is only one possible solution to this calculation. To compute a PCA score for a specific individual, we multiply their standardized item scores by the corresponding factor loadings and then sum the results. For instance, if an individual has standardized item scores of 1, 3, and 2 on items with factor loadings of 0.85, 0.80, and 0.14, respectively, their PCA score would be calculated as <span class="math inline">\((0.85 * 1 + 0.80 * 3 + 0.14 * 2) / (0.85^2 + 0.80^2 + 0.14^2) = 2.44\)</span>. This score represents the individual’s relative level on the component.</p>
+<p>Estimating latent variable scores in exploratory factor analysis (EFA) is more complex compared to PCA. Unlike PCA, which provides unique factor scores for each individual, EFA does not uniquely determined factor scores. An infinite number of latent variable datasets is consistent with the same EFA model. To estimate factor scores, researchers use methods like the regression method and the Bartlett method. The regression method involves ordinary least squares estimates and aims to maximize the multiple correlation between factor scores and common factors. However, these estimates are biased and the estimated factor scores correlate with one another and with the different latent variables. The Bartlett method produces factor scores that only correlate with their own latent variable but still correlate with estimated scores for other factors. Both methods thus have shortcomings. Some (see references below) have argued that it might be preferable to simply use mean scores instead of factor scores. In cases where factor loadings are approximately equal, this is probably fine.</p>
+<p>Further reading:</p>
+<p>Everitt, B. S., &amp; Howell, D. C. (2005). Encyclopedia of Statistics in Behavioral Science. DOI:10.1002/0470013192.bsa726 DiStefano, C., Zhu, M., &amp; Mindrila, D. (2009). Understanding and Using Factor Scores: Considerations for the Applied Researcher. DOI:10.7275/da8t-4g52</p>
+</section><section id="lecture" class="level1" data-number="19"><h1 data-number="19">
+<span class="header-section-number">19</span> Lecture</h1>
+</section><section id="formative-test" class="level1" data-number="20"><h1 data-number="20">
+<span class="header-section-number">20</span> Formative Test</h1>
+<p>A formative test helps you assess your progress in the course, and helps you address any blind spots in your understanding of the material. If you get a question wrong, you will receive a hint on how to improve your understanding of the material.</p>
+<p>Complete the formative test ideally after you’ve seen the lecture, but before the lecture meeting in which we can discuss any topics that need more attention</p>
+<div class="cell" data-layout-align="center">
+<div class="webex-check webex-box">
+<p><strong>Question 1</strong></p>
+Introversion is normally distributed with a mean of 50 and a standard deviation of 10. What is the probability that the mean introversion level of a randomly selected group of 16 people is smaller than 52? Round the answer to 3 decimal places.
+<div id="radio_WFOHHXSSYP" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_WFOHHXSSYP" value=""><span>0.345</span></label><label><input type="radio" autocomplete="off" name="radio_WFOHHXSSYP" value=""><span>0.045</span></label><label><input type="radio" autocomplete="off" name="radio_WFOHHXSSYP" value=""><span>0.655</span></label><label><input type="radio" autocomplete="off" name="radio_WFOHHXSSYP" value="answer"><span>0.788</span></label>
+</div>
+<p><strong>Question 2</strong></p>
+Variable X is not normally distributed in the population. Variable X has a population mean of 30 and a population standard deviation of 6. A random sample of N = 36 scores is drawn from the population for variable X. The sample mean is equal to 32. Which of the following statements about the sampling distribution of the sample means for this sample (n = 36) is incorrect?
+<div id="radio_BGMXQSKANU" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_BGMXQSKANU" value=""><span>The standard error is smaller than the population standard deviation.</span></label><label><input type="radio" autocomplete="off" name="radio_BGMXQSKANU" value=""><span>The sampling distribution of sample means is approximately normally distributed.</span></label><label><input type="radio" autocomplete="off" name="radio_BGMXQSKANU" value="answer"><span>The mean of the sampling distribution of the sample means is equal to 32.</span></label><label><input type="radio" autocomplete="off" name="radio_BGMXQSKANU" value=""><span>The standard deviation of the sampling distribution of sample means is equal to 1.</span></label>
+</div>
+<p><strong>Question 3</strong></p>
+What does the sampling distribution represent?
+<div id="radio_FHRMNLWPIE" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_FHRMNLWPIE" value="answer"><span>A theoretical distribution of sample statistics</span></label><label><input type="radio" autocomplete="off" name="radio_FHRMNLWPIE" value=""><span>The distribution of raw data</span></label><label><input type="radio" autocomplete="off" name="radio_FHRMNLWPIE" value=""><span>The distribution of sample means</span></label><label><input type="radio" autocomplete="off" name="radio_FHRMNLWPIE" value=""><span>The distribution of population parameters</span></label>
+</div>
+<p><strong>Question 4</strong></p>
+Which of the following statements about the sampling distribution is true?
+<div id="radio_KPPKYYILGV" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_KPPKYYILGV" value=""><span>The sampling distribution is identical to the population distribution</span></label><label><input type="radio" autocomplete="off" name="radio_KPPKYYILGV" value=""><span>The sampling distribution is based on a single sample</span></label><label><input type="radio" autocomplete="off" name="radio_KPPKYYILGV" value=""><span>The sampling distribution of a skewed variable is also skewed</span></label><label><input type="radio" autocomplete="off" name="radio_KPPKYYILGV" value="answer"><span>The sampling distribution is centered around the population parameter</span></label>
+</div>
+<p><strong>Question 5</strong></p>
+What is the standard deviation of the sampling distribution called?
+<div id="radio_QBVJQHQYQY" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_QBVJQHQYQY" value="answer"><span>Standard error</span></label><label><input type="radio" autocomplete="off" name="radio_QBVJQHQYQY" value=""><span>Variance</span></label><label><input type="radio" autocomplete="off" name="radio_QBVJQHQYQY" value=""><span>Bias</span></label><label><input type="radio" autocomplete="off" name="radio_QBVJQHQYQY" value=""><span>Population standard deviation</span></label>
+</div>
+<p><strong>Question 6</strong></p>
+How does sample size affect the shape of the sampling distribution?
+<div id="radio_HVLBNDDPAY" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_HVLBNDDPAY" value=""><span>Larger sample sizes increase the variability of sample statistics</span></label><label><input type="radio" autocomplete="off" name="radio_HVLBNDDPAY" value=""><span>Larger sample sizes have no impact on the sampling distribution</span></label><label><input type="radio" autocomplete="off" name="radio_HVLBNDDPAY" value="answer"><span>Larger sample sizes result in smaller standard errors</span></label><label><input type="radio" autocomplete="off" name="radio_HVLBNDDPAY" value=""><span>Larger sample sizes make the sampling distribution more spread out</span></label>
+</div>
+<p><strong>Question 7</strong></p>
+What is the probability that a sample mean falls within +/- 1 standard deviation of the population mean, assuming a normal distribution of sample means?
+<div id="radio_YDZZUJWIQP" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_YDZZUJWIQP" value=""><span>0.34</span></label><label><input type="radio" autocomplete="off" name="radio_YDZZUJWIQP" value=""><span>0.48</span></label><label><input type="radio" autocomplete="off" name="radio_YDZZUJWIQP" value=""><span>0.95</span></label><label><input type="radio" autocomplete="off" name="radio_YDZZUJWIQP" value="answer"><span>0.68</span></label>
+</div>
+<p><strong>Question 8</strong></p>
+If the standard deviation of the population is 10 and the sample size is 25, what is the standard error of the sample mean?
+<div id="radio_ERKKUQMCUM" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ERKKUQMCUM" value="answer"><span>2</span></label><label><input type="radio" autocomplete="off" name="radio_ERKKUQMCUM" value=""><span>5</span></label><label><input type="radio" autocomplete="off" name="radio_ERKKUQMCUM" value=""><span>0.2</span></label><label><input type="radio" autocomplete="off" name="radio_ERKKUQMCUM" value=""><span>0.4</span></label>
+</div>
+<p><strong>Question 9</strong></p>
+What is the probability that the sample proportion falls within +/- 2 standard deviations of the population proportion, assuming a large sample size?
+<div id="radio_ZCHYFXOSOX" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ZCHYFXOSOX" value=""><span>0.48</span></label><label><input type="radio" autocomplete="off" name="radio_ZCHYFXOSOX" value=""><span>0.34</span></label><label><input type="radio" autocomplete="off" name="radio_ZCHYFXOSOX" value=""><span>0.68</span></label><label><input type="radio" autocomplete="off" name="radio_ZCHYFXOSOX" value="answer"><span>0.95</span></label>
+</div>
+<p><strong>Question 10</strong></p>
+If the standard deviation of the population is 5 and the sample size is 50, what is the standard error of the sample mean?
+<div id="radio_DKBRHSQBBQ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_DKBRHSQBBQ" value="answer"><span>0.707</span></label><label><input type="radio" autocomplete="off" name="radio_DKBRHSQBBQ" value=""><span>0.0707</span></label><label><input type="radio" autocomplete="off" name="radio_DKBRHSQBBQ" value=""><span>0.283</span></label><label><input type="radio" autocomplete="off" name="radio_DKBRHSQBBQ" value=""><span>0.141</span></label>
+</div>
+</div>
+<div class="webex-solution">
+<button>
+Show explanations
+</button>
+<p><strong>Question 1</strong></p>
+<p>Calculate the standard error as 10/sqrt(16). Then, calculate the Z-score as (52-50)/SE. Find the right tailed probability of that Z-score, then calculate 1 minus that probability.</p>
+<p><strong>Question 2</strong></p>
+<p>The sampling distribution will be approximately normal because n &gt;= 30. The SE is indeed 1, because sigma/sqrt(n) = 6 /sqrt(36) = 1. The SE is always smaller than sigma, because it is calculated as sigma divided by square root of n.</p>
+<p><strong>Question 3</strong></p>
+<p>The sampling distribution represents the distribution of sample statistics, such as sample means or proportions, derived from multiple samples drawn from the same population. It provides insights into the variability and characteristics of these sample statistics.</p>
+<p><strong>Question 4</strong></p>
+<p>The sampling distribution is centered around the population parameter.</p>
+<p><strong>Question 5</strong></p>
+<p>The standard deviation of the sampling distribution is known as the standard error. It measures the average variability or spread of sample statistics around the population parameter, reflecting the precision of the estimation.</p>
+<p><strong>Question 6</strong></p>
+<p>Larger sample sizes result in smaller standard errors. As the sample size increases, the sampling distribution becomes more concentrated around the population parameter, leading to a decrease in the standard error. This implies that larger samples provide more precise estimates of the population parameter.</p>
+<p><strong>Question 7</strong></p>
+<p>The probability that a sample mean falls within +/- 1 standard deviations of the population mean, assuming a normal distribution of sample means, is 68%. This is based on ‘the empirical rule’.</p>
+<p><strong>Question 8</strong></p>
+<p>The standard error of the sample mean is 2. The standard error can be calculated by dividing the standard deviation of the population by the square root of the sample size. In this case, it would be 10 / √25 = 2.</p>
+<p><strong>Question 9</strong></p>
+<p>The key lesson here is that everything you learned about the sampling distribution also applies to other statistics than the mean, so according to the empirical rule, 95% of sample proportions will fall within +/- 2 standard deviation of the population proportion.</p>
+<p><strong>Question 10</strong></p>
+<p>The standard error of the sample mean is SD/sqrt(n), so 5/sqrt(50) = .707</p>
+</div>
+</div>
+</section><section id="tutorial" class="level1" data-number="21"><h1 data-number="21">
+<span class="header-section-number">21</span> Tutorial</h1>
+<section id="pca" class="level2" data-number="21.1"><h2 data-number="21.1" class="anchored" data-anchor-id="pca">
+<span class="header-section-number">21.1</span> PCA</h2>
+<p>Open the data file: emotions.sav.</p>
+<p>The data file consists of data from the International College Survey 2001 (Diener and colleagues, 2001). In this survey, data on emotions was collected for 41 countries. The data you’ll analyze in this assignment is about norms for experiencing/expressing 12 emotions in Belgium.</p>
+<!-- The questionnaire the participants filled out looked like this: -->
+<!-- ![](images/Figure10.png) -->
+<p>Let’s look at the data. The first two columns contain the number of the participant and the nation, so you don’t need to include them in the analysis.</p>
+<p>True or false: There are missing data. <select class="webex-select"><option value="blank"></option>
+<option value="answer">TRUE</option>
+<option value="">FALSE</option></select></p>
+<p>Suppose we are only interested in reducing the number of dimensions of the data, which method would you use? <select class="webex-select"><option value="blank"></option>
+<option value="">Confirmatory Factor Analysis</option>
+<option value="">Explanatory Factor Analysis</option>
+<option value="">Path Analysis</option>
+<option value="answer">Principal Component Analysis</option></select></p>
+<p>Navigate to Analyze → Dimension Reduction → Factor in SPSS</p>
+<p>In the tab Extraction: choose the correct method.</p>
+<p>Also enable the option Scree plot and specify which variables need to be included in the analysis.</p>
+<p>Check the Options tab. Can you determine what method is used to deal with missing data?</p>
+<div id="radio_WHQAPDHNZM" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_WHQAPDHNZM" value="answer"><span>All cases with missing values are removed prior to analysis</span></label><label><input type="radio" autocomplete="off" name="radio_WHQAPDHNZM" value=""><span>All missing values are removed prior to analysis</span></label><label><input type="radio" autocomplete="off" name="radio_WHQAPDHNZM" value=""><span>No action is taken</span></label><label><input type="radio" autocomplete="off" name="radio_WHQAPDHNZM" value=""><span>All correlations are computed based on available data for that pair of variables</span></label>
+</div>
+<p>Paste the syntax and run the analysis.</p>
+<p>Take a look at the output.</p>
+<p>What number of component have an Eigenvalue greater than 1 (Kaiser’s criterion)? <input class="webex-solveme nospaces" size="1" data-answer="[&quot;3&quot;]"></p>
+<p>How many components does the scree plot suggest?</p>
+<p><input class="webex-solveme nospaces" size="1" data-answer="[&quot;2&quot;]"></p>
+<p>Redo the analysis with the number of components you need to retain according to the scree plot.</p>
+<p>You can specify the number of components in the Extraction menu of the Factor Analysis window.</p>
+<p>Click Fixed number of factors and enter the number of components (2).</p>
+<p>Run the analysis and look at the loadings in the Component matrix.</p>
+<p>True or false: This solution is easy to interpret. <select class="webex-select"><option value="blank"></option>
+<option value="">TRUE</option>
+<option value="answer">FALSE</option></select></p>
+<p>The two principal components seem to correspond with positive emotions (appropriate and valued), and negative emotions (inappropriate and not valued), but there is not enough simple structure (too many variables have a high loading on both components).</p>
+<p>To aid interpretation, you could rotate the solution. Which type of rotation is most appropriate here? <select class="webex-select"><option value="blank"></option>
+<option value="">orthogonal</option>
+<option value="answer">oblique</option></select></p>
+<div class="webex-solution">
+<button>
+Answer
+</button>
+<p>It is unlikely that positive and negative emotions are uncorrelated! An oblique rotation seems by far the most sensible choice.</p>
+</div>
+<p>Regardless of your previous answer, redo the analysis and choose Direct Oblimin in the Rotation menu.</p>
+<p>Take a look at the component loadings in the Pattern matrix.</p>
+<p>Which component would you label Positive Emotions? Number.. <input class="webex-solveme nospaces" size="1" data-answer="[&quot;2&quot;]"></p>
+<p>Compare the component loadings in the Pattern Matrix with the loadings in the Component Matrix.</p>
+<p>We now observe that the loadings resemble a simple structure more closely than before the rotation: the low loadings are lower and the high loadings are higher.</p>
+<p>Note: Due to the oblique rotation, the loadings are no longer equal to item-component correlations.</p>
+<p>What is the correlation between the two rotated components? <input class="webex-solveme nospaces" data-tol="0.01" size="5" data-answer="[&quot;0.143&quot;,&quot;.143&quot;]"></p>
+<p>Redo the Principal Component Analysis again one last time to save the component scores in the data set. Open Scores in the Factor Analysis window, check the Save as variables checkbox. Have a look at these component scores (now added to your data set): these are the scores for each person on the two components.</p>
+<p>Alternatively, add this syntax:</p>
+<pre><code>  /SAVE REG(ALL)</code></pre>
+<p>What is the component score for the first person on the first component? <input class="webex-solveme nospaces" data-tol="0.01" size="5" data-answer="[&quot;1.937&quot;]"></p>
+<p>Take a look at the table Total Variance Explained.</p>
+<p>How much of the variance do the two components together account for? <input class="webex-solveme nospaces" data-tol="0.1" size="6" data-answer="[&quot;51.575&quot;]">%</p>
+<p>What proportion of the variance in the item stress is accounted for by the two components? <input class="webex-solveme nospaces" data-tol="0.01" size="5" data-answer="[&quot;0.505&quot;,&quot;.505&quot;]"></p>
+<p>Which item has the highest unicity? <select class="webex-select"><option value="blank"></option>
+<option value="">Happy</option>
+<option value="">Cheerful</option>
+<option value="answer">Pride</option>
+<option value="">Anger</option></select></p>
+</section><section id="exploratory-factor-analysis-1" class="level2" data-number="21.2"><h2 data-number="21.2" class="anchored" data-anchor-id="exploratory-factor-analysis-1">
+<span class="header-section-number">21.2</span> Exploratory Factor Analysis</h2>
+<p>We will move on to work with Exploratory Factor Analysis.</p>
+<p>For this second assignment you will perform an Exploratory Factor Analysis (EFA) in SPSS on a set of 18 items. These items measure Tolerance and are part of the European Value Survey (EVS).</p>
+<p>Discuss with your group when we decide to use Exploratory Factor Analysis and when we decide to use Principal Component Analysis.</p>
+<div class="webex-solution">
+<button>
+Explanation
+</button>
+<p>PCA is a data reduction technique. We use it when we want to summarize information in the items.</p>
+<p>EFA is used to identify latent variables underlying the measured items. EFA is typically used when a questionnaire has not been validated yet. When we use EFA, we usually do not know exactly which item belongs to which dimension (although we might have an idea based on our theory).</p>
+</div>
+<p>Discuss with your group: When do we use Confirmatory Factor Analysis?</p>
+<div class="webex-solution">
+<button>
+Explanation
+</button>
+<p>CFA is used when we DO know which items belong to which dimension. With CFA we can then check whether the model that we have in mind corresponds with what we see in the data.</p>
+</div>
+<!-- The Tolerance questionnaire is displayed in the figure below. -->
+<!-- Take a few minutes to read the items carefully. -->
+<!-- ![](images/Figure11.png) -->
+<p>Open the file evs.sav in SPSS.</p>
+<!-- To check whether we are allowed to carry out factor analysis and to know how many factors we should select, we first run another quick PCA. -->
+<p>Select Factor via Analyze -&gt; Dimension Reduction.</p>
+<p>Which extraction method should we use if we want a test of model fit? <select class="webex-select"><option value="blank"></option>
+<option value="answer">Maximum Likelihood</option>
+<option value="">Principal Components Analysis</option>
+<option value="">Principal Axis Factoring</option>
+<option value="">Unweighted Least Squares</option></select></p>
+<p>Drag all items of the tolerance scale (i.e., V225 - V2242) into the ‘items’ window. Go to Descriptives and select the options “Coefficients”, “Determinant”, and “KMO and Bartlett’s test of sphericity”. Then, go to extraction and select “unrotated factor solution” and “scree plot”. Paste and run the syntax.</p>
+<p>What is the Determinant? <input class="webex-solveme nospaces" data-tol="0.001" size="5" data-answer="[&quot;0.004&quot;,&quot;.004&quot;]"></p>
+<p>True or false: The determinant indicates that multicollinearity might be a problem for these data. <select class="webex-select"><option value="blank"></option>
+<option value="">TRUE</option>
+<option value="answer">FALSE</option></select></p>
+<p>The factorability, as determined by the KMO index, is <select class="webex-select"><option value="blank"></option>
+<option value="">Middling</option>
+<option value="">Mediocre</option>
+<option value="answer">Marvelous</option></select></p>
+<p>How many factors would you want to select based on the scree plot? <input class="webex-solveme nospaces" size="1" data-answer="[&quot;2&quot;]"></p>
+<p>How many factors would you want to select based on Kaiser’s criterion? <input class="webex-solveme nospaces" size="1" data-answer="[&quot;3&quot;]"></p>
+<p>What are the limitations of using these criteria?</p>
+<div class="webex-solution">
+<button>
+Answer
+</button>
+<p>Both are based on eigenvalues computed for PCA, but you are performing EFA now.</p>
+<p>Although you can also compute eigenvalues for EFA, SPSS doesn’t use those for the scree plot and Kaiser’s criterion - and moreover, eigenvalues for EFA depend on the number of extracted factors, which defeats the purpose of using them to determine how many factors to extract.</p>
+<p>Furthermore, EFA is a theory-driven technique; it makes sense to use theory to determine how many factors to retain.</p>
+</div>
+<p>Assume that we’re extracting two factors for now. Re-do your analysis with the appropriate number of factors.</p>
+<p>In the tab Extraction: choose the number of factors you want to extract.</p>
+<p>In the tab Rotation: Tick the box Direct Oblimin.</p>
+<p>In the tab Options: The interpretation of the pattern matrix is easier if you suppress all coefficients in that table that are small (e.g., values &lt; 0.30). To do so, click on options and ask SPSS to suppress the small coefficients.</p>
+<p>In the tab Descriptives: Ask for the reproduced matrix.</p>
+<p>Paste and run the syntax.</p>
+<p>When we interpret the output of the factor analysis, we inspect 4 tables: the pattern matrix, the communalities, the factor correlation matrix, and the reproduced correlation matrix.</p>
+<p>We will start with the pattern matrix.</p>
+<p>Inspect the factor loadings in the pattern matrix.</p>
+<p>Which item has the highest absolute factor loading on Factor 2? Type the variable label from the table: <input class="webex-solveme nospaces" size="7" data-answer="[&quot;divorce&quot;]"></p>
+<p>Decide for yourself: are the two factors clearly interpretable? Then check your answer.</p>
+<div class="webex-solution">
+<button>
+Answer
+</button>
+<p>The solution almost follows a simple structure where each item loads on one factor. Only for the item Having casual sex do we see high factor loadings on both factors.</p>
+</div>
+<p>Inspect the communalities table.</p>
+<p>How much of the variance in the item “suicide” do the factors explain? <input class="webex-solveme nospaces" data-tol="0.01" size="5" data-answer="[&quot;0.317&quot;,&quot;.317&quot;]"></p>
+<p>Check the correlations between the three factors.</p>
+<p>How substantial is the correlation between the factors? <select class="webex-select"><option value="blank"></option>
+<option value="">weak</option>
+<option value="answer">moderate</option>
+<option value="">large</option></select></p>
+<p>Inspect the residual correlations.</p>
+<p>Which residual correlation is most concerning?</p>
+<div id="radio_XKWXBADVRV" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_XKWXBADVRV" value=""><span>Between driving under the influence and claiming state benefits.</span></label><label><input type="radio" autocomplete="off" name="radio_XKWXBADVRV" value=""><span>Between speeding over the limit and smoking in public places.</span></label><label><input type="radio" autocomplete="off" name="radio_XKWXBADVRV" value="answer"><span>Between Cheating on tax and Paying cash</span></label><label><input type="radio" autocomplete="off" name="radio_XKWXBADVRV" value=""><span>Between taking soft drugs and joyriding.</span></label>
+</div>
+<p>Take a look at the pattern matrix again.</p>
+<p>Can you think of a meaningful label for each of the factors? (Take into consideration whether the loadings are positive or negative). Then check your answer.</p>
+<div class="webex-solution">
+<button>
+Answer
+</button>
+<p>There appears to be a distinction between legal and religious issues.</p>
+</div>
+</section><section id="exploratory-factor-analysis-ii" class="level2" data-number="21.3"><h2 data-number="21.3" class="anchored" data-anchor-id="exploratory-factor-analysis-ii">
+<span class="header-section-number">21.3</span> Exploratory Factor Analysis II</h2>
+<p>Open the dataset called “student_questionnaire.sav”.</p>
+<p>It contains data on moral judgment in a variety of domains of social life (variables whose names start with MACJ). Note that you need the variable <code>MACJ13_imputed</code>, not <code>MACJ13</code>.</p>
+<section id="model-selection-using-the-bic" class="level3" data-number="21.3.1"><h3 data-number="21.3.1" class="anchored" data-anchor-id="model-selection-using-the-bic">
+<span class="header-section-number">21.3.1</span> Model Selection using the BIC</h3>
+<p>When conducting EFA with ML estimation, we obtain a chi-square test of model fit that allows us to compute the BIC, a comparative fit index that can help us choose the number of factors that best balances model fit and complexity.</p>
+<p>Run an EFA analysis for 1-3 and 7-9 factors. Using syntax can help you do this easily - just copy-paste the basic syntax below four times and change the number of classes:</p>
+<pre><code>FACTOR
+  /VARIABLES MACJ1 MACJ2 MACJ3 MACJ4 MACJ5 MACJ6 MACJ7 MACJ8 MACJ9 MACJ10 MACJ11 MACJ12 MACJ13_imputed
+    MACJ14 MACJ15 MACJ16 MACJ17 MACJ18 MACJ19 MACJ20 MACJ21
+  /MISSING LISTWISE 
+  /CRITERIA FACTORS(1) ITERATE(100)
+  /EXTRACTION ML
+  /ROTATION NOROTATE.</code></pre>
+<p>Open a spreadsheet in Excel or Google Sheets, and copy-paste the chi-square values and degrees of freedom into the first two columns. Obtain the number of (valid) observations using whatever procedure you want (for example, Descriptives).</p>
+<p>Assuming that you have used the first two columns, paste the following formula into the fourth column. Replace “n” with the number of valid observations. Drag the formula down to copy it the all cells in its column:</p>
+<p><code>= A1 - B1 * LOG(n)</code></p>
+<p>What is the BIC for 3 factors? <input class="webex-solveme nospaces" data-tol="0.01" size="11" data-answer="[&quot;83.39268271&quot;]"></p>
+<p>Based on the BIC, out of the set of models compared, which number of factors would you choose? <input class="webex-solveme nospaces" size="1" data-answer="[&quot;8&quot;]"></p>
+<p>True or false: This finding corresponds to the conclusion you would draw from the Scree plot. <select class="webex-select"><option value="blank"></option>
+<option value="">TRUE</option>
+<option value="answer">FALSE</option></select></p>
+<p>True or false: This finding corresponds to the conclusion you would draw from Kaiser’s criterion. <select class="webex-select"><option value="blank"></option>
+<option value="">TRUE</option>
+<option value="answer">FALSE</option></select></p>
+<p>True or false: KMO suggests that there is insufficient common variance for factor analysis. <select class="webex-select"><option value="blank"></option>
+<option value="">TRUE</option>
+<option value="answer">FALSE</option></select></p>
+<p>True or false: The determinant suggests a potential problem with multicollinearity. This might be because there are so many similar items. <select class="webex-select"><option value="blank"></option>
+<option value="answer">TRUE</option>
+<option value="">FALSE</option></select></p>
+<p>If I told you that the theory specified 7 factors, how many factors would you prefer? Explain why, then check your answer.</p>
+<div class="webex-solution">
+<button>
+Answer
+</button>
+<p>The BIC for 7 factors is almost identical to the one for 8 factors. If theory dictates 7 factors, you might prefer to stick with 7, as the evidence for 8 factors is not overwhelmingly stronger.</p>
+</div>
+</section><section id="latent-variable-reliability" class="level3" data-number="21.3.2"><h3 data-number="21.3.2" class="anchored" data-anchor-id="latent-variable-reliability">
+<span class="header-section-number">21.3.2</span> Latent Variable Reliability</h3>
+<p>Regardless of your previous answer, perform EFA with one factor. Recall that this is equivalent to performing CFA with one factor.</p>
+<p>Cronbach’s alpha assumes that all items have equal factor loadings. Examine the factor loadings matrix.</p>
+<p>True or false: it looks like the factor loadings are indeed all equivalent. <select class="webex-select"><option value="blank"></option>
+<option value="">TRUE</option>
+<option value="answer">FALSE</option></select></p>
+<p>Compute Cronbach’s alpha for these items, and report the value: <input class="webex-solveme nospaces" data-tol="0.01" size="5" data-answer="[&quot;0.931&quot;,&quot;.931&quot;]"></p>
+<p>Copy-paste the factor loadings into a spreadsheet.</p>
+<p>Use the spreadsheet function <code>=SUM()</code> to sum the loadings, then square the sum to get the SSL, <span class="math inline">\(SSL = (\sum_{j=0}^k L_{1,k})^2\)</span></p>
+<p>Create a new column with the squared factor loadings. Use the function <code>=A1^2</code> (assuming that cell A1 contains your first factor loading). Then sum these squared loadings to get the SSR, <span class="math inline">\(SSR = 1-\sum_{j=0}^k L_{1,k}^2\)</span>.</p>
+<p>Finally, calculate McDonald’s Omega:</p>
+<p><span class="math display">\[
+\omega = \frac{SSL}{SSL+SSR}
+\]</span></p>
+<p>Report McDonald’s Omega: <input class="webex-solveme nospaces" data-tol="0.01" size="11" data-answer="[&quot;0.952571482&quot;,&quot;.952571482&quot;]"></p>
+<p>Note that McDonald’s Omega is larger than Cronbach’s alpha. This is a rule; Cronbach’s alpha underestimates reliability compared to McDonald’s omega, and the underestimation becomes worse as the assumption of equal factor loadings is more violated.</p>
+</section><section id="model-fit" class="level3" data-number="21.3.3"><h3 data-number="21.3.3" class="anchored" data-anchor-id="model-fit">
+<span class="header-section-number">21.3.3</span> Model Fit</h3>
+<p>Finally, calculate the RMSEA model fit index for this one-factor model. The cutoff for acceptable fit is RMSEA &lt; .08.</p>
+<p><span class="math display">\[
+RMSEA = \frac{\sqrt{\chi^2 - df}}{\sqrt{(n - 1)*df}}
+\]</span></p>
+<p>True or false: The one-factor model has acceptable fit. <select class="webex-select"><option value="blank"></option>
+<option value="answer">TRUE</option>
+<option value="">FALSE</option></select></p>
+
+
+</section></section></section></main><!-- /main --><script>
+
+/* update total correct if #webex-total_correct exists */
+update_total_correct = function() {
+  console.log("webex: update total_correct");
+
+  var t = document.getElementsByClassName("webex-total_correct");
+  for (var i = 0; i < t.length; i++) {
+    p = t[i].parentElement;
+    var correct = p.getElementsByClassName("webex-correct").length;
+    var solvemes = p.getElementsByClassName("webex-solveme").length;
+    var radiogroups = p.getElementsByClassName("webex-radiogroup").length;
+    var selects = p.getElementsByClassName("webex-select").length;
+
+    t[i].innerHTML = correct + " of " + (solvemes + radiogroups + selects) + " correct";
+  }
+}
+
+/* webex-solution button toggling function */
+b_func = function() {
+  console.log("webex: toggle hide");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('open')) {
+    cl.remove("open");
+  } else {
+    cl.add("open");
+  }
+}
+
+/* check answers */
+check_func = function() {
+  console.log("webex: check answers");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('unchecked')) {
+    cl.remove("unchecked");
+    this.innerHTML = "Hide Answers";
+  } else {
+    cl.add("unchecked");
+    this.innerHTML = "Show Answers";
+  }
+}
+
+/* function for checking solveme answers */
+solveme_func = function(e) {
+  console.log("webex: check solveme");
+
+  var real_answers = JSON.parse(this.dataset.answer);
+  var my_answer = this.value;
+  var cl = this.classList;
+  if (cl.contains("ignorecase")) {
+    my_answer = my_answer.toLowerCase();
+  }
+  if (cl.contains("nospaces")) {
+    my_answer = my_answer.replace(/ /g, "")
+  }
+
+  if (my_answer == "") {
+    cl.remove("webex-correct");
+    cl.remove("webex-incorrect");
+  } else if (real_answers.includes(my_answer)) {
+    cl.add("webex-correct");
+    cl.remove("webex-incorrect");
+  } else {
+    cl.add("webex-incorrect");
+    cl.remove("webex-correct");
+  }
+
+  // match numeric answers within a specified tolerance
+  if(this.dataset.tol > 0){
+    var tol = JSON.parse(this.dataset.tol);
+    var matches = real_answers.map(x => Math.abs(x - my_answer) < tol)
+    if (matches.reduce((a, b) => a + b, 0) > 0) {
+      cl.add("webex-correct");
+    } else {
+      cl.remove("webex-correct");
+    }
+  }
+
+  // added regex bit
+  if (cl.contains("regex")){
+    answer_regex = RegExp(real_answers.join("|"))
+    if (answer_regex.test(my_answer)) {
+      cl.add("webex-correct");
+    }
+  }
+
+  update_total_correct();
+}
+
+/* function for checking select answers */
+select_func = function(e) {
+  console.log("webex: check select");
+
+  var cl = this.classList
+
+  /* add style */
+  cl.remove("webex-incorrect");
+  cl.remove("webex-correct");
+  if (this.value == "answer") {
+    cl.add("webex-correct");
+  } else if (this.value != "blank") {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+/* function for checking radiogroups answers */
+radiogroups_func = function(e) {
+  console.log("webex: check radiogroups");
+
+  var checked_button = document.querySelector('input[name=' + this.id + ']:checked');
+  var cl = checked_button.parentElement.classList;
+  var labels = checked_button.parentElement.parentElement.children;
+
+  /* get rid of styles */
+  for (i = 0; i < labels.length; i++) {
+    labels[i].classList.remove("webex-incorrect");
+    labels[i].classList.remove("webex-correct");
+  }
+
+  /* add style */
+  if (checked_button.value == "answer") {
+    cl.add("webex-correct");
+  } else {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+window.onload = function() {
+  console.log("webex onload");
+  /* set up solution buttons */
+  var buttons = document.getElementsByTagName("button");
+
+  for (var i = 0; i < buttons.length; i++) {
+    if (buttons[i].parentElement.classList.contains('webex-solution')) {
+      buttons[i].onclick = b_func;
+    }
+  }
+
+  var check_sections = document.getElementsByClassName("webex-check");
+  console.log("check:", check_sections.length);
+  for (var i = 0; i < check_sections.length; i++) {
+    check_sections[i].classList.add("unchecked");
+
+    let btn = document.createElement("button");
+    btn.innerHTML = "Show Answers";
+    btn.classList.add("webex-check-button");
+    btn.onclick = check_func;
+    check_sections[i].appendChild(btn);
+
+    let spn = document.createElement("span");
+    spn.classList.add("webex-total_correct");
+    check_sections[i].appendChild(spn);
+  }
+
+  /* set up webex-solveme inputs */
+  var solveme = document.getElementsByClassName("webex-solveme");
+
+  for (var i = 0; i < solveme.length; i++) {
+    /* make sure input boxes don't auto-anything */
+    solveme[i].setAttribute("autocomplete","off");
+    solveme[i].setAttribute("autocorrect", "off");
+    solveme[i].setAttribute("autocapitalize", "off");
+    solveme[i].setAttribute("spellcheck", "false");
+    solveme[i].value = "";
+
+    /* adjust answer for ignorecase or nospaces */
+    var cl = solveme[i].classList;
+    var real_answer = solveme[i].dataset.answer;
+    if (cl.contains("ignorecase")) {
+      real_answer = real_answer.toLowerCase();
+    }
+    if (cl.contains("nospaces")) {
+      real_answer = real_answer.replace(/ /g, "");
+    }
+    solveme[i].dataset.answer = real_answer;
+
+    /* attach checking function */
+    solveme[i].onkeyup = solveme_func;
+    solveme[i].onchange = solveme_func;
+
+    solveme[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+  }
+
+  /* set up radiogroups */
+  var radiogroups = document.getElementsByClassName("webex-radiogroup");
+  for (var i = 0; i < radiogroups.length; i++) {
+    radiogroups[i].onchange = radiogroups_func;
+  }
+
+  /* set up selects */
+  var selects = document.getElementsByClassName("webex-select");
+  for (var i = 0; i < selects.length; i++) {
+    selects[i].onchange = select_func;
+    selects[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+  }
+
+  update_total_correct();
+}
+
+</script><script>
+// open rdrr links externally ----
+
+var exlinks = document.querySelectorAll("a[href^='https://rdrr.io']");
+var exlink_func = function(){
+  window.open(this.href);
+  return false;
+};
+for (var i = 0; i < exlinks.length; i++) {
+    exlinks[i].addEventListener('click', exlink_func, false);
+}
+
+// visible second sidebar in mobile ----
+
+function move_sidebar() {
+  var toc = document.getElementById("TOC");
+  var small_sidebar = document.querySelector("#quarto-sidebar .sidebar-menu-container");
+  var right_sidebar = document.getElementById("quarto-margin-sidebar");
+
+  if (window.innerWidth < 768) {
+    small_sidebar.append(toc);
+  } else {
+    right_sidebar.append(toc);
+  }
+}
+move_sidebar();
+window.onresize = move_sidebar;
+</script><script>
+
+/* update total correct if #webex-total_correct exists */
+update_total_correct = function() {
+  console.log("webex: update total_correct");
+
+  var t = document.getElementsByClassName("webex-total_correct");
+  for (var i = 0; i < t.length; i++) {
+    p = t[i].parentElement;
+    var correct = p.getElementsByClassName("webex-correct").length;
+    var solvemes = p.getElementsByClassName("webex-solveme").length;
+    var radiogroups = p.getElementsByClassName("webex-radiogroup").length;
+    var selects = p.getElementsByClassName("webex-select").length;
+
+    t[i].innerHTML = correct + " of " + (solvemes + radiogroups + selects) + " correct";
+  }
+}
+
+/* webex-solution button toggling function */
+b_func = function() {
+  console.log("webex: toggle hide");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('open')) {
+    cl.remove("open");
+  } else {
+    cl.add("open");
+  }
+}
+
+/* check answers */
+check_func = function() {
+  console.log("webex: check answers");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('unchecked')) {
+    cl.remove("unchecked");
+    this.innerHTML = "Hide Answers";
+  } else {
+    cl.add("unchecked");
+    this.innerHTML = "Show Answers";
+  }
+}
+
+/* function for checking solveme answers */
+solveme_func = function(e) {
+  console.log("webex: check solveme");
+
+  var real_answers = JSON.parse(this.dataset.answer);
+  var my_answer = this.value;
+  var cl = this.classList;
+  if (cl.contains("ignorecase")) {
+    my_answer = my_answer.toLowerCase();
+  }
+  if (cl.contains("nospaces")) {
+    my_answer = my_answer.replace(/ /g, "")
+  }
+
+  if (my_answer == "") {
+    cl.remove("webex-correct");
+    cl.remove("webex-incorrect");
+  } else if (real_answers.includes(my_answer)) {
+    cl.add("webex-correct");
+    cl.remove("webex-incorrect");
+  } else {
+    cl.add("webex-incorrect");
+    cl.remove("webex-correct");
+  }
+
+  // match numeric answers within a specified tolerance
+  if(this.dataset.tol > 0){
+    var tol = JSON.parse(this.dataset.tol);
+    var matches = real_answers.map(x => Math.abs(x - my_answer) < tol)
+    if (matches.reduce((a, b) => a + b, 0) > 0) {
+      cl.add("webex-correct");
+    } else {
+      cl.remove("webex-correct");
+    }
+  }
+
+  // added regex bit
+  if (cl.contains("regex")){
+    answer_regex = RegExp(real_answers.join("|"))
+    if (answer_regex.test(my_answer)) {
+      cl.add("webex-correct");
+    }
+  }
+
+  update_total_correct();
+}
+
+/* function for checking select answers */
+select_func = function(e) {
+  console.log("webex: check select");
+
+  var cl = this.classList
+
+  /* add style */
+  cl.remove("webex-incorrect");
+  cl.remove("webex-correct");
+  if (this.value == "answer") {
+    cl.add("webex-correct");
+  } else if (this.value != "blank") {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+/* function for checking radiogroups answers */
+radiogroups_func = function(e) {
+  console.log("webex: check radiogroups");
+
+  var checked_button = document.querySelector('input[name=' + this.id + ']:checked');
+  var cl = checked_button.parentElement.classList;
+  var labels = checked_button.parentElement.parentElement.children;
+
+  /* get rid of styles */
+  for (i = 0; i < labels.length; i++) {
+    labels[i].classList.remove("webex-incorrect");
+    labels[i].classList.remove("webex-correct");
+  }
+
+  /* add style */
+  if (checked_button.value == "answer") {
+    cl.add("webex-correct");
+  } else {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+window.onload = function() {
+  console.log("webex onload");
+  /* set up solution buttons */
+  var buttons = document.getElementsByTagName("button");
+
+  for (var i = 0; i < buttons.length; i++) {
+    if (buttons[i].parentElement.classList.contains('webex-solution')) {
+      buttons[i].onclick = b_func;
+    }
+  }
+
+  var check_sections = document.getElementsByClassName("webex-check");
+  console.log("check:", check_sections.length);
+  for (var i = 0; i < check_sections.length; i++) {
+    check_sections[i].classList.add("unchecked");
+
+    let btn = document.createElement("button");
+    btn.innerHTML = "Show Answers";
+    btn.classList.add("webex-check-button");
+    btn.onclick = check_func;
+    check_sections[i].appendChild(btn);
+
+    let spn = document.createElement("span");
+    spn.classList.add("webex-total_correct");
+    check_sections[i].appendChild(spn);
+  }
+
+  /* set up webex-solveme inputs */
+  var solveme = document.getElementsByClassName("webex-solveme");
+
+  for (var i = 0; i < solveme.length; i++) {
+    /* make sure input boxes don't auto-anything */
+    solveme[i].setAttribute("autocomplete","off");
+    solveme[i].setAttribute("autocorrect", "off");
+    solveme[i].setAttribute("autocapitalize", "off");
+    solveme[i].setAttribute("spellcheck", "false");
+    solveme[i].value = "";
+
+    /* adjust answer for ignorecase or nospaces */
+    var cl = solveme[i].classList;
+    var real_answer = solveme[i].dataset.answer;
+    if (cl.contains("ignorecase")) {
+      real_answer = real_answer.toLowerCase();
+    }
+    if (cl.contains("nospaces")) {
+      real_answer = real_answer.replace(/ /g, "");
+    }
+    solveme[i].dataset.answer = real_answer;
+
+    /* attach checking function */
+    solveme[i].onkeyup = solveme_func;
+    solveme[i].onchange = solveme_func;
+
+    solveme[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+  }
+
+  /* set up radiogroups */
+  var radiogroups = document.getElementsByClassName("webex-radiogroup");
+  for (var i = 0; i < radiogroups.length; i++) {
+    radiogroups[i].onchange = radiogroups_func;
+  }
+
+  /* set up selects */
+  var selects = document.getElementsByClassName("webex-select");
+  for (var i = 0; i < selects.length; i++) {
+    selects[i].onchange = select_func;
+    selects[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+  }
+
+  update_total_correct();
+}
+
+</script><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="./reliability_validity.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Reliability and Validity</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./confint.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">BE2 - Confidence Intervals</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer"><div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">CC-BY (2023) Caspar J. Van Lissa</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

@@ -179,7 +179,7 @@ Note that, in the first assignment, we used a different set of dummy variables t
 
 ## Estimating group means
 
-In the first assignment, we computed the group means. But remeber that the ANOVA model allows us to estimate them using the general linear model. In this assignment, we will do so by hand. After the previous assignment, you should have five dummy variables to represent the five groups of `behavior`.
+In the first assignment, we computed the group means. But remember that the ANOVA model allows us to estimate them using the general linear model. In this assignment, we will do so by hand. After the previous assignment, you should have five dummy variables to represent the five groups of `behavior`.
 
 Until now, you've always included four dummy variables to represent five categories, as the last category is represented by the intercept.
 
@@ -326,9 +326,9 @@ This approach builds upon the logic of effects coding, where the weights for the
 
 There are some rules to follow:
 
-1. As with effect coding, the possible values of each indicator variable must sum to 1.
+1. As with effect coding, the possible values of each indicator variable must sum to 0.
 1. As with effect coding, you must account for relative group size. If all groups are of equal size, the math becomes easier but the same principle applies.
-1. Each group must be uniquely identified by a particular combination of the contrast variables
+1. Each group must be uniquely identified by a particular combination of the contrast variables.
 
 Based on rule 2 above, assume for a moment that we have equal group sizes and want to compare groups 1 and 2 to groups 3, 4, and 5.
 

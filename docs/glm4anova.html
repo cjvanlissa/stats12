@@ -1,0 +1,1453 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.427">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="description" content="Book Description">
+<title>Statistics 1 and 2 - 8&nbsp; GLM-IV: ANOVA</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./glm5multiple.html" rel="next">
+<link href="./glm3binary.html" rel="prev">
+<link href="./images/logos/favicon.png" rel="icon" type="image/png">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark"><script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
+<link rel="stylesheet" href="include/booktem.css">
+<link rel="stylesheet" href="include/webex.css">
+<link rel="stylesheet" href="include/glossary.css">
+<link rel="stylesheet" href="include/style.css">
+<link rel="stylesheet" href="c:/gitbook_stats12/include/webex.css">
+</head>
+<body class="nav-sidebar floating">
+
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./glm4anova.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">GLM-IV: ANOVA</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Statistics 1 and 2</a> 
+        <div class="sidebar-tools-main">
+    <div class="dropdown">
+      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Share"><i class="bi bi-share"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+<li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=%7Curl%7C">
+              <i class="bi bi-bi-twitter pe-1"></i>
+            Twitter
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=%7Curl%7C">
+              <i class="bi bi-bi-facebook pe-1"></i>
+            Facebook
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=%7Curl%7C">
+              <i class="bi bi-bi-linkedin pe-1"></i>
+            LinkedIn
+            </a>
+          </li>
+      </ul>
+</div>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Overview</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to Statistics</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./probability.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Probability Distributions</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./samplingdistribution.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">The Sampling Distribution</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./testing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Hypothesis Testing</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glm1_regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">GLM-I: Linear Regression</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glm2_sum_squares.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">GLM-II: Sums of Squares</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glm3binary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">GLM-III: Binary Predictors</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glm4anova.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">GLM-IV: ANOVA</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glm5multiple.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">GLM-V: Multiple regression</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glm6nested.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">GLM-VI: Nested models</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glm7interaction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">GLM-VII: Interaction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./logistic.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">GLM VIII - Logistic Regression</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glm_contrasts.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">GLM: Contrasts</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./factorial.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">GLM: Factorial ANOVA</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ancova.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">GLM: ANCOVA</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./rmanova.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">GLM: Repeated Measures ANOVA</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./reliability_validity.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Reliability and Validity</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data_reduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Dimension Reduction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./confint.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">BE2 - Confidence Intervals</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data for Portfolio</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./probability_tables.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Z-table</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+    </ul>
+</div>
+</nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+<li><a href="#formative-test" id="toc-formative-test" class="nav-link active" data-scroll-target="#formative-test"><span class="header-section-number">9</span> Formative Test</a></li>
+  <li>
+<a href="#in-spss" id="toc-in-spss" class="nav-link" data-scroll-target="#in-spss"><span class="header-section-number">10</span> In SPSS</a>
+  <ul class="collapse">
+<li><a href="#anova" id="toc-anova" class="nav-link" data-scroll-target="#anova"><span class="header-section-number">10.1</span> ANOVA</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#tutorial" id="toc-tutorial" class="nav-link" data-scroll-target="#tutorial"><span class="header-section-number">11</span> Tutorial</a>
+  <ul class="collapse">
+<li><a href="#anova-1" id="toc-anova-1" class="nav-link" data-scroll-target="#anova-1"><span class="header-section-number">11.1</span> ANOVA</a></li>
+  <li><a href="#anova-using-regression" id="toc-anova-using-regression" class="nav-link" data-scroll-target="#anova-using-regression"><span class="header-section-number">11.2</span> ANOVA using regression</a></li>
+  <li><a href="#one-way-anova" id="toc-one-way-anova" class="nav-link" data-scroll-target="#one-way-anova"><span class="header-section-number">11.3</span> One-Way ANOVA</a></li>
+  <li><a href="#one-way-anova-using-regression" id="toc-one-way-anova-using-regression" class="nav-link" data-scroll-target="#one-way-anova-using-regression"><span class="header-section-number">11.4</span> One-Way ANOVA using regression</a></li>
+  </ul>
+</li>
+  </ul></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<h1 class="title"><span id="sec-glm4" class="quarto-section-identifier"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">GLM-IV: ANOVA</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header><p>We can also use regression analysis to examine mean differences between the categories of a nominal or ordinal predictor with more than two categories. Suppose we have a categorical predictor, such as socioeconomic status (SES), with three categories: Low, Medium, and High. We want to predict fathers’ involvement in child rearing based on these SES categories. We can use regression analysis to model this relationship by using dummy variables.</p>
+<p>We previously discussed how <em>bivariate</em> linear regression allows us to model the effect of a binary categorical predictor by using dummy coding. We code one variable as the reference group (giving it the value 0), and estimate the mean difference between the reference group and the other category.</p>
+<p>When we have two or more categories, we can use the same principle - but we need to expand the model. For our example with SES, we can select one reference category (say, High SES), and we would create <strong>two</strong> dummy variables to estimate the mean differences between the reference category and the Medium and Low SES categories. Our regression model then includes both dummy variables as predictors, along with the intercept term.</p>
+<p>This regression model is completely equivalent to one-way ANOVA (Analysis of Variance). Think of ANOVA as a different interface to the same analysis, which presents the results in a slightly different way that is more common in some subfields of social science.</p>
+<p>When we perform an ANOVA, we conduct an omnibus test of differences between group means. The default null hypothesis is that all group means are equal, and the alternative hypothesis suggests that at least two group means differ. We test this hypothesis with an F-test for the overall significance of the model. You are already familiar with this test from the lecture on sums of square.</p>
+<p>One way to think about the F-test in th context of ANOVA is that it compares the size of the variance (differences) in group means, relative to the error variance in the data. If the differences between group means are large relative to the spread of the data, we observe a significant test. In ANOVA, the regression sum of squares is also called the “between-group sum of squares”, and the error sum of squares is also called “within-group sum of squares”.</p>
+<p>When interpreting the results of ANOVA, it’s common to use eta squared <span class="math inline">\(\eta^2\)</span> as an effect size. It is simply another name for the familiar <span class="math inline">\(R^2\)</span>. It reflects the proportion of variance in the outcome variable that can be explained by the categorical predictor.</p>
+<section id="formative-test" class="level1" data-number="9"><h1 data-number="9">
+<span class="header-section-number">9</span> Formative Test</h1>
+<p>A formative test helps you assess your progress in the course, and helps you address any blind spots in your understanding of the material. If you get a question wrong, you will receive a hint on how to improve your understanding of the material.</p>
+<p>Complete the formative test ideally after you’ve seen the lecture, but before the lecture meeting in which we can discuss any topics that need more attention</p>
+<div class="cell" data-layout-align="center">
+<div class="webex-check webex-box">
+<p><strong>Question 1</strong></p>
+How can you model a categorical predictor with more than 2 categories in regression?
+<div id="radio_ISYRHABTKX" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ISYRHABTKX" value=""><span>Convert the categorical predictor into a binary predictor.</span></label><label><input type="radio" autocomplete="off" name="radio_ISYRHABTKX" value=""><span>Use a single continuous variable to represent all categories.</span></label><label><input type="radio" autocomplete="off" name="radio_ISYRHABTKX" value=""><span>Exclude the categorical predictor from the regression model.</span></label><label><input type="radio" autocomplete="off" name="radio_ISYRHABTKX" value="answer"><span>Create dummy variables for each category and include them in the regression equation.</span></label>
+</div>
+<p><strong>Question 2</strong></p>
+What does the intercept term represent in a regression model with dummy variables?
+<div id="radio_OOPIUFWPUD" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_OOPIUFWPUD" value="answer"><span>The mean value of the reference category.</span></label><label><input type="radio" autocomplete="off" name="radio_OOPIUFWPUD" value=""><span>The standard deviation of the predictor variable.</span></label><label><input type="radio" autocomplete="off" name="radio_OOPIUFWPUD" value=""><span>The difference between the means of all categories.</span></label><label><input type="radio" autocomplete="off" name="radio_OOPIUFWPUD" value=""><span>The mean difference between all categories.</span></label>
+</div>
+<p><strong>Question 3</strong></p>
+How many dummy variables are created for a categorical predictor with three categories?
+<div id="radio_CKGAWOVVHQ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_CKGAWOVVHQ" value=""><span>For three categories, you don't need dummy variables.</span></label><label><input type="radio" autocomplete="off" name="radio_CKGAWOVVHQ" value="answer"><span>Two dummy variables are created, each representing membership in one of the non-reference categories.</span></label><label><input type="radio" autocomplete="off" name="radio_CKGAWOVVHQ" value=""><span>Three dummy variables are created, each representing membership in a category.</span></label><label><input type="radio" autocomplete="off" name="radio_CKGAWOVVHQ" value=""><span>One dummy variable is created, representing membership in the reference category.</span></label>
+</div>
+<p><strong>Question 4</strong></p>
+What does the F-value represent in ANOVA?
+<div id="radio_HGNFVNJKGK" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_HGNFVNJKGK" value=""><span>How large the difference between the group means is, relative to the error variance.</span></label><label><input type="radio" autocomplete="off" name="radio_HGNFVNJKGK" value="answer"><span>How large the variance between group means is relative to variance within groups.</span></label><label><input type="radio" autocomplete="off" name="radio_HGNFVNJKGK" value=""><span>The proportion of variance explained by the predictor variable.</span></label><label><input type="radio" autocomplete="off" name="radio_HGNFVNJKGK" value=""><span>An overall test of the difference between group means.</span></label>
+</div>
+<p><strong>Question 5</strong></p>
+What is the purpose of follow-up analyses after a significant ANOVA?
+<div id="radio_DZYHKORPGG" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_DZYHKORPGG" value=""><span>To adjust the p-value for multiple comparisons.</span></label><label><input type="radio" autocomplete="off" name="radio_DZYHKORPGG" value=""><span>To understand which groups are significant.</span></label><label><input type="radio" autocomplete="off" name="radio_DZYHKORPGG" value="answer"><span>To understand which specific group means differ significantly from each other.</span></label><label><input type="radio" autocomplete="off" name="radio_DZYHKORPGG" value=""><span>To calculate the effect size.</span></label>
+</div>
+<p><strong>Question 6</strong></p>
+How are the degrees of freedom calculated for the F-distribution in ANOVA?
+<div id="radio_HICIXOUGEM" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_HICIXOUGEM" value=""><span>Numerator df: Number of groups - 1; Denominator df: Total number of observations</span></label><label><input type="radio" autocomplete="off" name="radio_HICIXOUGEM" value=""><span>Numerator df: Total number of observations - Number of groups; Denominator df: Number of groups - 1</span></label><label><input type="radio" autocomplete="off" name="radio_HICIXOUGEM" value=""><span>Numerator df: Total number of observations - 1; Denominator df: Number of groups</span></label><label><input type="radio" autocomplete="off" name="radio_HICIXOUGEM" value="answer"><span>Numerator df: Number of groups - 1; Denominator df: Total number of observations - Number of groups</span></label>
+</div>
+<p><strong>Question 7</strong></p>
+What is the correct interpretation of a small eta squared (η²) value in ANOVA?
+<div id="radio_OTLYUCVOSP" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_OTLYUCVOSP" value=""><span>A small proportion of the error variance is explained by the group differences.</span></label><label><input type="radio" autocomplete="off" name="radio_OTLYUCVOSP" value=""><span>A small proportion of the total variance is due to individual differences.</span></label><label><input type="radio" autocomplete="off" name="radio_OTLYUCVOSP" value=""><span>A small proportion of the total variance is due to error.</span></label><label><input type="radio" autocomplete="off" name="radio_OTLYUCVOSP" value="answer"><span>A small proportion of the total variance is explained by the group differences.</span></label>
+</div>
+<p><strong>Question 8</strong></p>
+Given the regression equation Y = 20 + 5<em>D1 - 3</em>D2 for an ANOVA model with dummy coded predictors, what is the predicted value of Y when D1 = 2 and D2 = 1?
+<div id="radio_OKNYQZVSRX" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_OKNYQZVSRX" value=""><span>Y = 20 + 5<em>1 - 3</em>1 = 22</span></label><label><input type="radio" autocomplete="off" name="radio_OKNYQZVSRX" value=""><span>Y = 20 - 5<em>0 - 3</em>1 = 17</span></label><label><input type="radio" autocomplete="off" name="radio_OKNYQZVSRX" value="answer"><span>This cannot happen as the dummy variables are orthogonal.</span></label><label><input type="radio" autocomplete="off" name="radio_OKNYQZVSRX" value=""><span>Y = 20 + 5<em>1 + 3</em>0 = 25</span></label>
+</div>
+<p><strong>Question 9</strong></p>
+In an ANOVA model with 4 groups and 300 observations, calculate the degrees of freedom for the numerator and denominator for the F-test.
+<div id="radio_WXICXTIOAA" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_WXICXTIOAA" value=""><span>Numerator df: 300 - 1 = 299; Denominator df: , 4 - 1 = 3</span></label><label><input type="radio" autocomplete="off" name="radio_WXICXTIOAA" value=""><span>Numerator df: 300 - 4 = 296; Denominator df: , 4 - 1 = 3</span></label><label><input type="radio" autocomplete="off" name="radio_WXICXTIOAA" value="answer"><span>Numerator df: 4 - 1 = 3; Denominator df: 300 - 4 = 296</span></label><label><input type="radio" autocomplete="off" name="radio_WXICXTIOAA" value=""><span>Numerator df: 4 - 1 = 3; Denominator df: 300 - 1 = 299</span></label>
+</div>
+<p><strong>Question 10</strong></p>
+In an ANOVA model, the variation of individual observations with respect to the grand mean (SST) is 1200, and the variation of individuals with respect to group means (SSW) is 800. Calculate the proportion of variance explained by the group means (η²).
+<div id="radio_NVQRWGFXVZ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_NVQRWGFXVZ" value=""><span>η² = SSB/SSW = (1200 - 800)/800 = 0.5</span></label><label><input type="radio" autocomplete="off" name="radio_NVQRWGFXVZ" value=""><span>η² = SSB/SST = (1200 + 800)/1200 = 2.0</span></label><label><input type="radio" autocomplete="off" name="radio_NVQRWGFXVZ" value=""><span>η² = SSW/SST = 800/1200 = 0.667</span></label><label><input type="radio" autocomplete="off" name="radio_NVQRWGFXVZ" value="answer"><span>η² = SSB/SST = (SST - SSW)/SST = (1200 - 800)/1200 = 0.333</span></label>
+</div>
+</div>
+<div class="webex-solution">
+<button>
+Show explanations
+</button>
+<p><strong>Question 1</strong></p>
+<p>To model a categorical predictor with more than 2 categories, you create dummy variables for each category and include them as predictors in the regression equation.</p>
+<p><strong>Question 2</strong></p>
+<p>The intercept term in a regression model with dummy variables represents the mean value of the reference category.</p>
+<p><strong>Question 3</strong></p>
+<p>For a categorical predictor with three categories, two dummy variables are created, each representing membership in one of the non-reference categories.</p>
+<p><strong>Question 4</strong></p>
+<p>The F-test in ANOVA measures how large the variance in group means is relative to the error variance, helping us determine if there are significant differences between group means.</p>
+<p><strong>Question 5</strong></p>
+<p>Follow-up analyses are conducted after a significant ANOVA to understand which specific groups differ significantly from each other, as the omnibus ANOVA only tells us there are differences among groups but not which ones.</p>
+<p><strong>Question 6</strong></p>
+<p>The degrees of freedom for the F-distribution in ANOVA are calculated as follows: Numerator df = Number of groups - 1; Denominator df = Total number of observations - Number of groups.</p>
+<p><strong>Question 7</strong></p>
+<p>A small eta squared (η²) value in ANOVA indicates that a small proportion of the total variance is explained by the group differences, suggesting weaker group effects.</p>
+<p><strong>Question 8</strong></p>
+<p>It is not possible for an observation to score 1 on two dummies.</p>
+<p><strong>Question 9</strong></p>
+<p>The degrees of freedom for the F-test are calculated as follows: Numerator df = Number of groups - 1; Denominator df = Total number of observations - Number of groups.</p>
+<p><strong>Question 10</strong></p>
+<p>The proportion of variance explained by the group means (η²) is calculated as η² = SSB/SST = (SST - SSW)/SST = (1200 - 800)/1200 = 0.333.</p>
+</div>
+</div>
+</section><section id="in-spss" class="level1" data-number="10"><h1 data-number="10">
+<span class="header-section-number">10</span> In SPSS</h1>
+<section id="anova" class="level2" data-number="10.1"><h2 data-number="10.1" class="anchored" data-anchor-id="anova">
+<span class="header-section-number">10.1</span> ANOVA</h2>
+<p>Using the ANOVA interface and the regression interface:</p>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/LXkytSgHl6c" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</section></section><section id="tutorial" class="level1" data-number="11"><h1 data-number="11">
+<span class="header-section-number">11</span> Tutorial</h1>
+<section id="anova-1" class="level2" data-number="11.1"><h2 data-number="11.1" class="anchored" data-anchor-id="anova-1">
+<span class="header-section-number">11.1</span> ANOVA</h2>
+<p>For this assignment, we will use the data file 5groups.sav Download 5groups.sav. Please open it in SPSS.</p>
+<p>As you have seen in the previous assignments, this file contains the measurements of the y variable for 5 different groups. So far, we have - at most - compared two groups at once. This time, we will compare the means of all 5 groups simultaneously using an Analysis of Variance (ANOVA).</p>
+<p>ANOVA is often used to examine the results of experimental research where different groups receive different manipulations of an independent variable, and a continuous dependent variable is measured. In that case, rejecting the null hypothesis indicates a causal effect of the manipulated independent variable on the dependent variable.</p>
+<p>Let’s say the 5 groups in our data file have received 5 different types of training, and the dependent variable y measures the effect of the training.</p>
+<p>We will now perform an ANOVA to see if these trainings have an equal effectiveness.</p>
+<p>The null hypothesis of the ANOVA with 5 groups is as follows:</p>
+<p><span class="math inline">\(H_0: \mu_1 = \mu_2 = \mu_3 = \mu_4 = \mu_5\)</span></p>
+<p>That is, the null hypothesis states that the population means of all five groups are the same. Rejecting the null hypothesis implies that at least one one of these means is different from the rest.</p>
+<p>Let’s run the analysis!</p>
+<p>Navigate to Analyze &gt; General Linear Model &gt; Univariate. Choose y as the dependent variable. Choose group as the fixed factor. Now click on the “Options” button and check the two boxes named “Descriptive statistics” and “Homogeneity tests”. Finally, click “Paste” to paste the syntax into the syntax editor, and run it from there.</p>
+<p>You should end up with the following syntax:</p>
+<pre><code>    UNIANOVA y BY group
+      /METHOD=SSTYPE(3)
+      /INTERCEPT=INCLUDE
+      /PRINT=HOMOGENEITY DESCRIPTIVE
+      /CRITERIA=ALPHA(.05)
+      /DESIGN=group.</code></pre>
+<p>The first table in the output we will inspect is the “Descriptive Statistics” table. This table displays the means and standard deviations of the variable y for each of the five groups.</p>
+<p>Do you think the population standard deviations are different for each group? If they are, why could that pose a problem for our analysis?</p>
+<p>One of the assumptions of ANOVA is homoscedasticity. In this case, that means that the population of each group has the same variance (and hence, the same standard deviation). This assumption is also called “homogeneity of variance” (= translation of homoscedasticity). Of course the variance in each sample will differ somewhat. If these differences are significant, there is evidence to doubt our assumption. That’s why we asked SPSS to perform “Homogeneity tests”.</p>
+<p>Note that the SD’s of groups 1 and 2 are quite different from the SD’s of groups 3, 4, 5.</p>
+<p>The next table shows the output of Levene’s test. You might remember using Levene’s test for comparing the variances of two groups in the context of the independent samples t-test. This time, it tests whether the variance of all 5 groups should be considered equal.</p>
+<p>Is there a reason to doubt the assumption of homoscedasticity based on Levene’s test? Note: Use the Levene’s test “Based on mean”. <code>mcq(c(answer = "Yes", "No"))</code></p>
+<p>If Levene’s test is significant, there is evidence that the population variances of at least 2 of the groups differ. This is evidence against our assumption. This could pose a problem for our analysis. We may choose to use a version of the analysis that is robust to violations of this assumption instead, but that makes our analysis dependent on the data (= no longer confirmatory). Instead, we could discuss the violation, and compare results with and without a robust test.</p>
+<p>For now, we continue with interpreting the output of the final table. There’s a lot of information, but for now we are only interested in the Sig. value of the “Corrected Model” in the first row. This is the two-sided p-value we can use to test our null hypothesis.</p>
+<p>What is the two-sided p-value? Do you reject the null hypothesis? What does that mean?</p>
+<div class="webex-solution">
+<button>
+Answer
+</button>
+<p>The p-value is &lt;.001. This is smaller than 0.05. Therefore, we reject the null hypothesis, which was: <span class="math inline">\(H_0: \mu1=\mu2=\mu3=\mu4=\mu5\)</span></p>
+<p>This means that the means of at least two groups are different. Note that we do not yet know for which groups the means differ!</p>
+</div>
+<p>Finally, there’s an interesting nugget of information below the final table. It’s called R Squared. This shows the total amount of variance in y that is explained by group membership.</p>
+<p>What is the value of R Squared? <input class="webex-solveme nospaces" data-tol="0.01" size="4" data-answer="[&quot;0.57&quot;,&quot;.57&quot;]"></p>
+<p>By rule of thumb, what is the magnitude of this value (small, medium, or large)?</p>
+<p>Cohen (1988) proposed the following guidelines for interpreting the magnitude of R2:</p>
+<table class="table">
+<thead><tr class="header">
+<th>Size</th>
+<th>R2</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>Small</td>
+<td>0.01</td>
+</tr>
+<tr class="even">
+<td>Medium</td>
+<td>0.06</td>
+</tr>
+<tr class="odd">
+<td>Large</td>
+<td>0.138</td>
+</tr>
+</tbody>
+</table></section><section id="anova-using-regression" class="level2" data-number="11.2"><h2 data-number="11.2" class="anchored" data-anchor-id="anova-using-regression">
+<span class="header-section-number">11.2</span> ANOVA using regression</h2>
+<p>This time, we will conduct the ANOVA using the regression interface.</p>
+<p>When we conduct ANOVA using regression, we still test the null hypothesis mentioned before:</p>
+<p><span class="math inline">\(H_0: \mu_1 = \mu_2 = \mu_3 = \mu_4 = \mu_5\)</span></p>
+<p>A different way to phrase this when using regression is to state that all regression coefficients will be zero:</p>
+<p><span class="math inline">\(H_0: \beta_0 =\beta_1 = \beta_2 = \beta_3 = \beta_4\)</span></p>
+<p>Or to say that the explained variance will be zero:</p>
+<p><span class="math inline">\(H_0: \rho^2 =0\)</span></p>
+<p>All of these hypotheses are interchangeable and imply that the means of all five groups are the same. If this is not the case, each of these null-hypotheses would be rejected. Rejecting these null hypothesis implies that at least one one of these means is different from the rest.</p>
+<p>To test the differences between groups, we first create dummy variables. Let’s make them for all categories, but we will mostly use group 1 as reference category. When making dummies, it’s most convenient to use syntax:</p>
+<pre><code>RECODE group (1=1) (2=0) (3=0) (4=0) (5=0) INTO dgroup1.
+RECODE group (1=0) (2=1) (3=0) (4=0) (5=0) INTO dgroup2.
+RECODE group (1=0) (2=0) (3=1) (4=0) (5=0) INTO dgroup3.
+RECODE group (1=0) (2=0) (3=0) (4=1) (5=0) INTO dgroup4.
+RECODE group (1=0) (2=0) (3=0) (4=0) (5=1) INTO dgroup5.
+EXECUTE.</code></pre>
+<p>Create the necessary syntax for a regression with the dummy variable that compares the means of group 1 against all other groups.</p>
+<p>You can find the dialog for the regression under Analyze &gt; Regression &gt; Linear</p>
+<p>In the SPSS dialog you have to specify the Dependent and Independent variable. In our case, the independent variables are all dummies we created, except for the reference category! Use category 1 as reference category.</p>
+<p>Compare your syntax to the correct syntax:</p>
+<pre><code>REGRESSION
+  /MISSING LISTWISE
+  /STATISTICS COEFF OUTS R ANOVA
+  /CRITERIA=PIN(.05) POUT(.10)
+  /NOORIGIN 
+  /DEPENDENT y
+  /METHOD=ENTER dgroup2 dgroup3 dgroup4 dgroup5.</code></pre>
+<p>Also compare this syntax to the one we used for t-test using regression. What is the only difference?</p>
+<p>Which test statistic do you use to determine the significance of your ANOVA? <select class="webex-select"><option value="blank"></option>
+<option value="">All of the ts</option>
+<option value="">R2</option>
+<option value="answer">F</option>
+<option value="">t for the Constant</option></select></p>
+<p>What is the value of the test statistic? <input class="webex-solveme nospaces" data-tol="0.01" size="6" data-answer="[&quot;14.783&quot;]"></p>
+<p>Compare this output to the output of your previous ANOVA!</p>
+<p>Which parts are the same? Which parts are different?</p>
+<div class="webex-solution">
+<button>
+Answer
+</button>
+<p>The F-test is identical to the one from the ANOVA. What’s different is that the regression also gives us t-tests for the difference between each group and the reference group. By changing the reference group, we can make all possible comparisons.</p>
+</div>
+<p>Note that, unlike the t-test interface, the regression interface does not provide a Levene’s test. This is one reason you might want to use the t-test interface. The regression interface provides a more generic way to test the assumption of homoscedasticity: a residual plot.</p>
+<p>Go back through the regression interface, but this time click the Plots button and plot the predicted value (X = ZPRED) against the residual value (Y = ZRESID).</p>
+<p>Alternatively, just add this line to your syntax (make sure to remove the period . from what was previously the last line):</p>
+<pre><code>  /SCATTERPLOT=(*ZRESID ,*ZPRED).</code></pre>
+<p>If the assumption of homoscedasticity is met, we should see that the dots in this plot are equally distributed around the zero line for all values on the X-axis. In this case, we see some differences that could lead us to question the assumption. However, we don’t get an actual test, which is a pity. Thus, you could use the ANOVA interface if you want this test.</p>
+</section><section id="one-way-anova" class="level2" data-number="11.3"><h2 data-number="11.3" class="anchored" data-anchor-id="one-way-anova">
+<span class="header-section-number">11.3</span> One-Way ANOVA</h2>
+<p>We have prepared the following data file for this assignment: hiking.sav Download hiking.sav. Please download it and open it in SPSS.</p>
+<p>The data file describes the result of a fictitious experiment in which a hiking guide has displayed five different types of behavior towards different groups of hikers. The treatment that each person received from the guide is recorded in the variable behavior.</p>
+<p>The dependent variable of this experiment is feeling. Higher scores on this variable indicate a more positive attitude of a participant towards the guide. In this assignment, we will use ANOVA to determine whether the mean score on the dependent variable differs between the five experimental conditions.</p>
+<p>What type of design do we use for this experiment? <select class="webex-select"><option value="blank"></option>
+<option value="answer">Between-subjects design</option>
+<option value="">Within-subjects design</option>
+<option value="">Combination of the two</option></select></p>
+<p>As you will have noticed, the data file contains a third variable named weather, which can be either good or bad. For now, we will only look at the results obtained during good weather. Hence, we will use “Select cases” to select only those participants with a value of 1 on the weather variable.</p>
+<p>Click Data &gt; Select Cases and select “If condition is satisfied” and click the “If”-button. Now enter the following condition into the equation box:</p>
+<p>weather = 1</p>
+<p>Now click “Continue” and “Paste” to paste the resulting syntax into the syntax editor. Select Run &gt; All to run it.</p>
+<p>Verify that half of the participants have been crossed out in the Data View.</p>
+<p>We are now ready to perform an ANOVA with the 50 remaining participants.</p>
+<p>To run an ANOVA in SPSS there are multiple options. We will use the module “General Linear Model”, which encompasses ANOVA and all of its extensions which we will discuss later on (factorial ANOVA, ANCOVA, and repeated measurements).</p>
+<p>Anyway, let’s first create the basic syntax.</p>
+<p>Analyze &gt; General Linear Model &gt; Univariate Choose feeling as the dependent variable and behavior as the fixed factor Click on the “Options” button and check the two boxes named “Descriptive” and “Homogeneity tests”. After clicking “Paste” you should get the following syntax:</p>
+<pre><code>UNIANOVA feeling BY behavior    
+    /METHOD=SSTYPE(3)   
+    /INTERCEPT=INCLUDE   
+    /PRINT=DESCRIPTIVE HOMOGENEITY    
+    /CRITERIA=ALPHA(.05)   
+    /DESIGN=behavior.   </code></pre>
+<p>What is the p-value of the Levene’s test? Use the Levene’s test “Based on mean” again. <input class="webex-solveme nospaces" data-tol="0.01" size="5" data-answer="[&quot;0.611&quot;,&quot;.611&quot;]"></p>
+<p>Do we have reason to question the assumption of equal population variances? <select class="webex-select"><option value="blank"></option>
+<option value="">Yes</option>
+<option value="answer">No</option></select></p>
+<p>In ANOVA, we distinguish between three sources of variation: the Sums of Squares total (SSt), the Sums of Squares between (SSb, or SSR) and the Sums of Squares within (SSw, or SSE).</p>
+<p>What does the Sum of squares total mean (phrase your answer in your own words)? Look up the value of the SSt in the ANOVA output and write it down as well.</p>
+<p>What does the Sum of squares between entail (phrase your answer in your own words)? Look up the value of the SSb in the ANOVA output, and write it down as well.</p>
+<p>What does the Sums of squares within entail (phrase your answer in your own words)? Look up the value of the SSw in the ANOVA output, and write it down as well.</p>
+<div class="webex-solution">
+<button>
+Answer
+</button>
+<p>The Between Groups Sum of squares or SSb is equal to 18.330 and simply give the squared distance of individual scores to the mean, summed together. In other words, it shows how much variability there is in the group means. If all group means would be equal to each other, the SSb equals 0.</p>
+<p>The SSw here is 38.405. It tells us how much the individual scores within a group deviate from the group mean. In other words, it shows how much variability there is within the groups. The is the variation that is independent from the experimental effect (because variation within groups cannot be caused by differences in experimental conditions).</p>
+<p>The SSt tells us how much the invidual scores deviate from the grand mean. In other words, it shows how much variability there is in the dependent variable in total.</p>
+<p>Recall that SSB is the same as SSR; it can be found in the row “Corrected Model”, column Type III Sums of Squares.</p>
+<p>Recall that the SSW is the same as SSE; it islabeled “Error” in the column Type III Sums of Squares.</p>
+</div>
+<p>How do we use the different types of Sum of Squares to calculate the F statistic?</p>
+<div id="radio_TPBODEADFL" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_TPBODEADFL" value="answer"><span>$rac{SSB/dfb}{SSW/dfw}<span class="math inline">\(&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_TPBODEADFL" value=""&gt;&lt;/input&gt; &lt;span&gt;\)</span>rac{SSW}{SSB}<span class="math inline">\(&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_TPBODEADFL" value=""&gt;&lt;/input&gt; &lt;span&gt;\)</span>rac{SSB}{SSW}<span class="math inline">\(&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_TPBODEADFL" value=""&gt;&lt;/input&gt; &lt;span&gt;\)</span>rac{SSW/dfw}{SSB/dfb}$</span></label>
+</div>
+<div class="webex-solution">
+<button>
+Answer
+</button>
+<p>We can calculate F using the following formula:</p>
+<p><span class="math inline">\(F = \frac{MSb}{MSw}\)</span></p>
+<p>The MSb and MSw give the between group variance and within group variance, respectively. They can be calculated using the following formula’s:</p>
+<p><span class="math inline">\(MSb = \frac{SSb}{k-1}\)</span>, <span class="math inline">\(MSw = \frac{SSw}{N-k}\)</span></p>
+</div>
+<p>Again, consider the table Tests of Between Subjects, which represents the results of ANOVA.</p>
+<p>What is the F-value of the ANOVA? <input class="webex-solveme nospaces" data-tol="0.01" size="5" data-answer="[&quot;5.369&quot;]"></p>
+<p>The degrees of freedom between (dfb) are <input class="webex-solveme nospaces" size="1" data-answer="[&quot;4&quot;]"> and the degrees of freedom within (dfw) are <input class="webex-solveme nospaces" size="2" data-answer="[&quot;45&quot;]">.</p>
+<p>dfb = k-1</p>
+<p>dfw = N-k</p>
+<p>Again consider the table Tests of Between Subjects</p>
+<p>What is the p-value of the ANOVA? <input class="webex-solveme nospaces" data-tol="0.001" size="5" data-answer="[&quot;0.001&quot;,&quot;.001&quot;]"></p>
+<p>You can find the p-value of the ANOVA in the table named “Tests of Between-Subjects Effects”. The p-value is equal to the Sig.-value in the first row of this table.</p>
+<p>What can you conclude from this?</p>
+<p>Write down a statistical conclusion and a conclusion within the context of this research example.</p>
+<div class="webex-solution">
+<button>
+Answer
+</button>
+<p>The p-value is smaller than our alpha level (0.05). Therefore, we can conclude that there was a statistically significant difference in positive attitude between the groups, based on the behaviour the guide displayed towards them, (F(4,45) = 5.369, p = .001).</p>
+</div>
+<p>What is the proportion of variance explained by behavior? <input class="webex-solveme nospaces" data-tol="0.01" size="5" data-answer="[&quot;0.323&quot;,&quot;.323&quot;]"></p>
+<p>How would you describe this number in words? So what does it mean?</p>
+<p>Remark: Cohen formulated some rules of thumb for interpreting the <span class="math inline">\(R^2\)</span> How would you qualify the strength of the effect based on Cohen’s rules of thumb? And why should we not take the rules of thumb too seriously?</p>
+<p>Cohen (1988) proposed the following guidelines for interpreting the magnitude of <span class="math inline">\(R^2\)</span></p>
+<table class="table">
+<thead><tr class="header">
+<th>Size</th>
+<th><span class="math inline">\(R^2\)</span></th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>Small</td>
+<td>0.01</td>
+</tr>
+<tr class="even">
+<td>Medium</td>
+<td>0.06</td>
+</tr>
+<tr class="odd">
+<td>Large</td>
+<td>0.14</td>
+</tr>
+</tbody>
+</table>
+<p>Note that, in ANOVA, <span class="math inline">\(R^2\)</span> is also called <span class="math inline">\(\eta^2\)</span> (eta squared) is a measure of effect size, it indicates the amount of variance in thedependen t variable that is explained by the independent variable(s). In our case, 32.3% of the variance in feeling is explained by behaviour. According to Cohen’s guidelines this is a large effect size (see slide 28). However, these guidelines are rather arbitrary, which Cohen himself also stresses.</p>
+<p>The correct conclusion so far is that the five groups differ significantly on the dependent variable feeling. However, we do not yet know which groups differ.</p>
+</section><section id="one-way-anova-using-regression" class="level2" data-number="11.4"><h2 data-number="11.4" class="anchored" data-anchor-id="one-way-anova-using-regression">
+<span class="header-section-number">11.4</span> One-Way ANOVA using regression</h2>
+<p>In this assignment, we will conduct the same ANOVA using the regression interface.</p>
+<p>To test the differences between groups, we first create dummy variables. Let’s make them for all categories, but we will mostly use group 1 as reference category. When making dummies, it’s most convenient to use syntax. Let’s give the dummies informative names this time:</p>
+<pre><code>RECODE behavior (1=1) (2=0) (3=0) (4=0) (5=0) INTO rushing.
+RECODE behavior (1=0) (2=1) (3=0) (4=0) (5=0) INTO stories.
+RECODE behavior (1=0) (2=0) (3=1) (4=0) (5=0) INTO insulting.
+RECODE behavior (1=0) (2=0) (3=0) (4=1) (5=0) INTO jokes.
+RECODE behavior (1=0) (2=0) (3=0) (4=0) (5=1) INTO singing.
+EXECUTE.</code></pre>
+<p>Create the necessary syntax for a regression with the dummy variable that compares the means of the rushing group against all other groups.</p>
+<p>You can find the dialog for the regression under Analyze &gt; Regression &gt; Linear</p>
+<p>In the SPSS dialog you have to specify the Dependent and Independent variable. In our case, the independent variables are all dummies we created, except for the reference category! Use category 1 as reference category.</p>
+<p>Compare your syntax to the correct syntax:</p>
+<pre><code>REGRESSION
+  /MISSING LISTWISE
+  /STATISTICS COEFF OUTS R ANOVA
+  /CRITERIA=PIN(.05) POUT(.10)
+  /NOORIGIN 
+  /DEPENDENT feeling
+  /METHOD=ENTER stories insulting jokes singing.</code></pre>
+<p>Can you find all three of the aforementioned sources of variation in the output? The Sums of Squares total (SSt), the Sums of Squares between (SSb, or SSR) and the Sums of Squares within (SSw, or SSE).</p>
+<p>Compare the results to those of the One-Way ANOVA interface.</p>
+<div class="webex-solution">
+<button>
+Answer
+</button>
+<p>In the ANOVA table, the Regression Sum of Squares is identical to the “Between Groups Sum of Squares” from the One-Way ANOVA interface. The Residual Sum of Squares is identical to the “Within Groups Sum of Squares” from the One-Way ANOVA interface. And the Total Sums of Squares are also the same.</p>
+</div>
+
+
+</section></section></main><!-- /main --><script>
+
+/* update total correct if #webex-total_correct exists */
+update_total_correct = function() {
+  console.log("webex: update total_correct");
+
+  var t = document.getElementsByClassName("webex-total_correct");
+  for (var i = 0; i < t.length; i++) {
+    p = t[i].parentElement;
+    var correct = p.getElementsByClassName("webex-correct").length;
+    var solvemes = p.getElementsByClassName("webex-solveme").length;
+    var radiogroups = p.getElementsByClassName("webex-radiogroup").length;
+    var selects = p.getElementsByClassName("webex-select").length;
+
+    t[i].innerHTML = correct + " of " + (solvemes + radiogroups + selects) + " correct";
+  }
+}
+
+/* webex-solution button toggling function */
+b_func = function() {
+  console.log("webex: toggle hide");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('open')) {
+    cl.remove("open");
+  } else {
+    cl.add("open");
+  }
+}
+
+/* check answers */
+check_func = function() {
+  console.log("webex: check answers");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('unchecked')) {
+    cl.remove("unchecked");
+    this.innerHTML = "Hide Answers";
+  } else {
+    cl.add("unchecked");
+    this.innerHTML = "Show Answers";
+  }
+}
+
+/* function for checking solveme answers */
+solveme_func = function(e) {
+  console.log("webex: check solveme");
+
+  var real_answers = JSON.parse(this.dataset.answer);
+  var my_answer = this.value;
+  var cl = this.classList;
+  if (cl.contains("ignorecase")) {
+    my_answer = my_answer.toLowerCase();
+  }
+  if (cl.contains("nospaces")) {
+    my_answer = my_answer.replace(/ /g, "")
+  }
+
+  if (my_answer == "") {
+    cl.remove("webex-correct");
+    cl.remove("webex-incorrect");
+  } else if (real_answers.includes(my_answer)) {
+    cl.add("webex-correct");
+    cl.remove("webex-incorrect");
+  } else {
+    cl.add("webex-incorrect");
+    cl.remove("webex-correct");
+  }
+
+  // match numeric answers within a specified tolerance
+  if(this.dataset.tol > 0){
+    var tol = JSON.parse(this.dataset.tol);
+    var matches = real_answers.map(x => Math.abs(x - my_answer) < tol)
+    if (matches.reduce((a, b) => a + b, 0) > 0) {
+      cl.add("webex-correct");
+    } else {
+      cl.remove("webex-correct");
+    }
+  }
+
+  // added regex bit
+  if (cl.contains("regex")){
+    answer_regex = RegExp(real_answers.join("|"))
+    if (answer_regex.test(my_answer)) {
+      cl.add("webex-correct");
+    }
+  }
+
+  update_total_correct();
+}
+
+/* function for checking select answers */
+select_func = function(e) {
+  console.log("webex: check select");
+
+  var cl = this.classList
+
+  /* add style */
+  cl.remove("webex-incorrect");
+  cl.remove("webex-correct");
+  if (this.value == "answer") {
+    cl.add("webex-correct");
+  } else if (this.value != "blank") {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+/* function for checking radiogroups answers */
+radiogroups_func = function(e) {
+  console.log("webex: check radiogroups");
+
+  var checked_button = document.querySelector('input[name=' + this.id + ']:checked');
+  var cl = checked_button.parentElement.classList;
+  var labels = checked_button.parentElement.parentElement.children;
+
+  /* get rid of styles */
+  for (i = 0; i < labels.length; i++) {
+    labels[i].classList.remove("webex-incorrect");
+    labels[i].classList.remove("webex-correct");
+  }
+
+  /* add style */
+  if (checked_button.value == "answer") {
+    cl.add("webex-correct");
+  } else {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+window.onload = function() {
+  console.log("webex onload");
+  /* set up solution buttons */
+  var buttons = document.getElementsByTagName("button");
+
+  for (var i = 0; i < buttons.length; i++) {
+    if (buttons[i].parentElement.classList.contains('webex-solution')) {
+      buttons[i].onclick = b_func;
+    }
+  }
+
+  var check_sections = document.getElementsByClassName("webex-check");
+  console.log("check:", check_sections.length);
+  for (var i = 0; i < check_sections.length; i++) {
+    check_sections[i].classList.add("unchecked");
+
+    let btn = document.createElement("button");
+    btn.innerHTML = "Show Answers";
+    btn.classList.add("webex-check-button");
+    btn.onclick = check_func;
+    check_sections[i].appendChild(btn);
+
+    let spn = document.createElement("span");
+    spn.classList.add("webex-total_correct");
+    check_sections[i].appendChild(spn);
+  }
+
+  /* set up webex-solveme inputs */
+  var solveme = document.getElementsByClassName("webex-solveme");
+
+  for (var i = 0; i < solveme.length; i++) {
+    /* make sure input boxes don't auto-anything */
+    solveme[i].setAttribute("autocomplete","off");
+    solveme[i].setAttribute("autocorrect", "off");
+    solveme[i].setAttribute("autocapitalize", "off");
+    solveme[i].setAttribute("spellcheck", "false");
+    solveme[i].value = "";
+
+    /* adjust answer for ignorecase or nospaces */
+    var cl = solveme[i].classList;
+    var real_answer = solveme[i].dataset.answer;
+    if (cl.contains("ignorecase")) {
+      real_answer = real_answer.toLowerCase();
+    }
+    if (cl.contains("nospaces")) {
+      real_answer = real_answer.replace(/ /g, "");
+    }
+    solveme[i].dataset.answer = real_answer;
+
+    /* attach checking function */
+    solveme[i].onkeyup = solveme_func;
+    solveme[i].onchange = solveme_func;
+
+    solveme[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+  }
+
+  /* set up radiogroups */
+  var radiogroups = document.getElementsByClassName("webex-radiogroup");
+  for (var i = 0; i < radiogroups.length; i++) {
+    radiogroups[i].onchange = radiogroups_func;
+  }
+
+  /* set up selects */
+  var selects = document.getElementsByClassName("webex-select");
+  for (var i = 0; i < selects.length; i++) {
+    selects[i].onchange = select_func;
+    selects[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+  }
+
+  update_total_correct();
+}
+
+</script><script>
+// open rdrr links externally ----
+
+var exlinks = document.querySelectorAll("a[href^='https://rdrr.io']");
+var exlink_func = function(){
+  window.open(this.href);
+  return false;
+};
+for (var i = 0; i < exlinks.length; i++) {
+    exlinks[i].addEventListener('click', exlink_func, false);
+}
+
+// visible second sidebar in mobile ----
+
+function move_sidebar() {
+  var toc = document.getElementById("TOC");
+  var small_sidebar = document.querySelector("#quarto-sidebar .sidebar-menu-container");
+  var right_sidebar = document.getElementById("quarto-margin-sidebar");
+
+  if (window.innerWidth < 768) {
+    small_sidebar.append(toc);
+  } else {
+    right_sidebar.append(toc);
+  }
+}
+move_sidebar();
+window.onresize = move_sidebar;
+</script><script>
+
+/* update total correct if #webex-total_correct exists */
+update_total_correct = function() {
+  console.log("webex: update total_correct");
+
+  var t = document.getElementsByClassName("webex-total_correct");
+  for (var i = 0; i < t.length; i++) {
+    p = t[i].parentElement;
+    var correct = p.getElementsByClassName("webex-correct").length;
+    var solvemes = p.getElementsByClassName("webex-solveme").length;
+    var radiogroups = p.getElementsByClassName("webex-radiogroup").length;
+    var selects = p.getElementsByClassName("webex-select").length;
+
+    t[i].innerHTML = correct + " of " + (solvemes + radiogroups + selects) + " correct";
+  }
+}
+
+/* webex-solution button toggling function */
+b_func = function() {
+  console.log("webex: toggle hide");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('open')) {
+    cl.remove("open");
+  } else {
+    cl.add("open");
+  }
+}
+
+/* check answers */
+check_func = function() {
+  console.log("webex: check answers");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('unchecked')) {
+    cl.remove("unchecked");
+    this.innerHTML = "Hide Answers";
+  } else {
+    cl.add("unchecked");
+    this.innerHTML = "Show Answers";
+  }
+}
+
+/* function for checking solveme answers */
+solveme_func = function(e) {
+  console.log("webex: check solveme");
+
+  var real_answers = JSON.parse(this.dataset.answer);
+  var my_answer = this.value;
+  var cl = this.classList;
+  if (cl.contains("ignorecase")) {
+    my_answer = my_answer.toLowerCase();
+  }
+  if (cl.contains("nospaces")) {
+    my_answer = my_answer.replace(/ /g, "")
+  }
+
+  if (my_answer == "") {
+    cl.remove("webex-correct");
+    cl.remove("webex-incorrect");
+  } else if (real_answers.includes(my_answer)) {
+    cl.add("webex-correct");
+    cl.remove("webex-incorrect");
+  } else {
+    cl.add("webex-incorrect");
+    cl.remove("webex-correct");
+  }
+
+  // match numeric answers within a specified tolerance
+  if(this.dataset.tol > 0){
+    var tol = JSON.parse(this.dataset.tol);
+    var matches = real_answers.map(x => Math.abs(x - my_answer) < tol)
+    if (matches.reduce((a, b) => a + b, 0) > 0) {
+      cl.add("webex-correct");
+    } else {
+      cl.remove("webex-correct");
+    }
+  }
+
+  // added regex bit
+  if (cl.contains("regex")){
+    answer_regex = RegExp(real_answers.join("|"))
+    if (answer_regex.test(my_answer)) {
+      cl.add("webex-correct");
+    }
+  }
+
+  update_total_correct();
+}
+
+/* function for checking select answers */
+select_func = function(e) {
+  console.log("webex: check select");
+
+  var cl = this.classList
+
+  /* add style */
+  cl.remove("webex-incorrect");
+  cl.remove("webex-correct");
+  if (this.value == "answer") {
+    cl.add("webex-correct");
+  } else if (this.value != "blank") {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+/* function for checking radiogroups answers */
+radiogroups_func = function(e) {
+  console.log("webex: check radiogroups");
+
+  var checked_button = document.querySelector('input[name=' + this.id + ']:checked');
+  var cl = checked_button.parentElement.classList;
+  var labels = checked_button.parentElement.parentElement.children;
+
+  /* get rid of styles */
+  for (i = 0; i < labels.length; i++) {
+    labels[i].classList.remove("webex-incorrect");
+    labels[i].classList.remove("webex-correct");
+  }
+
+  /* add style */
+  if (checked_button.value == "answer") {
+    cl.add("webex-correct");
+  } else {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+window.onload = function() {
+  console.log("webex onload");
+  /* set up solution buttons */
+  var buttons = document.getElementsByTagName("button");
+
+  for (var i = 0; i < buttons.length; i++) {
+    if (buttons[i].parentElement.classList.contains('webex-solution')) {
+      buttons[i].onclick = b_func;
+    }
+  }
+
+  var check_sections = document.getElementsByClassName("webex-check");
+  console.log("check:", check_sections.length);
+  for (var i = 0; i < check_sections.length; i++) {
+    check_sections[i].classList.add("unchecked");
+
+    let btn = document.createElement("button");
+    btn.innerHTML = "Show Answers";
+    btn.classList.add("webex-check-button");
+    btn.onclick = check_func;
+    check_sections[i].appendChild(btn);
+
+    let spn = document.createElement("span");
+    spn.classList.add("webex-total_correct");
+    check_sections[i].appendChild(spn);
+  }
+
+  /* set up webex-solveme inputs */
+  var solveme = document.getElementsByClassName("webex-solveme");
+
+  for (var i = 0; i < solveme.length; i++) {
+    /* make sure input boxes don't auto-anything */
+    solveme[i].setAttribute("autocomplete","off");
+    solveme[i].setAttribute("autocorrect", "off");
+    solveme[i].setAttribute("autocapitalize", "off");
+    solveme[i].setAttribute("spellcheck", "false");
+    solveme[i].value = "";
+
+    /* adjust answer for ignorecase or nospaces */
+    var cl = solveme[i].classList;
+    var real_answer = solveme[i].dataset.answer;
+    if (cl.contains("ignorecase")) {
+      real_answer = real_answer.toLowerCase();
+    }
+    if (cl.contains("nospaces")) {
+      real_answer = real_answer.replace(/ /g, "");
+    }
+    solveme[i].dataset.answer = real_answer;
+
+    /* attach checking function */
+    solveme[i].onkeyup = solveme_func;
+    solveme[i].onchange = solveme_func;
+
+    solveme[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+  }
+
+  /* set up radiogroups */
+  var radiogroups = document.getElementsByClassName("webex-radiogroup");
+  for (var i = 0; i < radiogroups.length; i++) {
+    radiogroups[i].onchange = radiogroups_func;
+  }
+
+  /* set up selects */
+  var selects = document.getElementsByClassName("webex-select");
+  for (var i = 0; i < selects.length; i++) {
+    selects[i].onchange = select_func;
+    selects[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+  }
+
+  update_total_correct();
+}
+
+</script><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="./glm3binary.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">GLM-III: Binary Predictors</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./glm5multiple.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">GLM-V: Multiple regression</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer"><div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">CC-BY (2023) Caspar J. Van Lissa</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

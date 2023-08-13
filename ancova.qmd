@@ -1,0 +1,517 @@
+# GLM: ANCOVA {#sec-ancova}
+
+```{r, include = FALSE}
+source("R/booktem_setup.R")
+source("R/my_setup.R")
+```
+
+ANCOVA, which stands for Analysis of Covariance, is an extension of the concepts we've covered in bivariate linear regression and multiple regression.
+It is essentially a multiple regression with a categorical predictor and one or more continuous predictors. What's "special" about this technique is that it is commonly used when the predictor of interest is that categorical variable, and the continuous predictor(s) are so-called "covariates": predictors that are only included to improve our estimate of the effect of the categorical predictor of interest.
+
+You will often see this technique used to analyze data from experiments or "natural experiments", where participants self-select into a treatment group.
+
+While ANCOVA is a useful technique, it comes with some serious pitfalls: any time control variables are used, we are making assumptions about causality. If these assumptions are incorrect, our estimates of the effect of interest will be (severely) biased.
+
+## Covariates and Their Role
+
+Covariates are variables that have a relationship with the dependent variable but are not the primary focus of the study. They are often referred to as control variables, as they help control for unwanted variability and improve the precision of the analysis. Examples of common covariates include age, gender, education level, or any other variables that might influence the dependent variable.
+
+In terms of causality, it's crucial to consider the relationships between covariates, predictors, and the outcome variable. Control variables should ideally be confounders – variables that influence both the predictor of interest and the outcome. It's essential to avoid controlling for colliders, which are variables *caused by* both the predictor and the outcome. A thorough understanding of causal relationships is crucial for proper interpretation.
+
+One reason why researchers use control variables in ANCOVA is because they reduce the residual variance in the outcome variable, which in turn increases the power to detect the effect of the predictor of interest. Another reason to use covariates is when the goal is making causal inferences, especially in quasi-experimental designs. The proper selection of covariates that enable causal inference requires careful consideration and is beyond the scope of this course.
+
+## Good, Neutral, and Bad Controls
+
+Covariates fall into different categories based on their relationship with the predictor of interest and the outcome. An example of a good control is a confounder: a variable that causes both the predictor and the outcome. These need to be controlled to avoid spurious relationships. An example of a neutral control is a covariate that is unrelated to the predictor but can reduce error variance in the outcome, thereby increasing statistical power. Bad controls, on the other hand, can introduce biases, such as collider bias (controlling for an outcome of predictor and outcome), case control bias (controlling for an outcome of the outcome), or overcontrol bias (controlling for a mediator of the effect of the focal predictor on the outcome).
+
+One crucial insight is that in randomized controlled experiments, the random assignment of participants to different groups breaks the relationship between confounders and the treatment variable. This makes control variables related to the confounders unnecessary. Controlling for them could even introduce bias into the analysis.
+
+
+## Calculating Adjusted Means
+
+Adjusting for covariates involves calculating adjusted means – the means that groups would have had if they scored equally on the covariate. There are two ways to mathematically calculate the adjusted means. One way is to fill in the regression equation for the desired value of the covariate. 
+
+The other way is to calculate the adjusted means from the group means:
+
+$$
+\bar{Y}_g^{adj} = \bar{Y}_g - b(\bar{X}_g-\bar{X})
+$$
+
+Where:
+
+* $\bar{Y}_g^{adj}$: Adjusted mean of the outcome for group g
+* $\bar{Y}_g$: Unadjusted mean of the outcome for group g
+* $b$: Regression coefficient of the covariate
+* $\bar{X}_g$: Group mean of covariate X
+* $\bar{X}$: Overall mean of covariate X
+
+
+In sum, ANCOVA is a different name for regression with a categorical predictor of interest, and continuous predictor(s) that are included to improve our estimate of the effect of the predictor of interest. ANCOVA can enhance statistical power and help make more accurate (potentiall causal) inferences. However, the careful selection of covariates and an understanding of causal relationships are paramount to its proper implementation and interpretation.
+
+# Formative Test
+
+A formative test helps you assess your progress in the course, and helps you address any blind spots in your understanding of the material. If you get a question wrong, you will receive a hint on how to improve your understanding of the material.
+
+Complete the formative test ideally after you’ve seen the lecture, but before the lecture meeting in which we can discuss any topics that need more attention
+
+```{r}
+#| results = "asis",
+#| echo = FALSE,
+#| cache = FALSE
+add_mcs("questions_ancova.csv")
+```
+
+# Tutorial
+
+## Factorial ANOVA
+
+Consider the following research situation: A psychologist wants to study if and to what extent different behavior of waiters affect the amount of tip money they get, and whether it matters if the behavior is shown by a waiter or waitress.
+
+The researcher distinguishes the following types of behavior: neutral behavior, drawing a smiley on the bill, or making small talk.
+
+They ran a fully crossed experiment with 3 (behaviors) x 2 (gender: waiter or waitress) = 6 conditions. For each condition they collected data for 10 customers who were helped by a waiter showing neutral behavior, 10 helped by a waiter drawing a smiley on the bill, and so forth.
+
+Is the design balanced? `r mcq(c(answer = "Yes", "No"))`
+
+What is/are the independent variable(s) in this experiment? `r mcq(c("Gender", "Tip size", answer = "Behavior")[sample.int(3)])`
+
+Draw the conceptual model of the experiment. Then, check your answer.
+
+`r hide("Answer")`
+
+```{r}
+library(tidySEM)
+library(ggplot2)
+lo <- get_layout("", "Gender", "",
+                 "Behavior", "", "Tip size", rows = 2)
+edges <- data.frame(from = "Behavior", to = "Tip size")
+p <- prepare_graph(layout = lo, edges= edges)
+plot(p) + geom_segment(aes(x = p$nodes$x[p$nodes$name == "Gender"], xend =  p$nodes$x[p$nodes$name == "Gender"], y = p$nodes$node_ymin[p$nodes$name == "Gender"], yend = p$nodes$y[p$nodes$name == "Behavior"]), arrow = arrow(length = unit(0.03, "npc"), type = "closed"))
+```
+
+As you can see, the dependent variable is Tip money, and the independent variables are Type of behavior and Gender. More specifically. Gender is the moderator, as is expected to influence the relationship between Behavior and Tip money.
+
+`r unhide()`
+
+Now, open the dataset `WaiterBehavior.sav`.
+
+We will run the analysis to find out what the results of the experiment are. We can do so with a factorial ANOVA.
+
+First, create all the dummy variables you need, using syntax. Check your answer below.
+
+
+`r hide("Answer")`
+
+```{r}
+library(tidySEM)
+library(ggplot2)
+lo <- get_layout("", "Gender", "",
+                 "Behavior", "", "Tip size", rows = 2)
+edges <- data.frame(from = "Behavior", to = "Tip size")
+p <- prepare_graph(layout = lo, edges= edges)
+plot(p) + geom_segment(aes(x = p$nodes$x[p$nodes$name == "Gender"], xend =  p$nodes$x[p$nodes$name == "Gender"], y = p$nodes$node_ymin[p$nodes$name == "Gender"], yend = p$nodes$y[p$nodes$name == "Behavior"]), arrow = arrow(length = unit(0.03, "npc"), type = "closed"))
+```
+
+As you can see, the dependent variable is Tip money, and the independent variables are Type of behavior and Gender. More specifically. Gender is the moderator, as is expected to influence the relationship between Behavior and Tip money.
+
+`r unhide()`
+
+## Regression with dummies
+
+First, we analyze these data using regression with dummies.
+
+You will need to dummy code both categorical predictors.
+
+Do this in the familiar way, then check your syntax.
+
+`r hide("Answer")`
+```
+RECODE behavior (1=1) (2=0) (3=0) INTO talking.
+RECODE behavior (1=0) (2=1) (3=0) INTO smiling.
+RECODE behavior (1=0) (2=0) (3=1) INTO neutral.
+
+RECODE Gender (1=1) (2=0) INTO waitress.
+RECODE Gender (1=0) (2=1) INTO waiter.
+EXECUTE.
+```
+`r unhide()`
+
+Estimate a regression model with a main effect for gender and behavior.
+Create the syntax, then check your answer below.
+
+
+`r hide("Answer")`
+
+Using neutral behavior and waiter as reference categories, the code is:
+
+```
+REGRESSION
+  /MISSING LISTWISE
+  /STATISTICS COEFF OUTS R ANOVA
+  /CRITERIA=PIN(.05) POUT(.10)
+  /NOORIGIN 
+  /DEPENDENT Tip
+  /METHOD=ENTER waitress smiling talking.
+```
+
+`r unhide()`
+
+Now, we want to examine whether there is an interaction between gender and behavior. 
+To do so, we want to specify a "full factorial" model.
+This simply means that we want to know if there is an interaction effect between the two categorical variables.
+The way to include an interaction effect is to multiply the predictor.
+As each predictor is represented by multiple dummies,
+we have to multiply each dummy for each variable with all dummies from the other variable.
+
+In this case, that means multiplying the `waiter` dummy with the `smiling` and `talking` dummies.
+
+Do this via syntax, then check your work.
+
+`r hide("Answer")`
+```
+COMPUTE smilingXwaitress = smiling*waitress.
+COMPUTE talkingXwaitress = talking*waitress.
+EXECUTE.
+```
+`r unhide()`
+
+
+Conduct a hierarchical regression analysis that includes these new interaction terms.
+
+What proportion of the total variance in Tip money is explained by the full factorial model? `r fitb(0.659, num = T, tol = .01)`
+
+
+True or false: The full factorial model explains a significant amount of variance. `r torf(TRUE)`
+
+
+Is there a significant interaction effect? `r mcq(c("Yes", "No", answer = "Can't tell"))`
+
+<!-- What is the value of the appropriate test statistic for the significance of the interaction effect? `r fitb(18.31, num = T, tol = .01)` -->
+
+`r hide("Explanation")`
+
+Even though we see significant interaction terms in the coefficients table, determining whether there is a significant interaction between categorical variables requires more than just "eyeballing" whether those terms are significant or not. You need to perform a nested model test. 
+<!-- So, the correct test statistic is the "F change" value from the Model Summary table. -->
+
+`r unhide()`
+
+
+Based on the output, complete the following table:
+
+Behavior | Gender | Mean
+---------|--------|------
+Neutral	| Waiter |	4.600
+Neutral	| 	Waitress |	`r fitb(2.200, num = T, tol = .01)`
+Smiley	| Waiter |	5.100
+Smiley	| 	Waitress |	7.600
+Small talk	| Waiter |	`r fitb(5.500, num = T, tol = .01)`
+Small talk	| Waitress |	10.000
+
+
+Draw a rough plot of these means on a piece of paper.
+
+Put the type of behavior on the x-axis and draw separate lines for waiters and waitresses.
+
+True or false: The graph suggests a potential interaction. `r torf(TRUE)`
+
+If so, describe the interaction effect (i.e., what can we say about the effect of behavior on amount of tip money for waiters and waitresses?).
+
+`r hide("Answer")`
+The lines are not parallel. Hence, also from the graph we see that there is interaction. The effect of type of behavior on the amount of tip money depends on the gender of the waiter/waitress.
+
+It seems that for waiters the tip money does not depend much on the behavior.
+
+For waitresses the effect is stronger; neutral behavior produces the least amount of tip money, whereas small talk is most beneficial.
+
+`r unhide()` 
+
+
+See if you can answer the following question by yourself:
+
+
+True or false: The interaction effect is significant. `r torf(TRUE)`
+
+`r hide("Answer")`
+
+To answer this question, you need to perform a nested model test.
+
+The syntax is:
+
+```
+REGRESSION
+  /MISSING LISTWISE
+  /STATISTICS COEFF OUTS R ANOVA CHANGE
+  /CRITERIA=PIN(.05) POUT(.10)
+  /NOORIGIN 
+  /DEPENDENT Tip
+  /METHOD=ENTER smiling talking waitress
+  /METHOD=ENTER smilingXwaitress talkingXwaitress.
+```
+
+Note two things: we request `CHANGE` statistics, and we enter all "interaction effects" in a separate step, so we can use the R-squared change test to determine overall significance.
+
+`r unhide()`
+
+What is the value of the test statistic for the significance of the **interaction effect**? `r fitb(18.32, num = T, tol = .01)`
+
+Report the effect, then check your answer.
+
+`r hide("Answer")`
+
+There was a significant interaction effect between waiters' sex and behavior, F(2,54) = 18.315, p < .001.
+ 
+This means that the effect of Type of behavior on Tip money depends on the Gender of the waiter/waitress. 
+
+`r unhide()`
+
+Out of curiosity - how much variance is explained by the main effects only? `r fitb(0.427, num = T, tol = .01)`
+
+
+<!-- ## ANOVA specification -->
+
+<!-- It is also possible to request all of the means above directly, using ANOVA specification. -->
+
+<!-- In such a model, each cell in the table receives its own dummy. The intercept is omitted from the regression model, thus forcing it to specify the effect of all those dummies in terms of that group's mean. -->
+
+<!-- We can specify these special dummies as follows: -->
+
+<!-- Create a variable for each cell in the expected means table, assign it the value 0: -->
+
+<!-- ```  -->
+<!-- COMPUTE neutralwaiter = 0. -->
+<!-- COMPUTE neutralwaitress = 0. -->
+<!-- COMPUTE smilingwaiter = 0. -->
+<!-- COMPUTE smilingwaitress = 0. -->
+<!-- COMPUTE talkingwaiter = 0. -->
+<!-- COMPUTE talkingwaitress = 0. -->
+<!-- EXECUTE. -->
+<!-- ``` -->
+
+<!-- For a particular combination of values on our two predictors, assign that dummy the value 1: -->
+
+<!-- ``` -->
+<!-- IF(behavior = 1 & gender = 1) neutralwaiter = 1. -->
+<!-- IF(behavior = 1 & gender = 2) neutralwaitress = 1. -->
+<!-- IF(behavior = 2 & gender = 1) smilingwaiter = 1. -->
+<!-- IF(behavior = 2 & gender = 2) smilingwaitress = 1. -->
+<!-- IF(behavior = 3 & gender = 1) talkingwaiter = 1. -->
+<!-- IF(behavior = 3 & gender = 2) talkingwaitress = 1. -->
+<!-- EXECUTE. -->
+<!-- ``` -->
+
+<!-- Now, specify a regression model with all of these new dummies, and without an intercept. Check your code if necessary. -->
+
+<!-- `r hide("Answer")` -->
+
+<!-- ``` -->
+<!-- REGRESSION -->
+<!--   /MISSING LISTWISE -->
+<!--   /STATISTICS COEFF OUTS R ANOVA -->
+<!--   /CRITERIA=PIN(.05) POUT(.10) -->
+<!--   /ORIGIN  -->
+<!--   /DEPENDENT Tip -->
+<!--   /METHOD=ENTER neutralwaiter neutralwaitress smilingwaiter smilingwaitress talkingwaiter talkingwaitress. -->
+<!-- ``` -->
+
+<!-- `r unhide()` -->
+
+
+<!-- Verify that the model coefficients are exactly the same as the expected means table above. -->
+
+<!-- You can use the standard errors in this table to test the means against any hypothesized value. -->
+
+<!-- For convenience's sake, use the Z-distribution rather than the t-distribution. -->
+
+<!-- Is the mean tip for smiling waitresses significantly greater than the scale midpoint of 6? -->
+
+<!-- First, construct your hypothesis and check it below. -->
+
+<!-- `r hide("Answer")` -->
+
+<!-- $H_0: \mu_{waitress, smiling} \leq 6$ -->
+
+<!-- `r unhide()` -->
+
+<!-- Now, perform the test. What is the test statistic? `r fitb(2.725724, num = T, tol = .01)` -->
+
+<!-- Would this Z-value be significant at $\alpha = .05$ for a two-sided test? `r torf(TRUE)` -->
+
+<!-- And what about a one-sided test? `r torf(TRUE)` -->
+
+
+
+## ANOVA interface
+
+SPSS also has a dedicated "ANOVA interface". It specifies exactly the same model as we have been investigating, but its output is more focused on information that is typically requested when estimating a model with only categorical predictors and (optionally) interactions between them.
+
+We will now use the ANOVA interface and pay special attention to output it gives us that is not directly available via the Regression interface.
+
+You can either use the graphical user interface, or copy-paste this syntax. Either way, pay particular attention to the following:
+
+* Under Options, ask for Homogeneity tests: `/PRINT=HOMOGENEITY`
+* Under Options, ask for Estimates of effect size: `/PRINT=ETASQ`
+* Under Options, ask for Parameter Estimates: `/PRINT=PARAMETER`
+* Under EM Means (expected marginal means), ask for the means for the interaction, and compare Main effects: `/EMMEANS=TABLES(Behavior*Gender) COMPARE(Behavior) ADJ(LSD)`
+
+
+```
+UNIANOVA Tip BY Behavior Gender
+  /METHOD=SSTYPE(3)
+  /INTERCEPT=INCLUDE
+  /PLOT=PROFILE(Behavior*Gender)
+  /PRINT=ETASQ HOMOGENEITY DESCRIPTIVE PARAMETER
+  /CRITERIA=ALPHA(.05)
+  /EMMEANS=TABLES(Behavior*Gender) COMPARE(Behavior) ADJ(LSD)
+  /EMMEANS=TABLES(Behavior*Gender) COMPARE(Gender) ADJ(LSD)
+  /DESIGN=Behavior Gender Behavior*Gender.
+```
+
+Copy and run this syntax.
+
+Note that the table labelled **Parameter Estimates** is identical to the Coefficients table from the previous regression analysis.
+
+Also note that, for example, the F-value for the explained variance for the interaction between Gender an Behavior is identical to the F-value for the $\Delta R^2$ test you performed in the previous hierarchical regression analysis.
+
+### Homoscedasticity
+
+Regression models have an assumption of homoscedasticity. If all predictors are categorical, that means that we assume equal variances in all groups.
+
+The ANOVA output offers us a Levene's test for homogeneity of variance. Find it, and answer the following question:
+
+True or false: There is reason to doubt the assumption of homogeneity. `r torf(FALSE)`
+
+What is the value of the appropriate test statistic? `r fitb(1.644, num = T, tol = .01)`
+
+
+True or false: As a rule, the assumption of homogeneity is more likely to be violated in a factorial ANOVA with an unbalanced design (as compared to a balanced design). `r torf(TRUE)`
+
+
+### Effect size
+
+We can also calculate effect sizes $\eta^2$ or partial $\eta^2$, for the two factors and the interaction effect separately.
+
+Recall that $\eta^2$ is just the explained variance, $R^2$. In other words: What proportion of the total sum of squares is explained by the factor of interest?
+
+We obtain $\eta^2$ for Factor A by dividing the sum of squares for factor A, $SS_A$, by the $SST$, which is labeled "Corrected total" in the ANOVA output: $\eta^2 = \frac{SS_A}{SST}$
+
+What is $\eta^2$ for the interaction effect? `r fitb(.23, num = T, tol = .01)`
+  
+Go back to your previous nested model test, where you determined whether adding the interaction terms led to a significant improvement in explained variance, $\Delta R^2$. Verify that this number is identical to the $\eta^2$ for the interaction! They are the same thing.
+
+
+Another measure of effect size is the partial $\eta^2$. It tells us what proportion of the variance not explained by other factors is explained by the factor of interest.
+
+We obtain $\eta_p^2$ for Factor A by dividing the sum of squares for factor A, $SS_A$, by $SS_A$ plus the residual sum of squares $SSE$: $\eta_p^2 = \frac{SS_A}{SS_A+SSE}$.
+
+Note that SPSS allows us to request partial $\eta^2$. We did so by including the line `/PRINT=ETASQ` in our syntax.
+
+What is the value of partial $\eta^2$ for the factor Behavior? `r fitb(0.515, num = T, tol = .01)`
+
+
+### Pairwise comparisons
+
+Another unique feature of the ANOVA interface is that it gives us all pairwise comparisons when we ask for them using the code `/EMMEANS=TABLES(Behavior*Gender) COMPARE(Behavior) ADJ(LSD)`
+
+Note that this line asks for comparisons of the three levels of behavior for each gender separately. You can also ask for comparisons of the two levels of gender for each behavior separately by specifying `COMPARE(Gender)` instead.
+
+Inspect the table Pairwise Comparisons. The three experimental conditions are compared in a pairwise manner, split over the factor Gender.
+
+For which pair of groups do the means differ significantly from one another (at the 5% level)? `r mcq(c(answer = "Waitress: Neutral-Smiley", "Waiter: Neutral-Smiley", "Waiter: Neutral-Small talk", "Waiter: Small talk-Smiley")[sample.int(4)])` 
+ 
+Look at the note under the table. True or false: the p-values in this table are adjusted for multiple comparisons. `r torf(FALSE)`
+
+Why do we need to apply a correction like the Bonferroni correction?
+
+`r hide("Answer")`
+
+When doing multiple tests on one sample, like doing these pairwise comparisons, the level of risk of a Type I error increases. To correct for this, we should use an adjusted alpha-level, such as the Bonferroni correction.
+
+Although it is possible to ask for SPSS to adjust the p-values in the table, I have expressly not instructed you to do so. The reason for this is that, strictly speaking, Bonferroni is an adjustment of the significance level $\alpha$ - not of the p-values. Moreover, sometimes you conduct many more tests in a study aside from the pairwise comparisons performed here. In that case, you might want to include those in your Bonferroni correction too, and SPSS does not know about their existence when it applies a Bonferroni correction to the p-values.
+
+In other words: It is better to set the alpha level yourself, and apply it consistently across all tests in a study.
+`r unhide()`
+
+### Simple Effects test
+
+The significant interaction effect tells us that the effect of behavior differs by gender, or conversely, that gender differences vary across the three behavoirs.
+
+Simple effects analysis allows us to test the significance of these marginal effects.
+
+Simply put: They give us an overall test of the mean differences across levels of one factor, within each level of a different factor.
+
+Consult the table Univariate Tests (still for the contrast `/EMMEANS=TABLES(Behavior*Gender) COMPARE(Behavior) ADJ(LSD)`). This table displays the results of the simple effects tests.
+
+Does the Behavior of waiters have an influence on the amount of tip money people give?
+
+What is the appropriate p-value? `r fitb(.557, num = T, tol = .01)`
+
+Report the simple effect test for waiters and interpret the finding, then check your answer.
+
+`r hide("Answer")`
+
+There is no significant difference among the three behaviors within waiters. Hence, for waiters we don’t have evidence that the behavior has an effect on average tips received, F(2,52) = 0.591, p = .557.
+ 
+`r unhide()`
+
+Again, consult the table Univariate Tests. This table gives the results of the simple effects tests.
+
+What p-value do we see here? `r fitb(.001, num = T, tol = .01)`
+
+True or false: the type of behavior of waitresses has an influence on the tip people give. `r torf(TRUE)`
+
+
+Does it make sense to adjust your behavior as a waiter/waitress if you want to increase your tip?
+
+`r longmcq(c(
+answer = "For waitresses behavior does affect amount of tip money received, but for waiters it does not.","For waiters behavior does affect amount of tip money received, but for waitresses it does not.", "For both waiters and waitresses behavior does affect amount of tip money received.", "For both waiters and waitresses behavior does not affect amount of tip money received.")[sample.int(4)])` 
+
+
+Report your results, then check the answer.
+
+`r hide("Answer")`
+We do see a significant effect of behavior on average tip money for waitresses, F(2,52) = 46.385, p < .001. Hence, we have convincing evidence that the type of behavior by waitresses affects the average amount of tips. Results suggest that in order to have high tips, waitresses best can make small talk.
+ 
+`r unhide()`
+
+ 
+
+## Optional: do it yourself!
+
+Open the datafile hiking.sav. The data file also contains data on weather.
+
+Examine the effect of weather and behavior and their potential interaction, with feelings as the dependent variable. 
+
+
+What is the explained variance of the main effects and interaction effects together? `r fitb(0.239, num = T, tol = .01)`
+
+True or false: the explained variance of the whole model is significant. `r torf(TRUE)`
+
+True or false: the interaction effect is significant. `r torf(TRUE)`
+
+Request a plot from SPSS that allows you to describe what the effects look like.
+
+Describe the trends in your own words, then check your answer.
+
+`r hide("Answer")`
+
+The lines in the plot are not parallel, also pointing to an interaction effect.
+
+
+`r unhide()` 
+
+
+Perform a simple effects analysis of the effect of behavior by weather.
+ 
+Report your findings and conclusion, then check your answer.
+
+
+`r hide("Answer")`
+
+We see a significant effect of behavior when the weather was good, F(4,90) = 3.864, p = .006, while the effect of behavior is not significant when the weather was bad, F(4,90) = 1.320, p = .269.
+
+Results suggest that when the weather is good, joking and singing significantly improves the participants’ feelings about the guide.
+
+When the weather is bad, the behavior of the guide does not have much influence.
+
+`r unhide()` 
+ 

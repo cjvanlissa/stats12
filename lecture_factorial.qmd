@@ -1,0 +1,641 @@
+---
+title: "GLM\nFactorial ANOVA"
+author:   "Caspar J. van Lissa"
+date:     "`r format(Sys.Date(), '%d %b %Y')`"
+format: revealjs
+---
+
+```{r}
+library(kableExtra)
+library(tidySEM)
+library(eulerr)
+options(knitr.kable.NA = '')
+
+```
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(ggplot2)
+set.seed(4)
+foods <- data.frame(Food = factor(c("Sausage", "Sausage","Ice cream","Ice cream")),
+                    Topping = factor(c("Mustard", "Chocolate", "Mustard", "Chocolate")),
+                    Liking = c(3.5, 1.5, .5, 4.5))
+foods <- foods[sample.int(nrow(foods), size = 68, replace = T), ]
+foods$Liking <- foods$Liking + rnorm(68)
+foods$Liking <- as.integer(cut(foods$Liking, 6))-1
+summary(aov(Liking ~ Food * Topping, foods))
+```
+
+## The road so far
+
+* $Y_i = a + bX$: Bivariate linear regression
+* $Y_i = a + bX$ where $X$ is a dummy variable: comparing two groups, aka independent samples t-test
+* $Y_i = a + b_1X_1 + \ldots + b_kX_k$ where $X_{1 \ldots k}$ are dummy variables: comparing multiple groups, aka ANOVA
+* Interaction: $Y = a + b_1X_1+ b_2X_2$<font color="blue">$+ b_3(X_1*X_2)$</font>
+
+<font color = "red">If you missed the lecture on interaction, re-watch the section on interactions between binary and continuous predictors!</font>
+
+## Today: Factorial ANOVA {.smaller}
+
+> **Factorial ANOVA:** Regression with multiple categorical predictors (and the interaction between them).
+
+- Nothing complicated!
+- We're combining the following ideas:
+    + Dummy coding
+    + Interactions
+- ANOVA developed distinctly from regression
+    + People would calculate mean value in each condition by hand, and calculate different sums of squares around these means 
+    + ANOVA-interface of SPSS still focuses on this type of output
+- Nowadays we know that factorial ANOVA is just a regression model
+
+## Factorial ANOVA Applications
+
+- Neuroscience: Comparing the effects of two drugs administered in two ways
+- Social science: Examining the effects of an empathy manipulation on prosocial behavior in young children versus teenagers
+- Business and Economics: Examining the effects of advertising type and discount offered
+
+
+## Throughout this Lecture:
+
+- **Factors**: Categorical variables (usually nominal)
+- Each factor has **multiple levels**
+- Example: Dosage 3 levels (low, medium, high), Drug 2 levels (A vs B)
+
+If factor A has $a$ groups, and factor B has $b$ groups, the total number of groups in the factorial design is $a \times b$
+
+
+## Example Data: Enjoy your meal! {.smaller}
+
+* DV: How much did you enjoy your meal? 0-5 (treated as continuous)
+* IV1: Type of Food (two levels)
+    + Beyond sausage
+    + Ben & Jerries Cookies on Cookie Dough
+* IV2: Topping (two levels)
+    + Mustard and onions
+    + Chocolate sauce and sprinkles
+    
+Design: 2(sausage vs. ice cream) X 2(mustard vs. chocolate) = 4 groups
+
+## Representing the Factorial Design
+
+```{r}
+mat <- matrix(c("$\\mu_{S,M}$", "$\\mu_{S,C}$", "$\\mu_{I,M}$", "$\\mu_{I,C}$"), nrow = 2, byrow = 2)
+rownames(mat) = c("Sausage", "Ice cream")
+colnames(mat) = c("Mustard", "Chocolate")
+kableExtra::kbl(mat, escape = T, format = "markdown")
+```
+
+Historically, people would calculate sums of squares around these means
+
+We are not doing this by hand!
+
+
+<!-- **Graph:** -->
+
+<!-- ```{r} -->
+<!-- df_plot <- data.frame(Food = c("Sausage", "Sausage","Ice cream","Ice cream"), -->
+<!--                       Topping = c("Mustard", "Chocolate", "Mustard", "Chocolate"), -->
+<!--                       Liking = c(4, 1, 0, 5), -->
+<!--                       grp = c(1,2,2,2)) -->
+<!-- library(ggplot2) -->
+<!-- ggplot(df_plot, aes(x = Food, y = Liking, color = Topping, group = Topping))+ -->
+<!--   geom_point()+ -->
+<!--   geom_line() + -->
+<!--   theme_bw() -->
+<!-- ``` -->
+
+## Regression Model
+
+We can represent factorial ANOVA using the regression model:
+
+* Dummy-code both factors
+    + In this case, assume that the first level is the reference category
+    + $D_A$ is a dummy for Factor A == 2, $D_B$ is a dummy for Factor B == 2
+* Create an interaction term
+    + Multiply both dummies, $D_A * D_B$
+
+$$
+Y = b_0 + b_1D_A + b_2D_B + b_3(D_A*D_B)
+$$
+
+
+## Regression model ctd.
+    
+$$
+Y = b_0 + b_1D_A + b_2D_B + b_3(D_A*D_B)
+$$
+
+* $b_0$: Intercept, mean value for people who score 0 on both dummies
+* $b_1$: Mean difference between intercept and people who score 1 on $D_A$
+* $b_2$: Mean difference between intercept and people who score 1 on $D_B$
+* $b_3$: Interaction term: additional "bump" for people who score 1 on both $D_A$ and $D_B$
+
+
+## Regression model ctd.
+
+
+$$
+Y = b_0 + b_1D_A + b_2D_B + b_3(D_A*D_B)
+$$
+
+Filling in the formula for each condition we get:
+
+```{r}
+mat <- matrix(c("$\\mu_{1,1} = b_0$", "$\\mu_{1,2} = b_0 + b_2$",
+                "$\\mu_{2,1} = b_0 + b_1$", "$\\mu_{2,2} = b_0+b_1+b_2+b_3$"
+                ), nrow = 2, byrow = 2)
+rownames(mat) = c("$D_A = 0$", "$D_A = 1$")
+colnames(mat) = c("$D_B = 0$", "$D_B = 1$")
+kableExtra::kbl(mat, escape = T, format = "markdown")
+```
+
+## Study Designs
+
+Factorial ANOVA was initially developed for experiments where every cell had an equal number of observations / participants
+
+* This is called a *balanced design*
+    + It makes hand calculations easier
+* It's fine to have an *unbalanced design*
+    + We're not hand-calculating anyway!
+    + For other regression models we also don't expect equal numbers of participants for every value of the predictors!
+* Downsides:
+    + Less power to detect a true effect
+    + More susceptible to deviations from homoscedasticity
+
+
+
+# Effects in Factorial Design
+
+## Two Types of Effects
+
+In a factorial design, it is common to discuss the following effects:
+
+* Main effects of Factors A and B
+    + Partial effect of the factor, controlling for the other factor (and optionally the interaction)
+    + This is different from the "direct effect" of Factor A without controlling for Factor B and the interaction
+* Interaction effects of Factor A $\times$ B
+    + Does the effect of Factor A differ across levels of Factor B (or vice versa?)
+
+## Interaction Effect
+
+Does our theory imply the presence of an interaction effect?
+
+* If so, we have to test for an interaction **first** 
+    + Because we cannot straightforwardly interpret main effects in the presence of an interaction
+
+If your theory does not imply an interaction, we can still test for it as an assumption check
+
+* Checking the assumption that the model is correctly specified
+* If the interaction is not significant, our results are easier to interpret by omitting it
+
+## Interpreting Interactions
+
+* Remember: Interactions are symmetrical, A x B is the same as B x A
+* You may want to interpret one of them as predictor and the other as moderator
+    + E.g., the effect of the type of drug is moderated by the method of administration
+    + Not: the effect of method of administration is moderated by type of drug
+* That is a *theoretical decision*, not a statistical one
+
+## Drawing the Model
+
+To indicate which variable is considered to be the moderator of the other, it is conventional to draw your causal model like so (left)
+
+This is equivalent to the one on the right!
+
+::: {layout-ncol=2}
+
+```{r}
+library(tidySEM)
+library(ggplot2)
+lo <- get_layout("", "M", "",
+                 "X", "", "Y", rows = 2)
+edges <- data.frame(from = "X", to = "Y")
+p <- prepare_graph(layout = lo, edges= edges)
+plot(p) + geom_segment(aes(x = p$nodes$x[p$nodes$name == "M"], xend =  p$nodes$x[p$nodes$name == "M"], y = p$nodes$node_ymin[p$nodes$name == "M"], yend = p$nodes$y[p$nodes$name == "X"]), arrow = arrow(length = unit(0.03, "npc"), type = "closed"))
+```
+
+```{r}
+lo <- get_layout("X", "", "",
+                 "X*M", "", "Y",
+                 "M", "", "",rows = 3)
+edges <- data.frame(from = c("X", "X*M", "M"), to = "Y")
+graph_sem(layout = lo, edges= edges)
+```
+
+:::
+
+<!-- ## Interaction Effects -->
+
+<!-- > **Interaction:** The effect of one predictor depends on the level of another predictor. -->
+
+<!-- To represent this, we add a *special* building block to our regression equation: -->
+
+<!-- $Y = a + b_1X_1+ b_2X_2$<font color="blue">$+ b_3(X_1*X_2)$</font> -->
+
+<!-- There is a whole lecture about interaction if you want to learn more! -->
+
+## Interactions for Categorical Variables {.smaller}
+
+Few simple rules:
+
+* Each factor with $k$ levels is represented by $k-1$ dummy variables
+* To include an interaction between factor A and B, multiply *all* dummies of factor A with all dummies of factor B
+    + If factor A has 3 groups, create 2 dummies: $D_{A1}$ and $D_{A2}$
+    + If factor B has 2 groups, create 1 dummy: $D_{B1}$
+    + To create their interaction terms, multiply all dummies:
+    + $Int_1 = D_{A1} * D_{B1}$ and $Int_2 = D_{A2} * D_{B1}$
+* Dummies stick together: Always include all dummies that code for one variable in the model together
+* Same goes for interactions: Always include all interaction variables and all dummy variables for the main effects of that interaction in the model together
+
+## Example Interaction
+
+We would expect people to prefer ice cream with chocolate sauce, and beyond sausage with mustard:
+
+```{r}
+df_plot <- data.frame(Food = c("Sausage", "Sausage","Ice cream","Ice cream"),
+                      Topping = c("Mustard", "Chocolate", "Mustard", "Chocolate"),
+                      Liking = c(4, 1, 0, 5),
+                      grp = c(1,2,2,2))
+library(ggplot2)
+ggplot(df_plot, aes(x = Food, y = Liking, color = Topping, group = Topping))+
+  geom_point()+
+  geom_line(size = 1) +
+  theme_bw()
+```
+
+
+## Main Effects
+
+> **Main Effect:** Effect of one factor, controlling for the other factor (and optionally interaction).
+
+- Main effect of food on liking: No preference
+- Main effect of topping: Slight preference for chocolate
+
+::: {layout-ncol=2}
+
+```{r}
+df_tmp <- data.frame(Liking = tapply(df_plot$Liking, factor(df_plot$Food), mean), Food = levels(factor(df_plot$Food)))
+
+ggplot(df_tmp, aes(x = Food, y = Liking))+
+  geom_point(color = "pink")+
+  geom_line(group =1, color = "pink", size =1) +
+  theme_bw()+
+  scale_y_continuous(limits = c(0,5))
+```
+
+```{r}
+df_tmp <- data.frame(Liking = tapply(df_plot$Liking, factor(df_plot$Topping), mean), Topping = levels(factor(df_plot$Topping)))
+
+ggplot(df_tmp, aes(x = Topping, y = Liking))+
+  geom_point(color = "pink")+
+  geom_line(group =1, color = "pink", size =1) +
+  theme_bw()+
+  scale_y_continuous(limits = c(0,5))
+```
+
+:::
+
+
+## Hypotheses for Main and Interaction Effects {.smaller}
+
+```{r}
+mat <- matrix(c("$\\mu_{1,1}$", "$\\mu_{1,2}$", "$\\mu_{A = 1}$",
+                "$\\mu_{2,1}$", "$\\mu_{2,2}$","$\\mu_{A=2}$",
+                "$\\mu_{B=1}$", "$\\mu_{B=2}$", "$\\mu_{overall}$"
+                ), nrow = 3, byrow = 2)
+rownames(mat) = c("Factor A = 1", "Factor A = 2", "Marginal Means")
+colnames(mat) = c("Factor B = 1", "Factor B = 2", "Marginal Means")
+kableExtra::kbl(mat, escape = T, format = "markdown")
+```
+
+
+__Hypotheses__:
+
+* Interaction: $H_0: (\mu_{11}-\mu_{12}) = (\mu_{21}-\mu_{22})$, or $H_0: (\mu_{11}-\mu_{21}) = (\mu_{12}-\mu_{22})$
+* Main effect Factor A: $H_0: \mu_{A=1} = \mu_{A=2}$
+* Main effect Factor B: $H_0: \mu_{B=1} = \mu_{B=2}$
+
+## Stylized Examples
+
+<!-- <font size = 5> -->
+
+<!-- * a: Main effect of Factor B -->
+<!-- * b: Main effects of Factors A and B -->
+<!-- * c: Interaction between A and B -->
+<!-- * d: Interaction between A and B -->
+
+<!-- </font> -->
+
+```{r}
+nulldiff <- .03
+df_plot <- list(
+  matrix(c(nulldiff,nulldiff,0,0), nrow = 2, byrow = T),
+  matrix(c(1,1,0,0), nrow = 2, byrow = T),
+  matrix(c(nulldiff,1,0,1-nulldiff), nrow = 2, byrow = T),
+  matrix(c(0,1,1,0), nrow = 2, byrow = T),
+  matrix(c(1,.5+nulldiff,0,.5-nulldiff), nrow = 2, byrow = T),
+  matrix(c(1,0,.6,.4), nrow = 2, byrow = T),
+  matrix(c(.5,1,0,.5), nrow = 2, byrow = T),
+  matrix(c(nulldiff,1,0,0), nrow = 2, byrow = T),
+  matrix(c(1,.2,.5,0), nrow = 2, byrow = T)
+)
+facts <- c("No effects",
+               "Main B",
+               "Main A",
+               "Interaction",
+               "Main B, Interaction",
+               "Main A, Interaction",
+               "Main A, Main B",
+               "Main A, Main B, Int",
+               "Main A, Main B, Int2")
+df_plot <- do.call(rbind, lapply(df_plot, as.data.frame.table))
+levels(df_plot$Var1) <- c(1, 2)
+levels(df_plot$Var2) <- c(1, 2)
+df_plot$Facet <- ordered(rep(facts, each = 4), levels = facts)
+p_lines <- ggplot(df_plot, aes(x = Var2, y = Freq, color = Var1, group = Var1)) +
+  geom_point()+
+  geom_line()+
+  facet_wrap(~Facet) +
+  labs(x = "Factor A", y = NULL, color = "Factor B")+
+  theme_bw()+
+  theme(axis.ticks.y = element_blank(), axis.text.y = element_blank())
+
+p_lines
+```
+
+## Rules for Interpreting Means Plots
+
+* If lines are parallel, there is no interaction
+* If lines cross (when extrapolated), there is a non-zero interaction
+* Main effect of Factor A: When middle of the points on the left side is not the same as the middle of the points on the right side
+* Main effect of Factor B: When middle point of one line is above or below the middle point of the other line
+  
+## Effect of Food on Liking
+
+If people like ice cream more than sausage, irrespective of topping, we would expect a pattern of means like this: 
+
+```{r}
+df_plot <- data.frame(Food = c("Sausage", "Sausage","Ice cream","Ice cream"),
+                      Topping = c("Mustard", "Chocolate", "Mustard", "Chocolate"),
+                      Liking = c(2, 1.9, 5, 4.9),
+                      grp = c(1,2,2,2))
+library(ggplot2)
+ggplot(df_plot, aes(x = Food, y = Liking, color = Topping, group = Topping))+
+  geom_point()+
+  geom_line() +
+  theme_bw()+
+  scale_y_continuous(limits = c(0,5))
+```
+
+
+## Effect of Food on Liking
+
+If people like chocolate sauce more than mustard, irrespective of food, we would expect a pattern of means like this: 
+
+```{r}
+df_plot <- data.frame(Food = c("Sausage", "Sausage","Ice cream","Ice cream"),
+                      Topping = c("Mustard", "Chocolate", "Mustard", "Chocolate"),
+                      Liking = c(2, 5, 2, 5),
+                      grp = c(1,2,2,2))
+library(ggplot2)
+ggplot(df_plot, aes(x = Food, y = Liking, color = Topping, group = Topping))+
+  geom_point()+
+  geom_line() +
+  theme_bw()+
+  scale_y_continuous(limits = c(0,5))
+
+```
+
+## Interactions
+
+<!-- **Table:** -->
+
+<!-- ```{r} -->
+<!-- mat <- matrix(c("$\\mu_{S,M}$", "$\\mu_{S,C}$", "$\\mu_{I,M}$", "$\\mu_{I,C}$"), nrow = 2, byrow = 2) -->
+<!-- rownames(mat) = c("Sausage", "Ice cream") -->
+<!-- colnames(mat) = c("Mustard", "Chocolate") -->
+<!-- kableExtra::kbl(mat, escape = T, format = "markdown") -->
+<!-- ``` -->
+
+More likely, the preference for food depends on the topping, and vice versa:
+
+```{r}
+df_plot <- data.frame(Food = c("Sausage", "Sausage","Ice cream","Ice cream"),
+                      Topping = c("Mustard", "Chocolate", "Mustard", "Chocolate"),
+                      Liking = c(4, 1, 0, 5),
+                      grp = c(1,2,2,2))
+library(ggplot2)
+ggplot(df_plot, aes(x = Food, y = Liking, color = Topping, group = Topping))+
+  geom_point()+
+  geom_line() +
+  theme_bw()
+```
+
+
+## Real Results
+
+```{r}
+foods$Food <- relevel(foods$Food, ref = "Sausage")
+foods$Topping <- relevel(foods$Topping, ref = "Mustard")
+res <- lm(Liking~Food*Topping, foods)
+
+df_plot <- data.frame(Food = c("Sausage", "Sausage","Ice cream","Ice cream"),
+                      Topping = c("Mustard", "Chocolate", "Mustard", "Chocolate"))
+df_plot$Liking <- predict(res, newdata = df_plot)
+
+ggplot(df_plot, aes(x = Food, y = Liking, color = Topping, group = Topping))+
+  geom_jitter(data = foods, alpha = .2, width = .05, height = .05)+
+  geom_point()+
+  geom_line() +
+  theme_bw()+
+  scale_y_continuous(limits = c(-.1,5.1))
+```
+
+## Results in Numbers {.smaller}
+
+**Coefficients:**
+
+```{r}
+tab_coef <- summary(res)$coefficients
+colnames(tab_coef) <- c("B", "SE", "t", "p")
+kableExtra::kbl(tab_coef, digits = 2)
+```
+
+
+
+# Testing Effects in ANOVA
+
+## Overall Tests
+
+**Problem:** If we have > 2 categories in one variable, those coefficients and their tests do not give us an overall significance test for the main effect of each factor or for the interaction terms.
+
+We have solved this problem previously!
+
+## F-test for Nested Models
+
+We solved this problem before, when performing hierarchical $R^2$ tests for categorical variables with > 2 categories:
+
+We have Factor A (3 categories, 2 dummies), Factor B (2 categories, 1 dummy), and their interaction (2 product terms)
+
+What is the unique effect of the interaction term?
+
+1. Estimate a model with all dummies of Factor A and Factor B
+2. Add both product terms
+3. Perform F-test for $\Delta R^2$
+
+## Same Logic Applies Here
+
+In ANOVA, we essentially perform such a nested model test for each variable and for the interaction terms
+
+This gives us a test for the unique variance explained by Factor A, Factor B, and their interaction
+
+It is customary to report the explained variance in terms of (partial) *sum of squares* explained by that variable, along with an F-test
+
+
+## Example Results
+
+For the Food/Topping analysis:
+
+**Sums of Squares:**
+
+```{r}
+tab_ss <- unclass(summary.aov(res))[[1]]
+names(tab_ss)[5] <- "p"
+kableExtra::kbl(tab_ss, digits = 2)
+```
+
+## Visualization
+
+```{r}
+all_pieces <- c(
+  FactorA = 3,
+  FactorB = 2,
+  Interaction = 1,
+  Y = 4,
+  "FactorA&Y" = .5,
+  "FactorB&Y" = 3,
+  "FactorA&Interaction" = .4,
+  "FactorB&Interaction" = 1,
+  "Interaction&Y" = 3,
+  "FactorA&Interaction&Y" = .4,
+  "FactorB&Interaction&Y" = 2,
+  "FactorA&Interaction&FactorB" = 1,
+  "FactorA&FactorB&Interaction&Y" = 1
+)
+
+#plot(euler(all_pieces), quantities = 1:15)
+nams <- rep("", 15)
+nams[7] <- "A"
+nams[9] <- "B"
+nams[10] <- "C"
+plot(euler(all_pieces), quantities = nams)
+
+```
+
+* A: Sum of Squares for Factor A (0 in this example)
+* B: Sum of Squares for Factor B
+* C: Sum of Squares for Interaction
+
+## Visualization
+
+```{r}
+all_pieces <- c(
+  FactorA = 3,
+  FactorB = 2,
+  Interaction = 1,
+  Y = 4,
+  "FactorA&Y" = .5,
+  "FactorB&Y" = 3,
+  "FactorA&Interaction" = .4,
+  "FactorB&Interaction" = 1,
+  "Interaction&Y" = 3,
+  "FactorA&Interaction&Y" = .4,
+  "FactorB&Interaction&Y" = 2,
+  "FactorA&Interaction&FactorB" = 1,
+  "FactorA&FactorB&Interaction&Y" = 1
+)
+
+#plot(euler(all_pieces), quantities = 1:15)
+nams <- rep("", 15)
+nams[c(4, 9,10,12,13,14,15)] <- LETTERS[1:length(nams[c(4, 9,10,12,13,14,15)])]
+plot(euler(all_pieces), quantities = nams)
+
+```
+
+* A: Sum of Squared Errors, SSE (or SSW)
+* B+C+D+E+F+G: Corrected model Sum of Squares, SSR (or SSB)
+* SSE+SSR: Corrected Total Sum of Squares (SST)
+* SST-SSE = SSR
+
+## Degrees of Freedom
+
+The degrees of freedom for each Factor are equal to the number of categories $k-1$
+
+* This corresponds to the number of dummies required to represent it
+
+The degrees of freedom for the interaction are also equal to the number of dummies needed to represent it
+
+
+# Effect Size Measures
+
+## Why Effect Size?
+
+Recall that sums of squares do not have a meaningful unit
+
+* Their value changes depending on the scale of your dependent variable, number of observations, etc
+* We standardize the sum of squares to put it on a meaningful 0-1 scale
+* For regression, the explained variance (SSR/SSE) is called $R^2$
+
+## Eta Squared
+
+Recall that, in ANOVA, $R^2$ is often called "Eta squared", $\eta^2$
+
+* Interpreted the same: How large is the variance explained by each Factor, relative to the total variance?
+* Easy calculation from SS:
+    + $\eta^2_{\text{Factor A}} = \frac{SS_{\text{Factor A}}}{SST}$
+    + $\eta^2_{\text{Factor B}} = \frac{SS_{\text{Factor B}}}{SST}$
+    + $\eta^2_{\text{Interaction}} = \frac{SS_{\text{Interaction}}}{SST}$
+    
+## Partial Eta Squared
+
+Another effect size is "partial Eta squared", $\eta_p^2$
+
+* Interpretation: How large is the variance explained by each Factor, relative to the unexplained variance?
+* This effect size is controlled for all other predictors
+* Easy calculation from SS:
+    + $\eta^2_{p\text{Factor A}} = \frac{SS_{\text{Factor A}}}{SS_{\text{Factor A}} + SSE}$
+    + $\eta^2_{p\text{Factor B}} = \frac{SS_{\text{Factor A}}}{SS_{\text{Factor B}} + SSE}$
+    + $\eta^2_{p\text{Interaction}} = \frac{SS_{\text{Interaction}}}{SS_{\text{Interaction}} + SSE}$
+
+## Visualization Eta Squared
+
+```{r}
+all_pieces <- c(
+  FactorA = 3,
+  FactorB = 2,
+  Interaction = 1,
+  Y = 4,
+  "FactorA&Y" = .5,
+  "FactorB&Y" = 3,
+  "FactorA&Interaction" = .4,
+  "FactorB&Interaction" = 1,
+  "Interaction&Y" = 3,
+  "FactorA&Interaction&Y" = .4,
+  "FactorB&Interaction&Y" = 2,
+  "FactorA&Interaction&FactorB" = 1,
+  "FactorA&FactorB&Interaction&Y" = 1
+)
+
+#plot(euler(all_pieces), quantities = 1:15)
+nams <- rep("", 15)
+nams[c(4, 9,10,12,13,14,15)] <- LETTERS[1:length(nams[c(4, 9,10,12,13,14,15)])]
+plot(euler(all_pieces), quantities = nams)
+
+```
+
+* Eta Squared for Factor B: $\frac{B}{A+B+C+D+E+F+G}$
+* Partial Eta Squared: $\frac{B}{B+A}$
+
+
+

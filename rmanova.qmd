@@ -1,0 +1,132 @@
+# GLM: Repeated Measures ANOVA {#sec-rmanova}
+
+```{r, include = FALSE}
+source("R/booktem_setup.R")
+source("R/my_setup.R")
+```
+
+Repeated Measures ANOVA is used to analyze data collected in within-participants designs, where the same outcome measure is collected from the same individuals multiple times.
+
+A study design in which the same participants are assessed repeatedly is called a *Within-Participants Design*.
+Within-participants designs have distinct advantages in comparison to between-participants designs. In these designs, participants serve as their own control, eliminating variability due to individual differences from the error term. This intrinsic control enhances statistical power and efficiency. These designs are used, for example, in longitudinal studies, test-retest designs, diary studies, and repeated physiological assessments.
+
+While within-participants designs offer significant advantages, they also present challenges that require careful consideration. Order effects, where the sequence of experimental conditions influences results, are a common concern. Differential order effects, where the influence of order varies across different sequences, can further complicate data interpretation. An example of a differential order effect is wen the effect of a drug administered before a placebo condition persists into the placebo phase of the experiment.
+To mitigate order effects, researchers often employ the Latin square design. This experimental design ensures each condition appears once in every position within the order, thus minimizing the influence of sequence on outcomes. By controlling for order effects, researchers enhance the internal validity of their experiments.
+
+Beyond order effects, within-participants designs are also affected by learning- and historical effects. A learning effect occurs when participants' increasing familiarity with questionnaires affects their subsequent responding. Historical effects occurr when external events happen during the study, and influence participants' responses.
+Finally, the effect of time is often confounded with the effect of experimental conditions.
+
+## Two Repeated Measurements
+
+The paired samples t-test is suitable for scenarios where participants are measured before and after an intervention. This technique simply analyzes the difference score between pretest and posttest scores.
+
+## More Than Two Measurements
+
+For scenarios with more than two repeated measurements, there are two potential solutions: the linear mixed model, and the multivariate approach. The linear mixed model, treats all repeated measurements as a single variable with multiple observations per participant. Thus, if one participant gave four repeated measurements, we would have four rows in the data for that participant. 
+The multivariate approach treats the repeated measurements as correlated outcomes.
+Each measurement occasion is analyzed while controlling for the other measurement occasions.
+
+## Sphericity Assumption
+
+The linear mixed model assumes *sphericity*, which is analogous to the assumption of homogeneity of error variance.
+Sphericity implies that the variances of the differences between all combinations of repeated measures are equal.
+
+If you do not, or can not, assume sphericity, you can use a corrected test for the linear mixed model, or switch to the multivariate approach.
+
+## Mixed Designs
+
+A mixed design involves both within-participants and between-participants factors. This factorial design allows researchers to examine interactions between these factors, such as the interplay between time and exposure conditions. Post hoc analyses can be used to understand the direction and significance of these interactions.
+
+# Formative Test
+
+A formative test helps you assess your progress in the course, and helps you address any blind spots in your understanding of the material. If you get a question wrong, you will receive a hint on how to improve your understanding of the material.
+
+Complete the formative test ideally after you’ve seen the lecture, but before the lecture meeting in which we can discuss any topics that need more attention
+
+```{r}
+#| results = "asis",
+#| echo = FALSE,
+#| cache = FALSE
+add_mcs("questions_rmanova.csv")
+```
+
+# Tutorial
+
+## Repeated Measures ANOVA
+
+In this tutorial, we will explore how to perform a repeated-measures ANOVA using SPSS to assess the effect of repeated measurements of depression symptoms in a sample of military veterans. The primary objective is to determine whether there are significant changes in depression symptom scores across multiple time points.
+
+Load the dataset called `depression.sav` containing depression symptom scores at different time points for each participant.
+
+3. Click on "Analyze" in the top menu and select "General Linear Model" and then "Repeated Measures."
+
+### Defining the Within-Subjects Factor
+
+1. In the "Repeated Measures" dialog box, name your within-subjects factor as "time."
+2. Specify the number of levels as 4 (since there are four repeated measurements).
+3. Click the "Add" button.
+
+### Defining Within-Subjects Variables
+
+1. Click on the "Define" button to configure within-subjects variables.
+2. In the "Repeated Measures" dialog box, move the variables corresponding to each time point (e.g., scl1, scl2, scl3, scl4) to the "Within-Subjects Variables" box while maintaining their correct order.
+
+**Configuring Options**
+
+1. Click the "Options" button.
+2. Check the boxes for "Descriptive statistics" and "Estimate of effect size."
+3. Click "Continue."
+
+**Running the Test**
+
+1. Click "OK" to run the repeated-measures ANOVA.
+2. The result will appear in the Output Viewer.
+
+**Interpreting the Result**
+
+**Descriptive Statistics**
+
+The descriptive statistics provide insight into the direction of any potential effect. The means comparison shows the average depression symptom scores at different time points. 
+
+True or false: There is an increase in symptoms over time. `r torf(TRUE)`
+
+**Assumption of Sphericity**
+
+SPSS tests assumption of sphericity using Mauchly's test of sphericity.
+
+True or false: In this analysis, the assumption of sphericity is met. `r torf(FALSE)`
+
+True or false: According to the Huyn-Feldt estimate of epsilon, the deviation from sphericity is small. `r torf(TRUE)`
+
+Let's assume sphericity for now. Choose the appropriate test and correction based on this assumption.
+
+What is the appropriate F-value for the chosen test? `r fitb(7.29, num = T, tol = .01)`
+
+What is the appropriate df for the chosen test? `r fitb(3, num = T)`
+
+## Pairwise Comparisons
+
+Examine the table of pairwise comparisons.
+
+Which difference is smallest? `r mcq(c(answer = "T2 v T3", "T3 v T4", "T1 v T2", "T2 v T4")[sample.int(4)])`
+
+If you were to use Bonferroni correction to control for multiple comparisons, you would divide the experiment-wise alpha level by the number of comparisons. How many comparisons are you making here? `r fitb(6, num = T)`
+
+
+Report your results. Make sure to reference both the RM-ANOVA test, and post hoc comparisons with Bonferroni correction. Then, check your answer.
+
+`r hide("Answer")`
+
+"A repeated-measures ANOVA revealed a significant effect of time on depression symptom scores, F(3, 2931) = 7.29, p < .001. For post hoc pairwise comparisons, we applied a Bonferroni correction. Since there are 6 comparisons between 4 time points, we established the alpha level as .05/6 = .008. Using this alpha level, we found that the mean depression symptom score increased significantly from T1 to T3 (Mean difference = .29, p = .003), and from T1 to T4 (Mean difference = .41, p < .001). These results suggest that depression symptoms increased significantly over time for the military veteran sample."
+
+`r unhide()`
+
+<!-- ## Mixed Design -->
+
+<!-- Now, add the Exposure variable to the analysis as a Between-Subjects Factor. -->
+
+<!-- The default model is a full factorial design, which is what we want. -->
+
+<!-- Click the Plots button, and put Time on the horizontal axis and Exposure in Separate Lines. Click "Add error bars". Then click Add. -->
+
+

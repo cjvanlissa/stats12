@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.3.427">
 
   <meta name="author" content="Caspar J. van Lissa">
-  <meta name="dcterms.date" content="2023-06-29">
+  <meta name="dcterms.date" content="2023-08-13">
   <title>Lecture 8 - GLM IV Differences between more groups</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -336,7 +336,7 @@ Caspar J. van Lissa
 </div>
 </div>
 
-  <p class="date">2023-06-29</p>
+  <p class="date">2023-08-13</p>
 </section>
 <section>
 <section id="categorical-predictors" class="title-slide slide level1 center">
@@ -359,6 +359,7 @@ Caspar J. van Lissa
 <ul>
 <li>a: Mean of group 1</li>
 <li>b: Mean difference between groups 1 and 2</li>
+<li><span class="math inline">\(X_i\)</span> is a dummy variable (codes for membership of group 2)</li>
 </ul>
 <p>For <strong>three+</strong> categories, we can <strong>expand</strong> the model:</p>
 <p><span class="math inline">\(\hat{Y}_i = a + b_1*X_{1i}+ b_2*X_{2i}\)</span></p>
@@ -400,8 +401,8 @@ Caspar J. van Lissa
 <p>Regression formula:</p>
 <p><span class="math inline">\(\hat{Y}_i = a + b_1*X_{1i}+ b_2*X_{2i}\)</span></p>
 </section>
-<section id="dummy-variabelen" class="slide level2 smaller">
-<h2>Dummy variabelen</h2>
+<section id="dummy-variables" class="slide level2 smaller">
+<h2>Dummy variables</h2>
 <p>Regression formula:</p>
 <p><span class="math inline">\(\hat{Y}_i = a + b_1*X_{1i}+ b_2*X_{2i}\)</span></p>
 <p><strong>Complete for High:</strong></p>
@@ -420,7 +421,7 @@ Caspar J. van Lissa
 <li><p>The mean value for Low SES is <span class="math inline">\(a\)</span> plus the difference between High and Low SES (<span class="math inline">\(b_2\)</span>)</p></li>
 </ul>
 </section>
-<section id="dummy-variables" class="slide level2">
+<section id="dummy-variables-1" class="slide level2">
 <h2>Dummy variables</h2>
 <p><strong>Intercept (a)</strong>: Mean of the “reference category”</p>
 <p><strong>b-coefficients</strong>: Mean difference relative to the “reference category”</p>
@@ -490,7 +491,11 @@ Caspar J. van Lissa
 <li><span class="math inline">\(df_2\)</span>: n-p</li>
 </ul>
 <p>p: 3 (<span class="math inline">\(a, b_1, b_2\)</span>)</p>
-</section></section>
+</section>
+<section id="some-output" class="slide level2">
+<h2>Some output</h2>
+
+<img data-src="images/regression_anova.png" class="r-stretch"></section></section>
 <section>
 <section id="anova" class="title-slide slide level1 center">
 <h1>ANOVA</h1>
@@ -501,9 +506,20 @@ Caspar J. van Lissa
 <p><strong>AN</strong>alysis <strong>O</strong>f <strong>VA</strong>riance</p>
 <p>One-way ANOVA has one categorical predictor and a continuous outcome</p>
 <ul>
-<li>It provides an omnibus test of differences between group means</li>
+<li>It provides an omnibus (overall) test of differences between group means</li>
+<li>So… exactly what we’ve learned so far</li>
+<li>For historical reasons, some fields call regression with dummies a “one-way ANOVA”, and present the results in a particular way</li>
+<li>It’s important that you recognize this and interpret it appropriately</li>
 </ul>
 </section>
+<section id="some-output-1" class="slide level2">
+<h2>Some output</h2>
+
+<img data-src="images/anova_regression.png" class="r-stretch"></section>
+<section id="compare-to-regression" class="slide level2">
+<h2>Compare to regression</h2>
+
+<img data-src="images/regression_anova.png" class="r-stretch"></section>
 <section id="step-1.-hypothesis" class="slide level2 smaller">
 <h2>Step 1. Hypothesis</h2>
 <p>ANOVA: comparing means of two or more groups</p>
@@ -530,7 +546,7 @@ Caspar J. van Lissa
 </ul></li>
 </ul>
 <p><span class="math display">\[
-F = \frac{MS_B}{MS_W} = \frac{SSB / df_b}{SSW/df_w}
+F = \frac{MS_B}{MS_W} = \frac{SSB / df_b}{SSW/df_w} = \frac{SSR/df_r}{SSE/df_e}
 \]</span></p>
 <p>How large are the between-group differences relative to the error variance?</p>
 </section>
@@ -556,7 +572,7 @@ F = \frac{MS_B}{MS_W} = \frac{SSB / df_b}{SSW/df_w}
 <tr class="odd">
 <td>SST</td>
 <td><span class="math inline">\(\sum{(Y_i - \bar{Y})^2}\)</span></td>
-<td>Variation of individuals wrt grand mean</td>
+<td>Variation of individual observations wrt grand mean</td>
 </tr>
 <tr class="even">
 <td>SSB (SSR)</td>
@@ -583,10 +599,12 @@ F = \frac{MS_B}{MS_W} = \frac{SSB / df_b}{SSW/df_w}
 </ul>
 <p>How to calculate the p-value?</p>
 <ul>
-<li>Statistical software</li>
-<li>Table in book</li>
+<li>Statistical software
+<ul>
 <li>Excel: <code>=F.DIST.RT(x, degree_freedom1, degree_freedom2)</code></li>
 <li>R: <code>pf(F_statistic, dataframe1, dataframe2, lower.tail = FALSE)</code></li>
+</ul></li>
+<li>Table in book</li>
 </ul>
 </section>
 <section id="step-4.-conclusion" class="slide level2">
@@ -652,6 +670,30 @@ F = \frac{MS_B}{MS_W} = \frac{SSB / df_b}{SSW/df_w}
 </tr>
 </tbody>
 </table>
+</section>
+<section id="interpretation" class="slide level2">
+<h2>Interpretation</h2>
+
+<img data-src="images/regression_anova.png" class="r-stretch"></section>
+<section id="interpretation-1" class="slide level2 smaller">
+<h2>Interpretation</h2>
+<p>Environment (urban vs.&nbsp;suburban vs.&nbsp;rural) had a significant effect on test scores, <span class="math inline">\(R^2 = .21, F(2, 2130) = 284.65, p &lt; .001\)</span>.</p>
+<p>The average test score for urban participants was <span class="math inline">\(M = 61.75\)</span>, and this score differed significantly from zero, <span class="math inline">\(t(2130) = 149.52, p &lt; .001\)</span>.</p>
+<p>Compared to urban participants, both suburban participants (<span class="math inline">\(M = 76.04\)</span>) and rural participants (<span class="math inline">\(M = 64.05\)</span>) scored significantly higher, with <span class="math inline">\(t(2130) = 23.00, p &lt; .001\)</span> and <span class="math inline">\(t(2130) = 3.35, p &lt; .001\)</span>, respectively.</p>
+</section>
+<section id="interpretation-2" class="slide level2">
+<h2>Interpretation</h2>
+<p>Important caveats:</p>
+<ul>
+<li>Standardized regression coefficients do not make sense for dummies!
+<ul>
+<li>“one SD difference in the dummy for rural living” is nonsense.</li>
+</ul></li>
+<li>Significance tests for dummies only make sense if you want to compare them to the reference group
+<ul>
+<li>If you want to compare to another group, you have to use different dummies</li>
+</ul></li>
+</ul>
 <p>
 <script type="application/shiny-prerendered" data-context="server-start">
 knitr::opts_chunk$set(echo = FALSE)
@@ -693,7 +735,7 @@ ojs_define <- function(..., .session = shiny::getDefaultReactiveDomain()) {
 <!--html_preserve-->
 
 <script type="application/shiny-prerendered" data-context="execution_dependencies">
-{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["packages"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["packages","version"]},"class":{"type":"character","attributes":{},"value":["data.frame"]},"row.names":{"type":"integer","attributes":{},"value":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125]}},"value":[{"type":"character","attributes":{},"value":["abind","backports","bain","base","bayesplot","blavaan","boot","callr","car","carData","checkmate","cli","coda","codetools","colorspace","compiler","CompQuadForm","crayon","curl","dagitty","data.table","datasets","dbscan","digest","dplyr","ellipsis","evaluate","fansi","fastDummies","fastmap","future","future.apply","generics","ggplot2","globals","glossary","glue","graphics","grDevices","grid","gridExtra","gsubfn","gtable","htmltools","httpuv","httr","igraph","inline","jsonlite","kableExtra","knitr","later","lattice","lavaan","lifecycle","listenv","loo","magrittr","MASS","Matrix","matrixStats","methods","mime","mnormt","MplusAutomation","munsell","mvtnorm","nlme","nonnest2","OpenMx","pander","parallel","parallelly","pbivnorm","pillar","pkgbuild","pkgconfig","plyr","prettyunits","processx","progressr","promises","proto","ps","psych","quadprog","R6","RANN","Rcpp","RcppParallel","rlang","rmarkdown","rstan","rstantools","rstudioapi","rvest","sandwich","scales","shiny","StanHeaders","stats","stats4","stringi","stringr","svglite","systemfonts","texreg","tibble","tidyselect","tidySEM","tmvnsim","tools","utf8","utils","V8","vctrs","viridisLite","webexercises","webshot","withr","xfun","xml2","xtable","yaml","zoo"]},{"type":"character","attributes":{},"value":["1.4-5","1.4.1","0.2.8","4.3.0","1.10.0","0.4-7","1.3-28.1","3.7.3","3.1-2","3.0-5","2.2.0","3.6.1","0.19-4","0.2-19","2.1-0","4.3.0","1.4.3","1.5.2","5.0.1","0.3-1","1.14.8","4.3.0","1.1-11","0.6.31","1.1.2","0.3.2","0.21","1.0.4","1.6.3","1.1.1","1.32.0","1.11.0","0.1.3","3.4.2","0.16.2","1.0.0","1.6.2","4.3.0","4.3.0","4.3.0","2.3","0.7","0.3.3","0.5.5","1.6.11","1.4.6","1.4.3","0.3.19","1.8.5","1.3.4","1.43","1.3.1","0.21-8","0.6-15","1.0.3","0.9.0","2.6.0","2.0.3","7.3-60","1.5-4.1","1.0.0","4.3.0","0.12","2.1.1","1.1.0","0.5.0","1.2-1","3.1-162","0.5-5","2.21.8","0.6.5","4.3.0","1.36.0","0.6.0","1.9.0","1.4.0","2.0.3","1.8.8","1.1.1","3.8.1","0.13.0","1.2.0.1","1.0.0","1.7.5","2.3.3","1.5-8","2.5.1","2.6.1","1.0.10","5.1.7","1.1.1","2.22","2.21.8","2.3.1","0.14","1.0.3","3.0-2","1.2.1","1.7.4","2.26.26","4.3.0","4.3.0","1.7.12","1.5.0","2.1.1","1.0.4","1.38.6","3.2.1","1.2.0","0.2.5.3","1.0-2","4.3.0","1.2.3","4.3.0","4.3.0","0.6.2","0.4.2","1.1.0","0.5.4","2.5.0","0.39","1.3.4","1.8-4","2.3.7","1.8-12"]}]}]}
+{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["packages"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["packages","version"]},"class":{"type":"character","attributes":{},"value":["data.frame"]},"row.names":{"type":"integer","attributes":{},"value":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125]}},"value":[{"type":"character","attributes":{},"value":["abind","backports","bain","base","bayesplot","blavaan","boot","callr","car","carData","checkmate","cli","coda","codetools","colorspace","compiler","CompQuadForm","crayon","curl","dagitty","data.table","datasets","dbscan","digest","dplyr","ellipsis","evaluate","fansi","fastDummies","fastmap","future","future.apply","generics","ggplot2","globals","glossary","glue","graphics","grDevices","grid","gridExtra","gsubfn","gtable","htmltools","httpuv","httr","igraph","inline","jsonlite","kableExtra","knitr","later","lattice","lavaan","lifecycle","listenv","loo","magrittr","MASS","Matrix","matrixStats","methods","mime","mnormt","MplusAutomation","munsell","mvtnorm","nlme","nonnest2","OpenMx","pander","parallel","parallelly","pbivnorm","pillar","pkgbuild","pkgconfig","plyr","prettyunits","processx","progressr","promises","proto","ps","psych","quadprog","R6","RANN","Rcpp","RcppParallel","rlang","rmarkdown","rstan","rstantools","rstudioapi","rvest","sandwich","scales","shiny","StanHeaders","stats","stats4","stringi","stringr","svglite","systemfonts","texreg","tibble","tidyselect","tidySEM","tmvnsim","tools","utf8","utils","V8","vctrs","viridisLite","webexercises","webshot","withr","xfun","xml2","xtable","yaml","zoo"]},{"type":"character","attributes":{},"value":["1.4-5","1.4.1","0.2.8","4.3.0","1.10.0","0.4-7","1.3-28.1","3.7.3","3.1-2","3.0-5","2.2.0","3.6.1","0.19-4","0.2-19","2.1-0","4.3.0","1.4.3","1.5.2","5.0.1","0.3-1","1.14.8","4.3.0","1.1-11","0.6.31","1.1.2","0.3.2","0.21","1.0.4","1.6.3","1.1.1","1.32.0","1.11.0","0.1.3","3.4.2","0.16.2","1.0.0","1.6.2","4.3.0","4.3.0","4.3.0","2.3","0.7","0.3.3","0.5.5","1.6.11","1.4.6","1.4.3","0.3.19","1.8.5","1.3.4","1.43","1.3.1","0.21-8","0.6-15","1.0.3","0.9.0","2.6.0","2.0.3","7.3-60","1.5-4.1","1.0.0","4.3.0","0.12","2.1.1","1.1.0","0.5.0","1.2-1","3.1-162","0.5-5","2.21.8","0.6.5","4.3.0","1.36.0","0.6.0","1.9.0","1.4.0","2.0.3","1.8.8","1.1.1","3.8.1","0.13.0","1.2.0.1","1.0.0","1.7.5","2.3.3","1.5-8","2.5.1","2.6.1","1.0.10","5.1.7","1.1.1","2.22","2.21.8","2.3.1","0.14","1.0.3","3.0-2","1.2.1","1.7.4","2.26.26","4.3.0","4.3.0","1.7.12","1.5.0","2.1.1","1.0.4","1.38.6","3.2.1","1.2.0","0.2.5.4","1.0-2","4.3.0","1.2.3","4.3.0","4.3.0","0.6.2","0.4.2","1.1.0","0.5.4","2.5.0","0.39","1.3.4","1.8-4","2.3.7","1.8-12"]}]}]}
 </script>
 <!--/html_preserve-->
 <div class="footer footer-default">

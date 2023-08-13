@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.3.427">
 
   <meta name="author" content="Caspar J. van Lissa">
-  <meta name="dcterms.date" content="2023-08-02">
+  <meta name="dcterms.date" content="2023-08-04">
   <title>Psychometrics II: Dimension Reduction</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -339,7 +339,7 @@ Caspar J. van Lissa
 </div>
 </div>
 
-  <p class="date">2023-08-02</p>
+  <p class="date">2023-08-04</p>
 </section>
 <section class="slide level2">
 
@@ -750,29 +750,29 @@ Caspar J. van Lissa
 <tr class="odd">
 <td style="text-align: left; font-weight: bold; color: white !important; background-color: green !important;"></td>
 <td style="text-align: right; font-weight: bold; color: white !important; background-color: green !important;">1</td>
-<td style="text-align: right; font-weight: bold; color: white !important; background-color: green !important;">1.19</td>
-<td style="text-align: right; font-weight: bold; color: white !important; background-color: green !important;">1.28</td>
+<td style="text-align: right; font-weight: bold; color: white !important; background-color: green !important;">1.20</td>
+<td style="text-align: right; font-weight: bold; color: white !important; background-color: green !important;">1.27</td>
 <td style="text-align: right; font-weight: bold; color: white !important; background-color: green !important;">2.81</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"></td>
 <td style="text-align: right;">2</td>
 <td style="text-align: right;">1.10</td>
-<td style="text-align: right;">1.15</td>
+<td style="text-align: right;">1.17</td>
 <td style="text-align: right;">0.93</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"></td>
 <td style="text-align: right;">3</td>
-<td style="text-align: right;">1.03</td>
-<td style="text-align: right;">1.07</td>
+<td style="text-align: right;">1.02</td>
+<td style="text-align: right;">1.06</td>
 <td style="text-align: right;">0.79</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"></td>
 <td style="text-align: right;">4</td>
 <td style="text-align: right;">0.96</td>
-<td style="text-align: right;">0.99</td>
+<td style="text-align: right;">1.00</td>
 <td style="text-align: right;">0.63</td>
 </tr>
 <tr class="odd">
@@ -785,8 +785,8 @@ Caspar J. van Lissa
 <tr class="even">
 <td style="text-align: left;"></td>
 <td style="text-align: right;">6</td>
-<td style="text-align: right;">0.81</td>
-<td style="text-align: right;">0.87</td>
+<td style="text-align: right;">0.82</td>
+<td style="text-align: right;">0.88</td>
 <td style="text-align: right;">0.36</td>
 </tr>
 </tbody>
@@ -1784,7 +1784,18 @@ h_j^2 = \sum_{i = 1}^m L_{j,i}^2
 <li>PCA is just data rotation; only requires matrix algebra</li>
 <li>EFA is a <em>model</em> about latent variables; loadings and error variances are unknown parameters that must be estimated</li>
 </ul>
-<p>We consider two estimation methods:</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="lecture_ss_3_pca_files/figure-revealjs/unnamed-chunk-19-1.png" style="width:100.0%;height:10.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="estimation-methods" class="slide level2">
+<h2>Estimation Methods</h2>
 <ul>
 <li>Principal Axis Factoring (PAF)
 <ul>
@@ -2421,28 +2432,31 @@ h_j^2 = \sum_{i = 1}^m L_{j,i}^2
 <section id="oblique-rotation" class="slide level2">
 <h2>Oblique Rotation</h2>
 <ul>
-<li>Factors are allowed to be correlated with each other
+<li>Factors are allowed to be correlated
 <ul>
 <li>It’s possible that high loadings for one factor are associated with high loadings for another factor</li>
 </ul></li>
 <li>In social science, many factors are probably correlated!
 <ul>
-<li>Oblique rotation is considered to be default by many</li>
+<li>Oblique rotation is considered a sensible default in social science</li>
 </ul></li>
 </ul>
 </section>
-<section id="oblique-rotation-ctd." class="slide level2">
-<h2>Oblique Rotation ctd.</h2>
-<p><strong>Note:</strong> factor loadings and item/factor correlations are now distinct!</p>
-<p>Pattern matrix: factor loadings</p>
+<section id="oblique-rotation-changes-loadings" class="slide level2">
+<h2>Oblique Rotation changes loadings</h2>
+<p><strong>Note:</strong> after oblique rotation, factor loadings are no longer item/factor correlations!</p>
+<p><strong>Pattern matrix</strong></p>
 <ul>
-<li>Cannot be interpreted as correlations between items and factors</li>
+<li>Factor loadings</li>
 <li>Each row is a regression equation describing the standardized item as a function of the factors</li>
-<li>The loadings are the regression coefficients</li>
+<li><span class="math inline">\(X_1 = L_{1,1}*F1 + L_{1,2}*F2+\epsilon\)</span></li>
+<li>The loading of each item is a regression coefficient, controlled for the effect of all other items</li>
 </ul>
-<p>Structure matrix</p>
+<p><strong>Structure matrix</strong></p>
 <ul>
-<li>Correlations between the items and factors</li>
+<li>Bivariate correlations between the items and factors</li>
+<li><span class="math inline">\(r_{X_1, F1}\)</span></li>
+<li>Not controlled for other items</li>
 </ul>
 <!-- Gorsuch (1983) and Thompson (1983) describe concepts and procedures for interpreting the factors with these matrices. -->
 <!-- Gorsuch, R.L. (1983). Factor Analysis (2nd Ed.). Hillsdale NJ: Erlbaum. -->
@@ -2540,152 +2554,12 @@ h_j^2 = \sum_{i = 1}^m L_{j,i}^2
 <h2>Reliability Analysis</h2>
 <p>If you extract multiple components/factors, you can perform reliability analysis for each subscale</p>
 </section></section>
+<section>
 <section id="questionnaires" class="title-slide slide level1 center">
 <h1>Questionnaires</h1>
 <p>Is our questionnaire unidimensional? Or are there multiple dimensions?</p>
 
 <img data-src="images/lecture130.png" class="r-stretch"></section>
-
-<section id="personality" class="title-slide slide level1 center">
-<h1>Personality</h1>
-<p>The items are taken from the NEO big five which measures 5 different personality traits: <em>Extraversion</em> , <em>Agreeableness</em> , <em>Neuroticism, Conscientiousness</em> &amp; <em>Openness to new experiences</em></p>
-<p>So, the NEO big 5 assumes that there are 5 different dimensions</p>
-<p>The items are measuring <span style="color:#FF0000"> <strong>2</strong> </span> of them. Which are those?</p>
-</section>
-
-<section id="neuroticism-conscientiousness" class="title-slide slide level1 center">
-<h1>Neuroticism &amp; Conscientiousness</h1>
-
-<img data-src="images/lecture131.png" class="r-stretch"><p> by looking for ‘patterns’ in the data/items, you find items that are measuring the same thing.</p>
-<p>… and that is exactly what factor analysis does!</p>
-<p>(but then in a more systematic/mathematical way)</p>
-</section>
-
-<section id="factor-analysis-find-factors" class="title-slide slide level1 center">
-<h1>Factor analysis: Find factors</h1>
-<p>Like you just did, FA tries to find patterns in the data</p>
-<p><strong> </strong> <strong>Are there groups of items that measure the same thing? </strong></p>
-<p><strong></strong> __ Find factors (= dimensions) in the data __</p>
-<p>Every factor = representative for a dimensionSo for data obtained with the NEO Big 5 (measures 5 personality traits), we would expect to find <em>5 factors</em></p>
-<p>The factors are hypothetical constructs. We cannot observe them, they are so-called latent variables. Typically, we do not know how many factors there are, we retrieve the number of factors from what we observe in the data.</p>
-</section>
-
-<section id="latent-variables" class="title-slide slide level1 center">
-<h1>Latent variables?</h1>
-<p>In statistics we make a distinction between variables we can observe directly (manifest variables) and variables we cannot observe directly (latent variables).</p>
-<p>_ Examples manifest variables: age, height, number of children, religion, etc…_</p>
-<p>_ Examples latent variables: personality traits, intelligence, fatigue, etc…._</p>
-<p>It is difficult to measure something that is unobserved. Therefore, we use several manifest variables (called indicators) to say something about a latent variable. We can use factor analysis (amongst other techniques) to do this.</p>
-</section>
-
-<section id="example-find-the-factors" class="title-slide slide level1 center">
-<h1>Example: find the factors</h1>
-<p>(fictional data)</p>
-
-<img data-src="images/lecture132.png" class="r-stretch"></section>
-
-<section id="goal-of-factor-analysis" class="title-slide slide level1 center">
-<h1>Goal of factor analysis</h1>
-<p><em>For questionnaire data</em> the goal is to group items that measure the same (sub)construct (a dimension)</p>
-<p>Hence, factor analysis can reveal the internal structure of a questionnaire (this is the division of a construct in subconstructs/dimensions)</p>
-</section>
-
-<section id="example-oxford-internet-surveys-oxis" class="title-slide slide level1 center">
-<h1>Example: Oxford Internet Surveys (OxIS)</h1>
-<p><strong>Disagree (1) – Agree (5)</strong></p>
-<p>V1. Going online helps me escape from things I would rather not deal with.</p>
-<p>V2. Going online helps me pass the time when I am bored or have nothing to do.</p>
-<p>V3. When I am online I don’t feel lonely.</p>
-<p>V4. I just enjoy being online to see what comes up.</p>
-<p>V5. Going online is an efficient means for finding information.</p>
-<p>V6. The Internet makes life easier.</p>
-<p>V7. The Internet helps me save time.</p>
-<p>V8. It is difficult to delete personal information once it is online.</p>
-<p>V9. The Internet is frustrating to work with.</p>
-<p>V10. There is too much immoral material online.</p>
-<p>V11. Dealing with email takes up too much time.</p>
-<p>V12. People can find personal information about me online.</p>
-<p>V13. Going online allows me to keep in touch with people.</p>
-<p>V14. It is easier for me to meet people online than in person.</p>
-</section>
-
-<section id="how-to-analyze-these-scores-classical-test-theory-ctt" class="title-slide slide level1 center">
-<h1>How to analyze these scores: Classical test theory (CTT)</h1>
-<ul>
-<li><em>Scale score according to CTT</em> : <strong>Online behavior </strong> = X1 + X2 + X3…. + X14 (i.e.: Calculate <strong>sum score</strong> : Add up the scores on every item)</li>
-<li>For example:
-<ul>
-<li>“When I am online I don’t feel lonely” = 5</li>
-<li>“The Internet helps me save time” = 3</li>
-<li>Etc …</li>
-<li>Then sumscore = 5 + 3 + ….</li>
-</ul></li>
-</ul>
-</section>
-
-<section id="how-to-analyse-these-scores-ctt" class="title-slide slide level1 center">
-<h1>How to analyse these scores: CTT</h1>
-<ul>
-<li>Or: Sumscore = <span style="color:#FF0000">1</span> *X1 + <span style="color:#FF0000">1</span> *X2 + <span style="color:#FF0000">1</span> *X3….+ <span style="color:#FF0000">1</span> *X14 (Unweighted sum!)</li>
-<li><span style="color:#FF0000"></span> <span style="color:#FF0000"> All variables have the same weight!!:</span>
-<ul>
-<li><strong>Online behavior </strong> = <span style="color:#FF0000">w</span> .X1 + <span style="color:#FF0000">w</span> <span style="color:#FF0000">.</span> X2 + … + <span style="color:#FF0000">w</span> .X14
-<ul>
-<li>We have to calculate the sumscore <em>separately</em> _ _ <em>for</em> _ _ <em>every</em> _ _ <em>dimension</em></li>
-<li>That’s why, when using classical test theory (and calculating an unweighted sumscore), we don’t need to know what items belong to which dimension</li>
-<li>This is different in PCA: we give an item a different weight for every dimension</li>
-</ul></li>
-</ul></li>
-</ul>
-</section>
-
-<section id="pca-components" class="title-slide slide level1 center">
-<h1>PCA: components</h1>
-<ul>
-<li>Not calculating a sum score, but trying to find patterns in the data
-<ul>
-<li>Based on these patterns, we find components</li>
-<li>Components = dimensions of the construct</li>
-<li>To which dimensions does an item belong?  higher weight for this dimension!</li>
-</ul></li>
-<li>A <span style="color:#FF0000">component</span> is thus representative for a subconstruct (a dimension)
-<ul>
-<li>e.g., NEO big five  the 5 personality traits</li>
-</ul></li>
-</ul>
-</section>
-
-<section>
-<section id="pca-component-scores-component-loadings" class="title-slide slide level1 center">
-<h1>PCA: component scores &amp; component loadings</h1>
-<ul>
-<li>Component #1 = <span style="color:#EA2D00">w</span> <span style="color:#EA2D00">1</span> .XZ1 + <span style="color:#EA2D00">w</span> <span style="color:#EA2D00">2</span> <span style="color:#EA2D00">.</span> XZ2 + … + <span style="color:#EA2D00">w</span> <span style="color:#EA2D00">14</span> .XZ14 (XZ  Standardized variables!)</li>
-<li>_ (For example: _ <span style="color:#EA2D00"> <em>0</em> </span> <span style="color:#EA2D00"> <em>.</em> </span> <em>XZ + </em> <span style="color:#EA2D00"> <em>0.5</em> </span> <span style="color:#EA2D00"> <em>.</em> </span> <em>XZ + … + </em> <span style="color:#EA2D00"> <em>0.5</em> </span> <em>.</em> <em>XZ14)</em></li>
-<li>Component #2 = <span style="color:#EA2D00">w2</span> <span style="color:#EA2D00">1</span> .XZ1 + <span style="color:#EA2D00">w2</span> <span style="color:#EA2D00">2</span> <span style="color:#EA2D00">.</span> XZ2 + … + <span style="color:#EA2D00">w2</span> <span style="color:#EA2D00">14</span> .XZ14</li>
-<li>_ (For example: _ <span style="color:#EA2D00"> <em>0.8</em> </span> <span style="color:#EA2D00"> <em>.</em> </span> <em>XZ + </em> <span style="color:#EA2D00"> <em>0.1</em> </span> <span style="color:#EA2D00"> <em>.</em> </span> <em>XZ + … + </em> <span style="color:#EA2D00"> <em>0.1</em> </span> <em>.</em> <em>XZ14)</em></li>
-<li>PCA calculates for every item a weight w1, w2, w3 , w4 , …, w14 for every component (we call this a component loading)
-<ul>
-<li><p>The loading is a correlation between component and item</p></li>
-<li><p>Indicates which dimension an item measures: if item 1 belongs to component/dimension1, then this item will get a high weight for this component and a very low weight for the second component/dimension</p></li>
-<li><p>Component#1 = <span style="color:#EA2D00">w</span> <span style="color:#EA2D00">1</span> .XZ1 + <span style="color:#EA2D00">w</span> <span style="color:#EA2D00">2</span> <span style="color:#EA2D00">.</span> XZ2 + … + <span style="color:#EA2D00">w</span> <span style="color:#EA2D00">14</span> .XZ14 (XZ  Standardized variables!)</p></li>
-<li><p>_ (For example: _ <span style="color:#EA2D00"> <em>0</em> </span> <span style="color:#EA2D00"> <em>.</em> </span> <em>XZ + </em> <span style="color:#EA2D00"> <em>0.5</em> </span> <span style="color:#EA2D00"> <em>.</em> </span> <em>XZ + … + </em> <span style="color:#EA2D00"> <em>0.5</em> </span> <em>.</em> <em>XZ14)</em></p></li>
-<li><p>Component#2 = <span style="color:#EA2D00">w2</span> <span style="color:#EA2D00">1</span> .XZ1 + <span style="color:#EA2D00">w2</span> <span style="color:#EA2D00">2</span> <span style="color:#EA2D00">.</span> XZ2 + … + <span style="color:#EA2D00">w2</span> <span style="color:#EA2D00">14</span> .XZ14</p></li>
-<li><p>_ (For example: _ <span style="color:#EA2D00"> <em>0.8</em> </span> <span style="color:#EA2D00"> <em>.</em> </span> <em>XZ + </em> <span style="color:#EA2D00"> <em>0.1</em> </span> <span style="color:#EA2D00"> <em>.</em> </span> <em>XZ + … + </em> <span style="color:#EA2D00"> <em>0.1</em> </span> <em>.</em> <em>XZ14)</em></p></li>
-<li><p>We can calculate component scores for every respondent: a score on C1 and score on C2</p></li>
-<li><p><em>The </em> <em>answers</em> _ on _ <em>the</em> _ items (XZ1, XZ2, etc..) are _ <em>weighted</em> _ _ <em>based</em> _ on _ <em>the</em> _ component _ <em>loadings</em> <em>. </em> <em>By</em> _ _ <em>doing</em> _ _ <em>so</em> <em>, items </em> <em>that</em> _ _ <em>measure</em> _ _ <em>dimension</em> _ 1 (component 1) _ <em>contribute</em> _ _ <em>the</em> _ most _ <em>to</em> _ _ <em>the</em> _ _ <em>calculation</em> _ of _ <em>the</em> _ component score _ <em>for</em> _ _ <em>the</em> _ first _ <em>dimension</em> <em>. </em></p></li>
-</ul></li>
-</ul>
-</section>
-<section id="how-does-this-work-what-does-spss-do" class="slide level2">
-<h2>How does this work? What does SPSS do??</h2>
-<ul>
-<li>Component#1 = <span style="color:#FF0000">w</span> <span style="color:#FF0000">1</span> .XZ1 + <span style="color:#FF0000">w</span> <span style="color:#FF0000">2</span> .XZ2 + … + <span style="color:#FF0000">w</span> <span style="color:#FF0000">14</span> .XZ14</li>
-<li>_ (For example: _ <span style="color:#FF0000"> <em>0</em> </span> <em>.</em> <em>XZ1 + </em> <span style="color:#FF0000"> <em>0.5</em> </span> <em>.</em> <em>XZ2 + … + </em> <span style="color:#FF0000"> <em>0.5</em> </span> <span style="color:#FF0000"> <em>.</em> </span> <em>XZ14)</em></li>
-<li>Finding the <span style="color:#FF0000">weighted</span> sum scores with weights <span style="color:#FF0000">w</span> <span style="color:#FF0000">1</span> <span style="color:#FF0000">, w</span> <span style="color:#FF0000">2</span> <span style="color:#FF0000">, … w</span> <span style="color:#FF0000">14</span> , such that we can explain as much variance as possible</li>
-<li>Variance = information!</li>
-<li>This score is then “principal component#1”</li>
-</ul>
-</section>
 <section id="pca-use-cases" class="slide level2">
 <h2>PCA use cases</h2>
 <p>To reduce dimensionality of the data when we do not have a theory about underlying latent variables</p>
@@ -2789,8 +2663,9 @@ RMSEA = \frac{\sqrt{\chi^2 - df}}{\sqrt{(n - 1)*df}}
 \]</span> ## Latent Variable Reliability {.smaller}</p>
 <p>Recall that Cronbach’s alpha assumes that each items is equally important</p>
 <ul>
-<li>Factor analysis allows us to test that assumption</li>
-<li>Obviously, it is not true in many cases</li>
+<li>I.e., all factor loadings should be identical</li>
+<li>Factor analysis tests that assumption</li>
+<li>Obviously, it is rarely true</li>
 </ul>
 <p>We can compute latent variable reliability, allowing for different factor loadings!</p>
 <ul>
@@ -2802,11 +2677,72 @@ RMSEA = \frac{\sqrt{\chi^2 - df}}{\sqrt{(n - 1)*df}}
 <p>Calculate SSL as: <span class="math inline">\(SSL = (\sum_{j=0}^k L_{1,k})^2\)</span> (first sum loadings, then square sum)</p>
 <p>Calculate SSR as: <span class="math inline">\(SSR = 1-\sum_{j=0}^k L_{1,k}^2\)</span> (first square loadings, then sum)</p>
 </section></section>
+<section>
 <section id="scale-scores" class="title-slide slide level1 center">
 <h1>Scale Scores</h1>
 
 </section>
-
+<section id="scale-scores-1" class="slide level2">
+<h2>Scale Scores</h2>
+<p>You’ve previously learned about:</p>
+<p><strong>Sum scores</strong></p>
+<ul>
+<li><span class="math inline">\(X = \sum_{j=1}^k x_j\)</span></li>
+<li><span class="math inline">\(X = 1*x_1 + 1*x_2 + \ldots + 1*x_k\)</span></li>
+</ul>
+<p><strong>Mean scores</strong></p>
+<ul>
+<li><span class="math inline">\(X = \frac{\sum_{j=1}^k x_j}{k}\)</span></li>
+<li><span class="math inline">\(X = (1*x_1 + 1*x_2 + \ldots + 1*x_k)/k\)</span></li>
+</ul>
+<p>In both of these approaches, all items contribute equally</p>
+</section>
+<section id="pca-scores" class="slide level2">
+<h2>PCA Scores</h2>
+<p>Multiply standardized item scores for the j items with j factor loadings</p>
+<!-- * <font color = "gray">Optionally, Divide by the Eigenvalue of that component -->
+<ul>
+<li>Sum the result</li>
+<li>E.g.: We have factor loadings .85, .80, .14
+<ul>
+<li>Francis’ standardiz scores 1, 3, and 2 on these variables</li>
+</ul></li>
+<li>Calculate <span class="math inline">\((.85*4 + .80*6+.14*5) / (.85^2 + .80^2 + .14^2) = 2.44\)</span></li>
+<li>Francis’ factor score is 2.44</li>
+</ul>
+<!-- as.matrix(scale(data)) %*% t(pracma::pinv(loadings))) -->
+</section>
+<section id="efa-not-uniquely-determined" class="slide level2">
+<h2>EFA: Not Uniquely Determined</h2>
+<p>Computing latent variable scores is not straightforward</p>
+<ul>
+<li>Although we can estimate the EFA model, this does not tell us what the latent variable score of every individual was</li>
+<li>An infinite number of latent variable datasets is consistent with the same EFA model</li>
+<li>There are methods to <em>estimate</em> what individuals’ scores could have been</li>
+<li>Factor scores tell us a person’s relative level on the latent factor</li>
+</ul>
+</section>
+<section id="efa-scores-methods" class="slide level2">
+<h2>EFA Scores Methods</h2>
+<ul>
+<li>Regression method: Ordinary least squares estimate
+<ul>
+<li>Maximize multiple correlation between factor score and common factors</li>
+<li>Are biased estimates of true factor scores</li>
+<li>Even for orthogonal EFA, regression scores for different factors correlate with each other and with all latent factors</li>
+</ul></li>
+<li>Bartlett method
+<ul>
+<li>Factor scores only correlate with their own latent factor, but still correlate with estimated scores for other factors</li>
+</ul></li>
+<li>If factor loadings are ~equal
+<ul>
+<li>Might be preferable to just compute mean scores</li>
+</ul></li>
+</ul>
+<p>Everitt, B. S. &amp; Howell, D. C. (2005). <a href="doi.org/10.1002/0470013192.bsa726">DOI:10.1002/0470013192.bsa726</a></p>
+<p>DiStefano, Zhu, &amp; Mindrila (2009). <a href="https://doi.org/10.7275/da8t-4g52">DOI:10.7275/da8t-4g52</a></p>
+</section></section>
 <section>
 <section id="steps-for-data-reduction" class="title-slide slide level1 center">
 <h1>Steps for Data Reduction</h1>
@@ -2882,7 +2818,10 @@ RMSEA = \frac{\sqrt{\chi^2 - df}}{\sqrt{(n - 1)*df}}
 <h2>Step 5: Optional Use Scales</h2>
 <ul>
 <li>Compute latent variable reliability</li>
-<li>Export factor scores</li>
+<li>Compute (for PCA) or estimate factor scores
+<ul>
+<li>Choose appriopriate method</li>
+</ul></li>
 </ul>
 <div class="footer footer-default">
 

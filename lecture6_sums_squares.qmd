@@ -1,0 +1,535 @@
+---
+title: "Lecture 6 - GLM II"
+author:   "Caspar J. van Lissa"
+date:     "`r format(Sys.Date(), '%d %b %Y')`"
+format: revealjs
+server: shiny
+---
+
+```{r}
+library(kableExtra)
+library(tidySEM)
+options(knitr.kable.NA = '')
+
+set.seed(42/101)
+Hours = abs(rnorm(92, 4, 2))
+Grade = abs(3 + (7/9)*Hours)+rnorm(92)
+Grade[Grade > 10] <- 10 - (Grade[Grade > 10] - 10)
+studentdata <- data.frame(Grade=Grade, Hours=Hours)
+Grade.Hours <- lm(Grade ~Hours, studentdata)
+predicted <- predict(Grade.Hours)
+```
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(ggplot2)
+set.seed(42/101)
+Hours = abs(rnorm(92, 4, 2))
+Grade = abs(3 + (7/9)*Hours)+rnorm(92)
+Grade[Grade > 10] <- 10 - (Grade[Grade > 10] - 10)
+studentdata <- data.frame(Grade=Grade, Hours=Hours)
+```
+
+<!-- GLM II: Sums of squares, explained variance, and correlation -->
+
+# Sums of Squares
+
+## Prediction error {.smaller}
+
+Last week, we discussed linear regression
+
+* It describes the relationship between a predictor X and outcome Y as a diagonal line
+* Given individual value $X_i$, this line predicts a value $\hat{Y}_i$
+* This prediction will be a bit wrong for every individual
+* The regression line, by definition, is the line that gives the "least prediction error" on average
+* Today, we will learn how that is determined
+
+```{r, fig.width=6, fig.asp=3/4, echo=FALSE}
+p <- ggplot(studentdata, aes(x=Hours, y=Grade))+geom_point()+geom_hline(yintercept = 0)+geom_vline(xintercept = 0)+theme_bw()+scale_x_continuous(limits = c(0,10), breaks=seq(0, 10, by = 1))+scale_y_continuous(limits = c(0,10), breaks=seq(0, 10, by = 1))+
+  geom_abline(intercept = Grade.Hours$coefficients[1], slope = Grade.Hours$coefficients[2], colour = "black", size = 1)+
+  geom_segment(x = Hours, xend = Hours, y = Grade,  yend = predict.lm(Grade.Hours, newdata = studentdata), colour = "blue")
+p
+```
+
+## Ordinary least squares {.smaller}
+
+Linear regression models are estimated using the "ordinary least squares" method
+
+* It minimizes the total prediction error
+* So what is this "total prediction error"? Let's define it
+
+Can we simply add the prediction errors for the 92 students below?
+
+```{r, fig.width=6, fig.asp=3/4, echo=FALSE}
+p
+```
+
+
+## Sum of Squared Errors
+
+**Problem:** Because the regression line, by definition, goes exactly through the "middle" of the data, the sum of all prediction errors is always exactly 0
+
+Sum of <font color = "blue">positive</font> prediction errors: `r predicted<- Grade.Hours$coefficients[1]+Grade.Hours$coefficients[2]*Hours; round(sum((Grade-predicted)[(Grade-predicted) > 0]),2)`
+
+Sum of \alert{negative} prediction errors: `r round(sum((Grade-predicted)[(Grade-predicted) < 0]),2)`
+
+```{r, fig.width=5, fig.asp=3/4, echo=FALSE,}
+ggplot(studentdata, aes(x=Hours, y=Grade))+geom_point()+geom_hline(yintercept = 0)+geom_vline(xintercept = 0)+theme_bw()+scale_x_continuous(limits = c(0,10), breaks=seq(0, 10, by = 1))+scale_y_continuous(limits = c(0,10), breaks=seq(0, 10, by = 1))+
+  geom_abline(intercept = Grade.Hours$coefficients[1], slope = Grade.Hours$coefficients[2], colour = "black", size = 1)+
+  geom_segment(x = Hours, xend = Hours, y = Grade,  yend = predict.lm(Grade.Hours, newdata = studentdata), colour = ifelse(Grade > predicted, "blue", "red"))
+  
+```
+
+## Sum of Squared Errors (SSE)
+
+The positive errors are exactly negated by the negative errors
+
+**Solution:** We take the **square** of the prediction errors to get rid of the negatives
+
+* This allows us to take a sum of squared errors; this is always a positive number
+* We can then find the regression line that gives the smallest "sum of squared errors"
+* That regression line also gives the smallest (non-squared) errors, so squaring them doesn't affect our results
+
+## Sum of Squared Errors
+
+Sum of Squared Prediction Errors (= Sum of Squared Errors, SSE):
+
+$$
+\sum{(Y_i - \hat{Y}_i)^2} = `r round(sum((Grade-predicted)^2),2)`
+$$
+
+This is the first example of a **sum of squares**. You will see many more, whenever we're summing things that can be both positive and negative, and the formula usually looks like:
+
+$$
+\sum(\dots-\dots)^2
+$$
+
+
+## Ordinary Least Squares
+
+For linear regression, the coefficients can be calculated straightforwardly using matrix algebra (not part of this course)
+
+* This calculation gives, by definition, the line with the **smallest possible** total prediction error
+* Prediction error is defined as "sum of squared errors"
+* Therefore, this method is called "ordinary least squares" (= squared errors)
+
+## Goodness of fit
+
+By definition, the regression line is the line that best describes the data
+
+* But how well does it describe the data?
+* In a way, the SSE describes the goodness of fit: small prediction errors imply good fit
+* But SSE is not on a meaningful scale, so we cannot interpret it easily
+
+**Solution:** We need to compare the SSE to some baseline
+
+## Null model
+
+To determine the goodness of fit of our regression line, we compare its SSE to the sum of squares we would obtain if we did not use information from the predictor to predict our outcome
+
+* If you did not include Hours as a predictor, you would predict the mean for each individual
+* A regression model without predictors is simply:
+    + $Y_i = a + e_i$, where $e_i \sim N(0, SD_y)$
+    + This is called a "null model" (no predictors)
+    + Its only coefficient $a$ is just the mean of $Y$
+
+## Total Sum of Squares
+
+You would predict the mean value of Grade for each individual, $\bar{Y}$
+
+The sum of squared distances between the mean and individual observations is called <font color = "blue">Total Sum of Squares</font>, TSS: $\sum{(Y_i-\bar{Y}_i)^2} = `r round(sum((Grade-mean(Grade))^2),2)`$
+
+```{r, fig.width=6, fig.asp=3/4, echo=FALSE}
+ggplot(studentdata, aes(x=Hours, y=Grade))+geom_point()+geom_hline(yintercept = 0)+geom_vline(xintercept = 0)+theme_bw()+scale_x_continuous(limits = c(0,10), breaks=seq(0, 10, by = 1))+scale_y_continuous(limits = c(0,10), breaks=seq(0, 10, by = 1))+geom_hline(yintercept = mean(Grade), linetype = 1)+geom_segment(x=Hours, xend = Hours, y = mean(Grade), yend = Grade,  col="blue")
+```
+
+## TSS is related to the variance
+
+You've seen the TSS before; it is used to calculate the variance (lecture 1)
+
+* $S_Y^2 = \frac{\sum(Y_i-\bar{Y})^2}{n-1}$
+* This is the "average" squared distance of individual observations to the mean of Y
+
+```{r, fig.width=6, fig.asp=3/4, echo=FALSE}
+ggplot(studentdata, aes(x=Hours, y=Grade))+geom_point()+geom_hline(yintercept = 0)+geom_vline(xintercept = 0)+theme_bw()+scale_x_continuous(limits = c(0,10), breaks=seq(0, 10, by = 1))+scale_y_continuous(limits = c(0,10), breaks=seq(0, 10, by = 1))+geom_hline(yintercept = mean(Grade), linetype = 1)+geom_segment(x=Hours, xend = Hours, y = mean(Grade), yend = Grade,  col="blue")
+```
+
+## Regression Sum of Squares {.smaller}
+
+How large is the difference between the total sum of squares and the sum of squared errors?
+
+* In other words: how much of the total sum of squares is explained away by the regression line?
+
+The reduction in sum of squares that occurs by using the regression line to predict observations instead of just the mean is called <font color = "blue">Regression Sum of Squares</font>, RSS:
+
+It's the difference between individual predctions and the mean:
+
+$$
+\sum{(\hat{Y}_i-\bar{Y})^2}
+$$
+
+So it follows: Total SS - Error SS = Regression SS
+
+`r round(sum((Grade-mean(Grade))^2),2)` - `r round(sum((Grade-predicted)^2),2)` = `r round(sum((Grade-mean(Grade))^2)-sum((Grade-predicted)^2),2)`
+
+## Sum of Squares demo
+
+[See this demo (LINK)](https://utrecht-university.shinyapps.io/cj_regression_residuals/)
+
+## {background-iframe="https://utrecht-university.shinyapps.io/cj_regression_residuals/"}
+
+## Sums of Squares formulas
+
+Sum  | Formula                         | Also
+-----|---------------------------------|---------------
+SSE  | $\sum{(Y_i - \hat{Y}_i)^2}$     | SST - SSR
+SST  | $\sum{(Y_i - \bar{Y})^2}$       | SSR + SSE
+SSR  | $\sum{(\hat{Y}_i - \bar{Y})^2}$ | SST-SSE
+
+
+# Explained variance
+
+## Model fit
+
+We want to describe how well our regression model describes the data
+
+* Can we use the RSS?
+
+**Problem:** Sums of squares are hard to interpret and cannot be compared from one dataset to another
+
+* Adding even one participant increases the SS, but does not mean the fit is worse
+
+<font color = "blue">Solution:</font> We standardize the RSS
+
+## Explained variance
+
+Which portion of the total sum of squares (TSS) is explained by the regression line (RSS)?
+
+$\frac{RSS}{TSS} = R^2$
+
+This gives $R^2$, the proportion of **explained variance**
+
+## Explained variance
+
+Which portion of the total variance in the dependent variable is explained by the predictor?
+
+(see demo)
+
+In our running example:
+
+$\frac{`r round(sum((Grade-mean(Grade))^2)-sum((Grade-predicted)^2),2)`}{`r round(sum((Grade-mean(Grade))^2),2)`} = `r round((sum((Grade-mean(Grade))^2)-sum((Grade-predicted)^2))/sum((Grade-mean(Grade))^2),2)`$
+
+# Tests
+
+## Model test
+
+Does the regression model explain significantly more variance than the null-model?
+
+Remember:
+
+* Regression model: $Y_i = a + b * X_i + e_i$
+* Null model: $Y_i = a + e_i$ (where $a$ is just the mean of $Y$)
+
+## Steps for testing
+
+## Steps for testing {.smaller}
+
+1. Formulate hypotheses  
+    + $H_0$: $R^2 = 0$, $H_A$: $R^2 > 0$
+2. Calculate test statistic
+
+**NOTE:** $R^2$ only takes positive values, so we need a probability distribution that only takes positive values. That's neither the Z- nor the t-distribution.
+
+## F-test
+
+<!--     + <font color = "gray">Describes how many standard errors away from the population statistic under the null hypothesis the sample statistic is</font> -->
+<!-- 3. Calculate p-value -->
+<!--     + <font color = "gray">Probability of observing a value at least as extreme as the sample statistic, if $H_0$ were true</font> -->
+<!-- 4.  Draw conclusion about null hypothesis -->
+<!--     + <font color = "gray">(Act as if) we reject or fail to reject it</font> -->
+
+Introducing the F-distribution
+
+```{r, out.width="600px", out.height="450px"}
+#knitr::include_graphics("./images/F_distribution.png")
+ggplot(data = data.frame(x = c(0, 5)), aes(x)) +
+  stat_function(fun = df, args = list(df1 = 2, df2 = 90)) +
+  ylab("Probability density") +
+  xlab("F") +
+  scale_y_continuous(breaks = NULL, expand = c(0,0)) +
+  geom_area(stat = "function", fun = df, fill = "red", alpha = .2, xlim = c(qf(.95, df1 = 2, df2=90, lower.tail = T), 5), args = list(df1 = 2, df2 = 90)) +
+  geom_segment(aes(
+    x = qf(.95, df1 = 2, df2=90, lower.tail = T),
+    xend = qf(.95, df1 = 2, df2=90, lower.tail = T),
+    y = 0,
+    yend = df(qf(.95, df1 = 2, df2=90, lower.tail = T), df1 = 2, df2 = 90)), colour = "red")+
+  theme_bw()
+```
+
+<!--$F = \frac{MEAN of Squares Segression}{MEAN of Squares Error} = \frac{SSR/k}{SSE/(n-k)}$
+
+$df_1$: k
+$df_2$: n-k-->
+
+## F-test
+
+The F-test is a ratio of two sources of variance:
+
+$$
+F = \frac{\sigma^2_{\text{regression}}}{\sigma^2_{\text{Error}}} =  \frac{MS_{\text{regression}}}{MS_{\text{Error}}} = \frac{SSR/(p-1)}{SSE/(n-p)}
+$$
+
+p: parameters ($a$ and $b$), n: number of participants
+
+* $df_1$: p-1
+* $df_2$: n-p
+
+Both SS can only be positive, so the F-statistic is always positive, so we use a probability distribution with only positive values.
+
+## Reporting results
+
+The regression model explained significant variance in the outcome, $R^2 = `r tmp = summary(Grade.Hours); round(tmp[["r.squared"]], 2)`, F(`r tmp[["fstatistic"]][2]`, `r tmp[["fstatistic"]][3]`) = `r round(tmp[["fstatistic"]][1], 2)`, p < .001.$ This means that hours studied explained `r round(tmp$r.squared, 2)`*100% of the variance in exam grades.
+
+<!--`r round(pf(tmp$fstatistic[1], tmp$fstatistic[2], tmp$fstatistic[3], lower.tail = FALSE), 2)`$.-->
+
+# Correlation
+
+## Correlation and regression
+
+Consider the association between X and Y
+
+* If you consider one of them to be the outcome of the other, regression is the correct technique
+    + $R^2$ indicates the strength of association between them
+* What if you don't want to label one variable outcome and the other predictor?
+
+Correlation is a measure of the strength and direction of the linear relationship between two variables.
+
+## Correlation
+
+A standardized measure of the strength of linear association between two continuous variables
+
+* Standardized: ranges from [-1, 1]
+* Sample correlation: $r$
+* Population correlation: $\rho$
+* r = -1: Perfect negative association
+* r =  0: No association
+* r =  1: Perfect positive association
+
+## Correlation and regression
+
+Correlation and regression are very closely related
+
+* $R^2$ (explained variance) for two is literally $r$, squared: the squared correlation coefficient
+    + For bivariate regression/correlation. The story is more complex for regression with 2+ predictors
+
+## Output in SPSS
+
+![](images/regression_correlation.png)
+
+## Correlation
+
+Correlation increases as:
+
+* The points are closer to the regression line
+* The slope is steeper (whether positive or negative)
+
+```{r, fig.width=5, fig.asp=3/4, echo=FALSE}
+Grade.Hours <- lm(Grade ~Hours, studentdata)
+ggplot(studentdata, aes(x=Hours, y=Grade))+geom_point()+geom_hline(yintercept = 0)+geom_vline(xintercept = 0)+theme_bw()+scale_x_continuous(limits = c(0,10), breaks=seq(0, 10, by = 1))+scale_y_continuous(limits = c(0,10), breaks=seq(0, 10, by = 1))+
+  geom_abline(intercept = Grade.Hours$coefficients[1], slope = Grade.Hours$coefficients[2], colour = "red", size = 2)
+```
+
+
+## Correlation
+
+```{r}
+#| panel: fill
+fluidPage(fluidRow(
+  column(3, numericInput("a", 
+                  "a:", 
+                   value = 1.5,
+                   min = -10, 
+                   max = 10)),
+  column(3, numericInput("b", 
+                  "b:", 
+                   value = .5,
+                   min = -10, 
+                   max = 10)),
+  column(3, numericInput("SD", 
+                  "SD:", 
+                   value = 1,
+                   min = 0, 
+                   max = 10)),
+  column(3, numericInput("n", 
+                  "n:", 
+                   value = 30,
+                   min = 1, 
+                   max = 200)),
+),
+fluidRow(
+  column(12, plotOutput('plot', width = "1000px", height = "500px"))
+))
+
+```
+
+
+```{r}
+#| context: server
+output$plot <- renderPlot({
+  set.seed(1)
+  X = rnorm(input$n)
+  Y <- input$a + input$b*X + rnorm(input$n, sd = input$SD)
+  df_cor <- data.frame(
+    X = X,
+    Y = Y
+  )
+  res <- lm(X~Y, df_cor)
+  ggplot(df_cor, aes(x=X, y=Y))+
+    geom_point()+
+    #geom_hline(yintercept = 0)+geom_vline(xintercept = 0)+
+    theme_bw()+
+    scale_x_continuous(limits = c(-5,5)) +
+    scale_y_continuous(limits = c(-5,5)) +
+    stat_smooth(method = "lm",
+              formula = y ~ x,
+              geom = "smooth",
+              se=FALSE)+
+    #geom_abline(intercept = coef(res)[1], slope = coef(res)[2], colour = "red")+
+    geom_label(x = 5, y = -5, hjust = 1, vjust = 0, label = paste0("Yi = ", formatC(coef(res)[1], digits = 2, format = "f"), " + ", formatC(coef(res)[2], digits = 2, format = "f"), "*Xi + ei,\nr = ", formatC(cor(df_cor$X, df_cor$Y), digits = 2, format = "f")))
+})
+```
+
+
+## Examples
+
+![](images/correlation2.jpg)
+
+## Be careful
+
+The <font color = "blue">Anscombe quartet</font>: 
+
+All examples below have a correlation of $r = .70$
+
+![](images/anscombe.png)
+
+## Calculating Correlations {.smaller}
+
+**Step 1:** Calculate means
+
+```{r}
+df <- data.frame("$X_i$" = c(1,2,4,5,5,7), "$Y_i$" = c(0,2,3,2,11,12), stringsAsFactors = F, check.names = F)
+library(knitr)
+library(kableExtra)
+kableExtra::kbl(df, escape = F, align=rep('c', ncol(df)), format = "markdown") |> kable_styling(bootstrap_options = "striped")
+```
+
+$\text{Mean } X = \frac{\sum{X_i}}{n} = \frac{1+2+4+5+5+7}{ 6} = `r mean(df[,1])`$ 
+
+$\text{Mean } Y = \frac{\sum{Y_i}}{n} = \frac{0+2+3+2+11+12}{6} = `r mean(df[,2])`$ 
+
+## Calculating Correlations {.smaller}
+
+**Step 2:** Calculate deviations from mean
+
+```{r}
+df[["$(X_i-\\bar{X})$"]] <- df[,1]-mean(df[,1])
+df[["$(Y_i-\\bar{Y})$"]] <- df[,2]-mean(df[,2])
+kableExtra::kbl(df, escape = F, align=rep('c', ncol(df)), format = "markdown") %>% kable_styling(bootstrap_options = "striped")
+```
+
+$\text{Mean } X = \frac{\sum{X_i}}{n} = \frac{0+2+3+2+11+12}{6} = `r mean(df[,1])`$ 
+
+$\text{Mean } Y = \frac{\sum{Y_i}}{n} = \frac{0+2+3+2+11+12}{6} = `r mean(df[,2])`$ 
+
+
+## Calculating Correlations {.smaller}
+
+**Step 3:** Square deviations
+
+```{r}
+df[["$(X_i-\\bar{X})^2$"]] <- df[,3]^2
+df[["$(Y_i-\\bar{Y})^2$"]] <- df[,4]^2
+kableExtra::kbl(df, escape = F, align=rep('c', ncol(df)), format = "markdown") %>% kable_styling(bootstrap_options = "striped")
+
+```
+
+## Calculating Correlations {.smaller}
+
+**Step 4:** Total sum of squares / variance / standard deviations
+
+```{r}
+kableExtra::kbl(df, escape = F, align=rep('c', ncol(df)), format = "markdown") %>% kable_styling(bootstrap_options = "striped")
+```
+  
+  
+$SS = \sum{(X_i-\bar{X})^2} = 9 + 4 + 0 + 1 + 1 +9$
+
+$s^2 = var = \frac{\sum{(X_i-\bar{X})^2}}{n-1} = \frac{24}{5} = 4.8$
+
+$s = SD = \sqrt{s^2} = \sqrt{2.2}$
+
+## Calculating Correlations {.smaller}
+
+**Step 5:** Calculate COvariance
+
+```{r}
+df[["$(X_i-\\bar{X})(Y_i-\\bar{Y})$"]] <- df[,3]*df[,4]
+kableExtra::kbl(df, escape = F, align=rep('c', ncol(df)), format = "markdown") |> kable_styling(bootstrap_options = "striped")
+```
+
+* Covariance is a rough, unstandardized measure of association
+* It is somewhat comparable to sums of squares (although technically it is a sum of products)
+
+## Calculating Correlations {.smaller}
+
+**Step 6:** Standardize the covariance
+
+**Correlation:**
+
+$$
+r = \frac{COV_{XY}}{SD_X * SD_Y}
+$$
+
+**Regression coefficient:**
+
+$$
+b = \frac{COV_{XY}}{S^2_X} = \frac{COV_{XY}}{SD_X*SD_X} 
+$$
+
+## Calculating Correlations {.smaller}
+
+**Step 6:** Standardize the covariance
+
+Correlation and regression coefficients are just different ways to standardize the covariance
+
+* Correlation is standardized with respect to X and Y
+    + Correlation of X with Y is the same as correlation of Y with X
+* Regression coefficient is only standardized with respect to X
+    + That's why its units are Y (a 1-step increase in X leads to $b$ steps increase in Y)
+    + That's why it's asymmetrical; regression slope of X on Y is different from Y on X
+    
+# Standardized regression coefficient
+
+## Standardized regression coefficient
+
+Remember: The correlation coefficient is standardized by dropping the units of both variables
+
+The standardized regression coefficient does the same
+
+Consequently, in bivariate linear regression, the standardized regression coefficient *is* the correlation coefficient
+
+* This changes when we have >1 predictors (future lesson)
+
+## Computation of the standardized regression coefficient
+
+Compute Z-scores for predictor and outcome
+
+* $Z_X = \frac{X_i-\bar{X}}{SD_x}$, $Z_Y = \frac{Y_i-\bar{Y}}{SD_Y}$
+* Z-scores have mean 0 and SD 1
+
+Then perform regression with these Z-scores
+
+## SPSS output
+
+![](images/regression_correlation.png)

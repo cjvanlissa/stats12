@@ -1,0 +1,357 @@
+---
+title: "GLM\nANCOVA"
+author:   "Caspar J. van Lissa"
+date:     "`r format(Sys.Date(), '%d %b %Y')`"
+format: revealjs
+---
+
+```{r}
+library(kableExtra)
+library(tidySEM)
+library(eulerr)
+options(knitr.kable.NA = '')
+
+```
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(ggplot2)
+set.seed(4)
+foods <- data.frame(Food = factor(c("Sausage", "Sausage","Ice cream","Ice cream")),
+                    Topping = factor(c("Mustard", "Chocolate", "Mustard", "Chocolate")),
+                    Liking = c(3.5, 1.5, .5, 4.5))
+foods <- foods[sample.int(nrow(foods), size = 68, replace = T), ]
+foods$Liking <- foods$Liking + rnorm(68)
+foods$Liking <- as.integer(cut(foods$Liking, 6))-1
+summary(aov(Liking ~ Food * Topping, foods))
+```
+
+
+## Today: ANCOVA {.smaller}
+
+> **ANCOVA:** ANalysis of COVAriance; regression with a categorical predictor and continuous control variable(s).
+
+- Nothing complicated!
+- Building upon:
+    + Regression with dummies
+    + Multiple regression
+    + Causality (multiple regression lecture)
+
+ANCOVA is just regression with one categorical predictor of interest, and one or more continuous *covariates*
+
+## What are Covariates? {.smaller}
+
+__Covariates:__ variables that are related to the dependent variable\, but not of primary interest to the researcher\. Examples:  _age_ \,  _gender_ \,  _education level_ \, ...
+
+* Unavoidable to discuss causal assumptions at this point
+* Remember: Control for *confounders*
+    + Variables that cause the predictor of interest and/or outcome
+* Never control for *colliders*
+    + Variables that are influenced by both the predictor of interest and the outcome
+    + Your results will be meaningless!
+* Don't blindly control for "everything but the kitchen sink"
+* Read Pearl (Book of Why) for a sensible approach to covariates
+
+## Why Control at all? {.smaller}
+
+Covariates can reduce the residual variance
+
+* This increases power to find an effect for your predictor of interest
+
+Covariates are essential for causal inference
+
+* E.g., in quasi-experiments
+* Proper selection of covariates that make causal inference possible is beyond the scope of this course!
+
+Cinelli, C., Forney, A., & Pearl, J. (2022). A crash course in good and bad controls. Sociological Methods & Research, 00491241221099552.
+
+<https://ftp.cs.ucla.edu/pub/stat_ser/r493.pdf>
+
+## Good Controls
+
+Assume that A is your factor and represents an intervention through a *natural experiment*
+
+* Natural experiment: No random assignment, people volunteer or choose to receive each treatment
+* A is the predictor (a factor)
+* B is the outcome (continuous)
+* C is a third variable
+
+## Good Control: Confounder {.smaller}
+
+For example:
+
+* A is taking a homeopathic supplement (1) or not (0)
+* B is perceived health improvement
+* C is belief in the efficacy of the supplement
+* C would cause a spurious effect of A on B, so we should control!
+
+```{r}
+p <- prepare_graph(dagitty::dagitty("dag{
+A -> B;
+C -> A;
+C -> B
+}"), layout = get_layout("", "C", "",
+                         "A", "", "B", rows = 2), angle = 179)
+p$nodes$shape <- "rect"
+p$edges$label[1] <- "spurious"
+plot(p)
+```
+
+## Neutral Control: Covariate {.smaller}
+
+* C is unrelated to A
+* Controlling for C reduces error variance of outcome B
+* This increases power to detect an effect of A on B
+
+```{r}
+p <- prepare_graph(dagitty::dagitty("dag{
+A -> B;
+C -> B
+}"), layout = get_layout("", "C", "",
+                         "A", "", "B", rows = 2), angle = 179)
+p$nodes$shape <- "rect"
+p$edges$label[1] <- "spurious"
+plot(p)
+```
+
+## Randomized Controlled Experiment {.smaller}
+
+* The experimental method breaks connections between confounders C and treatment A:
+
+```{r}
+p <- prepare_graph(dagitty::dagitty("dag{
+A -> B;
+C -> A;
+C -> B
+}"), layout = get_layout("", "C", "",
+                         "A", "", "B", rows = 2), angle = 179)
+p$nodes$shape <- "rect"
+p$edges$label[1] <- "spurious"
+p$edges$linetype <- c(1,2,1)
+p$edges$alpha <- c(1,.5,1)
+plot(p)
+```
+
+## Neutral Control: Cause of X {.smaller}
+
+* In a natural experiment:
+    + This reduces variance in A
+    + Which may reduce the precision of the effect of A on B
+* In a randomized controlled experiment:
+    + Differences between groups should be due to random chance
+    + Effects on A are prevented by random assignment
+    + Controlling for "causes of" A thus introduces bias
+
+```{r}
+p <- prepare_graph(dagitty::dagitty("dag{
+C -> A;
+A -> B
+}"), layout = get_layout("C", "", "",
+                         "A", "", "B", rows = 2), angle = 179)
+p$nodes$shape <- "rect"
+plot(p)
+```
+
+
+<!-- ## Bad Control: M-bias -->
+
+<!-- Do not control for a common outcome of the causes of treatment and outcome! -->
+
+<!-- ```{r} -->
+<!-- # tmp = m_bias( -->
+<!-- #     x = "Education", y = "Diabetes", a = "Income during Childhood", -->
+<!-- #     b = "Genetic Risk \nfor Diabetes", m = "Mother's Diabetes" -->
+<!-- # ) -->
+<!-- library(ggdag) -->
+<!-- p <- prepare_graph(m_bias( -->
+<!--     x = "Education", y = "Diabetes", a = "Income during Childhood", -->
+<!--     b = "Genetic Risk \nfor Diabetes", m = "Mother's Diabetes" -->
+<!-- ), angle = 179) -->
+<!-- p$nodes$shape <- "rect" -->
+<!-- plot(p) + scale_y_reverse() -->
+<!-- ``` -->
+
+## Bad Control: Collider {.smaller}
+
+* E.g.: A is smoking
+* B infant mortality
+* C is low birthweight
+* Controlling for low birthweight creates a (spurious!) negative effect of smoking on infant mortality!
+* Tobacco industry used this as evidence that smoking is good for babies...
+
+```{r}
+p <- prepare_graph(dagitty::dagitty("dag{
+C <- A;
+C <- B
+}"), layout = get_layout("", "C", "",
+                         "A", "", "B", rows = 2), angle = 179)
+p$nodes$shape <- "rect"
+plot(p)
+```
+
+## Bad Control: Case Control Bias {.smaller}
+
+* Controlling for an outcome of the outcome B
+
+```{r}
+p <- prepare_graph(dagitty::dagitty("dag{
+A -> B;
+B -> C
+}"), layout = get_layout("", "", "C",
+                         "A", "", "B", rows = 2), angle = 179)
+p$nodes$shape <- "rect"
+plot(p)
+```
+
+## Bad Control: Overcontrol Bias {.smaller}
+
+* Controlling for a mediator (process variable) of the effect of A on B
+
+```{r}
+p <- prepare_graph(dagitty::dagitty("dag{
+A -> C;
+C -> B
+}"), layout = get_layout("A", "C", "B", rows = 1), angle = 179)
+p$nodes$shape <- "rect"
+plot(p)
+```
+
+## Take Home Message
+
+Think about causal assumptions before you control!
+
+Draw the presumed causal diagram on a piece of paper
+
+## Example: Red Bull study 1
+
+Natural experiment at the train station
+
+* Participants choose a drink
+    + Factor, 2 level: Red bull VS herbal tea
+* Participants perform a memory task:
+    + DV: # words remembered
+* Covariate: participants' age
+
+## Example: Red Bull study
+
+**ANOVA:**
+
+```{r}
+set.seed(2)
+n = 78
+age <- runif(n)
+age <- scales::rescale(age, to = c(16, 68))
+drink <- factor(cut(age + rnorm(n), 2), labels = c("Tea", "Red Bull"))
+memory <- -.2*age + rnorm(n, sd = 3)
+memory <- scales::rescale(memory, to = c(0,30))
+redbull1 <- data.frame(age = age, memory = memory, drink = drink)
+res_drink <- summary(lm(memory ~ drink))$coefficients
+colnames(res_drink) <- c("B", "SE", "t", "p")
+kableExtra::kbl(res_drink, digits = 2)
+```
+
+Does drinking Red Bull harm memory? Why? Does it make people distractable?
+
+**ANCOVA:**
+
+```{r}
+res_drinkage1 <- res_drinkage <- summary(lm(memory ~ drink + age))$coefficients
+colnames(res_drinkage) <- c("B", "SE", "t", "p")
+kableExtra::kbl(res_drinkage, digits = 2)
+```
+
+No: Age is a confounder; old people's memory is slightly worse, and they tend to prefer tea over red bull.
+
+## Example: Red Bull study 2
+
+Randomized controlled experiment at the train station
+
+* Participants are assigned a drink
+    + Factor, 2 level: Red bull VS herbal tea
+* Participants perform a memory task:
+    + DV: # words remembered
+* Covariate: participants' age
+
+## Example: Red Bull study 2
+
+**ANOVA:**
+
+```{r}
+set.seed(4)
+n = 78
+age <- runif(n)
+age <- scales::rescale(age, to = c(16, 68))
+drink <- factor(sample(c("Tea", "Red Bull"), n, replace = TRUE), levels = c("Tea", "Red Bull"))
+memory <- -.2*age + rnorm(n, sd = 3)
+memory <- scales::rescale(memory, to = c(0,30))
+res_drink <- summary(lm(memory ~ drink))$coefficients
+colnames(res_drink) <- c("B", "SE", "t", "p")
+kableExtra::kbl(res_drink, digits = 2)
+```
+
+Correct answer: No effect of Red Bull
+
+**ANCOVA:**
+
+```{r}
+res_drinkage <- summary(lm(memory ~ drink + age))$coefficients
+colnames(res_drinkage) <- c("B", "SE", "t", "p")
+kableExtra::kbl(res_drinkage, digits = 2)
+```
+
+Still correct answer (age = neutral control)
+
+# Adjusted Means
+
+## Controlling for Covariate
+
+One way to think of controlling for the covariate is to account for differences between groups
+
+* Recall: in multiple regression, we get the effect of each predictor while controlling for all other predictors
+
+We can use this property to reconstruct the "adjusted means" we would have observed if both groups had scored equal on the covariate
+
+## Visualization
+
+![](images/adjustmeans.png)
+
+## Using Regression Coefficients
+
+* The regression coefficients give us the mean of the reference group, for a covariate value of 0
+* The slope of the dummy variable(s) allows us to calculate the mean for the other group(s), for a covariate value of 0
+* We can use the regression formula to calculate adjusted means for other covariate values
+
+## Example Adjusted Means {.smaller}
+
+```{r}
+coefs <- res_drinkage1
+```
+
+The unadjusted mean is $M = `r report(mean(redbull1[["memory"]][redbull1[["drink"]] == "Tea"]), equals = F)`$ for tea drinkers, and $M = `r report(mean(redbull1[["memory"]][redbull1[["drink"]] == "Red Bull"]), equals = F)`$ for red bull drinkers.
+
+```{r}
+res_drinkage <- res_drinkage1
+colnames(res_drinkage) <- c("B", "SE", "t", "p")
+kableExtra::kbl(res_drinkage, digits = 2)
+```
+
+The adjusted means for 20-year old participants are:
+
+* 20yo tea drinkers: $`r report(res_drinkage[1,1], equals = F)` + (20 * `r report(res_drinkage[3,1], equals = F)`) = `r report(res_drinkage[1,1]+(20 *res_drinkage[3,1]), equals = F)`$
+* 20yo red bull drinkers: $`r report(res_drinkage[1,1], equals = F)` + `r report(res_drinkage[2,1], equals = F)` + (20 * `r report(res_drinkage[3,1], equals = F)`) = `r report(res_drinkage[1,1]+res_drinkage[2,1] + (20 *res_drinkage[3,1]), equals = F)`$
+
+## Method 2: Using Group Means
+
+$$
+\bar{Y}_g^{adj} = \bar{Y}_g - b(\bar{X}_g-\bar{X})
+$$
+
+Where:
+
+* $\bar{Y}_g^{adj}$: Adjusted mean of the outcome for group g
+* $\bar{Y}_g$: Unadjusted mean of the outcome for group g
+* $b$: Regression coefficient of the covariate
+* $\bar{X}_g$: Group mean of covariate X
+* $\bar{X}$: Overall mean of covariate X
+

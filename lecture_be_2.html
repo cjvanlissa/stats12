@@ -1,0 +1,1473 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="lecture_be_2_files/libs/clipboard/clipboard.min.js"></script>
+<script src="lecture_be_2_files/libs/quarto-html/tabby.min.js"></script>
+<script src="lecture_be_2_files/libs/quarto-html/popper.min.js"></script>
+<script src="lecture_be_2_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="lecture_be_2_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="lecture_be_2_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="lecture_be_2_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="lecture_be_2_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.3.427">
+
+  <meta name="author" content="Caspar J. van Lissa">
+  <meta name="dcterms.date" content="2023-08-07">
+  <title>GLM VIII Logistic Regression</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="lecture_be_2_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="lecture_be_2_files/libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" href="lecture_be_2_files/libs/revealjs/dist/theme/quarto.css">
+  <link href="lecture_be_2_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="lecture_be_2_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="lecture_be_2_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="lecture_be_2_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+
+  .callout {
+    margin-top: 1em;
+    margin-bottom: 1em;  
+    border-radius: .25rem;
+  }
+
+  .callout.callout-style-simple { 
+    padding: 0em 0.5em;
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+    display: flex;
+  }
+
+  .callout.callout-style-default {
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+  }
+
+  .callout .callout-body-container {
+    flex-grow: 1;
+  }
+
+  .callout.callout-style-simple .callout-body {
+    font-size: 1rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-style-default .callout-body {
+    font-size: 0.9rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-titled.callout-style-simple .callout-body {
+    margin-top: 0.2em;
+  }
+
+  .callout:not(.callout-titled) .callout-body {
+      display: flex;
+  }
+
+  .callout:not(.no-icon).callout-titled.callout-style-simple .callout-content {
+    padding-left: 1.6em;
+  }
+
+  .callout.callout-titled .callout-header {
+    padding-top: 0.2em;
+    margin-bottom: -0.2em;
+  }
+
+  .callout.callout-titled .callout-title  p {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+    
+  .callout.callout-titled.callout-style-simple .callout-content  p {
+    margin-top: 0;
+  }
+
+  .callout.callout-titled.callout-style-default .callout-content  p {
+    margin-top: 0.7em;
+  }
+
+  .callout.callout-style-simple div.callout-title {
+    border-bottom: none;
+    font-size: .9rem;
+    font-weight: 600;
+    opacity: 75%;
+  }
+
+  .callout.callout-style-default  div.callout-title {
+    border-bottom: none;
+    font-weight: 600;
+    opacity: 85%;
+    font-size: 0.9rem;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-default div.callout-content {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-simple .callout-icon::before {
+    height: 1rem;
+    width: 1rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 1rem 1rem;
+  }
+
+  .callout.callout-style-default .callout-icon::before {
+    height: 0.9rem;
+    width: 0.9rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 0.9rem 0.9rem;
+  }
+
+  .callout-title {
+    display: flex
+  }
+    
+  .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  .callout.no-icon::before {
+    display: none !important;
+  }
+
+  .callout.callout-titled .callout-body > .callout-content > :last-child {
+    margin-bottom: 0.5rem;
+  }
+
+  .callout.callout-titled .callout-icon::before {
+    margin-top: .5rem;
+    padding-right: .5rem;
+  }
+
+  .callout:not(.callout-titled) .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  /* Callout Types */
+
+  div.callout-note {
+    border-left-color: #4582ec !important;
+  }
+
+  div.callout-note .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEU0lEQVRYCcVXTWhcVRQ+586kSUMMxkyaElstCto2SIhitS5Ek8xUKV2poatCcVHtUlFQk8mbaaziwpWgglJwVaquitBOfhQXFlqlzSJpFSpIYyXNjBNiTCck7x2/8/LeNDOZxDuEkgOXe++553zfefee+/OYLOXFk3+1LLrRdiO81yNqZ6K9cG0P3MeFaMIQjXssE8Z1JzLO9ls20MBZX7oG8w9GxB0goaPrW5aNMp1yOZIa7Wv6o2ykpLtmAPs/vrG14Z+6d4jpbSKuhdcSyq9wGMPXjonwmESXrriLzFGOdDBLB8Y6MNYBu0dRokSygMA/mrun8MGFN3behm6VVAwg4WR3i6FvYK1T7MHo9BK7ydH+1uurECoouk5MPRyVSBrBHMYwVobG2aOXM07sWrn5qgB60rc6mcwIDJtQrnrEr44kmy+UO9r0u9O5/YbkS9juQckLed3DyW2XV/qWBBB3ptvI8EUY3I9p/67OW+g967TNr3Sotn3IuVlfMLVnsBwH4fsnebJvyGm5GeIUA3jljERmrv49SizPYuq+z7c2H/jlGC+Ghhupn/hcapqmcudB9jwJ/3jvnvu6vu5lVzF1fXyZuZZ7U8nRmVzytvT+H3kilYvH09mLWrQdwFSsFEsxFVs5fK7A0g8gMZjbif4ACpKbjv7gNGaD8bUrlk8x+KRflttr22JEMRUbTUwwDQScyzPgedQHZT0xnx7ujw2jfVfExwYHwOsDTjLdJ2ebmeQIlJ7neo41s/DrsL3kl+W2lWvAga0tR3zueGr6GL78M3ifH0rGXrBC2aAR8uYcIA5gwV8zIE8onoh8u0Fca/ciF7j1uOzEnqcIm59sEXoGc0+z6+H45V1CvAvHcD7THztu669cnp+L0okAeIc6zjbM/24LgGM1gZk7jnRu1aQWoU9sfUOuhrmtaPIO3YY1KLLWZaEO5TKUbMY5zx8W9UJ6elpLwKXbsaZ4EFl7B4bMtDv0iRipKoDQT2sNQI9b1utXFdYisi+wzZ/ri/1m7QfDgEuvgUUEIJPq3DhX/5DWNqIXDOweC2wvIR90Oq3lDpdMIgD2r0dXvGdsEW5H6x6HLRJYU7C69VefO1x8Gde1ZFSJLfWS1jbCnhtOPxmpfv2LXOA2Xk2tvnwKKPFuZ/oRmwBwqRQDcKNeVQkYcOjtWVBuM/JuYw5b6isojIkYxyYAFn5K7ZBF10fea52y8QltAg6jnMqNHFBmGkQ1j+U43HMi2xMar1Nv0zGsf1s8nUsmUtPOOrbFIR8bHFDMB5zL13Gmr/kGlCkUzedTzzmzsaJXhYawnA3UmARpiYj5ooJZiUoxFRtK3X6pgNPv+IZVPcnwbOl6f+aBaO1CNvPW9n9LmCp01nuSaTRF2YxHqZ8DYQT6WsXT+RD6eUztwYLZ8rM+rcPxamv1VQzFUkzFXvkiVrySGQgJNvXHJAxiU3/NwiC03rSf05VBaPtu/Z7/B8Yn/w7eguloAAAAAElFTkSuQmCC');
+  }
+
+  div.callout-note.callout-style-default .callout-title {
+    background-color: #dae6fb
+  }
+
+  div.callout-important {
+    border-left-color: #d9534f !important;
+  }
+
+  div.callout-important .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEKklEQVRYCcVXTWhcVRS+575MJym48A+hSRFr00ySRQhURRfd2HYjk2SSTokuBCkU2o0LoSKKraKIBTcuFCoidGFD08nkBzdREbpQ1EDNIv8qSGMFUboImMSZd4/f9zJv8ibJMC8xJQfO3HPPPef7zrvvvnvviIkpC9nsw0UttFunbUhpFzFtarSd6WJkStVMw5xyVqYTvkwfzuf/5FgtkVoB0729j1rjXwThS7Vio+Mo6DNnvLfahoZ+i/o32lULuJ3NNiz7q6+pyAUkJaFF6JwaM2lUJlV0MlnQn5aTRbEu0SEqHUa0A4AdiGuB1kFXRfVyg5d87+Dg4DL6m2TLAub60ilj7A1Ec4odSAc8X95sHh7+ZRPCFo6Fnp7HfU/fBng/hi10CjCnWnJjsxvDNxWw0NfV6Rv5GgP3I3jGWXumdTD/3cbEOP2ZbOZp69yniG3FQ9z1jD7bnBu9Fc2tKGC2q+uAJOQHBDRiZX1x36o7fWBs7J9ownbtO+n0/qWkvW7UPIfc37WgT6ZGR++EOJyeQDSb9UB+DZ1G6DdLDzyS+b/kBCYGsYgJbSQHuThGKRcw5xdeQf8YdNHsc6ePXrlSYMBuSIAFTGAtQo+VuALo4BX83N190NWZWbynBjhOHsmNfFWLeL6v+ynsA58zDvvAC8j5PkbOcXCMg2PZFk3q8MjI7WAG/Dp9AwP7jdGBOOQkAvlFUB+irtm16I1Zw9YBcpGTGXYmk3kQIC/Cds55l+iMI3jqhjAuaoe+am2Jw5GT3Nbz3CkE12NavmzN5+erJW7046n/CH1RO/RVa8lBLozXk9uqykkGAyRXLWlLv5jyp4RFsG5vGVzpDLnIjTWgnRy2Rr+tDKvRc7Y8AyZq10jj8DqXdnIRNtFZb+t/ZRtXcDiVnzpqx8mPcDWxgARUqx0W1QB9MeUZiNrV4qP+Ehc+BpNgATsTX8ozYKL2NtFYAHc84fG7ndxUPr+AR/iQSns7uSUufAymwDOb2+NjK27lEFocm/EE2WpyIy/Hi66MWuMKJn8RvxIcj87IM5Vh9663ziW36kR0HNenXuxmfaD8JC7tfKbrhFr7LiZCrMjrzTeGx+PmkosrkNzW94ObzwocJ7A1HokLolY+AvkTiD/q1H0cN48c5EL8Crkttsa/AXQVDmutfyku0E7jShx49XqV3MFK8IryDhYVbj7Sj2P2eBxwcXoe8T8idsKKPRcnZw1b+slFTubwUwhktrfnAt7J++jwQtLZcm3sr9LQrjRzz6cfMv9aLvgmnAGvpoaGLxM4mAEaLV7iAzQ3oU0IvD5x9ix3yF2RAAuYAOO2f7PEFWCXZ4C9Pb2UsgDeVnFSpbFK7/IWu7TPTvBqzbGdCHOJQSxiEjt6IyZmxQyEJHv6xyQsYk//moVFsN2zP6fRImjfq7/n/wFDguUQFNEwugAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-important.callout-style-default .callout-title {
+    background-color: #f7dddc
+  }
+
+  div.callout-warning {
+    border-left-color: #f0ad4e !important;
+  }
+
+  div.callout-warning .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAETklEQVRYCeVWW2gcVRg+58yaTUnizqbipZeX4uWhBEniBaoUX1Ioze52t7sRq6APio9V9MEaoWlVsFasRq0gltaAPuxms8lu0gcviE/FFOstVbSIxgcv6SU7EZqmdc7v9+9mJtNks51NTUH84ed889/PP+cmxP+d5FIbMJmNbpREu4WUkiTtCicKny0l1pIKmBzovF2S+hIJHX8iEu3hZJ5lNZGqyRrGSIQpq15AzF28jgpeY6yk6GVdrfFqdrD6Iw+QlB8g0YS2g7dyQmXM/IDhBhT0UCiRf59lfqmmDvzRt6kByV/m4JjtzuaujMUM2c5Z2d6JdKrRb3K2q6mA+oYVz8JnDdKPmmNthzkAk/lN63sYPgevrguc72aZX/L9C6x09GYyxBgCX4NlvyGUHOKELlm5rXeR1kchuChJt4SSwyddZRXgvwMGvYo4QSlk3/zkHD8UHxwVJA6zjZZqP8v8kK8OWLnIZtLyCAJagYC4rTGW/9Pqj92N/c+LUaAj27movwbi19tk/whRCIE7Q9vyI6yvRpftAKVTdUjOW40X3h5OXsKCdmFcx0xlLJoSuQngnrJe7Kcjm4OMq9FlC7CMmScQANuNvjfP3PjGXDBaUQmbp296S5L4DrpbrHN1T87ZVEZVCzg1FF0Ft+dKrlLukI+/c9ENo+TvlTDbYFvuKPtQ9+l052rXrgKoWkDAFnvh0wTOmYn8R5f4k/jN/fZiCM1tQx9jQQ4ANhqG4hiL0qIFTGViG9DKB7GYzgubnpofgYRwO+DFjh0Zin2m4b/97EDkXkc+f6xYAPX0KK2I/7fUQuwzuwo/L3AkcjugPNixC8cHf0FyPjWlItmLxWw4Ou9YsQCr5fijMGoD/zpdRy95HRysyXA74MWOnscpO4j2y3HAVisw85hX5+AFBRSHt4ShfLFkIMXTqyKFc46xdzQM6XbAi702a7sy04J0+feReMFKp5q9esYLCqAZYw/k14E/xcLLsFElaornTuJB0svMuJINy8xkIYuL+xPAlWRceH6+HX7THJ0djLUom46zREu7tTkxwmf/FdOZ/sh6Q8qvEAiHpm4PJ4a/doJe0gH1t+aHRgCzOvBvJedEK5OFE5jpm4AGP2a8Dxe3gGJ/pAutug9Gp6he92CsSsWBaEcxGx0FHytmIpuqGkOpldqNYQK8cSoXvd+xLxXADw0kf6UkJNFtdo5MOgaLjiQOQHcn+A6h5NuL2s0qsC2LOM75PcF3yr5STuBSAcGG+meA14K/CI21HcS4LBT6tv0QAh8Dr5l93AhZzG5ZJ4VxAqdZUEl9z7WJ4aN+svMvwHHL21UKTd1mqvChH7/Za5xzXBBKrUcB0TQ+Ulgkfbi/H/YT5EptrGzsEK7tR1B7ln9BBwckYfMiuSqklSznIuoIIOM42MQO+QnduCoFCI0bpkzjCjddHPN/F+2Yu+sd9bKNpVwHhbS3LluK/0zgfwD0xYI5dXuzlQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-warning.callout-style-default .callout-title {
+    background-color: #fcefdc
+  }
+
+  div.callout-tip {
+    border-left-color: #02b875 !important;
+  }
+
+  div.callout-tip .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAADr0lEQVRYCe1XTWgTQRj9ZjZV8a9SPIkKgj8I1bMHsUWrqYLVg4Ue6v9BwZOxSYsIerFao7UiUryIqJcqgtpimhbBXoSCVxUFe9CTiogUrUp2Pt+3aUI2u5vdNh4dmMzOzHvvezuz8xNFM0mjnbXaNu1MvFWRXkXEyE6aYOYJpdW4IXuA4r0fo8qqSMDBU0v1HJUgVieAXxzCsdE/YJTdFcVIZQNMyhruOMJKXYFoLfIfIvVIMWdsrd+Rpd86ZmyzzjJmLStqRn0v8lzkb4rVIXvnpScOJuAn2ACC65FkPzEdEy4TPWRLJ2h7z4cArXzzaOdKlbOvKKX25Wl00jSnrwVxAg3o4dRxhO13RBSdNvH0xSARv3adTXbBdTf64IWO2vH0LT+cv4GR1DJt+DUItaQogeBX/chhbTBxEiZ6gftlDNXTrvT7co4ub5A6gp9HIcHvzTa46OS5fBeP87Qm0fQkr4FsYgVQ7Qg+ZayaDg9jhg1GkWj8RG6lkeSacrrHgDaxdoBiZPg+NXV/KifMuB6//JmYH4CntVEHy/keA6x4h4CU5oFy8GzrBS18cLJMXcljAKB6INjWsRcuZBWVaS3GDrqB7rdapVIeA+isQ57Eev9eCqzqOa81CY05VLd6SamW2wA2H3SiTbnbSxmzfp7WtKZkqy4mdyAlGx7ennghYf8voqp9cLSgKdqNfa6RdRsAAkPwRuJZNbpByn+RrJi1RXTwdi8RQF6ymDwGMAtZ6TVE+4uoKh+MYkcLsT0Hk8eAienbiGdjJHZTpmNjlbFJNKDVAp2fJlYju6IreQxQ08UJDNYdoLSl6AadO+fFuCQqVMB1NJwPm69T04Wv5WhfcWyfXQB+wXRs1pt+nCknRa0LVzSA/2B+a9+zQJadb7IyyV24YAxKp2Jqs3emZTuNnKxsah+uabKbMk7CbTgJx/zIgQYErIeTKRQ9yD9wxVof5YolPHqaWo7TD6tJlh7jQnK5z2n3+fGdggIOx2kaa2YI9QWarc5Ce1ipNWMKeSG4DysFF52KBmTNMmn5HqCFkwy34rDg05gDwgH3bBi+sgFhN/e8QvRn8kbamCOhgrZ9GJhFDgfcMHzFb6BAtjKpFhzTjwv1KCVuxHvCbsSiEz4CANnj84cwHdFXAbAOJ4LTSAawGWFn5tDhLMYz6nWeU2wJfIhmIJBefcd/A5FWQWGgrWzyORZ3Q6HuV+Jf0Bj+BTX69fm1zWgK7By1YTXchFDORywnfQ7GpzOo6S+qECrsx2ifVQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-tip.callout-style-default .callout-title {
+    background-color: #ccf1e3
+  }
+
+  div.callout-caution {
+    border-left-color: #fd7e14 !important;
+  }
+
+  div.callout-caution .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAACV0lEQVRYCdVWzWoUQRCuqp2ICBLJXgITZL1EfQDBW/bkzUMUD7klD+ATSHBEfAIfQO+iXsWDxJsHL96EHAwhgzlkg8nBg25XWb0zIb0zs9muYYWkoKeru+vn664fBqElyZNuyh167NXJ8Ut8McjbmEraKHkd7uAnAFku+VWdb3reSmRV8PKSLfZ0Gjn3a6Xlcq9YGb6tADjn+lUfTXtVmaZ1KwBIvFI11rRXlWlatwIAAv2asaa9mlB9wwygiDX26qaw1yYPzFXg2N1GgG0FMF8Oj+VIx7E/03lHx8UhvYyNZLN7BwSPgekXXLribw7w5/c8EF+DBK5idvDVYtEEwMeYefjjLAdEyQ3M9nfOkgnPTEkYU+sxMq0BxNR6jExrAI31H1rzvLEfRIdgcv1XEdj6QTQAS2wtstEALLG1yEZ3QhH6oDX7ExBSFEkFINXH98NTrme5IOaaA7kIfiu2L8A3qhH9zRbukdCqdsA98TdElyeMe5BI8Rs2xHRIsoTSSVFfCFCWGPn9XHb4cdobRIWABNf0add9jakDjQJpJ1bTXOJXnnRXHRf+dNL1ZV1MBRCXhMbaHqGI1JkKIL7+i8uffuP6wVQAzO7+qVEbF6NbS0LJureYcWXUUhH66nLR5rYmva+2tjRFtojkM2aD76HEGAD3tPtKM309FJg5j/K682ywcWJ3PASCcycH/22u+Bh7Aa0ehM2Fu4z0SAE81HF9RkB21c5bEn4Dzw+/qNOyXr3DCTQDMBOdhi4nAgiFDGCinIa2owCEChUwD8qzd03PG+qdW/4fDzjUMcE1ZpIAAAAASUVORK5CYII=');
+  }
+
+  div.callout-caution.callout-style-default .callout-title {
+    background-color: #ffe5d0
+  }
+
+  </style>
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+  
+  <script src="lecture_be_2_files/libs/kePrint-0.0.1/kePrint.js"></script>
+  <link href="lecture_be_2_files/libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">GLM VIII Logistic Regression</h1>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Caspar J. van Lissa 
+</div>
+</div>
+</div>
+
+  <p class="date">2023-08-07</p>
+</section>
+<section>
+<section id="introduction" class="title-slide slide level1 center">
+<h1>Introduction</h1>
+
+</section>
+<section id="the-road-so-far" class="slide level2">
+<h2>The road so far</h2>
+<ul>
+<li><span class="math inline">\(Y_i = a + bX\)</span>: Bivariate linear regression</li>
+<li><span class="math inline">\(Y_i = a + bX\)</span> where <span class="math inline">\(X\)</span> is a dummy variable: comparing two groups, aka independent samples t-test</li>
+<li><span class="math inline">\(Y_i = a + b_1X_1 + \ldots + b_kX_k\)</span> where <span class="math inline">\(X_{1 \ldots k}\)</span> are dummy variables: comparing multiple groups, aka ANOVA</li>
+<li><span class="math inline">\(Y_i = a + b_1X_1 + \ldots + b_kX_k\)</span> where <span class="math inline">\(X_{1 \ldots k}\)</span> are continuous or dummy variables: multiple regression</li>
+<li><span class="math inline">\(Y = a + b_1X_1+ b_2X_2+ b_3(X_1*X_2)\)</span>: Interaction effect</li>
+</ul>
+</section>
+<section id="introducing-logistic-regression" class="slide level2">
+<h2>Introducing: Logistic Regression</h2>
+<blockquote>
+<p><strong>Logistic Regression:</strong> Regression analysis with a binary dependent variable.</p>
+</blockquote>
+<p>To represent this, we predict a transformation of dependent variable Y instead of just the raw scores:</p>
+<p><font color="blue"><span class="math inline">\(f(Y)\)</span></font> <span class="math inline">\(= a + b_1X_1+ \ldots b_kX_k + \epsilon\)</span></p>
+<p>Where <span class="math inline">\(f(Y) = log(\frac{P(Y = 1|X)}{1-P(Y = 1|X)})\)</span></p>
+</section>
+<section id="why-use-logistic-regression" class="slide level2">
+<h2>Why use logistic regression?</h2>
+<p>In any case where the outcome variable is binary categorical (nominal or ordinal)</p>
+<p>We can code such outcomes as dummy variables:</p>
+<ul>
+<li>Whether a customer bought (1) vs did not buy (0) a product</li>
+<li>Whether a person helped (1) or did not help (0) somebody in need</li>
+<li>Whether a patient has a neurological disease (1) or not (0)</li>
+</ul>
+</section>
+<section id="example-data-chimpanzees" class="slide level2 smaller">
+<h2>Example Data: Chimpanzees</h2>
+<p>Inspired by Richard McElreath: Study of prosocial behavior in Chimps</p>
+<ul>
+<li>The chimp pulls one of two levers:
+<ul>
+<li>Both levers deliver a tasty treat to the chimp</li>
+<li>One lever additionally delivers a treat to the second chimp</li>
+<li>Dependent variable: whether chimps pulled the lever with two treats (1) or not (0)</li>
+</ul></li>
+<li>Two conditions:
+<ul>
+<li>The chimp is “alone”</li>
+<li>The chimp is “together” with a second chimp</li>
+</ul></li>
+<li>One covariate:
+<ul>
+<li>Chimp’s average test score in other experiments</li>
+</ul></li>
+</ul>
+<p>If chimps are prosocial, we should see an increase in pulling the lever with treats for both chimps, but only when a second chimp is present</p>
+</section>
+<section id="can-we-use-linear-regression" class="slide level2">
+<h2>Can we use Linear Regression?</h2>
+<p>For the moment, consider only the “together” condition</p>
+<ul>
+<li>Does testscore predict prosocial choices?</li>
+<li>Maybe we can interpret the regression line as predicted probability <span class="math inline">\(P(Y = 1)\)</span>?</li>
+<li><font color="red"><strong>Predicted probabilities outside of range [0, 1]</strong></font></li>
+</ul>
+
+<img data-src="lecture_be_2_files/figure-revealjs/unnamed-chunk-2-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"></section>
+<section id="violation-of-assumptions" class="slide level2">
+<h2>Violation of assumptions</h2>
+<p><strong>Heteroscedastic residuals</strong></p>
+
+<img data-src="lecture_be_2_files/figure-revealjs/unnamed-chunk-3-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"></section>
+<section id="violation-of-assumptions-1" class="slide level2">
+<h2>Violation of assumptions</h2>
+<p><strong>Non-normal residuals</strong></p>
+
+<img data-src="lecture_be_2_files/figure-revealjs/unnamed-chunk-4-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"><p>Residuals not normally distributed because Y only has two values</p>
+</section>
+<section id="whats-wrong-with-linear-regression" class="slide level2">
+<h2>What’s wrong with Linear Regression</h2>
+<p><font color="red"><strong>Problem:</strong></font></p>
+<ul>
+<li>Predicts impossible probabilities outside the range [0, 1]</li>
+<li>Heteroscedastic residuals</li>
+<li>Non-normal residuals</li>
+</ul>
+<p><strong>Ideal solution:</strong></p>
+<ul>
+<li>Transform the predicted outcomes using a function that limits them to [0,1]</li>
+<li>Assume a different distribution for the prediction errors</li>
+</ul>
+</section>
+<section id="introducing-the-logit" class="slide level2">
+<h2>Introducing the logit</h2>
+<blockquote>
+<p><strong>Logit:</strong> The log of the odds of the outcome being present versus absent.</p>
+</blockquote>
+<p><span class="math display">\[
+Logit(p) = \log{(\frac{p}{1-p})}
+\]</span></p>
+</section>
+<section id="logit-function" class="slide level2">
+<h2>Logit Function</h2>
+<p>Predict the <em>logit of the probability</em> instead of just the probability of <span class="math inline">\(Y\)</span></p>
+
+<img data-src="lecture_be_2_files/figure-revealjs/unnamed-chunk-5-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"></section>
+<section id="different-error-family" class="slide level2 smaller">
+<h2>Different Error Family</h2>
+<p>We’ve previously assumed that the prediction errors are normally distributed:</p>
+<p><span class="math display">\[
+\begin{align}
+Y_i &amp;= a + bX_i + \epsilon_i \text{, where}\\
+\epsilon_i &amp;\sim N(0, \sigma_\epsilon)
+\end{align}
+\]</span> Logistic regression instead assumes a <em>Bernoulli</em> error distribution</p>
+<ul>
+<li>Used to represent binary outcomes, like coinflips</li>
+<li>Outcomes are either 0 or 1</li>
+<li>The Bernoulli distribution has one parameter: The probability of observing a 1</li>
+</ul>
+</section>
+<section id="logistic-regression-model" class="slide level2">
+<h2>Logistic Regression Model</h2>
+<p>The outcome is Bernoulli distributed; each participant has an individual probability of “success” <span class="math inline">\(p_i\)</span>:</p>
+<p><span class="math display">\[
+Y_i \sim \text{Bernoulli}(p_i)
+\]</span></p>
+<p>The logit of this success probability is a linear function of the predictors:</p>
+<p><span class="math display">\[
+\text{Logit}(p_i) = a + b*X_i
+\]</span></p>
+<p>Do you spot our familiar linear model <span class="math inline">\(a + b*X_i\)</span>?</p>
+</section>
+<section id="comparing-linear-and-logistic-model" class="slide level2">
+<h2>Comparing Linear and Logistic Model</h2>
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="lecture_be_2_files/figure-revealjs/unnamed-chunk-6-1.png" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="lecture_be_2_files/figure-revealjs/unnamed-chunk-7-1.png" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="lecture_be_2_files/figure-revealjs/unnamed-chunk-8-1.png" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="cell-output cell-output-stdout">
+<pre><code>        Predicted
+Observed   0   1
+       0   6  17
+       1   4 138</code></pre>
+</div>
+</div>
+</div>
+</div>
+</section></section>
+<section>
+<section id="probability-odds-logit" class="title-slide slide level1 center">
+<h1>Probability, odds, logit</h1>
+
+</section>
+<section id="probability" class="slide level2">
+<h2>Probability</h2>
+<p>Recall that, for any “random experiment”, probability is defined as the long-run proportion of observing an outcome</p>
+<ul>
+<li>If we flipped a coin 100.000 times, we would expect to see heads (1) 50.000 times</li>
+<li>So the probability <span class="math inline">\(P(heads) = 100.000/50.000 = .5\)</span></li>
+</ul>
+<p>For our chimpansees, the overall probability of acting prosocially is <span class="math inline">\(P(prosocial) = 0.86\)</span></p>
+</section>
+<section id="odds" class="slide level2 smaller">
+<h2>Odds</h2>
+<blockquote>
+<p><strong>Odds:</strong> Probability of an event occurring divided by the probability of the event not occurring.</p>
+</blockquote>
+<p><span class="math display">\[
+Odds = \frac{P(success)}{P(faillure)} = \frac{P(success)}{1-P(success)}
+\]</span></p>
+<ul>
+<li>So given probability <span class="math inline">\(P(prosocial) = 0.86\)</span>, the odds are <span class="math inline">\(\frac{0.86}{1-0.86} = 6.17\)</span></li>
+<li>Odds tell us if it’s more likely to observe the outcome than not</li>
+<li>E.g., at a Casino, if there is a game where I am twice as likely to win as lose (e.g., <span class="math inline">\(Odds = \frac{.66}{.33} = 2\)</span>), I should play that game!</li>
+<li>More realistically, I might be twice as likely to lose as win: <span class="math inline">\(Odds = \frac{.33}{.66} = 0.5\)</span>)</li>
+</ul>
+</section>
+<section id="logit" class="slide level2">
+<h2>Logit</h2>
+<p>The logit converts these odds to a linear function, allowing us to use the linear regression model:</p>
+<p><span class="math display">\[
+\text{Logit} = \log(Odds) = \log(\frac{p}{1-p})
+\]</span></p>
+</section>
+<section id="prob---odds---logit-and-back" class="slide level2 smaller">
+<h2>Prob -&gt; Odds -&gt; Logit and back</h2>
+<p>You don’t need to know these by heart. You should be able to work with them:</p>
+<table>
+<thead>
+<tr class="header">
+<th>Operation</th>
+<th>Formula</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Probability to odds</td>
+<td><span class="math inline">\(\text{odds}= \frac{P}{1-P}\)</span></td>
+</tr>
+<tr class="even">
+<td>Odds to probability</td>
+<td><span class="math inline">\(P = \frac{\text{odds}}{1+\text{odds}}\)</span></td>
+</tr>
+<tr class="odd">
+<td>Odds to logit</td>
+<td><span class="math inline">\(\text{logit} = \ln(odds)\)</span></td>
+</tr>
+<tr class="even">
+<td>Logit to odds</td>
+<td><span class="math inline">\(\text{odds} = e^{\text{logit}}\)</span></td>
+</tr>
+<tr class="odd">
+<td>Probability to logit</td>
+<td><span class="math inline">\(\text{logit} = \ln(\frac{p}{1-p})\)</span></td>
+</tr>
+<tr class="even">
+<td>Logit to probability</td>
+<td><span class="math inline">\(p = \frac{e^{logit}}{1+e^{logit}}\)</span></td>
+</tr>
+</tbody>
+</table>
+</section></section>
+<section>
+<section id="model-estimation" class="title-slide slide level1 center">
+<h1>Model Estimation</h1>
+
+</section>
+<section id="maximum-likelihood-estimation-mle" class="slide level2">
+<h2>Maximum Likelihood Estimation (MLE)</h2>
+<ul>
+<li>We obtain the parameters for linear regression using “ordinary least squares” (OLS) estimation
+<ul>
+<li>‘Simple’ matrix algebra</li>
+<li>Only one possible solution</li>
+</ul></li>
+<li>For logistic regression, there is no OLS solution</li>
+<li>Instead, we use “maximum likelihood” estimation</li>
+</ul>
+</section>
+<section id="basics-of-maximum-likelihood" class="slide level2 smaller">
+<h2>Basics of Maximum Likelihood</h2>
+<p>When estimating model parameters <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> for model <span class="math inline">\(logit(\hat{p}_i) = a + bX_i\)</span></p>
+<ol type="1">
+<li>Start with random values for <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span></li>
+<li>Calculate model-implied probabilities <span class="math inline">\(p_i\)</span> using <span class="math inline">\(\text{logit}(p_i) = a + bX_i\)</span></li>
+<li>For each individual <span class="math inline">\(i\)</span>, calculate the likelihood of observing their outcome <span class="math inline">\(Y_i\)</span> in a Bernoulli distribution with probability <span class="math inline">\(p_i\)</span> <!-- + E.g., how likely is it to observe a score of $Y_i = 1$ if the regression model predicted $p_i = .001$? -> Very unlikely, low value --> <!-- + E.g., how likely is it to observe a score of $Y_i = 1$ if the regression model predicted $p_i = .99$? -> Very likely, high value --></li>
+<li>Multiply these probabilities across all individuals to get the <em>likelihood</em> <span class="math inline">\(L\)</span>
+<ul>
+<li>High values of <span class="math inline">\(L\)</span>: The observed outcome values are very likely, given parameters <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span></li>
+</ul></li>
+<li>Change the values of <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> a little bit</li>
+<li>Check if the likelihood has become larger</li>
+<li>Keep repeating steps 2-6 until you find the highest possible value of the likelihood</li>
+</ol>
+</section></section>
+<section>
+<section id="coefficients" class="title-slide slide level1 center">
+<h1>Coefficients</h1>
+
+</section>
+<section id="coefficients-demo" class="slide level2">
+<h2>Coefficients Demo</h2>
+<div class="cell panel-fill" data-layout-align="center">
+
+</div>
+</section>
+<section id="interpreting-coefficients" class="slide level2 smaller">
+<h2>Interpreting Coefficients</h2>
+<ul>
+<li>The intercept <span class="math inline">\(a\)</span> determines where the function intersects <span class="math inline">\(P = .5\)</span>
+<ul>
+<li>You can calculate the X-value of the inflection point:</li>
+<li><span class="math inline">\(X_{p = .5} = \frac{-a}{b}\)</span></li>
+</ul></li>
+<li>The slope <span class="math inline">\(b\)</span> determines how steeply the function switches from predicting 0 to predicting 1
+<ul>
+<li>Larger values: steeper transition</li>
+</ul></li>
+<li>If the slope is positive, the function ascends
+<ul>
+<li>Starts at 0, goes to 1</li>
+<li>S shape</li>
+</ul></li>
+<li>If the slope is negative, the function descends
+<ul>
+<li>Starts at 1, goes to 0</li>
+<li>Z shape</li>
+</ul></li>
+</ul>
+</section>
+<section id="example-coefficients" class="slide level2">
+<h2>Example Coefficients</h2>
+<p>For our chimp model (only in the “Together” condition):</p>
+<ul>
+<li>Testscore ranges from 0 to 5</li>
+</ul>
+<p><span class="math inline">\(\text{logit}(\hat{P}(Prosocial)_i) = a + b*testscore_i\)</span></p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<table data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">B</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">SE</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Z</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">p</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">-2.46</td>
+<td style="text-align: right;">0.81</td>
+<td style="text-align: right;">-3.03</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">testscore</td>
+<td style="text-align: right;">2.12</td>
+<td style="text-align: right;">0.43</td>
+<td style="text-align: right;">4.88</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</section>
+<section id="interpreting-intercept" class="slide level2">
+<h2>Interpreting Intercept</h2>
+<p>Log odds (of scoring 1 on Y) for someone who scores 0 on all predictors</p>
+<ul>
+<li>We can convert this to the probability of scoring 1 on Y for someone who scores 0 on all predictors:
+<ul>
+<li><span class="math inline">\(\frac{e^a}{1+e^a}\)</span></li>
+</ul></li>
+</ul>
+<p>For example, in our model with Chimps, <span class="math inline">\(a = -2.46\)</span></p>
+<p>The probability of acting prosocially for a chimp with a centered test score of 0 (= mean test score) is</p>
+<p><span class="math inline">\(\frac{\text{e}^{-2.46}}{1+\text{e}^{-2.46}} = 0.08\)</span></p>
+</section>
+<section id="interpreting-slope" class="slide level2">
+<h2>Interpreting slope</h2>
+<p>In (multiple) logistic regression:</p>
+<ul>
+<li>The slope <span class="math inline">\(b\)</span> is the <em>change in logit</em> for a 1 unit increase in predictor X, keeping all other predictors constant</li>
+<li>A 1 unit increase in X multiplies the odds of the outcome by <span class="math inline">\(\text{e}^b\)</span></li>
+<li>This is why it’s interesting to report the exponent of logistic regression coefficients</li>
+</ul>
+</section>
+<section id="example" class="slide level2 smaller">
+<h2>Example</h2>
+<p><span class="math inline">\(\text{logit}(\hat{p}_i) = -2.46 + 2.12 * testscore_i\)</span></p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<table data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: right;" data-quarto-table-cell-role="th">testscore</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">logit</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">odds</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">prob</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">-2.46</td>
+<td style="text-align: right;">0.09</td>
+<td style="text-align: right;">0.08</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">-0.34</td>
+<td style="text-align: right;">0.71</td>
+<td style="text-align: right;">0.42</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">1.78</td>
+<td style="text-align: right;">5.93</td>
+<td style="text-align: right;">0.86</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">3.90</td>
+<td style="text-align: right;">49.57</td>
+<td style="text-align: right;">0.98</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">6.03</td>
+<td style="text-align: right;">414.09</td>
+<td style="text-align: right;">1.00</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">8.15</td>
+<td style="text-align: right;">3459.14</td>
+<td style="text-align: right;">1.00</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+<p>You can easily make such a table in a spreadsheet; the formulae are:</p>
+<ul>
+<li>Cell A1: Enter value of X</li>
+<li>Cell B1: <code>= a + b*A1</code></li>
+<li>Cell C1: <code>= EXP(B1)</code></li>
+<li>Cell D1: <code>= C1/(1+C1)</code></li>
+</ul>
+</section>
+<section id="odds-ratio" class="slide level2 smaller">
+<h2>Odds Ratio</h2>
+<blockquote>
+<p><strong>Odds ratio:</strong> Another term for the exponent of the regression coefficient. The OR represents the odds that an outcome will occur given a particular exposure, compared to the odds of the outcome occurring in the absence of that exposure.</p>
+</blockquote>
+<ul>
+<li><span class="math inline">\(\text{e}^b\)</span> is the odds ratio associated with a one-unit increase in the exposure</li>
+<li>Multiply the original odds with <span class="math inline">\(\text{e}^b\)</span></li>
+<li>For binary predictors (e.g., <code>condition</code>), this is a sensible effect size</li>
+<li>For continuous predictors, this is the increase in odds associated with a one unit increase in the predictor</li>
+</ul>
+</section>
+<section id="odds-ratio-2" class="slide level2">
+<h2>Odds Ratio 2</h2>
+<ul>
+<li>Standard SPSS output</li>
+<li>Can also be calculated as follows:</li>
+</ul>
+<p><span class="math display">\[
+OR = \text{e}^b = \frac{\text{e}^{a+b}}{\text{e}^a} = \frac{\text{e}^{a}*\text{e}^{b}}{\text{e}^a}
+\]</span></p>
+<p>OR=1 Exposure does not affect odds of outcome<br>
+OR&gt;1 Exposure associated with higher odds of outcome<br>
+OR&lt;1 Exposure associated with lower odds of outcome For binary predictors, we can calculate the “odds” ## Testing Coefficients</p>
+<ul>
+<li>Use the reported regression slope and its standard error</li>
+<li>Default nil hypothesis <span class="math inline">\(H_0: \beta = 0\)</span></li>
+<li>Calculate Wald test statistic: <span class="math inline">\(W= (\frac{B-\beta_0}{SE_b})^2\)</span></li>
+<li>This test statistic is <span class="math inline">\(\chi^2\)</span> distributed with <span class="math inline">\(df = 1\)</span></li>
+</ul>
+</section>
+<section id="reporting" class="slide level2">
+<h2>Reporting</h2>
+<p>For example:</p>
+<p>There was a significant effect of test score on prosocial behavior, <span class="math inline">\(B = 2.12, \chi^2(1) = 23.85, p &lt; 0.01\)</span>. This means that for a 1 unit increase in test score, the odds of prosocial behavior are multiplied by 8.35 (exponent of B).</p>
+<p>The inflection point of the logistic function was 1.16; for chimpansees with higher test scores than this value, the predicted probability of prosocial behavior exceeded <span class="math inline">\(.5\)</span>.</p>
+</section></section>
+<section>
+<section id="evaluating-model-performance" class="title-slide slide level1 center">
+<h1>Evaluating Model Performance</h1>
+
+</section>
+<section id="model-fit" class="slide level2">
+<h2>Model Fit</h2>
+<p>The <em>Likelihood</em> <span class="math inline">\(L\)</span> (from ML estimation) can be used as model fit measure</p>
+<ul>
+<li>If we multiply the log likelihood by -2, we get a chi-square distributed test statistic: <span class="math inline">\(-2LL\)</span></li>
+<li>Perform a chi square test to determine if the overall model is significant
+<ul>
+<li>The null hypothesis is that the</li>
+</ul></li>
+</ul>
+</section>
+<section id="nested-model-test" class="slide level2">
+<h2>Nested Model Test</h2>
+<blockquote>
+<p><strong>Likelihood Ratio Test:</strong> Chi square test for the difference in <span class="math inline">\(-2LL\)</span> of two nested models.</p>
+</blockquote>
+<p><span class="math display">\[
+LR = -2LL_0 - -2LL_1
+\]</span></p>
+<p>Where <span class="math inline">\(-2LL_0\)</span> is the <span class="math inline">\(-2LL\)</span> of the restricted model, and <span class="math inline">\(-2LL_1\)</span> of the full model</p>
+<p>The LR is also chi-square distributed, with degrees of freedom equal to the difference in number of parameters.</p>
+<p>These tests take the place of F tests for model fit and nested models in OLS regression</p>
+</section>
+<section id="pseudo-r2" class="slide level2 smaller">
+<h2>Pseudo R2</h2>
+<p><span class="math inline">\(R^2\)</span> is a measure of explained variance, but logistic regression doesn’t really “explain variance” - it predicts a binary outcome</p>
+<p>People have - controversially - tried to create statistics that behave somewhat similar to <span class="math inline">\(R^2\)</span></p>
+<ul>
+<li>These *Pseudo-<span class="math inline">\(R^2\)</span> statistics rescale the -2LL of your model</li>
+<li>There is no agreed-upon way to do this</li>
+<li>Higher scores: better model fit</li>
+<li>Measure of relative model fit, only valid for comparing models on the same data set</li>
+<li><font color="red"><strong>Not a measure of absolute model fit or effect size</strong></font></li>
+</ul>
+</section>
+<section id="two-examples-of-pseudo-r2" class="slide level2">
+<h2>Two Examples of Pseudo-R2</h2>
+<p>Cox &amp; Snell is a generalization of the “normal” <span class="math inline">\(R^2\)</span></p>
+<ul>
+<li>For OLS regression, Cox &amp; Snell is equal to the normal <span class="math inline">\(R^2\)</span></li>
+<li>For logistic regression, it is not the same</li>
+<li>For logistic regression, it can never be 1: 0 ≤ Cox &amp; Snell &lt; 1</li>
+</ul>
+<p>Nagelkerke <span class="math inline">\(R^2\)</span></p>
+<ul>
+<li>Divides Cox &amp; Snell <span class="math inline">\(R^2\)</span> by its maximum possible value</li>
+<li>Thus rescaling it to [0, 1]</li>
+</ul>
+<!-- https://www.researchgate.net/publication/287333683_Pseudo-R2_and_related_measures_Online_Supplement_4_to_Serious_stats_A_guide_to_advanced_statistics_for_the_behavioral_sciences_Basingstoke_Palgrave -->
+<!-- https://stats.stackexchange.com/questions/8511/how-to-calculate-pseudo-r2-from-rs-logistic-regression -->
+<!-- https://stats.stackexchange.com/questions/237702/comparing-models-using-the-deviance-and-log-likelihood-ratio-tests -->
+</section>
+<section id="classification-accuracy" class="slide level2">
+<h2>Classification Accuracy</h2>
+<p>How well does the model predict true positives / true negatives?</p>
+<p>You’ve already seen an example:</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output cell-output-stdout">
+<pre><code>        Predicted
+Observed   0   1
+       0   6  17
+       1   4 138</code></pre>
+</div>
+</div>
+</section>
+<section id="classification-table-how-to" class="slide level2">
+<h2>Classification Table How-To</h2>
+<ol type="1">
+<li>Calculate the predicted probability for each individual, <span class="math inline">\(p_i\)</span></li>
+<li>Use a specific cutoff, like 0.5, to dichotomize these probabilities:</li>
+</ol>
+<p><span class="math display">\[
+\hat{Y}_i = \left\{
+  \begin{array}{ c l }
+    1 &amp; \quad \textrm{if } p_i &gt; 0.5 \\
+    0                 &amp; \quad \textrm{else}
+  \end{array}
+\right.
+\]</span></p>
+<ol start="3" type="1">
+<li>Cross-tabulate the observed outcome <span class="math inline">\(Y_i\)</span> against the dichotom</li>
+<li>How accurate are the predictions? Where do we see most prediction errors?</li>
+</ol>
+<p>We can choose to use a different cutoff</p>
+<ul>
+<li>But there is a trade-off between false positives and false negatives</li>
+</ul>
+</section></section>
+<section>
+<section id="putting-it-all-together" class="title-slide slide level1 center">
+<h1>Putting it all Together</h1>
+
+</section>
+<section id="chimpansees-example" class="slide level2">
+<h2>Chimpansees example</h2>
+<p>Dependent variable (Y):</p>
+<ul>
+<li><code>Prosocial</code>: lever pulled (1) or not (0)</li>
+</ul>
+<p>Predictors (Xs):</p>
+<ul>
+<li><code>Condition</code>: The chimp is “alone” (0) or “together” (1)
+<ul>
+<li>Recoded into <code>dTogether</code></li>
+</ul></li>
+<li><code>testscore</code>: Average test score in other experiments</li>
+</ul>
+<p>We additionally compute an interaction term:</p>
+<p><code>COMPUTE testXtogether = testscore*dTogether.</code></p>
+</section>
+<section id="research-questions" class="slide level2">
+<h2>Research Questions</h2>
+<ol type="1">
+<li>Is there an effect of condition on prosocial behavior?</li>
+<li>Smart chimps might be more inclined to act prosocially when another chimp is present. Is there an interaction between condition and testscore?</li>
+</ol>
+</section>
+<section id="model-fit-1" class="slide level2">
+<h2>Model Fit</h2>
+<p>Chi square test of model fit:</p>
+
+<img data-src="lecture_be_2_files/figure-revealjs/unnamed-chunk-15-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"></section>
+<section id="pseudo-r2-1" class="slide level2">
+<h2>Pseudo R2</h2>
+
+<img data-src="lecture_be_2_files/figure-revealjs/unnamed-chunk-16-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"></section>
+<section id="classification-accuracy-1" class="slide level2">
+<h2>Classification Accuracy</h2>
+
+<img data-src="lecture_be_2_files/figure-revealjs/unnamed-chunk-17-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"></section>
+<section id="coefficients-1" class="slide level2">
+<h2>Coefficients</h2>
+
+<img data-src="lecture_be_2_files/figure-revealjs/unnamed-chunk-18-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"><p>Probability of prosocial behavior when condition = 0:</p>
+<ul>
+<li><span class="math inline">\(P(Y=1|Cond=0) = \frac{e^a}{1+e^a} = \frac{\text{e}^{-.96}}{1+\text{e}^{-.96}} = .28\)</span></li>
+</ul>
+<p>Probability of prosocial behavior when condition = 1:</p>
+<ul>
+<li><span class="math inline">\(P(Y=1|Cond=0) = \frac{e^{a+b}}{1+e^{a+b}} = \frac{\text{e}^{-.96+2.78}}{1+\text{e}^{-.96+2.78}} = .86\)</span></li>
+</ul>
+</section>
+<section id="coefficients-odds-scale" class="slide level2 smaller">
+<h2>Coefficients, odds scale</h2>
+
+<img data-src="lecture_be_2_files/figure-revealjs/unnamed-chunk-19-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"><p>Odds of prosocial behavior when condition = 0:</p>
+<ul>
+<li><span class="math inline">\(Odds(Y=1|Cond=0) = e^a = e^{-.96} = .38\)</span></li>
+</ul>
+<p>Odds when condition = 1:</p>
+<ul>
+<li><span class="math inline">\(Odds(Y=1|Cond=1) = e^{b}*Odds(Y=1|Cond=0) = e^{2.78} * .38 = 6.18\)</span></li>
+</ul>
+<p>Odds ratio:</p>
+<ul>
+<li><span class="math inline">\(\frac{6.18}{.38} = 16.08\)</span>, see also output for Exp(B)</li>
+</ul>
+<p>Odds Ratio:</p>
+<p><span class="math inline">\(OR = \frac{Odds(Y=1|Cond=0)}{Odds(Y=1|Cond=1)} = \frac{.38}{6.18} = 0.06\)</span></p>
+</section>
+<section id="add-interaction" class="slide level2">
+<h2>Add Interaction</h2>
+<p>Chi square test of model fit:</p>
+
+<img data-src="lecture_be_2_files/figure-revealjs/unnamed-chunk-20-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"></section>
+<section id="likelihood-ratio-test" class="slide level2">
+<h2>Likelihood Ratio Test</h2>
+<p>Recall that <span class="math inline">\(-2LL\)</span> of the previous model was 316.33</p>
+<ul>
+<li>LR = <span class="math inline">\(-2LL_0 - -2LL_1 = 316.33 - 269.45 = 46.88\)</span></li>
+<li>We added two predictors, so <span class="math inline">\(df = 2\)</span></li>
+</ul>
+
+<img data-src="lecture_be_2_files/figure-revealjs/unnamed-chunk-21-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"></section>
+<section id="pseudo-r2-2" class="slide level2">
+<h2>Pseudo R2</h2>
+
+<img data-src="lecture_be_2_files/figure-revealjs/unnamed-chunk-22-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"></section>
+<section id="classification-accuracy-2" class="slide level2">
+<h2>Classification Accuracy</h2>
+<ul>
+<li>Previously: 23 false positives, 43 false negatives = 66</li>
+<li>Currently: 17 false positives, 47 false negatives = 64</li>
+<li>Two more parameters, two less missclassifications - is it worth it?</li>
+</ul>
+
+<img data-src="lecture_be_2_files/figure-revealjs/unnamed-chunk-23-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"></section>
+<section id="coefficients-2" class="slide level2">
+<h2>Coefficients</h2>
+
+<img data-src="lecture_be_2_files/figure-revealjs/unnamed-chunk-24-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"><p>Effect of testscore for “Alone” condition:</p>
+<ul>
+<li>The odds ratio associated with a 1 unit increase in test score is <span class="math inline">\(\text{e}^b = .66\)</span></li>
+<li>For a 1 unit increase in test score, the odds of prosocial behavior becomes .66 times smaller</li>
+<li>Not significant: <span class="math inline">\(p = .05\)</span>, and 95%CI includes odds ratio of 1 (= stays exactly equal)</li>
+</ul>
+</section>
+<section id="coefficients-3" class="slide level2">
+<h2>Coefficients</h2>
+
+<img data-src="lecture_be_2_files/figure-revealjs/unnamed-chunk-25-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"><p>Effect of testscore in the “Together” condition:</p>
+<ul>
+<li>The odds ratio associated with a 1 unit increase in test score is <span class="math inline">\(\text{e}^{b_{test}+b_{int}} = \text{e}^{-.417+2.539} = 8.35\)</span></li>
+<li>For a 1 unit increase in test score, the odds of prosocial behavior become 8.35 times larger</li>
+<li>But is this significant?</li>
+</ul>
+</section>
+<section id="change-reference-category" class="slide level2">
+<h2>Change Reference Category</h2>
+
+<img data-src="lecture_be_2_files/figure-revealjs/unnamed-chunk-26-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"><p>Easier to just change the reference category</p>
+<ul>
+<li>No need to hand-compute the odds ratio of testscore for the Together condition
+<ul>
+<li>Note: <span class="math inline">\(\text{e}^b = 8.35\)</span>, like we calculated!</li>
+</ul></li>
+<li>Get p-value and 95%CI
+<ul>
+<li>Note: <span class="math inline">\(p &lt; .05\)</span>, 95%CI[3.56, 19.58] excludes 1</li>
+<li>So: effect is significant in the Together condition</li>
+</ul></li>
+</ul>
+</section>
+<section id="reporting-1" class="slide level2">
+<h2>Reporting</h2>
+<ol type="1">
+<li>Is there an effect of condition on prosocial behavior?</li>
+</ol>
+<blockquote>
+<p>There was a significant marginal effect of condition on prosocial behavior, <span class="math inline">\(B = 2.78, \chi^2(1) = 93.29, p &lt; .001\)</span>. The probability of engaging in prosocial behavior was <span class="math inline">\(p = .28\)</span> when chimps were alone, and <span class="math inline">\(p = .86\)</span> when they were together. The odds ratio of this effect was <span class="math inline">\(OR = 16.08\)</span>.</p>
+</blockquote>
+</section>
+<section id="reporting-2" class="slide level2">
+<h2>Reporting</h2>
+<ol type="1">
+<li>Smart chimps might be more inclined to act prosocially when another chimp is present. Is there an interaction between condition and testscore?</li>
+</ol>
+<blockquote>
+<p>There was a significant interaction between condition and testscore, <span class="math inline">\(B = 2.54, \chi^2(1) = 27.53, p &lt; .001\)</span>. The odds ratio of this effect was <span class="math inline">\(OR = 12.67\)</span>, meaing that when going from the Alone condition to the Together condition, the odds of engaging in prosocial behavior are multiplied with 12.67. In the Alone condition, the effect of testscore was not significant, <span class="math inline">\(B = -.42, \chi^2(1) = 3.83, p = .05\)</span>. In the Together condition, the effect of testscore was significant, <span class="math inline">\(B = 2.12, \chi^2(1) = 23.85, p &lt; .001\)</span>.</p>
+</blockquote>
+<div class="footer footer-default">
+
+</div>
+</section></section>
+    </div>
+  </div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="lecture_be_2_files/libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="lecture_be_2_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="lecture_be_2_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="lecture_be_2_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="lecture_be_2_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="lecture_be_2_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="lecture_be_2_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="lecture_be_2_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="lecture_be_2_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="lecture_be_2_files/libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'smaller': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: false,
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
+    <script id="quarto-html-after-body" type="application/javascript">
+    window.document.addEventListener("DOMContentLoaded", function (event) {
+      const toggleBodyColorMode = (bsSheetEl) => {
+        const mode = bsSheetEl.getAttribute("data-mode");
+        const bodyEl = window.document.querySelector("body");
+        if (mode === "dark") {
+          bodyEl.classList.add("quarto-dark");
+          bodyEl.classList.remove("quarto-light");
+        } else {
+          bodyEl.classList.add("quarto-light");
+          bodyEl.classList.remove("quarto-dark");
+        }
+      }
+      const toggleBodyColorPrimary = () => {
+        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+        if (bsSheetEl) {
+          toggleBodyColorMode(bsSheetEl);
+        }
+      }
+      toggleBodyColorPrimary();  
+      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+      tabsets.forEach(function(tabset) {
+        const tabby = new Tabby('#' + tabset.id);
+      });
+      const isCodeAnnotation = (el) => {
+        for (const clz of el.classList) {
+          if (clz.startsWith('code-annotation-')) {                     
+            return true;
+          }
+        }
+        return false;
+      }
+      const clipboard = new window.ClipboardJS('.code-copy-button', {
+        text: function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+      });
+      clipboard.on('success', function(e) {
+        // button target
+        const button = e.trigger;
+        // don't keep focus
+        button.blur();
+        // flash "checked"
+        button.classList.add('code-copy-button-checked');
+        var currentTitle = button.getAttribute("title");
+        button.setAttribute("title", "Copied!");
+        let tooltip;
+        if (window.bootstrap) {
+          button.setAttribute("data-bs-toggle", "tooltip");
+          button.setAttribute("data-bs-placement", "left");
+          button.setAttribute("data-bs-title", "Copied!");
+          tooltip = new bootstrap.Tooltip(button, 
+            { trigger: "manual", 
+              customClass: "code-copy-button-tooltip",
+              offset: [0, -8]});
+          tooltip.show();    
+        }
+        setTimeout(function() {
+          if (tooltip) {
+            tooltip.hide();
+            button.removeAttribute("data-bs-title");
+            button.removeAttribute("data-bs-toggle");
+            button.removeAttribute("data-bs-placement");
+          }
+          button.setAttribute("title", currentTitle);
+          button.classList.remove('code-copy-button-checked');
+        }, 1000);
+        // clear code selection
+        e.clearSelection();
+      });
+      function tippyHover(el, contentFn) {
+        const config = {
+          allowHTML: true,
+          content: contentFn,
+          maxWidth: 500,
+          delay: 100,
+          arrow: false,
+          appendTo: function(el) {
+              return el.closest('section.slide') || el.parentElement;
+          },
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'light-border',
+          placement: 'bottom-start'
+        };
+          config['offset'] = [0,0];
+          config['maxWidth'] = 700;
+        window.tippy(el, config); 
+      }
+      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+      for (var i=0; i<noterefs.length; i++) {
+        const ref = noterefs[i];
+        tippyHover(ref, function() {
+          // use id or data attribute instead here
+          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+          try { href = new URL(href).hash; } catch {}
+          const id = href.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          return note.innerHTML;
+        });
+      }
+      const findCites = (el) => {
+        const parentEl = el.parentElement;
+        if (parentEl) {
+          const cites = parentEl.dataset.cites;
+          if (cites) {
+            return {
+              el,
+              cites: cites.split(' ')
+            };
+          } else {
+            return findCites(el.parentElement)
+          }
+        } else {
+          return undefined;
+        }
+      };
+      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+      for (var i=0; i<bibliorefs.length; i++) {
+        const ref = bibliorefs[i];
+        const citeInfo = findCites(ref);
+        if (citeInfo) {
+          tippyHover(citeInfo.el, function() {
+            var popup = window.document.createElement('div');
+            citeInfo.cites.forEach(function(cite) {
+              var citeDiv = window.document.createElement('div');
+              citeDiv.classList.add('hanging-indent');
+              citeDiv.classList.add('csl-entry');
+              var biblioDiv = window.document.getElementById('ref-' + cite);
+              if (biblioDiv) {
+                citeDiv.innerHTML = biblioDiv.innerHTML;
+              }
+              popup.appendChild(citeDiv);
+            });
+            return popup.innerHTML;
+          });
+        }
+      }
+    });
+    </script>
+    
+
+</body></html>

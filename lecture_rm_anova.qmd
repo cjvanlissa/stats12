@@ -1,0 +1,329 @@
+---
+title: "GLM\nRepeated Measures ANOVA"
+author:   "Caspar J. van Lissa"
+date:     "`r format(Sys.Date(), '%d %b %Y')`"
+format: revealjs
+---
+
+```{r}
+library(kableExtra)
+library(tidySEM)
+options(knitr.kable.NA = '')
+depression <- foreign::read.spss("data/depression.sav", to.data.frame = TRUE)
+depression_long <- foreign::read.spss("data/depression_long.sav", to.data.frame = TRUE)
+```
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(ggplot2)
+set.seed(4)
+foods <- data.frame(Food = factor(c("Sausage", "Sausage","Ice cream","Ice cream")),
+                    Topping = factor(c("Mustard", "Chocolate", "Mustard", "Chocolate")),
+                    Liking = c(3.5, 1.5, .5, 4.5))
+foods <- foods[sample.int(nrow(foods), size = 68, replace = T), ]
+foods$Liking <- foods$Liking + rnorm(68)
+foods$Liking <- as.integer(cut(foods$Liking, 6))-1
+summary(aov(Liking ~ Food * Topping, foods))
+```
+
+
+## Within-participants Designs
+
+* Participants are exposed to multiple experimental conditions
+    + Type of stimulus, drug dosage
+* The outcome is measured at two or more measurement occasions (*longitudinal design*).
+    + Test-retest designs, panel studies, diary studies, repeated physiological assessments, etc
+
+## Advantages Within-participants Designs
+
+Many individual differences are constant
+
+* Variability due to individual differences is thus removed from the error term
+* Each subject serves as its own control
+* Greater statistical power
+* More information per participant = more efficient; we can use a smaller sample than if we used a between-participants design
+
+## Limitations of Within-participants Designs {.smaller}
+
+For experimental designs:
+
+* Order effects: The order of conditions may have an effect
+* __Differential__ order effects: Order effects may differ across different orders
+    + If participants take the drug before the placebo, they may still be under the influence during the placebo condition
+
+## Solution for Order Effects
+
+Latin Square Design
+
+* Experimentally controls for order effects
+* In a Latin square\, each condition appears in one position in the ordering:
+
+<font size = 2>
+
+| 1 | 2 | 3 | 4 |
+| :-: | :-: | :-: | :-: |
+| A | B | C | D |
+| B | C | D | A |
+| C | D | A | B |
+| D | A | B | C |
+
+</font>
+
+This is just one out of many \(in fact 256; 44\) possible Latin Squares\. There are tools that randomly generate a Latin square\.
+
+## Limitations of Within-participants Designs {.smaller}
+
+For all designs, including non-experimental:
+
+* Learning effects: People become familiar with your questionnaire
+* Historical effects: Some event may happen during your study (fire alarm goes off, global pandemic breaks out, documentary on TV about your topic of study)
+* Effect of time is confounded with effect of condition
+* Effect of time may have a clearly defined functional form which RM-ANOVA is ignoring
+    + E.g.: depression probably changes *after* deployment, and then increases or decreases over time
+    + Techniques like "Structural Equation Modeling" allow you to describe this
+    
+
+## Two Repeated Measurements
+
+An intervention is imposed on ten people
+
+Each person is measured twice:
+
+* Before the intervention (pretest) 
+* After the intervention (posttest)
+
+<font size = 3>
+
+| Resp. | Pretest | Posttest |
+| :-: | :-: | :-: |
+| 1 | 2 | 5 |
+| 2 | 3 | 4 |
+| 3 | 4 | 6 |
+| 4 | 5 | 5 |
+| 5 | 6 | 8 |
+| 6 | 7 | 10 |
+| 7 | 8 | 9 |
+| 8 | 9 | 11 |
+| 9 | 10 | 9 |
+| 10 | 11 | 15 |
+| Mean | 6.5 | 8.2 |
+
+</font>
+
+
+## How to Analyze These Data?
+
+**Problem:** These data violate one assumption of the general linear model:
+
+* Independence of errors
+
+So we can't use linear regression, or any of its "interfaces" like the independent samples t-test
+
+## Solution: Paired Samples t-test
+
+**Solution:** With just two repeated measures, the *paired samples t-test*!
+
+This is equivalent to calculating the *difference between the two measurements* and...
+
+* Performing a one-sample t-test on that difference
+* Performing linear regression with that difference score as outcome and only an intercept as predictor
+
+## Paired Samples t-test {.smaller}
+
+| Resp. | Pretest | Posttest | Difference<br />(post-pre) |
+| :-: | :-: | :-: | :-: |
+| 1 | 2 | 5 | 3 |
+| 2 | 3 | 4 | 1 |
+| 3 | 4 | 6 | 2 |
+| 4 | 5 | 5 | 0 |
+| 5 | 6 | 8 | 2 |
+| 6 | 7 | 10 | 3 |
+| 7 | 8 | 9 | 1 |
+| 8 | 9 | 11 | 2 |
+| 9 | 10 | 9 | -1 |
+| 10 | 11 | 15 | 4 |
+| Mean | 6.5 | 8.2 | 1.7 |
+
+## Results
+
+**t-test:**
+
+![](images/paired_ttest.png)
+
+**Regression:**
+
+![](images/paired_regression.png)
+
+# More than Two Measurements
+
+## Example: depression in Military Personnel
+
+* Data on 978 Dutch military personnel who have been deployed
+* 4 repeated measures of depression symptoms on the SCL scale
+    + 1 pre-deployment, 3 every 6 months post-deployment
+
+## 3+ Repeated Measurements {.smaller}
+
+__Research question__ : is there a difference between those repeated measures?
+
+$H_0: \mu_{1}=\mu_{2}=\mu_{3}=\mu_{4}$; $H_1:$ not $H_0$
+
+Two approaches:
+
+1. Univariate Approach (aka: Linear Mixed model)
+    + Just linear regression
+    + The repeated measures are treated as one outcome variable
+    + Each participant has multiple rows
+2. Multivariate Approach
+    + Treating the repeated measures as different correlated outcomes
+
+## Liner Mixed Model
+
+Uses Linear Regression:
+
+* Treat all repeated measurements as a single variable with repeated observations
+    + Convert data to "long format"
+    + 4 repeated measures -> 4 data rows per participant
+* Measurement occasion (or: condition) is a "fixed effect" (= limited number of discrete values)
+* Participant ID is a "random effect"; each participant may vary around a person-specific mean
+
+This only works if the so called  __sphericity__  assumption holds
+
+## Sphericity Assumption
+
+> **Sphericity:** The variances of the differences between all combinations of repeated measures are equal.
+
+This is analogous to the homoscedasticity assumption
+
+Closely related to the notion of compound symmetry:
+
+* All repeated measures have equal variance
+* Each pair of repeated measures have the same correlation
+* You see how this justifies treating repeated measures as a single long-format dependent variable
+
+## Multivariate Approach
+
+If we can not / do not assume sphericity, we can use the *multivariate approach*
+
+* Repeated measurements are treated as covariates of each other
+    + I.e., effect on T1 controlling for T2, T3, ...
+    + Effect on T2 controlling for T1, T3, ...
+* Because of this, this approach has more predictors and thus much smaller $df$ 
+    + Needs larger sample to get the same power
+
+
+
+## Mauchly’s test of Sphericity
+
+![](images/sphericity.png)
+
+* $H_0$: sphericity holds, $H_1$: sphericity does not hold
+* Significant test: evidence that the assumption is violated
+* This is the case here, possibly because of the qualitative difference between pre- and post-deployment measurements
+
+## Mauchly’s test of Sphericity
+
+![](images/sphericity.png)
+
+_Epsilon_ is an estimate of departure of sphericity
+
+* If sphericity holds, epsilon = 1
+* Lower value of epsilon -> larger departure from sphericity
+* Lower bound of epsilon: $1/(k-1)$
+    + $k$ is the number of repeated measures
+
+## Violation of Sphericity
+
+* Remember: You don't have to blindly adjust your test based on assumption checks
+* You should definitely disclose it
+* You can choose a test that is more robust to violations of sphericity
+
+## Mixed Model Results {.smaller}
+
+![](images/rmanova_univariate.png)
+
+* Notice error df: 2931
+* You can use a corrected test
+* Trade-off between Type I error (false-positives) and Type II error (false negatives) by adjusting $df$:
+    + Sphericity assumed: Highest Type I error, lowest Type II error
+    + Huynh-Feldt: Slightly lower Type I error slightly higher Type II error
+    + Greenhouse Geisser: Slightly lower Type I error,  slightly higher Type II error
+    + Lower bound: Lowest Type I error, highest Type II error
+
+## Multivariate Approach {.smaller}
+
+![](images/sphericity_multivariate.png)
+
+* Notice error df: 975 (much lower)
+
+
+# Mixed Design
+
+## Mixed Design {.smaller}
+
+Within-participants Factor:
+
+* Time, experimental condition, etc
+* In our example: Time
+
+Between-participants Factor:
+
+* Sex, age, major, etc
+* In our example: Whether the participant was exposed to high-intensity combat action (1) or not (0)
+
+## Mixed Design ctd
+
+This is essentially a factorial design:  4(Time: T1, T2, T3, T4) x 2(Combat exposure: Low vs. High)
+
+```{r}
+tab <- tapply(depression_long$scl, list(depression_long$Exposure, factor(depression_long$time)), mean)
+colnames(tab) <- paste0("T", 1:4)
+rownames(tab) <- paste0(rownames(tab), " exposure")
+kableExtra::kbl(tab, digits = 2)
+```
+
+## Interactions
+
+This requires testing an interaction effect between time and exposure
+
+* If there is a significant interaction, you can use simple effects analysis:
+    + Test whether the within-participants factor has an effect for each level of the between-participants factor.
+    + Test	whether the between\-participants factor has an effect for each level of the within\-participants factor\.
+
+## Graphical display
+
+```{r}
+df_plot <- data.frame(
+  depression = as.vector(tab),
+  Time = ordered(rep(colnames(tab), each = 2)),
+  Exposure = ordered(rep(rownames(tab), 4))
+)
+library(ggplot2)
+ggplot(df_plot, aes(x=Time, y = depression, color = Exposure, group = Exposure)) +
+  geom_point()+
+  geom_line(linewidth = 1)+
+  theme_bw()
+```
+
+
+## Test for interaction
+
+![](images/manova_int.png)
+
+Significant interaction, we could perform simple effects tests
+
+## Follow-up: Simple Effect of Time
+
+![](images/manova_simple_eff.png)
+
+* Not significant in low exposure group
+* Significant in high exposure group
+
+## Follow-up: Simple Effect of Exposure
+
+![](images/manova_simple_eff2.png)
+
+* Significant difference at each time
+* We could apply Bonferroni correction, but these p-values are very small (< .001)
+

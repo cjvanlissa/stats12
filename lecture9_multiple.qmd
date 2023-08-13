@@ -1,0 +1,770 @@
+---
+title: "Lecture 9 - GLM V\nMultiple Regression"
+author:   "Caspar J. van Lissa"
+date:     "`r format(Sys.Date(), '%d %b %Y')`"
+format: revealjs
+server: shiny
+---
+
+```{r}
+library(kableExtra)
+library(tidySEM)
+library(scales)
+library(eulerr)
+options(knitr.kable.NA = '')
+set.seed(32)
+x1 <- rnorm(100)
+x1 <- rescale(x1, to = c(0,40))
+
+x2 <- rnorm(100)
+x2 <- round(rescale(x2, to = c(1,7)))
+
+y <- 20 - .25*x1 + 4*x2 + rnorm(100) 
+
+invdat <- data.frame(Work_hours=x1, Gender_role=x2, Involvement = y)
+rm(x1, x2, y)
+set.seed(5793)
+data <- data.frame(
+  sex_dich = ordered(sample(c("Man", "Woman"), size = 100, replace = TRUE), levels = c("Woman", "Man"))
+)
+data$shoesize <- rnorm(100, mean = c(39, 43)[as.integer(data$sex_dich)], sd = 2)
+
+library(scales)
+require(gridExtra)
+set.seed(32)
+x1 <- rnorm(100)
+
+
+x2 <- rnorm(100)
+x2 <- round(rescale(x2, to = c(1,7)))
+
+y <- 20 - .25*x1 + 4*x2 + rnorm(100) 
+
+invdat <- data.frame(Work_hours=x1, Gender_role=x2, Involvement = y)
+rm(x1, x2, y)
+invdat <- matrix(c(1, .3, .24,
+                   .3, 1, .5,
+                   .24, .5, 1), nrow = 3, ncol = 3, byrow = TRUE)
+set.seed(76)
+invdat <- data.frame(mvtnorm::rmvnorm(60, sigma = invdat))
+
+names(invdat) <- c("Work_hours", "Gender_role", "Involvement")
+
+invdat$Work_hours <- rescale(invdat$Work_hours, to = c(0,40))
+invdat$Gender_role <- rescale(invdat$Gender_role, to = c(1,7))
+invdat$Involvement <- rescale(invdat$Involvement, to = c(0,50))
+
+invmodel <- lm(Involvement ~ Work_hours + Gender_role, invdat)
+
+m_work <- lm(Involvement ~ Work_hours, invdat)
+m_gender <- lm(Involvement ~ Gender_role, invdat)
+m_both <- lm(Involvement ~ Gender_role+Work_hours, invdat)
+# data.frame(model = c("single", "both"),
+#            work = c(summary(m_work)$coefficients[2,4],
+#                     summary(m_both)$coefficients[3,4]),
+#            gender = c(summary(m_gender)$coefficients[2,4],
+#                       summary(m_both)$coefficients[2,4]))
+
+```
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(ggplot2)
+```
+
+# Recap
+
+## Two+ categories {.smaller}
+
+Remember: we can use bivariate linear regression to model two categories
+
+$\hat{Y}_i = a + b*X_i$
+
+* a: Mean of group 1
+* b: Mean difference between groups 1 and 2
+
+For **three+** categories, we can **expand** the model:
+
+$\hat{Y}_i = a + b_1*X_{1i}+ b_2*X_{2i}$
+
+* a: Mean of group 1
+* $b_1$: Mean difference between groups 1 and 2
+* $b_2$: Mean difference between groups 1 and 3
+
+## Multiple regression
+
+The model with two dummies is also an example of $\color{blue}{\text{multiple regression}}$.
+
+**Multiple regression:** Regression with more than one predictor.
+
+* Answers the question: What is the unique effect of one predictor, controlling for the effect of all other predictors?
+
+## Multiple regression
+
+$\hat{Y}_i = a + b_1*X_{1i}+ b_2*X_{2i}$
+
+Last week, $X_1$ and $X_2$ were dummies (only 0 and 1 values)
+
+You can simply replace them with continuous predictors!
+
+You can expand the model with as many predictors as you like:
+
+$\hat{Y}_i = a + b_1*X_{1i}+ b_2*X_{2i} + b_3*X_{3i} + \dots + b_K*X_{Ki}$
+
+## Parameter interpretation {.smaller}
+
+$\hat{Y}_i = a + b_1*X_{1i}+ b_2*X_{2i}$
+
+$a$ is the $\color{blue}{\text{intercept}}$
+
+* Expected value when **all** predictors are equal to 0
+* When using dummies, this is the mean value of the reference category
+* When using continuous predictors, this is the expected value for someone who scores 0 on all predictors
+
+$b_1$ and $b_2$ are $\color{blue}{\text{slopes}}$
+
+* There's one $b$ for each $X$
+* $b$ tells us how many points Y increases if X goes up by 1, while keeping **all other** X-values equal
+
+## Unique effects
+
+**Aim:** predict dependent variable Y from multiple predictors $X_1, X_2, \ldots,X_k$ with a linear model:
+
+$y_i = b_0 + b_1 * x_1 + b_2 * x_2 + \ldots + b_k * x_k + \epsilon_i$
+
+This will give you the **unique/partial effect** of each predictor, while keeping all other variables constant
+
+# A story of bubbles
+
+## A story of bubbles
+
+Imagine that these two circles represent the variance in two variables,
+for example, "Father involvement" and "Hours worked"
+
+```{r}
+ss_y = 43
+ss_x1 = 50
+ss_both_y_x1 = 3
+plot(euler(c("Involvement" = ss_y,
+             "Hours" = ss_x1)),
+     quantities = F)
+```
+
+## Visualizing covariance
+
+Imagine that "Father involvement" and "Hours worked" covary
+
+* There would be overlap in the circles (area C)
+* We can describe this overlap as correlation, or as a regression coefficient
+
+```{r}
+plot(euler(c("Involvement" = ss_y - ss_both_y_x1,
+             "Hours" = ss_x1 - ss_both_y_x1,
+             "Involvement&Hours" = ss_both_y_x1)),
+     quantities = c("A", "B", "C"))
+```
+
+## Visualizing covariance
+
+Now, let's say that "Father involvement" and "Gender role attitudes" **also** covary
+
+* There would also be overlap in these circles
+
+```{r}
+ss_x2 <- 30
+ss_both_y_x2 <- 4
+plot(euler(c("Involvement" = ss_y - ss_both_y_x2,
+             "Gender" = ss_x2 - ss_both_y_x2,
+             "Involvement&Gender" = ss_both_y_x2)),
+     quantities = LETTERS[1:3])
+```
+
+
+## Visualizing multiple regression
+
+Finally, imagine that Hours worked and Gender role attitudes both covary with Involvement, and also with one another (e.g., maybe more progressive fathers work fewer hours)
+
+```{r}
+all_pieces <- c(
+  Involvement = 305,
+  Gender = 202,
+  Hours = 124,
+  "Involvement&Gender" = 40,
+  "Involvement&Hours" = 14,
+  "Gender&Hours" = 20,
+  "Involvement&Gender&Hours" = 50
+)
+##       Y      X1      X2    X1&Y    X2&Y   X1&X2 Y&X1&X2 
+##   304.6   201.6   123.6    39.7    13.3    21.5    42.3
+
+plot(euler(all_pieces),
+     quantities = LETTERS[1:7])
+
+```
+
+
+# Coefficients
+
+## Coefficients {.smaller .flexbox .vcenter}
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+w <- summary(m_work)$coefficients[,-2]
+w <- apply(w, 2, formatC, digits = 2, format = "f")
+G <- summary(m_gender)$coefficients[,-2]
+G <- apply(G, 2, formatC, digits = 2, format = "f")
+B <- summary(invmodel)$coefficients[,-2]
+B <- apply(B, 2, formatC, digits = 2, format = "f")
+```
+
+**Only work hours:**
+
+Variabele   | B           | t          | p  
+------------|-------------|------------|-------------
+(Intercept) | `r w[1,1]`  | `r w[1,2]` | `r w[1,3]`
+Work_hours    | `r w[2,1]`  | `r w[2,2]` | `r w[2,3]`
+
+**Only gender roles:**
+
+Variabele   | B           | t          | p  
+------------|-------------|------------|-------------
+(Intercept) | `r G[1,1]`  | `r G[1,2]` | `r G[1,3]`
+Gender_roles | `r G[2,1]`  | `r G[2,2]` | `r G[2,3]`
+
+**Multiple regression:**
+
+Variabele   | B           | t          | p  
+------------|-------------|------------|-------------
+(Intercept) | `r B[1,1]`  | `r B[1,2]` | `r B[1,3]`
+Work_hours    | `r B[2,1]`  | `r B[2,2]` | `r B[2,3]`
+Gender_roles | `r B[3,1]`  | `r B[3,2]` | `r B[3,3]`
+
+## Coefficients {.smaller}
+
+Why is work hours significant on its own, but not significant when we add gender roles?
+
+**Only work hours:**
+
+Variabele   | B           | t          | p  
+------------|-------------|------------|-------------
+(Intercept) | `r w[1,1]`  | `r w[1,2]` | `r w[1,3]`
+Work_hours    | `r w[2,1]`  | `r w[2,2]` | `r w[2,3]`
+
+**Multiple regression:**
+
+Variabele   | B           | t          | p  
+------------|-------------|------------|-------------
+(Intercept) | `r B[1,1]`  | `r B[1,2]` | `r B[1,3]`
+Work_hours    | `r B[2,1]`  | `r B[2,2]` | `r B[2,3]`
+Gender_roles | `r B[3,1]`  | `r B[3,2]` | `r B[3,3]`
+
+
+## Separate bivariate regression
+
+Two separate bivariate regression models, $\hat{Y}_i = a + b_1*X_1$
+
+```{r, fig.width=6.5, fig.asp=3/4, echo=FALSE, warning=FALSE, message=FALSE}
+
+werkplot1 <- ggplot(invdat, aes(x=Work_hours, y=Involvement))+
+  geom_point()+
+  geom_hline(yintercept = 0)+geom_vline(xintercept = 0)+
+  theme_bw()+
+  scale_x_continuous(limits = c(0,40), breaks=seq(0, 40, by = 5))+
+  scale_y_continuous(limits = c(0,50), breaks=seq(0, 50, by = 5))+
+  geom_abline(intercept = coef(m_work)[1], slope = coef(m_work)[2], colour = "blue", size = 1)
+
+genderplot1 <- ggplot(invdat, aes(x=Gender_role, y=Involvement))+
+  geom_point()+
+  geom_hline(yintercept = 0)+geom_vline(xintercept = 0)+
+  theme_bw()+
+  scale_x_continuous(limits = c(0,7), breaks=seq(0, 7, by = 1))+
+  scale_y_continuous(limits = c(0,50), breaks=seq(0, 50, by = 5))+
+  geom_abline(intercept = coef(m_gender)[1], slope = coef(m_gender)[2], colour = "blue", size = 1)
+
+grid.arrange(werkplot1, genderplot1, ncol=2)
+
+```
+
+
+## Multiple regression example
+
+$\hat{Y}_i = a + b_1*X_1 + b_2*X_2$
+
+```{r, fig.width=6.5, fig.asp=3/4, echo=FALSE, warning=FALSE, message=FALSE}
+invmodel <- lm(Involvement ~ Work_hours + Gender_role, invdat)
+
+werkplot2 <- ggplot(invdat, aes(x=Work_hours, y=Involvement))+
+  geom_point()+
+  geom_hline(yintercept = 0)+geom_vline(xintercept = 0)+
+  theme_bw()+
+  scale_x_continuous(limits = c(0,40), breaks=seq(0, 40, by = 5))+
+  scale_y_continuous(limits = c(0,50), breaks=seq(0, 50, by = 5))+
+  geom_abline(intercept = invmodel$coefficients[1], slope = invmodel$coefficients[2], colour = "blue", size = 1)
+
+genderplot2 <- ggplot(invdat, aes(x=Gender_role, y=Involvement))+
+  geom_point()+
+  geom_hline(yintercept = 0)+geom_vline(xintercept = 0)+
+  theme_bw()+
+  scale_x_continuous(limits = c(0,7), breaks=seq(0, 7, by = 1))+
+  scale_y_continuous(limits = c(0,50), breaks=seq(0, 50, by = 5))+
+  geom_abline(intercept = invmodel$coefficients[1], slope = invmodel$coefficients[3], colour = "blue", size = 1)
+
+grid.arrange(werkplot2, genderplot2, ncol=2)
+
+```
+
+## Multiple regression example
+
+The lines are no longer "in the middle" of the data cloud?
+
+* The effect of Work_hours is *controlled for* the effect of Gender_role, and vice versa
+
+[$\color{red}{\text{This is clearer when you vidualize this as a 3D plot}}$](https://plot.ly/~c.j.vanlissa/3.embed)
+
+```{r, fig.height=2, fig.width=4, echo=FALSE, warning=FALSE, message=FALSE}
+grid.arrange(werkplot2, genderplot2, ncol=2)
+
+```
+
+## Multiple regression 3D plot
+
+```{r, echo = FALSE, message=FALSE}
+library(plotly)
+library(reshape2)
+library(scales)
+require(gridExtra)
+
+
+invmodel <- lm(Involvement ~ Work_hours + Gender_role, invdat)
+
+graph_reso <- .5
+
+#Setup Axis
+axis_x <- seq(min(invdat$Work_hours), max(invdat$Work_hours), by = graph_reso)
+axis_y <- seq(min(invdat$Gender_role), max(invdat$Gender_role), by = graph_reso)
+
+#Sample points
+inv_lm_surface <- expand.grid(Work_hours = axis_x, Gender_role = axis_y, KEEP.OUT.ATTRS = F)
+inv_lm_surface$Involvement <- predict.lm(invmodel, newdata = inv_lm_surface)
+inv_lm_surface <- acast(inv_lm_surface, Gender_role ~ Work_hours, value.var = "Involvement") #y ~ x
+
+invplot <- plot_ly() %>%
+  add_surface(x = axis_x, 
+                  y = axis_y, 
+                  z = inv_lm_surface, 
+                  type = "surface") %>%#, 
+                  #opacity = 1,
+                  #colors = c('#d1d1d1','#000000')) %>%
+  add_trace(x = invdat$Work_hours, 
+            y = invdat$Gender_role,
+            z = invdat$Involvement, 
+            type = "scatter3d", 
+            mode = "markers",
+            marker = list(color = "red"),
+            #color = coh$dance,
+            #colors = c("gray70", '#6d98f3'),
+            opacity = 1) %>%
+  layout(title = "Multiple regression demo",
+         scene = list(xaxis = list(title = 'Work_hours', range = c(0,40)),# ticktype = "array", tickvals = ticks),
+                      yaxis = list(title = 'Gender role', range = c(1,7)),# ticktype = "array", tickvals = ticks),
+                      zaxis = list(title = 'Involvement', range = c(0,50)),# ticktype = "array", tickvals = ticks),
+                      camera = list(eye = list(x = 2, y = -2, z = 1.25), zoom = 5),
+                      showlegend = FALSE))
+invplot
+```
+
+
+# Centering
+
+## Centering
+
+> $a$: The $\color{blue}{\text{intercept}}$, expected value when **all** predictors are equal to 0
+
+But: almost nobody works 0 hours, and nobody scores 0 on the 1-7 point Likert-scale for Gender_roles
+
+## Centering
+
+That's why we move the zero-point:
+
+$\text{Center}(Y_i) = Y_i - \bar{Y} = \text{observations - mean}$
+
+```{r, fig.width=6, fig.asp=3/4, echo=FALSE, warning=FALSE, message=FALSE}
+scale_dat <- data.frame(Scaled = factor(c(rep(0, length(invdat$Gender_role)), rep(1, length(invdat$Gender_role))), labels = c("Standaard", "Gecentreerd")), Gender_role = c(invdat$Gender_role, scale(invdat$Gender_role, scale = FALSE)))
+
+ggplot(scale_dat, aes(x=Gender_role, linetype = Scaled))+geom_histogram(alpha = 0, binwidth = 1, position = 'identity', size = 1, colour = "black")+scale_linetype_manual(values = c(3, 1))+theme_bw()+ theme(legend.position="none")
+
+```
+
+
+## Multiple regression after centering
+
+After centering, the separate plots look like this:
+
+```{r, fig.width=6.2, fig.asp=3/4, echo=FALSE, warning=FALSE, message=FALSE}
+invdat_cent <- invdat
+invdat_cent[,c(1,2)]<-lapply(invdat_cent[,c(1,2)], scale, scale = FALSE)
+invmodel_c <- lm(Involvement ~ Work_hours + Gender_role, invdat_cent)
+
+werkplot3 <- ggplot(invdat_cent, aes(x=Work_hours, y=Involvement))+
+  geom_point()+
+  geom_hline(yintercept = 0)+geom_vline(xintercept = 0)+
+  theme_bw()+
+  scale_x_continuous(limits = c(-20,20), breaks=seq(-20,20, by = 5))+
+  scale_y_continuous(limits = c(0,50), breaks=seq(0, 50, by = 5))+
+  geom_abline(intercept = invmodel_c$coefficients[1], slope = invmodel_c$coefficients[2], colour = "black", size = 1)
+
+genderplot3 <- ggplot(invdat_cent, aes(x=Gender_role, y=Involvement))+
+  geom_point()+
+  geom_hline(yintercept = 0)+geom_vline(xintercept = 0)+
+  theme_bw()+
+  scale_x_continuous(limits = c(-4,4), breaks=seq(-4,4, by = 1))+
+  scale_y_continuous(limits = c(0,50), breaks=seq(0, 50, by = 5))+
+  geom_abline(intercept = invmodel_c$coefficients[1], slope = invmodel_c$coefficients[3], colour = "black", size = 1)
+
+grid.arrange(werkplot3, genderplot3, ncol=2)
+
+```
+
+## Centering
+
+By centering, you can choose a meaningful zero-point for your predictors
+
+* For example, the mean value
+
+<!-- ## Dichotoom en continu -->
+<!-- Effect van geslacht en Gender_role op parental involvenment: -->
+
+<!-- ```{r, fig.width=6, fig.asp=3/4, echo=FALSE, warning=FALSE, message=FALSE} -->
+<!-- library(scales) -->
+<!-- set.seed(32) -->
+<!-- n <- 178 -->
+<!-- Geslacht <- rbinom(n, 1, .5) -->
+
+<!-- Gender_role <- 2*Geslacht+rnorm(n) -->
+<!-- Gender_role <- round(scales::rescale(Gender_role, to = c(1,7))) -->
+
+<!-- Involvement <- 5 + 15*Geslacht + 4*Gender_role + rnorm(n)  -->
+
+<!-- dichmodel <- lm(Involvement ~ Geslacht + Gender_role) -->
+<!-- m_gender <- lm(Involvement ~ Gender_role, invdat) -->
+
+
+<!-- ggplot(data.frame(Involvement, Geslacht = factor(Geslacht), Gender_role), aes(x=Gender_role, y=Involvement, colour = Geslacht))+ -->
+<!--   geom_point()+ -->
+<!--   theme_bw()+ -->
+<!--   scale_colour_manual(values = c("blue", "red"))+theme(legend.position = "none") -->
+
+<!-- ``` -->
+
+<!-- ## Voorbeelden -->
+
+<!-- ```{r out.height = "350px"} -->
+<!-- knitr::include_graphics("./images/Interactie.png", dpi = NA) -->
+<!-- ``` -->
+
+
+<!-- # Welke toets -->
+
+<!-- ## Welke toets? -->
+
+<!-- * Percentage mensen met religieuze achtergrond > 50% -->
+<!-- * Mannen en vrouwen verschillen op inkomen? -->
+<!-- * Mannen en vrouwen verschillen op inkomen gecontroleerd op leeftijd?    -->
+<!-- * Laag vs midden vs hoog opgeleide mensen verschillen op inkomen? -->
+<!-- * Waar gebruik ik een gamma-toets voor? -->
+
+
+## When to use?
+
+When to use multiple regression?
+
+* To make better predictions using all available predictors
+* To compare relative importance of different predictors
+* When theory implies multiple causes
+* To improve causal inference by controlling for confounders
+
+# Standardized regression coefficients
+
+## Standardizing regression coefficients
+
+**Problem:** We want to know how important different predictors are
+
+**Problem:** We want to compare the effect of the same variable across two studies
+
+Solution: Standardize the regression coefficient to make them ~comparable
+
+## What is standardized regression coefficient
+
+It's just the regression coefficient you would get IF you carried out the analysis after standardizing the X and Y variables
+
+Instead of X and Y, we use Z-scores:
+
+$Z_x = (X - \bar{X}) / SD_x$
+
+$Z_y = (Y - \bar{Y}) / SD_y$
+
+Z-scores: mean = 0,  SD = 1
+
+Z-scores lose the original units of a variable. The new unit is the SD: a Z-score of 1.3 means "1.3 standard deviations above the mean"
+
+## Interpretation
+
+**Unstandardized**
+
+A one unit increase in X is associated with a $b$ unit increase in Y
+
+**Standardized**
+
+A one SD increase in X is associated with a $\beta$ SD increase in Y
+
+## When to use (un)standardized coefficients?
+
+**Unstandardized**
+
+* If the units are meaningful/important (e.g., years, euros, centimeters, number of questions correct)
+* If there are (clinical) cut-off scores
+
+**Standardized**
+
+* When units are not meaningful (e.g., depression, need to belong, job satisfaction, Likert scales).
+* If you want to compare effect sizes / variable importance
+
+<!-- In this course, we will mostly focus on the unstandardized regression coefficient b -->
+
+# Multicolinearity
+
+## MAKE ME
+
+# Causality
+
+## Causality
+
+* Often, we want to find causal relationships: X -> Y
+    + Treatment, Policy decisions, Investments
+* Causality can only be established using experiments, or assumed based on theory
+* If we rely on theory, it is crucial that we correctly represent our theory in our analyses
+    + If the theory is wrong, or incorrectly represented by the analysis, our results will be misleading
+
+## Bivariate relationships
+
+Possible relationships:
+
+* There is no **statistical** way to distinguish which one is "true"
+* That's the realm of theory
+
+```{r}
+#| fig.dim = c(8, 3),
+#| out.width = "100%"
+
+# , out.height="300px"
+library(dagitty)
+library(tidySEM)
+library(ggplot2)
+# p1 <- prepare_graph(dagitty::dagitty("dag{A -> B}"), layout = get_layout("A", "B", "C", rows = 1))
+#
+# p2 <- prepare_graph(dagitty::dagitty("dag{
+# A <- B
+# }"), layout = get_layout("A", "B", "C", rows = 1))
+
+
+# model_direct (revised)
+mdir <- prepare_graph(dagitty::dagitty("dag{
+A -> B
+}"), layout = get_layout("A", "B", "C", rows = 1))
+
+# model_indirect (revised)
+mindir <- prepare_graph(dagitty::dagitty("dag{
+A -> B;
+B -> C
+}"), layout = get_layout("", "B", "",
+                         "A", "", "C", rows = 2), angle = 179)
+
+# model_common_cause (revised)
+mcommon <- prepare_graph(dagitty::dagitty("dag{
+B -> A;
+B -> C
+}"), layout = get_layout("", "B", "",
+                         "A", "", "C", rows = 2), angle = 179)
+
+# model_colliders (revised)
+mcollider <- prepare_graph(dagitty::dagitty("dag{
+A -> B;
+C -> B
+}"), layout = get_layout("A", "", "C",
+                         "", "B", "", rows = 2), angle = 179)
+
+# model_reverse_causation (revised)
+mrev <- prepare_graph(dagitty::dagitty("dag{
+B -> A
+}"))
+
+# model_feedback_loop (revised)
+mloop <- prepare_graph(dagitty::dagitty("dag{
+A -> B;
+B -> A
+}"), angle = 1, layout = get_layout("A", "B", rows = 1))
+mloop$edges$curvature <- 60
+mloop$edges$connect_from <- c("bottom", "top")[2:1]
+mloop$edges$connect_to <- c("bottom", "top")[2:1]
+
+pbivar <- tidySEM:::merge.sem_graph(mdir, mrev, mloop, ncol = 3, nrow = 1, distance_x = 0, distance_y = 0)
+pbivar$nodes$shape <- "rect"
+plot(pbivar)
+```
+
+
+
+## Trivariate relationships
+
+1. Common cause
+2. Indirect effect
+3. Collider
+
+```{r}
+#| fig.dim = c(8, 3)
+ptri <- tidySEM:::merge.sem_graph(mcommon, mindir, mcollider, ncol = 3, nrow = 1, distance_x = 0, distance_y = 0)
+ptri$nodes$shape <- "rect"
+plot(ptri)
+```
+
+## Common cause
+
+* A and C share a common cause B
+* Changes in B induce changes in both A and C, resulting in covariance between A and C
+* If you only examine the relationship between A and C, it will be distorted by the effects of B
+* In this context, B is a **confounder**
+* Controlling for B is good / necessary if you want to study the relationship between A and B
+
+## Examples confounding
+
+```{r}
+p <- prepare_graph(dagitty::dagitty("dag{
+Exercise -> Lung_cancer;
+Smoking -> Exercise;
+Smoking -> Lung_cancer
+}"), layout = get_layout("", "Smoking", "",
+                         "Exercise", "", "Lung_cancer", rows = 2), angle = 179)
+p$nodes$shape <- "rect"
+p$edges$label[1] <- "spurious negative"
+plot(p)
+```
+
+## Examples confounding
+
+```{r}
+p <- prepare_graph(dagitty::dagitty("dag{
+Height -> Vocabulary;
+Age -> Height;
+Age -> Vocabulary
+}"), layout = get_layout("", "Age", "",
+                         "Height", "", "Vocabulary", rows = 2), angle = 179)
+p$nodes$shape <- "rect"
+p$edges$label[3] <- "spurious positive"
+plot(p)
+```
+
+## Examples confounding
+
+```{r}
+p <- prepare_graph(dagitty::dagitty("dag{
+Aid -> Struggles;
+SES -> Struggles;
+SES -> Aid
+}"), layout = get_layout("", "SES", "",
+                         "Aid", "", "Struggles", rows = 2), angle = 179)
+p$nodes$shape <- "rect"
+p$nodes$label <- c("Receives\naid", "Low-SES\nneighborhood", "Life\nstruggles")
+p$edges$label[1] <- "spurious positive"
+plot(p)
+```
+
+## Indirect effect
+
+* Also called mediation or chain relationship
+* B is a process variable or intermediate step in the relationship between A and C
+* Controlling for B hides the (indirect causal) association between A and C
+
+```{r}
+p <- prepare_graph(dagitty::dagitty("dag{
+Hours_studied -> Understanding;
+Understanding -> Grade
+}"), layout = get_layout("", "Understanding", "",
+                         "Hours_studied", "", "Grade", rows = 2), angle = 179)
+p$nodes$shape <- "rect"
+p$nodes$label[2] <- "Hours\nstudied"
+plot(p)
+```
+
+## Partial mediation example
+
+```{r}
+p <- prepare_graph(dagitty::dagitty("dag{
+SES -> Cancer_survival;
+SES -> Screening;
+Screening -> Cancer_survival
+}"), layout = get_layout("", "Screening", "",
+                         "SES", "", "Cancer_survival", rows = 2), angle = 179)
+p$nodes$shape <- "rect"
+p$nodes$label[1] <- "Cancer\nsurvival"
+plot(p)
+```
+
+## Colliding
+
+> **Colliding**: If two unrelated variables separately cause a third variable, controlling for that third variable will create a spurious statistical relationship between the unrelated variables.
+
+* Also called "common effect" relationships: B is a common effect of A and C
+* In this case, **do not** control for B when studying the relationship between A and C!
+
+```{r}
+mcollider$nodes$shape <- "rect"
+plot(mcollider)
+```
+
+## Example collider
+
+```{r}
+mcollider$nodes$label <- c("Attractive", "Hollywood\ncareer", "Acting\ntalent")
+plot(mcollider)
+```
+
+## Example collider
+
+```{r}
+mcollider$nodes$colour <- "black"
+mcollider$nodes$colour[mcollider$nodes$name == "B"] <- "red"
+mcollider$nodes$label_colour <- "black"
+mcollider$nodes$label_colour[mcollider$nodes$name == "B"] <- "red"
+mcollider$edges$color <- "red"
+mcollider$edges <- rbind(mcollider$edges,
+                         data.frame(from = "A", to = "C", label = "spurious positive", arrow = "last", curvature = NA, connect_from = "right", connect_to = "left", color = "black", show = TRUE))
+plot(mcollider)
+```
+
+## Example collider
+
+```{r}
+mcollider$nodes$label <- c("Cognitive\nimpairment", "Participate\nin study", "Quality\nof life")
+mcollider$edges$label[3] <- "spurious negative"
+plot(mcollider)
+```
+
+## Take-home message
+
+**Assuming that your model is correctly specified,**
+
+* Controlling for confounders improves causal inference
+* Controlling for a collider biases (causal) inference
+
+So don't put EVERYTHING in the model without good reason!
+
+
+## Further reading
+
+![](https://imgs.xkcd.com/comics/correlation.png)
+
+Image credit: XKCD
+
+* Judea Pearl's "The book of why?" - excellent holiday reading material!
+* [This blog post](https://theoreticalecology.wordpress.com/2019/04/14/mediators-confounders-colliders-a-crash-course-in-causal-inference/)
+* Cinelli, C., Forney, A., & Pearl, J. (2022). A crash course in good and bad controls. Sociological Methods & Research, 00491241221099552. <https://ftp.cs.ucla.edu/pub/stat_ser/r493.pdf>

@@ -1,0 +1,1369 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.427">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="description" content="Book Description">
+<title>Statistics 1 and 2 - 9&nbsp; GLM-V: Multiple regression</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./glm6nested.html" rel="next">
+<link href="./glm4anova.html" rel="prev">
+<link href="./images/logos/favicon.png" rel="icon" type="image/png">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark"><script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
+<link rel="stylesheet" href="include/booktem.css">
+<link rel="stylesheet" href="include/webex.css">
+<link rel="stylesheet" href="include/glossary.css">
+<link rel="stylesheet" href="include/style.css">
+<link rel="stylesheet" href="c:/gitbook_stats12/include/webex.css">
+</head>
+<body class="nav-sidebar floating">
+
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./glm5multiple.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">GLM-V: Multiple regression</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Statistics 1 and 2</a> 
+        <div class="sidebar-tools-main">
+    <div class="dropdown">
+      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Share"><i class="bi bi-share"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+<li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=%7Curl%7C">
+              <i class="bi bi-bi-twitter pe-1"></i>
+            Twitter
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=%7Curl%7C">
+              <i class="bi bi-bi-facebook pe-1"></i>
+            Facebook
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=%7Curl%7C">
+              <i class="bi bi-bi-linkedin pe-1"></i>
+            LinkedIn
+            </a>
+          </li>
+      </ul>
+</div>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Overview</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to Statistics</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./probability.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Probability Distributions</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./samplingdistribution.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">The Sampling Distribution</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./testing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Hypothesis Testing</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glm1_regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">GLM-I: Linear Regression</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glm2_sum_squares.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">GLM-II: Sums of Squares</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glm3binary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">GLM-III: Binary Predictors</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glm4anova.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">GLM-IV: ANOVA</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glm5multiple.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">GLM-V: Multiple regression</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glm6nested.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">GLM-VI: Nested models</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glm7interaction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">GLM-VII: Interaction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./logistic.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">GLM VIII - Logistic Regression</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glm_contrasts.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">GLM: Contrasts</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./factorial.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">GLM: Factorial ANOVA</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ancova.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">GLM: ANCOVA</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./rmanova.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">GLM: Repeated Measures ANOVA</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./reliability_validity.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Reliability and Validity</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data_reduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Dimension Reduction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./confint.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">BE2 - Confidence Intervals</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data for Portfolio</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./probability_tables.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Z-table</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+    </ul>
+</div>
+</nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+<li><a href="#multiple-regression" id="toc-multiple-regression" class="nav-link active" data-scroll-target="#multiple-regression"><span class="header-section-number">9.1</span> Multiple regression</a></li>
+  <li><a href="#causality" id="toc-causality" class="nav-link" data-scroll-target="#causality"><span class="header-section-number">9.2</span> Causality</a></li>
+  <li><a href="#formative-test" id="toc-formative-test" class="nav-link" data-scroll-target="#formative-test"><span class="header-section-number">10</span> Formative Test</a></li>
+  <li>
+<a href="#in-spss" id="toc-in-spss" class="nav-link" data-scroll-target="#in-spss"><span class="header-section-number">11</span> In SPSS</a>
+  <ul class="collapse">
+<li><a href="#multiple-regression-1" id="toc-multiple-regression-1" class="nav-link" data-scroll-target="#multiple-regression-1"><span class="header-section-number">11.1</span> Multiple Regression</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#tutorial" id="toc-tutorial" class="nav-link" data-scroll-target="#tutorial"><span class="header-section-number">12</span> Tutorial</a>
+  <ul class="collapse">
+<li><a href="#multiple-regression-2" id="toc-multiple-regression-2" class="nav-link" data-scroll-target="#multiple-regression-2"><span class="header-section-number">12.1</span> Multiple Regression</a></li>
+  <li><a href="#multiple-regression-ii" id="toc-multiple-regression-ii" class="nav-link" data-scroll-target="#multiple-regression-ii"><span class="header-section-number">12.2</span> Multiple Regression II</a></li>
+  </ul>
+</li>
+  </ul></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<h1 class="title"><span id="sec-glm5" class="quarto-section-identifier"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">GLM-V: Multiple regression</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header><section id="multiple-regression" class="level2" data-number="9.1"><h2 data-number="9.1" class="anchored" data-anchor-id="multiple-regression">
+<span class="header-section-number">9.1</span> Multiple regression</h2>
+<p>Multiple regression is a statistical technique that allows us to examine the relationship between one outcome and multiple predictors. It extends the concept of bivariate linear regression, where we model the relationship between two variables, to include more predictors. In the context of social science research, multiple regression helps us answer the question: What is the unique effect of one predictor, while controlling for the effects of all other predictors?</p>
+<p>As a matter of fact, last week’s analyses for categorical variables with more than two categories were already an example of multiple regression. We included two dummy variables to represent a categorical variable with three categories. All that’s new today is that we also consider the case where the multiple predictors are continuous variables. An important realization is that a regression model can be expanded to include as many predictors as needed. The general formula for multiple regression is <span class="math inline">\(\hat{Y} = a + b_1X_1 + b_2X_2 + \ldots + b_KX_K\)</span>, where <span class="math inline">\(\hat{Y}\)</span> represents the predicted value of the dependent variable Y, <span class="math inline">\(a\)</span> is the intercept, and <span class="math inline">\(b_{1 \ldots K}\)</span> are the slopes for each predictor.</p>
+<p>When interpreting the regression coefficients, the intercept (a) represents the expected value of the dependent variable when all predictors are equal to 0. For dummy variables, this is the mean value of the reference category, while for continuous predictors, it represents the expected value for someone who scores 0 on all predictors. The regression coefficients (b1, b2, …, bK) indicate how many units the dependent variable Y is expected to change when the corresponding predictor X increases by 1 unit, while holding all other predictors constant.</p>
+<p>Centering predictors can be useful in multiple regression. By centering, we shift the zero-point of the predictor to a meaningful value, such as the mean value on that predictor. This helps in interpretation, because the intercept now gives us the mean value on the outcome for someone who has an average score on all predictors.</p>
+<p>As previously explained, standardized regression coefficients drop the units of the predictor and outcome variable. They are calculated by transforming the predictors and outcome variable into z-scores with a mean of 0 and a standard deviation of 1, and performing the (multiple) regression analysis on those z-scores. Because the units of the variables are dropped, standardized coefficients make the effects of predictors comparable across different studies or variables with different measurement units. They represent the change in the dependent variable in terms of standard deviations when the corresponding predictor increases by 1 standard deviation.</p>
+</section><section id="causality" class="level2" data-number="9.2"><h2 data-number="9.2" class="anchored" data-anchor-id="causality">
+<span class="header-section-number">9.2</span> Causality</h2>
+<p>A statistical association between variables does not necessarily imply a causal relationship. Instead, causality is either assumed on theoretical grounds, or established using the experimental method. In an experiment, researchers manipulate an independent variable and observe its effects on the dependent variable. However, in many social science studies, experiments are not feasible or ethical, so researchers rely on observational data. In these cases, establishing causal relationships relies on theory and careful statistical analysis.</p>
+<p>One important concept in causal inference is the direction of effects. While statistical methods can identify associations between variables, determining the direction of causality is a causal assumption that cannot be estimated using statistics alone. The assumed direction of effects is often based on theory and prior knowledge of the subject matter. Researchers make informed assumptions about which variable is likely to have a causal effect on the other based on theoretical reasoning and empirical evidence.</p>
+<p>In the process of analyzing causal relationships, it is essential to consider the presence of confounders, mediators, and colliders. Confounders are variables that are associated with both the independent and dependent variables and can create a spurious association or distort the true causal relationship. Identifying and controlling for confounders is crucial to ensure accurate causal inference.</p>
+<p>Mediators, on the other hand, are variables that explain the relationship between the independent and dependent variables. They act as intermediate steps or process variables in the causal pathway. Understanding and analyzing mediation effects help us understand the underlying mechanisms through which the independent variable affects the dependent variable.</p>
+<p>Colliders are variables that are caused by both the independent and dependent variables. Controlling for colliders can lead to spurious statistical relationships between unrelated variables. It is essential to be cautious when including variables in the analysis and consider the causal structure of the variables involved.</p>
+<p>One important take-home message is that, in multiple regression, the distinction between confounders and colliders is crucial. Including confounders as control variables in multiple regression improves our inferences - but accidentally including a collider as control variable (severely) biases our inferences. You therefore have to carefully reason about each variable’s role in relation to the other variables in the model.</p>
+</section><section id="formative-test" class="level1" data-number="10"><h1 data-number="10">
+<span class="header-section-number">10</span> Formative Test</h1>
+<p>A formative test helps you assess your progress in the course, and helps you address any blind spots in your understanding of the material. If you get a question wrong, you will receive a hint on how to improve your understanding of the material.</p>
+<p>Complete the formative test ideally after you’ve seen the lecture, but before the lecture meeting in which we can discuss any topics that need more attention</p>
+<div class="cell" data-layout-align="center">
+<div class="webex-check webex-box">
+<p><strong>Question 1</strong></p>
+What is the primary advantage of using multiple regression analysis?
+<div id="radio_INZXAULPTB" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_INZXAULPTB" value=""><span>To group predictors based on their significance</span></label><label><input type="radio" autocomplete="off" name="radio_INZXAULPTB" value=""><span>To identify the most significant predictor</span></label><label><input type="radio" autocomplete="off" name="radio_INZXAULPTB" value=""><span>To find a single predictor that explains all the variance</span></label><label><input type="radio" autocomplete="off" name="radio_INZXAULPTB" value="answer"><span>To understand the unique effect of each predictor while accounting for others</span></label>
+</div>
+<p><strong>Question 2</strong></p>
+What is the purpose of centering in multiple regression analysis?
+<div id="radio_ZOPTQDILMB" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ZOPTQDILMB" value=""><span>To remove outliers from the data</span></label><label><input type="radio" autocomplete="off" name="radio_ZOPTQDILMB" value="answer"><span>To choose a meaningful zero-point for predictors</span></label><label><input type="radio" autocomplete="off" name="radio_ZOPTQDILMB" value=""><span>To standardize all predictors</span></label><label><input type="radio" autocomplete="off" name="radio_ZOPTQDILMB" value=""><span>To ensure the assumption of normality is met</span></label>
+</div>
+<p><strong>Question 3</strong></p>
+What does the intercept (a) in a multiple regression model represent?
+<div id="radio_QFBIQRLWMF" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_QFBIQRLWMF" value=""><span>The effect of the first predictor</span></label><label><input type="radio" autocomplete="off" name="radio_QFBIQRLWMF" value=""><span>The effect of the last predictor</span></label><label><input type="radio" autocomplete="off" name="radio_QFBIQRLWMF" value=""><span>The difference between the two groups</span></label><label><input type="radio" autocomplete="off" name="radio_QFBIQRLWMF" value="answer"><span>Expected value when all predictors are equal to 0</span></label>
+</div>
+<p><strong>Question 4</strong></p>
+What do the b-coefficients in a multiple regression model represent?
+<div id="radio_VSLLNBDZOI" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_VSLLNBDZOI" value=""><span>The average of all predictor values</span></label><label><input type="radio" autocomplete="off" name="radio_VSLLNBDZOI" value="answer"><span>The change in the dependent variable for a one-unit change in the predictor while other predictors are held constant</span></label><label><input type="radio" autocomplete="off" name="radio_VSLLNBDZOI" value=""><span>The change in the predictor for a one-unit change in the dependent variable while other predictors are held constant</span></label><label><input type="radio" autocomplete="off" name="radio_VSLLNBDZOI" value=""><span>The change in the dependent variable for a one-unit change in the predictor without considering other predictors</span></label>
+</div>
+<p><strong>Question 5</strong></p>
+When is multicollinearity a concern in multiple regression analysis?
+<div id="radio_LPHWIHPGSG" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_LPHWIHPGSG" value=""><span>When there are multiple outcome variables</span></label><label><input type="radio" autocomplete="off" name="radio_LPHWIHPGSG" value=""><span>When predictor variables are independent</span></label><label><input type="radio" autocomplete="off" name="radio_LPHWIHPGSG" value="answer"><span>When predictor variables are highly correlated with each other</span></label><label><input type="radio" autocomplete="off" name="radio_LPHWIHPGSG" value=""><span>When there are outliers in the data</span></label>
+</div>
+<p><strong>Question 6</strong></p>
+What is the role of standardized regression coefficients in multiple regression analysis?
+<div id="radio_UMRIGSQUIV" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_UMRIGSQUIV" value=""><span>To convert categorical predictors to continuous ones</span></label><label><input type="radio" autocomplete="off" name="radio_UMRIGSQUIV" value="answer"><span>To compare the effect sizes of predictors on a common scale</span></label><label><input type="radio" autocomplete="off" name="radio_UMRIGSQUIV" value=""><span>To determine the unique effect of each predictor</span></label><label><input type="radio" autocomplete="off" name="radio_UMRIGSQUIV" value=""><span>To calculate the intercept</span></label>
+</div>
+<p><strong>Question 7</strong></p>
+What is the potential bias introduced when controlling for a collider in multiple regression analysis?
+<div id="radio_LSKHBQBVIC" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_LSKHBQBVIC" value=""><span>It biases the estimate of the association between the two variables that are caused by the collider</span></label><label><input type="radio" autocomplete="off" name="radio_LSKHBQBVIC" value=""><span>It has no effect on the causal inference between the variables that form the collider</span></label><label><input type="radio" autocomplete="off" name="radio_LSKHBQBVIC" value="answer"><span>It biases the estimate of the association between the two variables that cause the collider</span></label><label><input type="radio" autocomplete="off" name="radio_LSKHBQBVIC" value=""><span>It creates a causal relationship between the variables that cause the collider</span></label>
+</div>
+<p><strong>Question 8</strong></p>
+Given the multiple regression equation: Y = 12.5 + 2.3<em>X1 + 1.8</em>X2 - 0.5*X3, calculate the predicted value of Y when X1 = 5, X2 = 3, and X3 = 2.
+<div id="radio_MGZRDHIEER" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_MGZRDHIEER" value="answer"><span>28.4</span></label><label><input type="radio" autocomplete="off" name="radio_MGZRDHIEER" value=""><span>20.5</span></label><label><input type="radio" autocomplete="off" name="radio_MGZRDHIEER" value=""><span>23.1</span></label><label><input type="radio" autocomplete="off" name="radio_MGZRDHIEER" value=""><span>27.6</span></label>
+</div>
+<p><strong>Question 9</strong></p>
+In a multiple regression model, if the coefficient of determination (R²) is 0.75 and the SSE is 150, what is the value of SST?
+<div id="radio_ASOVHMFNEZ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ASOVHMFNEZ" value=""><span>450</span></label><label><input type="radio" autocomplete="off" name="radio_ASOVHMFNEZ" value="answer"><span>600</span></label><label><input type="radio" autocomplete="off" name="radio_ASOVHMFNEZ" value=""><span>112.5</span></label><label><input type="radio" autocomplete="off" name="radio_ASOVHMFNEZ" value=""><span>0.25</span></label>
+</div>
+<p><strong>Question 10</strong></p>
+Given the following standardized regression equation: Y = 0.6 + 0.35<em>X1 + 0.25</em>X2 - 0.15*X3, what is the correct conclusion about the effect of X2?
+<div id="radio_XXOTFQSOAN" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_XXOTFQSOAN" value=""><span>A one SD increase in X2 is associated with a 0.25 SD increase in Y, keeping all other predictors constant.</span></label><label><input type="radio" autocomplete="off" name="radio_XXOTFQSOAN" value=""><span>A one unit increase in X2 is associated with a 0.25 unit increase in Y.</span></label><label><input type="radio" autocomplete="off" name="radio_XXOTFQSOAN" value="answer"><span>A one unit increase in X2 is associated with a 0.25 increase in Y, keeping all other predictors constant.</span></label><label><input type="radio" autocomplete="off" name="radio_XXOTFQSOAN" value=""><span>X2 is associated with a 0.25 increase in Y, keeping all other predictors constant.</span></label>
+</div>
+</div>
+<div class="webex-solution">
+<button>
+Show explanations
+</button>
+<p><strong>Question 1</strong></p>
+<p>Multiple regression analysis helps to understand the unique effect of each predictor while controlling for the effects of other predictors.</p>
+<p><strong>Question 2</strong></p>
+<p>Centering is used in multiple regression analysis to choose a meaningful zero-point for predictors.</p>
+<p><strong>Question 3</strong></p>
+<p>The intercept (a) in a multiple regression model represents the expected value when all predictors are equal to 0.</p>
+<p><strong>Question 4</strong></p>
+<p>The b-coefficients in a multiple regression model represent the change in the dependent variable for a one-unit change in the predictor while other predictors are held constant.</p>
+<p><strong>Question 5</strong></p>
+<p>Multicollinearity is a concern in multiple regression analysis when predictor variables are highly correlated with each other.</p>
+<p><strong>Question 6</strong></p>
+<p>Standardized regression coefficients are used to compare the effect sizes of predictors on a common scale, especially when the units of predictors are not meaningful.</p>
+<p><strong>Question 7</strong></p>
+<p>Controlling for a collider in multiple regression analysis can introduce bias in the estimated association between the variables that form the collider.</p>
+<p><strong>Question 8</strong></p>
+<p>Plug in the values of X1, X2, and X3 into the regression equation: Y = 12.5 + 2.3<em>5 + 1.8</em>3 - 0.5*2 = 28.4.</p>
+<p><strong>Question 9</strong></p>
+<p>Use the formula R2 = 1-(SSE/SST) or R2 = SSR/SST</p>
+<p><strong>Question 10</strong></p>
+<p>The correct interpretation is in the original units of the variables, and emphasizing the fact that other predictors were controlled for.</p>
+</div>
+</div>
+</section><section id="in-spss" class="level1" data-number="11"><h1 data-number="11">
+<span class="header-section-number">11</span> In SPSS</h1>
+<section id="multiple-regression-1" class="level2" data-number="11.1"><h2 data-number="11.1" class="anchored" data-anchor-id="multiple-regression-1">
+<span class="header-section-number">11.1</span> Multiple Regression</h2>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/ueNrP5TyZaE" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</section></section><section id="tutorial" class="level1" data-number="12"><h1 data-number="12">
+<span class="header-section-number">12</span> Tutorial</h1>
+<section id="multiple-regression-2" class="level2" data-number="12.1"><h2 data-number="12.1" class="anchored" data-anchor-id="multiple-regression-2">
+<span class="header-section-number">12.1</span> Multiple Regression</h2>
+<p>Social science students were asked about their opinion towards Tilburg’s nightlife, number of Facebook friends, and some other characteristics. The data are in the SocScSurvey.sav file.</p>
+<p>In a previous assignment we predicted Facebook friends by extraversion.</p>
+<p>In this question we will add another predictor, peer pressure.</p>
+<p>The variable peer pressure refers to the tendency to be influenced by close friends. Higher scores reflect higher sensitivity to peer pressure.</p>
+<p>Before we proceed with the regression analysis, we will first look at the correlations between the variables.</p>
+<p>Analyze &gt; correlate &gt; bivariate.</p>
+<p>Now choose as variables: Facebook Friends, Extraversion and Peer Pressure, and click OK.</p>
+<p>What is the correlation between peer pressure and number of Facebook friends? <input class="webex-solveme nospaces" data-tol="0.01" size="5" data-answer="[&quot;0.145&quot;,&quot;.145&quot;]"></p>
+<p>Suppose three researchers test the significance of the correlation between peer pressure and Facebook friends. Researcher I tests at the 10% level, researcher II tests at the 5% level, and researcher III at the 1% level.</p>
+<p>Which researcher will reject the null hypothesis? <select class="webex-select"><option value="blank"></option>
+<option value="">Only researcher III</option>
+<option value="answer">Only researcher I</option>
+<option value="">All three researchers</option>
+<option value="">Only researcher II</option></select></p>
+<p>Now, run the regression analysis in which the number of Facebook friends is regressed on extraversion and peer pressure.</p>
+<p>Proceed as follows: via analyze &gt; regression &gt; linear. Choose Facebook friends as dependent and extraversion and peer pressure as independents.</p>
+<p>Consult the output and write down the regression equation.</p>
+<div class="webex-solution">
+<button>
+Answer
+</button>
+<p><span class="math inline">\(\text{Friends}_i = -158.012 + 26.560*\text{Extraversion}_i + 12.056*\text{Peer}_i + e_i\)</span></p>
+</div>
+<p>Consider the second person in the sample. The person had an extraversion score of 11 and a score of 9 on peer pressure.</p>
+<p>What is the predicted number of Facebook friends for this person? <input class="webex-solveme nospaces" data-tol="0.1" size="7" data-answer="[&quot;242.652&quot;]"></p>
+<p>Consult the output.</p>
+<p>Researchers conclude that – in the sample – as peer pressure increases with one unit, the predicted number of Facebook friends increases with 12.056 units.</p>
+<p>Is this a valid conclusion? <select class="webex-select"><option value="blank"></option>
+<option value="">Yes</option>
+<option value="answer">No</option></select></p>
+<p>In multiple regression, the regression coefficients show us the expected changes in the dependent variable, while keeping the other independent variables constant.</p>
+<p>With this in mind, what is the correct conclusion?</p>
+<div id="radio_XYRQPYBMII" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_XYRQPYBMII" value=""><span>As peer pressure increases with one unit the predicted number of Facebook friends increases with 12.056 units, while extraversion changes with 26.56 units.</span></label><label><input type="radio" autocomplete="off" name="radio_XYRQPYBMII" value="answer"><span>As peer pressure increases with one unit the predicted number of Facebook friends increases with 12.056 units, while keeping extraversion constant.</span></label><label><input type="radio" autocomplete="off" name="radio_XYRQPYBMII" value=""><span>As peer pressure increases with one unit the predicted number of Facebook friends increases with 12.056 units. This is added to the constant of -158.01.</span></label><label><input type="radio" autocomplete="off" name="radio_XYRQPYBMII" value=""><span>As peer pressure increases with one unit the predicted number of Facebook friends increases with 12.056 units.</span></label>
+</div>
+<p>Consult the table Coefficients. The table shows the results of t-tests.</p>
+<p>What are the null hypotheses and alternative hypotheses that are tested here?</p>
+<div class="webex-solution">
+<button>
+Answer
+</button>
+<p>The t-tests test significance of the individual regression coefficients. In particular, for each coefficient we can use the t-tests to test the following hypotheses:</p>
+<p><span class="math inline">\(H_0: \beta = 0\)</span>, <span class="math inline">\(H_1: \beta \ne 0\)</span></p>
+</div>
+<p>What is the value of the test-statistic for the significance test for extraversion? <input class="webex-solveme nospaces" data-tol="0.01" size="5" data-answer="[&quot;5.583&quot;]"></p>
+<p>Consider the t-tests for the regression coefficients again.</p>
+<p>How many degrees of freedom do the t-tests have? <input class="webex-solveme nospaces" size="3" data-answer="[&quot;131&quot;]"></p>
+<div class="webex-solution">
+<button>
+Explanation
+</button>
+<p>Note that:</p>
+<p>Degrees of freedom = N - p N = number of participants; p = number of parameters in the model (intercept + two regression slopes)</p>
+</div>
+<p>Suppose three researchers test the significance of peer pressure as a predictor of Facebook friends, while controlling for extraversion. Researcher I tests at the 10% level, researcher II tests at the 5% level, and researcher III at the 1% level.</p>
+<p>Which researcher(s) will reject the null hypothesis? <select class="webex-select"><option value="blank"></option>
+<option value="">Only researcher II</option>
+<option value="answer">Only researcher I</option>
+<option value="">All three researchers</option>
+<option value="">Only researcher III</option></select></p>
+<p>What <em>percentage</em> of the total variance in Facebook friends can be explained by both extraversion and peer pressure? <input class="webex-solveme nospaces" data-tol="0.1" size="4" data-answer="[&quot;20.9&quot;]"></p>
+<p>Compare the <span class="math inline">\(R^2\)</span> of the regression model with both predictors with the <span class="math inline">\(R^2\)</span> of a model with only extraversion as the predictor.</p>
+<p>What is the difference? <input class="webex-solveme nospaces" data-tol="0.01" size="5" data-answer="[&quot;0.017&quot;,&quot;.017&quot;]"></p>
+<p>In the previous step we compared the <span class="math inline">\(R^2\)</span> of two so called nested models.</p>
+<p>Two models are nested if the larger model (i.e., the model with the most predictors) contains all predictors of the smaller model.</p>
+<p>In the next lecture we will learn more about nested models, model comparisons, and how useful they are for researchers!</p>
+</section><section id="multiple-regression-ii" class="level2" data-number="12.2"><h2 data-number="12.2" class="anchored" data-anchor-id="multiple-regression-ii">
+<span class="header-section-number">12.2</span> Multiple Regression II</h2>
+<p>For this assignment we need the file HealthyFood.sav.</p>
+<p>This file contains hypothetical data on three variables:</p>
+<p>Eating healthy food (the higher the score, the healthier a person’s diet) Knowledge about food (the higher the score, the more a person knows about healthy food and risks of unhealthy food) Income (higher scores = more income).</p>
+<p>Let’s first look at the associations (correlations) between the three variables.</p>
+<p>Compute the correlations and summarize the relationships between all pairs of variables. Include in your answer the strength of the relationship (i.e., weak, moderate, or strong), the direction of the relationship (i.e., positive or negative), and generalizability to the population (i.e., is the correlation significant at the 5% level).</p>
+<p>Cohen’s rules of thumb:</p>
+<ul>
+<li>r = 0.00-0.30 (none to weak)</li>
+<li>r = 0.30-0.50 (weak to moderate)</li>
+<li>r = 0.50-0.70 (moderate to strong)</li>
+<li>r = 0.70-0.90 (strong to very strong)</li>
+<li>r = 0.90-1.00 (very strong)</li>
+</ul>
+<div class="webex-solution">
+<button>
+Answer
+</button>
+<ul>
+<li>Income and eating have a weak positive correlation, which is significant at the 5% level.</li>
+<li>Income and knowledge have a weak to moderate positive correlation, which is significant at the 5% level.</li>
+<li>Knowledge and eating have a moderate to strong positive correlation, which is significant at the 5% level.</li>
+</ul>
+</div>
+<p>Researchers may be interested in explaining differences in eating healthy food: in other words, they want to know why some people eat very healthy, while others tend to eat unhealthy.</p>
+<p>One of the hypotheses is that healthy food is on average more expensive than unhealthy food, so one of the explanatory variables may be income.</p>
+<p>Run a regression analysis using eating as the dependent variable and income as the independent variable.</p>
+<p>Consult the output.</p>
+<p>Which of the following conclusions is correct?</p>
+<div id="radio_JUSQZCPZBQ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_JUSQZCPZBQ" value="answer"><span>The effect of Income on eating healthy food is positive and significantly different from zero.</span></label><label><input type="radio" autocomplete="off" name="radio_JUSQZCPZBQ" value=""><span>The effect of Income on eating healthy food is positive but not significantly different from zero.</span></label>
+</div>
+<p>Simple regression analysis suggests a positive relationship between income and healthy food.</p>
+<p>However, other researchers (say Team B) came up with an alternative explanation. They hypothesized that the relationship between income and healthy food can be explained by a confounder; knowledge. People with more knowledge will have better jobs (on average), and, as a result more, income. As the result of their knowledge they also prefer to eat healthy food. I.e., Team B thinks knowledge is a common cause of income and eating healthy food.</p>
+<p>In other words, the researchers of Team B hypothesize that the relationship between income and eating healthy food is <select class="webex-select"><option value="blank"></option>
+<option value="">Indirect</option>
+<option value="answer">Spurious</option></select></p>
+<p>Draw (on a piece of paper) the conceptual model that reflects the hypotheses of the researchers.</p>
+<div class="webex-solution">
+<button>
+Answer
+</button>
+<p><img src="images/y_x_on_z_spurious.png" class="img-fluid"></p>
+</div>
+<p>Now let’s see if the data support the hypotheses of the researchers.</p>
+<p>Run a multiple regression analysis using eating healthy food as the dependent variable and income and knowledge as independent variables.</p>
+<p>Consult the output. Look at the effect of income, controlled for knowledge (both the coefficient and the significance test).</p>
+<ul>
+<li>What happened with the effect of income if you control for knowledge?</li>
+<li>Does knowledge predict eating healthy food (controlled for income)?</li>
+<li>Do the data support the hypothesis that the relationship between income and healthy food is confounded by knowledge?</li>
+</ul>
+<p>What is the p-value of Income when you control for Knowledge? <input class="webex-solveme nospaces" data-tol="0.01" size="5" data-answer="[&quot;0.778&quot;,&quot;.778&quot;]"></p>
+<p>What is the p-value of Knowledge, controlling for Income? <input class="webex-solveme nospaces" data-tol="0.01" size="5" data-answer="[&quot;0.001&quot;,&quot;.001&quot;]"></p>
+<p>Do the data support the hypothesis that the relationship between income and healthy food is confounded by knowledge? <select class="webex-select"><option value="blank"></option>
+<option value="answer">Yes</option>
+<option value="">No</option></select></p>
+<p>Finally, interpret the output. Write down the answers to the following questions:</p>
+<ol type="1">
+<li>How well can we predict the variance in healthy eating with the predictors income and knowledge? Interpret R2, report the appropriate test and its significance</li>
+<li>Interpret the regression coefficients (size, direction, significance)</li>
+<li>Which predictor is the most important predictor of healthy eating behavior? Inspect the standardized regression coefficients</li>
+</ol>
+<div class="webex-solution">
+<button>
+Answer
+</button>
+<p>Income and Knowledge together predict 44.9% of the variance in Eating healthy food, which is significantly different from zero, <span class="math inline">\(R^2 = .45, F(2, 347) = 141.179, p &lt;.001\)</span>.</p>
+<p>Controlling for Knowledge, Income has a positive, but non-significant effect on Eating healthy food, t(347) = .283, p = .778.</p>
+<p>Controlling for Income, Knowledge has a positive, significant effect on Eating healthy food, t(347) = 15.287, p &lt;.001.</p>
+<p>Knowledge is the most important predictor (β = .665) (compare it with β = .012 of Income).</p>
+</div>
+
+
+</section></section></main><!-- /main --><script>
+
+/* update total correct if #webex-total_correct exists */
+update_total_correct = function() {
+  console.log("webex: update total_correct");
+
+  var t = document.getElementsByClassName("webex-total_correct");
+  for (var i = 0; i < t.length; i++) {
+    p = t[i].parentElement;
+    var correct = p.getElementsByClassName("webex-correct").length;
+    var solvemes = p.getElementsByClassName("webex-solveme").length;
+    var radiogroups = p.getElementsByClassName("webex-radiogroup").length;
+    var selects = p.getElementsByClassName("webex-select").length;
+
+    t[i].innerHTML = correct + " of " + (solvemes + radiogroups + selects) + " correct";
+  }
+}
+
+/* webex-solution button toggling function */
+b_func = function() {
+  console.log("webex: toggle hide");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('open')) {
+    cl.remove("open");
+  } else {
+    cl.add("open");
+  }
+}
+
+/* check answers */
+check_func = function() {
+  console.log("webex: check answers");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('unchecked')) {
+    cl.remove("unchecked");
+    this.innerHTML = "Hide Answers";
+  } else {
+    cl.add("unchecked");
+    this.innerHTML = "Show Answers";
+  }
+}
+
+/* function for checking solveme answers */
+solveme_func = function(e) {
+  console.log("webex: check solveme");
+
+  var real_answers = JSON.parse(this.dataset.answer);
+  var my_answer = this.value;
+  var cl = this.classList;
+  if (cl.contains("ignorecase")) {
+    my_answer = my_answer.toLowerCase();
+  }
+  if (cl.contains("nospaces")) {
+    my_answer = my_answer.replace(/ /g, "")
+  }
+
+  if (my_answer == "") {
+    cl.remove("webex-correct");
+    cl.remove("webex-incorrect");
+  } else if (real_answers.includes(my_answer)) {
+    cl.add("webex-correct");
+    cl.remove("webex-incorrect");
+  } else {
+    cl.add("webex-incorrect");
+    cl.remove("webex-correct");
+  }
+
+  // match numeric answers within a specified tolerance
+  if(this.dataset.tol > 0){
+    var tol = JSON.parse(this.dataset.tol);
+    var matches = real_answers.map(x => Math.abs(x - my_answer) < tol)
+    if (matches.reduce((a, b) => a + b, 0) > 0) {
+      cl.add("webex-correct");
+    } else {
+      cl.remove("webex-correct");
+    }
+  }
+
+  // added regex bit
+  if (cl.contains("regex")){
+    answer_regex = RegExp(real_answers.join("|"))
+    if (answer_regex.test(my_answer)) {
+      cl.add("webex-correct");
+    }
+  }
+
+  update_total_correct();
+}
+
+/* function for checking select answers */
+select_func = function(e) {
+  console.log("webex: check select");
+
+  var cl = this.classList
+
+  /* add style */
+  cl.remove("webex-incorrect");
+  cl.remove("webex-correct");
+  if (this.value == "answer") {
+    cl.add("webex-correct");
+  } else if (this.value != "blank") {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+/* function for checking radiogroups answers */
+radiogroups_func = function(e) {
+  console.log("webex: check radiogroups");
+
+  var checked_button = document.querySelector('input[name=' + this.id + ']:checked');
+  var cl = checked_button.parentElement.classList;
+  var labels = checked_button.parentElement.parentElement.children;
+
+  /* get rid of styles */
+  for (i = 0; i < labels.length; i++) {
+    labels[i].classList.remove("webex-incorrect");
+    labels[i].classList.remove("webex-correct");
+  }
+
+  /* add style */
+  if (checked_button.value == "answer") {
+    cl.add("webex-correct");
+  } else {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+window.onload = function() {
+  console.log("webex onload");
+  /* set up solution buttons */
+  var buttons = document.getElementsByTagName("button");
+
+  for (var i = 0; i < buttons.length; i++) {
+    if (buttons[i].parentElement.classList.contains('webex-solution')) {
+      buttons[i].onclick = b_func;
+    }
+  }
+
+  var check_sections = document.getElementsByClassName("webex-check");
+  console.log("check:", check_sections.length);
+  for (var i = 0; i < check_sections.length; i++) {
+    check_sections[i].classList.add("unchecked");
+
+    let btn = document.createElement("button");
+    btn.innerHTML = "Show Answers";
+    btn.classList.add("webex-check-button");
+    btn.onclick = check_func;
+    check_sections[i].appendChild(btn);
+
+    let spn = document.createElement("span");
+    spn.classList.add("webex-total_correct");
+    check_sections[i].appendChild(spn);
+  }
+
+  /* set up webex-solveme inputs */
+  var solveme = document.getElementsByClassName("webex-solveme");
+
+  for (var i = 0; i < solveme.length; i++) {
+    /* make sure input boxes don't auto-anything */
+    solveme[i].setAttribute("autocomplete","off");
+    solveme[i].setAttribute("autocorrect", "off");
+    solveme[i].setAttribute("autocapitalize", "off");
+    solveme[i].setAttribute("spellcheck", "false");
+    solveme[i].value = "";
+
+    /* adjust answer for ignorecase or nospaces */
+    var cl = solveme[i].classList;
+    var real_answer = solveme[i].dataset.answer;
+    if (cl.contains("ignorecase")) {
+      real_answer = real_answer.toLowerCase();
+    }
+    if (cl.contains("nospaces")) {
+      real_answer = real_answer.replace(/ /g, "");
+    }
+    solveme[i].dataset.answer = real_answer;
+
+    /* attach checking function */
+    solveme[i].onkeyup = solveme_func;
+    solveme[i].onchange = solveme_func;
+
+    solveme[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+  }
+
+  /* set up radiogroups */
+  var radiogroups = document.getElementsByClassName("webex-radiogroup");
+  for (var i = 0; i < radiogroups.length; i++) {
+    radiogroups[i].onchange = radiogroups_func;
+  }
+
+  /* set up selects */
+  var selects = document.getElementsByClassName("webex-select");
+  for (var i = 0; i < selects.length; i++) {
+    selects[i].onchange = select_func;
+    selects[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+  }
+
+  update_total_correct();
+}
+
+</script><script>
+// open rdrr links externally ----
+
+var exlinks = document.querySelectorAll("a[href^='https://rdrr.io']");
+var exlink_func = function(){
+  window.open(this.href);
+  return false;
+};
+for (var i = 0; i < exlinks.length; i++) {
+    exlinks[i].addEventListener('click', exlink_func, false);
+}
+
+// visible second sidebar in mobile ----
+
+function move_sidebar() {
+  var toc = document.getElementById("TOC");
+  var small_sidebar = document.querySelector("#quarto-sidebar .sidebar-menu-container");
+  var right_sidebar = document.getElementById("quarto-margin-sidebar");
+
+  if (window.innerWidth < 768) {
+    small_sidebar.append(toc);
+  } else {
+    right_sidebar.append(toc);
+  }
+}
+move_sidebar();
+window.onresize = move_sidebar;
+</script><script>
+
+/* update total correct if #webex-total_correct exists */
+update_total_correct = function() {
+  console.log("webex: update total_correct");
+
+  var t = document.getElementsByClassName("webex-total_correct");
+  for (var i = 0; i < t.length; i++) {
+    p = t[i].parentElement;
+    var correct = p.getElementsByClassName("webex-correct").length;
+    var solvemes = p.getElementsByClassName("webex-solveme").length;
+    var radiogroups = p.getElementsByClassName("webex-radiogroup").length;
+    var selects = p.getElementsByClassName("webex-select").length;
+
+    t[i].innerHTML = correct + " of " + (solvemes + radiogroups + selects) + " correct";
+  }
+}
+
+/* webex-solution button toggling function */
+b_func = function() {
+  console.log("webex: toggle hide");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('open')) {
+    cl.remove("open");
+  } else {
+    cl.add("open");
+  }
+}
+
+/* check answers */
+check_func = function() {
+  console.log("webex: check answers");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('unchecked')) {
+    cl.remove("unchecked");
+    this.innerHTML = "Hide Answers";
+  } else {
+    cl.add("unchecked");
+    this.innerHTML = "Show Answers";
+  }
+}
+
+/* function for checking solveme answers */
+solveme_func = function(e) {
+  console.log("webex: check solveme");
+
+  var real_answers = JSON.parse(this.dataset.answer);
+  var my_answer = this.value;
+  var cl = this.classList;
+  if (cl.contains("ignorecase")) {
+    my_answer = my_answer.toLowerCase();
+  }
+  if (cl.contains("nospaces")) {
+    my_answer = my_answer.replace(/ /g, "")
+  }
+
+  if (my_answer == "") {
+    cl.remove("webex-correct");
+    cl.remove("webex-incorrect");
+  } else if (real_answers.includes(my_answer)) {
+    cl.add("webex-correct");
+    cl.remove("webex-incorrect");
+  } else {
+    cl.add("webex-incorrect");
+    cl.remove("webex-correct");
+  }
+
+  // match numeric answers within a specified tolerance
+  if(this.dataset.tol > 0){
+    var tol = JSON.parse(this.dataset.tol);
+    var matches = real_answers.map(x => Math.abs(x - my_answer) < tol)
+    if (matches.reduce((a, b) => a + b, 0) > 0) {
+      cl.add("webex-correct");
+    } else {
+      cl.remove("webex-correct");
+    }
+  }
+
+  // added regex bit
+  if (cl.contains("regex")){
+    answer_regex = RegExp(real_answers.join("|"))
+    if (answer_regex.test(my_answer)) {
+      cl.add("webex-correct");
+    }
+  }
+
+  update_total_correct();
+}
+
+/* function for checking select answers */
+select_func = function(e) {
+  console.log("webex: check select");
+
+  var cl = this.classList
+
+  /* add style */
+  cl.remove("webex-incorrect");
+  cl.remove("webex-correct");
+  if (this.value == "answer") {
+    cl.add("webex-correct");
+  } else if (this.value != "blank") {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+/* function for checking radiogroups answers */
+radiogroups_func = function(e) {
+  console.log("webex: check radiogroups");
+
+  var checked_button = document.querySelector('input[name=' + this.id + ']:checked');
+  var cl = checked_button.parentElement.classList;
+  var labels = checked_button.parentElement.parentElement.children;
+
+  /* get rid of styles */
+  for (i = 0; i < labels.length; i++) {
+    labels[i].classList.remove("webex-incorrect");
+    labels[i].classList.remove("webex-correct");
+  }
+
+  /* add style */
+  if (checked_button.value == "answer") {
+    cl.add("webex-correct");
+  } else {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+window.onload = function() {
+  console.log("webex onload");
+  /* set up solution buttons */
+  var buttons = document.getElementsByTagName("button");
+
+  for (var i = 0; i < buttons.length; i++) {
+    if (buttons[i].parentElement.classList.contains('webex-solution')) {
+      buttons[i].onclick = b_func;
+    }
+  }
+
+  var check_sections = document.getElementsByClassName("webex-check");
+  console.log("check:", check_sections.length);
+  for (var i = 0; i < check_sections.length; i++) {
+    check_sections[i].classList.add("unchecked");
+
+    let btn = document.createElement("button");
+    btn.innerHTML = "Show Answers";
+    btn.classList.add("webex-check-button");
+    btn.onclick = check_func;
+    check_sections[i].appendChild(btn);
+
+    let spn = document.createElement("span");
+    spn.classList.add("webex-total_correct");
+    check_sections[i].appendChild(spn);
+  }
+
+  /* set up webex-solveme inputs */
+  var solveme = document.getElementsByClassName("webex-solveme");
+
+  for (var i = 0; i < solveme.length; i++) {
+    /* make sure input boxes don't auto-anything */
+    solveme[i].setAttribute("autocomplete","off");
+    solveme[i].setAttribute("autocorrect", "off");
+    solveme[i].setAttribute("autocapitalize", "off");
+    solveme[i].setAttribute("spellcheck", "false");
+    solveme[i].value = "";
+
+    /* adjust answer for ignorecase or nospaces */
+    var cl = solveme[i].classList;
+    var real_answer = solveme[i].dataset.answer;
+    if (cl.contains("ignorecase")) {
+      real_answer = real_answer.toLowerCase();
+    }
+    if (cl.contains("nospaces")) {
+      real_answer = real_answer.replace(/ /g, "");
+    }
+    solveme[i].dataset.answer = real_answer;
+
+    /* attach checking function */
+    solveme[i].onkeyup = solveme_func;
+    solveme[i].onchange = solveme_func;
+
+    solveme[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+  }
+
+  /* set up radiogroups */
+  var radiogroups = document.getElementsByClassName("webex-radiogroup");
+  for (var i = 0; i < radiogroups.length; i++) {
+    radiogroups[i].onchange = radiogroups_func;
+  }
+
+  /* set up selects */
+  var selects = document.getElementsByClassName("webex-select");
+  for (var i = 0; i < selects.length; i++) {
+    selects[i].onchange = select_func;
+    selects[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+  }
+
+  update_total_correct();
+}
+
+</script><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="./glm4anova.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">GLM-IV: ANOVA</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./glm6nested.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">GLM-VI: Nested models</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer"><div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">CC-BY (2023) Caspar J. Van Lissa</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

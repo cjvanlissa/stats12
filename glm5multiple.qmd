@@ -37,59 +37,211 @@ A formative test helps you assess your progress in the course, and helps you add
 
 Complete the formative test ideally after you’ve seen the lecture, but before the lecture meeting in which we can discuss any topics that need more attention
 
-::: {.webex-check .webex-box}
-
-**Question 1**
-
-```{r, results='asis', echo = FALSE}
-mc("Suppose that I ask a random sample of 5 students how many pairs of shoes they have. The number of pairs are: 7, 6, 8, 6, and 8. What is the variance of these pairs of shoes?", 1, 4, 7, 2)
+```{r}
+#| results = "asis",
+#| echo = FALSE,
+#| cache = FALSE
+add_mcs("questions_multiple.csv")
 ```
 
-**Question 2**
+# In SPSS
 
-```{r, results='asis', echo = FALSE}
-mc("Six students work on a Statistics exam. They obtain the following grades: 8, 9, 5, 6, 7 and 8. The teacher calculates a certain statistic, which is equal to 7.5. Which statistic did the teacher calculate?", "Median","Mean", "Standard deviation", "Mode")
-```
+## Multiple Regression
 
-**Question 3**
+{{< video https://www.youtube.com/watch?v=ueNrP5TyZaE >}}
 
-For which of the three scatterplots below is the correlation coefficient largest? `r mcq(c(answer = "A", "B", "C"))`
+# Tutorial
 
-::: {#fig-scatter layout-ncol=3}
+## Multiple Regression
 
-![A](images/lecture 73.png){width = 30%}
+Social science students were asked about their opinion towards Tilburg’s nightlife, number of Facebook friends, and some other characteristics. The data are in the SocScSurvey.sav file.
 
-![B](images/lecture 74.png){width = 30%}
+In a previous assignment we predicted Facebook friends by extraversion.
 
-![C](images/lecture 76.png){width = 30%}
+In this question we will add another predictor, peer pressure.
 
-Question 3 scatterplots
-:::
+The variable peer pressure refers to the tendency to be influenced by close friends. Higher scores reflect higher sensitivity to peer pressure.
 
-```{r, results='asis', echo = FALSE}
-mc("Six students work on a Statistics exam. They obtain the following grades: 8, 9, 5, 6, 7 and 8. The teacher calculates a certain statistic, which is equal to 7.5. Which statistic did the teacher calculate?", "Median","Mean", "Standard deviation", "Mode")
-```
-:::
+Before we proceed with the regression analysis, we will first look at the correlations between the variables.
 
-`r hide("Show answers")`
+Analyze > correlate > bivariate.
 
-**Question 1**
+Now choose as variables: Facebook Friends, Extraversion and Peer Pressure, and click OK.
 
-The variance is the sum of squared distances of observations to the mean, divided by the number of observations minus one. So calculate:
+What is the correlation between peer pressure and number of Facebook friends? `r fitb(0.145, num = T, tol = .01)`
 
-$S_{X}^2= \frac{\sum_{i=1}^nX_i}{n} = \frac{(7 + 6 + 8 + 6 + 8)}{5} = 7$
+Suppose three researchers test the significance of the correlation between peer pressure and Facebook friends. Researcher I tests at the 10% level, researcher II tests at the 5% level, and researcher III at the 1% level.
 
-**Question 2**
 
-First rule out improbable answers; all grades are pretty close to each other, so it's impossible for the variance to be that high. We can see what the mode (most common value) is: it's 8. So we only choose between mean or median.
+Which researcher will reject the null hypothesis? `r mcq(c(answer = "Only researcher I", "Only researcher II", "Only researcher III", "All three researchers")[sample.int(4)])` 
 
-Mean: calculate $\bar{X}= \frac{\sum_{i=1}^nX_i}{n} = \frac{8 + 9 + 5 + 6 + 7 + 8}{6} = 7.17$
+Now, run the regression analysis in which the number of Facebook friends is regressed on extraversion and peer pressure.
 
-Median: order the numbers, note that there is an odd number, take the average of the two middle numbers. 5, 6, 7, 8, 8, 9 -> 7.5
+Proceed as follows: via analyze > regression > linear.
+Choose Facebook friends as dependent and extraversion and peer pressure as independents.
 
-**Question 3**
+Consult the output and write down the regression equation.
 
-Correlation measures linear association, so eliminate option C. Option B shows a very small correlation - probably 0 or maybe .1. So the correct answer is A, which shows a moderate negative correlation.
+`r hide("Answer")`
+$\text{Friends}_i = -158.012 + 26.560*\text{Extraversion}_i + 12.056*\text{Peer}_i + e_i$
+
 `r unhide()`
 
-#
+Consider the second person in the sample. The person had an extraversion score of 11 and a score of 9 on peer pressure.
+
+
+What is the predicted number of Facebook friends for this person? `r fitb(242.652, num = T, tol = .1)`
+
+Consult the output.
+
+Researchers conclude that – in the sample – as peer pressure increases with one unit, the predicted number of Facebook friends increases with 12.056 units. 
+
+Is this a valid conclusion? `r mcq(c("Yes", answer = "No"))`
+
+In multiple regression, the regression coefficients show us the expected changes in the dependent variable, while keeping the other independent variables constant.
+
+With this in mind, what is the correct conclusion?
+
+`r longmcq(c(answer = "As peer pressure increases with one unit the predicted number of Facebook friends increases with 12.056 units, while keeping extraversion constant.",
+"As peer pressure increases with one unit the predicted number of Facebook friends increases with 12.056 units.",
+"As peer pressure increases with one unit the predicted number of Facebook friends increases with 12.056 units, while extraversion changes with 26.56 units.",
+"As peer pressure increases with one unit the predicted number of Facebook friends increases with 12.056 units. This is added to the constant of -158.01.")[sample.int(4)])`
+
+Consult the table Coefficients. The table shows the results of t-tests. 
+
+What are the null hypotheses and alternative hypotheses that are tested here? 
+
+`r hide("Answer")`
+The t-tests test significance of the individual regression coefficients. In particular, for each coefficient we can use the t-tests to test the following hypotheses:
+
+$H_0: \beta = 0$, $H_1: \beta \ne 0$
+`r unhide()`
+
+What is the value of the test-statistic for the significance test for extraversion? `r fitb(5.583, num = TRUE, tol = .01)`
+
+
+Consider the t-tests for the regression coefficients again.
+
+How many degrees of freedom do the t-tests have? `r fitb(131, num = T)`
+
+`r hide("Explanation")`
+Note that:
+
+Degrees of freedom = N - p
+N = number of participants; p = number of parameters in the model (intercept + two regression slopes)
+`r unhide()`
+ 
+
+Suppose three researchers test the significance of peer pressure as a predictor of Facebook friends, while controlling for extraversion. Researcher I tests at the 10% level, researcher II tests at the 5% level, and researcher III at the 1% level.
+
+
+Which researcher(s) will reject the null hypothesis? `r mcq(c(answer = "Only researcher I", "Only researcher II", "Only researcher III", "All three researchers")[sample.int(4)])` 
+    
+
+
+What *percentage* of the total variance in Facebook friends can be explained by both extraversion and peer pressure? `r fitb(20.9, num = T, tol = .1)`
+
+Compare the $R^2$ of the regression model with both predictors with the $R^2$ of a model with only extraversion as the predictor.
+
+What is the difference? `r fitb(0.017, num = T, tol = .01)`
+
+In the previous step we compared the $R^2$ of two so called nested models. 
+
+Two models are nested if the larger model (i.e., the model with the most predictors) contains all predictors of the smaller model.
+
+In the next lecture we will learn more about nested models, model comparisons, and how useful they are for researchers! 
+
+
+## Multiple Regression II
+
+For this assignment we need the file HealthyFood.sav.
+
+This file contains hypothetical data on three variables:
+
+Eating healthy food (the higher the score, the healthier a person's diet)
+Knowledge about food (the higher the score, the more a person knows about healthy food and risks of unhealthy food)
+Income (higher scores = more income).
+ 
+Let's first look at the associations (correlations) between the three variables.
+
+Compute the correlations and summarize the relationships between all pairs of variables. Include in your answer the strength of the relationship (i.e., weak, moderate, or strong), the direction of the relationship (i.e., positive or negative), and generalizability to the population (i.e., is the correlation significant at the 5% level).
+
+Cohen’s rules of thumb:
+
+* r = 0.00-0.30 (none to weak)
+* r = 0.30-0.50 (weak to moderate)
+* r = 0.50-0.70 (moderate to strong)
+* r = 0.70-0.90 (strong to very strong)
+* r = 0.90-1.00 (very strong)
+
+`r hide("Answer")`
+
+- Income and eating have a weak positive correlation, which is significant at the 5% level.
+- Income and knowledge have a weak to moderate positive correlation, which is significant at the 5% level.
+- Knowledge and eating have a moderate to strong positive correlation, which is significant at the 5% level.
+
+`r unhide()`
+ 
+Researchers may be interested in explaining differences in eating healthy food: in other words, they want to know why some people eat very healthy, while others tend to eat unhealthy. 
+
+One of the hypotheses is that healthy food is on average more expensive than unhealthy food, so one of the explanatory variables may be income.
+
+
+Run a regression analysis using eating as the dependent variable and income as the independent variable. 
+
+Consult the output.
+
+
+Which of the following conclusions is correct?
+
+`r longmcq(c(answer = "The effect of Income on eating healthy food is positive and significantly different from zero.","The effect of Income on eating healthy food is positive but not significantly different from zero."))`
+ 
+Simple regression analysis suggests a positive relationship between income and healthy food.
+
+However, other researchers (say Team B) came up with an alternative explanation. They hypothesized that the relationship between income and healthy food can be explained by a confounder; knowledge. People with more knowledge will have better jobs (on average), and, as a result more, income. As the result of their knowledge they also prefer to eat healthy food. I.e., Team B thinks knowledge is a common cause of income and eating healthy food.
+
+
+In other words, the researchers of Team B hypothesize that the relationship between income and eating healthy food is `r mcq(c("Indirect", answer = "Spurious"))`
+
+Draw (on a piece of paper) the conceptual model that reflects the hypotheses of the researchers.
+
+`r hide("Answer")`
+
+![](images/y_x_on_z_spurious.png)
+`r unhide()`
+
+
+Now let's see if the data support the hypotheses of the researchers.
+
+Run a multiple regression analysis using eating healthy food as the dependent variable and income and knowledge as independent variables.
+
+Consult the output. Look at the effect of income, controlled for knowledge (both the coefficient and the significance test).
+
+- What happened with the effect of income if you control for knowledge?
+- Does knowledge predict eating healthy food (controlled for income)? 
+- Do the data support the hypothesis that the relationship between income and healthy food is confounded by knowledge?
+
+What is the p-value of Income when you control for Knowledge? `r fitb(.778, num = T, tol = .01)`
+
+What is the p-value of Knowledge, controlling for Income? `r fitb(.001, num = T, tol = .01)`
+
+Do the data support the hypothesis that the relationship between income and healthy food is confounded by knowledge? `r mcq(c(answer = "Yes", "No"))`
+
+
+Finally, interpret the output. Write down the answers to the following questions:
+
+1. How well can we predict the variance in healthy eating with the predictors income and knowledge? Interpret R2, report the appropriate test and its significance
+1. Interpret the regression coefficients (size, direction, significance)
+1. Which predictor is the most important predictor of healthy eating behavior? Inspect the standardized regression coefficients
+
+`r hide("Answer")`
+
+
+Income and Knowledge together predict 44.9% of the variance in Eating healthy food, which is significantly different from zero, $R^2 = .45, F(2, 347) = 141.179, p <.001$.
+
+Controlling for Knowledge, Income has a positive, but non-significant effect on Eating healthy food, t(347) = .283, p = .778.
+
+Controlling for Income, Knowledge has a positive, significant effect on Eating healthy food, t(347) = 15.287, p <.001.
+
+Knowledge is the most important predictor (β = .665) (compare it with β = .012 of Income).
+`r unhide()`

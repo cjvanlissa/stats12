@@ -757,7 +757,29 @@ kableExtra::kbl(cor(df), digits = 2)
 * PCA is just data rotation; only requires matrix algebra
 * EFA is a *model* about latent variables; loadings and error variances are unknown parameters that must be estimated
 
-We consider two estimation methods:
+```{r}
+#| out.width = "100%",
+#| out.height = "10%"
+df_plot <- data.frame(
+  x = c(1, 2, 2),
+  y = c(100, 60, 40),
+  label = ordered(c("Total Variance", "Common variance", "Unique variance")),
+  labely = c(50, 20, 70)
+)
+
+ggplot(df_plot, aes(fill=label, y=y, x=x, label = label)) + 
+  geom_bar(position="stack", stat="identity", alpha = .5) +
+  geom_label(aes(y = labely), fill = "white") +
+  ggplot2::scale_x_reverse() +
+  ggplot2::scale_y_reverse()+
+  coord_flip() +
+  theme_void() +
+  labs(fill = "Variance") +
+  scale_fill_manual(values = c("Total Variance" = "green", "Common variance" = "blue", "Unique variance" = "red"))
+```
+
+
+## Estimation Methods
 
 * Principal Axis Factoring (PAF)
     + Long considered default in SPSS
@@ -1033,14 +1055,14 @@ kableExtra::kbl(varmax, digits = 2)
 
 ## Oblique Rotation
 
-* Factors are allowed to be correlated with each other
+* Factors are allowed to be correlated
     + It's possible that high loadings for one factor are associated with high loadings for another factor
 * In social science, many factors are probably correlated!
-    + Oblique rotation is considered to be default by many
+    + Oblique rotation is considered a sensible default in social science
 
-## Oblique Rotation ctd.
+## Oblique Rotation changes loadings
 
-**Note:** factor loadings and item/factor correlations are now distinct!
+**Note:** after oblique rotation, factor loadings are no longer item/factor correlations!
 
 **Pattern matrix**
 
@@ -1262,8 +1284,6 @@ Calculate SSL as: $SSL = (\sum_{j=0}^k L_{1,k})^2$ (first sum loadings, then squ
 
 Calculate SSR as: $SSR = 1-\sum_{j=0}^k L_{1,k}^2$ (first square loadings, then sum)
 
-
-
 # Scale Scores
 
 ## Scale Scores
@@ -1284,56 +1304,42 @@ In both of these approaches, all items contribute equally
 
 ## PCA Scores
 
-For each component:
+Multiply standardized item scores for the j items with j factor loadings
 
-* Multiply standardized item scores with factor loadings for that component
-* Divide resulting variable by Eigenvalue of that component
+<!-- * <font color = "gray">Optionally, Divide by the Eigenvalue of that component -->
+* Sum the result 
+* E.g.: We have factor loadings .85, .80, .14
+    + Francis' standardiz scores 1, 3, and 2 on these variables
+* Calculate $(.85*4 + .80*6+.14*5) / (.85^2 + .80^2 + .14^2) = 2.44$
+* Francis' factor score is 2.44
 
 <!-- as.matrix(scale(data)) %*% t(pracma::pinv(loadings))) -->
 
+## EFA: Not Uniquely Determined
 
-# How to analyse these scores: CTT
+Computing latent variable scores is not straightforward
 
-* Or: Sumscore =  <span style="color:#FF0000">1</span> \*X1 \+  <span style="color:#FF0000">1</span> \*X2 \+  <span style="color:#FF0000">1</span> \*X3….\+  <span style="color:#FF0000">1</span> \*X14  (Unweighted sum\!)
-* <span style="color:#FF0000"></span>  <span style="color:#FF0000"> All variables have the same weight\!\!:</span>
-  * __Online behavior __ =  <span style="color:#FF0000">w</span> .X1 \+  <span style="color:#FF0000">w</span>  <span style="color:#FF0000">.</span> X2 \+ … \+  <span style="color:#FF0000">w</span> .X14
-    * We have to calculate the sumscore  _separately_  _ _  _for_  _ _  _every_  _ _  _dimension_
-    * That’s why, when using classical test theory (and calculating an unweighted sumscore), we don’t need to know what items belong to which dimension
-    * This is different in PCA: we give an item a different weight for every dimension
+* Although we can estimate the EFA model, this does not tell us what the latent variable score of every individual was
+* An infinite number of latent variable datasets is consistent with the same EFA model
+* There are methods to *estimate* what individuals' scores could have been
+* Factor scores tell us a person's relative level on the latent factor
 
-# PCA: components
+## EFA Scores Methods
 
-* Not calculating a sum score, but trying to find patterns in the data
-  * Based on these patterns, we find components
-  * Components = dimensions of the construct
-  * To which dimensions does an item belong?  higher weight for this dimension\!
-* A  <span style="color:#FF0000">component</span>  is thus representative for a subconstruct (a dimension)
-  * e.g., NEO big five  the 5 personality traits
+* Regression method: Ordinary least squares estimate
+    + Maximize multiple correlation between factor
+score and common factors
+    + Are biased estimates of true factor scores
+    + Even for orthogonal EFA, regression scores for different factors correlate with each other and with all latent factors
+* Bartlett method
+    +  Factor scores only correlate with their own latent factor, but still correlate with estimated scores for other factors
+* If factor loadings are ~equal
+    + Might be preferable to just compute mean scores
 
-# PCA: component scores & component loadings
+Everitt, B. S. & Howell, D. C. (2005). [DOI:10.1002/0470013192.bsa726](doi.org/10.1002/0470013192.bsa726)
 
-  * Component \#1 =  <span style="color:#EA2D00">w</span>  <span style="color:#EA2D00">1</span> .XZ1 \+  <span style="color:#EA2D00">w</span>  <span style="color:#EA2D00">2</span>  <span style="color:#EA2D00">.</span> XZ2 \+ … \+  <span style="color:#EA2D00">w</span>  <span style="color:#EA2D00">14</span> .XZ14 		(XZ  Standardized variables\!)
-  * _	(For example: _  <span style="color:#EA2D00"> _0_ </span>  <span style="color:#EA2D00"> _._ </span>  _XZ \+ _  <span style="color:#EA2D00"> _0.5_ </span>  <span style="color:#EA2D00"> _._ </span>  _XZ \+ … \+ _  <span style="color:#EA2D00"> _0.5_ </span>  _._  _XZ14)_
-  * Component \#2 =  <span style="color:#EA2D00">w2</span>  <span style="color:#EA2D00">1</span> .XZ1 \+  <span style="color:#EA2D00">w2</span>  <span style="color:#EA2D00">2</span>  <span style="color:#EA2D00">.</span> XZ2 \+ … \+  <span style="color:#EA2D00">w2</span>  <span style="color:#EA2D00">14</span> .XZ14
-  * _	(For example: _  <span style="color:#EA2D00"> _0.8_ </span>  <span style="color:#EA2D00"> _._ </span>  _XZ \+ _  <span style="color:#EA2D00"> _0.1_ </span>  <span style="color:#EA2D00"> _._ </span>  _XZ \+ … \+ _  <span style="color:#EA2D00"> _0.1_ </span>  _._  _XZ14)_
-* PCA calculates for every item a weight w1, w2, w3 , w4 , …, w14 for every component (we call this a component loading)
-  * The loading is a correlation between component and item
-  * Indicates which dimension an item measures: if item 1 belongs to component/dimension1, then this item will get a high weight for this component and a very low weight for the second component/dimension
+DiStefano, Zhu, & Mindrila (2009). [DOI:10.7275/da8t-4g52](https://doi.org/10.7275/da8t-4g52)
 
-  * Component\#1 =  <span style="color:#EA2D00">w</span>  <span style="color:#EA2D00">1</span> .XZ1 \+  <span style="color:#EA2D00">w</span>  <span style="color:#EA2D00">2</span>  <span style="color:#EA2D00">.</span> XZ2 \+ … \+  <span style="color:#EA2D00">w</span>  <span style="color:#EA2D00">14</span> .XZ14 		(XZ  Standardized variables\!)
-  * _	(For example: _  <span style="color:#EA2D00"> _0_ </span>  <span style="color:#EA2D00"> _._ </span>  _XZ \+ _  <span style="color:#EA2D00"> _0.5_ </span>  <span style="color:#EA2D00"> _._ </span>  _XZ \+ … \+ _  <span style="color:#EA2D00"> _0.5_ </span>  _._  _XZ14)_
-  * Component\#2 =  <span style="color:#EA2D00">w2</span>  <span style="color:#EA2D00">1</span> .XZ1 \+  <span style="color:#EA2D00">w2</span>  <span style="color:#EA2D00">2</span>  <span style="color:#EA2D00">.</span> XZ2 \+ … \+  <span style="color:#EA2D00">w2</span>  <span style="color:#EA2D00">14</span> .XZ14
-  * _	(For example: _  <span style="color:#EA2D00"> _0.8_ </span>  <span style="color:#EA2D00"> _._ </span>  _XZ \+ _  <span style="color:#EA2D00"> _0.1_ </span>  <span style="color:#EA2D00"> _._ </span>  _XZ \+ … \+ _  <span style="color:#EA2D00"> _0.1_ </span>  _._  _XZ14)_
-  * We can calculate component scores for every respondent: a score on C1 and score on C2
-  * _The _  _answers_  _ on _  _the_  _ items (XZ1, XZ2, etc..) are _  _weighted_  _ _  _based_  _ on _  _the_  _ component _  _loadings_  _. _  _By_  _ _  _doing_  _ _  _so_  _, items _  _that_  _ _  _measure_  _ _  _dimension_  _ 1 (component 1) _  _contribute_  _ _  _the_  _ most _  _to_  _ _  _the_  _ _  _calculation_  _ of _  _the_  _ component score _  _for_  _ _  _the_  _ first _  _dimension_  _. _
-
-## How does this work? What does SPSS do??
-
-  * Component\#1 =  <span style="color:#FF0000">w</span>  <span style="color:#FF0000">1</span> .XZ1 \+  <span style="color:#FF0000">w</span>  <span style="color:#FF0000">2</span> .XZ2 \+ … \+  <span style="color:#FF0000">w</span>  <span style="color:#FF0000">14</span> .XZ14
-  * _	(For example: _  <span style="color:#FF0000"> _0_ </span>  _._  _XZ1 \+ _  <span style="color:#FF0000"> _0.5_ </span>  _._  _XZ2 \+ … \+ _  <span style="color:#FF0000"> _0.5_ </span>  <span style="color:#FF0000"> _._ </span>  _XZ14)_
-* Finding the  <span style="color:#FF0000">weighted</span>  sum scores with weights  <span style="color:#FF0000">w</span>  <span style="color:#FF0000">1</span>  <span style="color:#FF0000">, w</span>  <span style="color:#FF0000">2</span>  <span style="color:#FF0000">, … w</span>  <span style="color:#FF0000">14</span> , such that we can explain as much variance as possible
-* Variance = information\!
-* This score is then “principal component\#1”
 
 
 # Steps for Data Reduction
@@ -1388,4 +1394,5 @@ For EFA:
 ## Step 5: Optional Use Scales
 
 * Compute latent variable reliability
-* Export factor scores
+* Compute (for PCA) or estimate factor scores
+    + Choose appriopriate method

@@ -45,7 +45,21 @@ book:
   - probability.qmd
   - samplingdistribution.qmd
   - testing.qmd
-  - glm1.qmd
+  - glm1_regression.qmd
+  - glm2_sum_squares.qmd
+  - glm3binary.qmd
+  - glm4anova.qmd
+  - glm5multiple.qmd
+  - glm6nested.qmd
+  - glm7interaction.qmd
+  - logistic.qmd
+  - glm_contrasts.qmd
+  - factorial.qmd
+  - ancova.qmd
+  - rmanova.qmd
+  - reliability_validity.qmd
+  - data_reduction.qmd
+  - confint.qmd
   appendices:
   - data.qmd
   - probability_tables.qmd

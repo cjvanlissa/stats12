@@ -1,0 +1,97 @@
+# BE2 - Confidence Intervals {#sec-confint}
+
+```{r, include = FALSE}
+source("R/booktem_setup.R")
+source("R/my_setup.R")
+```
+
+
+# Lecture
+
+There is no lecture for this topic, but you can re-watch part of the lecture on the sampling distribution to refresh your knowledge about confidence intervals!
+
+# Formative Test
+
+A formative test helps you assess your progress in the course, and helps you address any blind spots in your understanding of the material. If you get a question wrong, you will receive a hint on how to improve your understanding of the material.
+
+Complete the formative test ideally after you’ve seen the lecture, but before the lecture meeting in which we can discuss any topics that need more attention
+
+```{r}
+#| results = "asis",
+#| echo = FALSE,
+#| cache = FALSE
+add_mcs("questions_confint.csv")
+```
+
+
+# Tutorial
+
+## Confidence Intervals
+
+In this assignment we will work on some questions regarding the confidence interval. We focus on the confidence interval around the mean, but everything you learn can also be applied to confidence intervals around the mean difference or regression coefficients.
+
+Finish the following sentence. The confidence interval around the mean is constructed around the `r mcq(c(answer =  "Sample mean", "Population mean (under H0)")[sample.int(2)])`
+
+
+In the population the variable IQ is normally distributed with $IQ \sim N(\mu=100, \sigma=15$.
+
+Imagine that we drew 2000 samples from the population. For each of the samples we would calculate a 90% confidence interval around the sample mean. If you had to make a guess, how many intervals would you expect to contain the value 100? `r fitb(1800, num = T)`
+
+
+Imagine we drew a sample from the population and we calculated the 95% confidence interval around the sample mean for a particular variable. The lower bound of the confidence interval is equal to 85 and the upper bound to 95.
+
+Which of the following statements is correct?
+
+`r longmcq(c(answer = 
+  "There is a 95% probability that a confidence interval calculated based on a sample from this population contains the true population value.",
+  "There is a 95% probability that if we would draw a new sample for the same population, the true population value lies between 85 and 95.",
+  "The probability that the population mean lies between 85 and 95 is 95%.",
+  "There is a 95% probability that the population mean lies between 85 and 95.")[sample.int(4)])`
+ 
+
+Confidence intervals are interpreted in terms of long-run probability. IF we could draw a huge number of samples from the population, 95% of those samples would provide a confidence interval that contains the population mean. 
+
+
+We can never know whether one specific confidence interval contains the population value, however.
+
+So we can NEVER draw a conclusion like "there is a 95% probability that the population mean lies between 85 and 95".
+
+Recall the first lecture, in which I explained the idea of a "random experiment". Think of a 95% confidence interval as a random experiment with a 95% probability of containing the population value. One specific confidence interval is **not** a random experiment.
+Whether the population mean lies within the interval is not a matter of probability. It either does or it does not. We just don’t know which of these is true. 
+
+Imagine a population with variable X, where $X \sim N(\mu 50, \sigma = 10)$
+
+Assume a confidence level of 95% for all intervals.
+
+You plan to draw a sample with $n=20$ and compute a 95% confidence interval.
+What's the probability that this interval will contain 50? `r fitb(95, num = T)`%
+
+Your colleague has already drawn a sample of $n=20$. What's the probability that their confidence interval includes 50? `r mcq(c("0%", "100%", "95%", answer = "Can't say")[sample.int(4)])`
+
+If you would draw 20 samples, how many samples would you expect the confidence interval to contain the value 50? `r fitb(19, num = T)`
+
+True or false: if you draw 100 samples, 95 of them will provide a confidence interval that contains the population value. `r torf(FALSE)`
+
+`r hide("Explanation")`
+This is false because the phrase "will provide" is not a probability statements, but a deterministic one.
+
+"The number of 95% confidence intervals out of 100 samples that contain the population value" is a random experiment. We expect an outcome of 95, but if we conduct this random experiment, the observed outcome may differ a little, e.g. 93, 94, 97 times are all fine.
+
+`r unhide()`
+
+ 
+All else being equal, what would you expect to happen to the confidence intervals of smaller samples? `r mcq(c("They stay the same", answer = "They become wider", "They become narrower")[sample.int(3)])`
+
+
+
+`r hide("Explanation")`
+By increasing the sample size, our estimate becomes more precise. This will lead to more narrow confidence intervals.
+
+Mathematically it also makes sense, because the confidence interval is based on the standard error. Remember that the formula for the standard error is $SE = \frac{\sigma}{n}.A smaller sample size leads to a smaller standard error, which leads to a narrower interval.
+
+Note that this does affect the probability of confidence intervals containing \mu.
+`r unhide()`
+
+If the standard deviation increases (and everything else stays the same) the confidence interval will `r mcq(c(answer = "become wider", "become narrower", "stay the same")[sample.int(3)])`.
+ 
+If we change the confidence level to 90%, the interval will `r mcq(c("become wider",answer = "become narrower", "stay the same")[sample.int(3)])` and `r mcq(c("more",answer = "fewer", "the same number of")[sample.int(3)])` intervals will contain $\mu$.

@@ -1,0 +1,215 @@
+---
+title: "Confidence Intervals"
+author:   "Caspar J. van Lissa"
+date:     "`r format(Sys.Date(), '%d %b %Y')`"
+format: revealjs
+#server: shiny
+---
+
+```{r}
+library(kableExtra)
+require(gridExtra)
+library(tidySEM)
+library(scales)
+library(eulerr)
+source("functions.r")
+options(knitr.kable.NA = '')
+
+```
+
+# Sampling Theory Recap
+
+## Sampling Theory - Population
+
+* There exists a target population, consisting of all potential participants for our study
+* These individuals posess a trait that could be measured as variable X
+* If we had access to the entire population, we could calculate *population parameters*:
+    + The mean population value of X, $\mu_x$
+    + The population standard deviation of X, $\sigma_x$
+    + Et cetera (population proportion of a binary variable, $\Pi_x$)
+    
+## Sampling Theory - Sample
+
+* Sample: Select number of individuals from the population
+    + Ideally, samples should be representative
+    + Best way to ensure a representative sample is random sampling
+* These individuals also posess trait X
+* We can calculate their *sample statistics*:
+    + The sample mean value of X, $M_x$ or $\bar{X}$
+    + The sample standard deviation of X, $S_x$ or $SD_x$
+    + Et cetera (sample proportion of a binary variable, $p_x$)
+
+## Inference
+
+Sample statistics are our best guesses about population parameters
+
+* But they're never exactly correct
+* The difference between the population parameter and the sample statistic is called the *sampling error*
+
+We typically don't know the population parameter, so we don't know how big the sampling error is
+
+
+1\. Test hypotheses about population values => dichotomous decision: the hypothesized value is rejected or not\.
+
+2\. Estimation:  __point __ and  __interval estimates __ \(range of values\)
+
+# Confidence interval
+
+* A confidence interval is a “window of uncertainty” around our estimate
+* How precise are our estimates?
+* We can calculate confidence intervals for any estimate:
+    * the sample mean
+    * mean difference
+    * regression coefficients
+    * Correlations
+    * \(other\) effect sizes such a Cohen’s  _d_
+  * ……
+* Today\, we will focus on the first three\.
+
+![](img%5CLecture%2014_BE1.png)
+
+# Confidence interval (calculation)
+
+![](img%5CLecture%2014_BE2.png)
+
+Sampling Distribution of Sample Means
+
+![](img%5CLecture%2014_BE3.png)
+
+Standard Error \( _se_ \)
+
+[https://rpsychologist\.com/d3/ci/](https://rpsychologist.com/d3/ci/)
+
+Sampling Distribution of Sample Means
+
+![](img%5CLecture%2014_BE4.png)
+
+Standard Error \( _se_ \)
+
+Sampling Distribution of Sample Means
+
+![](img%5CLecture%2014_BE5.png)
+
+_t_ cv \(df>250\); 2\-tailed;  _α_  = \.10
+
+Standard Error \( _se_ \)
+
+Sampling Distribution of Sample Means
+
+![](img%5CLecture%2014_BE6.png)
+
+Standard Error \( _se_ \)
+
+Sampling Distribution of Sample Means
+
+![](img%5CLecture%2014_BE7.png)
+
+Standard Error \( _se_ \)
+
+Sampling Distribution of Sample Means
+
+![](img%5CLecture%2014_BE8.png)
+
+Standard Error \( _se_ \)
+
+90% confidence intervals obtained in 20 different random samples \(with fixed  _N_ \):
+
+But\, in practice we only observe one sample\!
+
+90% confidence intervals obtained in 20 different random samples \(with fixed  _N_ \):
+
+But\, in practice we only observe one sample\!
+
+And… we don’t know what μ is\!
+
+90% confidence intervals obtained in 20 different random samples \(with fixed  _N_ \):
+
+__How do the intervals change when you increase __  _N_  __ __
+
+__\(__  __and__  __ keep __  __all__  __ __  __other__  __ __  __things__  __ constant\)? __
+
+__\(hint: __  _two_  __ different __  __things__  __ happen\!\)__
+
+Confidence intervals for 20 samples using “small”   _N_
+
+Confidence intervals for 20 samples using “large”   _N_
+
+# Confidence interval (interpretation)
+
+95% confidence interval
+
+__Correct __  __interpretation__
+
+“If we were to repeat this research 100 times\, 95 of the confidence intervals would contain the true population mean\.”
+
+This is called the long run probability\.
+
+Based on the idea that we could repeat the experiment many times
+
+95% of these replications provide an interval that contains the population value
+
+We do not know if this particular interval contains the population value\!
+
+# Confidence interval (width)
+
+  * CIs for different confidence levels estimating glasses alcohol
+  * The more confidence desired\, the wider the CI
+  * The more confidence desired\, the less precise the estimation
+  * _“we buy confidence with imprecision” _
+
+![](img%5CLecture%2014_BE9.png)
+
+# Confidence interval (SPSS)
+
+Remember that we calculated: 95% C\.I\. = \(20\.68\, 32\.46\)
+
+![](img%5CLecture%2014_BE10.png)
+
+Confidence interval for what?
+
+Reported is the CI for the mean difference compared to H0: mu = 20
+
+To get the CI add the test value to both the lower and upper boundary:
+
+_20 \+ _  <span style="color:#00B0F0">0\.6790 </span> = 20\.679 _20 \+ _  <span style="color:#00B0F0">12\.4639 </span> = 32\.464
+
+![](img%5CLecture%2014_BE11.png)
+
+![](img%5CLecture%2014_BE12.png)
+
+# Testing for significance
+
+# Regression coefficients
+
+![](img%5CLecture%2014_BE13.png)
+
+Take a look at the  _p_ \-values\. Were you right?
+
+![](img%5CLecture%2014_BE14.png)
+
+# Why confidence intervals?
+
+Confidence intervals should usually be reported in scientific literature\. Why?
+
+With confidence intervals we do not limit ourselves to point estimates\, but we acknowledge the fact that there is uncertainty in our estimation\.
+
+Some researchers passionately encourage the use of confidence intervals: [link1](https://www.youtube.com/watch?v=5OL1RqHrZQ8)
+
+Others are more skeptical: [link2](http://www.timvanderzee.com/not-interpret-confidence-intervals/)
+
+# That’s all folks!
+
+* This was the final lecture of the course Statistics 1 & 2 for LAS\.
+* Lab session on Friday: practice with confidence intervals\.
+* Plenty of time to study for the exam\!
+    * 36 MC questions \(27 questions common part; 9 questions major specific part\); 3 hours
+    * Covers the material we discussed in class
+    * Practice exam questions \+ workbook on Canvas
+    * Practice until your fingers fall off
+* Q&A session: Next week on Tuesday?
+    * Send your questions via email before the session\.
+  * Don’t forget to fill out the course evaluation\!
+* Good luck\!
+
+![](img%5CLecture%2014_BE15.png)
+

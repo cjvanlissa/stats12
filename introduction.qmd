@@ -46,6 +46,18 @@ Complete the formative test ideally after you’ve seen the lecture, but before 
 add_mcs("questions1.csv")
 ```
 
+::: {#fig-scatter layout-ncol=3}
+
+![A](images/lecture 73.png){width = 30%}
+
+![B](images/lecture 74.png){width = 30%}
+
+![C](images/lecture 76.png){width = 30%}
+
+Scatterplots
+
+:::
+
 # In SPSS
 
 ## Frequency Distributions

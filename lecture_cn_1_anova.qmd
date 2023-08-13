@@ -1,0 +1,487 @@
+---
+title: "GLM IV+ \nAdvanced ANOVA"
+author:   "Caspar J. van Lissa"
+date:     "`r format(Sys.Date(), '%d %b %Y')`"
+format: revealjs
+---
+
+```{r}
+library(kableExtra)
+library(tidySEM)
+options(knitr.kable.NA = '')
+
+set.seed(5793)
+data <- data.frame(
+  sex_dich = ordered(sample(c("Man", "Woman"), size = 100, replace = TRUE), levels = c("Woman", "Man"))
+)
+data$shoesize <- rnorm(100, mean = c(39, 43)[as.integer(data$sex_dich)], sd = 2)
+```
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(ggplot2)
+set.seed(9)
+n = 89
+condition <- sample(c("nothing", "t-shirt", "chalk ball", "chalk powder", "liquid chalk"), n, replace = TRUE)
+means <- c("nothing" = 25, "t-shirt" = 35, "chalk ball" = 27, "chalk powder" = 22, "liquid chalk" = 21)
+hangtime <- means[condition] + rnorm(n, 0,10)
+hangtime <- abs(hangtime)
+chalk <- data.frame(condition = factor(condition, levels = c("nothing", "t-shirt", "chalk ball", "chalk powder", "liquid chalk")), hangtime = hangtime)
+```
+
+# ANOVA
+
+## What is ANOVA {.smaller}
+
+**AN**alysis **O**f **VA**riance
+
+* One-way ANOVA has one categorical predictor and a continuous outcome
+* Provides an omnibus (overall) test of differences between group means
+    + $H_0: \mu_1 = \mu_2 \ldots = \mu_k$
+    + All k groups have the same mean
+    + $H_1$: not H0, any means differ
+
+<!-- * We split the total Sum of squares (SST) into the between-groups Sum of Squares (SSB or SSR) and within-groups Sum of Squares (SSW or SSE).  -->
+<!-- * The F-statistic is the ratio of the between-groups mean square ($SSB/df_b$) divided by the within-groups mean square ($SSW/df_w$) -->
+
+<!-- The effect of a categorical predictor with $k$ categories can be represented two ways: -->
+
+<!-- * Regression specification -->
+<!-- * Omitting the dummy of the reference category -->
+<!-- * $Y = b_0 + b_1*D_1 + \ldots b_{k-1}*D_{k-1}$ -->
+<!-- * ANOVA specification -->
+<!-- * Omitting the intercept, including all dummies -->
+<!-- * $Y = b_1*D_1 + \ldots b_k*D_k$ (omitting the intercept) -->
+
+
+<!-- In this tutorial, you will learn to use the general linear model to estimate means and to test the difference between two group means, the difference between individual group means and the overall mean, and between groups of means. -->
+
+## Example Data {.smaller}
+
+Most climbers use "chalk" (magnesium carbonate) to dry their hands
+
+* Climbing chalk is hygroscopic (absorbs moisture)
+* But does it actually improve climbing performance?
+
+Li, Margetts, & Fowler (2010):
+
+> [Chalk] dries the skin, decreasing its compliance and hence reducing the coefficient of friction. Secondly, [chalk] creates a slippery granular layer. [...] alternative methods for drying the fingers are preferable.
+
+Our fake data:
+
+* Dependent variable: hangtime until faillure in seconds
+* Independent variable: Method of drying hands
+    + Nothing, t-shirt, chalk powder, chalk ball, liquid chalk (alcohol suspension)
+
+## Dummy Coding Scheme {.smaller}
+
+* Pick one reference category
+* Create $k-1$ dummy variables that indicate membership of the other groups
+
+```{r}
+tab_con <- contrasts(chalk$condition)
+colnames(tab_con) <- paste0("D", 1:ncol(tab_con))
+kableExtra::kbl(tab_con)
+```
+
+## Regression with Dummies
+
+You can represent a categorical variable with $k$ categories in a regression model using $k-1$ dummy variables:
+
+$\hat{Y}_i = a + b_1D_{1i}+ b_2D_{2i}+ b_3D_{3i}+ b_4D_{4i}$
+
+* $a$: Intercept, mean value of the reference category "nothing"
+* $b_1$: Difference between Nothing and t-shirt
+* $b_2$: Difference between Nothing and chalk ball
+* Et cetera
+
+## Example {.smaller}
+
+```{r}
+res_reg <- lm(hangtime~condition, chalk)
+tmp <- summary(res_reg)
+tab_reg <- tmp$coefficients
+# contrasts(chalk$condition)
+colnames(tab_reg) <- c("B", "SE", "t", "p")
+rownames(tab_reg) <- gsub("condition", "D", rownames(tab_reg))
+kableExtra::kbl(tab_reg, digits = 2)
+
+library(ggplot2)
+set.seed(2)
+pmeans <- ggplot(chalk, aes(x = condition, y = hangtime, color = condition)) +
+  geom_boxplot(alpha = 1)+
+  geom_jitter(width = .2)+
+  theme_bw()+
+    theme(axis.text.x = element_blank(), axis.title.x = element_blank(), axis.ticks.x = element_blank())
+pmeans
+```
+
+
+
+
+# Alterntive Coding Schemes
+
+## ANOVA specification {.smaller}
+
+Alternatively, you can estimate $k$ group means using $k$ dummy variables
+
+```{r}
+tab_con <- diag(1, length(levels(chalk$condition)))
+colnames(tab_con) <- paste0("D", 1:ncol(tab_con))
+rownames(tab_con) <- levels(chalk$condition)
+kableExtra::kbl(tab_con)
+```
+
+Regression formula:
+
+$\hat{Y} = b_1*D_1 + b_2*D_2 + b_3*D_3+b_4*D_4 + b_5*D_5$
+
+* $b_1$: Mean of the nothing group
+* $b_2$: Mean of the t-shirt group
+* $b_3$: Mean of the chalk ball group
+* Et cetera
+
+## ANOVA vs Regression specification
+
+* Both preceding models are mathematically identical
+* We just replace the intercept with one additional dummy
+    + Same number of parameters
+* Advantage: We get a standard error for each group mean
+* We can test each group mean against hypothesized values
+* The default t-test tests $H_0: \beta = 0$
+    + Use the standard errors to test other hypotheses
+
+## Example Results ANOVA Specification
+
+```{r}
+res_aov <- lm(hangtime~condition-1, chalk)
+tmp <- summary(res_aov)
+tab_aov <- tmp$coefficients
+# contrasts(chalk$condition)
+colnames(tab_aov) <- c("Mean", "SE", "t", "p")
+kableExtra::kbl(tab_aov, digits = 2)
+
+pmeans
+```
+
+## Example Custom Test {.smaller}
+
+Does hang time in the T-shirt condition exceed 30 seconds? $H_0: \beta < 30$
+
+$$
+t = \frac{33.66-30}{2.62} = 1.40
+$$
+$t_{crit}(df=84) = 1.66$, $t_{test} < t_{crit}$ so cannot reject $H_0$
+
+
+```{r}
+kableExtra::kbl(tab_aov, digits = 2)
+```
+
+
+
+## More Coding Schemes {.smaller}
+
+**Dummy coding**, $k-1$ dummies + intercept
+
+* Gives us one group mean + difference tests with all other group means
+
+**Dummy coding**, $k$ dummies
+
+* Gives us all group means
+
+Other coding schemes that represent exactly the same information, but give us different information:
+
+**Deviation coding**: Compare each condition to the grand mean  
+**Contrast coding**: Compare multiple group means against each other
+
+* One control condition vs two different experimental conditions
+* Effect of two positive emotions vs three negative emotions
+* Instead of talking about "dummies", we'll talk about "indicator variables"
+    + A dummy is an indicator variable that can take only 0 or 1 values
+
+## General Rules Coding Schemes
+
+For all coding schemes:
+
+* The possible values of each indicator must sum to 0
+* Each group should be uniquely identified by a particular combination of the indicator variables
+    + E.g., this is why we cannot have both an intercept and a dummy for one group; the dummy and intercept are redundant
+* _Sometimes you have to account for relative group size_
+
+
+## Effects Coding {.smaller}
+
+> **Effects Coding:** Comparing all groups to the grand mean.
+
+* The reference category does not score 0 on all indicator variables, but receives a negative value
+* In a balanced design (equal group sizes), this value is -1
+* Codes for each indicator must sum to 0
+* In a balanced design, the coding scheme for effects coding is:
+
+
+```{r}
+tab_con <- contrasts(chalk$condition)
+colnames(tab_con) <- paste0("E", 1:ncol(tab_con))
+tab_con[1, ]<--1
+kableExtra::kbl(tab_con)
+```
+
+
+## Effects Coding Output
+
+Effects coding gives us the following information:
+
+* The grand mean for the dependent vaeriable
+* The difference between each group, except the reference category, compared to the grand mean
+
+## Effects Coding Unequal Groups {.smaller}
+
+We rarely have balanced designs.
+
+* In the general way to construct effect codes, weights assigned for the reference category differ for each indicator
+* They are computed as:
+
+$-1 * n_{\text{this category}} / n_{\text{reference category}}$
+
+Given group sizes a = 44, b = 87, c = 7:
+
+ | E1 | E2 
+----|-----|----
+a | 1 | 0 
+b | 0 | 1
+c | $\frac{-7}{44}$ | $\frac{-87}{44}$
+
+## Understanding Equal Groups
+
+Note that when group sizes are equal, we get -1 for the reference category:
+
+Given group sizes a = 40, b = 40, c = 40:
+
+ | E1 | E2 
+----|-----|----
+a | 1 | 0 
+b | 0 | 1
+c | $\frac{-40}{40} = -1$ | $\frac{-40}{40}= -1$
+
+## Example Effect Coding {.smaller}
+
+We have the following sample sizes:
+
+```{r}
+tab_freq <- table(Condition = chalk$condition)
+
+kableExtra::kbl(rbind(Freq = tab_freq))
+tab_eff <- diag(1, length(levels(chalk$condition)))
+tab_eff <- tab_eff[,-ncol(tab_eff)]
+rownames(tab_eff) <- rev(levels(chalk$condition))
+tab_eff[nrow(tab_eff),] <- paste0(-1*tab_freq[head(rownames(tab_eff), length(levels(chalk$condition))-1)], "/", tab_freq["nothing"])
+```
+
+Which leads to this coding scheme:
+
+```{r}
+colnames(tab_eff) <- paste0("E", 1:ncol(tab_eff))
+kableExtra::kbl(tab_eff)
+```
+
+## Example Results Effects Coding
+
+```{r}
+df_eff <- chalk
+cont <- contrasts(df_eff$condition)
+cont[1, ] <- (-1*tab_freq[colnames(cont)])/tab_freq["nothing"]
+colnames(cont) <- paste0("E_", colnames(cont))
+contrasts(df_eff$condition) <- cont
+res_eff <- lm(hangtime~condition, df_eff)
+tmp <- summary(res_eff)
+tab_eff <- tmp$coefficients
+# contrasts(chalk$cotndition)
+colnames(tab_eff) <- c("Mean", "SE", "t", "p")
+rownames(tab_eff) <- gsub("^condition", "", rownames(tab_eff))
+kableExtra::kbl(tab_eff, digits = 2)
+```
+
+
+## Contrast Coding {.smaller}
+
+Another coding scheme is to compare groups of means
+
+* E.g., is there a difference between doing nothing or using a t-shirt versus the three chalk types?
+    + $H_0: \mu_{\text{nothing, shirt}} = \mu_{\text{powder, ball, liquid chalk}}$
+* And is there a difference between liquid and dry forms of chalk?
+    + $H_0: \mu_{\text{liquid chalk}} = \mu_{\text{powder, ball chalk}}$
+* Complete the matrix to meet the rules of coding schemes
+
+<font color = "red">**This is a very advanced technique!**</font>
+
+## Step 1: Plan Contrasts {.smaller}
+
+Plan your contrasts. This scheme meets all requirements, **except** accounting for group size:
+
+```{r}
+mat <- cbind(c(-1.5, -1.5, 1,1,1),
+             c(-1,1, 0, 0, 0),
+             c(0,0,-.5,-.5, 1),
+             c(0,0,-1,1,0))
+rownames(mat) <- levels(chalk$condition)
+colnames(mat) <- c("nothingshirtVchalk", "nothingVshirt", "dryVliquid", "ballVpowder")
+kableExtra::kbl(mat)
+```
+
+
+## Step 2: Account for Group Size
+
+If you do not account for group size, you will be comparing means of means:
+
+$H_0: \frac{\mu_{nothing}+\mu_{shirt}}{2} = \frac{\mu_{powder}+\mu_{ball}+\mu_{liquid}}{3}$
+
+Instead of the mean of multiple conditions:
+
+$H_0: \mu_{\text{nothing, shirt}} = \mu_{\text{powder, ball, liquid chalk}}$
+
+<font color = "darkgreen">If group sizes are equal, these approaches are identical and you can skip</font>
+
+## Step 2: How To {.smaller}
+
+Sample sizes:
+
+```{r}
+kableExtra::kbl(rbind(Freq = tab_freq))
+```
+
+We then get the contrast values:
+
+```{r}
+mat <- cbind(c("-24/(24+13)","-13/(24+13)","23/(23+16+13)","16/(23+16+13)","13/(23+16+13)"),
+             c(-1,1, 0, 0, 0),
+             c(0,0,"-23/(23+16)","-16/(23+16)", 1),
+             c(0,0,-1,1,0))
+rownames(mat) <- levels(chalk$condition)
+colnames(mat) <- c("nothingshirtVchalk", "nothingVshirt", "dryVliquid", "ballVpowder")
+kableExtra::kbl(mat)
+```
+
+
+## Step 3a: Do Matrix Algebra
+
+Planned contrasts require you to invert the matrix of contrasts
+
+Write your planned contrasts in Excel/Google Sheets:
+
+![](images/contrasts1.png)
+
+## Step 3b: Add intercept
+
+Add an intercept, consisting of 1/$k$ for each group:
+
+* We have 5 groups, so our intercept is $1/5 = 0.2$
+
+![](images/contrasts2.png)
+
+## Step 3c: Copy-paste Formula
+
+* Click an Empty cell
+* Paste `=MINVERSE(TRANSPOSE(`
+* Select your contrast matrix
+* Finish the formula by typing closing brackets `))`
+
+![](images/contrasts3.png)
+
+## Step 3d: Copy-Paste Result
+
+Copy-paste the inverted matrix
+
+**These are the values you will use for your indicators!**
+
+![](images/contrasts4.png)
+
+
+```{r eval =F}
+kableExtra::kbl(rbind(Contrast = matrix(c("-24/(24+13)","-13/(24+13)","23/(23+16+13)","16/(23+16+13)","13/(23+16+13)"), nrow = 1)))
+
+```
+
+
+## Example Results Contrast Coding
+
+```{r}
+df_cont <- chalk
+mat <- cbind(c(1/5,1/5,1/5,1/5,1/5),
+  c(-24/(24+13),-13/(24+13),23/(23+16+13),16/(23+16+13),13/(23+16+13)),
+  c(-1,1, 0, 0, 0),
+  c(0,0,(-23/(23+16)),(-16/(23+16)), 1),
+  c(0,0,-1,1,0))
+mat <- solve(t(mat))
+mat <- mat[, -1]
+cont <- contrasts(chalk$condition)
+cont[,] <- mat
+colnames(cont) <- c("nothingshirtVchalk", "nothingVshirt", "dryVliquid", "ballVpowder")
+contrasts(df_cont$condition) <- cont
+res_cont <- lm(hangtime~condition, df_cont)
+tmp <- summary(res_cont)
+tab_cont <- tmp$coefficients
+colnames(tab_cont) <- c("Mean", "SE", "t", "p")
+rownames(tab_cont) <- gsub("^condition", "", rownames(tab_cont))
+kableExtra::kbl(tab_cont, digits = 2)
+```
+
+## 'Post-Hoc' Tests {.smaller}
+
+You can also compare all group means to each other
+
+With $k$ groups, we can make $\frac{k(k−1)}{2}$ comparisons
+
+If $k = 5$, we have $(5*4)/2=10$ comparisons.
+
+* Historically, this is called a "post-hoc" test (="after the fact")
+* "post-hoc" implies that this is not a hypothesized test, like a planned contrast might be
+* You have to be very mindful of data dredging (false positive findings)
+* This can only be done via the ANOVA interface in SPSS
+
+# Experiment-wise Type I error
+
+## Adjusting for Multiple Comparisons
+
+* The significance level $\alpha$ is the probability of committing a Type I error
+* We typically use $\alpha = .05$: 5% probabability of drawing a false positive conclusion
+* When we conduct many tests, we run this risk each time
+
+## Experiment-wise Type I error
+
+> **Experiment-wise Type I error $\alpha_{ew}$:** The total risk of committing a Type I error (false positive conclusion) accross multiple (m) tests.
+
+$$
+\alpha_{ew} = 1 - (1-\alpha)^m
+$$
+
+So for 3 tests: $\alpha_{ew} = 1 - (1-.05)^10 = .40
+
+40% chance of at least one false positive conclusion may be more than we want
+
+## Bonferroni Correction
+
+Bonferroni proposed a simple correction:
+
+$\alpha = \alpha_{EW}/m$
+
+* $\alpha_{EW}$ is the desired experiment-wise Type I error rate (e.g., .05)
+* $m$ is the number of tests
+* This correction is quite conservative
+* There's always a trade off: fewer false positive conclusions means it is harder to detect true effects
+
+## Another Solution
+
+Aside from choosing a sensible $\alpha$ level, conducting fewer tests and specifying specific hypotheses before conducting your study also helps control Type I error. 
+
+See this chapter on "preregistration" of study plans and planned tests:
+
+<https://lakens.github.io/statistical_inferences/13-prereg.html
+
+<!-- Tukey's HSD: https://stats.stackexchange.com/questions/610993/the-theory-behind-tukeys-hsd-test -->
+<!-- Tukey's HSD: https://real-statistics.com/one-way-analysis-of-variance-anova/unplanned-comparisons/tukey-hsd/ -->
+
+
+<!-- HIER -->
+
