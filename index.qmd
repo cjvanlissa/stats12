@@ -55,6 +55,8 @@ All essential information is contained within this GitBook. To ensure that you a
 8. The "data" folder contains all SPSS datasets you need for the course.
 9. The "pdfs" folder contains all PDF files you need for the course.
 
+**It is possible that the book will be updated during the course. If this happens, I will notify you via Canvas to re-download the book.**
+
 ![](images/downloadgitbook.png)
 <!-- * A summary of each week's material -->
 <!-- * YouTube lectures created for this course -->
@@ -166,7 +168,11 @@ You work on the portfolio assignments with your group, both during the lab sessi
 
 ### Exam 60% 
 
-To make sure that all students are equally involved in the making of the portfolio assignments, an individual exam assesses comprehension of the material covered therein. It is a digital multiple choice exam. You may bring all course materials to the exam, including the portfolio. The exam consists of a common part and a major-specific part. Note: As per university policy, a guessing correction is applied to your grade.
+To make sure that all students are equally involved in the making of the portfolio assignments, an individual exam assesses comprehension of the material covered therein. It is a digital multiple choice exam. Note that some of the questions are developed by you, the students (see portfolio)! You thus have an advantage if you develop questions that are good enough to be on the exam.
+
+You may bring all course materials to the exam, including the portfolio. The exam consists of a common part and a major-specific part. Note: As per university policy, a guessing correction is applied to your grade.
+
+**Note: I recommend that you download the GitBook onto a USB stick so you have access during your exam!**
 
 ## Assignments 
 
@@ -209,6 +215,22 @@ d.	Discuss your analyses (300 words)
     iii. Discuss assumptions
     iv.	Discuss what you have learned from it and how you might improve it 
 e.	Use APA style throughout your report
+f.  Create four multiple choice questions about the first 4 weeks. You can use some of your analyses as inspiration, or make the questions purely about understanding. The best questions will be part of the real exam, so you have an advantage if you make questions that are good, but that you can still answer correctly!
+    i. Introduction to statistics
+    ii. Probability
+    iii. Sampling distribution
+    iv. Testing
+
+The multiple choice questions must be in plain text (no images or special characters, in the format below. You can just copy-paste this into the (Word?) document of your assignment:
+
+```
+question = "This is the question",
+answer = "This is the correct answer",
+distractor1 = "This is an incorrect distractor answer",
+distractor2 = "This is an incorrect distractor answer",
+distractor3 = "This is an incorrect distractor answer",
+expanation = "Why is the correct answer correct?"
+```
 
 ### Assignment 2
 
@@ -234,6 +256,22 @@ e.	Discuss your analyses (300 words)
     iii. Discuss assumptions
     iv.	Discuss what you have learned from it and how you might improve it 
 f.	Use APA style throughout your report
+g.  Create four multiple choice questions about the first 4 weeks. You can use some of your analyses as inspiration, or make the questions purely about understanding. The best questions will be part of the real exam, so you have an advantage if you make questions that are good, but that you can still answer correctly!
+    i. Linear regression, correlation, or sums of squares
+    ii. Categorical predictors in linear regression (e.g., t-test or ANOVA)
+    iii. Multiple regression
+    iv. Nested models
+
+The multiple choice questions must be in plain text (no images or special characters, in the format below. You can just copy-paste this into the (Word?) document of your assignment:
+
+```
+question = "This is the question",
+answer = "This is the correct answer",
+distractor1 = "This is an incorrect distractor answer",
+distractor2 = "This is an incorrect distractor answer",
+distractor3 = "This is an incorrect distractor answer",
+expanation = "Why is the correct answer correct?"
+```
 
 ### Assignment 3 (BE)
 
@@ -254,6 +292,18 @@ e.	Discuss your analyses (300 words)
     iii. Discuss assumptions
     iv.	Discuss what you have learned from it and how you might improve it 
 f.	Use APA style throughout your report
+g.  Create four multiple choice questions about the major-specific material. The best questions will be part of the real exam, so you have an advantage if you make questions that are good, but that you can still answer correctly!
+
+The multiple choice questions must be in plain text (no images or special characters, in the format below. You can just copy-paste this into the (Word?) document of your assignment:
+
+```
+question = "This is the question",
+answer = "This is the correct answer",
+distractor1 = "This is an incorrect distractor answer",
+distractor2 = "This is an incorrect distractor answer",
+distractor3 = "This is an incorrect distractor answer",
+expanation = "Why is the correct answer correct?"
+```
 
 ### Assignment 3 (SS)
 
