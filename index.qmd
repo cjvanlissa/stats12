@@ -307,21 +307,13 @@ expanation = "Why is the correct answer correct?"
 
 ### Assignment 3 (SS)
 
-Psychometrics
-
-Construct scale, export scores, use for interaction effects
-
-Major SS: GLM VII: Interaction effects (moderation analysis)
-Major SS: Psychometrics I: Reliability and validity, reliability analysis
-Major SS: Psychometrics II: Reliability and validity, factor analysis
-Major SS: Psychometrics III: Reliability and validity, factor analysis
-
-a. Select at least constructs for further analysis, and using at least one reference, explain what research questions you will investigate and what hypotheses you will test (150 words)
+a. Select at least three constructs for further analysis, and using at least one reference, explain what research questions you will investigate and what hypotheses you will test (150 words)
     i.	At least one of these constructs must be a scale with 3+ items
     ii.	Include at least two predictors
-b.	Construct a model with only main effects (200 words)
+b.	Perform some kind of data reduction analysis (200 words)
     i. Report and interpret the results
-
+b.	Perform reliability analysis (200 words)
+    i. Report and interpret the results
 b.	Construct a model with only main effects (200 words)
     i. Report and interpret the results
 c.	Construct a model with the interaction effect (200 words)
@@ -334,18 +326,50 @@ e.	Discuss your analyses (300 words)
     iii. Discuss assumptions
     iv.	Discuss what you have learned from it and how you might improve it 
 f.	Use APA style throughout your report
+g.  Create four multiple choice questions about the major-specific material. The best questions will be part of the real exam, so you have an advantage if you make questions that are good, but that you can still answer correctly!
 
+The multiple choice questions must be in plain text (no images or special characters, in the format below. You can just copy-paste this into the (Word?) document of your assignment:
 
-Assignment 3 (CN)
+```
+question = "This is the question",
+answer = "This is the correct answer",
+distractor1 = "This is an incorrect distractor answer",
+distractor2 = "This is an incorrect distractor answer",
+distractor3 = "This is an incorrect distractor answer",
+expanation = "Why is the correct answer correct?"
+```
 
-Major CN: GLM IV+: Effect size, post-hoc tests and planned comparison in ANOVA
-Major CN: GLM IV+: Factorial designs and interaction effects in ANOVA 
-Major CN: GLM IV+: ANCOVA (ANOVA with continuous control variables)
-Major CN: GLM IV+: Repeated measures ANOVA
+### Assignment 3 (CN)
 
-Conduct factorial ANOVA
-Add continuous control variable
-Report effect sizes and post-hoc tests
+a. Select at least three variables for further analysis, and using at least one reference, explain what research questions you will investigate and what hypotheses you will test (150 words)
+    i.	At least one of these variables must be categorical with 3+ levels
+    ii.	Include at least two predictors
+b.	Perform an ANOVA (200 words)
+    i. Report and interpret the results
+    ii. Use either a different kind of coding, or post-hoc tests, or planned comparisons
+b.	Perform a factorial ANOVA (200 words)
+    i. Report and interpret the results
+    ii. Report on the interaction effect
+b.	Include a continuous control variable in one of the preceding models (200 words)
+    i. Report and interpret the results
+e.	Discuss your analyses (300 words)
+    i. Explain your rationale for important modeling decisions
+    ii.	Motivate your choice for the type of statistics and analyses
+    iii. Discuss assumptions
+    iv.	Discuss what you have learned from it and how you might improve it 
+f.	Use APA style throughout your report
+g.  Create four multiple choice questions about the major-specific material. The best questions will be part of the real exam, so you have an advantage if you make questions that are good, but that you can still answer correctly!
+
+The multiple choice questions must be in plain text (no images or special characters, in the format below. You can just copy-paste this into the (Word?) document of your assignment:
+
+```
+question = "This is the question",
+answer = "This is the correct answer",
+distractor1 = "This is an incorrect distractor answer",
+distractor2 = "This is an incorrect distractor answer",
+distractor3 = "This is an incorrect distractor answer",
+expanation = "Why is the correct answer correct?"
+```
 
 ## Credit
 
