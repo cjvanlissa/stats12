@@ -5,7 +5,6 @@ date:     "`r format(Sys.Date(), '%d %b %Y')`"
 format: 
   revealjs:
     self-contained: true
-server: shiny
 ---
 
 ```{r}
@@ -72,16 +71,11 @@ This is regression.
 ## Scatterplot
 
 - Visualization for two variables
-    + To show associations, both should be at least of ordinal measurement level
--	Sex and shoe size?
-- Travel time to TiU and monthly phone bill?
-- Hours of work and hours of study?
-- Hours of study and grade?
+- Conventionally: Predictor on the X-axis, outcome on the Y-axis
+- Points represent individuals' scores on both variables
 
-## Scatterplot examples
-
-```{r, out.width = "800px"}
-knitr::include_graphics("images/scatterplots4.png")
+```{r, fig.width=6, fig.asp=3/4, echo=FALSE}
+ggplot(studentdata, aes(x=Hours, y=Grade))+geom_point()+geom_hline(yintercept = 0)+geom_vline(xintercept = 0)+theme_bw()+scale_x_continuous(limits = c(0,10), breaks=seq(0, 10, by = 1))+scale_y_continuous(limits = c(0,10), breaks=seq(0, 10, by = 1))
 ```
 
 
@@ -103,16 +97,6 @@ ggplot(studentdata, aes(x=Hours, y=Grade))+geom_point()+geom_hline(yintercept = 
 
 ```
 
-## Link with standard deviation
-
-The mean of those prediction errors (squared) is the variance of "grade"
-
-Its square root is the SD of grade
-
-```{r, fig.width=6, fig.asp=3/4, echo=FALSE}
-ggplot(studentdata, aes(x=Hours, y=Grade))+geom_point()+geom_hline(yintercept = 0)+geom_vline(xintercept = 0)+theme_bw()+scale_x_continuous(limits = c(0,10), breaks=seq(0, 10, by = 1))+scale_y_continuous(limits = c(0,10), breaks=seq(0, 10, by = 1))+geom_hline(yintercept = mean(Grade), linetype = 2, size = 2)+geom_segment(x=Hours, xend = Hours, y = mean(Grade), yend = Grade,  col="blue")
-
-```
 
 ## Association
 
@@ -201,9 +185,10 @@ We want to obtain the line that gives us the best possible predictions
 
 * There exist values of $a$ and $b$ that give us a line with the best possible predictions
 * These can be calculated using matrix algebra (not part of this course)
-* The resulting line goes *exactly through the middle* of the cloud of datapoints, which is why $e_i \sim N(\textbf{0}, \hat{\sigma}^2_e)$
-* This is called *ordinary least squares* regression
-    + Will be explained further, but squares refers to squared prediction errors
+* The resulting line goes *exactly through the middle* of the cloud of datapoints
+<!-- , which is why $e_i \sim N(\textbf{0}, \hat{\sigma}^2_e)$ -->
+* This also minimizes the squared prediction errors (more next week)
+* That's why it is called *ordinary least squares* regression
 
 ```{r, fig.width=6, fig.asp=3/4, echo=FALSE,}
 ggplot(studentdata, aes(x=Hours, y=Grade))+geom_point()+geom_hline(yintercept = 0)+geom_vline(xintercept = 0)+theme_bw()+scale_x_continuous(limits = c(0,10), breaks=seq(0, 10, by = 1))+scale_y_continuous(limits = c(0,10), breaks=seq(0, 10, by = 1))+
@@ -248,8 +233,9 @@ $Y_i = a + b*X_i +e_{i}$
 
 $e_{i}$ refers to the individual prediction error
 
-* We assume prediction errors are normally distributed around the regression line
+* We assume prediction errors are normally distributed
     + $e_i \sim N(0, \hat{\sigma}_e^2)$
+    + Mean of zero implies that they are distributed around the regression line
 
 ## Bivariate regression formula
 
@@ -274,15 +260,15 @@ In words, this formula says:
 
 ## Other notations
 
-$Y_i = a + b*X_i +e_{i}$
+$Y_i = b_0 + b_1*X_i +e_{i}$
 
-Symbol        | Interpretation
+Symbol        | Synonyms
 -------------- | -----------------------------------------------------
 $Y_i$          | Outcome, dependent variable (DV)
-$a$            | $b_0, \beta_0$
-$b$            | $b_1, \beta_1$
+$a$            | $b_0$, population value $\beta_0$
+$b$            | $b_1$, population value $\beta_1$
 $X_i$          | Predictor, independent variable (IV)
-$e_i$   | $e_i$
+$e_i$   | $e_i$, $\varepsilon_i$, $\epsilon_i$
 
 ## Observed and predicted value
 
@@ -290,15 +276,15 @@ $Y_i = a + b*X_i +e_{i}$
 
 "The individual values on variable Y are equal to the intercept, plus the slope times the individual values on the predictor X, plus individual prediction error."
 
-And also:
+The predicted value is the value on the regression line:
+
+$\hat{Y}_i = a + b*X_i$
 
 "The individual values on variable Y are equal to the <font color = "blue">predicted values</font>, plus individual prediction errors"
 
 $Y_i = \hat{Y}_i + e_{i}$
 
-The predicted value is the value on the regression line:
 
-$\hat{Y}_i = a + b*X_i$
 
 # Coefficients
 
@@ -371,7 +357,7 @@ knitr::include_graphics("images/spss_test_coef.png")
 
 ## Reporting
 
-The effect of hours studied on exam grade was significant, $b = `r round(cijfer.uren[["coefficients"]][2], 2)`, t(`r cijfer.uren[["df.residual"]]`) = `r round(summary(cijfer.uren)[["coefficients"]][2,3], 2)`, p < .001.$ This means that for every additional hour studied, the expected grade increased by `r round(cijfer.uren[["coefficients"]][2], 2)` points.
+The effect of hours studied on exam grade was significant, $b = 0.67, t(90) = 5.47, p < .001.$ This means that for every additional hour studied, the expected grade increased by 0.67.
 
 # Assumptions
 

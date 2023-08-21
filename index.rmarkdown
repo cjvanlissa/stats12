@@ -1,0 +1,399 @@
+# Overview {.unnumbered}
+
+This course covers the basics of statistics and data analysis.
+The ability to extract insights from data is an essential skill for both academic and non-academic work, and "data literacy" is increasingly important in a world where data are collected about every aspect of our lives.
+After completing this course, you will be able to independently analyze data,
+interpret and report your findings,
+and assess the results of analyses performed by others, such as you might find in scientific articles.
+
+This GitBook contains all relevant information about this course.
+It is assumed that every student reads it carefully.
+If you have any questions, first consult this GitBook,
+then ask a fellow student, and only if your question is still not answered,
+then contact the course coordinator.
+
+Communication about the course occurs through Canvas (Login with your student ID and password).
+
+## Course overview
+
+The **course schedule** is available on Osiris. For an overview of the content, see below:
+
+
+```{r}
+#| results = "asis",
+#| echo = FALSE,
+#| cache = FALSE
+schedule <- read.csv("schedule_notes.csv")[, 1:4]
+schedule$Date <- as.Date(paste(2023, schedule$Week, 1, sep="-"), "%Y-%U-%u")
+addthis <- c(0:5)
+names(addthis) <- c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday")
+schedule$Date <- schedule$Date+addthis[schedule$Day]
+schedule <- schedule[!is.na(schedule$Week), c("Week", "Activity", "Date", "Topic")]
+ordr <- order(schedule$Date, decreasing = FALSE)
+schedule$Date <- format(schedule$Date, format = "%d-%m-%Y")
+suppressWarnings(library(DT))
+# library(lubridate)
+# mdy(isoweek(4))
+# lubridate::isoweek(as.Date("13-09-2021", format = "%d-%m-%Y"))
+# lubridate::parse_date_time("37", orders = "%W")
+# lubridate::isoweek(as.Date("13-09-2021", format = "%d-%m-%Y"))
+DT::datatable(schedule[ordr, ], rownames = FALSE, options = list(pageLength = nrow(schedule)))
+```
+
+
+## Using this GitBook
+
+**You do not need a book for this course!** 
+
+All essential information is contained within this GitBook. To ensure that you always have access to the GitBook, it is recommended that you download it to your local computer as follows:
+
+1. Go to <https://github.com/cjvanlissa/stats12>
+2. Click the green Code button
+3. Select "Download ZIP" (see figure below)
+4. Save the ZIP archive to your drive
+5. Right-click the downloaded file, and select "Extract here" (or similar option, depending on your operating system)
+6. You should now have a folder with the contents of the book.
+7. Inside this folder is a shortcut titled "Launch book". Double-clicking this should launch the book in your browser.
+8. The "data" folder contains all SPSS datasets you need for the course.
+9. The "pdfs" folder contains all PDF files you need for the course.
+
+**It is possible that the book will be updated during the course. If this happens, I will notify you via Canvas to re-download the book.**
+
+![](images/downloadgitbook.png)
+<!-- * A summary of each week's material -->
+<!-- * YouTube lectures created for this course -->
+<!-- * Links to external YouTube tutorials -->
+<!-- * Formative tests to test how prepared you are for the final exam -->
+<!-- * Tutorial exercises for the lab session -->
+
+
+## Software {#sec-software}
+
+During lab sessions, you work on the exercises and your portfolio using the commercial SPSS software installed on university computers.
+
+If you want to use your own computer instead, you might consider trying some free alternatives to SPSS:
+
+* PSPP, which is designed to be nearly identical to SPSS with all the same basic functionality: <https://www.gnu.org/software/pspp/pspp.html>
+* JASP, which is more modern, looks nicer and is very easy to use – but looks less similar to SPSS: 
+<https://jasp-stats.org/>
+
+
+## Learning goals
+
+After taking this course, students will be able to...
+
+### All majors
+
+1.	compute and interpret commonly used descriptive statistics such as the sample mean, the median, the mode, variance and standard deviation, the standard error, and the correlation coefficient.
+2.	recognize different probability distributions such as the normal distribution, and make computations for these probability distributions. 
+3.	explain the essential aspects of null-hypothesis significance testing, including sampling distributions, Type I and Type II errors, one-tailed versus two-tailed testing, and statistical power. 
+4.	apply different statistical tests such as the Z-test, the one sample t-test, the one way Between Subjects Analysis of Variance test, and statistical tests related to (multiple) linear regression analysis with continuous and categorical predictors; and clarify the statistical and/or methodological assumptions that apply to the techniques that are discussed in this course.
+5.	explain basic concepts in regression analysis, including: linear association, least-squares estimation, explained variance, Multiple R, multiple correlation, adjusted R-square, raw and standardized regression coefficients, model-comparison tests, predicted scores, residuals and the assumptions;
+6.	choose the appropriate analysis technique for answering a specific research problem from the range of techniques that are covered in the course.
+7.	use the software package SPSS to perform several statistical data analyses and be able to correctly interpret and report the output to an informed audience (e.g., Liberal arts students, researchers from the social sciences/business and economics/cognitive neuroscience).
+8.	draw valid conclusions from the results of empirical data analyses given specific research questions envisaged.
+
+### Major Business and Economics
+
+9.	apply statistical tests in the context of multiple linear regression models with interaction terms and logistic regression models; interpret the corresponding output. 
+10.	describe the concepts of probabilities, odds and logits; describe the relationship between the three scales; transform one into another (formulae are provided).
+
+### Major Cognitive Neuroscience
+
+11.	apply statistical tests in the context of factorial ANOVA, ANCOVA and Analysis of Repeated measures; interpret the corresponding output; and calculate and interpret effect size estimates relevant for these statistical techniques (e.g., (partial) eta squared)
+
+### Major Social Sciences
+
+12.	apply statistical tests in the context of multiple linear regression models with interaction terms and interpret the corresponding output.
+13.	gauge the reliability of measurements from questionnaires and identify problematic items.
+14.	explore the dimensionality of questionnaire data.
+
+## Attendance
+
+Attendance is mandatory based on our experience that students who actively participate tend to pass the course, whereas those who do not tend to drop out or fail.
+All lectures and practicals ‘build’ on each other,
+so if you have to miss either one, absolutely make sure you have caught up with the materials before the next session.
+
+## Study Load
+
+Below is a breakdown of the expected study load:
+
+
+```{r}
+#| echo = FALSE
+options(knitr.kable.NA = '')
+tab_load <- xlsx::read.xlsx("hours_breakdown.xlsx", 1)
+library(kableExtra)
+kbl(tab_load) |>
+  row_spec(which(is.na(tab_load$Duration)), bold = TRUE, hline_after = T)
+```
+
+
+
+## Staff
+
+**Coordinator:**
+
+[dr. Caspar J. van Lissa](https://www.tilburguniversity.edu/nl/medewerkers/c-j-vanlissa)
+
+**Lab sessions**
+
+(Thu) Tra Lê
+
+<!-- ## Teaching Philosophy -->
+
+<!-- The corona crisis is challenging all of us to rethink how we teach and learn. But aside from the challenges, it also offers opportunities. In adapting this course, we kept two goals in mind: increasing the alignment between the way of teaching and the learning goals, and ensuring high-quality interaction among students and between the students and teachers while still using online communication. Based on these goals, we made the following changes: -->
+
+<!-- 1. During the course, you will be working in learning teams to promote interaction among students and peer support -->
+<!-- 2. The two in-person exams (4 hours each) are replaced with take-home assignments: Two group assignments, and one individual assignment. -->
+
+
+### Why group assignments?
+
+Contact with fellow students is a key aspect of the university experience.
+We want to stimulate you to engage with the material and with one another.
+Therefore, the portfolio assignments are made in groups.
+There are also aspects of learning in groups that can really improve your knowledge, like peer feedback.
+To ensure that every group member pulls their weight, the final exam tests each student's individual comprehension of all material covered in the portfolios.
+
+Groups comprise 3-5 members and are assigned randomly when the course starts.
+However, it is allowed to switch with a consenting member of another group,
+or to join/merge with another small group if your group has become smaller than 3 members.
+There are three portfolio registration deadlines. At this point, one group member submits the definitive group composition via a Google form.
+
+### Why use portfolio assessment?
+
+Portfolio assignments are well-suited for a skills-based course like Statistics 1 & 2.
+They also take a lot of the pressure off because you can work at your own pace, and keep improving the work until it is good enough. We entrust you with the responsibility of making  these portfolio assignments in good faith, without instrumental assistance from outside your group or plagiarism, so I kindly ask you to make good on this trust, and hand in original work to show what you’ve learned.
+
+### Statement on using AI for assignments
+
+There is, in principle, nothing wrong with using AI-based tools like ChatGPT,
+as you will also have access to them in your working life - but be warned:
+when you use ChatGPT, it is your responsibility to thoroughly check its output for logical consistency and correctness.
+You may not yet have the level of expertise required to know when ChatGPT generates irrelevant nonsense - but the teacher who grades your work does.
+Consider this carefully when deciding what makes more sense: doing your work manually, making sure each step is correct - or outsourcing it to AI, and then checking its work before submitting.
+
+## Grading
+
+Your grade is based on three portfolio assignments made in groups,
+and one individual exam to test comprehension of the material covered in the portfolios.
+
+### Portfolios 40% (3 x 13.3%)
+
+You work on the portfolio assignments with your group, both during the lab sessions and outside of class. You hand in your group’s portfolio assignment before the set deadline, at which point it is graded. If your grade is below the passing level of 5.5, your group will have the opportunity to revise the portfolio based on teacher feedback to receive a maximum grade of 6.
+
+### Exam 60% 
+
+To make sure that all students are equally involved in the making of the portfolio assignments, an individual exam assesses comprehension of the material covered therein. It is a digital multiple choice exam. Note that some of the questions are developed by you, the students (see portfolio)! You thus have an advantage if you develop questions that are good enough to be on the exam.
+
+You may bring all course materials to the exam, including the portfolio. The exam consists of a common part and a major-specific part. Note: As per university policy, a guessing correction is applied to your grade.
+
+**Note: I recommend that you download the GitBook onto a USB stick so you have access during your exam!**
+
+## Assignments 
+
+Below is a description of the assignments.
+For each assignment, every element labeled with a lower case letter is graded fail (0 points), pass (1 point), or excellent (1.5 points).
+Grades are summed for each assignment, and rescaled from 1-10.
+The final grade is the average across assignments of the rescaled grades.
+Note the stated word limit for each section.
+If you can write a good report with fewer words, that's fine.
+If you exceed the word limit however,
+your grade for that section cannot exceed a pass (1 point).
+
+The focus of the assignments should me on motivating, reporting, interpreting, and discussing your analyses.
+You will get a good grade for well-reasoned and discussed analyses.
+
+See the Appendices section to access data sources for the assignment.
+
+### Assignment 1
+
+Descriptive statistics and statistical inference
+
+a. Select at least three variables for further analysis, and motivate your selection based on theory, using at least one reference to explain why are you interested in the properties of the selected variables (150 words)
+    i.	Include one continuous variable
+    ii.	Include one nominal variable
+    iii.	Include one ordinal variable
+b.	Describe the dataset (200 words + tables/figures)
+    i. Use appropriate univariate descriptive statistics for all variables
+    ii. Plot data using appropriate plots
+    iii. Include at least one frequency- or crosstable
+c.	For a continuous variable:
+    i. Select one or more cutoff values with clinical/societal/statistical relevance
+    ii. Report the probability of observing values that fall within/exceed those cutoff values
+d.  For a continuous variable:
+    i. Formulate a specific null- and alternative hypothesis
+    ii. Report a one-sample t-test or Z-test for the specific null-hypothesis
+    iii. Calculate the probability of comitting a Type II error
+d.	Discuss your analyses (300 words)
+    i. Explain your rationale for important modeling decisions
+    ii.	Motivate your choice for the type of statistics and analyses
+    iii. Discuss assumptions
+    iv.	Discuss what you have learned from it and how you might improve it 
+e.	Use APA style throughout your report
+f.  Create four multiple choice questions about the first 4 weeks. You can use some of your analyses as inspiration, or make the questions purely about understanding. The best questions will be part of the real exam, so you have an advantage if you make questions that are good, but that you can still answer correctly!
+    i. Introduction to statistics
+    ii. Probability
+    iii. Sampling distribution
+    iv. Testing
+
+The multiple choice questions must be in plain text (no images or special characters, in the format below. You can just copy-paste this into the (Word?) document of your assignment:
+
+```
+question = "This is the question",
+answer = "This is the correct answer",
+distractor1 = "This is an incorrect distractor answer",
+distractor2 = "This is an incorrect distractor answer",
+distractor3 = "This is an incorrect distractor answer",
+expanation = "Why is the correct answer correct?"
+```
+
+### Assignment 2
+
+General linear model
+
+a. Select at least three variables for further analysis, and using at least one reference, explain what research questions you will investigate and what hypotheses you will test (150 words)
+    i.	Include one continuous outcome variable
+    ii.	Include one continuous predictor
+    iii.	Include one nominal or ordinal predictor
+b.	Construct a model with only the continuous predictor (200 words)
+    i. Report and interpret the different sums of squares
+    ii. Report and interpret the explained variance
+    iii. Conduct a separate correlation analysis. Compare the results with the regression analysis.
+c.	Construct a model with only the categorical predictor (200 words)
+    i. Report and interpret the model results
+    ii. Conduct a separate ANOVA or t-test with the same variables, whichever one is suitable. Compare the results with the regression analysis.
+d.  Construct a model with both the continuous and categorical predictor (200 words)
+    i. Report and interpret the model results
+    ii. Conduct and report a nested model test
+e.	Discuss your analyses (300 words)
+    i. Explain your rationale for important modeling decisions
+    ii.	Motivate your choice for the type of statistics and analyses
+    iii. Discuss assumptions
+    iv.	Discuss what you have learned from it and how you might improve it 
+f.	Use APA style throughout your report
+g.  Create four multiple choice questions about the first 4 weeks. You can use some of your analyses as inspiration, or make the questions purely about understanding. The best questions will be part of the real exam, so you have an advantage if you make questions that are good, but that you can still answer correctly!
+    i. Linear regression, correlation, or sums of squares
+    ii. Categorical predictors in linear regression (e.g., t-test or ANOVA)
+    iii. Multiple regression
+    iv. Nested models
+
+The multiple choice questions must be in plain text (no images or special characters, in the format below. You can just copy-paste this into the (Word?) document of your assignment:
+
+```
+question = "This is the question",
+answer = "This is the correct answer",
+distractor1 = "This is an incorrect distractor answer",
+distractor2 = "This is an incorrect distractor answer",
+distractor3 = "This is an incorrect distractor answer",
+expanation = "Why is the correct answer correct?"
+```
+
+### Assignment 3 (BE)
+
+Logistic regression
+
+a. Select at least three variables for further analysis, and using at least one reference, explain what research questions you will investigate and what hypotheses you will test (150 words)
+    i.	Choose a binary outcome variable
+    ii.	Include at least two predictors
+b.	Construct a model with only main effects (200 words)
+    i. Report and interpret the results
+c.	Construct a model with the interaction effect (200 words)
+    i. Report and interpret the model results
+    ii. Conduct and report a nested model test
+d.  Throughout your report, report confidence intervals. For at least one hypothesis, use interval testing (optionally, alongside p-value based testing).
+e.	Discuss your analyses (300 words)
+    i. Explain your rationale for important modeling decisions
+    ii.	Motivate your choice for the type of statistics and analyses
+    iii. Discuss assumptions
+    iv.	Discuss what you have learned from it and how you might improve it 
+f.	Use APA style throughout your report
+g.  Create four multiple choice questions about the major-specific material. The best questions will be part of the real exam, so you have an advantage if you make questions that are good, but that you can still answer correctly!
+
+The multiple choice questions must be in plain text (no images or special characters, in the format below. You can just copy-paste this into the (Word?) document of your assignment:
+
+```
+question = "This is the question",
+answer = "This is the correct answer",
+distractor1 = "This is an incorrect distractor answer",
+distractor2 = "This is an incorrect distractor answer",
+distractor3 = "This is an incorrect distractor answer",
+expanation = "Why is the correct answer correct?"
+```
+
+### Assignment 3 (SS)
+
+a. Select at least three constructs for further analysis, and using at least one reference, explain what research questions you will investigate and what hypotheses you will test (150 words)
+    i.	At least one of these constructs must be a scale with 3+ items
+    ii.	Include at least two predictors
+b.	Perform some kind of data reduction analysis (200 words)
+    i. Report and interpret the results
+b.	Perform reliability analysis (200 words)
+    i. Report and interpret the results
+b.	Construct a model with only main effects (200 words)
+    i. Report and interpret the results
+c.	Construct a model with the interaction effect (200 words)
+    i. Report and interpret the model results
+    ii. Conduct and report a nested model test
+d.  Throughout your report, report confidence intervals. For at least one hypothesis, use interval testing (optionally, alongside p-value based testing).
+e.	Discuss your analyses (300 words)
+    i. Explain your rationale for important modeling decisions
+    ii.	Motivate your choice for the type of statistics and analyses
+    iii. Discuss assumptions
+    iv.	Discuss what you have learned from it and how you might improve it 
+f.	Use APA style throughout your report
+g.  Create four multiple choice questions about the major-specific material. The best questions will be part of the real exam, so you have an advantage if you make questions that are good, but that you can still answer correctly!
+
+The multiple choice questions must be in plain text (no images or special characters, in the format below. You can just copy-paste this into the (Word?) document of your assignment:
+
+```
+question = "This is the question",
+answer = "This is the correct answer",
+distractor1 = "This is an incorrect distractor answer",
+distractor2 = "This is an incorrect distractor answer",
+distractor3 = "This is an incorrect distractor answer",
+expanation = "Why is the correct answer correct?"
+```
+
+### Assignment 3 (CN)
+
+a. Select at least three variables for further analysis, and using at least one reference, explain what research questions you will investigate and what hypotheses you will test (150 words)
+    i.	At least one of these variables must be categorical with 3+ levels
+    ii.	Include at least two predictors
+b.	Perform an ANOVA (200 words)
+    i. Report and interpret the results
+    ii. Use either a different kind of coding, or post-hoc tests, or planned comparisons
+b.	Perform a factorial ANOVA (200 words)
+    i. Report and interpret the results
+    ii. Report on the interaction effect
+b.	Include a continuous control variable in one of the preceding models (200 words)
+    i. Report and interpret the results
+e.	Discuss your analyses (300 words)
+    i. Explain your rationale for important modeling decisions
+    ii.	Motivate your choice for the type of statistics and analyses
+    iii. Discuss assumptions
+    iv.	Discuss what you have learned from it and how you might improve it 
+f.	Use APA style throughout your report
+g.  Create four multiple choice questions about the major-specific material. The best questions will be part of the real exam, so you have an advantage if you make questions that are good, but that you can still answer correctly!
+
+The multiple choice questions must be in plain text (no images or special characters, in the format below. You can just copy-paste this into the (Word?) document of your assignment:
+
+```
+question = "This is the question",
+answer = "This is the correct answer",
+distractor1 = "This is an incorrect distractor answer",
+distractor2 = "This is an incorrect distractor answer",
+distractor3 = "This is an incorrect distractor answer",
+expanation = "Why is the correct answer correct?"
+```
+
+## Credit
+
+This book was authored by Caspar J. Van Lissa. Its code and layout are derived from Lisa DeBruine's "booktem":
+
+> DeBruine L, Lakens D (2023). _booktem: Methods Book Template_.
+  https://github.com/debruine/booktem, https://debruine.github.io/booktem/.
+
+Also see: https://psyteachr.github.io/
+

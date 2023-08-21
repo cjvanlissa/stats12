@@ -533,7 +533,80 @@ A one SD increase in X is associated with a $\beta$ SD increase in Y
 
 # Multicolinearity
 
-## MAKE ME
+## Multicolinearity {.smaller}
+
+> **Problem:** Multiple regression gives us the *unique effect* of each predictor, controlling for all other predictors. What if multiple predictors overlap substantially?
+
+Example: What would happen if I predicted total body length from the length of people's left leg and right leg?
+
+* It's definitely possible to predict body length from leg length
+* Legs are approximately equally long
+* They both predict body length equally strongly
+* Their effects overlap nearly 100%
+* Left leg does not have a unique effect controlling for right leg, or vice versa
+
+## Example
+
+**Using both legs as predictors:**
+
+```{r}
+set.seed(18)
+df_leg <- data.frame(mvtnorm::rmvnorm(30, mean = c(170, .45*170, .45*170),
+                           sigma = matrix(c(1, .75, .75,
+                                            .75, 1, .95,
+                                            .75, .95, 1), nrow = 3, byrow = T)))
+names(df_leg) <- c("Height", "Left", "Right")
+tab_mc <- summary(lm(Height~Left+Right, df_leg))$coefficients
+colnames(tab_mc) <- c("B", "SE", "t", "p")
+kableExtra::kbl(tab_mc, digits = 2)
+```
+
+**Using one leg:**
+
+```{r}
+tab_mc2 <- summary(lm(Height~Left, df_leg))$coefficients
+colnames(tab_mc2) <- c("B", "SE", "t", "p")
+kableExtra::kbl(tab_mc2, digits = 2)
+```
+## Defining Multicolinearity {.smaller}
+
+> **Multicolinearity:** When two or more predictors explain the same variance in the outcome.
+
+* With two predictors, you can look at their correlation
+    + > .8 or .9 might be a problem
+* With more than two predictors, you need a measure of *multiple correlation*: $R^2$
+    + Predict predictor $p$ from all other predictors
+    + Calculate the **variance inflation factor (VIF)* from it's $R^2$
+    + VIF > 5 ($R^2 = .8$) may indicate a problem, VIF > 10 ($R^2 = .9$ is definitely a problem
+
+$$
+VIF_p = \frac{1}{1-R^2_p}
+$$
+
+## Causes of Multicolinearity
+
+* You have a small dataset and values of predictors tend to go together
+    + Extreme example: 2 participants, 2 categorical predictors
+    + Person 1 is Dutch and has a tattoo, Person 2 is international and has no tattoo
+    + Variables "nationality" and "tattoo" are perfectly colinear
+* Several of your variables measure the same thing
+    + Father's SES and mothers' SES
+    + Emotion regulation and neuroticism
+    + Activation in two brain regions that are jointly activated
+    + Clicks on a product page and sales of that product
+* Several of your variables are causally connected
+    + Conflict and relationship quality as predictors of relationship satisfaction, when conflict causes a decrease in relationship quality
+* Several of your variables are transformations of other variables
+    + E.g., family SES is the average of mothers' and fathers' SES, it will be colinear with them
+
+## Consequences of Multicolinearity
+
+* Biased estimates of unique effect of colinear predictors
+    + May be smaller, or larger, or of opposite sign
+* Inflated standard errors for unique effect
+    + Indicating that the algorithm has great uncertainty about whether or not this is the correct parameter estimate
+* **No effect on the model's predictive ability! $R^2$ is unaffected**
+    + Only the parameter estimates are biased, not the overall model predictions
 
 # Causality
 

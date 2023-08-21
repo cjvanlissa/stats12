@@ -277,19 +277,20 @@ ul.task-list li input[type="checkbox"] {
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#formative-test" id="toc-formative-test" class="nav-link active" data-scroll-target="#formative-test"><span class="header-section-number">7</span> Formative Test</a></li>
+<li><a href="#lecture" id="toc-lecture" class="nav-link active" data-scroll-target="#lecture"><span class="header-section-number">7</span> Lecture</a></li>
+  <li><a href="#formative-test" id="toc-formative-test" class="nav-link" data-scroll-target="#formative-test"><span class="header-section-number">8</span> Formative Test</a></li>
   <li>
-<a href="#in-spss" id="toc-in-spss" class="nav-link" data-scroll-target="#in-spss"><span class="header-section-number">8</span> In SPSS</a>
+<a href="#in-spss" id="toc-in-spss" class="nav-link" data-scroll-target="#in-spss"><span class="header-section-number">9</span> In SPSS</a>
   <ul class="collapse">
-<li><a href="#correlation-analysis" id="toc-correlation-analysis" class="nav-link" data-scroll-target="#correlation-analysis"><span class="header-section-number">8.1</span> Correlation Analysis</a></li>
+<li><a href="#correlation-analysis" id="toc-correlation-analysis" class="nav-link" data-scroll-target="#correlation-analysis"><span class="header-section-number">9.1</span> Correlation Analysis</a></li>
   </ul>
 </li>
   <li>
-<a href="#tutorial" id="toc-tutorial" class="nav-link" data-scroll-target="#tutorial"><span class="header-section-number">9</span> Tutorial</a>
+<a href="#tutorial" id="toc-tutorial" class="nav-link" data-scroll-target="#tutorial"><span class="header-section-number">10</span> Tutorial</a>
   <ul class="collapse">
-<li><a href="#bivariate-regression" id="toc-bivariate-regression" class="nav-link" data-scroll-target="#bivariate-regression"><span class="header-section-number">9.1</span> Bivariate Regression</a></li>
-  <li><a href="#correlation" id="toc-correlation" class="nav-link" data-scroll-target="#correlation"><span class="header-section-number">9.2</span> Correlation</a></li>
-  <li><a href="#r-squared" id="toc-r-squared" class="nav-link" data-scroll-target="#r-squared"><span class="header-section-number">9.3</span> R squared</a></li>
+<li><a href="#bivariate-regression" id="toc-bivariate-regression" class="nav-link" data-scroll-target="#bivariate-regression"><span class="header-section-number">10.1</span> Bivariate Regression</a></li>
+  <li><a href="#correlation" id="toc-correlation" class="nav-link" data-scroll-target="#correlation"><span class="header-section-number">10.2</span> Correlation</a></li>
+  <li><a href="#r-squared" id="toc-r-squared" class="nav-link" data-scroll-target="#r-squared"><span class="header-section-number">10.3</span> R squared</a></li>
   </ul>
 </li>
   </ul></nav>
@@ -315,61 +316,64 @@ ul.task-list li input[type="checkbox"] {
 <p>To understand how much of the TSS is explained by the regression line, we calculate the Regression Sum of Squares (RSS). This is the difference between the TSS and the SSE: the reduction in TSS achieved by using the regression line to predict observations instead of just the mean. It indicates how well the regression line explains the variance in the dependent variable.</p>
 <p>We can standardize this RSS by dividing it by the SSE, which gives us the “explained variance” <span class="math inline">\(R^2\)</span>, which ranges from 0 to 1. A higher R^2 value indicates that a larger portion of the total variance in the dependent variable is accounted for by the predictor variable. Explained variance is the proportion of the total sum of squares (TSS) that is explained by the regression line (RSS).</p>
 <p>Understanding these sums of squares gives us a good foundation for understanding another statistic: the correlation coefficient <span class="math inline">\(r\)</span>. The correlation coefficient describes the strength and direction of the linear relationship between two variables. It differs from regression because regression describes one of these variables as an outcome of the other: an asymmetrical relationship. Correlation instead just describes how strongly these two variables are associated without labeling one as the predictor and the other as the outcome: a symmetrical relationship. The correlation coefficient is a standardized measure of the strength of this association that ranges from -1 (perfectly negatively associated) to 1 (perfectly positively associated). A correlation coefficient of 0 means that there is no association between X and Y. Correlation and regression are very closely related, as the squared correlation coefficient (<span class="math inline">\(r\)</span>, squared) is the same as the measure of explained variance from simple linear regression, <span class="math inline">\(R^2\)</span>, and is also the same as the standardized regression coefficient.</p>
-<section id="formative-test" class="level1" data-number="7"><h1 data-number="7">
-<span class="header-section-number">7</span> Formative Test</h1>
+<section id="lecture" class="level1" data-number="7"><h1 data-number="7">
+<span class="header-section-number">7</span> Lecture</h1>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/okrRJXb0YT4" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</section><section id="formative-test" class="level1" data-number="8"><h1 data-number="8">
+<span class="header-section-number">8</span> Formative Test</h1>
 <p>A formative test helps you assess your progress in the course, and helps you address any blind spots in your understanding of the material. If you get a question wrong, you will receive a hint on how to improve your understanding of the material.</p>
 <p>Complete the formative test ideally after you’ve seen the lecture, but before the lecture meeting in which we can discuss any topics that need more attention</p>
 <div class="cell" data-layout-align="center">
 <div class="webex-check webex-box">
 <p><strong>Question 1</strong></p>
 What does SSE stand for in linear regression?
-<div id="radio_MLDBNDZOKA" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_MLDBNDZOKA" value=""><span>Sum of Squares for the Expectation</span></label><label><input type="radio" autocomplete="off" name="radio_MLDBNDZOKA" value=""><span>Sum of Standard Errors</span></label><label><input type="radio" autocomplete="off" name="radio_MLDBNDZOKA" value="answer"><span>Sum of Squared Errors</span></label><label><input type="radio" autocomplete="off" name="radio_MLDBNDZOKA" value=""><span>Sum of Squared Explained Variance</span></label>
+<div id="radio_ITNMVHPRVK" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ITNMVHPRVK" value=""><span>Sum of Squared Explained Variance</span></label><label><input type="radio" autocomplete="off" name="radio_ITNMVHPRVK" value=""><span>Sum of Standard Errors</span></label><label><input type="radio" autocomplete="off" name="radio_ITNMVHPRVK" value=""><span>Sum of Squares for the Expectation</span></label><label><input type="radio" autocomplete="off" name="radio_ITNMVHPRVK" value="answer"><span>Sum of Squared Errors</span></label>
 </div>
 <p><strong>Question 2</strong></p>
 Which of the following describes the concept of Ordinary Least Squares?
-<div id="radio_KMWBFXVZOO" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_KMWBFXVZOO" value=""><span>Minimizing the regression sum of squares</span></label><label><input type="radio" autocomplete="off" name="radio_KMWBFXVZOO" value=""><span>Minimizing the correlation</span></label><label><input type="radio" autocomplete="off" name="radio_KMWBFXVZOO" value="answer"><span>Minimizing the sum of squared errors</span></label><label><input type="radio" autocomplete="off" name="radio_KMWBFXVZOO" value=""><span>Minimizing the total sum of squares</span></label>
+<div id="radio_IQLDCYENKR" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_IQLDCYENKR" value=""><span>Minimizing the total sum of squares</span></label><label><input type="radio" autocomplete="off" name="radio_IQLDCYENKR" value=""><span>Minimizing the regression sum of squares</span></label><label><input type="radio" autocomplete="off" name="radio_IQLDCYENKR" value="answer"><span>Minimizing the sum of squared errors</span></label><label><input type="radio" autocomplete="off" name="radio_IQLDCYENKR" value=""><span>Minimizing the correlation</span></label>
 </div>
 <p><strong>Question 3</strong></p>
 What does the Regression Sum of Squares (RSS) represent?
-<div id="radio_VCDATGHJJK" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_VCDATGHJJK" value=""><span>The total sum of squares minus the predicted values</span></label><label><input type="radio" autocomplete="off" name="radio_VCDATGHJJK" value="answer"><span>The reduction in sum of squares by using the regression line as a predictor, rather than the mean</span></label><label><input type="radio" autocomplete="off" name="radio_VCDATGHJJK" value=""><span>The explained variance by the regression line</span></label><label><input type="radio" autocomplete="off" name="radio_VCDATGHJJK" value=""><span>The sum of squared prediction errors</span></label>
+<div id="radio_RPUOGLIZBY" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_RPUOGLIZBY" value=""><span>The explained variance by the regression line</span></label><label><input type="radio" autocomplete="off" name="radio_RPUOGLIZBY" value=""><span>The sum of squared prediction errors</span></label><label><input type="radio" autocomplete="off" name="radio_RPUOGLIZBY" value=""><span>The total sum of squares minus the predicted values</span></label><label><input type="radio" autocomplete="off" name="radio_RPUOGLIZBY" value="answer"><span>The reduction in sum of squares by using the regression line as a predictor, rather than the mean</span></label>
 </div>
 <p><strong>Question 4</strong></p>
 What is the purpose of the Total Sum of Squares (TSS) in linear regression?
-<div id="radio_RKVHXGPNYS" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_RKVHXGPNYS" value=""><span>It measures the explained variance of the predictor.</span></label><label><input type="radio" autocomplete="off" name="radio_RKVHXGPNYS" value="answer"><span>It measures the total variability of the dependent variable.</span></label><label><input type="radio" autocomplete="off" name="radio_RKVHXGPNYS" value=""><span>It measures the standard deviation of the errors.</span></label><label><input type="radio" autocomplete="off" name="radio_RKVHXGPNYS" value=""><span>It measures the residual error in the model.</span></label>
+<div id="radio_SGISPYRFKF" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_SGISPYRFKF" value=""><span>It measures the explained variance of the predictor.</span></label><label><input type="radio" autocomplete="off" name="radio_SGISPYRFKF" value="answer"><span>It measures the total variability of the dependent variable.</span></label><label><input type="radio" autocomplete="off" name="radio_SGISPYRFKF" value=""><span>It measures the residual error in the model.</span></label><label><input type="radio" autocomplete="off" name="radio_SGISPYRFKF" value=""><span>It measures the standard deviation of the errors.</span></label>
 </div>
 <p><strong>Question 5</strong></p>
 What does the term ‘explained variance’ refer to in linear regression?
-<div id="radio_CHSXBQUYHQ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_CHSXBQUYHQ" value=""><span>The portion of the standard deviation explained by the predictor.</span></label><label><input type="radio" autocomplete="off" name="radio_CHSXBQUYHQ" value="answer"><span>The portion of the total variance explained by the regression line.</span></label><label><input type="radio" autocomplete="off" name="radio_CHSXBQUYHQ" value=""><span>The portion of the regression sum of squares explained by the predictor.</span></label><label><input type="radio" autocomplete="off" name="radio_CHSXBQUYHQ" value=""><span>The portion of the total variance explained by the null model.</span></label>
+<div id="radio_AEIRCVFXMN" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_AEIRCVFXMN" value="answer"><span>The portion of the total variance explained by the regression line.</span></label><label><input type="radio" autocomplete="off" name="radio_AEIRCVFXMN" value=""><span>The portion of the regression sum of squares explained by the predictor.</span></label><label><input type="radio" autocomplete="off" name="radio_AEIRCVFXMN" value=""><span>The portion of the total variance explained by the null model.</span></label><label><input type="radio" autocomplete="off" name="radio_AEIRCVFXMN" value=""><span>The portion of the standard deviation explained by the predictor.</span></label>
 </div>
 <p><strong>Question 6</strong></p>
 How is correlation different from regression?
-<div id="radio_IPKVPYTGFI" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_IPKVPYTGFI" value=""><span>Correlation measures the total variance, while regression measures the explained variance.</span></label><label><input type="radio" autocomplete="off" name="radio_IPKVPYTGFI" value="answer"><span>Correlation measures the strength of linear association, while regression predicts one variable from another.</span></label><label><input type="radio" autocomplete="off" name="radio_IPKVPYTGFI" value=""><span>Correlation predicts one variable from another, while regression measures the strength of linear association.</span></label><label><input type="radio" autocomplete="off" name="radio_IPKVPYTGFI" value=""><span>Correlation focuses on categorical variables, while regression focuses on continuous variables.</span></label>
+<div id="radio_LLAMQRQGHP" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_LLAMQRQGHP" value=""><span>Correlation measures the total variance, while regression measures the explained variance.</span></label><label><input type="radio" autocomplete="off" name="radio_LLAMQRQGHP" value=""><span>Correlation focuses on categorical variables, while regression focuses on continuous variables.</span></label><label><input type="radio" autocomplete="off" name="radio_LLAMQRQGHP" value="answer"><span>Correlation measures the strength of linear association, while regression predicts one variable from another.</span></label><label><input type="radio" autocomplete="off" name="radio_LLAMQRQGHP" value=""><span>Correlation predicts one variable from another, while regression measures the strength of linear association.</span></label>
 </div>
 <p><strong>Question 7</strong></p>
 What is the range of the correlation coefficient (r) between two variables?
-<div id="radio_PIWVLUZAME" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_PIWVLUZAME" value=""><span>[-1, 0]</span></label><label><input type="radio" autocomplete="off" name="radio_PIWVLUZAME" value=""><span>[0, 1]</span></label><label><input type="radio" autocomplete="off" name="radio_PIWVLUZAME" value=""><span>[-∞, ∞]</span></label><label><input type="radio" autocomplete="off" name="radio_PIWVLUZAME" value="answer"><span>[-1, 1]</span></label>
+<div id="radio_XFJCNGTZAA" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_XFJCNGTZAA" value="answer"><span>[-1, 1]</span></label><label><input type="radio" autocomplete="off" name="radio_XFJCNGTZAA" value=""><span>[-1, 0]</span></label><label><input type="radio" autocomplete="off" name="radio_XFJCNGTZAA" value=""><span>[-∞, ∞]</span></label><label><input type="radio" autocomplete="off" name="radio_XFJCNGTZAA" value=""><span>[0, 1]</span></label>
 </div>
 <p><strong>Question 8</strong></p>
 Which statistic is equivalent to the standardized regression coefficient in bivariate regression?
-<div id="radio_UJMGQIJHLI" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_UJMGQIJHLI" value="answer"><span>Correlation coefficient (r)</span></label><label><input type="radio" autocomplete="off" name="radio_UJMGQIJHLI" value=""><span>Sum of Squared Errors (SSE)</span></label><label><input type="radio" autocomplete="off" name="radio_UJMGQIJHLI" value=""><span>Coefficient of determination (R²)</span></label><label><input type="radio" autocomplete="off" name="radio_UJMGQIJHLI" value=""><span>Standard deviation of the predictor</span></label>
+<div id="radio_SUAEJRTFGZ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_SUAEJRTFGZ" value=""><span>Sum of Squared Errors (SSE)</span></label><label><input type="radio" autocomplete="off" name="radio_SUAEJRTFGZ" value=""><span>Standard deviation of the predictor</span></label><label><input type="radio" autocomplete="off" name="radio_SUAEJRTFGZ" value=""><span>Coefficient of determination (R²)</span></label><label><input type="radio" autocomplete="off" name="radio_SUAEJRTFGZ" value="answer"><span>Correlation coefficient (r)</span></label>
 </div>
 <p><strong>Question 9</strong></p>
 What is the relationship between the Total Sum of Squares (TSS) and the Regression Sum of Squares (RSS)?
-<div id="radio_UIBWRDYAJM" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_UIBWRDYAJM" value=""><span>SSR- SSE = SST</span></label><label><input type="radio" autocomplete="off" name="radio_UIBWRDYAJM" value=""><span>TSS + SSE = SSR</span></label><label><input type="radio" autocomplete="off" name="radio_UIBWRDYAJM" value="answer"><span>TSS - SSE = RSS</span></label><label><input type="radio" autocomplete="off" name="radio_UIBWRDYAJM" value=""><span>TSS + RSS = SSE</span></label>
+<div id="radio_KAREWWCVEQ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_KAREWWCVEQ" value=""><span>TSS + SSE = SSR</span></label><label><input type="radio" autocomplete="off" name="radio_KAREWWCVEQ" value="answer"><span>TSS - SSE = RSS</span></label><label><input type="radio" autocomplete="off" name="radio_KAREWWCVEQ" value=""><span>SSR- SSE = SST</span></label><label><input type="radio" autocomplete="off" name="radio_KAREWWCVEQ" value=""><span>TSS + RSS = SSE</span></label>
 </div>
 <p><strong>Question 10</strong></p>
 How is the proportion of explained variance (R²) related to the correlation coefficient (r)?
-<div id="radio_JXFEVIPDXU" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_JXFEVIPDXU" value=""><span>R² = 2 * r</span></label><label><input type="radio" autocomplete="off" name="radio_JXFEVIPDXU" value="answer"><span>R² = r²</span></label><label><input type="radio" autocomplete="off" name="radio_JXFEVIPDXU" value=""><span>R² = 1 / r</span></label><label><input type="radio" autocomplete="off" name="radio_JXFEVIPDXU" value=""><span>R² = 1 - r²</span></label>
+<div id="radio_RECRGRJZGF" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_RECRGRJZGF" value=""><span>R² = 1 / r</span></label><label><input type="radio" autocomplete="off" name="radio_RECRGRJZGF" value="answer"><span>R² = r²</span></label><label><input type="radio" autocomplete="off" name="radio_RECRGRJZGF" value=""><span>R² = 2 * r</span></label><label><input type="radio" autocomplete="off" name="radio_RECRGRJZGF" value=""><span>R² = 1 - r²</span></label>
 </div>
 </div>
 <div class="webex-solution">
@@ -398,15 +402,15 @@ Show explanations
 <p>The proportion of explained variance (R²) is equal to the square of the correlation coefficient (r), meaning R² = r².</p>
 </div>
 </div>
-</section><section id="in-spss" class="level1" data-number="8"><h1 data-number="8">
-<span class="header-section-number">8</span> In SPSS</h1>
-<section id="correlation-analysis" class="level2" data-number="8.1"><h2 data-number="8.1" class="anchored" data-anchor-id="correlation-analysis">
-<span class="header-section-number">8.1</span> Correlation Analysis</h2>
+</section><section id="in-spss" class="level1" data-number="9"><h1 data-number="9">
+<span class="header-section-number">9</span> In SPSS</h1>
+<section id="correlation-analysis" class="level2" data-number="9.1"><h2 data-number="9.1" class="anchored" data-anchor-id="correlation-analysis">
+<span class="header-section-number">9.1</span> Correlation Analysis</h2>
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/VOI5IlHfZVE" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
-</section></section><section id="tutorial" class="level1" data-number="9"><h1 data-number="9">
-<span class="header-section-number">9</span> Tutorial</h1>
-<section id="bivariate-regression" class="level2" data-number="9.1"><h2 data-number="9.1" class="anchored" data-anchor-id="bivariate-regression">
-<span class="header-section-number">9.1</span> Bivariate Regression</h2>
+</section></section><section id="tutorial" class="level1" data-number="10"><h1 data-number="10">
+<span class="header-section-number">10</span> Tutorial</h1>
+<section id="bivariate-regression" class="level2" data-number="10.1"><h2 data-number="10.1" class="anchored" data-anchor-id="bivariate-regression">
+<span class="header-section-number">10.1</span> Bivariate Regression</h2>
 <p>Social science students were asked about their opinion towards Tilburg’s nightlife, number of Facebook friends, and some other characteristics. The data are in the SocScSurvey.sav file.</p>
 <p>Download the file to your computer and open it in SPSS.</p>
 <p>Suppose researchers are interested in the relationship between personality and social media use. In particular, they want to know if extraversion explains the number of Facebook friends.</p>
@@ -425,15 +429,15 @@ Answer
 <p><span class="math inline">\(\text{Friends}_i = -62.377 + 26.788*\text{Extraversion}_i + e_i\)</span></p>
 </div>
 <p>Which of the following statements is true?</p>
-<div id="radio_FCMLVJZLVO" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_FCMLVJZLVO" value=""><span>If Facebook friends increases with one unit, extraversion increases with 26.788 units</span></label><label><input type="radio" autocomplete="off" name="radio_FCMLVJZLVO" value="answer"><span>If Extraversion increases with one unit, the number of facebook friends increases with 26.788 units</span></label><label><input type="radio" autocomplete="off" name="radio_FCMLVJZLVO" value=""><span>If Extraversion increases with 26.788 units, the number of facebook friends increases with 1 unit</span></label>
+<div id="radio_PTLJWTSHPE" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_PTLJWTSHPE" value=""><span>If Facebook friends increases with one unit, extraversion increases with 26.788 units</span></label><label><input type="radio" autocomplete="off" name="radio_PTLJWTSHPE" value="answer"><span>If Extraversion increases with one unit, the number of facebook friends increases with 26.788 units</span></label><label><input type="radio" autocomplete="off" name="radio_PTLJWTSHPE" value=""><span>If Extraversion increases with 26.788 units, the number of facebook friends increases with 1 unit</span></label>
 </div>
 <p>Remember that the general form of interpretation of the unstandardized effect is: “If X increases with 1 unit, Y increases/decreases with ‘unstandardized regression coefficient’ units”.</p>
 <p>What is the value of the standardized regression coefficient? <input class="webex-solveme nospaces" data-tol="0.01" size="5" data-answer="[&quot;0.438&quot;,&quot;.438&quot;]"></p>
 <p>You can find the standardized regression coefficients in the column called ‘Standardized Coefficients Beta’.</p>
 <p>Which of the following statements about the standardized regression coefficients is correct?</p>
-<div id="radio_VSEZVCJXXK" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_VSEZVCJXXK" value=""><span>If extraversion increases with one SD, the number of facebook friends increases with 0.438 units</span></label><label><input type="radio" autocomplete="off" name="radio_VSEZVCJXXK" value="answer"><span>If extraversion increases with one SD, the number of facebook friends increases with 0.438 SDs</span></label><label><input type="radio" autocomplete="off" name="radio_VSEZVCJXXK" value=""><span>If extraversion increases with one unit, the number of facebook friends increases with 0.438 SDs</span></label>
+<div id="radio_TNNJHRZXLF" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_TNNJHRZXLF" value=""><span>If extraversion increases with one SD, the number of facebook friends increases with 0.438 units</span></label><label><input type="radio" autocomplete="off" name="radio_TNNJHRZXLF" value="answer"><span>If extraversion increases with one SD, the number of facebook friends increases with 0.438 SDs</span></label><label><input type="radio" autocomplete="off" name="radio_TNNJHRZXLF" value=""><span>If extraversion increases with one unit, the number of facebook friends increases with 0.438 SDs</span></label>
 </div>
 <p>Remember that standardized regression coefficients are interpreted in a similar way as unstandardized regression coefficients are, with the one difference being they are interpreted in terms of standard deviations.</p>
 <p>Consider the first person in the data file. The person had an extraversion score of 9.</p>
@@ -457,20 +461,20 @@ Answer
 <p>Suppose three researchers test the significance of the R-square.</p>
 <p>Researcher I tests at the 10% level, researcher II tests at the 5% level, and researcher III at the 1% level.</p>
 <p>Which researcher will reject the null hypothesis? <select class="webex-select"><option value="blank"></option>
-<option value="">Only researcher II</option>
 <option value="answer">All three researchers</option>
+<option value="">Only researcher II</option>
 <option value="">Only researcher III</option>
 <option value="">Only researcher I</option></select></p>
 <p>When reporting the F-test for the model, you would report <span class="math inline">\(R^2\)</span>, the F-test statistic, its degrees of freedom, and the p-value.</p>
 <p>The F-test has two distinct degrees of freedom. The first refers to the degrees of freedom for the regression equation, and the second to the degrees of freedom for the residuals. The degrees of freedom are given in brackets. For example, if regression has 2 degrees of freedom and the residuals 100, we write the F-value as F(2,100) = ….</p>
 <p>Which of the following F value and corresponding degrees of freedom should be reported? <select class="webex-select"><option value="blank"></option>
-<option value="">F(1,133) = 31.283</option>
+<option value="answer">F(1,132) = 31.283</option>
 <option value="">F(1,132) = 0.000</option>
-<option value="answer">F(1,132) = 31.283</option></select></p>
+<option value="">F(1,133) = 31.283</option></select></p>
 <!-- Keep the output for the next assignment. -->
 <!-- In the next assignment we will extend our analysis by including multiple predictors to predict the number of Facebook friends (i.e., we will carry out multiple regression analysis).     -->
-</section><section id="correlation" class="level2" data-number="9.2"><h2 data-number="9.2" class="anchored" data-anchor-id="correlation">
-<span class="header-section-number">9.2</span> Correlation</h2>
+</section><section id="correlation" class="level2" data-number="10.2"><h2 data-number="10.2" class="anchored" data-anchor-id="correlation">
+<span class="header-section-number">10.2</span> Correlation</h2>
 <p>Correlations and regression analyses can both be used to study the relationship between variables, but there is an important difference.</p>
 <p>Discuss with your group mates what the similarities and differences between the two methods are.</p>
 <div class="webex-solution">
@@ -488,13 +492,13 @@ Answer
 <p>What is the correlation between Extraversion and number of Facebook friends? <input class="webex-solveme nospaces" data-tol="0.01" size="5" data-answer="[&quot;0.438&quot;,&quot;.438&quot;]"></p>
 <p>Suppose three researchers test the significance of the correlation between Extraversion and Facebook friends. Researcher I tests at the 10% level, researcher II tests at the 5% level, and researcher III at the 1% level.</p>
 <p>Which researcher will reject the null hypothesis? <select class="webex-select"><option value="blank"></option>
-<option value="">Only researcher III</option>
-<option value="answer">All three researchers</option>
 <option value="">Only researcher I</option>
-<option value="">Only researcher II</option></select></p>
+<option value="">Only researcher III</option>
+<option value="">Only researcher II</option>
+<option value="answer">All three researchers</option></select></p>
 <p>Which of the following interpretations is true?</p>
-<div id="radio_GXFCFZGWPT" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_GXFCFZGWPT" value="answer"><span>It would be very unlikely to observe a sample correlation of .44 by chance if the population correlation would be zero.</span></label><label><input type="radio" autocomplete="off" name="radio_GXFCFZGWPT" value=""><span>We don't have convincing evidence that Facebook friends and extraversion are associated in the population.</span></label><label><input type="radio" autocomplete="off" name="radio_GXFCFZGWPT" value=""><span>We have convincing evidence that Facebook friends and extraversion are associated in the population.</span></label>
+<div id="radio_IQYITYBKWF" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_IQYITYBKWF" value=""><span>We don't have convincing evidence that Facebook friends and extraversion are associated in the population.</span></label><label><input type="radio" autocomplete="off" name="radio_IQYITYBKWF" value=""><span>We have convincing evidence that Facebook friends and extraversion are associated in the population.</span></label><label><input type="radio" autocomplete="off" name="radio_IQYITYBKWF" value="answer"><span>It would be very unlikely to observe a sample correlation of .44 by chance if the population correlation would be zero.</span></label>
 </div>
 <p>Compare the correlation coefficient to the standardized regression coefficient from the bivariate regression you conducted previously.</p>
 <p>Then, compare it to the value labeled “R” in the “Model Summary” table from the regression.</p>
@@ -507,8 +511,8 @@ Answer
 <p>If you did everything correctly, you should observe that the bivariate correlation is identical to the standardized regression coefficient. This is only the case with <em>bivariate</em> regression.</p>
 <p>Furthermore, the bivariate correlation should be identical to the R reported in the Model Summary table, because they are both just the correlation coefficient. R squared is the squared correlation coefficient, and we interpret it as the “proportion of variance in the outcome explained by the predictor”. Only in bivariate regression is this identical to the squared correlation coefficient.</p>
 </div>
-</section><section id="r-squared" class="level2" data-number="9.3"><h2 data-number="9.3" class="anchored" data-anchor-id="r-squared">
-<span class="header-section-number">9.3</span> R squared</h2>
+</section><section id="r-squared" class="level2" data-number="10.3"><h2 data-number="10.3" class="anchored" data-anchor-id="r-squared">
+<span class="header-section-number">10.3</span> R squared</h2>
 <p>The R squared expresses how well the predictors explain variance in the outcome of a regression. In the next few steps we will look in more detail at this concept.</p>
 <p>Consider the results of the regression model again.</p>
 <p>Write down the (unstandardized) regression equation based on your previous results, and use the raw data in the Data View to answer the following question.</p>

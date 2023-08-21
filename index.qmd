@@ -22,21 +22,21 @@ The **course schedule** is available on Osiris. For an overview of the content, 
 #| results = "asis",
 #| echo = FALSE,
 #| cache = FALSE
-schedule <- read.csv("schedule.csv")
+schedule <- read.csv("schedule_notes.csv")[, 1:4]
 schedule$Date <- as.Date(paste(2023, schedule$Week, 1, sep="-"), "%Y-%U-%u")
 addthis <- c(0:5)
 names(addthis) <- c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday")
 schedule$Date <- schedule$Date+addthis[schedule$Day]
-schedule$Date <- format(schedule$Date, format = "%d-%m-%Y")
 schedule <- schedule[!is.na(schedule$Week), c("Week", "Activity", "Date", "Topic")]
-
+ordr <- order(schedule$Date, decreasing = FALSE)
+schedule$Date <- format(schedule$Date, format = "%d-%m-%Y")
 suppressWarnings(library(DT))
 # library(lubridate)
 # mdy(isoweek(4))
 # lubridate::isoweek(as.Date("13-09-2021", format = "%d-%m-%Y"))
 # lubridate::parse_date_time("37", orders = "%W")
 # lubridate::isoweek(as.Date("13-09-2021", format = "%d-%m-%Y"))
-DT::datatable(schedule[order(schedule$Week, decreasing = FALSE), ], rownames = FALSE, options = list(pageLength = nrow(schedule)))
+DT::datatable(schedule[ordr, ], rownames = FALSE, options = list(pageLength = nrow(schedule)))
 ```
 
 ## Using this GitBook
@@ -111,6 +111,19 @@ After taking this course, students will be able to...
 Attendance is mandatory based on our experience that students who actively participate tend to pass the course, whereas those who do not tend to drop out or fail.
 All lectures and practicals ‘build’ on each other,
 so if you have to miss either one, absolutely make sure you have caught up with the materials before the next session.
+
+## Study Load
+
+Below is a breakdown of the expected study load:
+
+```{r}
+#| echo = FALSE
+options(knitr.kable.NA = '')
+tab_load <- xlsx::read.xlsx("hours_breakdown.xlsx", 1)
+library(kableExtra)
+kbl(tab_load) |>
+  row_spec(which(is.na(tab_load$Duration)), bold = TRUE, hline_after = T)
+```
 
 
 ## Staff
