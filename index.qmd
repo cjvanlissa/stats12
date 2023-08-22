@@ -51,7 +51,8 @@ All essential information is contained within this GitBook. To ensure that you a
 4. Save the ZIP archive to your drive
 5. Right-click the downloaded file, and select "Extract here" (or similar option, depending on your operating system)
 6. You should now have a folder with the contents of the book.
-7. Inside this folder is a shortcut titled "Launch book". Double-clicking this should launch the book in your browser.
+7. Inside this folder is a shortcut titled `Launch_book.html`. Double-clicking this should launch the book in your browser.
+    + If this doesn't work: The target of the shortcut is the file `index.html` in the `docs` folder, which you can also open directly!
 8. The "data" folder contains all SPSS datasets you need for the course.
 9. The "pdfs" folder contains all PDF files you need for the course.
 
@@ -178,6 +179,8 @@ and one individual exam to test comprehension of the material covered in the por
 ### Portfolios 40% (3 x 13.3%)
 
 You work on the portfolio assignments with your group, both during the lab sessions and outside of class. You hand in your group’s portfolio assignment before the set deadline, at which point it is graded. If your grade is below the passing level of 5.5, your group will have the opportunity to revise the portfolio based on teacher feedback to receive a maximum grade of 6.
+
+**Note:** Groups should equally distribute the work load for the portfolio assignments. In case doubts are raised about the equal distribution of labor in a particular group, the portfolio assignment in question will be supplemented with individual oral examination and an individual grade, which can not exceed the original grade for the group assignment. In other words, failing to distribute the work properly can not have positive effects, but it can have negative effects on your grade. To prevent this, make clear agreements about the distribution of work with your group mates.
 
 ### Exam 60% 
 

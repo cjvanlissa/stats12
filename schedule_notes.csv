@@ -10,8 +10,8 @@ Week,Activity,Day,Topic,File,Lecture,Filmed
 36,lectures,Monday,Describing data with a probability distribution,probability.qmd,lecture2.qmd,1
 37,lectures,Monday,Sampling distribution of the mean and the standard error.,samplingdistribution.qmd,lecture3.qmd,1
 38,lectures,Monday,"Testing: Hypotheses, p-values, Type I, Type II errors and Power. Z-test and (one-sample) t-test.",testing.qmd,lecture4.qmd,1
-39,lectures,Monday,General Linear Model (GLM) I: Bivariate regression ,glm1.qmd,lecture5.qmd,
-40,lectures,Monday,"GLM II: Sums of squares, explained variance, and correlation",glm2.qmd,lecture6.qmd,
+39,lectures,Monday,General Linear Model (GLM) I: Bivariate regression ,glm1.qmd,lecture5.qmd,1
+40,lectures,Monday,"GLM II: Sums of squares, explained variance, and correlation",glm2.qmd,lecture6.qmd,1
 41,lectures,Monday,GLM III: Differences between two groups: dummy variables and two-sample t-test ,glm3binary.qmd,lecture7.qmd,
 ,,,,,,
 43,lectures,Monday,GLM IV: Differences between more groups: dummy variables and ANOVA,glm4anova.qmd,lecture8.qmd,
@@ -30,7 +30,7 @@ Week,Activity,Day,Topic,File,Lecture,Filmed
 48,lectures,Monday,Major CN: GLM IV+: ANCOVA (ANOVA with continuous control variables),ancova.qmd,lecture_ancova.qmd,
 49,lectures,Monday,Major CN: GLM IV+: Repeated measures ANOVA,rmanova.qmd,lecture_rmanova.qmd,
 ,,,,,,
-35,Lab session,Thursday,BE Introduction,,,
+35,Lab session,Friday,BE Introduction,,,
 36,Lab session,Thursday,BE Normal distribution and probability,,,
 37,Lab session,Thursday,BE Sampling distribution,,,
 38,Lab session,Thursday,BE Hypothesis testing,,,
@@ -55,7 +55,7 @@ Week,Activity,Day,Topic,File,Lecture,Filmed
 44,Lab session,Wednesday,CN Multiple Regression,,,
 45,Lab session,Wednesday,CN Nested Models,,,
 ,,,,,,
-35,Lab session,Wednesday,SS Introduction,,,
+35,Lab session,Friday,SS Introduction,,,
 36,Lab session,Wednesday,SS Normal distribution and probability,,,
 37,Lab session,Wednesday,SS Sampling distribution,,,
 38,Lab session,Wednesday,SS Hypothesis testing,,,
