@@ -706,7 +706,7 @@ plot(ptri)
 * Changes in B induce changes in both A and C, resulting in covariance between A and C
 * If you only examine the relationship between A and C, it will be distorted by the effects of B
 * In this context, B is a **confounder**
-* Controlling for B is good / necessary if you want to study the relationship between A and B
+* Controlling for B is good / necessary if you want to study the relationship between A and C
 
 ## Examples confounding
 

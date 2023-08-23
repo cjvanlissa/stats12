@@ -51,7 +51,8 @@ Models are *nested* if they are identical, except that some parameters are const
 
 You already saw this in our first class on bivariate regression:
 
-* 1. Null model: $\hat{Y}_i = a$, which is the same as $\hat{Y}_i = a + 0 * X_1$ (so $b_1 = 0$)
+* 1. Null model: $\hat{Y}_i = a$,
+    + Which is the same as $\hat{Y}_i = a + 0 * X_1$ (so $b_1 = 0$)
 * 2. Regression model: $\hat{Y}_i = a + b_1 * X_1$
 
 
@@ -175,7 +176,7 @@ $$
 F = \frac{SSR/df1_u}{SSE/df2_u} = \frac{(SSR_u - SSR_c) / (df1_u -df1_c)}{SSE_u / df2_u} = \frac{(SSR_u - 0) / (df1_u - 0)}{SSE_u / df2_u}
 $$
 
-## Putting it together
+## Putting it together {.smaller}
 
 So, if you have two nested models, you could think of three comparisons:
 

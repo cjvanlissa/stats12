@@ -51,8 +51,7 @@ All essential information is contained within this GitBook. To ensure that you a
 4. Save the ZIP archive to your drive
 5. Right-click the downloaded file, and select "Extract here" (or similar option, depending on your operating system)
 6. You should now have a folder with the contents of the book.
-7. Inside this folder is a shortcut titled `Launch_book.html`. Double-clicking this should launch the book in your browser.
-    + If this doesn't work: The target of the shortcut is the file `index.html` in the `docs` folder, which you can also open directly!
+7. To launch the book in your browser, open the file `docs\index.html`.
 8. The "data" folder contains all SPSS datasets you need for the course.
 9. The "pdfs" folder contains all PDF files you need for the course.
 

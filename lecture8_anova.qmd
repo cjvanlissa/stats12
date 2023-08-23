@@ -3,7 +3,6 @@ title: "Lecture 8 - GLM IV\nDifferences between more groups"
 author:   "Caspar J. van Lissa"
 date:     "`r format(Sys.Date(), '%d %b %Y')`"
 format: revealjs
-server: shiny
 ---
 
 ```{r}
@@ -181,7 +180,7 @@ How large are the between-group differences relative to the error variance?
 
 ## {background-iframe="https://utrecht-university.shinyapps.io/Anova-Regression/"}
 
-## Sums of Squares in ANOVA
+## Sums of Squares in ANOVA {.smaller}
 
 Sum  | Formula                         | Meaning
 -----|---------------------------------|---------------
@@ -192,7 +191,7 @@ SSW (SSE)  | $\sum{(Y_i - \hat{Y}_i)^2}$     | Variation of individuals wrt grou
 
 ## {background-iframe="https://utrecht-university.shinyapps.io/cj_anova/"}
 
-## Step 3. p-value
+## Step 3. p-value {.smaller}
 
 The F-distribution has two degrees of freedom parameters:
 
@@ -203,7 +202,7 @@ How to calculate the p-value?
 
 * Statistical software
     + Excel: `=F.DIST.RT(x, degree_freedom1, degree_freedom2)`
-    + R: `pf(F_statistic, dataframe1, dataframe2, lower.tail = FALSE)`
+    + R: `pf(F_statistic, df1, df2, lower.tail = FALSE)`
 * Table in book
 
 ## Step 4. Conclusion
@@ -258,7 +257,7 @@ How to calculate the p-value?
 <!-- * The mean value for high SES is $b_3$ -->
 
 
-## Effect size in ANOVA
+## Effect size in ANOVA {.smaller}
 
 It's common to call $R^2$ for ANOVA models "eta squared", $\eta^2$
 
@@ -267,8 +266,10 @@ It's common to call $R^2$ for ANOVA models "eta squared", $\eta^2$
 * There are rules of thumb like (Cohen, 1988)
 * But they differ from rules of thumb for $R^2$, which is confusing
 
-| Small | 0.01 |
+
+| Interpretation | Value |
 | :-: | :-: |
+| Small | 0.01 |
 | Medium | 0.06 |
 | Large | 0.14 |
 
