@@ -1,4 +1,4 @@
-# Z-table
+# Z-table  {#sec-ztable}
 
 Table gives the right-tail probability corresponding to a Z-value of the value in the Z-column plus the value in the column name, which indicates the second digit of the Z-score.
 
@@ -31,7 +31,7 @@ DT::datatable(tab, rownames = FALSE, options = list(ordering=F, pageLength = nro
   DT::formatRound(columns=names(tab)[-1], digits=3)
 ```
 
-# t-table
+# t-table {#sec-ttable}
 
 Table gives the t-value corresponding to the right-tail probability indicated by the columns.
 

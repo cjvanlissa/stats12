@@ -103,21 +103,19 @@ Background information is given throughout the exercises. We will occasionally r
 If you’re working from a student workplace, SPSS is already installed. If you’re working from your own computer, you either have to purchase SPSS, or you can use a free alternative (see @sec-software) - but note that, at this point, the instruction text is still focused on SPSS so if there are any differences it will be your responsibility to figure out how to use your software.
 
 Your first task is to start the SPSS program. You can easily find SPSS via the Windows Start Menu. SPSS may ask about the coding: use Unicode (button to the left). Then there may be another window open that you can close. In the end you should see an empty spread sheet.
-
-Leave SPSS active during the lab session. Click “Next” when you’re ready.
-
  
 ### Step  2
+
 Now you’ve got SPSS running, we’re ready to go!
 
-We will start with a number of introductory exercises using the data file stressLAS.sav Download stressLAS.sav. Please right-click on the link and choose “Save Link As”. Then, save the file on your USB stick or on your personal space (e.g., the m:-drive).
+We will start with a number of introductory exercises using the data file `stressLAS.sav`. To obtain this and other tutorial data files, download the GitBook, and open the `data` folder to find all files.
 
 Open the file in SPSS. Proceed as follows: via the op menu follow the route: File -> open -> data. SPSS now opens a new window. Search for the file StressLAS.sav and open the file in SPSS.
 
-Note: If you are using Internet Explorer, you may notice it sometimes saves SPSS files with a different name (ending in .htm instead of .sav). This causes the file to be opened with the web browser instead of SPSS. If this happens to you, please rename the file to its original name, but even better is to use another web browser (e.g, google chrome).
 
  
 ### Step  3
+
 The file contains data about a study on - you guessed it - stress.
 
 More precisely, it contains data on the following variables:
@@ -130,6 +128,7 @@ More precisely, it contains data on the following variables:
 - `negemo`: The amount of negative emotions on a scale of 0 to 50.
  
 ### Step  4
+
 After opening the data file, you will see the tabs Data View and Variable View at the bottom of your screen.
 
 Make sure the tab Data View is selected.
@@ -138,6 +137,7 @@ Look at the Data View and describe the data file. What do the rows represent, an
 
  
 ### Step  5
+
 Now switch to the Variable View tab.
 
 The Variable View lists the variables and their properties. We will not discuss all the columns in detail, but focus on the most important ones, which includes: name, label, values, and measure.
@@ -166,6 +166,7 @@ Add the value labels yourself in SPSS such that a score 1 represents “Single�
 
  
 ### Step  7
+
 Every variable has a so-called Measurement Level.
 
 First, summarize the measurement levels in your own words (as if you have to explain it to a fellow student). Then, indicate the measurement level for each of the variables of interest (Stress, Smoking, etc.).
@@ -183,13 +184,14 @@ In the next assignment we will generate descriptive statistics for this data.
 
 ### Step 1
 
-The first step in any statistical analysis involves inspection of the data at hand by means of descriptive statistics and/or graphical summaries. Descriptive statistics include the mean, standard deviation, minimum and maximum value, amongst others. Examples of graphical summaries are bar charts, histograms, and scatter plots.
+The first step in any statistical analysis involves inspection of the data at hand by means of descriptive statistics and/or graphical summaries. Descriptive statistics include the mean, standard deviation, minimum and maximum value. Examples of graphical summaries are bar charts, histograms, and scatter plots.
 
 In this assignment we will look at graphical summaries. In particular, we will look at three: bar charts, histogram, and scatter plots.
 
 You may use the same data file as for the previous assignments.
 
 ### Step 2
+
 First, we will create a bar chart for Stress.
 
 Proceed as follows:
@@ -200,6 +202,7 @@ Select Stress under Category Axis (i.e., the variable at the x-axis)
 Then Click on OK and consult the graph in the output
 
 ### Step 3
+
 You may have noticed that SPSS by default creates a bar chart with the observed frequency depicted on the y-axis. We will now create a new bar chart and instead ask SPSS to show the percentages on the y-axis.
 
 Proceed as follows:
@@ -231,6 +234,7 @@ bars represent score ranges; the more respondents with a score in that range, th
  
 
 ### Step 5
+
 Finally, we will create a scatter plot for Negative Emotions and Life Satisfaction. Scatter plots are very useful to get a first impression of whether variables are associated.
 
 Create a scatter plot as follows:
@@ -271,13 +275,13 @@ Based on the scatter plot from Step 5, would you expect an association between N
 ## Descriptive Statistics
 
 ### Step 1
+
 As explained before, the first step in any statistical analysis involves inspection of the data. In the previous assignment we looked at graphical summaries.
 
 This assignment shows you how to explore data using descriptive statistics. Descriptive statistics include values such as the mean, standard deviation, the maximum value and the minimum value.
 
 Use the same data file as for the previous assignments.
 
- 
 
 ### Step 2
 
@@ -286,6 +290,7 @@ We will first take a look at the descriptive statistics for Optimism, Life Satis
 Compute descriptive statistics as follows:
 
 Analyze > Descriptive Statistics > Descriptives
+
 Select the variables Optimism, Life Satisfaction and Negative Emotions
 Now click on OK
 SPSS will open a new window - the output window - including a table with the descriptives for the selected variables.
@@ -300,6 +305,7 @@ In the previous step we computed the average value and standard deviations. Howe
 Let's generate a frequency table for variables Smoke and Relation.
 
 Analyze > Descriptive Statistics > Frequencies
+
 Select the variables for which you want to have the frequency distribution (i.e., Smoke and Relation)
 Click OK.
 SPSS now adds a table with the frequency distributions of the selected variables to the output file.
@@ -546,6 +552,7 @@ Second, we can compute the variance and standard deviation in SPSS.
 Proceed as follows:
 
 Analyze > Descriptive statistics > Descriptives
+
 Select the variable you just defined
 Now click op Options. A new window opens which shows many more descriptive options
 Enable the variance
@@ -558,7 +565,7 @@ Were your computations correct?
 ## Correlation
 
 For the next few questions we need the data file `LAS_SocSc_DataLab2.sav`.
-Download LAS_SocSc_DataLab2.sav. Open the file in SPSS. You will see that the file contains data for six variables, named X1 through X6. We will inspect the associations between pairs of variables (so called bivariate relationships).
+Open the file in SPSS. You will see that the file contains data for six variables, named X1 through X6. We will inspect the associations between pairs of variables (so called bivariate relationships).
 
 First, generate a scatter plot for X1 and X2. Proceed as follows: Graphs > Legacy dialogs > Scatter/dot. Then ask for a Simple scatter. Put X1 on the X-Axis and X2 on the Y-Axis. Describe the association. Take into account whether the relationship follows a straight line (i.e., linearity), is positive or negative (i.e., direction), and whether the relationship seems to be weak, moderate or strong (i.e., strength).
 

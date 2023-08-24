@@ -149,7 +149,7 @@ What is the SD of the standard normal distribution? `r fitb(1, num = TRUE)`
 
 ### Calculating probabilities
 
-For the next series of exercises you need to use a Z-table or calculator (e.g., Excel, R online).
+For the next series of exercises you need to use a Z-table or calculator (e.g., Excel, Google Sheets, R online, or the Z-table in this GitBook, @sec-ztable).
 
 We have seen that probabilities are related to the area under the curve. This means that for continuous variables we can only find the probability that the outcome falls within a certain interval. For example, the time to complete a task is more than 10 minutes; the IQ is in between 70 and 90.
 
@@ -243,7 +243,7 @@ Conclusion: about 21.2% in the population has low confidence in society.
 Let X be the test scores. We need to compute P(42<X<62). This area can not be directly found in the Z-table, so we have to take some additional steps. First, because the whole area under the curve is 1, we can say that the area we are looking for is equal to 1 minus the areas in the tail; thus, 1 − P(X<42) − P(X>62). These latter probabilities can be read from the Z-table!
 
 
-Compute Z-values: 1 − P(Z<−0.8) − P(Z>1.2). Remember that $Z = \frac{Observed-mean}{SD}.
+Compute Z-values: 1 − P(Z<−0.8) − P(Z>1.2). Remember that $Z = \frac{Observed-mean}{SD}$.
 
 Determine the tail areas: because the distribution is symmetric, we have P(Z<−0.8)=P(Z>0.8). The latter can found in Z-table, which equals .2119. Probability P(Z>1.2) can be directly read from the Z-table, which is .1151. 
 
@@ -320,7 +320,7 @@ Type D is measured with the DS14 scale. The DS14 consists of 14 items, 7 measuri
 
 * see also Type D personality on Wikipedia.
 
-Open the data file TypeDDataSSC.sav Download TypeDDataSSC.savin SPSS. The data file contains the scores on the DS14 items measuring Type D as well as the background variables for 80 respondents.
+Open the data file `TypeDDataSSC.sav` in SPSS. The data file contains the scores on the DS14 items measuring Type D as well as the background variables for 80 respondents.
 
 Go to the variable view. The content of the items are given under labels and it is indicated whether the item measures NA or SI.
 
