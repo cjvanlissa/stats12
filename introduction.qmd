@@ -248,21 +248,21 @@ Consult the output. Look at the scatter plot and see if you understand the graph
 
 How to read a scatter plot:
 
-* x-axis represents the scores on Life Satisfaction.
-* y-axis represents the scores on Negative Emotions.
+* x-axis represents the scores on Negative Emotions.
+* y-axis represents the scores on Life Satisfaction.
 * Each dot in the graph is a case, representing how the case scores on both Negative Emotions and Life Satisfaction. 
 
 ## Quiz
 
 ::: {.webex-check .webex-box}
 
-Describe the bar chart; What is shown on the x-axis? `r mcq(c("answer" = "Categories of Stress", "Frequency of Responses", "Numeric scores of Stress", "Percentages of Responses")[sample.int(4, 4)])`
+Describe the first bar chart; What is shown on the x-axis? `r mcq(c("answer" = "Categories of Stress", "Frequency of Responses", "Numeric scores of Stress", "Percentages of Responses")[sample.int(4, 4)])`
 
-And what is shown on the y-axis? `r mcq(c("Categories of Stress", "answer" = "Frequency of Responses", "Numeric scores of Stress", "Percentages of Responses")[sample.int(4, 4)])`
+In the first bar chart, what is shown on the y-axis? `r mcq(c("Categories of Stress", "answer" = "Frequency of Responses", "Numeric scores of Stress", "Percentages of Responses")[sample.int(4, 4)])`
 
 What's the approximate proportion of people experiencing work-related stress? `r mcq(c("answer" = "33%", "66%", "70%")[sample.int(3)])`
 
-What can you say about differences in stress levels in the sample? Are most people stressed or not? In other words: How is stress distributed across the three categories? `r mcq(c("answer" = "Evenly distributed", "Most people report no stress", "Most people report work stress", "Most people report life stress")[sample.int(4)])`
+Based on the bar charts, what can you say about differences in stress levels in the sample? Are most people stressed or not? In other words: How is stress distributed across the three categories? `r mcq(c("answer" = "Evenly distributed", "Most people report no stress", "Most people report work stress", "Most people report life stress")[sample.int(4)])`
 
 Describe the distribution of Negative Emotions. Are the scores normally distributed (i.e., like a bell-shape)? Really consider why this is / is not the case before checking your answer. `r mcq(c("answer" = "Not normal", "Normal")[sample.int(2)])`
 
@@ -294,8 +294,6 @@ Analyze > Descriptive Statistics > Descriptives
 Select the variables Optimism, Life Satisfaction and Negative Emotions
 Now click on OK
 SPSS will open a new window - the output window - including a table with the descriptives for the selected variables.
- 
-
 
 
 ### Step 3
@@ -343,9 +341,9 @@ For which of the variables is the spread in the scores highest? `r mcq(c("answer
 
 The minimum and maximum observed scores for Negative Emotions were: [  `r fitb(3, num = TRUE)`, `r fitb(37, num = TRUE)`].
 
-What percentage of participants is a non-smoker? `r fitb(48.1, num = TRUE, tol = .01)`
+What percentage of participants is a non-smoker? `r fitb(48.1, num = TRUE, tol = .1)`
 
-What percentage of participants is in a relationship? `r fitb(47.9, num = TRUE, tol = .01)`
+What percentage of participants is in a relationship? `r fitb(47.9, num = TRUE, tol = .1)`
 
 :::
 
@@ -407,7 +405,7 @@ how do you think the standard deviation of that variable will be affected? `r mc
 
 In this sample, who are more satisfied with life? `r mcq(c("answer" = "Smokers", "Non-smokers")[sample.int(2)])`
 
-Do you think this also holds for the population of all persons? `r mcq(c("answer" = "Can't tell", "No", "Yes")[sample.int(2)])`
+Do you think this also holds for the population of all persons? `r mcq(c("answer" = "Can't tell", "No", "Yes")[sample.int(3)])`
 
 :::
 
@@ -432,7 +430,7 @@ Compute the frequency distribution of stress. Consult the output, and answer the
 
 ::: {.webex-check .webex-box}
 
-What is the percentage of respondents who experience No Stress? `r fitb(33.6, num = TRUE, tol = .01)`
+What is the percentage of respondents who experience No Stress? `r fitb(33.6, num = TRUE, tol = .1)`
 
 Which type of stress is most common in the sample? `r mcq(c("answer" = "Life stress", "No stress", "Work stress")[sample.int(3)])`
 
@@ -450,9 +448,9 @@ Explain what has changed and why.
 
 `r unhide()`
 
-Imagine I have a sample of 65 participants, with 3 missing value. Of these participants, 15 reported no stress. What is the percentage of no stress, calculated by hand? `r fitb(23.1, num = TRUE, tol = .01)`
+Imagine I have a sample of 65 participants, with 3 missing value. Of these participants, 15 reported no stress. What is the percentage of no stress, calculated by hand? `r fitb(23.1, num = TRUE, tol = .1)`
 
-What is the percentage out of valid responses (i.e., valid percent), calculated by hand? `r fitb(24.2, num = TRUE, tol = .01)`
+What is the percentage out of valid responses (i.e., valid percent), calculated by hand? `r fitb(24.2, num = TRUE, tol = .1)`
 
 
 :::
@@ -494,6 +492,18 @@ Compute (by hand) the mean, median, and mode.
 * The mean is calculated as the sum of all values, divided by the number of values: $\frac{\sum_{i=1}^nX_i}{n}$
 `r unhide()`
 
+## Quiz
+
+::: {.webex-check .webex-box}
+
+What is the mean? `r fitb(6.8, num = TRUE, tol = .1)`
+
+What is the median? `r fitb(6.5, num = TRUE)`
+
+What is the mode? `r fitb(6, num = TRUE)`
+
+:::
+
 Measures of variation
 
 Next we will look at a measure of variation (i.e., indicating the amount of spread in the observations).
@@ -521,17 +531,9 @@ Follow these steps:
 
 ::: {.webex-check .webex-box}
 
-What is the mean? `r fitb(6.8, num = TRUE, tol = .01)`
-
-What is the median? `r fitb(6.5, num = TRUE)`
-
-What is the mode? `r fitb(6, num = TRUE)`
-
-What is the mean? `r fitb(6.8, num = TRUE, tol = .1)`
-
 What is the variance? `r fitb(5.9, num = TRUE, tol = .1)`
 
-What is the standard deviation? `r fitb(2.43, num = TRUE, tol = .01)`
+What is the standard deviation? `r fitb(2.43, num = TRUE, tol = .1)`
 
 :::
 

@@ -254,7 +254,7 @@ ui <- fluidPage(
   p("Select a data source:"),
   selectInput("dataset", "Dataset", choices = c("World Values Survey", "Empathy in Adolescents", "Sustainable Food Choices")),
   p("Enter your group number:"),
-  numericInput("groupno", "Group number", value = 0),
+  textInput("groupno", "Group name"),
   p("What's your teacher's last name?"),
   textInput("teach", "Teacher's name"),
   #actionButton("create", "Generate data"),
@@ -282,11 +282,13 @@ server <- function(input, output) {
   # })
   output$downloadData <- downloadHandler(
     filename = function() {
+      groupno_processed <- tolower(gsub("[^[:alpha:]]", "", input$groupno, ignore.case = TRUE))
+      thesd <- sum(match(strsplit(groupno_processed, split = "")[[1]], letters))
       # Use the selected dataset as the suggested file name
-      paste0("data_", input$groupno, "_", c("wvs", "emp", "sfc")[match(input$dataset, c("World Values Survey", "Empathy in Adolescents", "Sustainable Food Choices"))], ".sav")
+      paste0("data_", groupno_processed, "_", c("wvs", "emp", "sfc")[match(input$dataset, c("World Values Survey", "Empathy in Adolescents", "Sustainable Food Choices"))], ".sav")
     },
     content = function(file) {
-      set.seed(input$groupno)
+      set.seed(thesd)
       Args <- switch(input$dataset,
         "World Values Survey" = generate_ss(),
         "Empathy in Adolescents" = generate_cn(),
