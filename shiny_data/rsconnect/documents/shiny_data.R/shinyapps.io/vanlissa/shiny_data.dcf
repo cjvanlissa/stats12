@@ -5,9 +5,9 @@ account: vanlissa
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 9384107
-bundleId: 7615482
+bundleId: 7642855
 url: https://vanlissa.shinyapps.io/shiny_data/
-when: 1693203091.60691
-lastSyncTime: 1693203091.60692
+when: 1693828486.46019
+lastSyncTime: 1693828486.4602
 asMultiple: FALSE
 asStatic: FALSE

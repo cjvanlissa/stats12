@@ -220,8 +220,8 @@ b.	Describe the dataset (200 words + tables/figures)
     ii. Plot data using appropriate plots
     iii. Include at least one frequency- or crosstable
 c.	For a continuous variable:
-    i. Select one or more cutoff values with clinical/societal/statistical relevance
-    ii. Report the probability of observing values that fall within/exceed those cutoff values
+    i. Select one or more values with clinical/societal/statistical relevance (i.e., provide some justification for the choice of value)
+    ii. Using probability calculus, calculate and report the probability of observing values that fall below/between/exceed the chosen value(s)
 d.  For a continuous variable:
     i. Formulate a specific null- and alternative hypothesis
     ii. Report a one-sample t-test or Z-test for the specific null-hypothesis

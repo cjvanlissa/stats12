@@ -288,6 +288,8 @@ server <- function(input, output) {
       paste0("data_", groupno_processed, "_", c("wvs", "emp", "sfc")[match(input$dataset, c("World Values Survey", "Empathy in Adolescents", "Sustainable Food Choices"))], ".sav")
     },
     content = function(file) {
+      groupno_processed <- tolower(gsub("[^[:alpha:]]", "", input$groupno, ignore.case = TRUE))
+      thesd <- sum(match(strsplit(groupno_processed, split = "")[[1]], letters))
       set.seed(thesd)
       Args <- switch(input$dataset,
         "World Values Survey" = generate_ss(),

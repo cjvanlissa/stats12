@@ -305,7 +305,7 @@ We estimate reliability as the association between repeated assessments of the t
 
 These are correlation coefficients, and their values should be positive
 
-## Test-retest reliability
+## Test-retest reliability {.smaller}
 
 * Administer same test to same participants twice
 * Compute correlation between their repeated scores, $r_{X_{t1},X_{t2}}$
@@ -373,7 +373,7 @@ Alpha | Interpretation
 < .50 | unacceptable
 
 
-## Item-total correlation
+## Item-total correlation {.smaller}
 
 
 <!-- # 1) Rule of thumb: ‘corrected item-total correlation’ > 0.30 -->
@@ -422,7 +422,7 @@ Should we use item-total correlation and alpha if item deleted to remove items f
 
 # Validity
 
-## Defining Validity
+## Defining Validity {.smaller}
 
 > **Validity:** Does the instrument measure what it intends to measure?
 
