@@ -213,9 +213,9 @@ H0 is rejected at the 5% significance level if z is either larger than 1.96 or s
 
 So far, we rejected the null hypothesis if the sample is among the 5% most unlikely sample means under H0. This 5% was called the significance level, and is denoted as $\alpha = .05$. However, we could just as well choose 1% or .5%.
 
-What would be the critical values for the Z-test if one tests at $\alpha = .01$? `r fitb(2.33, num = T, tol = .01)`
+What would be the critical values for the Z-test if one tests at $\alpha = .01$? `r fitb(2.58, num = T, tol = .01)`
 
-What would be the critical values for the Z-test if one tests at $\alpha = .5\%$? `r fitb(2.58, num = T, tol = .01)`
+What would be the critical values for the Z-test if one tests at $\alpha = .005\%$? `r fitb(2.81, num = T, tol = .01)`
 
 For historical reasons, social scientists tend to use $\alpha = 0.05$ as a default. So in this course, if alpha is not explicitly stated, assume $\alpha = 0.05$.
 
@@ -416,7 +416,7 @@ Is it significant at the 1% level? `r torf(FALSE)`
 
 Researchers test whether $\mu = 90$. They assume that $\sigma=21$. The sample mean was 85. Sample size was 50.
 
-What is the two-tailed p-value? `r fitb(.046, num = TRUE, tol = .002)`
+What is the two-tailed p-value? `r fitb(.09, num = TRUE, tol = .01)`
 
 What is the highest level at which the test is significant? `r mcq(c("answer" = .05, .01, .005, .10)[sample.int(4)])`
 
