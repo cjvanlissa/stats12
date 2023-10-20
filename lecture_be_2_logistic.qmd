@@ -107,11 +107,11 @@ library(ggplot2)
 df_together <- chimps[chimps$condition == "Together", ]
 res <- lm(prosocial ~testscore, data = df_together)
 p1 <- ggplot(data = df_together, aes(x = testscore, y = prosocial)) +
-  geom_jitter(width = .1, height = .1) +
-  geom_abline(intercept = coef(res)[1], slope = coef(res)[2], color = "blue", linewidth = 1) +
-  theme_bw() +
-  scale_x_continuous(limits = c(-2, 7))+
-  scale_y_continuous(breaks = c(0,1), limits = predict(res, newdata = data.frame(testscore = c(-2, 7)), type = "response"))
+    geom_jitter(width = .1, height = .1) +
+    geom_abline(intercept = coef(res)[1], slope = coef(res)[2], color = "blue", linewidth = 1) +
+    theme_bw() +
+    scale_x_continuous(limits = c(-2, 7))+
+    scale_y_continuous(breaks = c(0,1), limits = c(-.1, 1.1))
 p1
 ```
 
@@ -234,7 +234,7 @@ p2
 p3
 ```
 
-```{r}
+```{r eval = FALSE}
 tab_resid <- t(table(Predicted = as.integer(predict(res, type = "response")>.5), Observed = df_together$prosocial))
 tab_resid
 ```
@@ -317,7 +317,7 @@ When estimating model parameters $a$ and $b$ for model $logit(\hat{p}_i) = a + b
 
 ## Coefficients Demo
 
-```{r eval =F}
+```{r eval =T}
 #| panel: fill
 # vars <- setdiff(names(iris), "Species")
 # div(style="display: inline-block;vertical-align:top; width: 150px;", selectInput('xcol', 'X Variable', vars))
@@ -517,15 +517,34 @@ Nagelkerke $R^2$
 
 <!-- https://stats.stackexchange.com/questions/237702/comparing-models-using-the-deviance-and-log-likelihood-ratio-tests -->
 
+# Logistic Regression Classification
+
+## What is Classification
+
+Logistic regression gives you probabilities of observing the outcome $Y=1$
+
+* It is often used for *binary classification*: Determining whether each individual case is an example of $Y=0$ or $Y=1$
+* To this end, a classification rule is applied
+    + E.g.: If $P(Y=1) > .5$, classify as 1
+    + E.g.: If $P(Y=1) <= .5$, classify as 0
+* You can use other classification rules
+
+## Should you Classify?
+
+Sometimes it's really important to classify:
+
+* You are a producer of climbing ropes, and you use logistic regression to predict the probability that individual ropes meet safety standards based on some non-destructive tests
+    + Then, you apply a classification rule: Any ropes with $p > .01$ that they do not meet standards are destroyed
+
 ## Classification Accuracy
 
-How well does the model predict true positives / true negatives?
+How well do the classification decisions correspond with true positives / true negatives?
 
-You've already seen an example:
+<!-- You've already seen an example: -->
 
-```{r}
-tab_resid
-```
+<!-- ```{r} -->
+<!-- tab_resid -->
+<!-- ``` -->
 
 ## Classification Table How-To
 
@@ -541,12 +560,19 @@ $$
 \right.
 $$
 
-3. Cross-tabulate the observed outcome $Y_i$ against the dichotom
-4. How accurate are the predictions? Where do we see most prediction errors?
+3. Cross-tabulate the observed outcome $Y_i$ against the classification decisions
+4. How accurate are the classification decisions? Where do we see most prediction errors?
 
 We can choose to use a different cutoff
 
 * But there is a trade-off between false positives and false negatives
+
+## Warning
+
+The classification table, and any statistics derived from it, are **not** measures of model fit of the logistic regression model
+
+* The model itself predicts probabilities $P(Y=1)$
+* The classification decision is binary and ignores uncertainty about that decision
 
 # Putting it all Together
 
@@ -759,15 +785,15 @@ Easier to just change the reference category
     + Note: $p < .05$, 95%CI[3.56, 19.58] excludes 1
     + So: effect is significant in the Together condition
     
-## Reporting
+## Reporting {.smaller}
 
 1. Is there an effect of condition on prosocial behavior?
 
 > There was a significant marginal effect of condition on prosocial behavior, $B = 2.78, \chi^2(1) = 93.29, p < .001$. The probability of engaging in prosocial behavior was $p = .28$ when chimps were alone, and $p = .86$ when they were together. The odds ratio of this effect was $OR = 16.08$.
 
-## Reporting
+## Reporting {.smaller}
 
-1. Smart chimps might be more inclined to act prosocially when another chimp is present. Is there an interaction between condition and testscore?
+2. Smart chimps might be more inclined to act prosocially when another chimp is present. Is there an interaction between condition and testscore?
 
 > There was a significant interaction between condition and testscore, $B = 2.54, \chi^2(1) = 27.53, p < .001$. The odds ratio of this effect was $OR = 12.67$, meaing that when going from the Alone condition to the Together condition, the odds of engaging in prosocial behavior are multiplied with  12.67. In the Alone condition, the effect of testscore was not significant, $B = -.42, \chi^2(1) = 3.83, p = .05$. In the Together condition, the effect of testscore was significant, $B = 2.12, \chi^2(1) = 23.85, p < .001$. 
 

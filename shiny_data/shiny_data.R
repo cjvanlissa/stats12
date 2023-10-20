@@ -195,9 +195,9 @@ generate_be <- function(){
                                                                                              "SEc", "CTc", "UNc", "SDc", "SHc", "APc", "FCax1", "FCax2", "Friendly",
                                                                                              "Picky", "BuysFR", "Meaty")))
 
-  labs = c(sekse = "Sekse", lftx = "Leeftijd in jaren",
-           Edu = "Level of education", Income = "In welke klasse valt het bruto jaarlijks inkomen van uw huishouden?",
-           Urban = "Urbanized", MealsTogether = "Hoe vaak per week eet u het avondmaal samen met anderen?",
+  labs = c(sekse = "Sex", lftx = "Age in years",
+           Edu = "Level of education", Income = "Which category describes your household's annual gross income?",
+           Urban = "Urbanized", MealsTogether = "How often do you eat dinner with other people?",
            SEc = "Security", CTc = "Zscore(CTc) conformism / tradition",
            UNc = "Universalism", SDc = "Self direction", SHc = "Zscore(SHc) stimulation / hedonism",
            APc = "Zscore(APc) achievement / power", FCax1 = "Involvement (F 1)",

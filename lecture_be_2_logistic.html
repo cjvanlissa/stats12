@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.3.427">
 
   <meta name="author" content="Caspar J. van Lissa">
-  <meta name="dcterms.date" content="2023-08-13">
+  <meta name="dcterms.date" content="2023-09-24">
   <title>GLM VIII Logistic Regression</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -323,6 +323,8 @@
   
   <script src="lecture_be_2_logistic_files/libs/kePrint-0.0.1/kePrint.js"></script>
   <link href="lecture_be_2_logistic_files/libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+  <link href="lecture_be_2_logistic_files/libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet">
+  <script src="lecture_be_2_logistic_files/libs/bsTable-3.3.7/bootstrapTable.js"></script>
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -339,7 +341,7 @@ Caspar J. van Lissa
 </div>
 </div>
 
-  <p class="date">2023-08-13</p>
+  <p class="date">2023-09-24</p>
 </section>
 <section>
 <section id="introduction" class="title-slide slide level1 center">
@@ -507,12 +509,7 @@ Y_i \sim \text{Bernoulli}(p_i)
 </div>
 </div>
 <div class="cell quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<div class="cell-output cell-output-stdout">
-<pre><code>        Predicted
-Observed   0   1
-       0   6  17
-       1   4 138</code></pre>
-</div>
+
 </div>
 </div>
 </div>
@@ -880,19 +877,42 @@ LR = -2LL_0 - -2LL_1
 <!-- https://www.researchgate.net/publication/287333683_Pseudo-R2_and_related_measures_Online_Supplement_4_to_Serious_stats_A_guide_to_advanced_statistics_for_the_behavioral_sciences_Basingstoke_Palgrave -->
 <!-- https://stats.stackexchange.com/questions/8511/how-to-calculate-pseudo-r2-from-rs-logistic-regression -->
 <!-- https://stats.stackexchange.com/questions/237702/comparing-models-using-the-deviance-and-log-likelihood-ratio-tests -->
+</section></section>
+<section>
+<section id="logistic-regression-classification" class="title-slide slide level1 center">
+<h1>Logistic Regression Classification</h1>
+
+</section>
+<section id="what-is-classification" class="slide level2">
+<h2>What is Classification</h2>
+<p>Logistic regression gives you probabilities of observing the outcome <span class="math inline">\(Y=1\)</span></p>
+<ul>
+<li>It is often used for <em>binary classification</em>: Determining whether each individual case is an example of <span class="math inline">\(Y=0\)</span> or <span class="math inline">\(Y=1\)</span></li>
+<li>To this end, a classification rule is applied
+<ul>
+<li>E.g.: If <span class="math inline">\(P(Y=1) &gt; .5\)</span>, classify as 1</li>
+<li>E.g.: If <span class="math inline">\(P(Y=1) &lt;= .5\)</span>, classify as 0</li>
+</ul></li>
+<li>You can use other classification rules</li>
+</ul>
+</section>
+<section id="should-you-classify" class="slide level2">
+<h2>Should you Classify?</h2>
+<p>Sometimes it’s really important to classify:</p>
+<ul>
+<li>You are a producer of climbing ropes, and you use logistic regression to predict the probability that individual ropes meet safety standards based on some non-destructive tests
+<ul>
+<li>Then, you apply a classification rule: Any ropes with <span class="math inline">\(p &gt; .01\)</span> that they do not meet standards are destroyed</li>
+</ul></li>
+</ul>
 </section>
 <section id="classification-accuracy" class="slide level2">
 <h2>Classification Accuracy</h2>
-<p>How well does the model predict true positives / true negatives?</p>
-<p>You’ve already seen an example:</p>
-<div class="cell" data-layout-align="center">
-<div class="cell-output cell-output-stdout">
-<pre><code>        Predicted
-Observed   0   1
-       0   6  17
-       1   4 138</code></pre>
-</div>
-</div>
+<p>How well do the classification decisions correspond with true positives / true negatives?</p>
+<!-- You've already seen an example: -->
+<!-- ```{r} -->
+<!-- tab_resid -->
+<!-- ``` -->
 </section>
 <section id="classification-table-how-to" class="slide level2">
 <h2>Classification Table How-To</h2>
@@ -909,12 +929,20 @@ Observed   0   1
 \right.
 \]</span></p>
 <ol start="3" type="1">
-<li>Cross-tabulate the observed outcome <span class="math inline">\(Y_i\)</span> against the dichotom</li>
-<li>How accurate are the predictions? Where do we see most prediction errors?</li>
+<li>Cross-tabulate the observed outcome <span class="math inline">\(Y_i\)</span> against the classification decisions</li>
+<li>How accurate are the classification decisions? Where do we see most prediction errors?</li>
 </ol>
 <p>We can choose to use a different cutoff</p>
 <ul>
 <li>But there is a trade-off between false positives and false negatives</li>
+</ul>
+</section>
+<section id="warning" class="slide level2">
+<h2>Warning</h2>
+<p>The classification table, and any statistics derived from it, are <strong>not</strong> measures of model fit of the logistic regression model</p>
+<ul>
+<li>The model itself predicts probabilities <span class="math inline">\(P(Y=1)\)</span></li>
+<li>The classification decision is binary and ignores uncertainty about that decision</li>
 </ul>
 </section></section>
 <section>
@@ -950,19 +978,19 @@ Observed   0   1
 <h2>Model Fit</h2>
 <p>Chi square test of model fit:</p>
 
-<img data-src="lecture_be_2_logistic_files/figure-revealjs/unnamed-chunk-15-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"></section>
+<img data-src="lecture_be_2_logistic_files/figure-revealjs/unnamed-chunk-14-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"></section>
 <section id="pseudo-r2-1" class="slide level2">
 <h2>Pseudo R2</h2>
 
-<img data-src="lecture_be_2_logistic_files/figure-revealjs/unnamed-chunk-16-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"></section>
+<img data-src="lecture_be_2_logistic_files/figure-revealjs/unnamed-chunk-15-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"></section>
 <section id="classification-accuracy-1" class="slide level2">
 <h2>Classification Accuracy</h2>
 
-<img data-src="lecture_be_2_logistic_files/figure-revealjs/unnamed-chunk-17-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"></section>
+<img data-src="lecture_be_2_logistic_files/figure-revealjs/unnamed-chunk-16-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"></section>
 <section id="coefficients-1" class="slide level2">
 <h2>Coefficients</h2>
 
-<img data-src="lecture_be_2_logistic_files/figure-revealjs/unnamed-chunk-18-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"><p>Probability of prosocial behavior when condition = 0:</p>
+<img data-src="lecture_be_2_logistic_files/figure-revealjs/unnamed-chunk-17-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"><p>Probability of prosocial behavior when condition = 0:</p>
 <ul>
 <li><span class="math inline">\(P(Y=1|Cond=0) = \frac{e^a}{1+e^a} = \frac{\text{e}^{-.96}}{1+\text{e}^{-.96}} = .28\)</span></li>
 </ul>
@@ -974,7 +1002,7 @@ Observed   0   1
 <section id="coefficients-odds-scale" class="slide level2 smaller">
 <h2>Coefficients, odds scale</h2>
 
-<img data-src="lecture_be_2_logistic_files/figure-revealjs/unnamed-chunk-19-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"><p>Odds of prosocial behavior when condition = 0:</p>
+<img data-src="lecture_be_2_logistic_files/figure-revealjs/unnamed-chunk-18-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"><p>Odds of prosocial behavior when condition = 0:</p>
 <ul>
 <li><span class="math inline">\(Odds(Y=1|Cond=0) = e^a = e^{-.96} = .38\)</span></li>
 </ul>
@@ -993,7 +1021,7 @@ Observed   0   1
 <h2>Add Interaction</h2>
 <p>Chi square test of model fit:</p>
 
-<img data-src="lecture_be_2_logistic_files/figure-revealjs/unnamed-chunk-20-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"></section>
+<img data-src="lecture_be_2_logistic_files/figure-revealjs/unnamed-chunk-19-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"></section>
 <section id="likelihood-ratio-test" class="slide level2">
 <h2>Likelihood Ratio Test</h2>
 <p>Recall that <span class="math inline">\(-2LL\)</span> of the previous model was 316.33</p>
@@ -1002,11 +1030,11 @@ Observed   0   1
 <li>We added two predictors, so <span class="math inline">\(df = 2\)</span></li>
 </ul>
 
-<img data-src="lecture_be_2_logistic_files/figure-revealjs/unnamed-chunk-21-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"></section>
+<img data-src="lecture_be_2_logistic_files/figure-revealjs/unnamed-chunk-20-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"></section>
 <section id="pseudo-r2-2" class="slide level2">
 <h2>Pseudo R2</h2>
 
-<img data-src="lecture_be_2_logistic_files/figure-revealjs/unnamed-chunk-22-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"></section>
+<img data-src="lecture_be_2_logistic_files/figure-revealjs/unnamed-chunk-21-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"></section>
 <section id="classification-accuracy-2" class="slide level2">
 <h2>Classification Accuracy</h2>
 <ul>
@@ -1015,11 +1043,11 @@ Observed   0   1
 <li>Two more parameters, two less missclassifications - is it worth it?</li>
 </ul>
 
-<img data-src="lecture_be_2_logistic_files/figure-revealjs/unnamed-chunk-23-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"></section>
+<img data-src="lecture_be_2_logistic_files/figure-revealjs/unnamed-chunk-22-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"></section>
 <section id="coefficients-2" class="slide level2">
 <h2>Coefficients</h2>
 
-<img data-src="lecture_be_2_logistic_files/figure-revealjs/unnamed-chunk-24-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"><p>Effect of testscore for “Alone” condition:</p>
+<img data-src="lecture_be_2_logistic_files/figure-revealjs/unnamed-chunk-23-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"><p>Effect of testscore for “Alone” condition:</p>
 <ul>
 <li>The odds ratio associated with a 1 unit increase in test score is <span class="math inline">\(\text{e}^b = .66\)</span></li>
 <li>For a 1 unit increase in test score, the odds of prosocial behavior becomes .66 times smaller</li>
@@ -1029,7 +1057,7 @@ Observed   0   1
 <section id="coefficients-3" class="slide level2">
 <h2>Coefficients</h2>
 
-<img data-src="lecture_be_2_logistic_files/figure-revealjs/unnamed-chunk-25-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"><p>Effect of testscore in the “Together” condition:</p>
+<img data-src="lecture_be_2_logistic_files/figure-revealjs/unnamed-chunk-24-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"><p>Effect of testscore in the “Together” condition:</p>
 <ul>
 <li>The odds ratio associated with a 1 unit increase in test score is <span class="math inline">\(\text{e}^{b_{test}+b_{int}} = \text{e}^{-.417+2.539} = 8.35\)</span></li>
 <li>For a 1 unit increase in test score, the odds of prosocial behavior become 8.35 times larger</li>
@@ -1039,7 +1067,7 @@ Observed   0   1
 <section id="change-reference-category" class="slide level2">
 <h2>Change Reference Category</h2>
 
-<img data-src="lecture_be_2_logistic_files/figure-revealjs/unnamed-chunk-26-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"><p>Easier to just change the reference category</p>
+<img data-src="lecture_be_2_logistic_files/figure-revealjs/unnamed-chunk-25-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"><p>Easier to just change the reference category</p>
 <ul>
 <li>No need to hand-compute the odds ratio of testscore for the Together condition
 <ul>

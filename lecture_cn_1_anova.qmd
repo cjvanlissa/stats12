@@ -247,11 +247,11 @@ $-1 * n_{\text{this category}} / n_{\text{reference category}}$
 
 Given group sizes a = 44, b = 87, c = 7:
 
- | E1 | E2 
+group    | E1  | E2 
 ----|-----|----
 a | 1 | 0 
 b | 0 | 1
-c | $\frac{-7}{44}$ | $\frac{-87}{44}$
+c | $\frac{-44}{7}$ | $\frac{-87}{7}$
 
 ## Understanding Equal Groups
 
@@ -452,11 +452,12 @@ If $k = 5$, we have $(5*4)/2=10$ comparisons.
 
 > **Experiment-wise Type I error $\alpha_{ew}$:** The total risk of committing a Type I error (false positive conclusion) accross multiple (m) tests.
 
+
 $$
 \alpha_{ew} = 1 - (1-\alpha)^m
 $$
 
-So for 3 tests: $\alpha_{ew} = 1 - (1-.05)^10 = .40
+So for 10 tests: $\alpha_{ew} = 1 - (1-.05)^{10} = .40$
 
 40% chance of at least one false positive conclusion may be more than we want
 
