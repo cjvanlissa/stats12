@@ -22,7 +22,7 @@ The default null hypothesis is that all group means are equal, and the alternati
 We test this hypothesis with an F-test for the overall significance of the model.
 You are already familiar with this test from the lecture on sums of square.
 
-One way to think about the F-test in th context of ANOVA is that it compares the size of the variance (differences) in group means, relative to the error variance in the data.
+One way to think about the F-test in the context of ANOVA is that it compares the size of the variance (differences) in group means, relative to the error variance in the data.
 If the differences between group means are large relative to the spread of the data, we observe a significant test.
 In ANOVA, the regression sum of squares is also called the "between-group sum of squares",
 and the error sum of squares is also called "within-group sum of squares".
@@ -299,7 +299,7 @@ Recall that the SSW is the same as SSE; it islabeled "Error" in the column Type 
 
 How do we use the different types of Sum of Squares to calculate the F statistic?
 
-`r longmcq(c(answer = "$\frac{SSB/dfb}{SSW/dfw}$", "$\frac{SSB}{SSW}$", "$\frac{SSW/dfw}{SSB/dfb}$", "$\frac{SSW}{SSB}$")[sample.int(4)])`
+`r longmcq(c(answer = "(SSB/dfb)/(SSW/dfw)", "(SSB)/(SSW)", "(SSW/dfw)/(SSB/dfb)", "(SSW)/(SSB)")[sample.int(4)])`
 
 `r hide("Answer")`
 
