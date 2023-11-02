@@ -277,28 +277,29 @@ ul.task-list li input[type="checkbox"] {
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#formative-test" id="toc-formative-test" class="nav-link active" data-scroll-target="#formative-test"><span class="header-section-number">11</span> Formative Test</a></li>
+<li><a href="#lecture" id="toc-lecture" class="nav-link active" data-scroll-target="#lecture"><span class="header-section-number">11</span> Lecture</a></li>
+  <li><a href="#formative-test" id="toc-formative-test" class="nav-link" data-scroll-target="#formative-test"><span class="header-section-number">12</span> Formative Test</a></li>
   <li>
-<a href="#in-spss" id="toc-in-spss" class="nav-link" data-scroll-target="#in-spss"><span class="header-section-number">12</span> In SPSS</a>
+<a href="#in-spss" id="toc-in-spss" class="nav-link" data-scroll-target="#in-spss"><span class="header-section-number">13</span> In SPSS</a>
   <ul class="collapse">
-<li><a href="#multiple-regression" id="toc-multiple-regression" class="nav-link" data-scroll-target="#multiple-regression"><span class="header-section-number">12.1</span> Multiple Regression</a></li>
+<li><a href="#multiple-regression" id="toc-multiple-regression" class="nav-link" data-scroll-target="#multiple-regression"><span class="header-section-number">13.1</span> Multiple Regression</a></li>
   </ul>
 </li>
   <li>
-<a href="#tutorial" id="toc-tutorial" class="nav-link" data-scroll-target="#tutorial"><span class="header-section-number">13</span> Tutorial</a>
+<a href="#tutorial" id="toc-tutorial" class="nav-link" data-scroll-target="#tutorial"><span class="header-section-number">14</span> Tutorial</a>
   <ul class="collapse">
-<li><a href="#multiple-regression-1" id="toc-multiple-regression-1" class="nav-link" data-scroll-target="#multiple-regression-1"><span class="header-section-number">13.1</span> Multiple Regression</a></li>
-  <li><a href="#unique-contributions" id="toc-unique-contributions" class="nav-link" data-scroll-target="#unique-contributions"><span class="header-section-number">13.2</span> Unique Contributions</a></li>
-  <li><a href="#hierarchical-regression-analysis" id="toc-hierarchical-regression-analysis" class="nav-link" data-scroll-target="#hierarchical-regression-analysis"><span class="header-section-number">13.3</span> Hierarchical Regression Analysis</a></li>
+<li><a href="#multiple-regression-1" id="toc-multiple-regression-1" class="nav-link" data-scroll-target="#multiple-regression-1"><span class="header-section-number">14.1</span> Multiple Regression</a></li>
+  <li><a href="#unique-contributions" id="toc-unique-contributions" class="nav-link" data-scroll-target="#unique-contributions"><span class="header-section-number">14.2</span> Unique Contributions</a></li>
+  <li><a href="#hierarchical-regression-analysis" id="toc-hierarchical-regression-analysis" class="nav-link" data-scroll-target="#hierarchical-regression-analysis"><span class="header-section-number">14.3</span> Hierarchical Regression Analysis</a></li>
   <li>
-<a href="#dummies-and-continuous-predictors" id="toc-dummies-and-continuous-predictors" class="nav-link" data-scroll-target="#dummies-and-continuous-predictors"><span class="header-section-number">13.4</span> Dummies and Continuous Predictors</a>
+<a href="#dummies-and-continuous-predictors" id="toc-dummies-and-continuous-predictors" class="nav-link" data-scroll-target="#dummies-and-continuous-predictors"><span class="header-section-number">14.4</span> Dummies and Continuous Predictors</a>
   <ul class="collapse">
-<li><a href="#examining-income" id="toc-examining-income" class="nav-link" data-scroll-target="#examining-income"><span class="header-section-number">13.4.1</span> Examining Income</a></li>
-  <li><a href="#add-continuous-predictor" id="toc-add-continuous-predictor" class="nav-link" data-scroll-target="#add-continuous-predictor"><span class="header-section-number">13.4.2</span> Add continuous predictor</a></li>
+<li><a href="#examining-income" id="toc-examining-income" class="nav-link" data-scroll-target="#examining-income"><span class="header-section-number">14.4.1</span> Examining Income</a></li>
+  <li><a href="#add-continuous-predictor" id="toc-add-continuous-predictor" class="nav-link" data-scroll-target="#add-continuous-predictor"><span class="header-section-number">14.4.2</span> Add continuous predictor</a></li>
   </ul>
 </li>
-  <li><a href="#nested-models" id="toc-nested-models" class="nav-link" data-scroll-target="#nested-models"><span class="header-section-number">13.5</span> Nested Models</a></li>
-  <li><a href="#one-more-categorical-variable" id="toc-one-more-categorical-variable" class="nav-link" data-scroll-target="#one-more-categorical-variable"><span class="header-section-number">13.6</span> One more Categorical Variable</a></li>
+  <li><a href="#nested-models" id="toc-nested-models" class="nav-link" data-scroll-target="#nested-models"><span class="header-section-number">14.5</span> Nested Models</a></li>
+  <li><a href="#one-more-categorical-variable" id="toc-one-more-categorical-variable" class="nav-link" data-scroll-target="#one-more-categorical-variable"><span class="header-section-number">14.6</span> One more Categorical Variable</a></li>
   </ul>
 </li>
   </ul></nav>
@@ -322,71 +323,74 @@ ul.task-list li input[type="checkbox"] {
 <p>Incremental F-tests are used to determine whether the increase in <span class="math inline">\(R^2\)</span> between two nested models is statistically significant. Recall that <span class="math inline">\(R^2\)</span> represents the proportion of variance in the dependent variable explained by the predictors in the model. The incremental F-test compares the variation in the dependent variable explained by an unconstrained model with the variation explained by a constrained model. The F-test assesses whether the increase in R-squared is greater than what would be expected by chance alone, indicating the significance of adding additional predictors to the model.</p>
 <p>Hierarchical regression refers to an approach where predictors are added to a regression model in blocks, allowing us to assess the additional variance explained by each block of predictors with an incremental F-test. Each block represents a set of predictors, and they are added to the model in a stepwise manner. This approach is useful when we want to determine the significance of adding a single categorical predictor which is represented by multiple dummy variables, or when we want to test whether adding some predictors (e.g., theoretically relevant variables) explain significant variance above and beyond other variables (e.g., demographic covariates). By conducting incremental F-tests at each step, we can assess the significance of adding each block of predictors and their contribution to the overall model.</p>
 <p>In summary, nested models allow us to compare models with different levels of complexity, incremental F-tests help us determine the significance of adding predictors to a model, and hierarchical regression enables the examination of additional variance explained by different blocks of predictors. These concepts are valuable tools in statistical analysis and can provide insights into the relationships between variables and the predictive power of a model.</p>
-<section id="formative-test" class="level1" data-number="11"><h1 data-number="11">
-<span class="header-section-number">11</span> Formative Test</h1>
+<section id="lecture" class="level1" data-number="11"><h1 data-number="11">
+<span class="header-section-number">11</span> Lecture</h1>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/s15b3KvfnO4" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</section><section id="formative-test" class="level1" data-number="12"><h1 data-number="12">
+<span class="header-section-number">12</span> Formative Test</h1>
 <p>A formative test helps you assess your progress in the course, and helps you address any blind spots in your understanding of the material. If you get a question wrong, you will receive a hint on how to improve your understanding of the material.</p>
 <p>Complete the formative test ideally after you’ve seen the lecture, but before the lecture meeting in which we can discuss any topics that need more attention</p>
 <div class="cell" data-layout-align="center">
 <div class="webex-check webex-box">
 <p><strong>Question 1</strong></p>
 Which of the following statements is true about nested models?
-<div id="radio_KXBZIUYPPS" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_KXBZIUYPPS" value=""><span>Model A is nested in Model B if they are identical, except some parameters in model B are constrained.</span></label><label><input type="radio" autocomplete="off" name="radio_KXBZIUYPPS" value=""><span>Model A is nested in Model B if they are identical, except Model A uses a subsample of the sample used to estimate Model B.</span></label><label><input type="radio" autocomplete="off" name="radio_KXBZIUYPPS" value="answer"><span>Model A is nested in Model B if they are identical, except some parameters in model A are constrained.</span></label><label><input type="radio" autocomplete="off" name="radio_KXBZIUYPPS" value=""><span>Nested models always have the same number of predictors.</span></label>
+<div id="radio_BLDAKXJVZT" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_BLDAKXJVZT" value="answer"><span>Model A is nested in Model B if they are identical, except some parameters in model A are constrained.</span></label><label><input type="radio" autocomplete="off" name="radio_BLDAKXJVZT" value=""><span>Nested models always have the same number of predictors.</span></label><label><input type="radio" autocomplete="off" name="radio_BLDAKXJVZT" value=""><span>Model A is nested in Model B if they are identical, except some parameters in model B are constrained.</span></label><label><input type="radio" autocomplete="off" name="radio_BLDAKXJVZT" value=""><span>Model A is nested in Model B if they are identical, except Model A uses a subsample of the sample used to estimate Model B.</span></label>
 </div>
 <p><strong>Question 2</strong></p>
 What can we say about the relative fit of Model A and Model B if Model A is nested in Model B?
-<div id="radio_TWBEBTTEXT" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_TWBEBTTEXT" value="answer"><span>Model B will always have better fit than Model A.</span></label><label><input type="radio" autocomplete="off" name="radio_TWBEBTTEXT" value=""><span>Nested models always have equal fit.</span></label><label><input type="radio" autocomplete="off" name="radio_TWBEBTTEXT" value=""><span>Model A will always have better fit than Model B.</span></label><label><input type="radio" autocomplete="off" name="radio_TWBEBTTEXT" value=""><span>In nested models, one model always has better fit than the other.</span></label>
+<div id="radio_WEWXGWLANQ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_WEWXGWLANQ" value=""><span>Nested models always have equal fit.</span></label><label><input type="radio" autocomplete="off" name="radio_WEWXGWLANQ" value=""><span>In nested models, one model always has better fit than the other.</span></label><label><input type="radio" autocomplete="off" name="radio_WEWXGWLANQ" value="answer"><span>Model B will always have better fit than Model A.</span></label><label><input type="radio" autocomplete="off" name="radio_WEWXGWLANQ" value=""><span>Model A will always have better fit than Model B.</span></label>
 </div>
 <p><strong>Question 3</strong></p>
 In the context of nested models, what does ‘constrained’ mean?
-<div id="radio_VTGDULCLLU" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_VTGDULCLLU" value=""><span>The set of predictors is constrained.</span></label><label><input type="radio" autocomplete="off" name="radio_VTGDULCLLU" value=""><span>Some variables are fixed to 0.</span></label><label><input type="radio" autocomplete="off" name="radio_VTGDULCLLU" value="answer"><span>Some parameters are fixed to 0.</span></label><label><input type="radio" autocomplete="off" name="radio_VTGDULCLLU" value=""><span>The R-squared value of the smaller model is constrained to be lower than that of the larger model.</span></label>
+<div id="radio_ZTDCPXBVQT" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ZTDCPXBVQT" value=""><span>The R-squared value of the smaller model is constrained to be lower than that of the larger model.</span></label><label><input type="radio" autocomplete="off" name="radio_ZTDCPXBVQT" value="answer"><span>Some parameters are fixed to 0.</span></label><label><input type="radio" autocomplete="off" name="radio_ZTDCPXBVQT" value=""><span>The set of predictors is constrained.</span></label><label><input type="radio" autocomplete="off" name="radio_ZTDCPXBVQT" value=""><span>Some variables are fixed to 0.</span></label>
 </div>
 <p><strong>Question 4</strong></p>
 What is the purpose of performing a nested model test?
-<div id="radio_GFOQQSUNAD" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_GFOQQSUNAD" value=""><span>To check if the predictors are correlated with each other.</span></label><label><input type="radio" autocomplete="off" name="radio_GFOQQSUNAD" value=""><span>To compare two different models.</span></label><label><input type="radio" autocomplete="off" name="radio_GFOQQSUNAD" value="answer"><span>To determine whether adding specific predictors significantly improves the model's fit.</span></label><label><input type="radio" autocomplete="off" name="radio_GFOQQSUNAD" value=""><span>To determine if the models are independent of each other.</span></label>
+<div id="radio_LAVHAEKFTU" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_LAVHAEKFTU" value=""><span>To determine if the models are independent of each other.</span></label><label><input type="radio" autocomplete="off" name="radio_LAVHAEKFTU" value=""><span>To check if the predictors are correlated with each other.</span></label><label><input type="radio" autocomplete="off" name="radio_LAVHAEKFTU" value="answer"><span>To determine whether adding specific predictors significantly improves the model's fit.</span></label><label><input type="radio" autocomplete="off" name="radio_LAVHAEKFTU" value=""><span>To compare two different models.</span></label>
 </div>
 <p><strong>Question 5</strong></p>
 Given the nested models: Y = a + b1<em>X1 and Y = a + b1</em>X1 + b2*X2, which model is the ‘constrained’ one?
-<div id="radio_CDZWNBGXTR" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_CDZWNBGXTR" value=""><span>Neither is constrained.</span></label><label><input type="radio" autocomplete="off" name="radio_CDZWNBGXTR" value="answer"><span>Y = a + b1*X1</span></label><label><input type="radio" autocomplete="off" name="radio_CDZWNBGXTR" value=""><span>Y = a + b1<em>X1 + b2</em>X2</span></label><label><input type="radio" autocomplete="off" name="radio_CDZWNBGXTR" value=""><span>It cannot be determined from the information given.</span></label>
+<div id="radio_DMTSTHVQCY" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_DMTSTHVQCY" value=""><span>Neither is constrained.</span></label><label><input type="radio" autocomplete="off" name="radio_DMTSTHVQCY" value=""><span>Y = a + b1<em>X1 + b2</em>X2</span></label><label><input type="radio" autocomplete="off" name="radio_DMTSTHVQCY" value=""><span>It cannot be determined from the information given.</span></label><label><input type="radio" autocomplete="off" name="radio_DMTSTHVQCY" value="answer"><span>Y = a + b1*X1</span></label>
 </div>
 <p><strong>Question 6</strong></p>
 How does the F-test for the R-squared of a single model relate to the F-test for the delta R-squared of two nested models?
-<div id="radio_QIMIKVLRNC" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_QIMIKVLRNC" value=""><span>Both can be seen as R-squared tests; both compare the model of interest to a model with only an intercept, which is a nested model test.</span></label><label><input type="radio" autocomplete="off" name="radio_QIMIKVLRNC" value=""><span>The similarity is only superficial; although both are F-tests, the calculation is different.</span></label><label><input type="radio" autocomplete="off" name="radio_QIMIKVLRNC" value="answer"><span>Both can be seen as delta R-squared tests; the former compares the model of interest to a model with only an intercept, which is a nested model test.</span></label><label><input type="radio" autocomplete="off" name="radio_QIMIKVLRNC" value=""><span>Both are F-tests; these are ratios comparing the explained variance to the unexplained variance.</span></label>
+<div id="radio_KGKPDUQSEF" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_KGKPDUQSEF" value=""><span>The similarity is only superficial; although both are F-tests, the calculation is different.</span></label><label><input type="radio" autocomplete="off" name="radio_KGKPDUQSEF" value=""><span>Both can be seen as R-squared tests; both compare the model of interest to a model with only an intercept, which is a nested model test.</span></label><label><input type="radio" autocomplete="off" name="radio_KGKPDUQSEF" value="answer"><span>Both can be seen as delta R-squared tests; the former compares the model of interest to a model with only an intercept, which is a nested model test.</span></label><label><input type="radio" autocomplete="off" name="radio_KGKPDUQSEF" value=""><span>Both are F-tests; these are ratios comparing the explained variance to the unexplained variance.</span></label>
 </div>
 <p><strong>Question 7</strong></p>
 What can we conclude from an incremental F-test in nested models?
-<div id="radio_AWQJTMZNGZ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_AWQJTMZNGZ" value=""><span>Whether the predictors of the nested models are significantly different.</span></label><label><input type="radio" autocomplete="off" name="radio_AWQJTMZNGZ" value=""><span>Whether the smaller model is significantly better than the larger model.</span></label><label><input type="radio" autocomplete="off" name="radio_AWQJTMZNGZ" value="answer"><span>Whether adding specific predictors significantly improves the model's fit.</span></label><label><input type="radio" autocomplete="off" name="radio_AWQJTMZNGZ" value=""><span>Whether the larger set of predictors has significant multicollinearity.</span></label>
+<div id="radio_EWASERZFRX" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_EWASERZFRX" value=""><span>Whether the smaller model is significantly better than the larger model.</span></label><label><input type="radio" autocomplete="off" name="radio_EWASERZFRX" value=""><span>Whether the larger set of predictors has significant multicollinearity.</span></label><label><input type="radio" autocomplete="off" name="radio_EWASERZFRX" value="answer"><span>Whether adding specific predictors significantly improves the model's fit.</span></label><label><input type="radio" autocomplete="off" name="radio_EWASERZFRX" value=""><span>Whether the predictors of the nested models are significantly different.</span></label>
 </div>
 <p><strong>Question 8</strong></p>
 When performing an incremental F-test, what does the numerator in the F ratio represent?
-<div id="radio_WVJPDXXJLF" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_WVJPDXXJLF" value="answer"><span>The reduction in residual mean square when adding predictors to the model.</span></label><label><input type="radio" autocomplete="off" name="radio_WVJPDXXJLF" value=""><span>The reduction in the number of predictors from the larger to the smaller model.</span></label><label><input type="radio" autocomplete="off" name="radio_WVJPDXXJLF" value=""><span>The increase in the number of degrees of freedom when adding predictors to the model.</span></label><label><input type="radio" autocomplete="off" name="radio_WVJPDXXJLF" value=""><span>The increase in residual mean square when adding predictors to the model.</span></label>
+<div id="radio_ECZTIPGSCP" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ECZTIPGSCP" value=""><span>The increase in the number of degrees of freedom when adding predictors to the model.</span></label><label><input type="radio" autocomplete="off" name="radio_ECZTIPGSCP" value=""><span>The reduction in the number of predictors from the larger to the smaller model.</span></label><label><input type="radio" autocomplete="off" name="radio_ECZTIPGSCP" value=""><span>The increase in residual mean square when adding predictors to the model.</span></label><label><input type="radio" autocomplete="off" name="radio_ECZTIPGSCP" value="answer"><span>The reduction in residual mean square when adding predictors to the model.</span></label>
 </div>
 <p><strong>Question 9</strong></p>
 Which scenario is suitable for using hierarchical regression?
-<div id="radio_QFXBYAMQFZ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_QFXBYAMQFZ" value=""><span>To check the multicollinearity of the predictors.</span></label><label><input type="radio" autocomplete="off" name="radio_QFXBYAMQFZ" value="answer"><span>To determine if theoretically relevant factors explain variance beyond demographic characteristics.</span></label><label><input type="radio" autocomplete="off" name="radio_QFXBYAMQFZ" value=""><span>To compare two unrelated models.</span></label><label><input type="radio" autocomplete="off" name="radio_QFXBYAMQFZ" value=""><span>To test whether each dummy of a categorical predictor with &gt;2 categories explains more variance than the other dummies.</span></label>
+<div id="radio_RVNPCNESKS" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_RVNPCNESKS" value=""><span>To compare two unrelated models.</span></label><label><input type="radio" autocomplete="off" name="radio_RVNPCNESKS" value=""><span>To test whether each dummy of a categorical predictor with &gt;2 categories explains more variance than the other dummies.</span></label><label><input type="radio" autocomplete="off" name="radio_RVNPCNESKS" value="answer"><span>To determine if theoretically relevant factors explain variance beyond demographic characteristics.</span></label><label><input type="radio" autocomplete="off" name="radio_RVNPCNESKS" value=""><span>To check the multicollinearity of the predictors.</span></label>
 </div>
 <p><strong>Question 10</strong></p>
 Given two nested models, one has regression sum of squares = 283.96 and residual sum of squares = 1039.78; the other has regression sum of squares = 202.76 and residual sum of squares = 958.58. What is the delta R-squared between these models?
-<div id="radio_RURESEOHHG" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_RURESEOHHG" value=""><span>Can't say with this information</span></label><label><input type="radio" autocomplete="off" name="radio_RURESEOHHG" value="answer"><span>.065</span></label><label><input type="radio" autocomplete="off" name="radio_RURESEOHHG" value=""><span>.085</span></label><label><input type="radio" autocomplete="off" name="radio_RURESEOHHG" value=""><span>.078</span></label>
+<div id="radio_JMTXLXCIMG" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_JMTXLXCIMG" value=""><span>.085</span></label><label><input type="radio" autocomplete="off" name="radio_JMTXLXCIMG" value=""><span>Can't say with this information</span></label><label><input type="radio" autocomplete="off" name="radio_JMTXLXCIMG" value=""><span>.078</span></label><label><input type="radio" autocomplete="off" name="radio_JMTXLXCIMG" value="answer"><span>.065</span></label>
 </div>
 <p><strong>Question 11</strong></p>
 In a nested model test, numerator degrees of freedom for the F ratio is 4, how many parameters were added to the model?
-<div id="radio_PWRJKTDDBT" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_PWRJKTDDBT" value=""><span>5</span></label><label><input type="radio" autocomplete="off" name="radio_PWRJKTDDBT" value="answer"><span>4</span></label><label><input type="radio" autocomplete="off" name="radio_PWRJKTDDBT" value=""><span>Depends on the model</span></label><label><input type="radio" autocomplete="off" name="radio_PWRJKTDDBT" value=""><span>3</span></label>
+<div id="radio_SBFPEXYCTS" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_SBFPEXYCTS" value="answer"><span>4</span></label><label><input type="radio" autocomplete="off" name="radio_SBFPEXYCTS" value=""><span>5</span></label><label><input type="radio" autocomplete="off" name="radio_SBFPEXYCTS" value=""><span>3</span></label><label><input type="radio" autocomplete="off" name="radio_SBFPEXYCTS" value=""><span>Depends on the model</span></label>
 </div>
 <p><strong>Question 12</strong></p>
 In a nested model test, one model has regression sum of squares = 202.76 and 3 parameters and residual sum of squares = 1039.78, the other model has regression sum of squares = 283.96 and 4 parameters and residual sum of squares = 958.58. There are 387 participants. What is the F-value for the nested model test?
-<div id="radio_RZKGIABHFQ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_RZKGIABHFQ" value=""><span>24.90</span></label><label><input type="radio" autocomplete="off" name="radio_RZKGIABHFQ" value=""><span>Can't say based on this information.</span></label><label><input type="radio" autocomplete="off" name="radio_RZKGIABHFQ" value="answer"><span>32.44</span></label><label><input type="radio" autocomplete="off" name="radio_RZKGIABHFQ" value=""><span>28.29</span></label>
+<div id="radio_NEFBWILCQX" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_NEFBWILCQX" value=""><span>24.90</span></label><label><input type="radio" autocomplete="off" name="radio_NEFBWILCQX" value=""><span>28.29</span></label><label><input type="radio" autocomplete="off" name="radio_NEFBWILCQX" value=""><span>Can't say based on this information.</span></label><label><input type="radio" autocomplete="off" name="radio_NEFBWILCQX" value="answer"><span>32.44</span></label>
 </div>
 </div>
 <div class="webex-solution">
@@ -419,31 +423,31 @@ Show explanations
 <p>The F-value is obtained by first calculating the regression mean square: dividing the difference in regression sum of squares by the difference in model DF: (283.957-202.758)/1, and calculating the residual mean square for the larger model: 958.58/(387-4). The F-value is then ((283.957-202.758)/1)/(958.58/(387-4)).</p>
 </div>
 </div>
-</section><section id="in-spss" class="level1" data-number="12"><h1 data-number="12">
-<span class="header-section-number">12</span> In SPSS</h1>
-<section id="multiple-regression" class="level2" data-number="12.1"><h2 data-number="12.1" class="anchored" data-anchor-id="multiple-regression">
-<span class="header-section-number">12.1</span> Multiple Regression</h2>
-<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/pkM4nXvP5Bo" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
-</section></section><section id="tutorial" class="level1" data-number="13"><h1 data-number="13">
-<span class="header-section-number">13</span> Tutorial</h1>
-<section id="multiple-regression-1" class="level2" data-number="13.1"><h2 data-number="13.1" class="anchored" data-anchor-id="multiple-regression-1">
+</section><section id="in-spss" class="level1" data-number="13"><h1 data-number="13">
+<span class="header-section-number">13</span> In SPSS</h1>
+<section id="multiple-regression" class="level2" data-number="13.1"><h2 data-number="13.1" class="anchored" data-anchor-id="multiple-regression">
 <span class="header-section-number">13.1</span> Multiple Regression</h2>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/pkM4nXvP5Bo" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</section></section><section id="tutorial" class="level1" data-number="14"><h1 data-number="14">
+<span class="header-section-number">14</span> Tutorial</h1>
+<section id="multiple-regression-1" class="level2" data-number="14.1"><h2 data-number="14.1" class="anchored" data-anchor-id="multiple-regression-1">
+<span class="header-section-number">14.1</span> Multiple Regression</h2>
 <p>This assignment revolves around multiple regression with more than two predictors.</p>
 <p>Use the data file called Work.sav. These data were about work characteristics.</p>
 <p>Open the date file in SPSS to get started!</p>
 <p>Consider the following research question(s):</p>
 <p>“To what extent do variety at work, learning possibilities, and independence at work explain pleasure at work, and which of these explanatory characteristics is most important?”</p>
 <p>What are the independent variables in this research question?</p>
-<div id="radio_LSRVSOBJEH" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_LSRVSOBJEH" value="answer"><span>variety, learning possibilities, independence</span></label><label><input type="radio" autocomplete="off" name="radio_LSRVSOBJEH" value=""><span>variety, learning possibilities, independence, pleasure</span></label><label><input type="radio" autocomplete="off" name="radio_LSRVSOBJEH" value=""><span>variety</span></label><label><input type="radio" autocomplete="off" name="radio_LSRVSOBJEH" value=""><span>pleasure</span></label>
+<div id="radio_ZGJBGJTFVA" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ZGJBGJTFVA" value="answer"><span>variety, learning possibilities, independence</span></label><label><input type="radio" autocomplete="off" name="radio_ZGJBGJTFVA" value=""><span>variety, learning possibilities, independence, pleasure</span></label><label><input type="radio" autocomplete="off" name="radio_ZGJBGJTFVA" value=""><span>pleasure</span></label><label><input type="radio" autocomplete="off" name="radio_ZGJBGJTFVA" value=""><span>variety</span></label>
 </div>
 <p>Let’s now run a multiple regression analysis to get the output we need to answer our research question.</p>
 <p>Navigate to Analyze &gt; Regression &gt; Linear. Enter the dependent variable (pleasure at work). Enter the independent variables (variety at work, learning possibilities, independence at work). Paste and run the syntax.</p>
 <p>In the next steps we will go over the output from this analysis.</p>
 <p>What percentage of the total variance in work pleasure is explained by variety at work, learning possibilities, and independence at work altogether? <input class="webex-solveme nospaces" data-tol="0.1" size="4" data-answer="[&quot;26.9&quot;]"></p>
 <p>Which of the following statements correctly summarizes the F-test for the R2 in this analysis?</p>
-<div id="radio_JQRVUENFHU" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_JQRVUENFHU" value=""><span>R-square is significant, F(3, 121) = 14.455, p &lt; .001</span></label><label><input type="radio" autocomplete="off" name="radio_JQRVUENFHU" value=""><span>R-square is not significant, F(3, 121) = 14.455, p &lt; .001</span></label><label><input type="radio" autocomplete="off" name="radio_JQRVUENFHU" value=""><span>R-square is not significant, F(3, 118) = 14.455, p &lt; .001</span></label><label><input type="radio" autocomplete="off" name="radio_JQRVUENFHU" value="answer"><span>R-square is significant, F(3, 118) = 14.455, p &lt; .001</span></label>
+<div id="radio_MXTROJPTKD" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_MXTROJPTKD" value=""><span>R-square is significant, F(3, 121) = 14.455, p &lt; .001</span></label><label><input type="radio" autocomplete="off" name="radio_MXTROJPTKD" value=""><span>R-square is not significant, F(3, 121) = 14.455, p &lt; .001</span></label><label><input type="radio" autocomplete="off" name="radio_MXTROJPTKD" value="answer"><span>R-square is significant, F(3, 118) = 14.455, p &lt; .001</span></label><label><input type="radio" autocomplete="off" name="radio_MXTROJPTKD" value=""><span>R-square is not significant, F(3, 118) = 14.455, p &lt; .001</span></label>
 </div>
 <p>Consider the “Coefficients” table.</p>
 <p>What is the unstandardized regression coefficient for the effect of variety at work on work pleasure? <input class="webex-solveme nospaces" data-tol="0.01" size="5" data-answer="[&quot;0.272&quot;,&quot;.272&quot;]"></p>
@@ -467,16 +471,16 @@ Answer
 </div>
 <p>Which of the predictors has a significant partial effect on pleasure at work when using α =.10? <select class="webex-select"><option value="blank"></option>
 <option value="answer">Variety at work and Learning possibilities</option>
-<option value="">None</option>
-<option value="">Variety at work</option>
 <option value="">Independence at work</option>
-<option value="">Learning possibilities</option></select></p>
+<option value="">Learning possibilities</option>
+<option value="">Variety at work</option>
+<option value="">None</option></select></p>
 <p>In the final couple of steps we went through the output displayed in the “Coefficients” table. Before you proceed with the next assignment, please review the following aspects in the answers your gave:</p>
 <ul>
 <li>When you wrote down the effect of variety at work on pleasure at work in unstandardized form, did you include that it is the effect of the IV on the DV controlled for the other two variables? If not, please keep in mind that this is very important! In multiple regression, all effects are partial (unique) effects, controlling for the other predictors.</li>
 <li>When you wrote down the effect of independence at work on pleasure at work in standardized form, did you indicate that it is the effect in standard deviations, and, again, did you include that it is the effect of IV on the DV controlled for the other two variables (i.e., 1 SD change in independent variable independence at work leads to a .107 SDs change in the predicted score for pleasure at work, controlled for the other variables)?</li>
-</ul></section><section id="unique-contributions" class="level2" data-number="13.2"><h2 data-number="13.2" class="anchored" data-anchor-id="unique-contributions">
-<span class="header-section-number">13.2</span> Unique Contributions</h2>
+</ul></section><section id="unique-contributions" class="level2" data-number="14.2"><h2 data-number="14.2" class="anchored" data-anchor-id="unique-contributions">
+<span class="header-section-number">14.2</span> Unique Contributions</h2>
 <p>Use the data file called Work.sav. These data were about work characteristics.</p>
 <p>In this assignment, we will look more closely at how to evaluate the “added value” of one predictor in addition to the other predictors in an analysis explaining the dependent variable. Or, put the other way around, how much we lose if we would remove a certain predictor from the model.</p>
 <p>We will again consider the analysis in which we predicted pleasure at work by the three predictors learning possibilities, independence at work, and variety at work.</p>
@@ -501,17 +505,17 @@ Answer
 <p>With Learning Possibilities removed, R square equals .211. R-square decreased with .058, which means that Learning Possibilities uniquely explains 5.8% of the total variance in Pleasure at Work. With Independence at Work removed, R square equals .260. R-square decreased with .009, which means that Independence at Work uniquely explains 0.9% of the total variance in Pleasure at Work.</p>
 </div>
 <p>Which predictor explained the least unique variance, controlling for the other two? <select class="webex-select"><option value="blank"></option>
-<option value="">Learning possibilities</option>
+<option value="">Variety at work</option>
 <option value="answer">Independence at work</option>
-<option value="">Variety at work</option></select></p>
-</section><section id="hierarchical-regression-analysis" class="level2" data-number="13.3"><h2 data-number="13.3" class="anchored" data-anchor-id="hierarchical-regression-analysis">
-<span class="header-section-number">13.3</span> Hierarchical Regression Analysis</h2>
+<option value="">Learning possibilities</option></select></p>
+</section><section id="hierarchical-regression-analysis" class="level2" data-number="14.3"><h2 data-number="14.3" class="anchored" data-anchor-id="hierarchical-regression-analysis">
+<span class="header-section-number">14.3</span> Hierarchical Regression Analysis</h2>
 <p>In this assignment we will carry out a hierarchical regression analysis, which is a structured way to compare nested models in linear regression analysis.</p>
 <p>With hierarchical regression analysis we are able to compare two (or more) nested models. Consider the model below:</p>
 <p><span class="math inline">\(Y′ = b0 + b1X1 + b2X2 + b4X4 + b5X5 + b7X7\)</span></p>
 <p>Which of the following models is/are nested within the larger model presented above?</p>
-<div id="radio_OUJVLPNHSZ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_OUJVLPNHSZ" value=""><span><span class="math inline">\(Y′=b0+b1X1+b2X2+b6X6\)</span></span></label><label><input type="radio" autocomplete="off" name="radio_OUJVLPNHSZ" value="answer"><span><span class="math inline">\(Y′=b0+b1X1+b2X2+b4X4\)</span></span></label><label><input type="radio" autocomplete="off" name="radio_OUJVLPNHSZ" value=""><span><span class="math inline">\(Y′=b0+b1X1+b3X3+b4X4\)</span></span></label>
+<div id="radio_QNBHSSHLBO" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_QNBHSSHLBO" value=""><span><span class="math inline">\(Y′=b0+b1X1+b3X3+b4X4\)</span></span></label><label><input type="radio" autocomplete="off" name="radio_QNBHSSHLBO" value=""><span><span class="math inline">\(Y′=b0+b1X1+b2X2+b6X6\)</span></span></label><label><input type="radio" autocomplete="off" name="radio_QNBHSSHLBO" value="answer"><span><span class="math inline">\(Y′=b0+b1X1+b2X2+b4X4\)</span></span></label>
 </div>
 <p>We will now get back to our data on work characteristics using the data file Work.sav.</p>
 <p>Consider the following situation in which researchers are interested in clusters of variables:</p>
@@ -564,10 +568,10 @@ Answer
 </div>
 <p>Suppose three researchers use the output to see whether the R2-change is significant. Researcher I tests at the 10% level, Researcher II tests at the 5% level, and Researcher III tests at the 1% level.</p>
 <p>Which of the researchers will conclude that there is a significant result? <select class="webex-select"><option value="blank"></option>
+<option value="answer">All three researchers</option>
 <option value="">Only researcher III</option>
-<option value="">Only researcher I</option>
 <option value="">Only researcher II</option>
-<option value="answer">All three researchers</option></select></p>
+<option value="">Only researcher I</option></select></p>
 <p>Suppose the researchers summarized the result as follows:</p>
 <p>“Health variables explain 11.3% of the variance in need for recovery.” <select class="webex-select"><option value="blank"></option>
 <option value="">Yes</option>
@@ -594,8 +598,8 @@ Answer
 </button>
 <p>The model with social environment variables explains 14.2% of the total variance in Need for Recovery. Health variables explain an additional 7.8% of variance in Need for Recovery, and this difference significantly differs from zero, <span class="math inline">\(\Delta R^2 = .08, F(2,116) = 5.800, p = .004\)</span>. This means that the social environment variables uniquely explain 7.8% of the total variance in Need for Recovery, while controlling for the health variables. The total explained variance in Need for Recovery is 22.0%, which is significantly different from zero, <span class="math inline">\(F(5, 116) = 6.536, p &lt; .001\)</span>.</p>
 </div>
-</section><section id="dummies-and-continuous-predictors" class="level2" data-number="13.4"><h2 data-number="13.4" class="anchored" data-anchor-id="dummies-and-continuous-predictors">
-<span class="header-section-number">13.4</span> Dummies and Continuous Predictors</h2>
+</section><section id="dummies-and-continuous-predictors" class="level2" data-number="14.4"><h2 data-number="14.4" class="anchored" data-anchor-id="dummies-and-continuous-predictors">
+<span class="header-section-number">14.4</span> Dummies and Continuous Predictors</h2>
 <p>In this assignment we will predict a continuous outcome variable from a dichotomous predictor (i.e.&nbsp;gender).</p>
 <p>The data file that we will use is PublicParticipation.sav.</p>
 <p>This data file contains data on the following variables:</p>
@@ -620,8 +624,8 @@ Answer
 <p>Consult the table Group Statistics.</p>
 <p>“In the sample, men score on average <input class="webex-solveme nospaces" data-tol="0.1" size="3" data-answer="[&quot;6.5&quot;]"> points higher on public participation than women.”</p>
 <p>Which of the following statements correctly summarizes the results of Levene’s test (use α=.05)?</p>
-<div id="radio_RGSXQYJWNG" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_RGSXQYJWNG" value="answer"><span>Levene's test is not significant, no evidence against the assumption of homoscedasticity</span></label><label><input type="radio" autocomplete="off" name="radio_RGSXQYJWNG" value=""><span>Levene's test is significant, evidence against assumption of homoscedasticity.</span></label>
+<div id="radio_QGUNJNBPOT" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_QGUNJNBPOT" value="answer"><span>Levene's test is not significant, no evidence against the assumption of homoscedasticity</span></label><label><input type="radio" autocomplete="off" name="radio_QGUNJNBPOT" value=""><span>Levene's test is significant, evidence against assumption of homoscedasticity.</span></label>
 </div>
 <p>The researchers conclude:</p>
 <p>“We have convincing evidence that the population means of public participation differs between males and females.”</p>
@@ -641,14 +645,14 @@ Explanation
 <option value="answer">Type I error </option>
 <option value="">Type II error</option>
 <option value="">Type I or Type II error </option></select></p>
-<section id="examining-income" class="level3" data-number="13.4.1"><h3 data-number="13.4.1" class="anchored" data-anchor-id="examining-income">
-<span class="header-section-number">13.4.1</span> Examining Income</h3>
+<section id="examining-income" class="level3" data-number="14.4.1"><h3 data-number="14.4.1" class="anchored" data-anchor-id="examining-income">
+<span class="header-section-number">14.4.1</span> Examining Income</h3>
 <p>In the previous steps, we used the independent sample’s t-test to test for mean differences in public participation and found a significant result. Results suggested that males show higher levels of public participation. However, males and females may differ not only in gender, but also in other characteristics that explain differences in public participation. In particular, the researchers hypothesize that income differences may play a role as well. Research has shown that income is positively associated with public participation. So if males and females differ in income (on average), the gender differences in public participation may be partly due to income differences.</p>
 <p>In other words, according to the researchers income may be a <select class="webex-select"><option value="blank"></option>
-<option value="">moderator</option>
 <option value="">collider</option>
 <option value="">predictor</option>
-<option value="answer">confounder</option></select> of the effect of gender.</p>
+<option value="answer">confounder</option>
+<option value="">moderator</option></select> of the effect of gender.</p>
 <p>Before we proceed, let’s first check whether the groups differ on income. Request the means for the variable income for both males and females separately.</p>
 <p>Do the males and females in the sample differ in average income?</p>
 <p>Take your existing syntax for gender differences in Participation, and change it to test for income differences instead:</p>
@@ -661,8 +665,8 @@ Explanation
 <option value="answer">Yes</option>
 <option value="">No</option></select></p>
 <p>The next step is to study gender differences controlled for income differences. This is not possible via the independent samples t-test interface, but it is possible when specifying our model using regression analyses. Regression analysis allows us to study gender differences controlling for other variables.</p>
-</section><section id="add-continuous-predictor" class="level3" data-number="13.4.2"><h3 data-number="13.4.2" class="anchored" data-anchor-id="add-continuous-predictor">
-<span class="header-section-number">13.4.2</span> Add continuous predictor</h3>
+</section><section id="add-continuous-predictor" class="level3" data-number="14.4.2"><h3 data-number="14.4.2" class="anchored" data-anchor-id="add-continuous-predictor">
+<span class="header-section-number">14.4.2</span> Add continuous predictor</h3>
 <p>Before we proceed with the regression analysis including income (we will do this in the next assignment), we will first see what the regression model looks like if we would only use gender as the only predictor in the model.</p>
 <p>Run a regression analysis using Public Participation as the dependent variable, and gender as the independent variable (Analyze &gt; regression &gt; linear). Note that the variable gender is already dummy coded.</p>
 <p>Inspect the table with Coefficients.</p>
@@ -731,12 +735,12 @@ Answer
 </div>
 <p>One researcher argues that there are gender differences in public participation, and gender differences in income, and that income additionally has an effect on public participation.</p>
 <p>In this theoretical model, income is a <select class="webex-select"><option value="blank"></option>
-<option value="answer">Mediator</option>
+<option value="">Moderator</option>
 <option value="">Confounder</option>
 <option value="">Common cause</option>
-<option value="">Moderator</option></select></p>
-</section></section><section id="nested-models" class="level2" data-number="13.5"><h2 data-number="13.5" class="anchored" data-anchor-id="nested-models">
-<span class="header-section-number">13.5</span> Nested Models</h2>
+<option value="answer">Mediator</option></select></p>
+</section></section><section id="nested-models" class="level2" data-number="14.5"><h2 data-number="14.5" class="anchored" data-anchor-id="nested-models">
+<span class="header-section-number">14.5</span> Nested Models</h2>
 <p>Finally, we might want to know how much unique variance is explained by gender, <em>after</em> controlling for income. To this end, we would perform a nested model test.</p>
 <p>Conduct this test as you have done before, using the graphical interface or syntax. Remember: Enter Income first, then Gender - and ask for the <span class="math inline">\(R^2\)</span> change statistics.</p>
 <p>Let’s inspect the Model Summary table.</p>
@@ -746,10 +750,10 @@ Answer
 <p>The Model Summary table also reports the results of the F-tests, which tests whether the change in R2 is significant.</p>
 <p>Suppose three researchers use the output to see whether the R2-change is significant. Researcher I tests at the 10% level, Researcher II tests at the 5% level, and Researcher III tests at the 1% level.</p>
 <p>Which of the researchers will conclude that there is a significant result? <select class="webex-select"><option value="blank"></option>
-<option value="">Only researcher I</option>
+<option value="answer">All three researchers</option>
 <option value="">Only researcher III</option>
-<option value="">Only researcher II</option>
-<option value="answer">All three researchers</option></select></p>
+<option value="">Only researcher I</option>
+<option value="">Only researcher II</option></select></p>
 <p>Report the results of your analysis (include all relevant statistics: test statistics, degrees of freedom, p-values).</p>
 <p>Include in your answer:</p>
 <ul>
@@ -763,8 +767,8 @@ Answer
 </button>
 <p>Income explains 39.1% of variance in Participation, which is significantly greater than zero, <span class="math inline">\(F(1,41) = 26.32, p &lt; .001\)</span>. Gender explains an additional 18.2% of variance in Participation, and this difference significantly differs from zero, <span class="math inline">\(\Delta R^2 = .18, F(1,40) = 17.06, p &lt; .001\)</span>. The total explained variance in Participation by Income and Gender is 55.2%, which is significantly different from zero, <span class="math inline">\(F(2, 40) = 26.85, p &lt; .001\)</span>.</p>
 </div>
-</section><section id="one-more-categorical-variable" class="level2" data-number="13.6"><h2 data-number="13.6" class="anchored" data-anchor-id="one-more-categorical-variable">
-<span class="header-section-number">13.6</span> One more Categorical Variable</h2>
+</section><section id="one-more-categorical-variable" class="level2" data-number="14.6"><h2 data-number="14.6" class="anchored" data-anchor-id="one-more-categorical-variable">
+<span class="header-section-number">14.6</span> One more Categorical Variable</h2>
 <p>Let’s finish this assignment by adding one more categorical variable, and seeing whether it has a significant unique effect after controlling for Income and Gender. We will use Education level, which has three categories. We thus have to create two dummy variables to account for this variable.</p>
 <p>First, make the dummy variables, using low Education status as reference category.</p>
 <p>Remember that these dummies together code for one variable, so you must add them to the model in the same step together.</p>
