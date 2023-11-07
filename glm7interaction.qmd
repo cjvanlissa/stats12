@@ -112,6 +112,10 @@ Instead of computing the effect of one variable for all unique values of a binar
 
 By centering the interacting predictors at their mean value +/- 1SD and re-computing the interaction term using those transformed predictors, we obtain simple slopes at different levels of the moderator. Note that centering at $M + 1SD$ gives us the effect for people who score 1SD **below** the mean (you're sliding the distribution to the right on the number line, until people who used to score -1SD are centered at 0).
 
+# Lecture
+
+{{< video https://www.youtube.com/embed/fGj_t72VJPk >}}
+
 # Formative Test
 
 Complete the formative test ideally after you’ve seen the lecture, but before the lecture meeting in which we can discuss any topics that need more attention

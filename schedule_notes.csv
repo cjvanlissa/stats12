@@ -12,20 +12,20 @@ Week,Activity,Day,Topic,File,Lecture,Filmed
 38,lectures,Monday,"Testing: Hypotheses, p-values, Type I, Type II errors and Power. Z-test and (one-sample) t-test.",testing.qmd,lecture4.qmd,1
 39,lectures,Monday,General Linear Model (GLM) I: Bivariate regression ,glm1.qmd,lecture5.qmd,1
 40,lectures,Monday,"GLM II: Sums of squares, explained variance, and correlation",glm2.qmd,lecture6.qmd,1
-41,lectures,Monday,GLM III: Differences between two groups: dummy variables and two-sample t-test ,glm3binary.qmd,lecture7.qmd,
+41,lectures,Monday,GLM III: Differences between two groups: dummy variables and two-sample t-test ,glm3binary.qmd,lecture7.qmd,1
 ,,,,,,
-43,lectures,Monday,GLM IV: Differences between more groups: dummy variables and ANOVA,glm4anova.qmd,lecture8.qmd,
-44,lectures,Monday,GLM V: More than one predictor - multiple regression analysis,glm5multiple.qmd,lecture9.qmd,
-45,lectures,Monday,GLM VI: Comparing nested models,glm6nested.qmd,lecture10.qmd,
-46,lectures,Monday,Major BE: GLM VII: Interaction effects (moderation analysis),glm7_interaction.qmd,lecture_ss_be1_interaction.qmd,
+43,lectures,Monday,GLM IV: Differences between more groups: dummy variables and ANOVA,glm4anova.qmd,lecture8.qmd,1
+44,lectures,Monday,GLM V: More than one predictor - multiple regression analysis,glm5multiple.qmd,lecture9.qmd,1
+45,lectures,Monday,GLM VI: Comparing nested models,glm6nested.qmd,lecture10.qmd,1
+46,lectures,Monday,Major BE: GLM VII: Interaction effects (moderation analysis),glm7_interaction.qmd,lecture_ss_be1_interaction.qmd,1
 47,lectures,Monday,Major BE: GLM VIII: Regression with binary outcomes - logistic regression,logistic.qmd,lecture_be_2_logistic.qmd,
 ,,,,,,
 ,,,,,,
-46,lectures,Monday,Major SS: GLM VII: Interaction effects (moderation analysis),glm7_interaction.qmd,lecture_ss_be1_interaction.qmd,
+46,lectures,Monday,Major SS: GLM VII: Interaction effects (moderation analysis),glm7_interaction.qmd,lecture_ss_be1_interaction.qmd,1
 47,lectures,Monday,"Major SS: Psychometrics I: Reliability and validity, reliability analysis",reliability_validity.qmd,lecture_ss_2_reliability.qmd,
 48,lectures,Monday,"Major SS: Psychometrics II: Reliability and validity, factor analysis",data_reduction.qmd,lecture_ss_3_pca.qmd,
 ,,,,,,
-46,lectures,Monday,Major CN: GLM IV+: Planned comparisons and post hoc tests in ANOVA,glm_contrasts.qmd,lecture_cn_1_anova.qmd,
+46,lectures,Monday,Major CN: GLM IV+: Planned comparisons and post hoc tests in ANOVA,glm_contrasts.qmd,lecture_cn_1_anova.qmd,1
 47,lectures,Monday,"Major CN: GLM IV+: Factorial designs, interaction effects, and effect size in ANOVA ",factorial.qmd,lecture_factorial.qmd,
 48,lectures,Monday,Major CN: GLM IV+: ANCOVA (ANOVA with continuous control variables),ancova.qmd,lecture_ancova.qmd,
 49,lectures,Monday,Major CN: GLM IV+: Repeated measures ANOVA,rmanova.qmd,lecture_rmanova.qmd,

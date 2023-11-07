@@ -44,6 +44,9 @@ To control the experiment-wise Type I error rate, we can apply a Bonferroni corr
 
 Planning to test specific hypotheses before conducting the study also helps control Type I error.
 
+# Lecture
+
+{{< video https://www.youtube.com/embed/8UDpTwXoINU >}}
 
 # Tutorial
 

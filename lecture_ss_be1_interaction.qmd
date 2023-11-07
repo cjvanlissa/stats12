@@ -1,5 +1,5 @@
 ---
-title: "Lecture 11 - GLM VII\nInteraction effects"
+title: "GLM VI+\nInteraction effects"
 author:   "Caspar J. van Lissa"
 date:     "`r format(Sys.Date(), '%d %b %Y')`"
 format: revealjs
@@ -460,14 +460,14 @@ invplot
 ```
 
 
-## Complete the formula
+## Complete the formula {.smaller}
 
 $\hat{Y}_i = a + b_1*X_{1i} + b_2 * X_{2i}+ b_3 * (X_{1i} * X_{2i})$
 
 * Y is involvement, X1 is gender roles, X2 is work
 * Imagine we have found these coefficients:
 
-$\hat{Y}_i &= 12.50 + 1.50*X_{1i} - .20 * X_{2i} + 0.07 * (X_{1i} * X_{2i})$
+$\hat{Y}_i = 12.50 + 1.50*X_{1i} - .20 * X_{2i} + 0.07 * (X_{1i} * X_{2i})$
 
 What's the effect of gender roles for someone who works 40 hours?
 
@@ -475,7 +475,7 @@ $\hat{Y}_i = 12.50 + 1.50*X_{1i} - .20 * 40 + 0.07 * (40 * X_{1i})$
 
 $\hat{Y}_i = (12.50- .20 * 40) + (1.50+0.07 * 40)*X_{1i} = 4.5 + 4.3*X_{1i}$
 
-## Complete the formula
+## Complete the formula {.smaller}
 
 $\hat{Y}_i = a + b_1*X_{1i} + b_2 * X_{2i}+ b_3 * (X_{1i} * X_{2i})$
 
@@ -489,7 +489,7 @@ $\hat{Y}_i = 12.50 + 1.50*0 - .20 * X_{2i} + 0.07 * (0 * X_{2i})$
 
 $\hat{Y}_i = (12.50 + 1.50*0) - (.20 + 0.07 * 0) * X_{2i} = 12.50 - .20 * X_{2i}$
 
-## Centering
+## Centering {.smaller}
 
 As the effect of X1 is now dependent on the value of X2, and vice versa, it's essential to **center the variables**
 
