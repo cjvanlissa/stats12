@@ -585,7 +585,7 @@ Recall that sums of squares do not have a meaningful unit
 
 * Their value changes depending on the scale of your dependent variable, number of observations, etc
 * We standardize the sum of squares to put it on a meaningful 0-1 scale
-* For regression, the explained variance (SSR/SSE) is called $R^2$
+* For regression, the explained variance (SSR/SST) is called $R^2$
 
 ## Eta Squared
 

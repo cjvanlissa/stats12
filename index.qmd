@@ -36,7 +36,7 @@ suppressWarnings(library(DT))
 # lubridate::isoweek(as.Date("13-09-2021", format = "%d-%m-%Y"))
 # lubridate::parse_date_time("37", orders = "%W")
 # lubridate::isoweek(as.Date("13-09-2021", format = "%d-%m-%Y"))
-DT::datatable(schedule[ordr, ], rownames = FALSE, options = list(pageLength = nrow(schedule)))
+DT::datatable(schedule[ordr, ], rownames = FALSE, options = list(pageLength = nrow(schedule)), escape = FALSE)
 ```
 
 ## Using this GitBook

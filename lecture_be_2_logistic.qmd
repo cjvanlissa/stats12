@@ -3,7 +3,7 @@ title: "GLM VIII\nLogistic Regression"
 author:   "Caspar J. van Lissa"
 date:     "`r format(Sys.Date(), '%d %b %Y')`"
 format: revealjs
-#server: shiny
+server: shiny
 ---
 
 ```{r}
@@ -11,6 +11,7 @@ library(kableExtra)
 require(gridExtra)
 library(tidySEM)
 library(scales)
+library(shiny)
 library(eulerr)
 source("functions.r")
 options(knitr.kable.NA = '')
@@ -334,7 +335,7 @@ fluidRow(
 ```
 
 
-```{r eval =F}
+```{r eval =T}
 #| context: server
 library(ggplot2)
 funx <- function(x, a, b){
@@ -445,6 +446,7 @@ OR=1 Exposure does not affect odds of outcome
 OR>1 Exposure associated with higher odds of outcome  
 OR<1 Exposure associated with lower odds of outcome
 For binary predictors, we can calculate the "odds"
+
 ## Testing Coefficients
 
 * Use the reported regression slope and its standard error
@@ -469,7 +471,7 @@ The *Likelihood* $L$ (from ML estimation) can be used as model fit measure
 
 * If we multiply the log likelihood by -2, we get a chi-square distributed test statistic: $-2LL$
 * Perform a chi square test to determine if the overall model is significant
-    + The null hypothesis is that the 
+
 
 ## Nested Model Test
 

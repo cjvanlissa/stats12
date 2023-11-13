@@ -17,17 +17,15 @@ Week,Activity,Day,Topic
 43,lectures,Monday,GLM IV: Differences between more groups: dummy variables and ANOVA
 44,lectures,Monday,GLM V: More than one predictor - multiple regression analysis
 45,lectures,Monday,GLM VI: Comparing nested models
-46,lectures,Monday,Major BE: GLM VII: Interaction effects (moderation analysis)
-47,lectures,Monday,Major BE: GLM VIII: Regression with binary outcomes - logistic regression
-48,lectures,Monday,Major BE: Logistic regression (II)
-49,lectures,Monday,Major BE: Interval estimation and testing 
-46,lectures,Monday,Major SS: GLM VII: Interaction effects (moderation analysis)
-47,lectures,Monday,"Major SS: Psychometrics I: Reliability and validity, reliability analysis"
-48,lectures,Monday,"Major SS: Psychometrics II: Reliability and validity, factor analysis"
-49,lectures,Monday,"Major SS: Psychometrics III: Reliability and validity, factor analysis"
-46,lectures,Monday,"Major CN: GLM IV+: Effect size, post-hoc tests and planned comparison in ANOVA"
-47,lectures,Monday,Major CN: GLM IV+: Factorial designs and interaction effects in ANOVA 
-48,lectures,Monday,Major CN: GLM IV+: ANCOVA (ANOVA with continuous control variables)
+46,lectures,Monday,Major BE: GLM VII: Interaction
+47,lectures,Monday,Major BE: GLM VIII: Logistic regression
+48,lectures,Monday,Major BE: Confindence Intervals
+46,lectures,Monday,Major SS: GLM VII: Interaction
+47,lectures,Monday,Major SS: Psychometrics I: Reliability and validity
+48,lectures,Monday,Major SS: Psychometrics II: Dimension Reduction
+46,lectures,Monday,Major CN: GLM IV+: Contrasts
+47,lectures,Monday,Major CN: GLM IV+: Factorial ANOVA 
+48,lectures,Monday,Major CN: GLM IV+: ANCOVA
 49,lectures,Monday,Major CN: GLM IV+: Repeated measures ANOVA
 ,,,
 35,Lab session,Thursday,BE Introduction to SPSS
@@ -60,12 +58,12 @@ Week,Activity,Day,Topic
 44,Lab session,Wednesday,CN MRA
 45,Lab session,Wednesday,CN Model comparison & dummies
 ,,,
-46,Lab session,,Major BE: Moderation
-46,Lab session,,Major CN: Contrasts and post hoc tests 
-46,Lab session,,Major SS: Moderation
+46,Lab session,,Major BE: Interaction @sec-interaction
+46,Lab session,,Major CN: Contrasts
+46,Lab session,,Major SS: Interaction
 47,Lab session,,Major CN: Factorial ANOVA
 47,Lab session,,Major SS: Reliability
-48,Lab session,,Major BE: Logistic regression
+47,Lab session,,Major BE: Logistic regression
 48,Lab session,,Major CN: ANCOVA
-49,Lab session,,Major BE: 
-49,Lab session,,Major SS: PCA & EFA
+48,Lab session,,Major BE: Confidence Intervals
+48,Lab session,,Major SS: Dimension Reduction
