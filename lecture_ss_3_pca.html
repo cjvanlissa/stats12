@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.3.427">
 
   <meta name="author" content="Caspar J. van Lissa">
-  <meta name="dcterms.date" content="2023-08-04">
+  <meta name="dcterms.date" content="2023-11-17">
   <title>Psychometrics II: Dimension Reduction</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -323,6 +323,8 @@
   
   <script src="lecture_ss_3_pca_files/libs/kePrint-0.0.1/kePrint.js"></script>
   <link href="lecture_ss_3_pca_files/libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+  <link href="lecture_ss_3_pca_files/libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet">
+  <script src="lecture_ss_3_pca_files/libs/bsTable-3.3.7/bootstrapTable.js"></script>
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -339,7 +341,7 @@ Caspar J. van Lissa
 </div>
 </div>
 
-  <p class="date">2023-08-04</p>
+  <p class="date">2023-11-17</p>
 </section>
 <section class="slide level2">
 
@@ -751,27 +753,27 @@ Caspar J. van Lissa
 <td style="text-align: left; font-weight: bold; color: white !important; background-color: green !important;"></td>
 <td style="text-align: right; font-weight: bold; color: white !important; background-color: green !important;">1</td>
 <td style="text-align: right; font-weight: bold; color: white !important; background-color: green !important;">1.20</td>
-<td style="text-align: right; font-weight: bold; color: white !important; background-color: green !important;">1.27</td>
+<td style="text-align: right; font-weight: bold; color: white !important; background-color: green !important;">1.26</td>
 <td style="text-align: right; font-weight: bold; color: white !important; background-color: green !important;">2.81</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"></td>
 <td style="text-align: right;">2</td>
-<td style="text-align: right;">1.10</td>
-<td style="text-align: right;">1.17</td>
+<td style="text-align: right;">1.11</td>
+<td style="text-align: right;">1.16</td>
 <td style="text-align: right;">0.93</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"></td>
 <td style="text-align: right;">3</td>
-<td style="text-align: right;">1.02</td>
+<td style="text-align: right;">1.03</td>
 <td style="text-align: right;">1.06</td>
 <td style="text-align: right;">0.79</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"></td>
 <td style="text-align: right;">4</td>
-<td style="text-align: right;">0.96</td>
+<td style="text-align: right;">0.97</td>
 <td style="text-align: right;">1.00</td>
 <td style="text-align: right;">0.63</td>
 </tr>
@@ -785,8 +787,8 @@ Caspar J. van Lissa
 <tr class="even">
 <td style="text-align: left;"></td>
 <td style="text-align: right;">6</td>
-<td style="text-align: right;">0.82</td>
-<td style="text-align: right;">0.88</td>
+<td style="text-align: right;">0.81</td>
+<td style="text-align: right;">0.86</td>
 <td style="text-align: right;">0.36</td>
 </tr>
 </tbody>
@@ -2010,16 +2012,16 @@ h_j^2 = \sum_{i = 1}^m L_{j,i}^2
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: right; font-weight: bold; color: white !important; background-color: green !important;">1</td>
-<td style="text-align: right; font-weight: bold; color: white !important; background-color: green !important;">81.12</td>
-<td style="text-align: right; font-weight: bold; color: white !important; background-color: green !important;">43</td>
-<td style="text-align: right; font-weight: bold; color: white !important; background-color: green !important;">-123.65</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">2</td>
+<td style="text-align: right;">1</td>
 <td style="text-align: right;">238.33</td>
 <td style="text-align: right;">54</td>
 <td style="text-align: right;">-18.83</td>
+</tr>
+<tr class="even">
+<td style="text-align: right; font-weight: bold; color: white !important; background-color: green !important;">2</td>
+<td style="text-align: right; font-weight: bold; color: white !important; background-color: green !important;">81.12</td>
+<td style="text-align: right; font-weight: bold; color: white !important; background-color: green !important;">43</td>
+<td style="text-align: right; font-weight: bold; color: white !important; background-color: green !important;">-123.65</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">3</td>
@@ -2033,7 +2035,7 @@ h_j^2 = \sum_{i = 1}^m L_{j,i}^2
 
 </div>
 </div>
-<p>A one-factor model has the lowest BIC!</p>
+<p>A 2-factor model has the lowest BIC!</p>
 </section>
 <section id="maximum-number-of-factors" class="slide level2">
 <h2>Maximum Number of Factors</h2>
@@ -2660,7 +2662,10 @@ h_j^2 = \sum_{i = 1}^m L_{j,i}^2
 </ul>
 <p><span class="math display">\[
 RMSEA = \frac{\sqrt{\chi^2 - df}}{\sqrt{(n - 1)*df}}
-\]</span> ## Latent Variable Reliability {.smaller}</p>
+\]</span></p>
+</section>
+<section id="latent-variable-reliability" class="slide level2 smaller">
+<h2>Latent Variable Reliability</h2>
 <p>Recall that Cronbach’s alpha assumes that each items is equally important</p>
 <ul>
 <li>I.e., all factor loadings should be identical</li>
@@ -2707,7 +2712,7 @@ RMSEA = \frac{\sqrt{\chi^2 - df}}{\sqrt{(n - 1)*df}}
 <ul>
 <li>Francis’ standardiz scores 1, 3, and 2 on these variables</li>
 </ul></li>
-<li>Calculate <span class="math inline">\((.85*4 + .80*6+.14*5) / (.85^2 + .80^2 + .14^2) = 2.44\)</span></li>
+<li>Calculate <span class="math inline">\((.85*1 + .80*3+.14*2) / (.85^2 + .80^2 + .14^2) = 2.44\)</span></li>
 <li>Francis’ factor score is 2.44</li>
 </ul>
 <!-- as.matrix(scale(data)) %*% t(pracma::pinv(loadings))) -->

@@ -138,7 +138,7 @@ DiStefano, C., Zhu, M., & Mindrila, D. (2009). Understanding and Using Factor Sc
 
 # Lecture
 
-
+{{< video https://www.youtube.com/embed/EF2Jcsh4OqA >}}
 
 # Formative Test
 

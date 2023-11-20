@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.3.427">
 
   <meta name="author" content="Caspar J. van Lissa">
-  <meta name="dcterms.date" content="2023-08-12">
+  <meta name="dcterms.date" content="2023-11-20">
   <title>GLM Repeated Measures ANOVA</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -323,6 +323,8 @@
   
   <script src="lecture_rm_anova_files/libs/kePrint-0.0.1/kePrint.js"></script>
   <link href="lecture_rm_anova_files/libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+  <link href="lecture_rm_anova_files/libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet">
+  <script src="lecture_rm_anova_files/libs/bsTable-3.3.7/bootstrapTable.js"></script>
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -339,7 +341,7 @@ Caspar J. van Lissa
 </div>
 </div>
 
-  <p class="date">2023-08-12</p>
+  <p class="date">2023-11-20</p>
 </section>
 <section id="within-participants-designs" class="slide level2">
 <h2>Within-participants Designs</h2>
@@ -431,7 +433,7 @@ Caspar J. van Lissa
 <li>Effect of time is confounded with effect of condition</li>
 <li>Effect of time may have a clearly defined functional form which RM-ANOVA is ignoring
 <ul>
-<li>E.g.: PTSD probably changes <em>after</em> deployment, and then increases or decreases over time</li>
+<li>E.g.: depression probably changes <em>after</em> deployment, and then increases or decreases over time</li>
 <li>Techniques like “Structural Equation Modeling” allow you to describe this</li>
 </ul></li>
 </ul>
@@ -623,11 +625,11 @@ Caspar J. van Lissa
 <h1>More than Two Measurements</h1>
 
 </section>
-<section id="example-ptsd-in-military-personnel" class="slide level2">
-<h2>Example: PTSD in Military Personnel</h2>
+<section id="example-depression-in-military-personnel" class="slide level2">
+<h2>Example: depression in Military Personnel</h2>
 <ul>
 <li>Data on 978 Dutch military personnel who have been deployed</li>
-<li>4 repeated measures of PTSD symptoms on the SCL scale
+<li>4 repeated measures of depression symptoms on the SCL scale
 <ul>
 <li>1 pre-deployment, 3 every 6 months post-deployment</li>
 </ul></li>
@@ -767,6 +769,15 @@ Caspar J. van Lissa
 <h2>Mixed Design ctd</h2>
 <p>This is essentially a factorial design: 4(Time: T1, T2, T3, T4) x 2(Combat exposure: Low vs.&nbsp;High)</p>
 <div class="cell" data-layout-align="center">
+<div class="cell-output cell-output-stdout">
+<pre><code>  scl1 scl2 scl3 scl4 Exposure id
+1   19   21   20   20      Low  1
+2   22   18   20   21      Low  2
+3   21   29   27   26     High  3
+4   22   24   25   22      Low  4
+5   18   17   19   19      Low  5
+6   19   19   19   20      Low  6</code></pre>
+</div>
 <div class="cell-output-display">
 <table data-quarto-postprocess="true">
 <thead>

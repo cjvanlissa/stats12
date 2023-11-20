@@ -10,7 +10,8 @@ library(kableExtra)
 library(tidySEM)
 options(knitr.kable.NA = '')
 depression <- foreign::read.spss("data/depression.sav", to.data.frame = TRUE)
-depression_long <- foreign::read.spss("data/depression_long.sav", to.data.frame = TRUE)
+
+#depression_long <- foreign::read.spss("data/depression_long.sav", to.data.frame = TRUE)
 ```
 
 
@@ -277,7 +278,11 @@ Between-participants Factor:
 This is essentially a factorial design:  4(Time: T1, T2, T3, T4) x 2(Combat exposure: Low vs. High)
 
 ```{r}
-tab <- tapply(depression_long$scl, list(depression_long$Exposure, factor(depression_long$time)), mean)
+head(depression)
+tab <- sapply(depression[1:4], function(x){
+  tapply(x, depression$Exposure, mean)
+})
+
 colnames(tab) <- paste0("T", 1:4)
 rownames(tab) <- paste0(rownames(tab), " exposure")
 kableExtra::kbl(tab, digits = 2)

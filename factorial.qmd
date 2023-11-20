@@ -23,6 +23,10 @@ Because each factor may be represented by multiple dummies, we can't use individ
 In addition to significance tests, effect size measures help us understand the practical importance of the effects observed in factorial ANOVA. Eta squared and partial eta squared are common effect size measures that quantify the proportion of variance explained by each factor or interaction, relative to the total variance or unexplained variance, respectively.
 Eta squared is just a different name for R squared; partial eta squared is something different, and typically only reported for ANOVA.
 
+# Lecture
+
+{{< video https://www.youtube.com/embed/fBQoxrleFoM >}}
+
 # Formative Test
 
 A formative test helps you assess your progress in the course, and helps you address any blind spots in your understanding of the material. If you get a question wrong, you will receive a hint on how to improve your understanding of the material.

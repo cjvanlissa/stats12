@@ -393,7 +393,7 @@ Log odds (of scoring 1 on Y) for someone who scores 0 on all predictors
     
 For example, in our model with Chimps, $a `r report(coef(res)[1])`$
 
-The probability of acting prosocially for a chimp with a centered test score of 0 (= mean test score) is
+The probability of acting prosocially for a chimp with a test score of 0 is
 
 $\frac{\text{e}^{`r report(coef(res)[1], equals = F)`}}{1+\text{e}^{`r report(coef(res)[1], equals = F)`}} `r tidySEM::report(exp(coef(res)[1])/(1+exp(coef(res)[1])))`$
 
