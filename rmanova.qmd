@@ -37,6 +37,10 @@ If you do not, or can not, assume sphericity, you can use a corrected test for t
 
 A mixed design involves both within-participants and between-participants factors. This factorial design allows researchers to examine interactions between these factors, such as the interplay between time and exposure conditions. Post hoc analyses can be used to understand the direction and significance of these interactions.
 
+# Lecture
+
+{{< video https://www.youtube.com/embed/K1elAF1SFrM >}}
+
 # Formative Test
 
 A formative test helps you assess your progress in the course, and helps you address any blind spots in your understanding of the material. If you get a question wrong, you will receive a hint on how to improve your understanding of the material.
