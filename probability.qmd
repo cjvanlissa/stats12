@@ -442,7 +442,7 @@ Data > Select cases. SPSS opens a new window.
 
 Chose “If condition is satisfied” and chose ‘if’. SPSS opens a new window again.
 
-First select the variable CountMiss (Number of Missings) and using the calculator below specify that we want to select cases with no missings. See the more info section what the final screen should look like. Click on Continue.
+Specify the condition `CountMiss = 0` to select cases with no missings.
 
 Make sure that the output is specified as “Filter out unselected cases”. Click on OK.
 
