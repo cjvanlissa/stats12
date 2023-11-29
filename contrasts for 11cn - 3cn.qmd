@@ -11,109 +11,93 @@ Researchers are interested in the relationship between age and depression.
 
 They hypothesized that older people are more vulnerable to depressive thoughts than younger people.
 
-To test their research hypothesis, they collected data in a random sample of 164 persons from the general population. Open the dataset HADShealthyGroup.sav Download HADShealthyGroup.sav.
+To test their research hypothesis, they collected data in a random sample of 164 persons from the general population. Open the dataset `HADShealthyGroup.sav`.
 
- 
-Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
-QuestionEdit this question Delete this question
 Run a linear regression analysis using age as the independent variable and depression as the dependent variable.
 
 Proceed as follows:
 
 Navigate to Analyze > Regression > Linear
+
 Select the correct dependent and independent variable.
+
 Paste and run the syntax.
  
-Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
-Question1 ptsEdit this question Delete this question
-How much of the total variance in Depression is explained by Age?
-Correct Answers
-0.02 (with margin: 0)
- 
-Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
-UnansweredQuestion1 ptsEdit this question Delete this question
+How much of the total variance in Depression is explained by Age? `r fitb(0.02, num = T, tol = .005)`
+
 What can you say about the effect size? Would you say it’s a lot?
-General answer comments
+
+`r hide("Answer")`
 To me, 2% of explained variance does not seem like a lot. There are probably better predictors of depression (i.e., predictors that explain more of the variance in depression).
- 
-Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
-Question1 ptsEdit this question Delete this question
-Is the explained variance significant at the 10% level?
-Correct answer
-  No 
-  Yes 
-General answer comments
+
+`r unhide()`
+
+True or false: The explained variance is significant at the 10% level. `r torf(FALSE)` 
+
+`r hide("Answer")`
 To conclude anything about the significance of the proportion explain variance of this model, we can look at the ANOVA table or ask SPSS to show the R2-change. This shows us that the explained variance in this model is not significant compared to an empty model (i.e. including no predictors), F(1,140) = 2.836, p = .094.
  
-Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
-UnansweredQuestion1 ptsEdit this question Delete this question
+
+`r unhide()`
+
 Write down the estimated regression line using the unstandardized coefficients.
-In other words, complete:
 
-Y′=…
+$Y^{'} = `r fitb(1.89, num = T, tol = .01)` + `r fitb(0.02, num = T, tol = .005)`*\text{age}$
 
-Write down, in your own words, the interpretation of all regression coefficients.
+How can we interpret the constant?
 
-General answer comments
-𝑌′=1.885+0.023∗𝐴𝑔𝑒
+`r longmcq(c(
+answer = "The predicted level of depression when age would be 0.",
+"The average level of depression.",
+"The average age in the sample.",
+"The predicted level of depression for the average age."
+)[sample.int(4)])`
 
-Constant: The predicted basic level of depression score (when age would be 0).
-
- 
-Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
-Question1 ptsEdit this question Delete this question
 Consult the table with the coefficients again
 
-Can we conclude from this table that the effect of age is significant at the 10% level?
+True or false: We can conclude from this table that the effect of age is significant at the 10% level. `r torf(TRUE)`
 
-Correct answer
-  Yes 
-  No 
-General answer comments
+`r hide("Answer")`
 To conclude whether the effect of Age on Depression is significant, we look at the t-test for the estimated coefficient.
 
 We should conclude that the effect of Age on Depression is significant when using α=.10, t(140) = 1.684, p = .094.
+`r unhide()`
 
- 
-Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
-UnansweredQuestion1 ptsEdit this question Delete this question
 One of the assumptions of bivariate regression analysis is that the relationship between the independent and dependent variable is linear.
 
 State in your own words what this assumption entails.
 
-General answer comments
+`r hide("Answer")`
 The assumption of a linear relationship entails that the relationship between the variables can be described with a straight line.
+
+`r unhide()`
+
  
-Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
-Question1 ptsEdit this question Delete this question
 How would you evaluate the assumption of linearity graphically? Do it for the data at hand.
+
+True or false: The relationship is linear. `r torf(FALSE)`
 
 If the assumption is not met, speculate about other possible relationships between age and depression.
 
- 
-
-
-Correct answer
-  Non-linear 
-  Linear 
-General answer comments
+`r hide("Answer")`
 The scatter plot does not have the shape of a cigar, so it does not unambiguously suggest a linear relationship. Thus, you may doubt whether the relationship between age and depression is best described by a linear model.
 Perhaps the relationship is quadratic. Especially persons in middle ages may be vulnerable to depressive thoughts.
 Next to the plot, you find both the estimated linear trend and a non-linear trend. It seems that the quadratic curve fits better with the data. Moreover, the quadratic model explains 6% of the variance, whereas the linear model only 2%.
- 
-Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
-UnansweredQuestion1 ptsEdit this question Delete this question
+`r unhide()`
+
 Run a regression analysis using Age as the independent variable and Anxiety as the dependent variable.
 
 Summarize the results.
 
 Include in your answer the proportion of explained variance (R-square), a description of the effect based on the estimated regression coefficients, and evaluate the significance of the effect of age on anxiety.
 
-General answer comments
+`r hide("Answer")`
 The proportion explained variance in Anxiety by Age is .071. The explained variance in this model is not significant compared to an empty model (i.e. including no predictors), F(1,140) = 0.710, p = .401.
 
 The effect is Age on Anxiety is negative (β = -0.013), meaning that anxiety decreases with age.
 However, the effect of Age on Anxiety is not significant when using α=.05, t(140) = -0.842, p = .401.
+`r unhide()`
+
 
 ## ANOVA (RECAP)
 
