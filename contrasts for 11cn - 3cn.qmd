@@ -107,106 +107,105 @@ Researchers are interested in effects of stereotyping on cognitive performance. 
 
 Afterwards the researchers compare the average math grades across the three groups. Because the schools may also differ in the student population, researchers also measured scholastic aptitude and use that as a covariate in the analysis.
 
-Open the dataset stereotyping.sav Download stereotyping.sav.
+Open the dataset `stereotyping.sav`.
 
- 
-Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
-UnansweredQuestion1 ptsEdit this question Delete this question
-Explain in your own words what a covariate is and why it is important to include those in neuro-psychological research (2 reasons).
-General answer comments
-Covariates are explanatory variables that exist naturally within research units. What differentiates them from independent variables is that they are of no primary interest in an investigation but cause nuisances that must be dealt with.
+In your own words, explain what a covariate is and give two examples of covariates that should/can be included in neuro-psychological research.
 
-It is important to include covariates in neuro-psychological research because it allows the researcher to be more confident in the conclusions drawn from the study, and helps explain variance in the outcome variable that would otherwise be considered error variance.
+`r hide("Answer")`
+Covariates are "nuissance" variables that we are not directly interested in, but that allow us to better estimate the effect of another variable of interest.
 
- 
-Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
-UnansweredQuestion1 ptsEdit this question Delete this question
+This is related to causal inference.
+
+We must thus justify our covariates by reference to their putative causal role with relation to our predictor and outcome.
+
+A covariate that *causes* both our predictor and our outcome is a *confounder*, and should be controlled for. This sometimes happens in "natural experiments", where the factor is not randomly assigned to participants.
+
+A covariate that *causes* our outcome, but is unrelated to our predictor, can be controlled for to reduce error variance in the outcome and increase statistical power of the effect of interest. This typically happens in randomized controlled experiments, but it may also happen in natural experiments.
+
+As a counter-example: A variable that *is caused by* our predictor and our outcome is a collider, and should never be controlled for! This will bias the effect of our predictor.
+`r unhide()`
+
 Mention two often-used covariates in research.
-General answer comments
+
+`r hide("Answer")`
 Gender and Age are two covariates that are often used in research.
- 
-Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
-UnansweredQuestion1 ptsEdit this question Delete this question
+`r unhide()` 
+
 Let’s start analyzing the math scores using an ANOVA, thus ignoring any covariates for now.
 
-Compute the means across the three groups (Analyze à Compare means à Means.
-Select MATH for the dependent list and STEREO as the independent.
-Paste and run the syntax.
-Inspect the table that displays the mean differences between the groups.
+* Compute the means across the three groups (Analyze à Compare means à Means.
+* Select MATH for the dependent list and STEREO as the independent.
+* Paste and run the syntax.
+* Inspect the table that displays the mean differences between the groups.
 
 What is the first impression of stereotyping that we have from the mean differences?
 
-General answer comments
+`r hide("Answer")`
 The table shows that no stereotyping results in the lowest mean score on the math test. Positive stereotyping results in the highest mean score, and negative stereotyping is in between.
- 
-Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
-UnansweredQuestion1 ptsEdit this question Delete this question
-Run an ANOVA (Analyze -> general linear model -> univariate). Select MATH as the dependent variable and STEREO as fixed factor.
+`r unhide()`
 
-What are the null and alternative hypothesis of the ANOVA?
+Run an ANOVA: (Analyze -> general linear model -> univariate). Select MATH as the dependent variable and STEREO as fixed factor.
 
-General answer comments
+Write down the null and alternative hypothesis of the ANOVA, then check your answer.
+
+`r hide("Answer")`
 H0: μ1 = μ2 = μ3
 H1: not μ1 = μ2 = μ3
- 
-Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
-Question1 ptsEdit this question Delete this question
-Is the effect of stereotyping significant (use α=0.05)?
-Correct answer
-  Yes 
-  No 
-General answer comments
+`r unhide()`
+
+True or false: The effect of stereotyping is significant (use α=0.05). `r torf(TRUE)`
+  
+`r hide("Answer")`
 Yes, the F-test for the effect of Stereotyping on Math performance is significant, F(2,27) = 5.614, p = .009. Hence, we reject H0.
 
 We have convincing evidence that, also at the population level, the means differ.
 
 In other words, we have convincing evidence that the mean differences in math performance are not the result of sampling fluctuations but reflect true differences due to the manipulation (i.e. stereotyping).
+`r unhide()`
+ 
+How large is the R-square? `r fitb(.294, number = T, tolerance = .01)`
+ 
 
- 
-Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
-Question1 ptsEdit this question Delete this question
-How large is the R-square?
-Correct Answers
-0.294 (with margin: 0)
- 
-Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
-UnansweredQuestion1 ptsEdit this question Delete this question
-What is the interpretation of the R-square?
-General answer comments
+How do you interpretat this value of the R-square?
+
+`r hide("Answer")`
 The R2 is 0.294.
 
 This means that 29.4% of the variance in Math performance is explained by the Stereotyping.
+`r unhide()`
+
+The R-square should be equal to:
+
+`r longmcq(c(
+answer = "The ratio of the sum of squares for STEREO to the (corrected) total sum of squares.",
+"The ratio of the mean square for STEREO to the (corrected) total mean square.",
+"The ratio of the sum of squares for STEREO to the error sum of squares.","The ratio of the mean square for STEREO to the error mean square."
+)[sample.int(4)])`
+
 
  
-Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
-QuestionEdit this question Delete this question
-Verify that the R-square equals the ratio of the Sums of Squares for STEREO to the (corrected) total.
- 
-Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
-QuestionEdit this question Delete this question
 Test whether there is an effect of stereotyping (regardless of whether it is positive or negative stereotyping).
 
 
  
-Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
-UnansweredQuestion1 ptsEdit this question Delete this question
-Is the effect of stereotyping (regardless of whether it is positive or negative stereotyping) significant?
 
-Report the Levene’s test, significance of the contrast that you tested, and an interpretation of the difference between the two means.
+True or false: The effect of stereotyping (regardless of whether it is positive or negative stereotyping) is significant. `r torf(TRUE)`
 
-General answer comments
-The Levene’s test is not significant (p = .805), so we can assume equal variances.
+Report Levene’s test, significance of the contrast that you tested, and an interpretation of the difference between the two means.
+
+`r hide("Answer")`
+The Levene’s test is not significant (p = .805), so there is no evidence for violation of the assumption of homoscedasticity.
+`r unhide()`
  
-Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
-UnansweredQuestion1 ptsEdit this question Delete this question
 Test the mean math score for each experimental group against the control group; that is, you have to test two planned contrasts.
 
 Are the means different when tested at an experiment-wise alpha of .05 and using a Bonferroni corrected alpha per test? Substantiate your answer.
 
-General answer comments
+`r hide("Answer")`
 The contrast is significant at α = .05.
 
 These results suggest that stereotyping (positive/negative) results in better math performance than non-stereotyping.   
+`r unhide()`
 
 ## ANCOVA
 
@@ -217,164 +216,141 @@ In the lecture, we considered two situations in which ANCOVA is used; one in whi
 Which situation do we have in this study?
 To answer the question, you need to ask for some additional statistics in SPSS.
 
-General answer comments
+`r hide("Answer")`
 We can check if the covariate is associated with the experimental factor by inspecting the means of the experimental groups on the covariate, or by running a one-way ANOVA.
 
 The covariate is associated with the grouping variable, and thus mean differences in math between the three groups may be confounded by mean differences in scholastic aptitude between the three groups.
 
- 
-Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
-UnansweredQuestion1 ptsEdit this question Delete this question
-A meaningful covariate is a variable that is associated with the outcome variable. However, ANCOVA also assumes homogeneity in regression.
+### Assumption or not?
 
-What does this assumption entail?
-Explain the assumption in the context of the study on stereotyping.
+Some texts state that ANCOVA has an additional assumption, beyond those of multiple regression.
+This "extra assumption" is the assumption of "homogeneity in regression slopes".
 
-General answer comments
-The assumption of homogeneity in regression states that the within-group effect of the covariate is the same across groups. That is, the covariate does not interact with the grouping variable.
+The assumption of homogeneity in regression slopes states that the within-group effect of the covariate is the same across groups. That is, the covariate does not interact with the grouping variable.
 
-In this study, the assumption states that the effect of scholastic aptitude is independent of the experimental condition.
+For example, in this assignment, the assumption would imply that the effect of scholastic aptitude is independent of the experimental condition.
 
- 
-Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
-Question1 ptsEdit this question Delete this question
-The assumption of homogeneity in regression states that the within-group effect of the covariate is the same across groups; that is, the covariate does not interact with the grouping variable. In this study, the assumption states that the effect of scholastic aptitude does not depend on the experimental condition.
+But: ANCOVA is just a special name for multiple regression with a categorical predictor of interest and control variables that we're not interested in ("nuissance variables"). If ANCOVA is multiple regression, then how can it have differen assumptions than multiple regression?
 
-Before we carry out the actual ANCOVA, we should first check whether there is a significant interaction. We can check whether there is a significant interaction effect using the following syntax:
+The answer is that ANCOVA does **not** have different assumptions, but if we were to allow for interaction between the factor and covariate, we would simply no longer call the resulting model an ANCOVA.
 
+So instead of saying "ANCOVA has an assumption of homogeneity in regression slopes", we could say: "it is conventional to call a model ANCOVA if it contains a factor and some control variables, but no interaction". 
+Of course we can add interaction terms in such a model - but then we just call it multiple regression with an interaction, not ANCOVA.
+
+Omitting an interaction between the factor and the covariate means that we force the within-group effect of the covariate to be the same across levels of the factor. In this study, that means that we do not allow the effect of scholastic aptitude to depend on the experimental condition.
+
+Before we carry out the actual ANCOVA, we can check whether this model is correctly specified, or whether we are missing a significant interaction. We can check whether there is a significant interaction effect using the following syntax:
+
+```
     UNIANOVA SA BY STEREO WITH MATH
       /METHOD=SSTYPE(3)
       /INTERCEPT=INCLUDE
       /PRINT=DESCRIPTIVE PARAMETER HOMOGENEITY
       /CRITERIA=ALPHA(.05)
       /DESIGN=STEREO MATH MATH*STEREO.
+```
 
 Copy and run the syntax. Go to the table "Tests of Between-Subjects Effects". Take a look at the row STEREO*MATH.
 
-Do we find a significant interaction effect?
+True or false: There is a significant interaction effect. `r torf(FALSE)` 
 
-Correct answer
-  No 
-  Yes 
-General answer comments
-No, there is no significant interaction effect. This means that we can run the actual ANCOVA, without the interaction term.
- 
-Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
-QuestionEdit this question Delete this question
-Since there is no significant interaction effect, we can run the actual ANCOVA, without the interaction term.
+If there is a significant interaction effect, what do we do?
+
+`r hide("Answer")`
+Remember we can check for a significant interaction effect for two reasons:
+
+1. Our hypothesis is about the interaction effect
+2. As an assumption check for correct model specification (i.e., we're interested in main effects, but we want to make sure that we're not ignoring an interaction when we do). This is similar to checking for linearity.
+
+In the first case, we should not be conducting ANCOVA at all; we should start with multiple regression with interaction, because the interaction effect is our effect of interest.
+
+In the second case, we can do two things: We can change our analysis based on the results of the "assumption check" - but such data-dependent decisions increase the risk of overfitting and Type I errors. Alternatively, we can just report the results of our planned ANCOVA analysis, but mention in the discussion that we observed a significant interaction, which means that the model may have been misspecified. We can also report results from both models, and see if/how the conclusions change if we allow for interaction (this is called a *sensitivity analysis*).
+
+`r unhide()`
+
+### Back to ANCOVA
 
 Let’s run an ANCOVA, proceed as follows:
 
-Navigate to Analyze > General linear model ? Univariate
-Select MATH as the dependent variable, STEREO as fixed factor, and SA as the covariate.
-Also, via OPTIONS ask for the Parameter estimates.
+* Navigate to Analyze > General linear model ? Univariate
+* Select MATH as the dependent variable, STEREO as fixed factor, and SA as the covariate.
+* Also, via OPTIONS ask for the Parameter estimates.
 Paste and run the syntax.
  
-Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
-UnansweredQuestion1 ptsEdit this question Delete this question
+
 Consider the Tests of Between Subjects Effects table (henceforth referred to as the “ANCOVA table”) and the FF-test for the grouping factor (STEREO).
+
+What's the p-value for the overall test of model fit? `r fitb(.117, number = T, tolerance = .01)`
 
 What conclusions can be drawn from the F-test?
 
-General answer comments
+`r hide("Answer")`
 The F-test is a test of the effect of Stereotyping on Math performance controlled for Scholastic aptitude. Conceptually, it tests whether differences in the adjusted means in Math performance are significant. Adjusted means are the means we would expect if the group had an average level of Scholastic aptitude.
 
 In other words, it tests the differences in the hypothetical situation we would have had three groups that had exactly the same level of Scholastic aptitude.
 
 The F-test is not significant, F(2,26) = 2.333, p = .117, which means that, controlled for Scholastic aptitude, we don’t have convincing evidence that Stereotyping had an effect on Match performance.
 
- 
-Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
-UnansweredQuestion1 ptsEdit this question Delete this question
+`r unhide()`
+
 Compare the results ANOVA and ANCOVA. What important difference do we see and how would you explain those?
-General answer comments
+
+`r hide("Answer")`
 The ANOVA suggested a significant effect, whereas once controlled for Scholastic aptitude (ANCOVA) the effect was no longer significant.
 
 Thus, the mean differences between the experimental groups we saw before were indeed confounded with differences in Scholastic aptitude!
-
+`r unhide()`
  
-Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
-UnansweredQuestion1 ptsEdit this question Delete this question
 Consult the table parameter estimates.
+
+What is the regression slope for scholastic aptitude? $b = `r fitb(.47, number = T, tolerance = .01)`$.
 
 Explain the meaning of estimated parameter for scholastic aptitude.
 
-General answer comments
+`r hide("Answer")`
 The parameter estimate for Scholastic aptitude is 0.470. The effect is significant when using α = .05.
 
 It is the pooled within-group regression effect of Scholastic aptitude on Math performance, controlled for Stereotyping.
+
 Thus, if Scholastic aptitude increases by one unit, the predicted Math score increases by .470 units, while controlling for Stereotyping.
 
+`r unhide()`
  
-Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
-Question1 ptsEdit this question Delete this question
 Based on the Parameters Estimates and the group-specific means, compute the adjusted group means (for each of the groups!) on MATH for an average scholastic aptitude.
 
-What is the adjusted group mean for the group that received the Negative Stereotype manipulation? Round your answer to three decimal places.
+What is the adjusted group mean for the group that received the Negative Stereotype manipulation? `r fitb(6.359, number = T, tolerance = .01)`
 
 $\bar{Y}_k^{adj} = \bar{Y}_k -b_w(\bar{X}_k- \bar{X})$
 
- To use the formula, you need to know the group means on MATH (you computed it before), you have to know the group means and overall mean SA (you can compute them via means), and the regression effect which is given in the table with parameter estimates: b=0.470.
+To use the formula, you need to know the group means on MATH (you computed them before), you have to know the group means and overall mean SA (you can compute them via means), and the regression effect which is given in the table with parameter estimates.
 
+Check your adjusted means against this answer model:
 
-
-Correct Answers
-6.359 (with margin: 0)
- 
-Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
-Question1 ptsEdit this question Delete this question
-Where you able to calculate all adjusted means?
-
-(Check the information button anyway.)
+`r hide("Answer")`
 
 ![](images/Figure13-1.png)
+`r unhide()`
 
-Correct answer
-  Yes 
-Correct answer
-  No 
- 
-Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
-UnansweredQuestion1 ptsEdit this question Delete this question
 Rerun the ANCOVA. Now via OPTIONS also ask for the estimated means. You do so by selecting stereo in the list of Display Means for (at the top of the menu). Look in the table Estimated Marginal Means and verify your answer to the previous question.
 
 Write down in your own words – and as precise as possible – the meaning of adjusted means.
 
-General answer comments
+`r hide("Answer")`
 The estimated marginal means (i.e., the adjusted means) are the group means if all groups would’ve had an average of 6.20 on the covariate.
- 
-Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
-Question1 ptsEdit this question Delete this question
+`r unhide()`
+
 Finally, we want to look at several effect size estimates.
 
-How much of the variance in Math do SA and STEREO explain?
+How much of the variance in Math do SA and STEREO explain? `r fitb(.421, number = T, tolerance = .01)`
 
-Correct Answers
-0.421 (with margin: 0)
  
-Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
-Question1 ptsEdit this question Delete this question
-Controlled for SA, how much of the remaining variance in Math does STEREO explain?
 
-(Use the formula mentioned in the lecture slides to calculate the partial η2)
+Controlled for SA, how much of the remaining variance in Math does STEREO explain? Use the formula mentioned in the lecture slides to calculate the partial $\eta^2$: `r fitb(.152, number = T, tolerance = .01)`
 
-Correct Answers
-0.152 (with margin: 0)
- 
-Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
-Question1 ptsEdit this question Delete this question
 Verify your answer by running the ANCOVA again. Now, in options, select the box Estimates if effect size.
 
-Does SPSS report the same partial η2?
+True or false: SPSS reports the same partial η2. `r torf(TRUE)`
 
-Correct answer
-  Yes 
-  No 
-General answer comments
-It should, though.
- 
-Move To...This element is a more accessible alternative to drag & drop reordering. Press Enter or Space to move this question.
-UnansweredQuestion1 ptsEdit this question Delete this question
 Could you summarize your findings of the ANCOVA in a few brief sentences?
 
 Mention the significance tests, (un)adjusted means and the effect size estimates.    

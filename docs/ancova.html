@@ -286,6 +286,14 @@ ul.task-list li input[type="checkbox"] {
 <a href="#tutorial" id="toc-tutorial" class="nav-link" data-scroll-target="#tutorial"><span class="header-section-number">18</span> Tutorial</a>
   <ul class="collapse">
 <li><a href="#bivariate-regression-recap" id="toc-bivariate-regression-recap" class="nav-link" data-scroll-target="#bivariate-regression-recap"><span class="header-section-number">18.1</span> Bivariate Regression (RECAP)</a></li>
+  <li><a href="#anova-recap" id="toc-anova-recap" class="nav-link" data-scroll-target="#anova-recap"><span class="header-section-number">18.2</span> ANOVA (RECAP)</a></li>
+  <li>
+<a href="#ancova" id="toc-ancova" class="nav-link" data-scroll-target="#ancova"><span class="header-section-number">18.3</span> ANCOVA</a>
+  <ul class="collapse">
+<li><a href="#assumption-or-not" id="toc-assumption-or-not" class="nav-link" data-scroll-target="#assumption-or-not"><span class="header-section-number">18.3.1</span> Assumption or not?</a></li>
+  <li><a href="#back-to-ancova" id="toc-back-to-ancova" class="nav-link" data-scroll-target="#back-to-ancova"><span class="header-section-number">18.3.2</span> Back to ANCOVA</a></li>
+  </ul>
+</li>
   </ul>
 </li>
   </ul></nav>
@@ -349,48 +357,48 @@ ul.task-list li input[type="checkbox"] {
 <div class="webex-check webex-box">
 <p><strong>Question 1</strong></p>
 What is a valid reason for using covariates in ANCOVA?
-<div id="radio_QAGKAYLALC" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_QAGKAYLALC" value=""><span>To increase the total variance</span></label><label><input type="radio" autocomplete="off" name="radio_QAGKAYLALC" value=""><span>To create more complex models</span></label><label><input type="radio" autocomplete="off" name="radio_QAGKAYLALC" value="answer"><span>To increase statistical power</span></label><label><input type="radio" autocomplete="off" name="radio_QAGKAYLALC" value=""><span>To replace categorical predictors</span></label>
+<div id="radio_KXTEDBZXBT" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_KXTEDBZXBT" value=""><span>To increase the total variance</span></label><label><input type="radio" autocomplete="off" name="radio_KXTEDBZXBT" value=""><span>To create more complex models</span></label><label><input type="radio" autocomplete="off" name="radio_KXTEDBZXBT" value="answer"><span>To increase statistical power</span></label><label><input type="radio" autocomplete="off" name="radio_KXTEDBZXBT" value=""><span>To replace categorical predictors</span></label>
 </div>
 <p><strong>Question 2</strong></p>
 What is an example of a ‘good control’ variable in ANCOVA?
-<div id="radio_YMUFQYRQMX" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_YMUFQYRQMX" value=""><span>A variable unrelated to the predictor</span></label><label><input type="radio" autocomplete="off" name="radio_YMUFQYRQMX" value=""><span>A variable affected by the outcome</span></label><label><input type="radio" autocomplete="off" name="radio_YMUFQYRQMX" value="answer"><span>A confounder</span></label><label><input type="radio" autocomplete="off" name="radio_YMUFQYRQMX" value=""><span>A variable related to the predictor</span></label>
+<div id="radio_FYSUICGQDU" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_FYSUICGQDU" value=""><span>A variable unrelated to the predictor</span></label><label><input type="radio" autocomplete="off" name="radio_FYSUICGQDU" value=""><span>A variable affected by the outcome</span></label><label><input type="radio" autocomplete="off" name="radio_FYSUICGQDU" value="answer"><span>A confounder</span></label><label><input type="radio" autocomplete="off" name="radio_FYSUICGQDU" value=""><span>A variable related to the predictor</span></label>
 </div>
 <p><strong>Question 3</strong></p>
 Which of the following is an example of a ‘bad control’ variable in ANCOVA?
-<div id="radio_TPZTXMPVMS" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_TPZTXMPVMS" value=""><span>A variable that causes the predictor</span></label><label><input type="radio" autocomplete="off" name="radio_TPZTXMPVMS" value=""><span>A confounder</span></label><label><input type="radio" autocomplete="off" name="radio_TPZTXMPVMS" value=""><span>A variable unrelated to the predictor or outcome</span></label><label><input type="radio" autocomplete="off" name="radio_TPZTXMPVMS" value="answer"><span>A variable affected by the outcome</span></label>
+<div id="radio_EIQGCVEONC" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_EIQGCVEONC" value="answer"><span>A variable affected by the outcome</span></label><label><input type="radio" autocomplete="off" name="radio_EIQGCVEONC" value=""><span>A confounder</span></label><label><input type="radio" autocomplete="off" name="radio_EIQGCVEONC" value=""><span>A variable that causes the predictor</span></label><label><input type="radio" autocomplete="off" name="radio_EIQGCVEONC" value=""><span>A variable unrelated to the predictor or outcome</span></label>
 </div>
 <p><strong>Question 4</strong></p>
 In a randomized controlled experiment, are there benefits to controling for any observed differences between the two experimental groups?
-<div id="radio_KZEXOZNUXL" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_KZEXOZNUXL" value=""><span>Only if the covariates are significantly related to the predictor</span></label><label><input type="radio" autocomplete="off" name="radio_KZEXOZNUXL" value=""><span>Yes, controlling for relevant covariates is essential</span></label><label><input type="radio" autocomplete="off" name="radio_KZEXOZNUXL" value="answer"><span>No, random assignment breaks the predictor's relationships with confounders</span></label><label><input type="radio" autocomplete="off" name="radio_KZEXOZNUXL" value=""><span>Only if the covariates are significantly related to the outcome</span></label>
+<div id="radio_JILJLDWSFV" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_JILJLDWSFV" value="answer"><span>No, random assignment breaks the predictor's relationships with confounders</span></label><label><input type="radio" autocomplete="off" name="radio_JILJLDWSFV" value=""><span>Only if the covariates are significantly related to the outcome</span></label><label><input type="radio" autocomplete="off" name="radio_JILJLDWSFV" value=""><span>Only if the covariates are significantly related to the predictor</span></label><label><input type="radio" autocomplete="off" name="radio_JILJLDWSFV" value=""><span>Yes, controlling for relevant covariates is essential</span></label>
 </div>
 <p><strong>Question 5</strong></p>
 What is the purpose of calculating adjusted means in ANCOVA?
-<div id="radio_PLSPFUMLPW" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_PLSPFUMLPW" value=""><span>To improve the model's fit</span></label><label><input type="radio" autocomplete="off" name="radio_PLSPFUMLPW" value="answer"><span>To account for covariate effects</span></label><label><input type="radio" autocomplete="off" name="radio_PLSPFUMLPW" value=""><span>To create new variables</span></label><label><input type="radio" autocomplete="off" name="radio_PLSPFUMLPW" value=""><span>To replace the original means</span></label>
+<div id="radio_TPRUDETPBM" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_TPRUDETPBM" value=""><span>To improve the model's fit</span></label><label><input type="radio" autocomplete="off" name="radio_TPRUDETPBM" value=""><span>To replace the original means</span></label><label><input type="radio" autocomplete="off" name="radio_TPRUDETPBM" value="answer"><span>To account for covariate effects</span></label><label><input type="radio" autocomplete="off" name="radio_TPRUDETPBM" value=""><span>To create new variables</span></label>
 </div>
 <p><strong>Question 6</strong></p>
 Which of the following is a key factor in choosing appropriate covariates for ANCOVA?
-<div id="radio_AZOLASIWRI" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_AZOLASIWRI" value=""><span>Covariates with the highest correlations</span></label><label><input type="radio" autocomplete="off" name="radio_AZOLASIWRI" value=""><span>Number of covariates</span></label><label><input type="radio" autocomplete="off" name="radio_AZOLASIWRI" value=""><span>Covariates with the smallest p-values</span></label><label><input type="radio" autocomplete="off" name="radio_AZOLASIWRI" value="answer"><span>Causal relationships</span></label>
+<div id="radio_AYLZKGTBMG" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_AYLZKGTBMG" value=""><span>Covariates with the highest correlations</span></label><label><input type="radio" autocomplete="off" name="radio_AYLZKGTBMG" value=""><span>Covariates with the smallest p-values</span></label><label><input type="radio" autocomplete="off" name="radio_AYLZKGTBMG" value="answer"><span>Causal relationships</span></label><label><input type="radio" autocomplete="off" name="radio_AYLZKGTBMG" value=""><span>Number of covariates</span></label>
 </div>
 <p><strong>Question 7</strong></p>
 What is the distinguishing feature of ANCOVA relative to multiple regression?
-<div id="radio_ENFBAWRRCH" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_ENFBAWRRCH" value=""><span>Multiple regression includes only continuous predictors</span></label><label><input type="radio" autocomplete="off" name="radio_ENFBAWRRCH" value=""><span>ANCOVA controls for confounding variables</span></label><label><input type="radio" autocomplete="off" name="radio_ENFBAWRRCH" value=""><span>Multiple regression includes only covariates</span></label><label><input type="radio" autocomplete="off" name="radio_ENFBAWRRCH" value="answer"><span>ANCOVA always includes a categorical predictor and control variable(s)</span></label>
+<div id="radio_TAAMYVETLJ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_TAAMYVETLJ" value="answer"><span>ANCOVA always includes a categorical predictor and control variable(s)</span></label><label><input type="radio" autocomplete="off" name="radio_TAAMYVETLJ" value=""><span>Multiple regression includes only continuous predictors</span></label><label><input type="radio" autocomplete="off" name="radio_TAAMYVETLJ" value=""><span>Multiple regression includes only covariates</span></label><label><input type="radio" autocomplete="off" name="radio_TAAMYVETLJ" value=""><span>ANCOVA controls for confounding variables</span></label>
 </div>
 <p><strong>Question 8</strong></p>
 In which of these situations should you avoid controlling a particular covariate in ANCOVA?
-<div id="radio_WAUKPTZLGW" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_WAUKPTZLGW" value="answer"><span>When the covariate is a mediator</span></label><label><input type="radio" autocomplete="off" name="radio_WAUKPTZLGW" value=""><span>When the covariate is perfectly correlated with another covariate</span></label><label><input type="radio" autocomplete="off" name="radio_WAUKPTZLGW" value=""><span>When the covariate is a confounder</span></label><label><input type="radio" autocomplete="off" name="radio_WAUKPTZLGW" value=""><span>When the covariate is irrelevant</span></label>
+<div id="radio_ZHOJAMWPDI" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ZHOJAMWPDI" value=""><span>When the covariate is a confounder</span></label><label><input type="radio" autocomplete="off" name="radio_ZHOJAMWPDI" value=""><span>When the covariate is irrelevant</span></label><label><input type="radio" autocomplete="off" name="radio_ZHOJAMWPDI" value="answer"><span>When the covariate is a mediator</span></label><label><input type="radio" autocomplete="off" name="radio_ZHOJAMWPDI" value=""><span>When the covariate is perfectly correlated with another covariate</span></label>
 </div>
 <p><strong>Question 9</strong></p>
 An ANCOVA model compares statistics grades for two classes of students, controlling for number of hours studied per week. The regression model is <span class="math inline">\(\text{Grade} = -1.27 + 0.50*D_{class2} + .30*Hours\)</span>. The unadjusted mean grades are 5.2 for class 1 and 7.3 for class 2. The mean hours studied were 21.56 for class 1 and 30.23 for class 2. The overall mean hours studied was 25.90. What are the adjusted means?
-<div id="radio_BHTHVFPACF" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_BHTHVFPACF" value=""><span>9.35 and 2.97</span></label><label><input type="radio" autocomplete="off" name="radio_BHTHVFPACF" value=""><span>-1.27 and -1.77</span></label><label><input type="radio" autocomplete="off" name="radio_BHTHVFPACF" value="answer"><span>6.50 and 6.00</span></label>
+<div id="radio_NMMJYRAMCJ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_NMMJYRAMCJ" value=""><span>-1.27 and -1.77</span></label><label><input type="radio" autocomplete="off" name="radio_NMMJYRAMCJ" value=""><span>9.35 and 2.97</span></label><label><input type="radio" autocomplete="off" name="radio_NMMJYRAMCJ" value="answer"><span>6.50 and 6.00</span></label>
 </div>
 </div>
 <div class="webex-solution">
@@ -447,10 +455,10 @@ Answer
 <p>To conclude anything about the significance of the proportion explain variance of this model, we can look at the ANOVA table or ask SPSS to show the R2-change. This shows us that the explained variance in this model is not significant compared to an empty model (i.e.&nbsp;including no predictors), F(1,140) = 2.836, p = .094.</p>
 </div>
 <p>Write down the estimated regression line using the unstandardized coefficients.</p>
-<p><span class="math inline">\(Y^{'} = &lt;input class='webex-solveme nospaces' data-tol='0.01' size='4' data-answer='["1.89"]'/&gt; + &lt;input class='webex-solveme nospaces' data-tol='0.005' size='4' data-answer='["0.02",".02"]'/&gt;*\text{age}\)</span></p>
+<p>Y’= <input class="webex-solveme nospaces" data-tol="0.01" size="4" data-answer="[&quot;1.89&quot;]"> + <input class="webex-solveme nospaces" data-tol="0.005" size="4" data-answer="[&quot;0.02&quot;,&quot;.02&quot;]"> *Age</p>
 <p>How can we interpret the constant?</p>
-<div id="radio_MCHFPZSTRO" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_MCHFPZSTRO" value=""><span>The predicted level of depression for the average age.</span></label><label><input type="radio" autocomplete="off" name="radio_MCHFPZSTRO" value=""><span>The average level of depression.</span></label><label><input type="radio" autocomplete="off" name="radio_MCHFPZSTRO" value=""><span>The average age in the sample.</span></label><label><input type="radio" autocomplete="off" name="radio_MCHFPZSTRO" value="answer"><span>The predicted level of depression when age would be 0.</span></label>
+<div id="radio_ZYSJTQVGJA" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ZYSJTQVGJA" value=""><span>The average level of depression.</span></label><label><input type="radio" autocomplete="off" name="radio_ZYSJTQVGJA" value=""><span>The predicted level of depression for the average age.</span></label><label><input type="radio" autocomplete="off" name="radio_ZYSJTQVGJA" value="answer"><span>The predicted level of depression when age would be 0.</span></label><label><input type="radio" autocomplete="off" name="radio_ZYSJTQVGJA" value=""><span>The average age in the sample.</span></label>
 </div>
 <p>Consult the table with the coefficients again</p>
 <p>True or false: We can conclude from this table that the effect of age is significant at the 10% level. <select class="webex-select"><option value="blank"></option>
@@ -492,9 +500,211 @@ Answer
 <p>The proportion explained variance in Anxiety by Age is .071. The explained variance in this model is not significant compared to an empty model (i.e.&nbsp;including no predictors), F(1,140) = 0.710, p = .401.</p>
 <p>The effect is Age on Anxiety is negative (β = -0.013), meaning that anxiety decreases with age. However, the effect of Age on Anxiety is not significant when using α=.05, t(140) = -0.842, p = .401.</p>
 </div>
+</section><section id="anova-recap" class="level2" data-number="18.2"><h2 data-number="18.2" class="anchored" data-anchor-id="anova-recap">
+<span class="header-section-number">18.2</span> ANOVA (RECAP)</h2>
+<p>Consider the following hypothetical research situation…</p>
+<p>Researchers are interested in effects of stereotyping on cognitive performance. For their research they performed a quasi-experiment. They selected three schools and asked girls from eight grade to do a math test. However, the teacher in School A says that boys do particularly well on the test (i.e., negative stereotyping for girls). In School B the teachers says that girls do particularly well on the test (i.e., positive stereotyping for girls). In the third school, the teacher gives gender-neutral information (control group).</p>
+<p>Afterwards the researchers compare the average math grades across the three groups. Because the schools may also differ in the student population, researchers also measured scholastic aptitude and use that as a covariate in the analysis.</p>
+<p>Open the dataset <code>stereotyping.sav</code>.</p>
+<p>In your own words, explain what a covariate is and give two examples of covariates that should/can be included in neuro-psychological research.</p>
+<div class="webex-solution">
+<button>
+Answer
+</button>
+<p>Covariates are “nuissance” variables that we are not directly interested in, but that allow us to better estimate the effect of another variable of interest.</p>
+<p>This is related to causal inference.</p>
+<p>We must thus justify our covariates by reference to their putative causal role with relation to our predictor and outcome.</p>
+<p>A covariate that <em>causes</em> both our predictor and our outcome is a <em>confounder</em>, and should be controlled for. This sometimes happens in “natural experiments”, where the factor is not randomly assigned to participants.</p>
+<p>A covariate that <em>causes</em> our outcome, but is unrelated to our predictor, can be controlled for to reduce error variance in the outcome and increase statistical power of the effect of interest. This typically happens in randomized controlled experiments, but it may also happen in natural experiments.</p>
+<p>As a counter-example: A variable that <em>is caused by</em> our predictor and our outcome is a collider, and should never be controlled for! This will bias the effect of our predictor.</p>
+</div>
+<p>Mention two often-used covariates in research.</p>
+<div class="webex-solution">
+<button>
+Answer
+</button>
+<p>Gender and Age are two covariates that are often used in research.</p>
+</div>
+<p>Let’s start analyzing the math scores using an ANOVA, thus ignoring any covariates for now.</p>
+<ul>
+<li>Compute the means across the three groups (Analyze à Compare means à Means.</li>
+<li>Select MATH for the dependent list and STEREO as the independent.</li>
+<li>Paste and run the syntax.</li>
+<li>Inspect the table that displays the mean differences between the groups.</li>
+</ul>
+<p>What is the first impression of stereotyping that we have from the mean differences?</p>
+<div class="webex-solution">
+<button>
+Answer
+</button>
+<p>The table shows that no stereotyping results in the lowest mean score on the math test. Positive stereotyping results in the highest mean score, and negative stereotyping is in between.</p>
+</div>
+<p>Run an ANOVA: (Analyze -&gt; general linear model -&gt; univariate). Select MATH as the dependent variable and STEREO as fixed factor.</p>
+<p>Write down the null and alternative hypothesis of the ANOVA, then check your answer.</p>
+<div class="webex-solution">
+<button>
+Answer
+</button>
+<p>H0: μ1 = μ2 = μ3 H1: not μ1 = μ2 = μ3</p>
+</div>
+<p>True or false: The effect of stereotyping is significant (use α=0.05). <select class="webex-select"><option value="blank"></option>
+<option value="answer">TRUE</option>
+<option value="">FALSE</option></select></p>
+<div class="webex-solution">
+<button>
+Answer
+</button>
+<p>Yes, the F-test for the effect of Stereotyping on Math performance is significant, F(2,27) = 5.614, p = .009. Hence, we reject H0.</p>
+<p>We have convincing evidence that, also at the population level, the means differ.</p>
+<p>In other words, we have convincing evidence that the mean differences in math performance are not the result of sampling fluctuations but reflect true differences due to the manipulation (i.e.&nbsp;stereotyping).</p>
+</div>
+<p>How large is the R-square? <input class="webex-solveme nospaces" data-tol="0.01" size="5" data-answer="[&quot;0.294&quot;,&quot;.294&quot;]"></p>
+<p>How do you interpretat this value of the R-square?</p>
+<div class="webex-solution">
+<button>
+Answer
+</button>
+<p>The R2 is 0.294.</p>
+<p>This means that 29.4% of the variance in Math performance is explained by the Stereotyping.</p>
+</div>
+<p>The R-square should be equal to:</p>
+<div id="radio_NJYMAFBHWG" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_NJYMAFBHWG" value=""><span>The ratio of the mean square for STEREO to the (corrected) total mean square.</span></label><label><input type="radio" autocomplete="off" name="radio_NJYMAFBHWG" value=""><span>The ratio of the mean square for STEREO to the error mean square.</span></label><label><input type="radio" autocomplete="off" name="radio_NJYMAFBHWG" value=""><span>The ratio of the sum of squares for STEREO to the error sum of squares.</span></label><label><input type="radio" autocomplete="off" name="radio_NJYMAFBHWG" value="answer"><span>The ratio of the sum of squares for STEREO to the (corrected) total sum of squares.</span></label>
+</div>
+<p>Test whether there is an effect of stereotyping (regardless of whether it is positive or negative stereotyping).</p>
+<p>True or false: The effect of stereotyping (regardless of whether it is positive or negative stereotyping) is significant. <select class="webex-select"><option value="blank"></option>
+<option value="answer">TRUE</option>
+<option value="">FALSE</option></select></p>
+<p>Report Levene’s test, significance of the contrast that you tested, and an interpretation of the difference between the two means.</p>
+<div class="webex-solution">
+<button>
+Answer
+</button>
+<p>The Levene’s test is not significant (p = .805), so there is no evidence for violation of the assumption of homoscedasticity.</p>
+</div>
+<p>Test the mean math score for each experimental group against the control group; that is, you have to test two planned contrasts.</p>
+<p>Are the means different when tested at an experiment-wise alpha of .05 and using a Bonferroni corrected alpha per test? Substantiate your answer.</p>
+<div class="webex-solution">
+<button>
+Answer
+</button>
+<p>The contrast is significant at α = .05.</p>
+<p>These results suggest that stereotyping (positive/negative) results in better math performance than non-stereotyping.</p>
+</div>
+</section><section id="ancova" class="level2" data-number="18.3"><h2 data-number="18.3" class="anchored" data-anchor-id="ancova">
+<span class="header-section-number">18.3</span> ANCOVA</h2>
+<p>The next step is to add scholastic aptitude as a covariate in our analysis.</p>
+<p>In the lecture, we considered two situations in which ANCOVA is used; one in which the covariate was not related to the grouping variable, and one in which the covariate is associated.</p>
+<p>Which situation do we have in this study? To answer the question, you need to ask for some additional statistics in SPSS.</p>
+<div class="webex-solution">
+<button>
+Answer
+</button>
+<p>We can check if the covariate is associated with the experimental factor by inspecting the means of the experimental groups on the covariate, or by running a one-way ANOVA.</p>
+<p>The covariate is associated with the grouping variable, and thus mean differences in math between the three groups may be confounded by mean differences in scholastic aptitude between the three groups.</p>
+</div>
+<section id="assumption-or-not" class="level3" data-number="18.3.1"><h3 data-number="18.3.1" class="anchored" data-anchor-id="assumption-or-not">
+<span class="header-section-number">18.3.1</span> Assumption or not?</h3>
+<p>Some texts state that ANCOVA has an additional assumption, beyond those of multiple regression. This “extra assumption” is the assumption of “homogeneity in regression slopes”.</p>
+<p>The assumption of homogeneity in regression slopes states that the within-group effect of the covariate is the same across groups. That is, the covariate does not interact with the grouping variable.</p>
+<p>For example, in this assignment, the assumption would imply that the effect of scholastic aptitude is independent of the experimental condition.</p>
+<p>But: ANCOVA is just a special name for multiple regression with a categorical predictor of interest and control variables that we’re not interested in (“nuissance variables”). If ANCOVA is multiple regression, then how can it have differen assumptions than multiple regression?</p>
+<p>The answer is that ANCOVA does <strong>not</strong> have different assumptions, but if we were to allow for interaction between the factor and covariate, we would simply no longer call the resulting model an ANCOVA.</p>
+<p>So instead of saying “ANCOVA has an assumption of homogeneity in regression slopes”, we could say: “it is conventional to call a model ANCOVA if it contains a factor and some control variables, but no interaction”. Of course we can add interaction terms in such a model - but then we just call it multiple regression with an interaction, not ANCOVA.</p>
+<p>Omitting an interaction between the factor and the covariate means that we force the within-group effect of the covariate to be the same across levels of the factor. In this study, that means that we do not allow the effect of scholastic aptitude to depend on the experimental condition.</p>
+<p>Before we carry out the actual ANCOVA, we can check whether this model is correctly specified, or whether we are missing a significant interaction. We can check whether there is a significant interaction effect using the following syntax:</p>
+<pre><code>    UNIANOVA SA BY STEREO WITH MATH
+      /METHOD=SSTYPE(3)
+      /INTERCEPT=INCLUDE
+      /PRINT=DESCRIPTIVE PARAMETER HOMOGENEITY
+      /CRITERIA=ALPHA(.05)
+      /DESIGN=STEREO MATH MATH*STEREO.</code></pre>
+<p>Copy and run the syntax. Go to the table “Tests of Between-Subjects Effects”. Take a look at the row STEREO*MATH.</p>
+<p>True or false: There is a significant interaction effect. <select class="webex-select"><option value="blank"></option>
+<option value="">TRUE</option>
+<option value="answer">FALSE</option></select></p>
+<p>If there is a significant interaction effect, what do we do?</p>
+<div class="webex-solution">
+<button>
+Answer
+</button>
+<p>Remember we can check for a significant interaction effect for two reasons:</p>
+<ol type="1">
+<li>Our hypothesis is about the interaction effect</li>
+<li>As an assumption check for correct model specification (i.e., we’re interested in main effects, but we want to make sure that we’re not ignoring an interaction when we do). This is similar to checking for linearity.</li>
+</ol>
+<p>In the first case, we should not be conducting ANCOVA at all; we should start with multiple regression with interaction, because the interaction effect is our effect of interest.</p>
+<p>In the second case, we can do two things: We can change our analysis based on the results of the “assumption check” - but such data-dependent decisions increase the risk of overfitting and Type I errors. Alternatively, we can just report the results of our planned ANCOVA analysis, but mention in the discussion that we observed a significant interaction, which means that the model may have been misspecified. We can also report results from both models, and see if/how the conclusions change if we allow for interaction (this is called a <em>sensitivity analysis</em>).</p>
+</div>
+</section><section id="back-to-ancova" class="level3" data-number="18.3.2"><h3 data-number="18.3.2" class="anchored" data-anchor-id="back-to-ancova">
+<span class="header-section-number">18.3.2</span> Back to ANCOVA</h3>
+<p>Let’s run an ANCOVA, proceed as follows:</p>
+<ul>
+<li>Navigate to Analyze &gt; General linear model ? Univariate</li>
+<li>Select MATH as the dependent variable, STEREO as fixed factor, and SA as the covariate.</li>
+<li>Also, via OPTIONS ask for the Parameter estimates. Paste and run the syntax.</li>
+</ul>
+<p>Consider the Tests of Between Subjects Effects table (henceforth referred to as the “ANCOVA table”) and the FF-test for the grouping factor (STEREO).</p>
+<p>What’s the p-value for the overall test of model fit? <input class="webex-solveme nospaces" data-tol="0.01" size="5" data-answer="[&quot;0.117&quot;,&quot;.117&quot;]"></p>
+<p>What conclusions can be drawn from the F-test?</p>
+<div class="webex-solution">
+<button>
+Answer
+</button>
+<p>The F-test is a test of the effect of Stereotyping on Math performance controlled for Scholastic aptitude. Conceptually, it tests whether differences in the adjusted means in Math performance are significant. Adjusted means are the means we would expect if the group had an average level of Scholastic aptitude.</p>
+<p>In other words, it tests the differences in the hypothetical situation we would have had three groups that had exactly the same level of Scholastic aptitude.</p>
+<p>The F-test is not significant, F(2,26) = 2.333, p = .117, which means that, controlled for Scholastic aptitude, we don’t have convincing evidence that Stereotyping had an effect on Match performance.</p>
+</div>
+<p>Compare the results ANOVA and ANCOVA. What important difference do we see and how would you explain those?</p>
+<div class="webex-solution">
+<button>
+Answer
+</button>
+<p>The ANOVA suggested a significant effect, whereas once controlled for Scholastic aptitude (ANCOVA) the effect was no longer significant.</p>
+<p>Thus, the mean differences between the experimental groups we saw before were indeed confounded with differences in Scholastic aptitude!</p>
+</div>
+<p>Consult the table parameter estimates.</p>
+<p>What is the regression slope for scholastic aptitude? <input class="webex-solveme nospaces" data-tol="0.01" size="4" data-answer="[&quot;0.47&quot;,&quot;.47&quot;]"></p>
+<p>Explain the meaning of estimated parameter for scholastic aptitude.</p>
+<div class="webex-solution">
+<button>
+Answer
+</button>
+<p>The parameter estimate for Scholastic aptitude is 0.470. The effect is significant when using α = .05.</p>
+<p>It is the pooled within-group regression effect of Scholastic aptitude on Math performance, controlled for Stereotyping.</p>
+<p>Thus, if Scholastic aptitude increases by one unit, the predicted Math score increases by .470 units, while controlling for Stereotyping.</p>
+</div>
+<p>Based on the Parameters Estimates and the group-specific means, compute the adjusted group means (for each of the groups!) on MATH for an average scholastic aptitude.</p>
+<p>What is the adjusted group mean for the group that received the Negative Stereotype manipulation? <input class="webex-solveme nospaces" data-tol="0.01" size="5" data-answer="[&quot;6.359&quot;]"></p>
+<p><span class="math inline">\(\bar{Y}_k^{adj} = \bar{Y}_k -b_w(\bar{X}_k- \bar{X})\)</span></p>
+<p>To use the formula, you need to know the group means on MATH (you computed them before), you have to know the group means and overall mean SA (you can compute them via means), and the regression effect which is given in the table with parameter estimates.</p>
+<p>Check your adjusted means against this answer model:</p>
+<div class="webex-solution">
+<button>
+Answer
+</button>
+<p><img src="images/Figure13-1.png" class="img-fluid"></p>
+</div>
+<p>Rerun the ANCOVA. Now via OPTIONS also ask for the estimated means. You do so by selecting stereo in the list of Display Means for (at the top of the menu). Look in the table Estimated Marginal Means and verify your answer to the previous question.</p>
+<p>Write down in your own words – and as precise as possible – the meaning of adjusted means.</p>
+<div class="webex-solution">
+<button>
+Answer
+</button>
+<p>The estimated marginal means (i.e., the adjusted means) are the group means if all groups would’ve had an average of 6.20 on the covariate.</p>
+</div>
+<p>Finally, we want to look at several effect size estimates.</p>
+<p>How much of the variance in Math do SA and STEREO explain? <input class="webex-solveme nospaces" data-tol="0.01" size="5" data-answer="[&quot;0.421&quot;,&quot;.421&quot;]"></p>
+<p>Controlled for SA, how much of the remaining variance in Math does STEREO explain? Use the formula mentioned in the lecture slides to calculate the partial <span class="math inline">\(\eta^2\)</span>: <input class="webex-solveme nospaces" data-tol="0.01" size="5" data-answer="[&quot;0.152&quot;,&quot;.152&quot;]"></p>
+<p>Verify your answer by running the ANCOVA again. Now, in options, select the box Estimates if effect size.</p>
+<p>True or false: SPSS reports the same partial η2. <select class="webex-select"><option value="blank"></option>
+<option value="answer">TRUE</option>
+<option value="">FALSE</option></select></p>
+<p>Could you summarize your findings of the ANCOVA in a few brief sentences?</p>
+<p>Mention the significance tests, (un)adjusted means and the effect size estimates.</p>
 
 
-</section></section></main><!-- /main --><script>
+</section></section></section></main><!-- /main --><script>
 
 /* update total correct if #webex-total_correct exists */
 update_total_correct = function() {
