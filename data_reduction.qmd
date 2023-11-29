@@ -150,7 +150,7 @@ Complete the formative test ideally after you’ve seen the lecture, but before 
 #| results = "asis",
 #| echo = FALSE,
 #| cache = FALSE
-add_mcs("questions3.csv")
+add_mcs("questions_dimension_reduction.csv")
 ```
 
 
