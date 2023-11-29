@@ -63,6 +63,7 @@ book:
   appendices:
   - data.qmd
   - probability_tables.qmd
+  - formula_sheet2.qmd
   - references.qmd
 bibliography: include/references.bib
 csl: include/apa.csl

@@ -1118,5 +1118,33 @@
     "title": "Appendix A — Z-table",
     "section": "",
     "text": "Table gives the right-tail probability corresponding to a Z-value of the value in the Z-column plus the value in the column name, which indicates the second digit of the Z-score.\n\n\n\n\n\n\n\n\n\n\nWarning: package 'DT' was built under R version 4.3.1\n\n\n\n\n\n\n\n\nB t-table\nTable gives the t-value corresponding to the right-tail probability indicated by the columns."
+  },
+  {
+    "objectID": "formula_sheet2.html#general-part",
+    "href": "formula_sheet2.html#general-part",
+    "title": "Appendix B — Formula sheet",
+    "section": "B.1 General Part",
+    "text": "B.1 General Part\nMean: \\(\\bar{X} = \\frac{\\Sigma_{i=1}^nx_i}{N}\\)\nVariance: \\(S^2_x = \\frac{\\Sigma_{i=1}^n(x_i-\\bar{x})^2}{n-1}\\)\nStandardized values (Z-values): \\(Z = \\frac{X-\\mu}{\\sigma}\\)\nZ-statistic in one sample Z-test: \\(Z = \\frac{\\bar{x}-\\mu}{\\sigma_\\bar{x}}\\)\nStandard error of the mean: \\(\\sigma_{\\bar{x}} = \\frac{\\sigma}{\\sqrt{n}}\\)\nCohen’s d: \\(\\frac{\\bar{X}_1-\\bar{X}_2}{s_{pooled}}\\)\n\\(s^2_{pooled} = \\frac{(n_1-1)*s_1^2 + (n_2-1)*s_2^2}{n_1+n_2-2}\\)\n\\(s_{pooled} = \\sqrt{s^2_{pooled}}\\)\nF-statistic in one-way ANOVA: \\(F (df_b, df_w) = \\frac{(SS_b/df_b)}{(SS_w/df_w)} = \\frac{MS_b}{(MS_w}\\)\nSimple regression model: \\(Y' = b_0+b_1X\\)\nMultiple regression model: \\(Y' = b_0+b_1X_1 + b_2X_2\\)\nExplained variance: \\(R^2 = \\frac{s^2_{y'}}{s^2_y}\\)\nt-statistic in a one sample t-test: \\(t = \\frac{\\bar{X}-\\mu_{H0}}{se_x}\\), where \\(se_x = \\frac{s_x}{\\sqrt{n}}\\), \\(df = n - 1\\)\nt-statistic in an independent samples t-test: \\(t = \\frac{(\\bar{X}_1-\\bar{X}_2)-(\\mu_1-\\mu_2)_{H0}}{se_{x_1-x_2}}\\)\n\\(se_{x_1-x_2} = \\sqrt{s^2_{pooled}(\\frac{1}{n_1}+\\frac{1}{n_2})}\\)"
+  },
+  {
+    "objectID": "formula_sheet2.html#business-and-economics",
+    "href": "formula_sheet2.html#business-and-economics",
+    "title": "Appendix B — Formula sheet",
+    "section": "B.2 Business and economics",
+    "text": "B.2 Business and economics\nLogistic function: \\(P(Y=1|X) = \\frac{e^{(b_0 + b_1X)}}{1 + e^{(b_0 + b_1X)}}\\)\nFrom probability to odds: \\(\\text{odds} = \\frac{P}{1 - P}\\)\nFrom odds to probability: \\(P = \\frac{\\text{odds}}{1 + \\text{odds}}\\)\nFrom odds to logit: \\(\\text{logit} = \\ln(\\text{odds})\\)\nFrom probability to logit: \\(\\text{logit} = \\ln\\left(\\frac{P}{1 - P}\\right)\\)\nFrom logit to odds: \\(\\text{odds} = e^{\\text{logit}}\\)\nFrom logit to probability: \\(P = \\frac{e^{\\text{logit}}}{1 + e^{\\text{logit}}}\\)\nWald test statistic: \\(W = (\\frac{b}{se_b})^2\\)"
+  },
+  {
+    "objectID": "formula_sheet2.html#cognitive-neuroscience",
+    "href": "formula_sheet2.html#cognitive-neuroscience",
+    "title": "Appendix B — Formula sheet",
+    "section": "B.3 Cognitive neuroscience",
+    "text": "B.3 Cognitive neuroscience\nNumber of Possible Pairwise Comparisons: \\(k \\times \\frac{(k - 1)}{2}\\)\nFactorial ANOVA Linear Model: \\(Y_{jkl} = \\mu_Y + \\alpha_k + \\beta_l + \\alpha\\beta_{kl} + \\epsilon_{jkl}\\)\nEta-squared for Factor A: \\(\\eta_A^2 = \\frac{SS_A}{SS_{total}}\\)\nPartial eta-squared for Factor A: \\(\\eta_{partial.A}^2 = \\frac{SS_A}{SS_A + SS_w}\\)\nAdjusted Mean: \\(\\bar{Y}_{i(adj)} = \\bar{Y}_i - b_w(\\bar{X}_i - \\bar{X})\\)\nt-Statistic in Paired Samples t-Test: \\(t = \\frac{\\bar{d}}{\\frac{s_{\\bar{d}}}{\\sqrt{n}}}, \\quad \\text{df} = n - 1\\)"
+  },
+  {
+    "objectID": "formula_sheet2.html#social-sciences",
+    "href": "formula_sheet2.html#social-sciences",
+    "title": "Appendix B — Formula sheet",
+    "section": "B.4 Social Sciences",
+    "text": "B.4 Social Sciences\nReliability: \\(r_{xx'} = \\frac{\\text{var}(T)}{\\text{var}(X)} = \\frac{\\text{var}(T)}{\\text{var}(T) + \\text{var}(E)}\\)\nEigenvalue of Component 1 for 6 Items: \\(\\lambda_1 = a_{11}^2 + a_{21}^2 + a_{31}^2 + a_{41}^2 + a_{51}^2 + a_{61}^2\\)\nThe proportion of Variance Accounted For by component 1 (when there are J items) is: \\(\\text{Proportion VAF} = \\frac{\\lambda_1}{\\text{TotalVar}} = \\frac{\\lambda_1}{J}\\)\nComponent loadings for component 1 and item j are represented as: \\(a_{j1} = r_{X_jC_1}\\)\nCommunality for 2 Components: \\(h_{j2} = r_{XjC1}^2 + r_{XjC2}^2 = a_{j1}^2 + a_{j2}^2\\)\nUnicity for 2 Components: \\(b_{j2} = 1 - h_{j2}\\)"
   }
 ]

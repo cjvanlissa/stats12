@@ -3,20 +3,19 @@ title: "formula_sheet"
 editor: visual
 ---
 
-
 ## Regression Slope
 
 When$\beta_1 = 0$there is no linear relationship between the two variables.
-    
+
 \textbf{Hypotheses:}
 
 $H_o: \beta_1 = 0$
 
 $H_a: \beta_1 \neq 0$
-    
+
 **Test statistic:**
 
-$t_{\text{obs}} = \frac{\hat{\beta_1} }{s_{\hat{\beta_1}}} \sim t_{n-2}$, 
+$t_{\text{obs}} = \frac{\hat{\beta_1} }{s_{\hat{\beta_1}}} \sim t_{n-2}$,
 
 where$s_{\hat{\beta_1}} = \frac{s}{s_x\sqrt{n-1}}$
 
@@ -26,26 +25,24 @@ $(1-\alpha)100\%$Confidence Interval for$\beta_1$:
 
 $\hat{\beta_1} \pm t_{\frac{\alpha}{2}, n-2} s_{\hat\beta_1}$
 
-
-
 ## Measures of Center
 
-Mean: 
+Mean:
 
 $\bar{x} = \frac{\sum_{i=1}^{n}x_i}{n} = \frac{x_1 + x_2 + ... + x_n}{n}$
 
-Median: 
+Median:
 
-* If n is even then $\tilde{x}$ is the mean of the two middle observations
-* If n is odd then $\tilde{x}$ is the middle observation (50th percentile)
+-   If n is even then $\tilde{x}$ is the mean of the two middle observations
+-   If n is odd then $\tilde{x}$ is the middle observation (50th percentile)
 
 ## Measures of Variability
 
-Range: $R = x_\text{largest} - x_\text{smallest}$ 
+Range: $R = x_\text{largest} - x_\text{smallest}$
 
-Variance: $s^2 = \frac{\sum_{i=1}^{n}(x_i - \bar{x})^2}{n-1} = \frac{\sum_{i=1}^{n}x_i^2 - n\bar{x}^2}{n-1}$ 
+Variance: $s^2 = \frac{\sum_{i=1}^{n}(x_i - \bar{x})^2}{n-1} = \frac{\sum_{i=1}^{n}x_i^2 - n\bar{x}^2}{n-1}$
 
-Standard deviation: $s = \sqrt{\frac{\sum_{i=1}^{n}(x_i - \bar{x})^2}{n-1}} = \sqrt{\frac{\sum_{i=1}^{n}x_i^2 - n\bar{x}^2}{n-1}} = \sqrt{s^2}$ 
+Standard deviation: $s = \sqrt{\frac{\sum_{i=1}^{n}(x_i - \bar{x})^2}{n-1}} = \sqrt{\frac{\sum_{i=1}^{n}x_i^2 - n\bar{x}^2}{n-1}} = \sqrt{s^2}$
 
 IQR: $\text{IQR} = \text{Q3} - \text{Q1}$
 
@@ -53,41 +50,36 @@ IQR: $\text{IQR} = \text{Q3} - \text{Q1}$
 
 <!-- $\text{Q_{(p)}$ -->
 
-* Sort data from smallest to largest:$x_{(1)} \leq x_{(2)} \leq ... \leq x_{(n)}$
-* Compute the number $np + 0.5$
-* If $np + 0.5$ is an integer, $m$, then: $\text{Q}_{(p)} = x_{(m)}$
-* If $np + 0.5$ is not an integer, $m < np + 0.5 < m+1$ for some integer $m$, then: $\text{Q}_{(p)} = \frac{x_{(m)}+x_{(m+1)}}{2}$
-
+-   Sort data from smallest to largest:$x_{(1)} \leq x_{(2)} \leq ... \leq x_{(n)}$
+-   Compute the number $np + 0.5$
+-   If $np + 0.5$ is an integer, $m$, then: $\text{Q}_{(p)} = x_{(m)}$
+-   If $np + 0.5$ is not an integer, $m < np + 0.5 < m+1$ for some integer $m$, then: $\text{Q}_{(p)} = \frac{x_{(m)}+x_{(m+1)}}{2}$
 
 **Outliers:**
 
-* Values smaller than $\text{Q1} - (1.5 \times \text{IQR})$are outliers
-* Values greater than $\text{Q3} + (1.5 \times \text{IQR})$are outliers
-
+-   Values smaller than $\text{Q1} - (1.5 \times \text{IQR})$are outliers
+-   Values greater than $\text{Q3} + (1.5 \times \text{IQR})$are outliers
 
 ## Measures of Variability
 
-
 ## Discrete Random Variable and Distributions
 
-
-Consider a **discrete** random variable $X$  
+Consider a **discrete** random variable $X$
 
 **Probability Mass Function** (pmf):$f(x) = P(X = x)$
 
-* $f(x) \geq 0$ for all $x$ in $X$
-* $\sum_x f(x) = 1$
-
+-   $f(x) \geq 0$ for all $x$ in $X$
+-   $\sum_x f(x) = 1$
 
 **Cumulative Distributive Function** (cdf):
 
-$F(x) = P(X \leq x) = \sum_{k \leq x}f(k)$  
+$F(x) = P(X \leq x) = \sum_{k \leq x}f(k)$
 
-Mean ($\mu$): $E(X) = \sum_{x}xf(x)$  
+Mean ($\mu$): $E(X) = \sum_{x}xf(x)$
 
-Expected value: $E(g(X)) = \sum_{x}g(x)f(x)$  
+Expected value: $E(g(X)) = \sum_{x}g(x)f(x)$
 
-Variance ($\sigma^2$): $Var(X) = \sum_x (x-\mu)^2f(x) = E(X^2)-[E(X)]^2$ 
+Variance ($\sigma^2$): $Var(X) = \sum_x (x-\mu)^2f(x) = E(X^2)-[E(X)]^2$
 
 SD ($\sigma$): $SD(X) = \sqrt{Var(X)}$
 
@@ -95,138 +87,53 @@ SD ($\sigma$): $SD(X) = \sqrt{Var(X)}$
 
 ## Sets and Probability
 
-
 **Properties of Probability:**
 
-* General Addition Rule: $P(A \cup B) = P(A) + P(B) - P(A \cap B)$
-* Complement Rule:$P(A^c) = 1 - P(A)$
-* If$A \subseteq B$then$P(A \cap B) = P(A)$
-* If$A \subseteq B$then$P(A) \leq P(B)$
-*$P(\emptyset) = 0$and$P(S) = 1$
-*$0 \leq P(A) \leq 1$for all$A$
-\end{itemize}
-**Conditional Probability:**
+-   General Addition Rule: $P(A \cup B) = P(A) + P(B) - P(A \cap B)$
+-   Complement Rule:$P(A^c) = 1 - P(A)$
+-   If$A \subseteq B$then$P(A \cap B) = P(A)$
+-   If$A \subseteq B$then$P(A) \leq P(B)$ $P(\emptyset) = 0$and$P(S) = 1$ $0 \leq P(A) \leq 1$for all$A$ \\end{itemize} **Conditional Probability:**
 
-\setlength*sep{0em}
-*$P(A|B) = \frac{P(A \cap B)}{P(B)}$and$P(B|A) = \frac{P(A \cap B)}{P(A)}$
-* Multiplication Rule:$P(A \cap B) = P(B) \times P(A|B)$and   $P(A \cap B) = P(A) \times P(B|A)$
-* Events$A$and$B$are **independent** if and only if$P(A \cap B) = P(A)P(B)$   and thus$P(A|B) = P(A)$and$P(B|A) = P(B)$
-\end{itemize}
-**Bayes' Theorem:** 
-$P(A_i|B)$$= \frac{P(B|A_i)P(A_i)}{\sum_{i=1}^{n}P(A_i)P(B|A_i)}$ 
-&$= \frac{P(B|A_i)P(A_i)}{P(B|A_1)P(A_1) + P(B|A_2)P(A_2)+ . . . + P(B|A_n)P(A_n)}$ 
-\end{tabular}
-};
-## Sets and Probability Header
-\node[fancytitle, right=10pt] at (box.north west) {Sets and Probability};
-## Continuous Random Variable and Distributions
-\node [mybox] (box){%
-Consider a **continuous** random variable$X$  
+\setlength\*sep{0em} $P(A|B) = \frac{P(A \cap B)}{P(B)}$and$P(B|A) = \frac{P(A \cap B)}{P(A)}$ Multiplication Rule:$P(A \cap B) = P(B) \times P(A|B)$and $P(A \cap B) = P(A) \times P(B|A)$ \* Events$A$and$B$are **independent** if and only if$P(A \cap B) = P(A)P(B)$ and thus$P(A|B) = P(A)$and$P(B|A) = P(B)$ \\end{itemize} **Bayes' Theorem:** $P(A_i|B)$$= \frac{P(B|A_i)P(A_i)}{\sum_{i=1}^{n}P(A_i)P(B|A_i)}$ &$= \frac{P(B|A_i)P(A_i)}{P(B|A_1)P(A_1) + P(B|A_2)P(A_2)+ . . . + P(B|A_n)P(A_n)}$ \\end{tabular} }; \## Sets and Probability Header \node[fancytitle, right=10pt] at (box.north west) {Sets and Probability}; \## Continuous Random Variable and Distributions \node \[mybox\] (box){% Consider a **continuous** random variable$X$\
 **Probability Density Function** (pdf):$P(a \leq X \leq b) = \int_{a}^{b} f(x) dx$
+
+```{=tex}
 \begin{enumerate}
 \setlength*sep{0em}
 *$f(x) \geq 0$for all$x$
 *$\int^{\infty}_{-\infty} f(x) dx = 1$
 \end{enumerate}
-**Cumulative Distributive Function** (cdf):$F(x) = P(X \leq x) = \int_{-\infty}^{x} f(t) dt$  
-Median: $x$such that$F(x) = 0.5$  
-$Q_1$and$Q_3$: $x$such that$F(x) = 0.25$and$x$such that$F(x) = 0.75$ 
-Mean ($\mu$): $E(X) = \int^{\infty}_{-\infty} xf(x) dx$  
-Expected value: $E(g(X)) = \int^{\infty}_{-\infty} g(x)f(x) dx$  
-Variance ($\sigma^2$): $Var(X) = \int^{\infty}_{-\infty} (x-\mu)^2f(x) dx = E(X^2)-[E(X)]^2$ 
-SD ($\sigma$): $SD(X) = \sqrt{Var(X)}$
-};
-## Continuous Random Variable and Distributions Header
-\node[fancytitle, right=10pt] at (box.north west) {Continuous Random Variables};
-## Summarizing Main Features of f(x)
-\node [mybox] (box){%
-Consider two random variables$X, Y$ 
-**Properties of Probability:**
+```
+**Cumulative Distributive Function** (cdf):$F(x) = P(X \leq x) = \int_{-\infty}^{x} f(t) dt$\
+Median: $x$such that$F(x) = 0.5$\
+$Q_1$and$Q_3$: $x$such that$F(x) = 0.25$and$x$such that$F(x) = 0.75$ Mean ($\mu$): $E(X) = \int^{\infty}_{-\infty} xf(x) dx$\
+Expected value: $E(g(X)) = \int^{\infty}_{-\infty} g(x)f(x) dx$\
+Variance ($\sigma^2$): $Var(X) = \int^{\infty}_{-\infty} (x-\mu)^2f(x) dx = E(X^2)-[E(X)]^2$ SD ($\sigma$): $SD(X) = \sqrt{Var(X)}$ }; \## Continuous Random Variable and Distributions Header \node[fancytitle, right=10pt] at (box.north west) {Continuous Random Variables}; \## Summarizing Main Features of f(x) \node \[mybox\] (box){% Consider two random variables$X, Y$ **Properties of Probability:**
 
-\setlength*sep{0em}
-*$E(aX+b) = aE(X)+b$, for$a, b \in \mathbb{R}$
-*$E(X+Y)=E(X)+E(Y)$, for all pairs of$X$and$Y$
-*$E(XY) = E(X)E(Y)$, for independent$X$and$Y$
-*$Var(aX+b) = a^2Var(X)$, for$a, b \in \mathbb{R}$
-*$Var(X+Y) = Var(X) + Var(Y)$ 
-$Var(X-Y) = Var(X) + Var(Y)$, for independent$X$and$Y$
-\end{itemize}
-**Covariance:**
+\setlength\*sep{0em} $E(aX+b) = aE(X)+b$, for$a, b \in \mathbb{R}$ $E(X+Y)=E(X)+E(Y)$, for all pairs of$X$and$Y$ $E(XY) = E(X)E(Y)$, for independent$X$and$Y$ $Var(aX+b) = a^2Var(X)$, for$a, b \in \mathbb{R}$ \*$Var(X+Y) = Var(X) + Var(Y)$ $Var(X-Y) = Var(X) + Var(Y)$, for independent$X$and$Y$ \\end{itemize} **Covariance:**
 
-\setlength*sep{0em}
-*$\text{Cov}(X,Y) = E{[X-E(X)][Y-E(Y)]} = E(XY)-E(X)E(Y)$ 
-If$X$and$Y$are independent,$Cov(X,Y) = 0$
-*$Var(X+Y) = Var(X)+Var(Y)+2Cov(X,Y)$
-*$Var(aX+bY+c) = a^2Var(X)+b^2Var(Y)+2abCov(X,Y)$
-\end{itemize}
-};
-## Summarizing Main Features of f(x)
-\node[fancytitle, right=10pt] at (box.north west) {Summarizing Main Features of$f(x)$};
-## Sum and Average of Independent Random Variables
-\node [mybox] (box){%
-**Sum of Independent Random Variables:**  
+\setlength\*sep{0em} $\text{Cov}(X,Y) = E{[X-E(X)][Y-E(Y)]} = E(XY)-E(X)E(Y)$ If$X$and$Y$are independent,$Cov(X,Y) = 0$ $Var(X+Y) = Var(X)+Var(Y)+2Cov(X,Y)$ \*$Var(aX+bY+c) = a^2Var(X)+b^2Var(Y)+2abCov(X,Y)$ \\end{itemize} }; \## Summarizing Main Features of f(x) \node[fancytitle, right=10pt] at (box.north west) {Summarizing Main Features of$f(x)$}; \## Sum and Average of Independent Random Variables \node \[mybox\] (box){% **Sum of Independent Random Variables:**\
 $Y = a_1X_1+a_2X_2+...+a_nX_n$, for$a_1, a_2,..., a_n \in \mathbb{R}$
 
-\setlength*sep{0em}
-*$E(Y) = a_1E(X_1)+a_2E(X_2)+...+a_nE(X_n)$
-*$Var(Y) = a_1^2Var(X_1) + a_2^2Var(X_2) + ... + a_n^2Var(X_n)$
-\end{itemize}
-If$n$random variables$X_i$have common mean$\mu$and common variance$\sigma^2$then,
+\setlength\*sep{0em} $E(Y) = a_1E(X_1)+a_2E(X_2)+...+a_nE(X_n)$ $Var(Y) = a_1^2Var(X_1) + a_2^2Var(X_2) + ... + a_n^2Var(X_n)$ \\end{itemize} If$n$random variables$X_i$have common mean$\mu$and common variance$\sigma^2$then,
 
-\setlength*sep{0em}
-*$E(Y) = (a_1 + a_2 + ... + a_n)\mu$
-*$Var(Y) = (a_1^2 + a_2^2 + ... + a_n^2)\sigma^2$
-\end{itemize}
-**Average of Independent Random Variables:**  
+\setlength\*sep{0em} $E(Y) = (a_1 + a_2 + ... + a_n)\mu$ $Var(Y) = (a_1^2 + a_2^2 + ... + a_n^2)\sigma^2$ \\end{itemize} **Average of Independent Random Variables:**\
 $X_1,X_2,...,X_n$are$n$independent random variables
 
-\setlength*sep{0em}
-*$\bar{X} = \frac{X_1+X_2+...+X_n}{n}$
-*$E[\bar{X}] = \frac{1}{n}[E(X_1)+E(X_2)+...+E(X_n)]$
-*$Var[\bar{X}] = \frac{1}{n^2}[Var(X_1)+Var(X_2)+...+Var(X_n)]$
-\end{itemize}
-If$n$random variables$X_i$have common mean$\mu$and common variance$\sigma^2$then,
+\setlength\*sep{0em} $\bar{X} = \frac{X_1+X_2+...+X_n}{n}$ $E[\bar{X}] = \frac{1}{n}[E(X_1)+E(X_2)+...+E(X_n)]$ \*$Var[\bar{X}] = \frac{1}{n^2}[Var(X_1)+Var(X_2)+...+Var(X_n)]$ \\end{itemize} If$n$random variables$X_i$have common mean$\mu$and common variance$\sigma^2$then,
 
-\setlength*sep{0em}
-*$E[\bar{X}] = \mu$
-*$Var[\bar{X}] = \frac{\sigma^2}{n}$
-\end{itemize}
-};
-## Sum and Average of Independent Random Variables
-\node[fancytitle, right=10pt] at (box.north west) {Sum and Average of Independent Random Variables};
-## Maximum and Minimum of Independent Variables
-\node [mybox] (box){%
-Given$n$independent random variables$X_1, X_2,...,X_n$.  
-For each$X_i$, cdf$F_X(x)$and pdf is$f_X(x)$.  
-**Maximum of Independent Random Variables:**  
-Consider$V=max\{X_1, X_2, ... , X_n\}$ 
-\underline{cdf of V}  
-$F_V(v)$$= P(V \leq v) = P(X_1 \leq v, X_2 \leq v,..., X_n \leq v)$ 
-$= P(X_1 \leq v)P(X_2 \leq v)...P(X_n \leq v) = F_{X_1}(v)F_{X_2}(v)...F_{X_n}(v)$ 
-$= [F_X(v)]^n$; if$X_i$'s are all identically distributed
-\underline{pdf of V}  
-$f_V(v)$$= F_V'(v) = \frac{d}{dv}F_V(v) = \frac{d}{dv}[F_X(v)]^n = n[F_X(v)]^{n-1}\frac{d}{dv}F_X(v)$ 
-$= n[F_X(v)]^{n-1}f_X(v)$
-**Minimum of Independent Random Variables:**  
-Consider$U=min\{X_1, X_2, ... , X_n\}$ 
-\underline{cdf of U}  
-$F_U(u)$$= P(U \leq u) = 1-P(U>u) = 1-P(X_1>u, X_2>u,...,X_n>u)$ 
-$= 1-P(X_1>u)P(X_2>u)...P(X_n>u)$ 
-$= 1-[1-F_{X_1}(u)][1-F_{X_2}(u)]...[1-F_{X_n}(u)]$ 
-$= 1-[1-F_X(u)]^n$; if$X_i$'s are all identically distributed
-\underline{pdf of U}  
-$f_U(u)$$= F_U'(u) = \frac{d}{du}\{1-[1-F_X(u)]^2\} = 0 - n[1-F_X(u)]^{n-1}\frac{d}{du}(-F_X(u))$ 
-$= n[1-F_X(u)]^{n-1}f_X(u)$
-\end{tabular}
-};
-## Maximum and Minimum of Independent Variables
-\node[fancytitle, right=10pt] at (box.north west) {Maximum and Minimum of Independent Variables};
-## Some Continuous Distributions
-\node [mybox] (box){%
-**Uniform Distribution:**$X \sim U(a, b)$ 
-Mean: $\mu = E(X) = \frac{a+b}{2}$  
-Variance: $\sigma^2$=$Var(X) = \frac{(b-a)^2}{12}$ 
-\end{tabular}
+\setlength\*sep{0em} $E[\bar{X}] = \mu$ $Var[\bar{X}] = \frac{\sigma^2}{n}$ \\end{itemize} }; \## Sum and Average of Independent Random Variables \node[fancytitle, right=10pt] at (box.north west) {Sum and Average of Independent Random Variables}; \## Maximum and Minimum of Independent Variables \node \[mybox\] (box){% Given$n$independent random variables$X_1, X_2,...,X_n$.\
+For each$X_i$, cdf$F_X(x)$and pdf is$f_X(x)$.\
+**Maximum of Independent Random Variables:**\
+Consider$V=max\{X_1, X_2, ... , X_n\}$ \underline{cdf of V}\
+$F_V(v)$$= P(V \leq v) = P(X_1 \leq v, X_2 \leq v,..., X_n \leq v)$ $= P(X_1 \leq v)P(X_2 \leq v)...P(X_n \leq v) = F_{X_1}(v)F_{X_2}(v)...F_{X_n}(v)$ $= [F_X(v)]^n$; if$X_i$'s are all identically distributed \underline{pdf of V}\
+$f_V(v)$$= F_V'(v) = \frac{d}{dv}F_V(v) = \frac{d}{dv}[F_X(v)]^n = n[F_X(v)]^{n-1}\frac{d}{dv}F_X(v)$ $= n[F_X(v)]^{n-1}f_X(v)$ **Minimum of Independent Random Variables:**\
+Consider$U=min\{X_1, X_2, ... , X_n\}$ \underline{cdf of U}\
+$F_U(u)$$= P(U \leq u) = 1-P(U>u) = 1-P(X_1>u, X_2>u,...,X_n>u)$ $= 1-P(X_1>u)P(X_2>u)...P(X_n>u)$ $= 1-[1-F_{X_1}(u)][1-F_{X_2}(u)]...[1-F_{X_n}(u)]$ $= 1-[1-F_X(u)]^n$; if$X_i$'s are all identically distributed \underline{pdf of U}\
+$f_U(u)$$= F_U'(u) = \frac{d}{du}\{1-[1-F_X(u)]^2\} = 0 - n[1-F_X(u)]^{n-1}\frac{d}{du}(-F_X(u))$ $= n[1-F_X(u)]^{n-1}f_X(u)$ \\end{tabular} }; \## Maximum and Minimum of Independent Variables \node[fancytitle, right=10pt] at (box.north west) {Maximum and Minimum of Independent Variables}; \## Some Continuous Distributions \node \[mybox\] (box){% **Uniform Distribution:**$X \sim U(a, b)$ Mean: $\mu = E(X) = \frac{a+b}{2}$\
+Variance: $\sigma^2$=$Var(X) = \frac{(b-a)^2}{12}$ \\end{tabular}
+
+```{=tex}
 \begin{multicols*}{2}
 \underline{pdf of X}  
 $f(x)=$
@@ -243,10 +150,11 @@ $\begin{cases}
 1 & x > b
 \end{cases}$
 \end{multicols*}
-**Exponential Distribution:**$X \sim Exp(\lambda)$ 
-Mean: $\mu = E(X) = \frac{1}{\lambda}$  
-Variance: $\sigma^2$=$Var(X) = \frac{1}{\lambda^2}$ 
-\end{tabular}
+```
+**Exponential Distribution:**$X \sim Exp(\lambda)$ Mean: $\mu = E(X) = \frac{1}{\lambda}$\
+Variance: $\sigma^2$=$Var(X) = \frac{1}{\lambda^2}$ \\end{tabular}
+
+```{=tex}
 \begin{multicols*}{2}
 \underline{pdf of X}  
 $f(x)=$
@@ -262,254 +170,104 @@ $\begin{cases}
 0 & x < 0
 \end{cases}$
 \end{multicols*}
-};
-## Some Continuous Distributions Header
-\node[fancytitle, right=10pt] at (box.north west) {Some Continuous Distributions};
-## Normal Distribution
-\node [mybox] (box){%
-**Normal Distribution:**$X \sim N(\mu, \sigma^2)$ 
-Standardized Normal:$Z \sim N(0, 1)$where$Z = \frac{X-\mu}{\sigma}$ 
-\underline{68-95-99.7 Rule:}
+```
+}; \## Some Continuous Distributions Header \node[fancytitle, right=10pt] at (box.north west) {Some Continuous Distributions}; \## Normal Distribution \node \[mybox\] (box){% **Normal Distribution:**$X \sim N(\mu, \sigma^2)$ Standardized Normal:$Z \sim N(0, 1)$where$Z = \frac{X-\mu}{\sigma}$ \underline{68-95-99.7 Rule:}
 
-\setlength*sep{0em}
-* approximately 68\% of observations fall within$\sigma$of$\mu$
-* approximately 95\% of observations fall within$2\sigma$of$\mu$
-* approximately 99.7\% of observations fall within$3\sigma$of$\mu$
-\end{itemize}
-};
-## Normal Distribution Header
-\node[fancytitle, right=10pt] at (box.north west) {Normal Distribution};
-## Bernoulli and Binomial Random Variables
-\node [mybox] (box){%
-**Bernoulli Random Variable:**  
-Bernoulli random variable$X$has only two outcomes, success and failure.  
-$P(Success) = p$and$P(Failure) = 1 - p$ 
-**Bernoulli Distribution:**  
-$X \sim Bernoulli(p)$ 
-\underline{pmf}:$P(X=x) = p^x(1-p)^{1-x}$for$x=0,1$ 
-Mean: $\mu = E(X) = p$  
-Variance: $\sigma^2 = Var(X) = p(1-p)$ 
-**Binomial Random Variable:**  
-Binomial random variable$X$is the number of successes for$n$independent trials and each trial has the same probability of success$p$.  
-**Binomial Distribution:**  
-$X \sim Bin(n, p)$ 
-\underline{pmf}:$P(X=x) = {n \choose x} p^x(1-p)^{n-x}$for$x=0,1,2,...,n$ 
-\underline{cdf}:$P(X\leq x) = \sum_{i=0}^{x} {n \choose i} p^i(1-p)^{n-i}$for$x=0,1,2,...,n$ 
-Note:${n \choose x} = \frac{n!}{x!(n-x)!}$ 
-Mean: $\mu = E(X) = np$  
-Variance: $\sigma^2 = Var(X) = np(1-p)$ 
-\end{tabular}
-};
-##  Bernoulli and Binomial Random Variables Header
-\node[fancytitle, right=10pt] at (box.north west) {Bernoulli and Binomial Random Variables};
-## Geometric Distribution and Return Period
-\node [mybox] (box){%
-**Geometric Random Variable:**  
-Geometric random variable X is the number of independent trials needed until the first success occurs.  
-**Geometric Distribution:**  
-$X \sim Geo(p)$where$p$is the probability of success  
-\underline{pmf}:$P(X=x)=p(1-p)^{x-1}$for$x=1,2,3,...$ 
-\underline{cdf}:$P(X \leq x)=1-(1-p)^x$for$x=1,2,3,...$ 
-Mean: $\mu = E(X) = \frac{1}{p}$  
-Variance: $\sigma^2 = Var(X) = \frac{1-p}{p^2}$ 
-};
-## Geometric Distribution Header
-\node[fancytitle, right=10pt] at (box.north west) {Geometric Distribution};
-## Poisson Distribution
-\node [mybox] (box){%
-**Poisson Process:**  
-Random variable X is the number of occurrences in a given interval.  
-**Poisson Distribution:**  
-$X \sim Poisson(\lambda)$where$\lambda$is the rate of occurrences  
-\underline{pmf}:$P(X=x)=\frac{\lambda^x e^{-\lambda}}{x!}$for$x=0,1,2,3,...$ 
-\underline{cdf}:$P(X\leq x)=\sum_{i=0}^{x}\frac{\lambda^i e^{-\lambda}}{i!}$for$x=0,1,2,3,...$ 
-Mean: $\mu = E(X) = \lambda$  
-Variance: $\sigma^2 = Var(X) = \lambda$ 
-\end{tabular}
+\setlength\*sep{0em} \* approximately 68% of observations fall within$\sigma$of$\mu$ \* approximately 95% of observations fall within$2\sigma$of$\mu$ \* approximately 99.7% of observations fall within$3\sigma$of$\mu$ \\end{itemize} }; \## Normal Distribution Header \node[fancytitle, right=10pt] at (box.north west) {Normal Distribution}; \## Bernoulli and Binomial Random Variables \node \[mybox\] (box){% **Bernoulli Random Variable:**\
+Bernoulli random variable$X$has only two outcomes, success and failure.\
+$P(Success) = p$and$P(Failure) = 1 - p$ **Bernoulli Distribution:**\
+$X \sim Bernoulli(p)$ \underline{pmf}:$P(X=x) = p^x(1-p)^{1-x}$for$x=0,1$ Mean: $\mu = E(X) = p$\
+Variance: $\sigma^2 = Var(X) = p(1-p)$ **Binomial Random Variable:**\
+Binomial random variable$X$is the number of successes for$n$independent trials and each trial has the same probability of success$p$.\
+**Binomial Distribution:**\
+$X \sim Bin(n, p)$ \underline{pmf}:$P(X=x) = {n \choose x} p^x(1-p)^{n-x}$for$x=0,1,2,...,n$ \underline{cdf}:$P(X\leq x) = \sum_{i=0}^{x} {n \choose i} p^i(1-p)^{n-i}$for$x=0,1,2,...,n$ Note:${n \choose x} = \frac{n!}{x!(n-x)!}$ Mean: $\mu = E(X) = np$\
+Variance: $\sigma^2 = Var(X) = np(1-p)$ \\end{tabular} }; \## Bernoulli and Binomial Random Variables Header \node[fancytitle, right=10pt] at (box.north west) {Bernoulli and Binomial Random Variables}; \## Geometric Distribution and Return Period \node \[mybox\] (box){% **Geometric Random Variable:**\
+Geometric random variable X is the number of independent trials needed until the first success occurs.\
+**Geometric Distribution:**\
+$X \sim Geo(p)$where$p$is the probability of success\
+\underline{pmf}:$P(X=x)=p(1-p)^{x-1}$for$x=1,2,3,...$ \underline{cdf}:$P(X \leq x)=1-(1-p)^x$for$x=1,2,3,...$ Mean: $\mu = E(X) = \frac{1}{p}$\
+Variance: $\sigma^2 = Var(X) = \frac{1-p}{p^2}$ }; \## Geometric Distribution Header \node[fancytitle, right=10pt] at (box.north west) {Geometric Distribution}; \## Poisson Distribution \node \[mybox\] (box){% **Poisson Process:**\
+Random variable X is the number of occurrences in a given interval.\
+**Poisson Distribution:**\
+$X \sim Poisson(\lambda)$where$\lambda$is the rate of occurrences\
+\underline{pmf}:$P(X=x)=\frac{\lambda^x e^{-\lambda}}{x!}$for$x=0,1,2,3,...$ \underline{cdf}:$P(X\leq x)=\sum_{i=0}^{x}\frac{\lambda^i e^{-\lambda}}{i!}$for$x=0,1,2,3,...$ Mean: $\mu = E(X) = \lambda$\
+Variance: $\sigma^2 = Var(X) = \lambda$ \\end{tabular}
 
-\setlength*sep{0em}
-* Let$T \sim Exp(\lambda)$be the time between two consecutive occurrences of events. (Can also be the waiting time for first event.)
-\end{itemize}
-};
-## Poisson Distribution Header
-\node[fancytitle, right=10pt] at (box.north west) {Poisson Distribution};
-## Poisson Approximation to the Binomial Distribution
-\node [mybox] (box){%
-Let$X \sim Bin(n, p)$be a binomial random variable. If$n$is large$(n \geq 20)$and$p$or$1-p$is small ($np<5$or$n(1-p)<5$), then we can use a Poisson random variable with rate$\lambda = np$to approximate the probabilistic behaviour of$X$.    
-$X \sim Poisson(np)$, approx. for$x=0,1,2,...n$
-};
-## Poisson Approximation to the Binomial Distribution Header
-\node[fancytitle, right=10pt] at (box.north west) {Poisson Approximation to the Binomial Distribution};
-## Central Limit Theorem
-\node [mybox] (box){%
-Let$X_1$,$X_2$,...,$X_n$be a random sample from an arbitrary population/distribution with mean$\mu$and variance$\sigma^2$. When$n$is large ($n \geq 20$) then    
-$\bar{X} = \frac{X_1 + X_2 + ... + X_n}{n} \sim N(\mu, \frac{\sigma^2}{n})$, approx.    
-When dealing with sum, the CLT can still be used. Then    
-$T = X_1 + X_2 + ... + X_n = n\bar{X}$  
-$T \sim N(n\mu, n\sigma^2)$, approx.
-};
-## Central Limit Theorem Header
-\node[fancytitle, right=10pt] at (box.north west) {Central Limit Theorem};
-## Normal Approximation to the Binomial Distribution
-\node [mybox] (box){%
-Let$X \sim Bin(n,p)$. When$n$is large so that both$np \geq 5$and$n(1-p) \geq 5$. We can use the normal distribution to get an approximate answer. Remember to use **continuity correction**.    
-$X \sim N(np, np(1-p))$, approx.
-};
-## Normal Approximation to the Binomial Distribution Header
-\node[fancytitle, right=10pt] at (box.north west) {Normal Approximation to the Binomial Distribution};
-## Normal Approximation to the Poisson Distribution
-\node [mybox] (box){%
-Let$X \sim Poisson(\lambda)$. When$\lambda$is large ($\lambda \geq 20$) then the Normal distribution can be used to approximate the Poisson distribution. Remember to use **continuity correction**.    
-$X \sim N(\lambda, \lambda)$, approx.
-};
-## Normal Approximation to the Poisson Distribution Header
-\node[fancytitle, right=10pt] at (box.north west) {Normal Approximation to the Poisson Distribution};
-## Continuity Correction
-\node [mybox] (box){%
-Consider continuous random variable$Y$and discrete random variable$X$.
+\setlength\*sep{0em} \* Let$T \sim Exp(\lambda)$be the time between two consecutive occurrences of events. (Can also be the waiting time for first event.) \\end{itemize} }; \## Poisson Distribution Header \node[fancytitle, right=10pt] at (box.north west) {Poisson Distribution}; \## Poisson Approximation to the Binomial Distribution \node \[mybox\] (box){% Let$X \sim Bin(n, p)$be a binomial random variable. If$n$is large$(n \geq 20)$and$p$or$1-p$is small ($np<5$or$n(1-p)<5$), then we can use a Poisson random variable with rate$\lambda = np$to approximate the probabilistic behaviour of$X$.\
+$X \sim Poisson(np)$, approx. for$x=0,1,2,...n$ }; \## Poisson Approximation to the Binomial Distribution Header \node[fancytitle, right=10pt] at (box.north west) {Poisson Approximation to the Binomial Distribution}; \## Central Limit Theorem \node \[mybox\] (box){% Let$X_1$,$X_2$,...,$X_n$be a random sample from an arbitrary population/distribution with mean$\mu$and variance$\sigma^2$. When$n$is large ($n \geq 20$) then\
+$\bar{X} = \frac{X_1 + X_2 + ... + X_n}{n} \sim N(\mu, \frac{\sigma^2}{n})$, approx.\
+When dealing with sum, the CLT can still be used. Then\
+$T = X_1 + X_2 + ... + X_n = n\bar{X}$\
+$T \sim N(n\mu, n\sigma^2)$, approx. }; \## Central Limit Theorem Header \node[fancytitle, right=10pt] at (box.north west) {Central Limit Theorem}; \## Normal Approximation to the Binomial Distribution \node \[mybox\] (box){% Let$X \sim Bin(n,p)$. When$n$is large so that both$np \geq 5$and$n(1-p) \geq 5$. We can use the normal distribution to get an approximate answer. Remember to use **continuity correction**.\
+$X \sim N(np, np(1-p))$, approx. }; \## Normal Approximation to the Binomial Distribution Header \node[fancytitle, right=10pt] at (box.north west) {Normal Approximation to the Binomial Distribution}; \## Normal Approximation to the Poisson Distribution \node \[mybox\] (box){% Let$X \sim Poisson(\lambda)$. When$\lambda$is large ($\lambda \geq 20$) then the Normal distribution can be used to approximate the Poisson distribution. Remember to use **continuity correction**.\
+$X \sim N(\lambda, \lambda)$, approx. }; \## Normal Approximation to the Poisson Distribution Header \node[fancytitle, right=10pt] at (box.north west) {Normal Approximation to the Poisson Distribution}; \## Continuity Correction \node \[mybox\] (box){% Consider continuous random variable$Y$and discrete random variable$X$.
 
-\setlength*sep{0em}
-*$P(X > 4) = P(X \geq 5) = P(Y \geq 4.5)$
-*$P(X \geq 4) = P(Y \geq 3.5)$
-*$P(X < 4) = P(X \leq 3) = P(Y \leq 3.5)$
-*$P(X \leq 4) = P(Y \leq 4.5)$
-*$P(X = 4) = P(3.5 \leq Y \leq 4.5)$
-\end{itemize}
-};
-## Continuity Correction Header
-\node[fancytitle, right=10pt] at (box.north west) {Continuity Correction};
-## Point Estimators
-\node [mybox] (box){%
-Suppose that$X_1$,$X_2$,...,$X_n$are random samples from a population with mean$\mu$and variance$\sigma^2$.
+\setlength\*sep{0em} $P(X > 4) = P(X \geq 5) = P(Y \geq 4.5)$ $P(X \geq 4) = P(Y \geq 3.5)$ $P(X < 4) = P(X \leq 3) = P(Y \leq 3.5)$ $P(X \leq 4) = P(Y \leq 4.5)$ \*$P(X = 4) = P(3.5 \leq Y \leq 4.5)$ \\end{itemize} }; \## Continuity Correction Header \node[fancytitle, right=10pt] at (box.north west) {Continuity Correction}; \## Point Estimators \node \[mybox\] (box){% Suppose that$X_1$,$X_2$,...,$X_n$are random samples from a population with mean$\mu$and variance$\sigma^2$.
 
-\setlength*sep{0em}
-*$\bar{x}$is an unbiased estimator of$\mu$ 
-$\bar{x} = \frac{\sum_{i=1}^{n}x_i}{n}$
-*$s^2$is an unbiased estimator of$\sigma^2$ 
-$s^2 = \frac{\sum_{i=1}^{n}(x_i-\bar{x})^2}{n-1} = \frac{\sum_{i=1}^{n}x_i^2-n\bar{x}^2}{n-1}$
-*$\theta$is the parameter,$\hat{\theta}$is the point estimator. When$E(\hat{\theta}) = \theta$,$\hat{\theta}$is an unbiased estimator. The bias of an estimator is$bias(\theta) = E(\hat{\theta}) - \theta$.
-\end{itemize}
-};
-## Point Estimators Header
-\node[fancytitle, right=10pt] at (box.north west) {Point Estimators};
-## Confidence Interval
-\node [mybox] (box){%
-**$(1-\alpha)100\%$Confidence Interval for population mean$\mu$:**   (point estimator of$\mu$is$\bar{x}$)  
-General Form: point estimate$\pm$margin of error  
-When$\sigma^2$is **known**:$\bar{x} \pm z_{\frac{\alpha}{2}}\frac{\sigma}{\sqrt{n}}$ 
-When$\sigma^2$is **unknown**:
-$\bar{x} \pm t_{\frac{\alpha}{2}, n-1}\frac{s}{\sqrt{n}}$ 
-Typical$z$values of$\alpha$:  
-$\alpha = 0.1$$90\%$$z_{\frac{\alpha}{2}} = z_{0.05} = 1.645$ 
-$\alpha = 0.05$$95\%$$z_{\frac{\alpha}{2}} = z_{0.025} = 1.96$ 
-$\alpha = 0.01$$99\%$$z_{\frac{\alpha}{2}} = z_{0.005} = 2.575$ 
-**$(1-\alpha)100\%$Confidence Interval for$\mu_1 - \mu_2$:**  
-$(\bar{x}_1 - \bar{x}_2) \pm t_{\frac{\alpha}{2}, n_1+n_2-2}s_p\sqrt{\frac{1}{n_1}+\frac{1}{n_2}}$
-};
-## Confidence Interval Header
-\node[fancytitle, right=10pt] at (box.north west) {Confidence Interval};
-## Pooled Standard Deviation
-\node [mybox] (box){%
-Requires assumptions that population variances are equal:$\sigma_1^2 = \sigma_2^2 = \sigma^2$ 
-The pooled standard deviation$s_p$estimates the common standard deviation$\sigma$.  
-$s_p = \sqrt{\frac{(n_1-1)s_1^2+(n_2-1)s_2^2}{n_1+n_2-2}}$
-};
-## Pooled Standard Deviation Header
-\node[fancytitle, right=10pt] at (box.north west) {Pooled Standard Deviation};
-## Testing of Hypotheses about mu
-\node [mybox] (box){%
-$H_o$: Null hypothesis is a tentative assumption about a population parameter.  
+\setlength\*sep{0em} $\bar{x}$is an unbiased estimator of$\mu$ $\bar{x} = \frac{\sum_{i=1}^{n}x_i}{n}$ $s^2$is an unbiased estimator of$\sigma^2$ $s^2 = \frac{\sum_{i=1}^{n}(x_i-\bar{x})^2}{n-1} = \frac{\sum_{i=1}^{n}x_i^2-n\bar{x}^2}{n-1}$ \*$\theta$is the parameter,$\hat{\theta}$is the point estimator. When$E(\hat{\theta}) = \theta$,$\hat{\theta}$is an unbiased estimator. The bias of an estimator is$bias(\theta) = E(\hat{\theta}) - \theta$. \\end{itemize} }; \## Point Estimators Header \node[fancytitle, right=10pt] at (box.north west) {Point Estimators}; \## Confidence Interval \node \[mybox\] (box){% $(1-\alpha)100\%$Confidence Interval for population mean$\mu$: (point estimator of$\mu$is$\bar{x}$)\
+General Form: point estimate$\pm$margin of error\
+When$\sigma^2$is **known**:$\bar{x} \pm z_{\frac{\alpha}{2}}\frac{\sigma}{\sqrt{n}}$ When$\sigma^2$is **unknown**: $\bar{x} \pm t_{\frac{\alpha}{2}, n-1}\frac{s}{\sqrt{n}}$ Typical$z$values of$\alpha$:\
+$\alpha = 0.1$$90\%$$z_{\frac{\alpha}{2}} = z_{0.05} = 1.645$ $\alpha = 0.05$$95\%$$z_{\frac{\alpha}{2}} = z_{0.025} = 1.96$ $\alpha = 0.01$$99\%$$z_{\frac{\alpha}{2}} = z_{0.005} = 2.575$ $(1-\alpha)100\%$Confidence Interval for$\mu_1 - \mu_2$:\
+$(\bar{x}_1 - \bar{x}_2) \pm t_{\frac{\alpha}{2}, n_1+n_2-2}s_p\sqrt{\frac{1}{n_1}+\frac{1}{n_2}}$ }; \## Confidence Interval Header \node[fancytitle, right=10pt] at (box.north west) {Confidence Interval}; \## Pooled Standard Deviation \node \[mybox\] (box){% Requires assumptions that population variances are equal:$\sigma_1^2 = \sigma_2^2 = \sigma^2$ The pooled standard deviation$s_p$estimates the common standard deviation$\sigma$.\
+$s_p = \sqrt{\frac{(n_1-1)s_1^2+(n_2-1)s_2^2}{n_1+n_2-2}}$ }; \## Pooled Standard Deviation Header \node[fancytitle, right=10pt] at (box.north west) {Pooled Standard Deviation}; \## Testing of Hypotheses about mu \node \[mybox\] (box){% $H_o$: Null hypothesis is a tentative assumption about a population parameter.\
 $H_a$: Alternative hypothesis is what the test is attempting to establish.
 
-\setlength*sep{0em}
-*$H_o: \mu \geq \mu_o$vs$H_a: \mu < \mu_o$(one-tail test, lower-tail)
-*$H_o: \mu \leq \mu_o$vs$H_a: \mu > \mu_o$(one-tail test, upper-tail)
-*$H_o: \mu = \mu_o$vs$H_a: \mu \neq \mu_o$(two-tail test)
-\end{itemize}
-**Test Statistic:**  
-Case 1:$\sigma^2$is \underline{known}  
-$z=\frac{\bar{x}-\mu_o}{\frac{\sigma}{\sqrt{n}}} \sim N(0,1)$ 
-Case 2:$\sigma^2$is \underline{unknown}  
-$t=\frac{\bar{x}-\mu_o}{\frac{s}{\sqrt{n}}} \sim t_{n-1}$ 
-**Type I and Type II errors:**  
-Type I error: & rejecting$H_o$when$H_o$is true  
-Type II error: & not rejecting$H_o$with$H_o$is false  
-$P(\text{Type I error}) = \alpha$ 
-$P(\text{Type II error}) = \beta$ 
-**Power** is the probability of rejecting$H_o$, when$H_o$is false.  
-$\text{Power} = 1-\beta$ 
-**Comparison of two means:**  
-Two independent populations with means$\mu_1$and$\mu_2$.  
+\setlength\*sep{0em} $H_o: \mu \geq \mu_o$vs$H_a: \mu < \mu_o$(one-tail test, lower-tail) $H_o: \mu \leq \mu_o$vs$H_a: \mu > \mu_o$(one-tail test, upper-tail) \*$H_o: \mu = \mu_o$vs$H_a: \mu \neq \mu_o$(two-tail test) \\end{itemize} **Test Statistic:**\
+Case 1:$\sigma^2$is \underline{known}\
+$z=\frac{\bar{x}-\mu_o}{\frac{\sigma}{\sqrt{n}}} \sim N(0,1)$ Case 2:$\sigma^2$is \underline{unknown}\
+$t=\frac{\bar{x}-\mu_o}{\frac{s}{\sqrt{n}}} \sim t_{n-1}$ **Type I and Type II errors:**\
+Type I error: & rejecting$H_o$when$H_o$is true\
+Type II error: & not rejecting$H_o$with$H_o$is false\
+$P(\text{Type I error}) = \alpha$ $P(\text{Type II error}) = \beta$ **Power** is the probability of rejecting$H_o$, when$H_o$is false.\
+$\text{Power} = 1-\beta$ **Comparison of two means:**\
+Two independent populations with means$\mu_1$and$\mu_2$.\
 Assume random samples, normal distributions, and equal variances ($\sigma_1^2 = \sigma_2^2$).
 
-\setlength*sep{0em}
-*$H_o: \mu_1 - \mu_2 \geq \Delta_o$vs$H_a: \mu_1 - \mu_2 < \Delta_o$(lower-tail)
-*$H_o: \mu_1 - \mu_2 \leq \Delta_o$vs$H_a: \mu_1 - \mu_2 > \Delta_o$(upper-tail)
-*$H_o: \mu_1 - \mu_2 = \Delta_o$vs$H_a: \mu_1 - \mu_2 \neq \Delta_o$(two-tail)
-\end{itemize}
-**Test Statistic:**  
-$t=\frac{(\bar{\chi}_1-\bar{\chi}_2)-\Delta_o}{s_p\sqrt{\frac{1}{n_1}+\frac{1}{n_2}}} \sim t_{n_1+n_2-2}$ 
-$s_p$is the pooled standard deviation  
-**Rejection Rules:**  
+\setlength\*sep{0em} $H_o: \mu_1 - \mu_2 \geq \Delta_o$vs$H_a: \mu_1 - \mu_2 < \Delta_o$(lower-tail) $H_o: \mu_1 - \mu_2 \leq \Delta_o$vs$H_a: \mu_1 - \mu_2 > \Delta_o$(upper-tail) \*$H_o: \mu_1 - \mu_2 = \Delta_o$vs$H_a: \mu_1 - \mu_2 \neq \Delta_o$(two-tail) \\end{itemize} **Test Statistic:**\
+$t=\frac{(\bar{\chi}_1-\bar{\chi}_2)-\Delta_o}{s_p\sqrt{\frac{1}{n_1}+\frac{1}{n_2}}} \sim t_{n_1+n_2-2}$ $s_p$is the pooled standard deviation\
+**Rejection Rules:**\
 Consider test statistic$z$, and significance value$\alpha$.
 
-\setlength*sep{0em}
-* Lower-tail test: Reject$H_o$if$z \leq z_{\alpha}$
-* Upper-tail test: Reject$H_o$if$z \geq z_{\alpha}$
-* Two-tail test: Reject$H_o$if$|z| \geq z_{\frac{\alpha}{2}}$
-\end{itemize}
-};
-## Testing of Hypotheses about mu Header
-\node[fancytitle, right=10pt] at (box.north west) {Testing of Hypotheses about$\mu$};
+\setlength\*sep{0em} \* Lower-tail test: Reject$H_o$if$z \leq z_{\alpha}$ \* Upper-tail test: Reject$H_o$if$z \geq z_{\alpha}$ \* Two-tail test: Reject$H_o$if$|z| \geq z_{\frac{\alpha}{2}}$ \\end{itemize} }; \## Testing of Hypotheses about mu Header \node[fancytitle, right=10pt] at (box.north west) {Testing of Hypotheses about$\mu$};
 
 ## ANOVA
 
-**One-way ANOVA:**  
+**One-way ANOVA:**
 
-$k =$number of populations or treatments being compared  
+$k =$number of populations or treatments being compared
 
-$\mu_1 =$mean of population 1 or true average response when treatment 1 is applied.  
-...  
+$\mu_1 =$mean of population 1 or true average response when treatment 1 is applied.\
+...
 
-$\mu_k =$mean of population$k$or true average response when treatment$k$is applied.  
+$\mu_k =$mean of population$k$or true average response when treatment$k$is applied.
 
 **Assumptions:**
 
-* For each population, response variable is normally distributed
-* Variance of response variable,$\sigma^2$is the same for all the populations
-* The observations must be independent
-\end{itemize}
-**Hypotheses:**  
-$H_o: \mu_1 = \mu_2 = ... = \mu_k$ 
-$H_a: \mu_i \neq \mu_j$for$i \neq j$ 
-**Notation:**  
-$y_{ij}$is the$j^{th}$observed value from the$i^{th}$population/treatment.  
-Total mean: $\bar{y}_{i\cdot} = \frac{y_{i\cdot}}{n_i} = \frac{\sum_{j=1}^{n_i}y_{ij}}{n_i}$ 
-Total sample size: $n = n_1 + n_2 + ... + n_k$  
-Grand total: $y_{\cdot\cdot} = \sum_{i=1}^{k}\sum_{j=1}^{n_i}y_{ij}$ 
-Grand mean: $\bar{y}_{\cdot\cdot} = \frac{y_{\cdot\cdot}}{n} = \frac{\sum_{i=1}^{k}\sum_{j=1}^{n_i}y_{ij}}{n}$ 
-$s^2 = \frac{\sum_{j=1}^{k}(n_i-1)s_i^2}{n-k}$= MSE, where	$s_i^2 = \frac{\sum_{j=1}^{n_i}(y_{ij}-\bar{y}_{i\cdot})^2}{n_i-1}$ 
+-   For each population, response variable is normally distributed
+-   Variance of response variable,$\sigma^2$is the same for all the populations
+-   The observations must be independent \\end{itemize} **Hypotheses:**\
+    $H_o: \mu_1 = \mu_2 = ... = \mu_k$ $H_a: \mu_i \neq \mu_j$for$i \neq j$ **Notation:**\
+    $y_{ij}$is the$j^{th}$observed value from the$i^{th}$population/treatment.\
+    Total mean: $\bar{y}_{i\cdot} = \frac{y_{i\cdot}}{n_i} = \frac{\sum_{j=1}^{n_i}y_{ij}}{n_i}$ Total sample size: $n = n_1 + n_2 + ... + n_k$\
+    Grand total: $y_{\cdot\cdot} = \sum_{i=1}^{k}\sum_{j=1}^{n_i}y_{ij}$ Grand mean: $\bar{y}_{\cdot\cdot} = \frac{y_{\cdot\cdot}}{n} = \frac{\sum_{i=1}^{k}\sum_{j=1}^{n_i}y_{ij}}{n}$ $s^2 = \frac{\sum_{j=1}^{k}(n_i-1)s_i^2}{n-k}$= MSE, where $s_i^2 = \frac{\sum_{j=1}^{n_i}(y_{ij}-\bar{y}_{i\cdot})^2}{n_i-1}$
 
 **The ANOVA Table:**
 
-Source of Variation & df & Sum of Squares & Mean Square & F-ratio   
+Source of Variation & df & Sum of Squares & Mean Square & F-ratio
 
-Treatment $k-1$& SSTr & MSTr =$\frac{\text{SSTr}}{k-1}$$\frac{\text{MSTr}}{\text{MSE}}$  
-Error $n-k$& SSE & MSE =$\frac{\text{SSE}}{n-k}$&    
-Total $n-1$& SST &  &    
+Treatment $k-1$& SSTr & MSTr =$\frac{\text{SSTr}}{k-1}$$\frac{\text{MSTr}}{\text{MSE}}$\
+Error $n-k$& SSE & MSE =$\frac{\text{SSE}}{n-k}$&\
+Total $n-1$& SST & &
 
+SST &= SSTr + SSE
 
-SST &= SSTr + SSE    
+SST = $\sum_{i=1}^{k}\sum_{j=1}^{n_i}(y_{ij}-\bar{y}_{\cdot\cdot})^2 = \sum_{i=1}^{k}\sum_{j=1}^{n_i}y_{ij}^2-\frac{1}{n}y_{\cdot\cdot}^2$ SSTr = $\sum_{i=1}^{k}\sum_{j=1}^{n_i}(\bar{y}_{i\cdot}-\bar{y}_{\cdot\cdot})^2 = \sum_{i=1}^{k}\frac{1}{n_i}y_{i\cdot}^2-\frac{1}{n}y_{\cdot\cdot}^2$ SSE = $\sum_{i=1}^{k}\sum_{j=1}^{n_i}(y_{ij}-\bar{y}_{i\cdot})^2= \sum_{i=1}^{k}\sum_{j=1}^{n_i}y_{ij}^2-\sum_{i=1}^{k}\frac{y_{i\cdot}^2}{n_i} = \sum_{i=1}^{k}(n_i-1)s_i^2$
 
-SST = $\sum_{i=1}^{k}\sum_{j=1}^{n_i}(y_{ij}-\bar{y}_{\cdot\cdot})^2 = \sum_{i=1}^{k}\sum_{j=1}^{n_i}y_{ij}^2-\frac{1}{n}y_{\cdot\cdot}^2$ 
-SSTr = $\sum_{i=1}^{k}\sum_{j=1}^{n_i}(\bar{y}_{i\cdot}-\bar{y}_{\cdot\cdot})^2 = \sum_{i=1}^{k}\frac{1}{n_i}y_{i\cdot}^2-\frac{1}{n}y_{\cdot\cdot}^2$ 
-SSE = $\sum_{i=1}^{k}\sum_{j=1}^{n_i}(y_{ij}-\bar{y}_{i\cdot})^2= \sum_{i=1}^{k}\sum_{j=1}^{n_i}y_{ij}^2-\sum_{i=1}^{k}\frac{y_{i\cdot}^2}{n_i} = \sum_{i=1}^{k}(n_i-1)s_i^2$ 
+**Test Statistic:**
 
-**Test Statistic:**  
+$F_{obs} = \frac{\text{MSTr}}{\text{MSE}} \sim F_{v_1, v_2}$& $v1 = df(\text{SSTr}) = k-1$
 
-$F_{obs} = \frac{\text{MSTr}}{\text{MSE}} \sim F_{v_1, v_2}$& $v1 = df(\text{SSTr}) = k-1$ 
-
-$v2 = df(\text{SSE}) = n-k$ 
+$v2 = df(\text{SSE}) = n-k$
 
 Reject$H_o$if$F_{obs} \geq F_{\alpha, v_1, v_2}$
 
@@ -517,97 +275,89 @@ Reject$H_o$if$F_{obs} \geq F_{\alpha, v_1, v_2}$
 
 ## Covariance and Correlation Coefficient
 
-On a scatter plot, each observation is represented as a point with x-coord $x_i$ and y-coord $y_i$.  
+On a scatter plot, each observation is represented as a point with x-coord $x_i$ and y-coord $y_i$.
 
-**Sample Covariance:** $Cov(x, y)$ 
+**Sample Covariance:** $Cov(x, y)$
 
-$Cov(x,y)$ $=\frac{1}{n-1}\sum_{i=1}^{n}(x_i-\bar{x})(y_i-\bar{y})$ 
+$Cov(x,y)$ $=\frac{1}{n-1}\sum_{i=1}^{n}(x_i-\bar{x})(y_i-\bar{y})$
 
-$=\frac{1}{n-1}[\sum_{i=1}^{n}x_iy_i-\frac{\sum_{i=1}^{n}x_i\sum_{i=1}^{n}y_i}{n}]$ 
+$=\frac{1}{n-1}[\sum_{i=1}^{n}x_iy_i-\frac{\sum_{i=1}^{n}x_i\sum_{i=1}^{n}y_i}{n}]$
 
 $=\frac{1}{n-1}[\sum_{i=1}^{n}x_iy_i-n\bar{x}\bar{y}]$
 
-* If $x$ and $y$ are positively associated, then $Cov(x, y)$ will be large and positive
-* If $x$ and $y$ are negatively associated, then $Cov(x, y)$ will be large and negative
-* If the variables are not positively nor negatively associated, then $Cov(x,y)$ will be small
+-   If $x$ and $y$ are positively associated, then $Cov(x, y)$ will be large and positive
+-   If $x$ and $y$ are negatively associated, then $Cov(x, y)$ will be large and negative
+-   If the variables are not positively nor negatively associated, then $Cov(x,y)$ will be small
 
 **Sample Correlation Coefficient:** $r$
 
-$r = \frac{1}{n-1}\sum_{i=1}^{n}(\frac{x_i-\bar{x}}{s_x})(\frac{y_i-\bar{y}}{s_y})$, where$s_x = \sqrt{\frac{\sum_{i=1}^{n}(x_i-\bar{x})^2}{n-1}}$ and $s_y = \sqrt{\frac{\sum_{i=1}^{n}(y_i-\bar{y})^2}{n-1}}$ 
+$r = \frac{1}{n-1}\sum_{i=1}^{n}(\frac{x_i-\bar{x}}{s_x})(\frac{y_i-\bar{y}}{s_y})$, where$s_x = \sqrt{\frac{\sum_{i=1}^{n}(x_i-\bar{x})^2}{n-1}}$ and $s_y = \sqrt{\frac{\sum_{i=1}^{n}(y_i-\bar{y})^2}{n-1}}$
 
 $r = \frac{Cov(x,y)}{s_x s_y}$
 
-
-* Always falls between -1 and +1
-* A positive $r$ value indicates a positive association
-* A negative $r$ value indicates a negative association
-* $r$ value close to +1 or -1 indicates a strong linear association
-* $r$ value close to 0 indicates a weak association
+-   Always falls between -1 and +1
+-   A positive $r$ value indicates a positive association
+-   A negative $r$ value indicates a negative association
+-   $r$ value close to +1 or -1 indicates a strong linear association
+-   $r$ value close to 0 indicates a weak association
 
 ## Covariance and Correlation Coefficient Header
 
-
 ## Simple Linear Regression
 
+**Regression Line:**
 
-**Regression Line:**  
+Simple linear regression model: $y = \beta_o + \beta_1x+\varepsilon$
 
-Simple linear regression model: $y = \beta_o + \beta_1x+\varepsilon$ 
+$\beta_o$, $\beta_1$, and $\sigma^2$ are parameters, $y$ and $\varepsilon$ are random variables. $\varepsilon$ is the error term.
 
-$\beta_o$, $\beta_1$, and $\sigma^2$ are parameters, $y$ and $\varepsilon$ are random variables. $\varepsilon$ is the error term.  
+True regression line: $E(y) = \beta_o + \beta_1x$
 
-True regression line: $E(y) = \beta_o + \beta_1x$ 
+Least squares regression line: $\hat{y} = \hat{\beta_o} + \hat{\beta_1}x$
 
-Least squares regression line: $\hat{y} = \hat{\beta_o} + \hat{\beta_1}x$ 
+$\hat{y}$, $\hat{\beta_o}$, and $\hat{\beta_1}$ are point estimates for $y$, $\beta_o$, and $\beta_1$.
 
-$\hat{y}$, $\hat{\beta_o}$, and $\hat{\beta_1}$ are point estimates for $y$, $\beta_o$, and $\beta_1$.  
+Residual: $\varepsilon_i = y_i - \hat{y_i}$
 
-Residual: $\varepsilon_i = y_i - \hat{y_i}$ 
+$\hat{\beta_1} = \frac{\sum_{i=1}^{n}(x_i-\bar{x})(y_i-\bar{y})}{\sum_{i=1}^{n}(x_i-\bar{x})^2} = \frac{\sum_{i=1}^{n}x_iy_i-n\bar{x}\bar{y}}{\sum_{i=1}^{n}x_i^2-n\bar{x}^2} = r\frac{s_y}{s_x}$
 
-$\hat{\beta_1} = \frac{\sum_{i=1}^{n}(x_i-\bar{x})(y_i-\bar{y})}{\sum_{i=1}^{n}(x_i-\bar{x})^2} = \frac{\sum_{i=1}^{n}x_iy_i-n\bar{x}\bar{y}}{\sum_{i=1}^{n}x_i^2-n\bar{x}^2} = r\frac{s_y}{s_x}$ 
+$\hat{\beta_o} = \frac{\sum_{i=1}^{n}y_i-\hat{\beta_1}\sum_{i=1}^{n}x_i}{n} = \bar{y} - \hat{\beta_1}\bar{x}$
 
-$\hat{\beta_o} = \frac{\sum_{i=1}^{n}y_i-\hat{\beta_1}\sum_{i=1}^{n}x_i}{n} = \bar{y} - \hat{\beta_1}\bar{x}$ 
-
-**Coefficient of Determination:** $r^2$ 
+**Coefficient of Determination:** $r^2$
 
 The proportion of observed $y$ variation that can be explained by the simple linear regression model.
 
-
 ## Simple Linear Regression Header
-
 
 ## Estimating Variance
 
+$\hat{\sigma}^2 = s^2 = \frac{\text{SSE}}{n-2} = \frac{\sum_{i=1}^{n}(y_i - \hat{y_i})^2}{n-2}$
 
-$\hat{\sigma}^2 = s^2 = \frac{\text{SSE}}{n-2} = \frac{\sum_{i=1}^{n}(y_i - \hat{y_i})^2}{n-2}$ 
+**Error Sum of Squares** (SSE):
 
-**Error Sum of Squares** (SSE):  
+SSE = $\sum_{i=1}^{n}\varepsilon_i^2 = \sum_{i=1}^{n}(y_i - \hat{y_i})^2 = \sum_{i=1}^{n}[y_i-(\hat{\beta_o}+\hat{\beta_1}x_i)]^2$
 
-SSE = $\sum_{i=1}^{n}\varepsilon_i^2 = \sum_{i=1}^{n}(y_i - \hat{y_i})^2 = \sum_{i=1}^{n}[y_i-(\hat{\beta_o}+\hat{\beta_1}x_i)]^2$ 
+SSE is a measure of variation in $y$ left unexplained by linear regression model.\
+**Total Sum of Squares** (SST):
 
-SSE is a measure of variation in $y$ left unexplained by linear regression model.  
-**Total Sum of Squares** (SST):  
+SST =$\sum_{i=1}^{n}(y_i-\bar{y})^2$
 
-SST =$\sum_{i=1}^{n}(y_i-\bar{y})^2$ 
+SST is sum of squared deviations about sample mean of observed $y$ values.
 
-SST is sum of squared deviations about sample mean of observed $y$ values.  
+**Regression Sum of Squares** (SSR):
 
-**Regression Sum of Squares** (SSR):  
+SSR =$\sum_{i=1}^{n}(\hat{y_i}-\bar{y})^2$
 
-SSR =$\sum_{i=1}^{n}(\hat{y_i}-\bar{y})^2$ 
+SSR is total variation explained by the linear regression model.
 
-SSR is total variation explained by the linear regression model.   
+SST = SSR + SSE
 
-SST = SSR + SSE  
+**Coefficient of Determination from SST, SSR, and SSE**:
 
-**Coefficient of Determination from SST, SSR, and SSE**:  
+$r^2 = 1 - \frac{SSE}{SST}$
 
-$r^2 = 1 - \frac{SSE}{SST}$ 
-
-or  
+or
 
 $r^2 = \frac{SSR}{SST}$
 
-
 ## Estimating Variance Header
-
