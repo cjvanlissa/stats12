@@ -24,7 +24,7 @@ sum(df$cas < 5.5)
 
 students <- read.csv("C:/Users/vanlissa/OneDrive - Tilburg University/TU/Statistics 1 and 2 (LAS) - documenten/2023/portfolio1.csv", stringsAsFactors = FALSE)
 
-f <- list.files(path = "C:/Users/vanlissa/OneDrive - Tilburg University/TU/Statistics 1 and 2 (LAS) - documenten/2023/Stats12-graded", full.names = T, pattern = "^Ass.+cj\\.xlsx$")
+f <- list.files(path = "C:/Users/vanlissa/OneDrive - Tilburg University/TU/Statistics 1 and 2 (LAS) - documenten/2023/Stats12-graded", full.names = T, pattern = "_cj")
 
 out <- lapply(f, xlsx::read.xlsx, sheetIndex = 1, header = FALSE)
 nam <- basename(f)
@@ -40,7 +40,7 @@ grades <- do.call(rbind, lapply(out, function(i){
   fbk[which(fbk == "")] <- "None"
   fbk <- paste0(paste0(c("Select suitable variables",
                              "Describe dataset", "Probability calculus on continuous variable",
-                             "Hypothesis test", "Discuss results", "APA Style", "MC Questions")[these], ", grade: ", tab[1, -ncol(tab)], ", feedback: ", fbk), collapse = "\n")
+                             "Hypothesis test", "Discuss results", "APA Style", "MC Questions"), ", grade: ", tab[1, -ncol(tab)], ", feedback: ", fbk), collapse = "\n")
   tab$fbk <- fbk
   tab["Final grade"] <- formatC(as.numeric(tab["Final grade"]), digits = 1, format = "f")
   ids <- na.omit(as.character(i[2, -1]))
@@ -55,7 +55,7 @@ grades$SIS.User.ID[grades$SIS.User.ID == "858314"] <- 2091754
 all(grades$SIS.User.ID %in% students$SIS.User.ID)
 
 df_comb <- merge(grades, students, by = "SIS.User.ID")
-
+write.csv(df_comb, "C:/Users/vanlissa/OneDrive - Tilburg University/TU/Statistics 1 and 2 (LAS) - documenten/2023/portfolio1_grades.csv", row.names = F)
 # Email students ----------------------------------------------------------
 library("RDCOMClient")
 OutApp <- COMCreate("Outlook.Application")

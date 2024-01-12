@@ -12,6 +12,8 @@ Throughout this lecture, assume that we have k items and n participants. Let's n
 
 ## Principal Components Analysis (PCA)
 
+
+
 PCA is a data rotation technique designed to transform original items into uncorrelated components. These components represent linear combinations of the original items. The primary goal of PCA is dimension reduction, where a small number of components are used to explain most of the variance in the items. This allows us to represent the variance in the items more efficiently. For instance, if ten items measure extraversion, and one component explains most of the variance, we can retain that one component and discard the remaining nine.
 
 ## Exploratory Factor Analysis (EFA)

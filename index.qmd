@@ -329,21 +329,21 @@ a. Select at least three constructs for further analysis, and using at least one
     ii.	Include at least two predictors
 b.	Perform some kind of data reduction analysis (200 words)
     i. Report and interpret the results
-b.	Perform reliability analysis (200 words)
+c.	Perform reliability analysis (200 words)
     i. Report and interpret the results
-b.	Construct a model with only main effects (200 words)
+d.	Construct a model with only main effects (200 words)
     i. Report and interpret the results
-c.	Construct a model with the interaction effect (200 words)
+e.	Construct a model with the interaction effect (200 words)
     i. Report and interpret the model results
     ii. Conduct and report a nested model test
-d.  Throughout your report, report confidence intervals. For at least one hypothesis, use interval testing (optionally, alongside p-value based testing).
-e.	Discuss your analyses (300 words)
+<!-- d.  Throughout your report, report confidence intervals. For at least one hypothesis, use interval testing (optionally, alongside p-value based testing). -->
+f.	Discuss your analyses (300 words)
     i. Explain your rationale for important modeling decisions
     ii.	Motivate your choice for the type of statistics and analyses
     iii. Discuss assumptions
     iv.	Discuss what you have learned from it and how you might improve it 
-f.	Use APA style throughout your report
-g.  Create four multiple choice questions about the major-specific material. The best questions will be part of the real exam, so you have an advantage if you make questions that are good, but that you can still answer correctly!
+g.	Use APA style throughout your report
+h.  Create four multiple choice questions about the major-specific material. The best questions will be part of the real exam, so you have an advantage if you make questions that are good, but that you can still answer correctly!
 
 The multiple choice questions must be in plain text (no images or special characters, in the format below. You can just copy-paste this into the (Word?) document of your assignment:
 
@@ -367,15 +367,15 @@ b.	Perform an ANOVA (200 words)
 b.	Perform a factorial ANOVA (200 words)
     i. Report and interpret the results
     ii. Report on the interaction effect
-b.	Include a continuous control variable in one of the preceding models (200 words)
+c.	Include a continuous control variable in one of the preceding models (200 words)
     i. Report and interpret the results
-e.	Discuss your analyses (300 words)
+d.	Discuss your analyses (300 words)
     i. Explain your rationale for important modeling decisions
     ii.	Motivate your choice for the type of statistics and analyses
     iii. Discuss assumptions
     iv.	Discuss what you have learned from it and how you might improve it 
-f.	Use APA style throughout your report
-g.  Create four multiple choice questions about the major-specific material. The best questions will be part of the real exam, so you have an advantage if you make questions that are good, but that you can still answer correctly!
+e.	Use APA style throughout your report
+f.  Create four multiple choice questions about the major-specific material. The best questions will be part of the real exam, so you have an advantage if you make questions that are good, but that you can still answer correctly!
 
 The multiple choice questions must be in plain text (no images or special characters, in the format below. You can just copy-paste this into the (Word?) document of your assignment:
 
