@@ -173,7 +173,7 @@ Consider this carefully when deciding what makes more sense: doing your work man
 ## Grading
 
 Your grade is based on three portfolio assignments made in groups,
-and one individual exam to test comprehension of the material covered in the portfolios.
+and one individual exam to test comprehension of the material covered in the portfolios. A grade of 5.5 or higher is required for both to pass the course.
 
 ### Portfolios 40% (3 x 13.3%)
 
