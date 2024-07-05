@@ -84,25 +84,9 @@ After taking this course, students will be able to...
 
 The **course schedule** is available at [My Timetable](https://rooster.uvt.nl/schedule). The information below might go out of date. For a general overview of the content, see below:
 
-```{r}
-#| results = "asis",
-#| echo = FALSE,
-#| cache = FALSE
-schedule <- read.csv("schedule_notes.csv")[, 1:4]
-schedule$Date <- as.Date(paste(2024, schedule$Week, 1, sep="-"), "%Y-%U-%u")
-addthis <- c(0:5)
-names(addthis) <- c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday")
-schedule$Date <- schedule$Date+addthis[schedule$Day]
-schedule <- schedule[!is.na(schedule$Week), c("Week", "Activity", "Date", "Topic")]
-ordr <- order(schedule$Date, decreasing = FALSE)
-schedule$Date <- format(schedule$Date, format = "%d-%m-%Y")
-suppressWarnings(library(DT))
-# library(lubridate)
-# mdy(isoweek(4))
-# lubridate::isoweek(as.Date("13-09-2021", format = "%d-%m-%Y"))
-# lubridate::parse_date_time("37", orders = "%W")
-# lubridate::isoweek(as.Date("13-09-2021", format = "%d-%m-%Y"))
-DT::datatable(schedule[ordr, ], rownames = FALSE, options = list(pageLength = nrow(schedule)), escape = FALSE)
+
+```
+## Error in loadNamespace(name): there is no package called 'webshot'
 ```
 
 ## Using this GitBook
@@ -152,14 +136,96 @@ so if you have to miss either one, absolutely make sure you have caught up with 
 
 Below is a breakdown of the expected study load:
 
-```{r}
-#| echo = FALSE
-options(knitr.kable.NA = '')
-tab_load <- xlsx::read.xlsx("hours_breakdown.xlsx", 1)
-library(kableExtra)
-kbl(tab_load) |>
-  row_spec(which(is.na(tab_load$Duration)), bold = TRUE, hline_after = T)
-```
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> Activity </th>
+   <th style="text-align:right;"> Duration </th>
+   <th style="text-align:right;"> Times </th>
+   <th style="text-align:right;"> Total </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;font-weight: bold;"> Synchronous </td>
+   <td style="text-align:right;font-weight: bold;">  </td>
+   <td style="text-align:right;font-weight: bold;">  </td>
+   <td style="text-align:right;font-weight: bold;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Lectures </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 14 </td>
+   <td style="text-align:right;"> 28 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Tutorials </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 14 </td>
+   <td style="text-align:right;"> 28 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;font-weight: bold;"> Asynchronous </td>
+   <td style="text-align:right;font-weight: bold;">  </td>
+   <td style="text-align:right;font-weight: bold;">  </td>
+   <td style="text-align:right;font-weight: bold;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Knowledge clips </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 14 </td>
+   <td style="text-align:right;"> 14 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Formative tests </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 14 </td>
+   <td style="text-align:right;"> 14 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Reading time </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 14 </td>
+   <td style="text-align:right;"> 14 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Studying </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 37 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;font-weight: bold;"> Assessment type(s) </td>
+   <td style="text-align:right;font-weight: bold;">  </td>
+   <td style="text-align:right;font-weight: bold;">  </td>
+   <td style="text-align:right;font-weight: bold;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Portfolio </td>
+   <td style="text-align:right;"> 10 </td>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;"> 30 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Exam </td>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 3 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;font-weight: bold;"> Total </td>
+   <td style="text-align:right;font-weight: bold;">  </td>
+   <td style="text-align:right;font-weight: bold;">  </td>
+   <td style="text-align:right;font-weight: bold;"> 168 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;font-weight: bold;"> ECTS </td>
+   <td style="text-align:right;font-weight: bold;">  </td>
+   <td style="text-align:right;font-weight: bold;">  </td>
+   <td style="text-align:right;font-weight: bold;"> 6 </td>
+  </tr>
+</tbody>
+</table>
 
 
 ## Staff
@@ -171,7 +237,6 @@ kbl(tab_load) |>
 **Lab sessions**
 
 (Thu) Tra Lê
-
 
 <!-- ## Teaching Philosophy -->
 
@@ -202,20 +267,10 @@ They also take a lot of the pressure off because you can work at your own pace, 
 ## Grading
 
 <span id="grading">
-Your grade is based on two components:
+Your grade is based on three portfolio assignments made in groups,
+and one individual exam to test comprehension of the material covered in the portfolios.
 
-1. *A portfolio* composed of three assignments made in groups, and
-2. *An individual exam*, split into three sessions, to test comprehension of the material covered in the portfolios.
-
-**A grade of 5.5 or higher is required for both components to pass the course.**
-
-The first occasion for the exam is split into three sessions, administered throughout the semester, for the following reasons:
-
-* To reduce study load by administering small tests shortly after the material is taught
-* To ensure continued engagement with the course
-* To give students feedback on their current level of understanding
-
-While you do receive an informal grade for each session, the final grade is simply calculated based on your correct answers in all sessions. If that grade falls below 5.5, you can take a resit which covers the material of the entire exam (all 3 sessions).
+A grade of 5.5 or higher is required for each component to pass the course.
 
 ### Portfolios 40% (3 x 13.3%)
 
@@ -227,15 +282,12 @@ Groups should equally distribute the work load for the portfolio assignments. In
 
 ### Exam 60% 
 
-To make sure that all students are equally involved in the making of the portfolio assignments, an individual exam assesses comprehension of the material covered therein. It is a digital multiple choice exam.
+To make sure that all students are equally involved in the making of the portfolio assignments, an individual exam assesses comprehension of the material covered therein. It is a digital multiple choice exam. Note that some of the questions are developed by you, the students (see portfolio)! You thus have an advantage if you develop questions that are good enough to be on the exam.
 
-<!--Note that some of the questions are developed by you, the students (see portfolio)! You thus have an advantage if you develop questions that are good enough to be on the exam.-->
-
-<!--You may bring all course materials to the exam, including the portfolio. The exam consists of a common part and a major-specific part. Note: As per university policy, a guessing correction is applied to your grade.-->
-
+You may bring all course materials to the exam, including the portfolio. The exam consists of a common part and a major-specific part. Note: As per university policy, a guessing correction is applied to your grade.
 </span>
 
-<!-- **Note: I recommend that you download the GitBook onto a USB stick so you have access during your exam!**-->
+**Note: I recommend that you download the GitBook onto a USB stick so you have access during your exam!**
 
 ## Assignments 
 
@@ -278,15 +330,7 @@ d.	Discuss your analyses (300 words)
     iii. Discuss assumptions
     iv.	Discuss what you have learned from it and how you might improve it 
 e.	Use APA style throughout your report
-f.  Reflect on the group process (300 words). Note: I will grade your *reflection*, not your *process*. So: if your group's process is not working well, but you reflect on it properly, you can still get full marks for this component. Use Gibbs' Reflective Cycle:
-    i. Describe what happened during the group work
-    ii. Explain how you felt during the group work
-    iii. Look at the good and bad aspects of the group work
-    iv. What were the obstacles you experienced? What factors contributed to success?
-    v. What could you have done differently to improve the situation?
-    vi. What are your intentions to make the next group assignment work (even) better?
-    
-<!--f.  Create four multiple choice questions about the first 4 weeks. You can use some of your analyses as inspiration, or make the questions purely about understanding. The best questions will be part of the real exam, so you have an advantage if you make questions that are good, but that you can still answer correctly!
+f.  Create four multiple choice questions about the first 4 weeks. You can use some of your analyses as inspiration, or make the questions purely about understanding. The best questions will be part of the real exam, so you have an advantage if you make questions that are good, but that you can still answer correctly!
     i. Introduction to statistics
     ii. Probability
     iii. Sampling distribution
@@ -302,7 +346,6 @@ distractor2 = "This is an incorrect distractor answer",
 distractor3 = "This is an incorrect distractor answer",
 expanation = "Why is the correct answer correct?"
 ```
---> 
 
 ### Assignment 2
 
@@ -328,15 +371,7 @@ e.	Discuss your analyses (300 words)
     iii. Discuss assumptions
     iv.	Discuss what you have learned from it and how you might improve it 
 f.	Use APA style throughout your report
-g.  Reflect on the group process (300 words). Note: I will grade your *reflection*, not your *process*. So: if your group's process is not working well, but you reflect on it properly, you can still get full marks for this component. Use Gibbs' Reflective Cycle:
-    i. Describe what happened during the group work
-    ii. Explain how you felt during the group work
-    iii. Look at the good and bad aspects of the group work
-    iv. What were the obstacles you experienced? What factors contributed to success?
-    v. What could you have done differently to improve the situation?
-    vi. What are your intentions to make the next group assignment work (even) better?
-
-<!--g.  Create four multiple choice questions about the first 4 weeks. You can use some of your analyses as inspiration, or make the questions purely about understanding. The best questions will be part of the real exam, so you have an advantage if you make questions that are good, but that you can still answer correctly!
+g.  Create four multiple choice questions about the first 4 weeks. You can use some of your analyses as inspiration, or make the questions purely about understanding. The best questions will be part of the real exam, so you have an advantage if you make questions that are good, but that you can still answer correctly!
     i. Linear regression, correlation, or sums of squares
     ii. Categorical predictors in linear regression (e.g., t-test or ANOVA)
     iii. Multiple regression
@@ -351,7 +386,7 @@ distractor1 = "This is an incorrect distractor answer",
 distractor2 = "This is an incorrect distractor answer",
 distractor3 = "This is an incorrect distractor answer",
 expanation = "Why is the correct answer correct?"
-```-->
+```
 
 ### Assignment 3 (BE)
 
@@ -372,15 +407,7 @@ e.	Discuss your analyses (300 words)
     iii. Discuss assumptions
     iv.	Discuss what you have learned from it and how you might improve it 
 f.	Use APA style throughout your report
-g.  Reflect on the group process (300 words). Note: I will grade your *reflection*, not your *process*. So: if your group's process is not working well, but you reflect on it properly, you can still get full marks for this component. Use Gibbs' Reflective Cycle:
-    i. Describe what happened during the group work
-    ii. Explain how you felt during the group work
-    iii. Look at the good and bad aspects of the group work
-    iv. What were the obstacles you experienced? What factors contributed to success?
-    v. What could you have done differently to improve the situation?
-    vi. What are your intentions to make the next group assignment work (even) better?
-    
-<!--g.  Create four multiple choice questions about the major-specific material. The best questions will be part of the real exam, so you have an advantage if you make questions that are good, but that you can still answer correctly!
+g.  Create four multiple choice questions about the major-specific material. The best questions will be part of the real exam, so you have an advantage if you make questions that are good, but that you can still answer correctly!
 
 The multiple choice questions must be in plain text (no images or special characters, in the format below. You can just copy-paste this into the (Word?) document of your assignment:
 
@@ -392,7 +419,6 @@ distractor2 = "This is an incorrect distractor answer",
 distractor3 = "This is an incorrect distractor answer",
 expanation = "Why is the correct answer correct?"
 ```
--->
 
 ### Assignment 3 (SS)
 
@@ -415,15 +441,7 @@ f.	Discuss your analyses (300 words)
     iii. Discuss assumptions
     iv.	Discuss what you have learned from it and how you might improve it 
 g.	Use APA style throughout your report
-h.  Reflect on the group process (300 words). Note: I will grade your *reflection*, not your *process*. So: if your group's process is not working well, but you reflect on it properly, you can still get full marks for this component. Use Gibbs' Reflective Cycle:
-    i. Describe what happened during the group work
-    ii. Explain how you felt during the group work
-    iii. Look at the good and bad aspects of the group work
-    iv. What were the obstacles you experienced? What factors contributed to success?
-    v. What could you have done differently to improve the situation?
-    vi. What are your intentions to make the next group assignment work (even) better?
-    
-<!--h.  Create four multiple choice questions about the major-specific material. The best questions will be part of the real exam, so you have an advantage if you make questions that are good, but that you can still answer correctly!
+h.  Create four multiple choice questions about the major-specific material. The best questions will be part of the real exam, so you have an advantage if you make questions that are good, but that you can still answer correctly!
 
 The multiple choice questions must be in plain text (no images or special characters, in the format below. You can just copy-paste this into the (Word?) document of your assignment:
 
@@ -434,7 +452,7 @@ distractor1 = "This is an incorrect distractor answer",
 distractor2 = "This is an incorrect distractor answer",
 distractor3 = "This is an incorrect distractor answer",
 expanation = "Why is the correct answer correct?"
-```-->
+```
 
 ### Assignment 3 (CN)
 
@@ -455,15 +473,7 @@ d.	Discuss your analyses (300 words)
     iii. Discuss assumptions
     iv.	Discuss what you have learned from it and how you might improve it 
 e.	Use APA style throughout your report
-f.  Reflect on the group process (300 words). Note: I will grade your *reflection*, not your *process*. So: if your group's process is not working well, but you reflect on it properly, you can still get full marks for this component. Use Gibbs' Reflective Cycle:
-    i. Describe what happened during the group work
-    ii. Explain how you felt during the group work
-    iii. Look at the good and bad aspects of the group work
-    iv. What were the obstacles you experienced? What factors contributed to success?
-    v. What could you have done differently to improve the situation?
-    vi. What are your intentions to make the next group assignment work (even) better?
-
-<!--f.  Create four multiple choice questions about the major-specific material. The best questions will be part of the real exam, so you have an advantage if you make questions that are good, but that you can still answer correctly!
+f.  Create four multiple choice questions about the major-specific material. The best questions will be part of the real exam, so you have an advantage if you make questions that are good, but that you can still answer correctly!
 
 The multiple choice questions must be in plain text (no images or special characters, in the format below. You can just copy-paste this into the (Word?) document of your assignment:
 
@@ -474,7 +484,7 @@ distractor1 = "This is an incorrect distractor answer",
 distractor2 = "This is an incorrect distractor answer",
 distractor3 = "This is an incorrect distractor answer",
 expanation = "Why is the correct answer correct?"
-```-->
+```
 
 ## Use of Large Language Models (LLMs) 
 
@@ -491,3 +501,79 @@ This book was authored by Caspar J. Van Lissa. Its code and layout are derived f
   https://github.com/debruine/booktem, https://debruine.github.io/booktem/.
 
 Also see: https://psyteachr.github.io/
+
+
+```r
+library(officer)
+library(revise)
+format_text <- function(doc, x, sections){
+  # x = "coursedesc"
+  txt <- sections$sections[[x]]
+  txt <- gsub("\\*\\*(?![a-zA-Z])", "\\*\\*\n", txt, perl = T)
+  txt <- strsplit(txt, split = "\n")[[1]]
+  for(i in txt){
+    if(grepl("^(\\*\\*|##)", i)){
+      i <- gsub("*", "", i, fixed = T)
+      i <- gsub("#", "", i, fixed = T)
+      i <- trimws(i)
+      
+      doc <- body_add(doc, fpar(ftext(i, fp_text(bold = TRUE))))
+    } else {
+      doc <- officer::body_add_par(doc, i)
+    }
+  }
+  doc
+}
+sections <- revise::read_manuscript("index.qmd", to_envir = FALSE)
+file.remove("Syllabus_Statistis_1_2.docx")
+```
+
+```
+## Warning in file.remove("Syllabus_Statistis_1_2.docx"): cannot remove file
+## 'Syllabus_Statistis_1_2.docx', reason 'Permission denied'
+```
+
+```
+## [1] FALSE
+```
+
+```r
+doc <- read_docx("c:/gitbook_stats12/LAS Syllabus Template.docx")
+doc <- body_replace_all_text(doc, "XXcoursename", "Statistics 1 and 2")
+doc <- body_replace_all_text(doc, "XXcoursecode", "840099-B-6")
+doc <- body_replace_all_text(doc, "XXcurrentyear", paste0(format(Sys.Date(), format = "%Y"), "-", (as.integer(format(Sys.Date(), format = "%Y"))+1)))
+
+doc <- officer::cursor_reach(doc, keyword = "XXcoursedesc")
+doc <- format_text(doc, "coursedesc", sections)
+doc <- body_replace_all_text(doc, "XXcoursedesc", "")
+
+
+doc <- officer::cursor_reach(doc, keyword = "XXlearninggoals")
+doc <- format_text(doc, "learninggoals", sections)
+doc <- body_replace_all_text(doc, "XXlearninggoals", "")
+
+doc <- officer::cursor_reach(doc, keyword = "XXstudyload")
+tab_load[] <- lapply(tab_load, as.character)
+tab_load[is.na(tab_load)] <- ""
+doc <- officer::body_add_table(doc, tab_load)
+doc <- body_replace_all_text(doc, "XXstudyload", "")
+
+
+
+doc <- officer::cursor_reach(doc, keyword = "XXschedule")
+schedule <- schedule[ordr, ]
+#tab_load[is.na(tab_load)] <- ""
+doc <- officer::body_add_table(doc, schedule)
+doc <- body_replace_all_text(doc, "XXschedule", "")
+
+doc <- officer::cursor_reach(doc, keyword = "XXgrading")
+doc <- format_text(doc, "grading", sections)
+doc <- body_replace_all_text(doc, "XXgrading", "")
+
+print(doc, target="Syllabus_Statistis_1_2.docx")
+```
+
+```
+## Error in print.rdocx(doc, target = "Syllabus_Statistis_1_2.docx"): Syllabus_Statistis_1_2.docx is open. To write to this document, please, close it.
+```
+

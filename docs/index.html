@@ -58,13 +58,13 @@ ul.task-list li input[type="checkbox"] {
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script><script src="site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><link href="site_libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
-<script src="site_libs/datatables-binding-0.31/datatables.js"></script><script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><link href="site_libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
+}</script><link href="site_libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+<script src="site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><link href="site_libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
+<script src="site_libs/datatables-binding-0.33/datatables.js"></script><script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><link href="site_libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
 <link href="site_libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet">
 <script src="site_libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script><link href="site_libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet">
 <script src="site_libs/crosstalk-1.2.1/js/crosstalk.min.js"></script><script src="site_libs/kePrint-0.0.1/kePrint.js"></script><link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
-<link href="site_libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet">
-<script src="site_libs/bsTable-3.3.7/bootstrapTable.js"></script><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
 <link rel="stylesheet" href="include/booktem.css">
 <link rel="stylesheet" href="include/webex.css">
 <link rel="stylesheet" href="include/glossary.css">
@@ -292,9 +292,7 @@ ul.task-list li input[type="checkbox"] {
 <li>
 <a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a>
   <ul class="collapse">
-<li><a href="#course-overview" id="toc-course-overview" class="nav-link" data-scroll-target="#course-overview">Course overview</a></li>
-  <li><a href="#using-this-gitbook" id="toc-using-this-gitbook" class="nav-link" data-scroll-target="#using-this-gitbook">Using this GitBook</a></li>
-  <li><a href="#sec-software" id="toc-sec-software" class="nav-link" data-scroll-target="#sec-software">Software</a></li>
+<li><a href="#course-description" id="toc-course-description" class="nav-link" data-scroll-target="#course-description">Course Description</a></li>
   <li>
 <a href="#learning-goals" id="toc-learning-goals" class="nav-link" data-scroll-target="#learning-goals">Learning goals</a>
   <ul class="collapse">
@@ -304,6 +302,8 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#major-social-sciences" id="toc-major-social-sciences" class="nav-link" data-scroll-target="#major-social-sciences">Major Social Sciences</a></li>
   </ul>
 </li>
+  <li><a href="#using-this-gitbook" id="toc-using-this-gitbook" class="nav-link" data-scroll-target="#using-this-gitbook">Using this GitBook</a></li>
+  <li><a href="#sec-software" id="toc-sec-software" class="nav-link" data-scroll-target="#sec-software">Software</a></li>
   <li><a href="#attendance" id="toc-attendance" class="nav-link" data-scroll-target="#attendance">Attendance</a></li>
   <li><a href="#study-load" id="toc-study-load" class="nav-link" data-scroll-target="#study-load">Study Load</a></li>
   <li>
@@ -311,7 +311,6 @@ ul.task-list li input[type="checkbox"] {
   <ul class="collapse">
 <li><a href="#why-group-assignments" id="toc-why-group-assignments" class="nav-link" data-scroll-target="#why-group-assignments">Why group assignments?</a></li>
   <li><a href="#why-use-portfolio-assessment" id="toc-why-use-portfolio-assessment" class="nav-link" data-scroll-target="#why-use-portfolio-assessment">Why use portfolio assessment?</a></li>
-  <li><a href="#statement-on-using-ai-for-assignments" id="toc-statement-on-using-ai-for-assignments" class="nav-link" data-scroll-target="#statement-on-using-ai-for-assignments">Statement on using AI for assignments</a></li>
   </ul>
 </li>
   <li>
@@ -331,6 +330,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#assignment-3-cn" id="toc-assignment-3-cn" class="nav-link" data-scroll-target="#assignment-3-cn">Assignment 3 (CN)</a></li>
   </ul>
 </li>
+  <li><a href="#use-of-large-language-models-llms" id="toc-use-of-large-language-models-llms" class="nav-link" data-scroll-target="#use-of-large-language-models-llms">Use of Large Language Models (LLMs)</a></li>
   <li><a href="#credit" id="toc-credit" class="nav-link" data-scroll-target="#credit">Credit</a></li>
   </ul>
 </li>
@@ -367,16 +367,70 @@ ul.task-list li input[type="checkbox"] {
 <p>This course covers the basics of statistics and data analysis. The ability to extract insights from data is an essential skill for both academic and non-academic work, and “data literacy” is increasingly important in a world where data are collected about every aspect of our lives. After completing this course, you will be able to independently analyze data, interpret and report your findings, and assess the results of analyses performed by others, such as you might find in scientific articles.</p>
 <p>This GitBook contains all relevant information about this course. It is assumed that every student reads it carefully. If you have any questions, first consult this GitBook, then ask a fellow student, and only if your question is still not answered, then contact the course coordinator.</p>
 <p>Communication about the course occurs through <a href="https://tilburguniversity.instructure.com/courses/12004">Canvas</a> (Login with your student ID and password).</p>
-<section id="course-overview" class="level2"><h2 class="anchored" data-anchor-id="course-overview">Course overview</h2>
+<section id="course-description" class="level2"><h2 class="anchored" data-anchor-id="course-description">Course Description</h2>
+<p><span id="coursedesc"> In the course, the following techniques will be discussed:</span></p>
+<p><strong>All Majors</strong></p>
+<ul>
+<li>Information on the use of SPSS and interpretation of the output.</li>
+<li>Descriptive statistics;</li>
+<li>Normal distribution; standard scores;</li>
+<li>Sampling distributions; Z and t distributions;</li>
+<li>Hypothesis tests and confidence intervals for the mean.</li>
+<li>The power of a statistical test.</li>
+<li>One way Between Subjects Analysis of Variance.</li>
+<li>Linear regression analysis</li>
+</ul>
+<p><strong>Major Business and Economics</strong></p>
+<ul>
+<li>Moderation</li>
+<li>Logistic regression</li>
+</ul>
+<p><strong>Major Cognitive Neuroscience</strong></p>
+<ul>
+<li>Post hoc tests</li>
+<li>Factorial Analysis of Variance.</li>
+<li>ANCOVA</li>
+<li>Analysis of Repeated Measures.</li>
+</ul>
+<p><strong>Major Social Sciences</strong></p>
+<ul>
+<li>Moderation</li>
+<li>Reliability analysis</li>
+<li>PCA and Factor Analysis. </li>
+</ul></section><section id="learning-goals" class="level2"><h2 class="anchored" data-anchor-id="learning-goals">Learning goals</h2>
+<p><span id="learninggoals"> After taking this course, students will be able to…</span></p>
+<section id="all-majors" class="level3"><h3 class="anchored" data-anchor-id="all-majors">All majors</h3>
+<ol type="1">
+<li>compute and interpret commonly used descriptive statistics such as the sample mean, the median, the mode, variance and standard deviation, the standard error, and the correlation coefficient.</li>
+<li>recognize different probability distributions such as the normal distribution, and make computations for these probability distributions.</li>
+<li>explain the essential aspects of null-hypothesis significance testing, including sampling distributions, Type I and Type II errors, one-tailed versus two-tailed testing, and statistical power.</li>
+<li>apply different statistical tests such as the Z-test, the one sample t-test, the one way Between Subjects Analysis of Variance test, and statistical tests related to (multiple) linear regression analysis with continuous and categorical predictors; and clarify the statistical and/or methodological assumptions that apply to the techniques that are discussed in this course.</li>
+<li>explain basic concepts in regression analysis, including: linear association, least-squares estimation, explained variance, Multiple R, multiple correlation, adjusted R-square, raw and standardized regression coefficients, model-comparison tests, predicted scores, residuals and the assumptions;</li>
+<li>choose the appropriate analysis technique for answering a specific research problem from the range of techniques that are covered in the course.</li>
+<li>use the software package SPSS to perform several statistical data analyses and be able to correctly interpret and report the output to an informed audience (e.g., Liberal arts students, researchers from the social sciences/business and economics/cognitive neuroscience).</li>
+<li>draw valid conclusions from the results of empirical data analyses given specific research questions envisaged.</li>
+</ol></section><section id="major-business-and-economics" class="level3"><h3 class="anchored" data-anchor-id="major-business-and-economics">Major Business and Economics</h3>
+<ol start="9" type="1">
+<li>apply statistical tests in the context of multiple linear regression models with interaction terms and logistic regression models; interpret the corresponding output.</li>
+<li>describe the concepts of probabilities, odds and logits; describe the relationship between the three scales; transform one into another (formulae are provided).</li>
+</ol></section><section id="major-cognitive-neuroscience" class="level3"><h3 class="anchored" data-anchor-id="major-cognitive-neuroscience">Major Cognitive Neuroscience</h3>
+<ol start="11" type="1">
+<li>apply statistical tests in the context of factorial ANOVA, ANCOVA and Analysis of Repeated measures; interpret the corresponding output; and calculate and interpret effect size estimates relevant for these statistical techniques (e.g., (partial) eta squared)</li>
+</ol></section><section id="major-social-sciences" class="level3"><h3 class="anchored" data-anchor-id="major-social-sciences">Major Social Sciences</h3>
+<ol start="12" type="1">
+<li>apply statistical tests in the context of multiple linear regression models with interaction terms and interpret the corresponding output.</li>
+<li>gauge the reliability of measurements from questionnaires and identify problematic items.</li>
+<li>explore the dimensionality of questionnaire data. </li>
+</ol>
 <p>The <strong>course schedule</strong> is available at <a href="https://rooster.uvt.nl/schedule">My Timetable</a>. The information below might go out of date. For a general overview of the content, see below:</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 
-<div class="datatables html-widget html-fill-item" id="htmlwidget-f0eaf39d9e102225f10b" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-f0eaf39d9e102225f10b">{"x":{"filter":"none","vertical":false,"data":[[35,35,35,35,35,36,36,36,36,37,37,37,37,38,38,38,38,38,39,39,39,39,39,40,40,40,40,41,41,41,41,43,43,43,43,44,44,44,44,45,45,45,45,45,46,46,46,46,46,46,46,47,47,47,47,47,47,48,48,48,48,48,49,49,49],["lectures","Lab session","Lab session","Exams","Lab session","lectures","Lab session","Lab session","Lab session","lectures","Lab session","Lab session","Lab session","lectures","Lab session","Lab session","Lab session","Exams","lectures","Lab session","Lab session","Lab session","Exams","lectures","Lab session","Lab session","Lab session","lectures","Lab session","Lab session","Lab session","lectures","Lab session","Lab session","Lab session","lectures","Lab session","Lab session","Lab session","lectures","Lab session","Lab session","Lab session","Exams","lectures","lectures","lectures","Lab session","Lab session","Lab session","Exams","lectures","lectures","lectures","Lab session","Lab session","Lab session","lectures","lectures","Lab session","Lab session","Lab session","lectures","Lab session","Exams"],["28-08-2023","30-08-2023","30-08-2023","01-09-2023","01-09-2023","04-09-2023","06-09-2023","06-09-2023","07-09-2023","11-09-2023","13-09-2023","13-09-2023","14-09-2023","18-09-2023","20-09-2023","20-09-2023","21-09-2023","22-09-2023","25-09-2023","27-09-2023","27-09-2023","28-09-2023","29-09-2023","02-10-2023","04-10-2023","04-10-2023","05-10-2023","09-10-2023","11-10-2023","11-10-2023","12-10-2023","23-10-2023","25-10-2023","25-10-2023","26-10-2023","30-10-2023","01-11-2023","01-11-2023","02-11-2023","06-11-2023","08-11-2023","08-11-2023","09-11-2023","10-11-2023","13-11-2023","13-11-2023","13-11-2023","15-11-2023","15-11-2023","16-11-2023","17-11-2023","20-11-2023","20-11-2023","20-11-2023","22-11-2023","22-11-2023","23-11-2023","27-11-2023","27-11-2023","29-11-2023","29-11-2023","30-11-2023","04-12-2023","06-12-2023","08-12-2023"],["Variables, measurement levels, parameters and statistics, and sampling designs.","CN Introduction","SS Introduction","Register group for Assignment 1","BE Introduction","Describing data with a probability distribution","CN Normal distribution and probability","SS Normal distribution and probability","BE Normal distribution and probability","Sampling distribution of the mean and the standard error.","CN Sampling distribution","SS Sampling distribution","BE Sampling distribution","Testing: Hypotheses, p-values, Type I, Type II errors and Power. Z-test and (one-sample) t-test.","CN Hypothesis testing","SS Hypothesis testing","BE Hypothesis testing","Deadline Assignment 1","General Linear Model (GLM) I: Bivariate regression ","CN Bivariate regression","SS Bivariate regression","BE Bivariate regression","Register group for Assignment 2","GLM II: Sums of squares, explained variance, and correlation","CN Sums of Squares, explained variance, and correlation","SS Sums of Squares, explained variance, and correlation","BE Sums of Squares, explained variance, and correlation","GLM III: Differences between two groups: dummy variables and two-sample t-test ","CN Dummy variables and two-sample t-test","SS Dummy variables and two-sample t-test","BE Dummy variables and two-sample t-test","GLM IV: Differences between more groups: dummy variables and ANOVA","CN Dummy variables and ANOVA","SS Dummy variables and ANOVA","BE Dummy variables and ANOVA","GLM V: More than one predictor - multiple regression analysis","CN Multiple Regression","SS Multiple Regression","BE Multiple Regression","GLM VI: Comparing nested models","CN Nested Models","SS Nested Models","BE Nested Models","Deadline Assignment 2","Major BE: GLM: <a href=\"https://cjvanlissa.github.io/stats12/glm7interaction.html\">Interaction<\/a>","Major SS: GLM: <a href=\"https://cjvanlissa.github.io/stats12/glm7interaction.html\">Interaction<\/a>","Major CN: GLM: <a href=\"https://cjvanlissa.github.io/stats12/glm_contrasts.html\">Contrasts<\/a>","Major SS: <a href=\"https://cjvanlissa.github.io/stats12/glm7interaction.html\">Interaction<\/a>","Major CN: GLM: <a href=\"https://cjvanlissa.github.io/stats12/glm_contrasts.html\">Contrasts<\/a>","Major BE: <a href=\"https://cjvanlissa.github.io/stats12/glm7interaction.html\">Interaction<\/a>","Register group for Assignment 3","Major BE: GLM: <a href=\"https://cjvanlissa.github.io/stats12/logistic.html\">Logistic Regression<\/a>","Major SS: Psychometrics I: <a href=\"https://cjvanlissa.github.io/stats12/reliability_validity.html\">Reliability and validity<\/a>","Major CN: GLM: <a href=\"https://cjvanlissa.github.io/stats12/factorial.html\">Factorial ANOVA<\/a>","Major SS: Psychometrics I: <a href=\"https://cjvanlissa.github.io/stats12/reliability_validity.html\">Reliability and validity<\/a>","Major CN: GLM: <a href=\"https://cjvanlissa.github.io/stats12/factorial.html\">Factorial ANOVA<\/a>","Major BE: GLM: <a href=\"https://cjvanlissa.github.io/stats12/logistic.html\">Logistic Regression<\/a>","Major SS: Psychometrics II: <a href=\"https://cjvanlissa.github.io/stats12/data_reduction.html\">Dimension Reduction<\/a>","Major CN: GLM: <a href=\"https://cjvanlissa.github.io/stats12/ancova.html\">ANCOVA<\/a>","Major SS: Psychometrics II: <a href=\"https://cjvanlissa.github.io/stats12/data_reduction.html\">Dimension Reduction<\/a>","Major CN: GLM: <a href=\"https://cjvanlissa.github.io/stats12/ancova.html\">ANCOVA<\/a>","Major BE: Confidence Intervals: <a href=\"https://cjvanlissa.github.io/stats12/confint.html\">Confidence Intervals<\/a>","Major CN: GLM: <a href=\"https://cjvanlissa.github.io/stats12/rmanova.html\">Repeated Measures ANOVA<\/a>","Major CN: GLM: <a href=\"https://cjvanlissa.github.io/stats12/rmanova.html\">Repeated Measures ANOVA<\/a>","Deadline Assignment 3"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Week<\/th>\n      <th>Activity<\/th>\n      <th>Date<\/th>\n      <th>Topic<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":65,"columnDefs":[{"className":"dt-right","targets":0},{"name":"Week","targets":0},{"name":"Activity","targets":1},{"name":"Date","targets":2},{"name":"Topic","targets":3}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[10,25,50,65,100]}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-ffd94183273303fa68ec" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-ffd94183273303fa68ec">{"x":{"filter":"none","vertical":false,"data":[[35,35,35,35,35,36,36,36,36,37,37,37,37,38,38,38,38,38,39,39,39,39,39,39,40,40,40,40,41,41,41,41,43,43,43,43,44,44,44,44,45,45,45,45,45,46,46,46,46,46,46,46,46,47,47,47,47,47,47,48,48,48,48,48,49,49,49,50],["lectures","Lab session","Lab session","Exams","Lab session","lectures","Lab session","Lab session","Lab session","lectures","Lab session","Lab session","Lab session","lectures","Lab session","Lab session","Lab session","Exams","lectures","Lab session","Lab session","Lab session","Exams","Exams","lectures","Lab session","Lab session","Lab session","lectures","Lab session","Lab session","Lab session","lectures","Lab session","Lab session","Lab session","lectures","Lab session","Lab session","Lab session","lectures","Lab session","Lab session","Lab session","Exams","lectures","lectures","lectures","Lab session","Lab session","Lab session","Exams","Exams","lectures","lectures","lectures","Lab session","Lab session","Lab session","lectures","lectures","Lab session","Lab session","Lab session","lectures","Lab session","Exams","Exams"],["02-09-2024","04-09-2024","04-09-2024","06-09-2024","06-09-2024","09-09-2024","11-09-2024","11-09-2024","12-09-2024","16-09-2024","18-09-2024","18-09-2024","19-09-2024","23-09-2024","25-09-2024","25-09-2024","26-09-2024","27-09-2024","30-09-2024","02-10-2024","02-10-2024","03-10-2024","04-10-2024","04-10-2024","07-10-2024","09-10-2024","09-10-2024","10-10-2024","14-10-2024","16-10-2024","16-10-2024","17-10-2024","28-10-2024","30-10-2024","30-10-2024","31-10-2024","04-11-2024","06-11-2024","06-11-2024","07-11-2024","11-11-2024","13-11-2024","13-11-2024","14-11-2024","15-11-2024","18-11-2024","18-11-2024","18-11-2024","20-11-2024","20-11-2024","21-11-2024","22-11-2024","22-11-2024","25-11-2024","25-11-2024","25-11-2024","27-11-2024","27-11-2024","28-11-2024","02-12-2024","02-12-2024","04-12-2024","04-12-2024","05-12-2024","09-12-2024","11-12-2024","13-12-2024","20-12-2024"],["Variables, measurement levels, parameters and statistics, and sampling designs.","CN Introduction","SS Introduction","Register group for Assignment 1","BE Introduction","Describing data with a probability distribution","CN Normal distribution and probability","SS Normal distribution and probability","BE Normal distribution and probability","Sampling distribution of the mean and the standard error.","CN Sampling distribution","SS Sampling distribution","BE Sampling distribution","Testing: Hypotheses, p-values, Type I, Type II errors and Power. Z-test and (one-sample) t-test.","CN Hypothesis testing","SS Hypothesis testing","BE Hypothesis testing","Deadline Assignment 1","General Linear Model (GLM) I: Bivariate regression ","CN Bivariate regression","SS Bivariate regression","BE Bivariate regression","Register group for Assignment 2","Exam 1","GLM II: Sums of squares, explained variance, and correlation","CN Sums of Squares, explained variance, and correlation","SS Sums of Squares, explained variance, and correlation","BE Sums of Squares, explained variance, and correlation","GLM III: Differences between two groups: dummy variables and two-sample t-test ","CN Dummy variables and two-sample t-test","SS Dummy variables and two-sample t-test","BE Dummy variables and two-sample t-test","GLM IV: Differences between more groups: dummy variables and ANOVA","CN Dummy variables and ANOVA","SS Dummy variables and ANOVA","BE Dummy variables and ANOVA","GLM V: More than one predictor - multiple regression analysis","CN Multiple Regression","SS Multiple Regression","BE Multiple Regression","GLM VI: Comparing nested models","CN Nested Models","SS Nested Models","BE Nested Models","Deadline Assignment 2","Major BE: GLM: <a href=\"https://cjvanlissa.github.io/stats12/glm7interaction.html\">Interaction<\/a>","Major SS: GLM: <a href=\"https://cjvanlissa.github.io/stats12/glm7interaction.html\">Interaction<\/a>","Major CN: GLM: <a href=\"https://cjvanlissa.github.io/stats12/glm_contrasts.html\">Contrasts<\/a>","Major SS: <a href=\"https://cjvanlissa.github.io/stats12/glm7interaction.html\">Interaction<\/a>","Major CN: GLM: <a href=\"https://cjvanlissa.github.io/stats12/glm_contrasts.html\">Contrasts<\/a>","Major BE: <a href=\"https://cjvanlissa.github.io/stats12/glm7interaction.html\">Interaction<\/a>","Register group for Assignment 3","Exam 2","Major BE: GLM: <a href=\"https://cjvanlissa.github.io/stats12/logistic.html\">Logistic Regression<\/a>","Major SS: Psychometrics I: <a href=\"https://cjvanlissa.github.io/stats12/reliability_validity.html\">Reliability and validity<\/a>","Major CN: GLM: <a href=\"https://cjvanlissa.github.io/stats12/factorial.html\">Factorial ANOVA<\/a>","Major SS: Psychometrics I: <a href=\"https://cjvanlissa.github.io/stats12/reliability_validity.html\">Reliability and validity<\/a>","Major CN: GLM: <a href=\"https://cjvanlissa.github.io/stats12/factorial.html\">Factorial ANOVA<\/a>","Major BE: GLM: <a href=\"https://cjvanlissa.github.io/stats12/logistic.html\">Logistic Regression<\/a>","Major SS: Psychometrics II: <a href=\"https://cjvanlissa.github.io/stats12/data_reduction.html\">Dimension Reduction<\/a>","Major CN: GLM: <a href=\"https://cjvanlissa.github.io/stats12/ancova.html\">ANCOVA<\/a>","Major SS: Psychometrics II: <a href=\"https://cjvanlissa.github.io/stats12/data_reduction.html\">Dimension Reduction<\/a>","Major CN: GLM: <a href=\"https://cjvanlissa.github.io/stats12/ancova.html\">ANCOVA<\/a>","Major BE: Confidence Intervals: <a href=\"https://cjvanlissa.github.io/stats12/confint.html\">Confidence Intervals<\/a>","Major CN: GLM: <a href=\"https://cjvanlissa.github.io/stats12/rmanova.html\">Repeated Measures ANOVA<\/a>","Major CN: GLM: <a href=\"https://cjvanlissa.github.io/stats12/rmanova.html\">Repeated Measures ANOVA<\/a>","Deadline Assignment 3","Exam 3"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Week<\/th>\n      <th>Activity<\/th>\n      <th>Date<\/th>\n      <th>Topic<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":68,"columnDefs":[{"className":"dt-right","targets":0},{"name":"Week","targets":0},{"name":"Activity","targets":1},{"name":"Date","targets":2},{"name":"Topic","targets":3}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[10,25,50,68,100]}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
-</section><section id="using-this-gitbook" class="level2"><h2 class="anchored" data-anchor-id="using-this-gitbook">Using this GitBook</h2>
+</section></section><section id="using-this-gitbook" class="level2"><h2 class="anchored" data-anchor-id="using-this-gitbook">Using this GitBook</h2>
 <p><strong>You do not need a book for this course!</strong></p>
 <p>All essential information is contained within this GitBook. To ensure that you always have access to the GitBook, it is recommended that you download it to your local computer as follows:</p>
 <ol type="1">
@@ -401,31 +455,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
 <li>JASP, which is more modern, looks nicer and is very easy to use – but looks less similar to SPSS: <a href="https://jasp-stats.org/" class="uri">https://jasp-stats.org/</a>
 </li>
-</ul></section><section id="learning-goals" class="level2"><h2 class="anchored" data-anchor-id="learning-goals">Learning goals</h2>
-<p>After taking this course, students will be able to…</p>
-<section id="all-majors" class="level3"><h3 class="anchored" data-anchor-id="all-majors">All majors</h3>
-<ol type="1">
-<li>compute and interpret commonly used descriptive statistics such as the sample mean, the median, the mode, variance and standard deviation, the standard error, and the correlation coefficient.</li>
-<li>recognize different probability distributions such as the normal distribution, and make computations for these probability distributions.</li>
-<li>explain the essential aspects of null-hypothesis significance testing, including sampling distributions, Type I and Type II errors, one-tailed versus two-tailed testing, and statistical power.</li>
-<li>apply different statistical tests such as the Z-test, the one sample t-test, the one way Between Subjects Analysis of Variance test, and statistical tests related to (multiple) linear regression analysis with continuous and categorical predictors; and clarify the statistical and/or methodological assumptions that apply to the techniques that are discussed in this course.</li>
-<li>explain basic concepts in regression analysis, including: linear association, least-squares estimation, explained variance, Multiple R, multiple correlation, adjusted R-square, raw and standardized regression coefficients, model-comparison tests, predicted scores, residuals and the assumptions;</li>
-<li>choose the appropriate analysis technique for answering a specific research problem from the range of techniques that are covered in the course.</li>
-<li>use the software package SPSS to perform several statistical data analyses and be able to correctly interpret and report the output to an informed audience (e.g., Liberal arts students, researchers from the social sciences/business and economics/cognitive neuroscience).</li>
-<li>draw valid conclusions from the results of empirical data analyses given specific research questions envisaged.</li>
-</ol></section><section id="major-business-and-economics" class="level3"><h3 class="anchored" data-anchor-id="major-business-and-economics">Major Business and Economics</h3>
-<ol start="9" type="1">
-<li>apply statistical tests in the context of multiple linear regression models with interaction terms and logistic regression models; interpret the corresponding output.</li>
-<li>describe the concepts of probabilities, odds and logits; describe the relationship between the three scales; transform one into another (formulae are provided).</li>
-</ol></section><section id="major-cognitive-neuroscience" class="level3"><h3 class="anchored" data-anchor-id="major-cognitive-neuroscience">Major Cognitive Neuroscience</h3>
-<ol start="11" type="1">
-<li>apply statistical tests in the context of factorial ANOVA, ANCOVA and Analysis of Repeated measures; interpret the corresponding output; and calculate and interpret effect size estimates relevant for these statistical techniques (e.g., (partial) eta squared)</li>
-</ol></section><section id="major-social-sciences" class="level3"><h3 class="anchored" data-anchor-id="major-social-sciences">Major Social Sciences</h3>
-<ol start="12" type="1">
-<li>apply statistical tests in the context of multiple linear regression models with interaction terms and interpret the corresponding output.</li>
-<li>gauge the reliability of measurements from questionnaires and identify problematic items.</li>
-<li>explore the dimensionality of questionnaire data.</li>
-</ol></section></section><section id="attendance" class="level2"><h2 class="anchored" data-anchor-id="attendance">Attendance</h2>
+</ul></section><section id="attendance" class="level2"><h2 class="anchored" data-anchor-id="attendance">Attendance</h2>
 <p>Attendance is mandatory based on our experience that students who actively participate tend to pass the course, whereas those who do not tend to drop out or fail. All lectures and practicals ‘build’ on each other, so if you have to miss either one, absolutely make sure you have caught up with the materials before the next session.</p>
 </section><section id="study-load" class="level2"><h2 class="anchored" data-anchor-id="study-load">Study Load</h2>
 <p>Below is a breakdown of the expected study load:</p>
@@ -535,17 +565,31 @@ ul.task-list li input[type="checkbox"] {
 <p>Groups comprise 3-5 members and are assigned randomly when the course starts. However, it is allowed to switch with a consenting member of another group, or to join/merge with another small group if your group has become smaller than 3 members. There are three portfolio registration deadlines. At this point, one group member submits the definitive group composition via a Google form.</p>
 </section><section id="why-use-portfolio-assessment" class="level3"><h3 class="anchored" data-anchor-id="why-use-portfolio-assessment">Why use portfolio assessment?</h3>
 <p>Portfolio assignments are well-suited for a skills-based course like Statistics 1 &amp; 2. They also take a lot of the pressure off because you can work at your own pace, and keep improving the work until it is good enough. We entrust you with the responsibility of making these portfolio assignments in good faith, without instrumental assistance from outside your group or plagiarism, so I kindly ask you to make good on this trust, and hand in original work to show what you’ve learned.</p>
-</section><section id="statement-on-using-ai-for-assignments" class="level3"><h3 class="anchored" data-anchor-id="statement-on-using-ai-for-assignments">Statement on using AI for assignments</h3>
-<p>There is, in principle, nothing wrong with using AI-based tools like ChatGPT, as you will also have access to them in your working life - but be warned: when you use ChatGPT, it is your responsibility to thoroughly check its output for logical consistency and correctness. You may not yet have the level of expertise required to know when ChatGPT generates irrelevant nonsense - but the teacher who grades your work does. Consider this carefully when deciding what makes more sense: doing your work manually, making sure each step is correct - or outsourcing it to AI, and then checking its work before submitting.</p>
 </section></section><section id="grading" class="level2"><h2 class="anchored" data-anchor-id="grading">Grading</h2>
-<p>Your grade is based on three portfolio assignments made in groups, and one individual exam to test comprehension of the material covered in the portfolios. A grade of 5.5 or higher is required for both to pass the course.</p>
+<p><span id="grading"> Your grade is based on two components:</span></p>
+<ol type="1">
+<li>
+<em>A portfolio</em> composed of three assignments made in groups, and</li>
+<li>
+<em>An individual exam</em>, split into three sessions, to test comprehension of the material covered in the portfolios.</li>
+</ol>
+<p><strong>A grade of 5.5 or higher is required for both components to pass the course.</strong></p>
+<p>The first occasion for the exam is split into three sessions, administered throughout the semester, for the following reasons:</p>
+<ul>
+<li>To reduce study load by administering small tests shortly after the material is taught</li>
+<li>To ensure continued engagement with the course</li>
+<li>To give students feedback on their current level of understanding</li>
+</ul>
+<p>While you do receive an informal grade for each session, the final grade is simply calculated based on your correct answers in all sessions. If that grade falls below 5.5, you can take a resit which covers the material of the entire exam (all 3 sessions).</p>
 <section id="portfolios-40-3-x-13.3" class="level3"><h3 class="anchored" data-anchor-id="portfolios-40-3-x-13.3">Portfolios 40% (3 x 13.3%)</h3>
 <p>You work on the portfolio assignments with your group, both during the lab sessions and outside of class. For each assignment, register your group membership before the set deadline at <a href="http://tiny.cc/stats12_portfolio" class="uri">http://tiny.cc/stats12_portfolio</a>. You hand in your group’s portfolio assignment before the set deadline, at which point it is graded. If your grade is below the passing level of 5.5, your group will have the opportunity to revise the portfolio based on teacher feedback to receive a maximum grade of 6.</p>
-<p><strong>Note:</strong> Groups should equally distribute the work load for the portfolio assignments. In case doubts are raised about the equal distribution of labor in a particular group, the portfolio assignment in question will be supplemented with individual oral examination and an individual grade, which can not exceed the original grade for the group assignment. In other words, failing to distribute the work properly can not have positive effects, but it can have negative effects on your grade. To prevent this, make clear agreements about the distribution of work with your group mates.</p>
+<p>Groups should equally distribute the work load for the portfolio assignments. In case doubts are raised about the equal distribution of labor in a particular group, the portfolio assignment in question will be supplemented with individual oral examination and an individual grade, which can not exceed the original grade for the group assignment. In other words, failing to distribute the work properly can not have positive effects, but it can have negative effects on your grade. To prevent this, make clear agreements about the distribution of work with your group mates.</p>
 </section><section id="exam-60" class="level3"><h3 class="anchored" data-anchor-id="exam-60">Exam 60%</h3>
-<p>To make sure that all students are equally involved in the making of the portfolio assignments, an individual exam assesses comprehension of the material covered therein. It is a digital multiple choice exam. Note that some of the questions are developed by you, the students (see portfolio)! You thus have an advantage if you develop questions that are good enough to be on the exam.</p>
-<p>You may bring all course materials to the exam, including the portfolio. The exam consists of a common part and a major-specific part. Note: As per university policy, a guessing correction is applied to your grade.</p>
-<p><strong>Note: I recommend that you download the GitBook onto a USB stick so you have access during your exam!</strong></p>
+<p>To make sure that all students are equally involved in the making of the portfolio assignments, an individual exam assesses comprehension of the material covered therein. It is a digital multiple choice exam.</p>
+<!--Note that some of the questions are developed by you, the students (see portfolio)! You thus have an advantage if you develop questions that are good enough to be on the exam.-->
+<!--You may bring all course materials to the exam, including the portfolio. The exam consists of a common part and a major-specific part. Note: As per university policy, a guessing correction is applied to your grade.-->
+<p></p>
+<!-- **Note: I recommend that you download the GitBook onto a USB stick so you have access during your exam!**-->
 </section></section><section id="assignments" class="level2"><h2 class="anchored" data-anchor-id="assignments">Assignments</h2>
 <p>Below is a description of the assignments. For each assignment, every element labeled with a lower case letter is graded fail (0 points), pass (1 point), or excellent (1.5 points). Grades are summed for each assignment, and rescaled from 1-10. The final grade is the average across assignments of the rescaled grades. Note the stated word limit for each section. If you can write a good report with fewer words, that’s fine. If you exceed the word limit however, your grade for that section cannot exceed a pass (1 point).</p>
 <p>The focus of the assignments should me on motivating, reporting, interpreting, and discussing your analyses. You will get a good grade for well-reasoned and discussed analyses.</p>
@@ -589,23 +633,34 @@ ul.task-list li input[type="checkbox"] {
 </ol>
 </li>
 <li>Use APA style throughout your report</li>
-<li>Create four multiple choice questions about the first 4 weeks. You can use some of your analyses as inspiration, or make the questions purely about understanding. The best questions will be part of the real exam, so you have an advantage if you make questions that are good, but that you can still answer correctly!
+<li>Reflect on the group process (300 words). Note: I will grade your <em>reflection</em>, not your <em>process</em>. So: if your group’s process is not working well, but you reflect on it properly, you can still get full marks for this component. Use Gibbs’ Reflective Cycle:
 <ol type="i">
-<li>Introduction to statistics</li>
-<li>Probability</li>
-<li>Sampling distribution</li>
-<li>Testing</li>
+<li>Describe what happened during the group work</li>
+<li>Explain how you felt during the group work</li>
+<li>Look at the good and bad aspects of the group work</li>
+<li>What were the obstacles you experienced? What factors contributed to success?</li>
+<li>What could you have done differently to improve the situation?</li>
+<li>What are your intentions to make the next group assignment work (even) better?</li>
 </ol>
 </li>
 </ol>
-<p>The multiple choice questions must be in plain text (no images or special characters, in the format below. You can just copy-paste this into the (Word?) document of your assignment:</p>
-<pre><code>question = "This is the question",
+<!--f.  Create four multiple choice questions about the first 4 weeks. You can use some of your analyses as inspiration, or make the questions purely about understanding. The best questions will be part of the real exam, so you have an advantage if you make questions that are good, but that you can still answer correctly!
+    i. Introduction to statistics
+    ii. Probability
+    iii. Sampling distribution
+    iv. Testing
+
+The multiple choice questions must be in plain text (no images or special characters, in the format below. You can just copy-paste this into the (Word?) document of your assignment:
+
+```
+question = "This is the question",
 answer = "This is the correct answer",
 distractor1 = "This is an incorrect distractor answer",
 distractor2 = "This is an incorrect distractor answer",
 distractor3 = "This is an incorrect distractor answer",
-expanation = "Why is the correct answer correct?"</code></pre>
-</section><section id="assignment-2" class="level3"><h3 class="anchored" data-anchor-id="assignment-2">Assignment 2</h3>
+expanation = "Why is the correct answer correct?"
+```
+--></section><section id="assignment-2" class="level3"><h3 class="anchored" data-anchor-id="assignment-2">Assignment 2</h3>
 <p>General linear model</p>
 <ol type="a">
 <li>Select at least three variables for further analysis, and using at least one reference, explain what research questions you will investigate and what hypotheses you will test (150 words)
@@ -643,23 +698,33 @@ expanation = "Why is the correct answer correct?"</code></pre>
 </ol>
 </li>
 <li>Use APA style throughout your report</li>
-<li>Create four multiple choice questions about the first 4 weeks. You can use some of your analyses as inspiration, or make the questions purely about understanding. The best questions will be part of the real exam, so you have an advantage if you make questions that are good, but that you can still answer correctly!
+<li>Reflect on the group process (300 words). Note: I will grade your <em>reflection</em>, not your <em>process</em>. So: if your group’s process is not working well, but you reflect on it properly, you can still get full marks for this component. Use Gibbs’ Reflective Cycle:
 <ol type="i">
-<li>Linear regression, correlation, or sums of squares</li>
-<li>Categorical predictors in linear regression (e.g., t-test or ANOVA)</li>
-<li>Multiple regression</li>
-<li>Nested models</li>
+<li>Describe what happened during the group work</li>
+<li>Explain how you felt during the group work</li>
+<li>Look at the good and bad aspects of the group work</li>
+<li>What were the obstacles you experienced? What factors contributed to success?</li>
+<li>What could you have done differently to improve the situation?</li>
+<li>What are your intentions to make the next group assignment work (even) better?</li>
 </ol>
 </li>
 </ol>
-<p>The multiple choice questions must be in plain text (no images or special characters, in the format below. You can just copy-paste this into the (Word?) document of your assignment:</p>
-<pre><code>question = "This is the question",
+<!--g.  Create four multiple choice questions about the first 4 weeks. You can use some of your analyses as inspiration, or make the questions purely about understanding. The best questions will be part of the real exam, so you have an advantage if you make questions that are good, but that you can still answer correctly!
+    i. Linear regression, correlation, or sums of squares
+    ii. Categorical predictors in linear regression (e.g., t-test or ANOVA)
+    iii. Multiple regression
+    iv. Nested models
+
+The multiple choice questions must be in plain text (no images or special characters, in the format below. You can just copy-paste this into the (Word?) document of your assignment:
+
+```
+question = "This is the question",
 answer = "This is the correct answer",
 distractor1 = "This is an incorrect distractor answer",
 distractor2 = "This is an incorrect distractor answer",
 distractor3 = "This is an incorrect distractor answer",
-expanation = "Why is the correct answer correct?"</code></pre>
-</section><section id="assignment-3-be" class="level3"><h3 class="anchored" data-anchor-id="assignment-3-be">Assignment 3 (BE)</h3>
+expanation = "Why is the correct answer correct?"
+```--></section><section id="assignment-3-be" class="level3"><h3 class="anchored" data-anchor-id="assignment-3-be">Assignment 3 (BE)</h3>
 <p>Logistic regression</p>
 <ol type="a">
 <li>Select at least three variables for further analysis, and using at least one reference, explain what research questions you will investigate and what hypotheses you will test (150 words)
@@ -689,16 +754,30 @@ expanation = "Why is the correct answer correct?"</code></pre>
 </ol>
 </li>
 <li>Use APA style throughout your report</li>
-<li>Create four multiple choice questions about the major-specific material. The best questions will be part of the real exam, so you have an advantage if you make questions that are good, but that you can still answer correctly!</li>
+<li>Reflect on the group process (300 words). Note: I will grade your <em>reflection</em>, not your <em>process</em>. So: if your group’s process is not working well, but you reflect on it properly, you can still get full marks for this component. Use Gibbs’ Reflective Cycle:
+<ol type="i">
+<li>Describe what happened during the group work</li>
+<li>Explain how you felt during the group work</li>
+<li>Look at the good and bad aspects of the group work</li>
+<li>What were the obstacles you experienced? What factors contributed to success?</li>
+<li>What could you have done differently to improve the situation?</li>
+<li>What are your intentions to make the next group assignment work (even) better?</li>
 </ol>
-<p>The multiple choice questions must be in plain text (no images or special characters, in the format below. You can just copy-paste this into the (Word?) document of your assignment:</p>
-<pre><code>question = "This is the question",
+</li>
+</ol>
+<!--g.  Create four multiple choice questions about the major-specific material. The best questions will be part of the real exam, so you have an advantage if you make questions that are good, but that you can still answer correctly!
+
+The multiple choice questions must be in plain text (no images or special characters, in the format below. You can just copy-paste this into the (Word?) document of your assignment:
+
+```
+question = "This is the question",
 answer = "This is the correct answer",
 distractor1 = "This is an incorrect distractor answer",
 distractor2 = "This is an incorrect distractor answer",
 distractor3 = "This is an incorrect distractor answer",
-expanation = "Why is the correct answer correct?"</code></pre>
-</section><section id="assignment-3-ss" class="level3"><h3 class="anchored" data-anchor-id="assignment-3-ss">Assignment 3 (SS)</h3>
+expanation = "Why is the correct answer correct?"
+```
+--></section><section id="assignment-3-ss" class="level3"><h3 class="anchored" data-anchor-id="assignment-3-ss">Assignment 3 (SS)</h3>
 <ol type="a">
 <li>Select at least three constructs for further analysis, and using at least one reference, explain what research questions you will investigate and what hypotheses you will test (150 words)
 <ol type="i">
@@ -737,16 +816,29 @@ expanation = "Why is the correct answer correct?"</code></pre>
 </ol>
 </li>
 <li>Use APA style throughout your report</li>
-<li>Create four multiple choice questions about the major-specific material. The best questions will be part of the real exam, so you have an advantage if you make questions that are good, but that you can still answer correctly!</li>
+<li>Reflect on the group process (300 words). Note: I will grade your <em>reflection</em>, not your <em>process</em>. So: if your group’s process is not working well, but you reflect on it properly, you can still get full marks for this component. Use Gibbs’ Reflective Cycle:
+<ol type="i">
+<li>Describe what happened during the group work</li>
+<li>Explain how you felt during the group work</li>
+<li>Look at the good and bad aspects of the group work</li>
+<li>What were the obstacles you experienced? What factors contributed to success?</li>
+<li>What could you have done differently to improve the situation?</li>
+<li>What are your intentions to make the next group assignment work (even) better?</li>
 </ol>
-<p>The multiple choice questions must be in plain text (no images or special characters, in the format below. You can just copy-paste this into the (Word?) document of your assignment:</p>
-<pre><code>question = "This is the question",
+</li>
+</ol>
+<!--h.  Create four multiple choice questions about the major-specific material. The best questions will be part of the real exam, so you have an advantage if you make questions that are good, but that you can still answer correctly!
+
+The multiple choice questions must be in plain text (no images or special characters, in the format below. You can just copy-paste this into the (Word?) document of your assignment:
+
+```
+question = "This is the question",
 answer = "This is the correct answer",
 distractor1 = "This is an incorrect distractor answer",
 distractor2 = "This is an incorrect distractor answer",
 distractor3 = "This is an incorrect distractor answer",
-expanation = "Why is the correct answer correct?"</code></pre>
-</section><section id="assignment-3-cn" class="level3"><h3 class="anchored" data-anchor-id="assignment-3-cn">Assignment 3 (CN)</h3>
+expanation = "Why is the correct answer correct?"
+```--></section><section id="assignment-3-cn" class="level3"><h3 class="anchored" data-anchor-id="assignment-3-cn">Assignment 3 (CN)</h3>
 <ol type="a">
 <li>Select at least three variables for further analysis, and using at least one reference, explain what research questions you will investigate and what hypotheses you will test (150 words)
 <ol type="i">
@@ -780,16 +872,32 @@ expanation = "Why is the correct answer correct?"</code></pre>
 </ol>
 </li>
 <li>Use APA style throughout your report</li>
-<li>Create four multiple choice questions about the major-specific material. The best questions will be part of the real exam, so you have an advantage if you make questions that are good, but that you can still answer correctly!</li>
+<li>Reflect on the group process (300 words). Note: I will grade your <em>reflection</em>, not your <em>process</em>. So: if your group’s process is not working well, but you reflect on it properly, you can still get full marks for this component. Use Gibbs’ Reflective Cycle:
+<ol type="i">
+<li>Describe what happened during the group work</li>
+<li>Explain how you felt during the group work</li>
+<li>Look at the good and bad aspects of the group work</li>
+<li>What were the obstacles you experienced? What factors contributed to success?</li>
+<li>What could you have done differently to improve the situation?</li>
+<li>What are your intentions to make the next group assignment work (even) better?</li>
 </ol>
-<p>The multiple choice questions must be in plain text (no images or special characters, in the format below. You can just copy-paste this into the (Word?) document of your assignment:</p>
-<pre><code>question = "This is the question",
+</li>
+</ol>
+<!--f.  Create four multiple choice questions about the major-specific material. The best questions will be part of the real exam, so you have an advantage if you make questions that are good, but that you can still answer correctly!
+
+The multiple choice questions must be in plain text (no images or special characters, in the format below. You can just copy-paste this into the (Word?) document of your assignment:
+
+```
+question = "This is the question",
 answer = "This is the correct answer",
 distractor1 = "This is an incorrect distractor answer",
 distractor2 = "This is an incorrect distractor answer",
 distractor3 = "This is an incorrect distractor answer",
-expanation = "Why is the correct answer correct?"</code></pre>
-</section></section><section id="credit" class="level2"><h2 class="anchored" data-anchor-id="credit">Credit</h2>
+expanation = "Why is the correct answer correct?"
+```--></section></section><section id="use-of-large-language-models-llms" class="level2"><h2 class="anchored" data-anchor-id="use-of-large-language-models-llms">Use of Large Language Models (LLMs)</h2>
+<p>Be warned: LLMs learn from all text on the internet, which includes a <em>lot</em> of incorrect information about statistics. As a result, my experience is that e.g.&nbsp;ChatGPT produces a lot of incorrect output for statistics assignments.</p>
+<p>If you decide to use LLMs, it is your responsibility to thoroughly check its output for logical consistency and correctness. You may not yet have the level of expertise required to know when ChatGPT generates irrelevant nonsense - but the teacher who grades your work does. Consider this carefully when deciding what makes more sense: doing your work manually, making sure each step is correct - or outsourcing it to AI, and then checking its work before submitting.</p>
+</section><section id="credit" class="level2"><h2 class="anchored" data-anchor-id="credit">Credit</h2>
 <p>This book was authored by Caspar J. Van Lissa. Its code and layout are derived from Lisa DeBruine’s “booktem”:</p>
 <blockquote class="blockquote">
 <p>DeBruine L, Lakens D (2023). <em>booktem: Methods Book Template</em>. https://github.com/debruine/booktem, https://debruine.github.io/booktem/.</p>
