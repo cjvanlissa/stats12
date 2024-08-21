@@ -1,0 +1,185 @@
+---
+title: "Motivating Success in Statistics"
+author: "Your Name"
+output: 
+  ioslides_presentation:
+    widescreen: true
+---
+
+## Set Your Standards
+
+Don't settle for passing. What do **YOU** want to get out of this course?
+
+* Define your expectations for your performance in this course
+* Set standard for grades, understanding, teamwork, etc
+* Aim higher to truly grasp the material
+* Become a critical thinker
+
+## Make a Decision
+
+**De-cidere: Cutting off alternative paths**
+
+Are you ready to become really GREAT at statistis?
+
+Deciding means committing to a specific result, and closing the door to any other outcome.
+
+Decide what kind of student you will be.
+
+* Commit to your standard
+* Be present
+* Complete (group) assignments on time
+* Seek help when needed:
+		1. Course manual
+		2. Groupmates
+		3. Discussion page
+		4. Teacher
+* Minimal effort is not an option if you want to succeed
+
+## Really believe it
+
+Complete trust in your ability to pass this course
+
+I had a 3.4 in math in high school - now I am a statistics professor
+
+The question is not: can I do this? The question is: How do I do this!
+
+## Decisions Determine Outcomes
+
+What percentage is aptitude, and what percentage is elbow grease?
+
+In my case, probably 10% aptitude, 90% hard work
+
+What about you?
+
+Whatever you have control over - focus on that
+
+* Make decisions to study, practice, and engage with the material
+* Shape your reality
+
+## Motivation
+
+What are your values?
+
+* Connection
+* Growth
+* Security
+* Adventure
+* Contribution
+
+Each of these can bring pain or pleasure
+
+## Motivation 2
+
+**Pain associated with studying**
+
+* Adventure/connection: Takes time you could have used for fun
+* Growth/security: Is challenging
+* Growth/security: You might fail sometimes
+* Adventure: Can be boring
+
+## Motivation 3
+
+**Pain associated with NOT studying**
+
+* Growth/security: Fail the course, have to go through all that again
+* Connection/growth/security: Feel unprepared, embarrassed, judged, etc.
+* Connection: Fall short of agreements with group mates
+* Adventure: Not able to go on exchange
+
+## Motivation 4
+
+**Pleasure associated with studying**
+
+* Connection: Work with group members, make new friends
+* Growth: Develop valuable real-life skills in data analysis
+* Contribution: Be a valuable team member
+* Security: Feel secure that you won't have to extend your studies
+* Adventure: Time invested pays off later; reward yourself with "adventure" (whatever it means to you)
+
+## Increasing Motivation
+
+* Make the pain associated with NOT studying bigger, and increase reward associated with studying
+* Reward yourself regularly! (celebrate every small succes, Caryl Rusbult)
+* Create accountability: share your goals with team members
+* Agree on rewards: make it fun (social), create a point system, give each other compliments, whatever works for you
+* Or agree on "punishments": lowest grade pays a round of drinks, etc.
+
+
+## Reinforce Good Behaviors
+
+**Behavior that is consistently reinforced will become a habit**
+
+* Create positive study habits: 
+		+ Just commit to 5 minutes, every morning (5 soon turns into 50)
+		+ Schedule regular study times (put it in your agenda)
+		+ Reward small successes (do a bit of work before exercise, or before having a nice snack, or before going out with a friend)
+* _Habits_ will serve you throughout your academic career and life
+
+
+## Problems Are Not Permanent
+
+**Struggle in statistics?**
+
+* Challenges are temporary hurdles
+* With persistence, you can grok (understand) any topic.
+* Growth mindset: Challenges are also opportunities to grow
+
+
+## Ask the Right Questions
+
+* Not "is this part of the exam"?
+* "How does this apply to my academic and real-world interests?"
+* "Why does this matter?"
+* "What is my fellow student - who understands the material - doing differently than me?"
+* Curiosity drives learning: The more you question, the more you learn.
+
+## Handle Your Emotions
+
+* Sh*#$ gets personal!
+* Emotions are part of the learning and teamwork process
+* Remember a time when you felt a similar emotion and realize that you've successfully handled this before
+* These are also learning opportunities
+* Expect emotions and prepare strategies to cope
+		+ Frustration: Take a breather, take smaller steps, ask for help
+		+ In team work: use co-regulation (e.g., empathy and constructive problem solving) to resolve negative emotions together
+
+
+**Become Resilient:** Your ability to manage stress and emotions will contribute to your success in this course and life
+
+## Group Work
+
+* Establish shared goals
+* Write and sign a "Teamwork Contract"
+* Communicate Your Expectations
+		+ Don't expect people to live up to standards you never clearly communicated
+* Create roles (either for the whole assignment, or rotate every week)
+		+ Planner, timekeeper, proofreader, counter-thinker, coach, social lubricator
+* Check in with each other regularly (how's it going with you and with our project)
+* Reflect at the end (this is part of the grade)
+
+
+## Urgency vs. Importance
+
+* It is possible to work hard and still fall short (work smart, not hard)
+* Focus on what's important:
+		+ Studying: Understanding > passing exam questions
+		+ Assignments: Good/clear > long and fluffy
+		+ Scope: Material offered > other/extra material
+		+ Group work: Teamwork > individual performance
+
+
+## Journey to Mastery
+
+* Yes, statistics is a valuable skill
+* This is not just about passing a course: It's about becoming the kind of person who successfully navigates challenges and grows
+* Embrace the journey: Use these principles to guide you through your studies
+
+## Exercises
+
+1. Write down (at least) 3 things **YOU** want to get out of this course
+2. Write down 3 decisions you are ready to make in relation to this course
+3. Pick your top 3 values (Connection, Growth, Security, Adventure, Contribution, or something else?)
+4. Think of 1 (funny OR serious) way to increase pain associated with not studying
+5. Think of 1 way to increase pleasure associated with studying
+6. Write down one intention for your group work this semester
+

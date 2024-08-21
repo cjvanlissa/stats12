@@ -81,15 +81,16 @@ After taking this course, students will be able to...
 14.	explore the dimensionality of questionnaire data.
 </span>
 
+## Course Schedule
 
-The **course schedule** is available at [My Timetable](https://rooster.uvt.nl/schedule). The information below might go out of date. For a general overview of the content, see below:
+The official **course schedule** is available at [My Timetable](https://rooster.uvt.nl/schedule). The information below might go out of date. For a general overview of the content, see below:
 
 ```{r}
 #| results = "asis",
 #| echo = FALSE,
 #| cache = FALSE
 schedule <- read.csv("schedule_notes.csv")[, 1:4]
-schedule$Date <- as.Date(paste(2024, schedule$Week, 1, sep="-"), "%Y-%U-%u")
+schedule$Date <- as.Date(paste(2024, (schedule$Week-1), 1, sep="-"), "%Y-%U-%u")
 addthis <- c(0:5)
 names(addthis) <- c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday")
 schedule$Date <- schedule$Date+addthis[schedule$Day]
