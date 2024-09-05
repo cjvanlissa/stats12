@@ -30,6 +30,8 @@ In conclusion, probability distributions provide a way to represent the probabil
 
 # Lecture
 
+**VIDEO ERRATA: from 10:10 - 10:50 I talk about the probability of Being Dutch and Having a Tattoo, but I'm calculating the probability of Being Dutch and Not Having a Tattoo (I misread the column labels).**
+
 {{< video https://www.youtube.com/embed/p9QWOXR4OT8 >}}
 
 
