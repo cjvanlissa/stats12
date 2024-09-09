@@ -38,6 +38,8 @@ In practice, this comes down to approximately: $M \pm 2 * SE_M$.
 
 # Lecture
 
+**VIDEO ERRATA: from 19:40 - 19:50 I incorrectly report the probability of P(Z > 1) as .025, but it is .16.**
+
 {{< video https://www.youtube.com/embed/iNxF0Tr6R9M >}}
 
 
