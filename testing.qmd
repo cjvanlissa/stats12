@@ -382,7 +382,7 @@ $H_0$ can be rejected at one of the three levels discussed above ($\alpha = .10,
 
 "If the two-tailed test is not significant at the 10% level, it won't be significant at the 5% level either (keeping everything else fixed)." `r torf(TRUE)`
 
-"If the two-tailed test is not significant at the 5% level, it could still be significant at the 5% level (keeping everything else fixed)." `r torf(TRUE)`
+"If the two-tailed test is not significant at the 5% level, it could still be significant at the 10% level (keeping everything else fixed)." `r torf(TRUE)`
 
 "If the two-tailed test is significant at the 1% level, it might not be significant at the 5% level (keeping everything else fixed)." `r torf(FALSE)`
 
