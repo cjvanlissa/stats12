@@ -228,7 +228,25 @@ Groups should equally distribute the work load for the portfolio assignments. In
 
 ### Exam 60% 
 
-To make sure that all students are equally involved in the making of the portfolio assignments, an individual exam assesses comprehension of the material covered therein. It is a digital multiple choice exam.
+To make sure that all students are equally involved in the making of the portfolio assignments, an individual exam assesses comprehension of the material covered therein. It is a digital multiple choice exam, split into three sessions, to test comprehension of the material covered in the portfolios.
+
+#### Exam 1: Covers weeks 1-4
+
+* Univariate descriptive statistics
+* Probability Distributions/Probability Calculus
+* The Sampling Distribution, probability calculus with sampling distribution
+* Hypothesis Testing
+
+#### Exam 2: Covers weeks 5-10
+
+* GLM-I: Linear Regression
+* GLM-II: Sums of Squares
+* GLM-III: Binary Predictors
+* GLM-IV: ANOVA
+* GLM-V: Multiple regression
+* GLM-VI: Nested models
+
+#### Exam 3: Covers major-specific weeks 11-?
 
 <!--Note that some of the questions are developed by you, the students (see portfolio)! You thus have an advantage if you develop questions that are good enough to be on the exam.-->
 
