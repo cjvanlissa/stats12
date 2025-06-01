@@ -445,7 +445,7 @@ knitr::include_graphics("images/Lecture 29.png")
 
 ![](images/Lecture 212.png)
 
-| Dist. |   μ   |  σ  |
+| Dist. |   $\mu$   |  $\sigma$  |
 |:-----:|:-----:|:---:|
 |   1   | --1.0 | 0.5 |
 |   2   |  0.5  | 0.5 |

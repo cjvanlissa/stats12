@@ -1,0 +1,48 @@
+New course setup:
+
+Please re-order existing material to this order:
+
+Week 1  Introduction to Statistics
+        ?Internal and external validity of study/experiment
+Week 2  Descriptive statistics
+        What is a statistical model?
+        Mean, mode, median
+        range, variance, sd
+Week 3  Correlation
+Week 4  Frequency and Probability
+Week 5  Probability Distributions
+Week 6  The Sampling Distribution
+Week 7  Hypothesis Testing
+        Falsificationism
+        Causality
+Week 8  GLM-I: Linear Regression
+Week 9  GLM-II: Sums of Squares
+Week 10 Assumptions, assumption checks, and violation of assumptions
+Week 11 GLM-III: Binary Predictors
+Week 12 GLM-IV: ANOVA
+Week 13 ?Open science and questionable research practices
+Week 14 Q&A
+
+Materials we still need to be developed:
+
+Knowledge clips, formative tests, and tutorial exercises for:
+
+Week 1  Introduction to Statistics
+        ?Internal and external validity of study/experiment
+Week 2  Descriptive statistics
+        What is a statistical model?
+        Mean, mode, median
+        range, variance, sd
+Week 3  Correlation
+Week 7  Hypothesis Testing
+        Falsificationism
+        Causality
+Week 10 Assumptions, assumption checks, and violation of assumptions
+Week 13 ?Open science and questionable research practices
+
+
+Caspar:
+
+Add slides from other courses to amirali_materials folder
+Render book to PDF
+Create a course-specific page for Statistics 1 and a course-specific page for Statistics 2

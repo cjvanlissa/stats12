@@ -87,7 +87,7 @@ Let’s first have another look at different examples of normal distributions:
 ![](images/Lecture 212.png)
 
 
-| Dist. |   μ   |  σ  |
+| Dist. |   $\mu$   |  $\sigma$  |
 |:-----:|:-----:|:---:|
 |   1   | --1.0 | 0.5 |
 |   2   |  0.5  | 0.5 |
@@ -222,7 +222,7 @@ The scores on a test for aggressive behavior are normally distributed with mean 
 What percentage of the population qualifies as police officer?  `r fitb(67.3, num = TRUE, tol = .01)`
 
 `r hide("Explanations")`
-Let X denote time people spend under the shower. We want to know the probability that the person showers for more than 20 minutes; that is, P(X>20) given μ = 10 and σ = 8.
+Let X denote time people spend under the shower. We want to know the probability that the person showers for more than 20 minutes; that is, P(X>20) given $\mu$ = 10 and $\sigma$ = 8.
 
 Compute Z value: (20 −10)/8 =1.25. Hence, we need P(Z>1.25); that is, the area beyond Z = 1.25.
 

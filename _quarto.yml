@@ -65,6 +65,7 @@ book:
   - probability_tables.qmd
   - formula_sheet2.qmd
   - references.qmd
+prefer-html: true
 bibliography: include/references.bib
 csl: include/apa.csl
 format:
@@ -96,3 +97,7 @@ format:
     - include/webex.js
     - include/script.js
     - c:/gitbook_stats12/include/webex.js
+  pdf:
+    include-in-header: preamble.tex
+    extra_dependencies: awesomebox
+    fontfamily: libertinus

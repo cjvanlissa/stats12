@@ -103,7 +103,7 @@ When independence at work increases with one SD and the other two variables stay
 `r unhide()`
  
 
-Which of the predictors has a significant partial effect on pleasure at work when using α =.10? `r mcq(c(answer = "Variety at work and Learning possibilities", "Learning possibilities", "Variety at work", "Independence at work", "None")[sample.int(5)])`
+Which of the predictors has a significant partial effect on pleasure at work when using $\alpha$ =.10? `r mcq(c(answer = "Variety at work and Learning possibilities", "Learning possibilities", "Variety at work", "Independence at work", "None")[sample.int(5)])`
 
 In the final couple of steps we went through the output displayed in the "Coefficients" table. Before you proceed with the next assignment, please review the following aspects in the answers your gave:
 
@@ -325,7 +325,7 @@ Consult the table Group Statistics.
 
 “In the sample, men score on average `r fitb(6.5, num = T, tol = .1)` points higher on public participation than women.”
 
-Which of the following statements correctly summarizes the results of Levene’s test (use α=.05)?
+Which of the following statements correctly summarizes the results of Levene’s test (use $\alpha$=.05)?
 
 `r longmcq(c(answer = "Levene's test is not significant, no evidence against the assumption of homoscedasticity", "Levene's test is significant, evidence against assumption of homoscedasticity."))`
 

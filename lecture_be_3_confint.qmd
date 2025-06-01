@@ -90,7 +90,7 @@ Sampling Distribution of Sample Means
 
 ![](img%5CLecture%2014_BE5.png)
 
-_t_ cv \(df>250\); 2\-tailed;  _α_  = \.10
+_t_ cv \(df>250\); 2\-tailed;  $\alpha$  = \.10
 
 Standard Error \( _se_ \)
 
@@ -120,7 +120,7 @@ But\, in practice we only observe one sample\!
 
 But\, in practice we only observe one sample\!
 
-And… we don’t know what μ is\!
+And… we don’t know what $\mu$ is\!
 
 90% confidence intervals obtained in 20 different random samples \(with fixed  _N_ \):
 

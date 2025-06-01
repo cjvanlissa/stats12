@@ -1,3 +1,4 @@
+source("renv/activate.R")
 source("R/booktem_setup.R")
 # load webexercises before each chapter
 # needs to check namespace to not bork github actions

@@ -289,5 +289,5 @@ Controlling for Knowledge, Income has a positive, but non-significant effect on 
 
 Controlling for Income, Knowledge has a positive, significant effect on Eating healthy food, t(347) = 15.287, p <.001.
 
-Knowledge is the most important predictor (β = .665) (compare it with β = .012 of Income).
+Knowledge is the most important predictor ($\beta$ = .665) (compare it with $\beta$ = .012 of Income).
 `r unhide()`

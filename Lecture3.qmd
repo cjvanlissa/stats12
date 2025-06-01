@@ -736,7 +736,7 @@ ggplot(data = data.frame(x = c(-3, 3)), aes(x)) +
 
 <!-- # Significance level and rejection region -->
 
-<!-- Significance \(α\) level: we reject H0 if our sample is among the 5% of the samples in the tails -->
+<!-- Significance \(alpha\) level: we reject H0 if our sample is among the 5% of the samples in the tails -->
 
 <!-- \(thus\, among the 5% most unlikely samples under H0\) -->
 

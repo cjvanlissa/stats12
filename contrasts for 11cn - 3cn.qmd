@@ -60,7 +60,7 @@ True or false: We can conclude from this table that the effect of age is signifi
 `r hide("Answer")`
 To conclude whether the effect of Age on Depression is significant, we look at the t-test for the estimated coefficient.
 
-We should conclude that the effect of Age on Depression is significant when using α=.10, t(140) = 1.684, p = .094.
+We should conclude that the effect of Age on Depression is significant when using $\alpha$=.10, t(140) = 1.684, p = .094.
 `r unhide()`
 
 One of the assumptions of bivariate regression analysis is that the relationship between the independent and dependent variable is linear.
@@ -94,8 +94,8 @@ Include in your answer the proportion of explained variance (R-square), a descri
 `r hide("Answer")`
 The proportion explained variance in Anxiety by Age is .071. The explained variance in this model is not significant compared to an empty model (i.e. including no predictors), F(1,140) = 0.710, p = .401.
 
-The effect is Age on Anxiety is negative (β = -0.013), meaning that anxiety decreases with age.
-However, the effect of Age on Anxiety is not significant when using α=.05, t(140) = -0.842, p = .401.
+The effect is Age on Anxiety is negative ($\beta$ = -0.013), meaning that anxiety decreases with age.
+However, the effect of Age on Anxiety is not significant when using $\alpha$=.05, t(140) = -0.842, p = .401.
 `r unhide()`
 
 
@@ -149,11 +149,13 @@ Run an ANOVA: (Analyze -> general linear model -> univariate). Select MATH as th
 Write down the null and alternative hypothesis of the ANOVA, then check your answer.
 
 `r hide("Answer")`
-H0: μ1 = μ2 = μ3
-H1: not μ1 = μ2 = μ3
+
+H0: $\mu1 = \mu2 = \mu3$
+H1: not $\mu1 = \mu2 = \mu3$
+
 `r unhide()`
 
-True or false: The effect of stereotyping is significant (use α=0.05). `r torf(TRUE)`
+True or false: The effect of stereotyping is significant (use $\alpha$=0.05). `r torf(TRUE)`
   
 `r hide("Answer")`
 Yes, the F-test for the effect of Stereotyping on Math performance is significant, F(2,27) = 5.614, p = .009. Hence, we reject H0.
@@ -202,7 +204,7 @@ Test the mean math score for each experimental group against the control group; 
 Are the means different when tested at an experiment-wise alpha of .05 and using a Bonferroni corrected alpha per test? Substantiate your answer.
 
 `r hide("Answer")`
-The contrast is significant at α = .05.
+The contrast is significant at $\alpha$ = .05.
 
 These results suggest that stereotyping (positive/negative) results in better math performance than non-stereotyping.   
 `r unhide()`
@@ -308,7 +310,7 @@ What is the regression slope for scholastic aptitude? $b = `r fitb(.47, number =
 Explain the meaning of estimated parameter for scholastic aptitude.
 
 `r hide("Answer")`
-The parameter estimate for Scholastic aptitude is 0.470. The effect is significant when using α = .05.
+The parameter estimate for Scholastic aptitude is 0.470. The effect is significant when using $\alpha$ = .05.
 
 It is the pooled within-group regression effect of Scholastic aptitude on Math performance, controlled for Stereotyping.
 

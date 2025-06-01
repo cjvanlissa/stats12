@@ -217,9 +217,9 @@ When we want to use an experiment-wise alpha of .10 and we are making 3 comparis
 Consult the output and draw conclusions.
 
 
-Is any of the contrasts significant when tested at an αEW=0.10?
+Is any of the contrasts significant when tested at an $\alpha$EW=0.10?
 
-(I.e., use the αPC you calculated in the previous step for each of the contrasts.)
+(I.e., use the $\alpha$PC you calculated in the previous step for each of the contrasts.)
 
 
 Correct answer
@@ -227,7 +227,7 @@ Correct answer
   Yes 
 General answer comments
 When using an experiment-wise alpha level of .10, we should conclude that non of the contrasts in our sample are significant.
-This means that, when using αEW = .10, we should conclude that, on average, there is no significant difference between any of the groups that got positive behavior from the guide regarding the feelings of the participants about the guide.
+This means that, when using $\alpha$EW = .10, we should conclude that, on average, there is no significant difference between any of the groups that got positive behavior from the guide regarding the feelings of the participants about the guide.
  
 
 Unanswered
@@ -245,14 +245,14 @@ H0: 3∗\murush - 2∗\mustory + 3∗\muinsult-2∗\mujoke-2∗\musing = 0
  
 
 Unanswered
-Change the syntax (remove all old contrasts). Consult the output and summarize the results. Do we have convincing evidence that for the feeling of the hikers it matters whether the guide shows positive or negative behaviors? Substantiate your answer. Use α=.05.
+Change the syntax (remove all old contrasts). Consult the output and summarize the results. Do we have convincing evidence that for the feeling of the hikers it matters whether the guide shows positive or negative behaviors? Substantiate your answer. Use $\alpha$=.05.
 
 The contrast values could be: 3 -2 3 -2 -2 
 
 
 General answer comments
 When using an experiment-wise alpha level of .05, we should conclude that the contrast is significant.
-This means that, when using α = .05, we should conclude that, on average, there is a significant difference between the groups who have a guide who shows positive behavior vs a guide who shows negative behavior regarding the feelings of the participants about the guide, t(45) = −4.266, p < .001.
+This means that, when using $\alpha$ = .05, we should conclude that, on average, there is a significant difference between the groups who have a guide who shows positive behavior vs a guide who shows negative behavior regarding the feelings of the participants about the guide, t(45) = −4.266, p < .001.
 Thus, we found sufficient evidence to believe that, in the population, positive behavior leads to more positive feelings than negative behavior.
  
 ## Post Hoc Tests
@@ -293,7 +293,7 @@ The experiment-wise error rate differs from the test-wise error rate, which is t
 
 What is the value of the experiment-wise Type I error rate if we would use an alpha of .05 for each comparison?
 
-Experiment-wise Type I error: P(at least 1 Type I error) = 1 − (1 − α)number of tests 
+Experiment-wise Type I error: P(at least 1 Type I error) = 1 − (1 − $\alpha$)number of tests 
 
 
 Correct Answers
@@ -301,10 +301,10 @@ Correct Answers
  
 
 
-Suppose we want to keep the αEW at the 5% level by using a Bonferroni corrected adjusted alpha level per comparison (αPC).
+Suppose we want to keep the $\alpha$EW at the 5% level by using a Bonferroni corrected adjusted alpha level per comparison ($\alpha$PC).
 
 
-What αPC (i.e., alpha level per comparison) should we use per comparison?
+What $\alpha$PC (i.e., alpha level per comparison) should we use per comparison?
 
  
 The number of pairwise comparisons we can make when we have 5 groups, is equal to: (k∗(k−1))/2
@@ -317,10 +317,10 @@ Unanswered
 we need use an alpha level of .005 (0.05/10) per comparison.
 
 
-Now, verify that when you test five hypotheses at an alpha level of 0.005 that the αEW is less than .05.
+Now, verify that when you test five hypotheses at an alpha level of 0.005 that the $\alpha$EW is less than .05.
 
 General answer comments
-The αpc is 0.005∗5=.025
+The $\alpha$pc is 0.005∗5=.025
 This alpha-level is indeed lower than .05.
  
 
