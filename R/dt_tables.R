@@ -21,7 +21,7 @@ knit_print.data.frame <- function (x, options, ...) {
                         rownames = rownames,
                         caption = caption,
                         escape = escape,
-                        width = "100%",
+                        #width = "100%",
                         height = "auto",
                         options = list(pageLength = pageLength),
                         selection = "none")

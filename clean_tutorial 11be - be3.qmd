@@ -243,7 +243,7 @@ Using confidence intervals, which variables do not have a significant effect on 
 
 In this assignment we will work on some questions regarding the confidence interval. We focus on the confidence interval around the mean, but everything you learn can also be applied to confidence intervals around the mean difference or regression coefficients.
 
-Finish the following sentence. The confidence interval around the mean is constructed around the `r mcq(c(answer =  "Sample mean", "Population mean (under H0)")[sample.int(2))`
+Finish the following sentence. The confidence interval around the mean is constructed around the `r mcq(c(answer =  "Sample mean", "Population mean (under H0)")[sample.int(2)])`
 
 
 In the population the variable IQ is normally distributed with $IQ \sim N(\mu=100, \sigma=15$.
@@ -301,9 +301,9 @@ All else being equal, what would you expect to happen to the confidence interval
 `r hide("Explanation")`
 By increasing the sample size, our estimate becomes more precise. This will lead to more narrow confidence intervals.
 
-Mathematically it also makes sense, because the confidence interval is based on the standard error. Remember that the formula for the standard error is $SE = \frac{\sigma}{n}.A smaller sample size leads to a smaller standard error, which leads to a narrower interval.
+Mathematically it also makes sense, because the confidence interval is based on the standard error. Remember that the formula for the standard error is $SE = \frac{\sigma}{n}$ . A smaller sample size leads to a smaller standard error, which leads to a narrower interval.
 
-Note that this does affect the probability of confidence intervals containing \mu.
+Note that this does affect the probability of confidence intervals containing $\mu$.
 `r unhide()`
 
 If the standard deviation increases (and everything else stays the same) the confidence interval will `r mcq(c(answer = "become wider", "become narrower", "stay the same")[sample.int(3)])`.

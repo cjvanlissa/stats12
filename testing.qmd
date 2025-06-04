@@ -336,7 +336,7 @@ What are the mean and standard deviation of the sampling distribution of the mea
 Sampling distribution:
 
 - Mean: $\mu = 50$
-- Standard error ( =SD of sampling distribution!): $\sigma_\bar{X} = \frac{15}{\sqrt{25}}= 3$
+- Standard error ( =SD of sampling distribution!): $\sigma_{\bar{X}} = \frac{15}{\sqrt{25}}= 3$
 
 `r unhide()`
  
@@ -376,7 +376,7 @@ We can use the Z-test to test hypotheses about the population mean if we know th
 
 The test statistic for the Z-test is:
 
-$z  = \frac{\bar{X}-\mu_{H_0}}{\sigma_\bar{X}}$
+$z  = \frac{\bar{X}-\mu_{H_0}}{\sigma_{\bar{X}}}$
 
 
 This statistic is computed using the mean from the sample, the hypothesized mean under H0 and $\sigma$.
@@ -574,7 +574,7 @@ Compute the p-value. Draw a graph for the two-tailed p-value. Write down in your
 `r hide("Explanation")`
 
 - The p-value represents the proportion of all possible sample means that are further away from our hypothesized mean than the observed sample mean is. 
-- We have the sampling distribution with $\mu = 500$ and $\sigma_\bar{X} = \frac{50}{\sqrt{60}} = 6.455$.
+- We have the sampling distribution with $\mu = 500$ and $\sigma_{\bar{X}} = \frac{50}{\sqrt{60}} = 6.455$.
 - First, we compute the right-tail area: $P(\bar{X} > 511) = P(Z > 1.70) = 0.0446$.
 - Hence, 4.66% of all possible samples is further away from $H_0$ on the right side. 
 - Second, we compute the left-tail area. These are the sample means that are more than 11 points from the hypothesized mean to the left $P(\bar{X} < 489) = P(Z < -1.70) = 0.0446$. 

@@ -2,9 +2,10 @@
 
 Table gives the right-tail probability corresponding to a Z-value of the value in the Z-column plus the value in the column name, which indicates the second digit of the Z-score.
 
-```{r echo = FALSE, out.width="40%"}
+```{r echo = FALSE}
 library(ggplot2)
-ggplot(data = data.frame(x = c(-4, 4)), aes(x)) +
+if(!file.exists("ztable.png")){
+  p <- ggplot(data = data.frame(x = c(-4, 4)), aes(x)) +
   stat_function(fun = dnorm, args = list(mean = 0, sd = 1)) +
   ylab("Probability density") +
   xlab("Z") +
@@ -12,8 +13,14 @@ ggplot(data = data.frame(x = c(-4, 4)), aes(x)) +
   scale_x_continuous(breaks = c(-4:4)) +
   geom_vline(xintercept = 0, color = "black") +
   geom_area(stat = "function", fun = dnorm, fill = "red", alpha = .2, xlim = c(2, 4), args = list(mean = 0, sd = 1))+
-  geom_segment(aes(x = 2, xend = 2, y = 0, yend = dnorm(2)), color = "red")+
+  geom_segment(x = 2, xend = 2, y = 0, yend = dnorm(2), color = "red")+
+  geom_segment(x = 2.5, xend = 2.5, y = .2, yend = .05,  arrow = arrow(length = unit(0.03, "npc")))+
+  geom_label(x = 2.5, y = .2, label = "This tail probability\nin table below")+
   theme_bw()
+ggsave("ztable.png", p, device = "png", width = 7, height = 4)
+}
+
+knitr::include_graphics("ztable.png")
 ```
 
 ```{r echo = FALSE}
@@ -26,9 +33,15 @@ tab <- t(sapply(x, function(i){
 
 tab <- data.frame(Z = as.character(x), tab)
 names(tab)[-1] <- y
-library(DT)
+library(webshot2)
+if(knitr::is_html_output()){
+  library(DT)
 DT::datatable(tab, rownames = FALSE, options = list(ordering=F, pageLength = nrow(tab))) |>
   DT::formatRound(columns=names(tab)[-1], digits=3)
+} else {
+  knitr::kable(tab, digits = 3)
+}
+
 ```
 
 # t-table {#sec-ttable}
@@ -45,8 +58,13 @@ tab <- t(sapply(x, function(i){
 
 tab <- data.frame(df = as.character(x), tab)
 names(tab)[-1] <- paste0("p = ", y)
-library(DT)
+if(knitr::is_html_output()){
+  library(DT)
 DT::datatable(tab, rownames = FALSE, options = list(ordering=F, pageLength = nrow(tab))) |>
   DT::formatRound(columns=names(tab)[-1], digits=3)
+} else {
+  knitr::kable(tab, digits = 3)
+}
+
 ```
 

@@ -1,3 +1,5 @@
+# ignore all directories by default
+*/
 /py_env # excludes the py_env directory
 /.git
 /.quarto
@@ -38,9 +40,9 @@
 /lecture9_files
 /lecture9_multiple_files
 /pdfs
-/R
+!/R
 /renv
-/scripts
+!/scripts
 /shiny_data
 /temp_power_files
 /temp_syllabus_files

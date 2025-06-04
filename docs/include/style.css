@@ -1,0 +1,17 @@
+/* edit this file to add custom styles */
+
+.inline-figure { border: none; }
+.quarto-cover-image { display: block; }
+/* named colours */
+:root {
+  --blue: #003366;
+  --bronze: #CC9933;
+}
+
+/* rainbow borders */
+body {
+  margin-top: 20px;
+  box-shadow:
+    0 -10px 0 0px var(--bronze),
+    0 -20px 0 0px var(--blue);
+}

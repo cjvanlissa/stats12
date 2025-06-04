@@ -191,12 +191,11 @@ p3
 
 We've previously assumed that the prediction errors are normally distributed:
 
-$$
 \begin{align}
 Y_i &= a + bX_i + \epsilon_i \text{, where}\\
 \epsilon_i &\sim N(0, \sigma_\epsilon) 
 \end{align}
-$$
+
 Logistic regression instead assumes a *Bernoulli* error distribution
 
 * Used to represent binary outcomes, like coinflips

@@ -44,33 +44,29 @@ Interaction is easiest to explain using one binary predictor, coded as 0 and 1, 
 
 Recall that using this type of "dummy coding" allows us to represent different intercepts for the two groups in our regression model. The intercept of the regression equation applies to the group coded 0 (the reference group), and the intercept of the group coded 1 is equal to the overall intercept plus the effect of the dummy variable. In formulas this is represented as:
 
-$$
 \begin{align}
 Y &= a + bD \text{, where D} \in(0,1)\\
 Y_{D=0} &= a + b*0 = a\\
 Y_{D=1} &= a + b*1 = a + b
 \end{align}
-$$
 
 An interaction implies that not only the intercept but also the regression slope differs between two groups. Imagine we add continuous predictor $X$ to the model, as well as the interaction term $D*X$:
 
-$$
 \begin{align}
 Y &= a + b_1D + b_2X +b_3 (D*X)
 \end{align}
-$$
 
 
 In some cases, we might want to estimate not only distinct intercepts but also distinct slopes for different groups. For instance, we might be interested in understanding how the effect of gender role attitudes on involvement differs for men and women.
 
 The complete formula for the regression line varies based the value of dummy variable $D$:
 
-$$
+
 \begin{align}
 Y_{D=0} &= a + b_1*0 + b_2X +b_3 (0*X) = a + b_2X\\
 Y_{D=1} &= a + b_1*1 + b_2X +b_3 (1*X) = (a + b_1) + (b_2 + b_3)X
 \end{align}
-$$
+
 
 Note that both groups' regression equations can be simplified into a basic linear formula of the form $a + bX$, except that they each have a unique value for the intercept and regression slope! This is how interaction terms allow you to make the effect of one variable contingent on the value of another.
 
