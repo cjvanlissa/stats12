@@ -43,6 +43,6 @@ Week 13 ?Open science and questionable research practices
 
 Caspar:
 
-Add slides from other courses to amirali_materials folder
-Render book to PDF v
-Create a course-specific page for Statistics 1 and a course-specific page for Statistics 2
+  Add slides from other courses to amirali_materials folder
+V Render book to PDF
+  Create a course-specific page for Statistics 1 and a course-specific page for Statistics 2
