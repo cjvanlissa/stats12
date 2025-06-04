@@ -1,4 +1,4 @@
-# GLM: Factorial ANOVA {#sec-glm2}
+# GLM: Factorial ANOVA {#sec-glmfactorial}
 
 ```{r, include = FALSE}
 source("R/booktem_setup.R")

@@ -1,0 +1,1781 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="description" content="Book Description">
+<title>12&nbsp; GLM VIII - Logistic Regression – Statistics 1 and 2</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./glm_contrasts.html" rel="next">
+<link href="./glm7interaction.html" rel="prev">
+<link href="./images/logos/favicon.png" rel="icon" type="image/png">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark"><script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script><script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
+<link rel="stylesheet" href="include/booktem.css">
+<link rel="stylesheet" href="include/webex.css">
+<link rel="stylesheet" href="include/glossary.css">
+<link rel="stylesheet" href="include/style.css">
+<link rel="stylesheet" href="c:/gitbook_stats12/include/webex.css">
+</head>
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./logistic.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">GLM VIII - Logistic Regression</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Statistics 1 and 2</a> 
+        <div class="sidebar-tools-main tools-wide">
+    <a href="https://github.com/cjvanlissa/stats12" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="./Statistics-1-and-2.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+    <div class="dropdown">
+      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Share"><i class="bi bi-share"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+<li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
+              <i class="bi bi-twitter pe-1"></i>
+            Twitter
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=|url|">
+              <i class="bi bi-facebook pe-1"></i>
+            Facebook
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=|url|">
+              <i class="bi bi-linkedin pe-1"></i>
+            LinkedIn
+            </a>
+          </li>
+      </ul>
+</div>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Overview</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to Statistics</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./probability.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Probability Distributions</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./samplingdistribution.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">The Sampling Distribution</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./testing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Hypothesis Testing</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glm1_regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">GLM-I: Linear Regression</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glm2_sum_squares.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">GLM-II: Sums of Squares</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glm3binary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">GLM-III: Binary Predictors</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glm4anova.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">GLM-IV: ANOVA</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glm5multiple.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">GLM-V: Multiple regression</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glm6nested.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">GLM-VI: Nested models</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glm7interaction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">GLM-VII: Interaction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./logistic.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">GLM VIII - Logistic Regression</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glm_contrasts.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">GLM: Contrasts</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./factorial.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">GLM: Factorial ANOVA</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ancova.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">GLM: ANCOVA</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./rmanova.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">GLM: Repeated Measures ANOVA</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./reliability_validity.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Reliability and Validity</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data_reduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Dimension Reduction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./confint.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">BE2 - Confidence Intervals</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data for Portfolio</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./probability_tables.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Z-table</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./formula_sheet2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Formula sheet</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+    </ul>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+<li><a href="#introducing-the-logit" id="toc-introducing-the-logit" class="nav-link active" data-scroll-target="#introducing-the-logit"><span class="header-section-number">12.1</span> Introducing the logit</a></li>
+  <li><a href="#maximum-likelihood-estimation-mle" id="toc-maximum-likelihood-estimation-mle" class="nav-link" data-scroll-target="#maximum-likelihood-estimation-mle"><span class="header-section-number">12.2</span> Maximum Likelihood Estimation (MLE)</a></li>
+  <li><a href="#interpreting-coefficients" id="toc-interpreting-coefficients" class="nav-link" data-scroll-target="#interpreting-coefficients"><span class="header-section-number">12.3</span> Interpreting Coefficients</a></li>
+  <li><a href="#odds-ratio" id="toc-odds-ratio" class="nav-link" data-scroll-target="#odds-ratio"><span class="header-section-number">12.4</span> Odds Ratio</a></li>
+  <li><a href="#model-fit" id="toc-model-fit" class="nav-link" data-scroll-target="#model-fit"><span class="header-section-number">12.5</span> Model Fit</a></li>
+  <li><a href="#likelihood-ratio-test" id="toc-likelihood-ratio-test" class="nav-link" data-scroll-target="#likelihood-ratio-test"><span class="header-section-number">12.6</span> Likelihood Ratio Test</a></li>
+  <li><a href="#pseudo-r2" id="toc-pseudo-r2" class="nav-link" data-scroll-target="#pseudo-r2"><span class="header-section-number">12.7</span> Pseudo R2</a></li>
+  <li><a href="#classification-accuracy" id="toc-classification-accuracy" class="nav-link" data-scroll-target="#classification-accuracy"><span class="header-section-number">12.8</span> Classification Accuracy</a></li>
+  <li><a href="#lecture" id="toc-lecture" class="nav-link" data-scroll-target="#lecture"><span class="header-section-number">13</span> Lecture</a></li>
+  <li><a href="#formative-test" id="toc-formative-test" class="nav-link" data-scroll-target="#formative-test"><span class="header-section-number">14</span> Formative Test</a></li>
+  <li>
+<a href="#tutorial" id="toc-tutorial" class="nav-link" data-scroll-target="#tutorial"><span class="header-section-number">15</span> Tutorial</a>
+  <ul class="collapse">
+<li><a href="#probability-odds-and-logits" id="toc-probability-odds-and-logits" class="nav-link" data-scroll-target="#probability-odds-and-logits"><span class="header-section-number">15.1</span> Probability, Odds, and Logits</a></li>
+  <li><a href="#logistic-regression" id="toc-logistic-regression" class="nav-link" data-scroll-target="#logistic-regression"><span class="header-section-number">15.2</span> Logistic Regression</a></li>
+  <li><a href="#logistic-regression-with-categorical-predictor" id="toc-logistic-regression-with-categorical-predictor" class="nav-link" data-scroll-target="#logistic-regression-with-categorical-predictor"><span class="header-section-number">15.3</span> Logistic Regression with Categorical Predictor</a></li>
+  <li><a href="#hierarchical-logistic-regression" id="toc-hierarchical-logistic-regression" class="nav-link" data-scroll-target="#hierarchical-logistic-regression"><span class="header-section-number">15.4</span> Hierarchical Logistic Regression</a></li>
+  </ul>
+</li>
+  </ul></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<h1 class="title"><span id="sec-logistic" class="quarto-section-identifier"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">GLM VIII - Logistic Regression</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header><p>When dealing with binary dependent variables (nominal or ordinal), we could model the probability of observing the outcome (coded as 0 or 1) with a conventional linear regression model. The problem with this approach is that linear regression predicts probabilities outside the range of [0, 1], and will have heteroscedastic and non-normal residuals because there are only two discrete values for the dependent variable.</p>
+<p><strong>Logistic Regression</strong> overcomes these limitations of linear regression. The core idea behind logistic regression is to predict a transformation of the dependent variable, Y, rather than the raw scores. Specifically, we model the <strong>log odds</strong> of the probability of Y being one category (e.g., 1) versus the other category (e.g., 0). The logit function, denoted as <code>log(p/(1-p))</code>, models the probability p using an s-shaped curve bounded by 0 and 1. Furthermore, logistic regression assumes a Bernoulli error distribution, instead of a normal error distribution, which accounts for the fact that observed outcomes can only take the values 0 or 1.</p>
+<section id="introducing-the-logit" class="level2" data-number="12.1"><h2 data-number="12.1" class="anchored" data-anchor-id="introducing-the-logit">
+<span class="header-section-number">12.1</span> Introducing the logit</h2>
+<p>Logistic regression predicts the <strong>logit function</strong> of the individual probabilities of observing the outcome, pi. The logit of the probability (pi) is given by <code>log(pi/(1-pi))</code>, ensuring that the predicted values remain within the valid probability range. The outcome, Yi, is assumed to follow a Bernoulli distribution with an individual probability of success, pi. The logit of this success probability is modeled as a linear function of the predictors, allowing us to use the familiar linear regression model to predict the logit of pi.</p>
+<p>Understanding the distinction between <strong>probability</strong>, <strong>odds</strong>, and the <strong>logit</strong> is crucial in logistic regression. Probability is defined as the long-run proportion of outcomes of a random experiment in which a particular outcome is observed. Odds describe the ratio of the probability of an event occurring relative to the probability of it not occurring. Finally, the logit transforms odds into a linear function, enabling us to use the regression model. The transformations from probability to odds and logit, and back, are given by:</p>
+<table class="caption-top table">
+<thead><tr class="header">
+<th>Operation</th>
+<th>Formula</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>Probability to odds</td>
+<td><span class="math inline">\(\text{odds}= \frac{P}{1-P}\)</span></td>
+</tr>
+<tr class="even">
+<td>Odds to probability</td>
+<td><span class="math inline">\(P = \frac{\text{odds}}{1+\text{odds}}\)</span></td>
+</tr>
+<tr class="odd">
+<td>Odds to logit</td>
+<td><span class="math inline">\(\text{logit} = \ln(odds)\)</span></td>
+</tr>
+<tr class="even">
+<td>Logit to odds</td>
+<td><span class="math inline">\(\text{odds} = e^{\text{logit}}\)</span></td>
+</tr>
+<tr class="odd">
+<td>Probability to logit</td>
+<td><span class="math inline">\(\text{logit} = \ln(\frac{p}{1-p})\)</span></td>
+</tr>
+<tr class="even">
+<td>Logit to probability</td>
+<td><span class="math inline">\(p = \frac{e^{logit}}{1+e^{logit}}\)</span></td>
+</tr>
+</tbody>
+</table></section><section id="maximum-likelihood-estimation-mle" class="level2" data-number="12.2"><h2 data-number="12.2" class="anchored" data-anchor-id="maximum-likelihood-estimation-mle">
+<span class="header-section-number">12.2</span> Maximum Likelihood Estimation (MLE)</h2>
+<p>In traditional linear regression, we use “ordinary least squares” (OLS) estimation to obtain the model parameters. This method involves simple matrix algebra and always yields a unique solution. However, for logistic regression, there is no OLS solution due to the binary nature of the dependent variable. Instead, we turn to <strong>Maximum Likelihood Estimation (MLE)</strong>. A complete explanation is beyond the scope of this course, but here is a basic intuitive explanation of the procedure:</p>
+<ol type="1">
+<li>Start with random values for the coefficients (a and b)</li>
+<li>Using those parameter values, calculate the individual probabilities predicted by the logistic regression formula</li>
+<li>For each individual, calculate the likelihood of observing their true outcome in a Bernoulli distribution with model-implied probability pi</li>
+<li>Multiply these probabilities across all individuals to get the overall likelihood of observing these data, given the chosen coefficient values</li>
+<li>Adjust the values of a and b a little bit</li>
+<li>Check if the likelihood has become larger</li>
+<li>Repeat steps 2-6 until until we find the coefficient values that maximize the likelihood and no further improvement can be found.</li>
+</ol>
+<p>In other words, we look for the values of a and b that maximize the likelihood of observing the observed outcome values.</p>
+</section><section id="interpreting-coefficients" class="level2" data-number="12.3"><h2 data-number="12.3" class="anchored" data-anchor-id="interpreting-coefficients">
+<span class="header-section-number">12.3</span> Interpreting Coefficients</h2>
+<p>The <strong>intercept (a)</strong> represents the log odds of the outcome (Y) for someone who scores 0 on all predictors. We can convert this log odds to the probability of the outcome for an individual who scores 0 on all predictors using the formula <code>P = e^(a) / (1 + e^(a))</code>. We can also solve for the inflection point at which the model stops predicting 0 and starts predicting 1, or vice versa, using <span class="math inline">\(X_{p = .5} = \frac{-a}{b}\)</span>.</p>
+<p>The <strong>slope (b)</strong> of the logistic regression equation determines how steeply the logistic function switches from predicting 0 to predicting 1 as the predictor variable (Xi) increases. Larger absolute values of b indicate a steeper transition between the two outcomes. If the slope is positive, the function ascends (starts at 0 and goes to 1), resulting in an S-shaped curve. Conversely, if the slope is negative, the function descends (starts at 1 and goes to 0), resulting in a Z-shaped curve.</p>
+</section><section id="odds-ratio" class="level2" data-number="12.4"><h2 data-number="12.4" class="anchored" data-anchor-id="odds-ratio">
+<span class="header-section-number">12.4</span> Odds Ratio</h2>
+<p>The <strong>odds ratio</strong> is another important concept when interpreting logistic regression coefficients. It represents the odds of the outcome occurring given a one-unit increase in the predictor variable (Xi), relative to the odds of the outcome occurring when Xi remains unchanged. For binary predictors (e.g., conditions), the odds ratio provides a sensible effect size. For continuous predictors, the odds ratio is a multiplyer by which the odds increase when the predictor increases by one unit.</p>
+<p>To calculate the odds ratio for a logistic regression coefficient (b), we use the formula <code>OR = e^(b)</code>. A value greater than 1 indicates that the predictor is associated with higher odds of the outcome, while a value less than 1 indicates lower odds of the outcome. For example, if the odds ratio for the test score coefficient (b = 2.12) is 8.35, it means that for each unit increase in the test score, the odds of the outcome are multiplied by 8.35.</p>
+</section><section id="model-fit" class="level2" data-number="12.5"><h2 data-number="12.5" class="anchored" data-anchor-id="model-fit">
+<span class="header-section-number">12.5</span> Model Fit</h2>
+<p>To assess how well the logistic regression model fits the data, we can use the likelihood obtained from maximum likelihood estimation (MLE). By multiplying the log likelihood by -2, we obtain the <span class="math inline">\(-2LL\)</span>, which is a chi-square distributed test statistic. Performing a chi-square test allows us to determine if the overall model is significant. The null hypothesis is that the model does not significantly differ from a model with no predictors. If the chi-square test is significant, it indicates that the model provides a better fit than a null model.</p>
+</section><section id="likelihood-ratio-test" class="level2" data-number="12.6"><h2 data-number="12.6" class="anchored" data-anchor-id="likelihood-ratio-test">
+<span class="header-section-number">12.6</span> Likelihood Ratio Test</h2>
+<p>In logistic regression, we can also conduct a <strong>Likelihood Ratio (LR) test</strong>, which is a chi-square test for the difference in log likelihood between two nested models, <span class="math inline">\(-2LL_0 - -2LL_1\)</span>. The first model is the restricted model with fewer parameters, and the second is the full model with more parameters. The LR test helps us compare the two models and determine if the additional predictors in the full model significantly improve its fit. The degrees of freedom for the LR test are equal to the difference in the number of parameters between the two models.</p>
+</section><section id="pseudo-r2" class="level2" data-number="12.7"><h2 data-number="12.7" class="anchored" data-anchor-id="pseudo-r2">
+<span class="header-section-number">12.7</span> Pseudo R2</h2>
+<p>Unlike linear regression, logistic regression doesn’t have a traditional R-squared to measure explained variance. However, researchers have proposed several <strong>Pseudo R2</strong> statistics to approximate the concept of explained variance in logistic regression. These Pseudo R2 statistics rescale the -2 log likelihood of the model. Two common Pseudo R2 statistics are Cox &amp; Snell and Nagelkerke.</p>
+<p>Cox &amp; Snell is a generalization of the “normal” R2, which provides the same value for ordinary least squares regression. For logistic regression, however, its value can never reach 1; it will be somewhere between 0 and &lt; 1. Nagelkerke aims to “fix” this property by rescaling Cox &amp; Snell to a range of [0, 1], by dividing it by its maximum possible value. While these statistics can provide a measure of relative model fit and help compare models on the same dataset, they do not represent absolute model fit or effect size.</p>
+</section><section id="classification-accuracy" class="level2" data-number="12.8"><h2 data-number="12.8" class="anchored" data-anchor-id="classification-accuracy">
+<span class="header-section-number">12.8</span> Classification Accuracy</h2>
+<p>One way to evaluate the model’s predictive performance is by using a <strong>classification table</strong>. The classification table compares the predicted outcomes with the actual outcomes to determine how well the model predicts true positives and true negatives. The table is constructed by calculating the predicted probability for each individual and then dichotomizing these probabilities using a specific cutoff, typically 0.5. Individuals with predicted probabilities above the cutoff are classified as “1,” and those below as “0.” The observed outcomes are then cross-tabulated against the dichotomized predictions.</p>
+<p>By examining the classification table, we can assess the accuracy of the model’s predictions and identify areas of improvement. Researchers could choose a different cutoff to optimize the trade-off between false positives and false negatives, depending on the specific goals of the analysis.</p>
+<p>In summary, evaluating logistic regression models involves assessing model fit through chi-square tests, using Pseudo R2 statistics for relative fit comparison, and examining classification accuracy to understand the model’s predictive performance.</p>
+</section><section id="lecture" class="level1" data-number="13"><h1 data-number="13">
+<span class="header-section-number">13</span> Lecture</h1>
+</section><section id="formative-test" class="level1" data-number="14"><h1 data-number="14">
+<span class="header-section-number">14</span> Formative Test</h1>
+<p>A formative test helps you assess your progress in the course, and helps you address any blind spots in your understanding of the material. If you get a question wrong, you will receive a hint on how to improve your understanding of the material.</p>
+<p>Complete the formative test ideally after you’ve seen the lecture, but before the lecture meeting in which we can discuss any topics that need more attention</p>
+<div class="cell" data-layout-align="center">
+<div class="webex-check webex-box">
+<p><strong>Question 1</strong></p>
+What type of dependent variable is suitable for logistic regression?
+<div id="radio_RLORBFPHYN" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_RLORBFPHYN" value=""><span>Interval</span></label><label><input type="radio" autocomplete="off" name="radio_RLORBFPHYN" value="answer"><span>Binary</span></label><label><input type="radio" autocomplete="off" name="radio_RLORBFPHYN" value=""><span>Ordinal</span></label><label><input type="radio" autocomplete="off" name="radio_RLORBFPHYN" value=""><span>Categorical</span></label>
+</div>
+<p><strong>Question 2</strong></p>
+What is the primary purpose of maximum likelihood estimation in logistic regression?
+<div id="radio_BWNKCOMNBE" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_BWNKCOMNBE" value="answer"><span>To maximize the likelihood of observing the data given the model</span></label><label><input type="radio" autocomplete="off" name="radio_BWNKCOMNBE" value=""><span>To maximize the variance explained by the predictors</span></label><label><input type="radio" autocomplete="off" name="radio_BWNKCOMNBE" value=""><span>To minimize the sum of squared errors</span></label><label><input type="radio" autocomplete="off" name="radio_BWNKCOMNBE" value=""><span>To maximize the parameter values</span></label>
+</div>
+<p><strong>Question 3</strong></p>
+How is the likelihood ratio test used in logistic regression?
+<div id="radio_ODUMHEVMXB" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ODUMHEVMXB" value=""><span>To assess the effect size of predictors</span></label><label><input type="radio" autocomplete="off" name="radio_ODUMHEVMXB" value="answer"><span>To compare the fit of nested models</span></label><label><input type="radio" autocomplete="off" name="radio_ODUMHEVMXB" value=""><span>To check for multicollinearity</span></label><label><input type="radio" autocomplete="off" name="radio_ODUMHEVMXB" value=""><span>To test for normality of residuals</span></label>
+</div>
+<p><strong>Question 4</strong></p>
+Which of the following is a Pseudo R2 statistic commonly used in logistic regression?
+<div id="radio_PARINFXAMP" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_PARINFXAMP" value=""><span>Adjusted R2</span></label><label><input type="radio" autocomplete="off" name="radio_PARINFXAMP" value="answer"><span>Cox &amp; Snell R2</span></label><label><input type="radio" autocomplete="off" name="radio_PARINFXAMP" value=""><span>Pearson's R2</span></label><label><input type="radio" autocomplete="off" name="radio_PARINFXAMP" value=""><span>-2LL</span></label>
+</div>
+<p><strong>Question 5</strong></p>
+What does the logit function do in logistic regression?
+<div id="radio_UFWWZWLYSU" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_UFWWZWLYSU" value=""><span>Standardizes the dependent variable</span></label><label><input type="radio" autocomplete="off" name="radio_UFWWZWLYSU" value=""><span>Calculates the Wald test statistic</span></label><label><input type="radio" autocomplete="off" name="radio_UFWWZWLYSU" value="answer"><span>Transforms the predicted probabilities to log odds</span></label><label><input type="radio" autocomplete="off" name="radio_UFWWZWLYSU" value=""><span>Converts continuous predictors to categorical</span></label>
+</div>
+<p><strong>Question 6</strong></p>
+What is the range of the Cox &amp; Snell Pseudo R2 statistic in logistic regression?
+<div id="radio_RAUPEKFIFY" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_RAUPEKFIFY" value="answer"><span>0 to &lt; 1</span></label><label><input type="radio" autocomplete="off" name="radio_RAUPEKFIFY" value=""><span>0 to Infinite</span></label><label><input type="radio" autocomplete="off" name="radio_RAUPEKFIFY" value=""><span>-Infinite to 1</span></label><label><input type="radio" autocomplete="off" name="radio_RAUPEKFIFY" value=""><span>0 to 1</span></label>
+</div>
+<p><strong>Question 7</strong></p>
+How is the classification table used in logistic regression evaluation?
+<div id="radio_IZSSRTOVSI" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_IZSSRTOVSI" value=""><span>To determine effect size of predictors</span></label><label><input type="radio" autocomplete="off" name="radio_IZSSRTOVSI" value=""><span>To test for multicollinearity</span></label><label><input type="radio" autocomplete="off" name="radio_IZSSRTOVSI" value=""><span>To compare model fit using likelihood ratio test</span></label><label><input type="radio" autocomplete="off" name="radio_IZSSRTOVSI" value="answer"><span>To assess the model's predictive accuracy</span></label>
+</div>
+<p><strong>Question 8</strong></p>
+What does a significant chi-square test in logistic regression indicate?
+<div id="radio_YKEXIWQWRP" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_YKEXIWQWRP" value="answer"><span>The model provides a better fit than a null model</span></label><label><input type="radio" autocomplete="off" name="radio_YKEXIWQWRP" value=""><span>The model's predicted probabilities are accurate</span></label><label><input type="radio" autocomplete="off" name="radio_YKEXIWQWRP" value=""><span>The model's predictors are collinear</span></label><label><input type="radio" autocomplete="off" name="radio_YKEXIWQWRP" value=""><span>The model's residuals are normally distributed</span></label>
+</div>
+<p><strong>Question 9</strong></p>
+Which parameter represents the odds ratio associated with a one-unit increase in the predictor?
+<div id="radio_CTKKQXAQTV" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_CTKKQXAQTV" value=""><span>The coefficient b</span></label><label><input type="radio" autocomplete="off" name="radio_CTKKQXAQTV" value="answer"><span>The exponent of the coefficient b, e^b</span></label><label><input type="radio" autocomplete="off" name="radio_CTKKQXAQTV" value=""><span>The p-value</span></label><label><input type="radio" autocomplete="off" name="radio_CTKKQXAQTV" value=""><span>The logit function</span></label>
+</div>
+<p><strong>Question 10</strong></p>
+When calculating the likelihood in logistic regression, what does a high value of likelihood imply?
+<div id="radio_FJFFUEXWUU" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_FJFFUEXWUU" value=""><span>The model is overfitting the data</span></label><label><input type="radio" autocomplete="off" name="radio_FJFFUEXWUU" value=""><span>The model has a high R-squared value</span></label><label><input type="radio" autocomplete="off" name="radio_FJFFUEXWUU" value=""><span>The model's residuals are normally distributed</span></label><label><input type="radio" autocomplete="off" name="radio_FJFFUEXWUU" value="answer"><span>The observed outcome values are very likely given the parameters</span></label>
+</div>
+<p><strong>Question 11</strong></p>
+What is the main purpose of the likelihood ratio test in logistic regression?
+<div id="radio_VTFWJMVXPR" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_VTFWJMVXPR" value=""><span>To assess the normality of residuals</span></label><label><input type="radio" autocomplete="off" name="radio_VTFWJMVXPR" value="answer"><span>To compare model fit between two nested models</span></label><label><input type="radio" autocomplete="off" name="radio_VTFWJMVXPR" value=""><span>To test the significance of individual predictors</span></label><label><input type="radio" autocomplete="off" name="radio_VTFWJMVXPR" value=""><span>To evaluate multicollinearity among predictors</span></label>
+</div>
+<p><strong>Question 12</strong></p>
+What can help researchers optimize the trade-off between false positives and false negatives in logistic regression?
+<div id="radio_AGWXPPWECZ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_AGWXPPWECZ" value="answer"><span>The classification table</span></label><label><input type="radio" autocomplete="off" name="radio_AGWXPPWECZ" value=""><span>The odds ratio</span></label><label><input type="radio" autocomplete="off" name="radio_AGWXPPWECZ" value=""><span>The -2LL</span></label><label><input type="radio" autocomplete="off" name="radio_AGWXPPWECZ" value=""><span>The pseudo R2</span></label>
+</div>
+<p><strong>Question 13</strong></p>
+What is the range of the Nagelkerke Pseudo R2 statistic in logistic regression?
+<div id="radio_AJNLAGFJZJ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_AJNLAGFJZJ" value=""><span>-1 to 1</span></label><label><input type="radio" autocomplete="off" name="radio_AJNLAGFJZJ" value=""><span>0 to &lt; 1</span></label><label><input type="radio" autocomplete="off" name="radio_AJNLAGFJZJ" value="answer"><span>0 to 1</span></label><label><input type="radio" autocomplete="off" name="radio_AJNLAGFJZJ" value=""><span>-Infinity to 1</span></label>
+</div>
+</div>
+<div class="webex-solution">
+<button>
+Show explanations
+</button>
+<p><strong>Question 1</strong></p>
+<p>Logistic regression is used for binary categorical outcomes.</p>
+<p><strong>Question 2</strong></p>
+<p>Maximum likelihood estimation aims to maximize the likelihood of observing the data given the model.</p>
+<p><strong>Question 3</strong></p>
+<p>The likelihood ratio test compares the fit of nested models to determine if additional predictors significantly improve the model.</p>
+<p><strong>Question 4</strong></p>
+<p>Cox &amp; Snell R2 is a Pseudo R2 statistic used in logistic regression.</p>
+<p><strong>Question 5</strong></p>
+<p>The logit function transforms the predicted probabilities to odds.</p>
+<p><strong>Question 6</strong></p>
+<p>The Cox &amp; Snell Pseudo R2 statistic never reaches 1 for logistic regression, so it ranges from 0 to &lt; 1.</p>
+<p><strong>Question 7</strong></p>
+<p>The classification table helps assess the model’s predictive accuracy by comparing predicted outcomes with actual outcomes.</p>
+<p><strong>Question 8</strong></p>
+<p>A significant chi-square test indicates that the model provides a better fit than a null model.</p>
+<p><strong>Question 9</strong></p>
+<p>The exponent of the coefficient b represents the odds ratio associated with a one-unit increase in the predictor.</p>
+<p><strong>Question 10</strong></p>
+<p>A high value of likelihood indicates that the observed outcome values are very likely given the parameters.</p>
+<p><strong>Question 11</strong></p>
+<p>The likelihood ratio test is used to compare model fit between two nested models.</p>
+<p><strong>Question 12</strong></p>
+<p>The classification table helps researchers optimize the trade-off between false positives and false negatives in logistic regression.</p>
+<p><strong>Question 13</strong></p>
+<p>The Nagelkerke Pseudo R2 statistic rescales the Cox &amp; Snell statistic to range from 0 to 1.</p>
+</div>
+</div>
+</section><section id="tutorial" class="level1" data-number="15"><h1 data-number="15">
+<span class="header-section-number">15</span> Tutorial</h1>
+<section id="probability-odds-and-logits" class="level2" data-number="15.1"><h2 data-number="15.1" class="anchored" data-anchor-id="probability-odds-and-logits">
+<span class="header-section-number">15.1</span> Probability, Odds, and Logits</h2>
+<p>We will start this session on logistic regression with some theoretical exercises. This way, you will learn how to work with probability, odds, and logits.</p>
+<p>The given probability is P = 0.36.</p>
+<p>What are the corresponding odds? <input class="webex-solveme nospaces" data-tol="0.01" size="5" data-answer="[&quot;0.563&quot;,&quot;.563&quot;]"></p>
+<p>Please find the formula’s below:</p>
+<table class="caption-top table">
+<thead><tr class="header">
+<th>Goal</th>
+<th>Function</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>Probability -&gt; Odds</td>
+<td><span class="math inline">\(odds = P/(1-P)\)</span></td>
+</tr>
+<tr class="even">
+<td>Odds -&gt; Probability</td>
+<td><span class="math inline">\(P = odds/(1+Odds)\)</span></td>
+</tr>
+<tr class="odd">
+<td>Odds -&gt; Logit</td>
+<td><span class="math inline">\(logit = \ln(odds)\)</span></td>
+</tr>
+<tr class="even">
+<td>Logit -&gt; Odds</td>
+<td><span class="math inline">\(odds = e^{logit}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>Again, the given probability is P = 0.36.</p>
+<p>What is the corresponding logit? <input class="webex-solveme nospaces" data-tol="0.01" size="6" data-answer="[&quot;-0.575&quot;,&quot;-.575&quot;]"></p>
+<p>The given logit is – 2.7.</p>
+<p>What are the corresponding odds? <input class="webex-solveme nospaces" data-tol="0.01" size="5" data-answer="[&quot;0.067&quot;,&quot;.067&quot;]"></p>
+<p>Again, the given logit is – 2.7. <input class="webex-solveme nospaces" data-tol="0.01" size="5" data-answer="[&quot;0.063&quot;,&quot;.063&quot;]"></p>
+<p>Discuss with your group mates when and why we should carry out logistic regression analysis.</p>
+<div class="webex-solution">
+<button>
+Explanation
+</button>
+<p>We carry out logistic regression analysis when we want to carry out regression analysis and we have a dichotomous outcome variable (i.e., a dependent variable with two answer categories). In that case we cannot use linear regression because several of the assumptions of linear regression are violated.</p>
+</div>
+<p>In a study concerning the smoking behavior amongst adolescents, a logistic regression analysis is conducted to check the effect of the image of smoking (Image) on smoking behavior (Smoking).</p>
+<p>Image: to what degree the young adult thinks smoking is perceived as “cool”. The variable image is measured on a scale from 10 to 30, in which higher scores indicate that smoking is perceived as cooler.</p>
+<p>Smoking: whether or not the adolescent smokes.</p>
+<ul>
+<li>0 = the adolescent is a non-smoker</li>
+<li>1 = the adolescent is a smoker</li>
+</ul>
+<p>Below you can find part of the output the researchers retrieved.</p>
+<p><img src="images/Figure 5-2.png" class="img-fluid"></p>
+<p>First, write down the estimated regression model.</p>
+<div class="webex-solution">
+<button>
+Answer
+</button>
+<p><span class="math inline">\(Logit(Smoking = 1) = -5.65 + 0.28*Image\)</span></p>
+</div>
+<p>What is the probability that an adolescent with a score of 15 on image smokes? <input class="webex-solveme nospaces" data-tol="0.01" size="4" data-answer="[&quot;0.33&quot;,&quot;.33&quot;]"></p>
+<p>Take a look at the regression coefficient.</p>
+<p><img src="images/Figure 5-1-1.png" class="img-fluid"></p>
+<p>Imagine that one’s score on Image will increase from 15 to 16.</p>
+<p>To what degree will the logit and odds change?</p>
+<p>And what can you conclude about the increase in probability?</p>
+<div class="webex-solution">
+<button>
+Answer
+</button>
+<p>The logit increases with 0.284. So −1.387+0.284=−1.103</p>
+<p>The odds increase with a factor 1.328. So, the odds become 0.25×1.328=0.332</p>
+<p>By just looking at the output, it is unclear what <em>exactly</em> will happen with the probability. We DO know that the probability will increase because the logits and the odds increase.</p>
+<p>If we would calculate the probability by hand, we would see that the probability increases with 0.05.</p>
+</div>
+<p>As you can see, the logit follows a linear function, the odds follow an exponential function, and probability follows a logistic function (perhaps less clear from the example but see the graphs below for an illustration). It is nice to work with a linear model (i.e., work with the logits), but from an interpretation point of view odds and probabilities are nicer to work with.</p>
+<p><img src="images/Figure 7-1.png" class="img-fluid"></p>
+</section><section id="logistic-regression" class="level2" data-number="15.2"><h2 data-number="15.2" class="anchored" data-anchor-id="logistic-regression">
+<span class="header-section-number">15.2</span> Logistic Regression</h2>
+<p>Today we will study whether the probability to pass a Statistics course depends on exam fear and the math grade obtained in high school (prior math ability).</p>
+<p>Open LAS BE LR.sav.</p>
+<p>In the table below you find the variables included in this fictional data set.</p>
+<p>We want to study the following research question:</p>
+<p>Does the probability of passing the statistics exam depend on exam stress and math ability?</p>
+<p>To answer this question, we first need to dichotomize the dependent variable. This is an unusual step, because dichotomizing variables loses information! Still, for the purpose of the present exercise, we will do so. We will create the new dependent variable Passed (0 = fail, 1 = pass), where a 5.5 or higher counts as a pass. Use the following steps:</p>
+<p>Navigate to Transform → Recode into different variables. Select GradeStats as input variable and use Passed as the name for the new recoded variable. Do not forget to click on CHANGE. Click on Old and new values and specify the recoding in such a way that all grades of 5.5 or higher will get the new value 1 and all grades lower than 5.5 (i.e., all other grades) the value 0. Paste and run the syntax. Go to variable view and specify the value labels.</p>
+<p>Obtain the frequency distribution for Passed (via Analyze –&gt; Descriptive Statistics –&gt; Frequencies).</p>
+<p>What percentage of students passed? <input class="webex-solveme nospaces" data-tol="0.2" size="4" data-answer="[&quot;82.2&quot;]">%</p>
+<p>We will use logistic regression to study the effect of exam stress and math ability on the probability to pass. Take the following steps:</p>
+<p>Navigate to Analyze –&gt; Regression –&gt; Binary logistic regression Select Passed as dependent variable and ExamStress and Math as independent variables (in SPSS called “covariates”). Paste and run the syntax.</p>
+<p>Inspect the output corresponding to Block 1. Take a look at the table “Variables in the Equation”.</p>
+<p>What would be good description of the effects on the sample level? (i.e., what the effect of ExamStress and Math on the probability to pass looks like).</p>
+<div class="webex-solution">
+<button>
+Answer
+</button>
+<p>Turns out Exam Stress has a negative effect on the probability to pass (controlled for Math grade), and Math a positive effect (controlled for Exam Stress).</p>
+</div>
+<p>What is the value of the regression coefficient for the variable Exam Stress? <input class="webex-solveme nospaces" data-tol="0.005" size="6" data-answer="[&quot;-0.025&quot;,&quot;-.025&quot;]"></p>
+<p>Give a detailed interpretation of this number.</p>
+<div class="webex-solution">
+<button>
+Answer
+</button>
+<p>If we would increase one unit in Exam Stress the logits to pass the exam will decrease with 0.025, while keeping the variable Math constant.</p>
+</div>
+<p>True or false: The independent variables Math and Exam Stress together have a significant effect on the probability to pass. <select class="webex-select"><option value="blank"></option>
+<option value="answer">TRUE</option>
+<option value="NA">FALSE</option></select></p>
+<div class="webex-solution">
+<button>
+Explanation
+</button>
+<p>When we inspect the model test, we see that, together, Exam Stress and Math grade have a significant effect on the probability to pass, χ2(2) = 81.043, p &lt; .001.</p>
+</div>
+<p>Second, carry out the significance tests for the individual predictors as well.</p>
+<p>True or false: There is a significant effect of Math on the probability to pass, controlled for Exam stress. <select class="webex-select"><option value="blank"></option>
+<option value="answer">TRUE</option>
+<option value="NA">FALSE</option></select></p>
+<p>True or false: There is a significant effect of Exam stress on the probability to pass, controlled for Math. <select class="webex-select"><option value="blank"></option>
+<option value="NA">TRUE</option>
+<option value="answer">FALSE</option></select></p>
+<div class="webex-solution">
+<button>
+Explanation
+</button>
+<p>When we inspect the separate regression coefficients together, we see that:</p>
+<p>Controlled for Exam stress, Math grade has a significant effect on the probability to pass, χ2(1)=54.500, p&lt;.001. Controlled for Math grade, Exam stress has no significant effect on the probability to pass, χ2(1)=0.040, p=.841.</p>
+</div>
+</section><section id="logistic-regression-with-categorical-predictor" class="level2" data-number="15.3"><h2 data-number="15.3" class="anchored" data-anchor-id="logistic-regression-with-categorical-predictor">
+<span class="header-section-number">15.3</span> Logistic Regression with Categorical Predictor</h2>
+<p>Now, we will carry out a logistic regression analysis to study whether the probability to pass can be predicted from the amount of preparation (Preparation), controlled for prior math ability (Math).</p>
+<p>But… the variable Preparation is a nominal (categorical) variable. Use dummy coding to include it in the model. The variable Preparation has three categories. Create all three dummy variables!</p>
+<p>Take the following approach to carry out the analysis.</p>
+<p>Navigate to Analyze –&gt; Regression –&gt; Binary Logistic</p>
+<p>Select Math as covariate.</p>
+<p>Select the dummies for Preparation as covariates. At this stage, use “only reading the book” as the reference group.</p>
+<p>Paste and run the syntax.</p>
+<p>Take a look at the table Variables in the Equation.</p>
+<p>Inspect the estimated regression coefficients. Consider the results on the sample level, ignoring inferential statistics for now.</p>
+<p>Which group has the highest estimated probability to pass? <select class="webex-select"><option value="blank"></option>
+<option value="">Student who only read the book.</option>
+<option value="answer">Students who read the book and did the exercises.</option>
+<option value="">Students who only did the exercises.</option></select></p>
+<p>Which group has the lowest estimated probability to pass (controlled for math ability)? <select class="webex-select"><option value="blank"></option>
+<option value="">Students who read the book and did the exercises.</option>
+<option value="answer">Student who only read the book.</option>
+<option value="">Students who only did the exercises.</option></select></p>
+<p>Write down the full model equation, filling in the values of coefficients. Then check your answer.</p>
+<div class="webex-solution">
+<button>
+Answer
+</button>
+<p><span class="math inline">\(logit_{passed} = -5.833 + .300*D_{exercises} + .946*D_{both} + .999 * Math\)</span></p>
+</div>
+<p>Controlled for Math Grade, what is the difference in predicted odds between people who only read the book and people who read the book and made the exercises? <input class="webex-solveme nospaces" data-tol="0.01" size="5" data-answer="[&quot;2.576&quot;]"></p>
+<div class="webex-solution">
+<button>
+Explanation
+</button>
+<p>Take the exponent of the regression coefficient for the dummy for people who read the book and made the exercises (see table).</p>
+</div>
+<p>By hand, calculate the probability that the third person in the file (respID=3) passes the exam. <input class="webex-solveme nospaces" data-tol="0.01" size="5" data-answer="[&quot;0.752&quot;,&quot;.752&quot;]"></p>
+<p>Imagine that you do not know whether this person passed the exam or not.</p>
+<p>True or false: Based on your answer in the previous step and using a decision threshold of .5, you would predict this student to pass. <select class="webex-select"><option value="blank"></option>
+<option value="answer">TRUE</option>
+<option value="NA">FALSE</option></select></p>
+<p>SPSS can easily calculate the probability to pass.</p>
+<p>Either use the visual interface:</p>
+<p>Click on the SAVE button in the menu for logistic regression.</p>
+<p>Select Probabilities under the header Predicted Values.</p>
+<p>Click on continue.</p>
+<p>Or add this line of code to your model:</p>
+<pre><code>  /SAVE=PRED</code></pre>
+<p>SPSS adds a new variable to the data file, which gives the predicted probability for each person. Check whether you calculated the predicted probability for person 3 correctly.</p>
+<p>Imagine that we would have used this model to predict the probability to pass for the students in this sample before they even made the exam. Use a decision threshold of .5 to classify students as those likely to pass vs fail.</p>
+<p>Out of all students that were classified as “pass”, which proportion actually failed? <input class="webex-solveme nospaces" data-tol="0.01" size="5" data-answer="[&quot;0.141&quot;,&quot;.141&quot;]"></p>
+<div class="webex-solution">
+<button>
+Explanation
+</button>
+<p>Of the 370 students who were predicted to pass, 52 failed the exam (.141). As you can see, the model is not completely flawless in making predictions.</p>
+</div>
+<p>What is worse in your opinion? Incorrectly predicting that students will pass (when they end up failing), or incorrectly predicting that students will fail (when they end up passing)? Why?</p>
+<p>If you chose a different decision criteria to predict passing - say .7, what would happen to the proportion of students that were classified as “pass”, but actually failed? <select class="webex-select"><option value="blank"></option>
+<option value="">gets bigger</option>
+<option value="">can’t say</option>
+<option value="">stays the same</option>
+<option value="answer">gets smaller</option></select></p>
+</section><section id="hierarchical-logistic-regression" class="level2" data-number="15.4"><h2 data-number="15.4" class="anchored" data-anchor-id="hierarchical-logistic-regression">
+<span class="header-section-number">15.4</span> Hierarchical Logistic Regression</h2>
+<p>In this assignment we will compare the following two models against each other.</p>
+<ul>
+<li>Model1: <span class="math inline">\(Logit(Pass) = b0+b1∗Math\)</span>
+</li>
+<li>Model2: <span class="math inline">\(Logit(Pass) = b0+b1∗Math+b2∗ExamStress+b3∗Evaluation\)</span>
+</li>
+</ul>
+<p>Later on, we want to carry out a model comparison test to check whether the larger model predicts the probability of passing the exam better than the smaller model.</p>
+<p>What would be the regression df for the model comparison test, in which we compare the larger model 2 to the smaller model 1? <input class="webex-solveme nospaces" size="1" data-answer="[&quot;2&quot;]"></p>
+<p>Now we will carry out the model comparison test. Take the following steps.</p>
+<p>Navigate to Analyze -&gt; Regression -&gt; Binary Logistic</p>
+<p>Select Math as predictor (covariates).</p>
+<p>Click on Next (upper right); we can now indicate which block of predictors we like to add in addition to the variables added in the first model.</p>
+<p>Enter ExamStress and Evaluation as predictors (covariates).</p>
+<p>Paste and run the syntax.</p>
+<p>Inspect the output. SPSS organizes the output in three blocks. The results in Block 0 refer to the null model without any predictors. Note that this null model also exists when you use the “Linear Regression” interface, but it’s not featured in the output.</p>
+<p>Block 1 refers to the results of Model 1 and Block to the results of Model 2.</p>
+<p>Take a look at the results of the model comparison test.</p>
+<p>What test statistic is used to compare nested logistic regression models? <select class="webex-select"><option value="blank"></option>
+<option value="">F</option>
+<option value="answer">Chi squared</option>
+<option value="">t</option>
+<option value="">Z</option></select></p>
+<p>What is the value of the appropriate test statistic for comparing models 1 and 2? <input class="webex-solveme nospaces" data-tol="0.01" size="5" data-answer="[&quot;1.297&quot;]"></p>
+<p>True or false: Adding predictors ExamStress and Evaluation lead to significantly better predictions, compared to a model with only high school math grade as predictor. <select class="webex-select"><option value="blank"></option>
+<option value="NA">TRUE</option>
+<option value="answer">FALSE</option></select></p>
+
+
+</section></section></main><!-- /main --><script>
+
+/* update total correct if #webex-total_correct exists */
+update_total_correct = function() {
+  console.log("webex: update total_correct");
+
+  var t = document.getElementsByClassName("webex-total_correct");
+  for (var i = 0; i < t.length; i++) {
+    p = t[i].parentElement;
+    var correct = p.getElementsByClassName("webex-correct").length;
+    var solvemes = p.getElementsByClassName("webex-solveme").length;
+    var radiogroups = p.getElementsByClassName("webex-radiogroup").length;
+    var selects = p.getElementsByClassName("webex-select").length;
+
+    t[i].innerHTML = correct + " of " + (solvemes + radiogroups + selects) + " correct";
+  }
+}
+
+/* webex-solution button toggling function */
+b_func = function() {
+  console.log("webex: toggle hide");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('open')) {
+    cl.remove("open");
+  } else {
+    cl.add("open");
+  }
+}
+
+/* check answers */
+check_func = function() {
+  console.log("webex: check answers");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('unchecked')) {
+    cl.remove("unchecked");
+    this.innerHTML = "Hide Answers";
+  } else {
+    cl.add("unchecked");
+    this.innerHTML = "Show Answers";
+  }
+}
+
+/* function for checking solveme answers */
+solveme_func = function(e) {
+  console.log("webex: check solveme");
+
+  var real_answers = JSON.parse(this.dataset.answer);
+  var my_answer = this.value;
+  var cl = this.classList;
+  if (cl.contains("ignorecase")) {
+    my_answer = my_answer.toLowerCase();
+  }
+  if (cl.contains("nospaces")) {
+    my_answer = my_answer.replace(/ /g, "")
+  }
+
+  if (my_answer == "") {
+    cl.remove("webex-correct");
+    cl.remove("webex-incorrect");
+  } else if (real_answers.includes(my_answer)) {
+    cl.add("webex-correct");
+    cl.remove("webex-incorrect");
+  } else {
+    cl.add("webex-incorrect");
+    cl.remove("webex-correct");
+  }
+
+  // match numeric answers within a specified tolerance
+  if(this.dataset.tol > 0){
+    var tol = JSON.parse(this.dataset.tol);
+    var matches = real_answers.map(x => Math.abs(x - my_answer) < tol)
+    if (matches.reduce((a, b) => a + b, 0) > 0) {
+      cl.add("webex-correct");
+    } else {
+      cl.remove("webex-correct");
+    }
+  }
+
+  // added regex bit
+  if (cl.contains("regex")){
+    answer_regex = RegExp(real_answers.join("|"))
+    if (answer_regex.test(my_answer)) {
+      cl.add("webex-correct");
+    }
+  }
+
+  update_total_correct();
+}
+
+/* function for checking select answers */
+select_func = function(e) {
+  console.log("webex: check select");
+
+  var cl = this.classList
+
+  /* add style */
+  cl.remove("webex-incorrect");
+  cl.remove("webex-correct");
+  if (this.value == "answer") {
+    cl.add("webex-correct");
+  } else if (this.value != "blank") {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+/* function for checking radiogroups answers */
+radiogroups_func = function(e) {
+  console.log("webex: check radiogroups");
+
+  var checked_button = document.querySelector('input[name=' + this.id + ']:checked');
+  var cl = checked_button.parentElement.classList;
+  var labels = checked_button.parentElement.parentElement.children;
+
+  /* get rid of styles */
+  for (i = 0; i < labels.length; i++) {
+    labels[i].classList.remove("webex-incorrect");
+    labels[i].classList.remove("webex-correct");
+  }
+
+  /* add style */
+  if (checked_button.value == "answer") {
+    cl.add("webex-correct");
+  } else {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+window.onload = function() {
+  console.log("webex onload");
+  /* set up solution buttons */
+  var buttons = document.getElementsByTagName("button");
+
+  for (var i = 0; i < buttons.length; i++) {
+    if (buttons[i].parentElement.classList.contains('webex-solution')) {
+      buttons[i].onclick = b_func;
+    }
+  }
+
+  var check_sections = document.getElementsByClassName("webex-check");
+  console.log("check:", check_sections.length);
+  for (var i = 0; i < check_sections.length; i++) {
+    check_sections[i].classList.add("unchecked");
+
+    let btn = document.createElement("button");
+    btn.innerHTML = "Show Answers";
+    btn.classList.add("webex-check-button");
+    btn.onclick = check_func;
+    check_sections[i].appendChild(btn);
+
+    let spn = document.createElement("span");
+    spn.classList.add("webex-total_correct");
+    check_sections[i].appendChild(spn);
+  }
+
+  /* set up webex-solveme inputs */
+  var solveme = document.getElementsByClassName("webex-solveme");
+
+  for (var i = 0; i < solveme.length; i++) {
+    /* make sure input boxes don't auto-anything */
+    solveme[i].setAttribute("autocomplete","off");
+    solveme[i].setAttribute("autocorrect", "off");
+    solveme[i].setAttribute("autocapitalize", "off");
+    solveme[i].setAttribute("spellcheck", "false");
+    solveme[i].value = "";
+
+    /* adjust answer for ignorecase or nospaces */
+    var cl = solveme[i].classList;
+    var real_answer = solveme[i].dataset.answer;
+    if (cl.contains("ignorecase")) {
+      real_answer = real_answer.toLowerCase();
+    }
+    if (cl.contains("nospaces")) {
+      real_answer = real_answer.replace(/ /g, "");
+    }
+    solveme[i].dataset.answer = real_answer;
+
+    /* attach checking function */
+    solveme[i].onkeyup = solveme_func;
+    solveme[i].onchange = solveme_func;
+
+    solveme[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+  }
+
+  /* set up radiogroups */
+  var radiogroups = document.getElementsByClassName("webex-radiogroup");
+  for (var i = 0; i < radiogroups.length; i++) {
+    radiogroups[i].onchange = radiogroups_func;
+  }
+
+  /* set up selects */
+  var selects = document.getElementsByClassName("webex-select");
+  for (var i = 0; i < selects.length; i++) {
+    selects[i].onchange = select_func;
+    selects[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+  }
+
+  update_total_correct();
+}
+
+</script><script>
+// open rdrr links externally ----
+
+var exlinks = document.querySelectorAll("a[href^='https://rdrr.io']");
+var exlink_func = function(){
+  window.open(this.href);
+  return false;
+};
+for (var i = 0; i < exlinks.length; i++) {
+    exlinks[i].addEventListener('click', exlink_func, false);
+}
+
+// visible second sidebar in mobile ----
+
+function move_sidebar() {
+  var toc = document.getElementById("TOC");
+  var small_sidebar = document.querySelector("#quarto-sidebar .sidebar-menu-container");
+  var right_sidebar = document.getElementById("quarto-margin-sidebar");
+
+  if (window.innerWidth < 768) {
+    small_sidebar.append(toc);
+  } else {
+    right_sidebar.append(toc);
+  }
+}
+move_sidebar();
+window.onresize = move_sidebar;
+</script><script>
+
+/* update total correct if #webex-total_correct exists */
+update_total_correct = function() {
+  console.log("webex: update total_correct");
+
+  var t = document.getElementsByClassName("webex-total_correct");
+  for (var i = 0; i < t.length; i++) {
+    p = t[i].parentElement;
+    var correct = p.getElementsByClassName("webex-correct").length;
+    var solvemes = p.getElementsByClassName("webex-solveme").length;
+    var radiogroups = p.getElementsByClassName("webex-radiogroup").length;
+    var selects = p.getElementsByClassName("webex-select").length;
+
+    t[i].innerHTML = correct + " of " + (solvemes + radiogroups + selects) + " correct";
+  }
+}
+
+/* webex-solution button toggling function */
+b_func = function() {
+  console.log("webex: toggle hide");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('open')) {
+    cl.remove("open");
+  } else {
+    cl.add("open");
+  }
+}
+
+/* check answers */
+check_func = function() {
+  console.log("webex: check answers");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('unchecked')) {
+    cl.remove("unchecked");
+    this.innerHTML = "Hide Answers";
+  } else {
+    cl.add("unchecked");
+    this.innerHTML = "Show Answers";
+  }
+}
+
+/* function for checking solveme answers */
+solveme_func = function(e) {
+  console.log("webex: check solveme");
+
+  var real_answers = JSON.parse(this.dataset.answer);
+  var my_answer = this.value;
+  var cl = this.classList;
+  if (cl.contains("ignorecase")) {
+    my_answer = my_answer.toLowerCase();
+  }
+  if (cl.contains("nospaces")) {
+    my_answer = my_answer.replace(/ /g, "")
+  }
+
+  if (my_answer == "") {
+    cl.remove("webex-correct");
+    cl.remove("webex-incorrect");
+  } else if (real_answers.includes(my_answer)) {
+    cl.add("webex-correct");
+    cl.remove("webex-incorrect");
+  } else {
+    cl.add("webex-incorrect");
+    cl.remove("webex-correct");
+  }
+
+  // match numeric answers within a specified tolerance
+  if(this.dataset.tol > 0){
+    var tol = JSON.parse(this.dataset.tol);
+    var matches = real_answers.map(x => Math.abs(x - my_answer) < tol)
+    if (matches.reduce((a, b) => a + b, 0) > 0) {
+      cl.add("webex-correct");
+    } else {
+      cl.remove("webex-correct");
+    }
+  }
+
+  // added regex bit
+  if (cl.contains("regex")){
+    answer_regex = RegExp(real_answers.join("|"))
+    if (answer_regex.test(my_answer)) {
+      cl.add("webex-correct");
+    }
+  }
+
+  update_total_correct();
+}
+
+/* function for checking select answers */
+select_func = function(e) {
+  console.log("webex: check select");
+
+  var cl = this.classList
+
+  /* add style */
+  cl.remove("webex-incorrect");
+  cl.remove("webex-correct");
+  if (this.value == "answer") {
+    cl.add("webex-correct");
+  } else if (this.value != "blank") {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+/* function for checking radiogroups answers */
+radiogroups_func = function(e) {
+  console.log("webex: check radiogroups");
+
+  var checked_button = document.querySelector('input[name=' + this.id + ']:checked');
+  var cl = checked_button.parentElement.classList;
+  var labels = checked_button.parentElement.parentElement.children;
+
+  /* get rid of styles */
+  for (i = 0; i < labels.length; i++) {
+    labels[i].classList.remove("webex-incorrect");
+    labels[i].classList.remove("webex-correct");
+  }
+
+  /* add style */
+  if (checked_button.value == "answer") {
+    cl.add("webex-correct");
+  } else {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+window.onload = function() {
+  console.log("webex onload");
+  /* set up solution buttons */
+  var buttons = document.getElementsByTagName("button");
+
+  for (var i = 0; i < buttons.length; i++) {
+    if (buttons[i].parentElement.classList.contains('webex-solution')) {
+      buttons[i].onclick = b_func;
+    }
+  }
+
+  var check_sections = document.getElementsByClassName("webex-check");
+  console.log("check:", check_sections.length);
+  for (var i = 0; i < check_sections.length; i++) {
+    check_sections[i].classList.add("unchecked");
+
+    let btn = document.createElement("button");
+    btn.innerHTML = "Show Answers";
+    btn.classList.add("webex-check-button");
+    btn.onclick = check_func;
+    check_sections[i].appendChild(btn);
+
+    let spn = document.createElement("span");
+    spn.classList.add("webex-total_correct");
+    check_sections[i].appendChild(spn);
+  }
+
+  /* set up webex-solveme inputs */
+  var solveme = document.getElementsByClassName("webex-solveme");
+
+  for (var i = 0; i < solveme.length; i++) {
+    /* make sure input boxes don't auto-anything */
+    solveme[i].setAttribute("autocomplete","off");
+    solveme[i].setAttribute("autocorrect", "off");
+    solveme[i].setAttribute("autocapitalize", "off");
+    solveme[i].setAttribute("spellcheck", "false");
+    solveme[i].value = "";
+
+    /* adjust answer for ignorecase or nospaces */
+    var cl = solveme[i].classList;
+    var real_answer = solveme[i].dataset.answer;
+    if (cl.contains("ignorecase")) {
+      real_answer = real_answer.toLowerCase();
+    }
+    if (cl.contains("nospaces")) {
+      real_answer = real_answer.replace(/ /g, "");
+    }
+    solveme[i].dataset.answer = real_answer;
+
+    /* attach checking function */
+    solveme[i].onkeyup = solveme_func;
+    solveme[i].onchange = solveme_func;
+
+    solveme[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+  }
+
+  /* set up radiogroups */
+  var radiogroups = document.getElementsByClassName("webex-radiogroup");
+  for (var i = 0; i < radiogroups.length; i++) {
+    radiogroups[i].onchange = radiogroups_func;
+  }
+
+  /* set up selects */
+  var selects = document.getElementsByClassName("webex-select");
+  for (var i = 0; i < selects.length; i++) {
+    selects[i].onchange = select_func;
+    selects[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+  }
+
+  update_total_correct();
+}
+
+</script><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="./glm7interaction.html" class="pagination-link" aria-label="GLM-VII: Interaction">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">GLM-VII: Interaction</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./glm_contrasts.html" class="pagination-link" aria-label="GLM: Contrasts">
+        <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">GLM: Contrasts</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer"><div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>CC-BY (2023) Caspar J. Van Lissa</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

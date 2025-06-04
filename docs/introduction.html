@@ -1,0 +1,1938 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="description" content="Book Description">
+<title>1&nbsp; Introduction to Statistics – Statistics 1 and 2</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./probability.html" rel="next">
+<link href="./index.html" rel="prev">
+<link href="./images/logos/favicon.png" rel="icon" type="image/png">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark"><script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script><script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
+<link rel="stylesheet" href="include/booktem.css">
+<link rel="stylesheet" href="include/webex.css">
+<link rel="stylesheet" href="include/glossary.css">
+<link rel="stylesheet" href="include/style.css">
+<link rel="stylesheet" href="c:/gitbook_stats12/include/webex.css">
+</head>
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./introduction.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to Statistics</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Statistics 1 and 2</a> 
+        <div class="sidebar-tools-main tools-wide">
+    <a href="https://github.com/cjvanlissa/stats12" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="./Statistics-1-and-2.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+    <div class="dropdown">
+      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Share"><i class="bi bi-share"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+<li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
+              <i class="bi bi-twitter pe-1"></i>
+            Twitter
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=|url|">
+              <i class="bi bi-facebook pe-1"></i>
+            Facebook
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=|url|">
+              <i class="bi bi-linkedin pe-1"></i>
+            LinkedIn
+            </a>
+          </li>
+      </ul>
+</div>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Overview</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./introduction.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to Statistics</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./probability.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Probability Distributions</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./samplingdistribution.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">The Sampling Distribution</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./testing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Hypothesis Testing</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glm1_regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">GLM-I: Linear Regression</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glm2_sum_squares.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">GLM-II: Sums of Squares</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glm3binary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">GLM-III: Binary Predictors</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glm4anova.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">GLM-IV: ANOVA</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glm5multiple.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">GLM-V: Multiple regression</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glm6nested.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">GLM-VI: Nested models</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glm7interaction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">GLM-VII: Interaction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./logistic.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">GLM VIII - Logistic Regression</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glm_contrasts.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">GLM: Contrasts</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./factorial.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">GLM: Factorial ANOVA</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ancova.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">GLM: ANCOVA</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./rmanova.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">GLM: Repeated Measures ANOVA</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./reliability_validity.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Reliability and Validity</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data_reduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Dimension Reduction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./confint.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">BE2 - Confidence Intervals</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data for Portfolio</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./probability_tables.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Z-table</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./formula_sheet2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Formula sheet</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+    </ul>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+<li><a href="#lecture" id="toc-lecture" class="nav-link active" data-scroll-target="#lecture"><span class="header-section-number">2</span> Lecture</a></li>
+  <li><a href="#formative-test" id="toc-formative-test" class="nav-link" data-scroll-target="#formative-test"><span class="header-section-number">3</span> Formative Test</a></li>
+  <li>
+<a href="#in-spss" id="toc-in-spss" class="nav-link" data-scroll-target="#in-spss"><span class="header-section-number">4</span> In SPSS</a>
+  <ul class="collapse">
+<li><a href="#frequency-distributions" id="toc-frequency-distributions" class="nav-link" data-scroll-target="#frequency-distributions"><span class="header-section-number">4.1</span> Frequency Distributions</a></li>
+  <li><a href="#descriptive-statistics" id="toc-descriptive-statistics" class="nav-link" data-scroll-target="#descriptive-statistics"><span class="header-section-number">4.2</span> Descriptive Statistics</a></li>
+  <li><a href="#bar-charts-and-histograms" id="toc-bar-charts-and-histograms" class="nav-link" data-scroll-target="#bar-charts-and-histograms"><span class="header-section-number">4.3</span> Bar Charts and Histograms</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#tutorial" id="toc-tutorial" class="nav-link" data-scroll-target="#tutorial"><span class="header-section-number">5</span> Tutorial</a>
+  <ul class="collapse">
+<li>
+<a href="#introducing-spss" id="toc-introducing-spss" class="nav-link" data-scroll-target="#introducing-spss"><span class="header-section-number">5.1</span> Introducing SPSS</a>
+  <ul class="collapse">
+<li><a href="#step-1" id="toc-step-1" class="nav-link" data-scroll-target="#step-1"><span class="header-section-number">5.1.1</span> Step 1</a></li>
+  <li><a href="#step-2" id="toc-step-2" class="nav-link" data-scroll-target="#step-2"><span class="header-section-number">5.1.2</span> Step 2</a></li>
+  <li><a href="#step-3" id="toc-step-3" class="nav-link" data-scroll-target="#step-3"><span class="header-section-number">5.1.3</span> Step 3</a></li>
+  <li><a href="#step-4" id="toc-step-4" class="nav-link" data-scroll-target="#step-4"><span class="header-section-number">5.1.4</span> Step 4</a></li>
+  <li><a href="#step-5" id="toc-step-5" class="nav-link" data-scroll-target="#step-5"><span class="header-section-number">5.1.5</span> Step 5</a></li>
+  <li><a href="#step-6" id="toc-step-6" class="nav-link" data-scroll-target="#step-6"><span class="header-section-number">5.1.6</span> Step 6</a></li>
+  <li><a href="#step-6a" id="toc-step-6a" class="nav-link" data-scroll-target="#step-6a"><span class="header-section-number">5.1.7</span> Step 6a</a></li>
+  <li><a href="#step-7" id="toc-step-7" class="nav-link" data-scroll-target="#step-7"><span class="header-section-number">5.1.8</span> Step 7</a></li>
+  <li><a href="#step-8" id="toc-step-8" class="nav-link" data-scroll-target="#step-8"><span class="header-section-number">5.1.9</span> Step 8</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#plotting-data" id="toc-plotting-data" class="nav-link" data-scroll-target="#plotting-data"><span class="header-section-number">5.2</span> Plotting data</a>
+  <ul class="collapse">
+<li><a href="#step-1-1" id="toc-step-1-1" class="nav-link" data-scroll-target="#step-1-1"><span class="header-section-number">5.2.1</span> Step 1</a></li>
+  <li><a href="#step-2-1" id="toc-step-2-1" class="nav-link" data-scroll-target="#step-2-1"><span class="header-section-number">5.2.2</span> Step 2</a></li>
+  <li><a href="#step-3-1" id="toc-step-3-1" class="nav-link" data-scroll-target="#step-3-1"><span class="header-section-number">5.2.3</span> Step 3</a></li>
+  <li><a href="#step-4-1" id="toc-step-4-1" class="nav-link" data-scroll-target="#step-4-1"><span class="header-section-number">5.2.4</span> Step 4</a></li>
+  <li><a href="#step-5-1" id="toc-step-5-1" class="nav-link" data-scroll-target="#step-5-1"><span class="header-section-number">5.2.5</span> Step 5</a></li>
+  </ul>
+</li>
+  <li><a href="#quiz" id="toc-quiz" class="nav-link" data-scroll-target="#quiz"><span class="header-section-number">5.3</span> Quiz</a></li>
+  <li>
+<a href="#descriptive-statistics-1" id="toc-descriptive-statistics-1" class="nav-link" data-scroll-target="#descriptive-statistics-1"><span class="header-section-number">5.4</span> Descriptive Statistics</a>
+  <ul class="collapse">
+<li><a href="#step-1-2" id="toc-step-1-2" class="nav-link" data-scroll-target="#step-1-2"><span class="header-section-number">5.4.1</span> Step 1</a></li>
+  <li><a href="#step-2-2" id="toc-step-2-2" class="nav-link" data-scroll-target="#step-2-2"><span class="header-section-number">5.4.2</span> Step 2</a></li>
+  <li><a href="#step-3-2" id="toc-step-3-2" class="nav-link" data-scroll-target="#step-3-2"><span class="header-section-number">5.4.3</span> Step 3</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#quiz-1" id="toc-quiz-1" class="nav-link" data-scroll-target="#quiz-1"><span class="header-section-number">5.5</span> Quiz</a>
+  <ul class="collapse">
+<li><a href="#step-4-2" id="toc-step-4-2" class="nav-link" data-scroll-target="#step-4-2"><span class="header-section-number">5.5.1</span> Step 4</a></li>
+  <li><a href="#step-5-2" id="toc-step-5-2" class="nav-link" data-scroll-target="#step-5-2"><span class="header-section-number">5.5.2</span> Step 5</a></li>
+  </ul>
+</li>
+  <li><a href="#quiz-2" id="toc-quiz-2" class="nav-link" data-scroll-target="#quiz-2"><span class="header-section-number">5.6</span> Quiz</a></li>
+  <li><a href="#missing-values" id="toc-missing-values" class="nav-link" data-scroll-target="#missing-values"><span class="header-section-number">5.7</span> Missing Values</a></li>
+  <li><a href="#quiz-3" id="toc-quiz-3" class="nav-link" data-scroll-target="#quiz-3"><span class="header-section-number">5.8</span> Quiz</a></li>
+  <li><a href="#more-descriptive-statistics" id="toc-more-descriptive-statistics" class="nav-link" data-scroll-target="#more-descriptive-statistics"><span class="header-section-number">5.9</span> More Descriptive Statistics</a></li>
+  <li><a href="#quiz-4" id="toc-quiz-4" class="nav-link" data-scroll-target="#quiz-4"><span class="header-section-number">5.10</span> Quiz</a></li>
+  <li><a href="#quiz-5" id="toc-quiz-5" class="nav-link" data-scroll-target="#quiz-5"><span class="header-section-number">5.11</span> Quiz</a></li>
+  <li>
+<a href="#correlation" id="toc-correlation" class="nav-link" data-scroll-target="#correlation"><span class="header-section-number">5.12</span> Correlation</a>
+  <ul class="collapse">
+<li><a href="#correlation-coefficient" id="toc-correlation-coefficient" class="nav-link" data-scroll-target="#correlation-coefficient"><span class="header-section-number">5.12.1</span> Correlation Coefficient</a></li>
+  </ul>
+</li>
+  <li><a href="#quiz-6" id="toc-quiz-6" class="nav-link" data-scroll-target="#quiz-6"><span class="header-section-number">5.13</span> Quiz</a></li>
+  </ul>
+</li>
+  </ul></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<h1 class="title"><span id="sec-intro" class="quarto-section-identifier"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to Statistics</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header><p>Statistics are more relevant than ever in this digital age, where data about our entire lives is readily available, and software to analyze such data has become extremely user-friendly and freely available. We live in a world where everyone wants our data, and being data literate is becoming increasingly important across industries.</p>
+<p>Statistics allows us to make sense of data and gain valuable insights. It helps us better understand social phenomena, predict sales and optimize marketing strategies, and even explore the relationship between brain activity and behavior. Data analysis is one of the most marketable skills taught at universities.</p>
+<p>Before we delve deeper into statistics, it’s crucial to distinguish between methods and statistics. Methods refer to the procedures used in research, such as data collection, participant selection, and study design. On the other hand, statistics focuses on analyzing the data obtained from these methods.</p>
+<p>Two fundamental branches of statistics covered in this course are descriptive statistics and inferential statistics. Descriptive statistics involves summarizing and describing the characteristics of a dataset, while inferential statistics allows us to make educated guesses about a larger population based on a smaller sample.</p>
+<p>Statistical modeling is another aspect of statistics where theories are represented mathematically. This enables us to predict important outcomes, such as sales figures, well-being, or the likelihood of neurological disorders. Statistical modeling also allows us to explore data for interesting patterns or to perform tests to answer theoretically driven research questions.</p>
+<p>In scientific research, statistics can help us test theories. The process of scientific knowledge acquisition is described by the empirical cycle: We start with a theory, from which we derive testable hypotheses. A theory is an abstract system of assumptions about the relationships between constructs. A hypothesis is a concrete statement, derived from the theory, about expected quantitative relationships between measured variables. We then collect data and test the hypothesis. If the hypothesis is refuted, we re-examine the theory and possibly ammend it.</p>
+<p>To lay a foundation for understanding statistics, it’s essential to be familiar with some basic concepts. First, data in the social sciences often comes in tabular format (e.g., spreadsheets), where each row represents an individual observation, and each column represents the individuals’ scores on various variables.</p>
+<p>A crucial distinction is the one between population and sample. The population refers to the complete set of objects of interest, such as all people in a country or all students in a class. However, due to practical limitations, we usually do not have access to the population. Instead, we draw a sample from it, which is a subset of the population. Sampling theory establishes the rationale for drawing inferences about a population based on samples. Sample statistics serve as our best estimate of population parameters. If the sample is representative, those estimates will be unbiased. Moreover, we can estimate our uncertainty about the sample statistics as estimates of population parameters. The best way to ensure a representative sample is to use random sampling, where each individual in the population has an equal chance of being included.</p>
+<p>The distinction between constructs and variables is also important. Constructs are abstract features of interest within a population, like short-term memory, intelligence, or education. Variables, on the other hand, are mathematical placeholders that represent specific values associated with these constructs. Data, then, refers to the specific values of a variable.</p>
+<p>Measurement level refers to the kind of information contained in a variable. The four common measurement levels are nominal, ordinal, interval, and ratio. Nominal variables have categories that differ in name only, while ordinal variables have categories with a meaningful order. Interval variables have meaningful intervals between values, which allows for meaningful comparisons between values. Finally, ratio variables have a meaningful zero-point, which additionally allows for the computation of meaningful ratios between values.</p>
+<p>Descriptive statistics are used to summarize and analyze data. They help us get a sense of the dataset and answer questions like the most common major among students or the average age of a group. Descriptive statistics can also be relevant in answering research questions, such as evaluating exam questions or determining if the proportion of correct answers on a multiple-choice question is greater than chance.</p>
+<p>In summary, statistics is a powerful tool for analyzing and interpreting data. It helps us gain insights into various aspects of social life, make predictions, and test theories. By understanding fundamental concepts, such as measurement levels and descriptive statistics, we can start exploring and making sense of data in a meaningful way.</p>
+<section id="lecture" class="level1" data-number="2"><h1 data-number="2">
+<span class="header-section-number">2</span> Lecture</h1>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/_TZIIANBt94" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</section><section id="formative-test" class="level1" data-number="3"><h1 data-number="3">
+<span class="header-section-number">3</span> Formative Test</h1>
+<p>A formative test helps you assess your progress in the course, and helps you address any blind spots in your understanding of the material. If you get a question wrong, you will receive a hint on how to improve your understanding of the material.</p>
+<p>Complete the formative test ideally after you’ve seen the lecture, but before the lecture meeting in which we can discuss any topics that need more attention</p>
+<div class="cell" data-layout-align="center">
+<div class="webex-check webex-box">
+<p><strong>Question 1</strong></p>
+What is the primary purpose of statistics?
+<div id="radio_TAJTTOYUKB" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_TAJTTOYUKB" value="answer"><span>To summarize and analyze data</span></label><label><input type="radio" autocomplete="off" name="radio_TAJTTOYUKB" value=""><span>To design research studies</span></label><label><input type="radio" autocomplete="off" name="radio_TAJTTOYUKB" value=""><span>To collect and store data</span></label><label><input type="radio" autocomplete="off" name="radio_TAJTTOYUKB" value=""><span>To create data visualizations</span></label>
+</div>
+<p><strong>Question 2</strong></p>
+What is the difference between descriptive statistics and inferential statistics?
+<div id="radio_SZCOPLQKXG" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_SZCOPLQKXG" value=""><span>Descriptive statistics involves analyzing data, while inferential statistics involves collecting data.</span></label><label><input type="radio" autocomplete="off" name="radio_SZCOPLQKXG" value=""><span>Descriptive statistics is used in social sciences, while inferential statistics is used in natural sciences.</span></label><label><input type="radio" autocomplete="off" name="radio_SZCOPLQKXG" value="answer"><span>Descriptive statistics summarize data, while inferential statistics involves making informed guesses about parameters in a larger population.</span></label><label><input type="radio" autocomplete="off" name="radio_SZCOPLQKXG" value=""><span>Descriptive statistics deals with nominal variables, while inferential statistics deals with ratio variables.</span></label>
+</div>
+<p><strong>Question 3</strong></p>
+What is the purpose of statistical modeling?
+<div id="radio_CBEHUFJPQP" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_CBEHUFJPQP" value="answer"><span>To represent a theory as a testable statistical model.</span></label><label><input type="radio" autocomplete="off" name="radio_CBEHUFJPQP" value=""><span>To summarize data using graphs and charts</span></label><label><input type="radio" autocomplete="off" name="radio_CBEHUFJPQP" value=""><span>To make educated guesses about a larger population based on a smaller sample</span></label><label><input type="radio" autocomplete="off" name="radio_CBEHUFJPQP" value=""><span>To predict outcomes and explore patterns in data</span></label><label><input type="radio" autocomplete="off" name="radio_CBEHUFJPQP" value=""><span>To describe the characteristics of a dataset</span></label>
+</div>
+<p><strong>Question 4</strong></p>
+What is the empirical cycle in scientific research?
+<div id="radio_ASETOYVDBV" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ASETOYVDBV" value="answer"><span>The process of formulating a theory, deriving hypotheses, testing these with data, and reflecting on theory</span></label><label><input type="radio" autocomplete="off" name="radio_ASETOYVDBV" value=""><span>The process of repeatedly collecting and analyzing data</span></label><label><input type="radio" autocomplete="off" name="radio_ASETOYVDBV" value=""><span>The process of designing research studies and selecting participants</span></label><label><input type="radio" autocomplete="off" name="radio_ASETOYVDBV" value=""><span>The process of summarizing and describing data using statistics</span></label>
+</div>
+<p><strong>Question 5</strong></p>
+What is the distinction between population and sample in statistics?
+<div id="radio_BDZVHDIJOL" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_BDZVHDIJOL" value=""><span>Population refers to all participants in a study, while sample refers all participants who provided complete answers.</span></label><label><input type="radio" autocomplete="off" name="radio_BDZVHDIJOL" value=""><span>Population refers to inferential statistics, while sample refers to descriptive statistics.</span></label><label><input type="radio" autocomplete="off" name="radio_BDZVHDIJOL" value="answer"><span>Population refers to the complete set of potential participants, of which the sample is a subset.</span></label>
+</div>
+<p><strong>Question 6</strong></p>
+What is the variance?
+<div id="radio_BFORFOZHGC" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_BFORFOZHGC" value=""><span>The distance between the lowest and highest value on a continuous variable.</span></label><label><input type="radio" autocomplete="off" name="radio_BFORFOZHGC" value="answer"><span>The average squared distance of observations to the mean.</span></label><label><input type="radio" autocomplete="off" name="radio_BFORFOZHGC" value=""><span>The measure of dispersion for scores on a continuous variable.</span></label><label><input type="radio" autocomplete="off" name="radio_BFORFOZHGC" value=""><span>The average distance of observations to the mean.</span></label>
+</div>
+<p><strong>Question 7</strong></p>
+Six students work on a Statistics exam. They obtain the following grades: 8, 9, 5, 6, 7 and 8. The teacher calculates a measure of central tendency, which is equal to 7.5. Which statistic did the teacher calculate?
+<div id="radio_SPMTGXJDAN" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_SPMTGXJDAN" value="answer"><span>Median</span></label><label><input type="radio" autocomplete="off" name="radio_SPMTGXJDAN" value=""><span>Standard deviation</span></label><label><input type="radio" autocomplete="off" name="radio_SPMTGXJDAN" value=""><span>Mean</span></label><label><input type="radio" autocomplete="off" name="radio_SPMTGXJDAN" value=""><span>Mode</span></label>
+</div>
+<p><strong>Question 8</strong></p>
+For which of the three scatterplots below is the correlation coefficient strongest?
+<div id="radio_GWZEKMYZMA" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_GWZEKMYZMA" value="answer"><span>A</span></label><label><input type="radio" autocomplete="off" name="radio_GWZEKMYZMA" value=""><span>C</span></label><label><input type="radio" autocomplete="off" name="radio_GWZEKMYZMA" value=""><span>B</span></label>
+</div>
+</div>
+<div class="webex-solution">
+<button>
+Show explanations
+</button>
+<p><strong>Question 1</strong></p>
+<p>Statistics is the science concerned with developing and studying methods for analyzing data.</p>
+<p><strong>Question 2</strong></p>
+<p>Descriptive statistics are calculated based on sample data; inferential statistics involves using those sample statistics to make best guesses about population parameters and quantify uncertainty about those guesses.</p>
+<p><strong>Question 3</strong></p>
+<p>Statistical modeling in particular refers to the process of translating a theoretical model into a statistical model whose coefficients can be estimated using data.</p>
+<p><strong>Question 4</strong></p>
+<p>The empirical cycle is a theoretical cyclical model of knowledge production through scientific research, whereby theory gives rise to hypotheses, which are tested in data, after which the theory is revisited based on the results.</p>
+<p><strong>Question 5</strong></p>
+<p>Population refers to the complete set of potential participants, of which the sample is a subset.</p>
+<p><strong>Question 6</strong></p>
+<p>The variance is the sum of squared distances of observations to the mean, divided by the number of observations minus one. So calculate:<br><span class="math inline">\(S_{X}^2= \frac{\sum_{i=1}^nX_i}{n} = \frac{(7 + 6 + 8 + 6 + 8)}{5} = 7\)</span></p>
+<p><strong>Question 7</strong></p>
+<p>First rule out improbable answers; the variance is not a measure of central tendency, and all grades are pretty close to each other, so it would be impossible for the variance to be that high. We can see what the mode (most common value) is: it’s 8. So we only choose between mean or median. <br>Mean: calculate <span class="math inline">\(\bar{X}= \frac{\sum_{i=1}^nX_i}{n} = \frac{8 + 9 + 5 + 6 + 7 + 8}{6} = 7.17\)</span><br>Median: order the numbers, note that there is an odd number, take the average of the two middle numbers. 5, 6, 7, 8, 8, 9 -&gt; 7.5</p>
+<p><strong>Question 8</strong></p>
+<p>Correlation measures linear association, so eliminate option C. Option B shows a very small correlation - probably 0 or maybe .1. So the correct answer is A, which shows a moderate negative correlation.</p>
+</div>
+</div>
+<div id="fig-scatter" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-scatter-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<p><img src="images/lecture 73.png" class="img-fluid figure-img">{width = 30%}</p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<p><img src="images/lecture 74.png" class="img-fluid figure-img">{width = 30%}</p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<p><img src="images/lecture 76.png" class="img-fluid figure-img">{width = 30%}</p>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-scatter-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.1: Scatterplots
+</figcaption></figure>
+</div>
+</section><section id="in-spss" class="level1" data-number="4"><h1 data-number="4">
+<span class="header-section-number">4</span> In SPSS</h1>
+<section id="frequency-distributions" class="level2" data-number="4.1"><h2 data-number="4.1" class="anchored" data-anchor-id="frequency-distributions">
+<span class="header-section-number">4.1</span> Frequency Distributions</h2>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/q1ER4MAngFE" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</section><section id="descriptive-statistics" class="level2" data-number="4.2"><h2 data-number="4.2" class="anchored" data-anchor-id="descriptive-statistics">
+<span class="header-section-number">4.2</span> Descriptive Statistics</h2>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/lXG7HWGdKNk" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</section><section id="bar-charts-and-histograms" class="level2" data-number="4.3"><h2 data-number="4.3" class="anchored" data-anchor-id="bar-charts-and-histograms">
+<span class="header-section-number">4.3</span> Bar Charts and Histograms</h2>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/0NeaD1Mojp0" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</section></section><section id="tutorial" class="level1" data-number="5"><h1 data-number="5">
+<span class="header-section-number">5</span> Tutorial</h1>
+<section id="introducing-spss" class="level2" data-number="5.1"><h2 data-number="5.1" class="anchored" data-anchor-id="introducing-spss">
+<span class="header-section-number">5.1</span> Introducing SPSS</h2>
+<p>Welcome everyone to your first lab session for Statistics 1 and 2. Today, we start working with an introduction to SPSS and we calculate a few basic descriptive statistics.</p>
+<p>Each lab session consists of several assignments and includes explanations on how to carry out the analyses in SPSS.</p>
+<p>You can work at your own pace. If you experience any problems, or if you have any questions, feel free to ask your teacher.</p>
+<p>You will receive feedback to your answers after you have submitted the practical.</p>
+<p>Good luck!</p>
+<section id="step-1" class="level3" data-number="5.1.1"><h3 data-number="5.1.1" class="anchored" data-anchor-id="step-1">
+<span class="header-section-number">5.1.1</span> Step 1</h3>
+<p>Hi there!</p>
+<p>During the lab sessions of this course you will learn how to work with the statistics program IBM SPSS (SPSS for short).</p>
+<p>Background information is given throughout the exercises. We will occasionally refer to additional reading materials for this course, or other sources (e.g., youtube videos).</p>
+<p>If you’re working from a student workplace, SPSS is already installed. If you’re working from your own computer, you either have to purchase SPSS, or you can use a free alternative (see <a href="index.html#sec-software" class="quarto-xref"><span>Section 4</span></a>) - but note that, at this point, the instruction text is still focused on SPSS so if there are any differences it will be your responsibility to figure out how to use your software.</p>
+<p>Your first task is to start the SPSS program. You can easily find SPSS via the Windows Start Menu. SPSS may ask about the coding: use Unicode (button to the left). Then there may be another window open that you can close. In the end you should see an empty spread sheet.</p>
+</section><section id="step-2" class="level3" data-number="5.1.2"><h3 data-number="5.1.2" class="anchored" data-anchor-id="step-2">
+<span class="header-section-number">5.1.2</span> Step 2</h3>
+<p>Now you’ve got SPSS running, we’re ready to go!</p>
+<p>We will start with a number of introductory exercises using the data file <code>stressLAS.sav</code>. To obtain this and other tutorial data files, download the GitBook, and open the <code>data</code> folder to find all files.</p>
+<p>Open the file in SPSS. Proceed as follows: via the op menu follow the route: File -&gt; open -&gt; data. SPSS now opens a new window. Search for the file StressLAS.sav and open the file in SPSS.</p>
+</section><section id="step-3" class="level3" data-number="5.1.3"><h3 data-number="5.1.3" class="anchored" data-anchor-id="step-3">
+<span class="header-section-number">5.1.3</span> Step 3</h3>
+<p>The file contains data about a study on - you guessed it - stress.</p>
+<p>More precisely, it contains data on the following variables:</p>
+<ul>
+<li>
+<code>stress</code>: Measures whether the participant experiences stress, and where the stress comes from.</li>
+<li>
+<code>smoke</code>: Measures the smoking behavior of the participant.</li>
+<li>
+<code>relation</code>: Whether or not the participant is involved in a long-term romantic relationship.</li>
+<li>
+<code>optim</code>: Measures how optimistic the participant is on a scale of 0 to 50.</li>
+<li>
+<code>satis</code>: Measures of life satisfaction of the participant on a scale of 0 to 50.</li>
+<li>
+<code>negemo</code>: The amount of negative emotions on a scale of 0 to 50.</li>
+</ul></section><section id="step-4" class="level3" data-number="5.1.4"><h3 data-number="5.1.4" class="anchored" data-anchor-id="step-4">
+<span class="header-section-number">5.1.4</span> Step 4</h3>
+<p>After opening the data file, you will see the tabs Data View and Variable View at the bottom of your screen.</p>
+<p>Make sure the tab Data View is selected.</p>
+<p>Look at the Data View and describe the data file. What do the rows represent, and what do the columns represent?</p>
+</section><section id="step-5" class="level3" data-number="5.1.5"><h3 data-number="5.1.5" class="anchored" data-anchor-id="step-5">
+<span class="header-section-number">5.1.5</span> Step 5</h3>
+<p>Now switch to the Variable View tab.</p>
+<p>The Variable View lists the variables and their properties. We will not discuss all the columns in detail, but focus on the most important ones, which includes: name, label, values, and measure.</p>
+<p>Explain for each of the columns name, label, values, and measure what aspect of the variable it describes. Also explain the difference between variable name and variable label.</p>
+</section><section id="step-6" class="level3" data-number="5.1.6"><h3 data-number="5.1.6" class="anchored" data-anchor-id="step-6">
+<span class="header-section-number">5.1.6</span> Step 6</h3>
+<p>Value Labels</p>
+<p>For nominal and ordinal variables we have to indicate what the scores represent; that is, we have to assign so called value labels. Value labels are specified under Values.</p>
+<p>If you click on values for the variable of interest, and then on the blue button with the three dots on the right, SPSS opens a new window that allows you to view, define, or modify the value labels.</p>
+<p>What are the value labels for the Stress and what are they for Smoke?</p>
+</section><section id="step-6a" class="level3" data-number="5.1.7"><h3 data-number="5.1.7" class="anchored" data-anchor-id="step-6a">
+<span class="header-section-number">5.1.7</span> Step 6a</h3>
+<p>You may have noticed that the value labels are missing for the nominal variable Relation.</p>
+<p>Add the value labels yourself in SPSS such that a score 1 represents “Single” and 2 represents “In a relationship”.</p>
+</section><section id="step-7" class="level3" data-number="5.1.8"><h3 data-number="5.1.8" class="anchored" data-anchor-id="step-7">
+<span class="header-section-number">5.1.8</span> Step 7</h3>
+<p>Every variable has a so-called Measurement Level.</p>
+<p>First, summarize the measurement levels in your own words (as if you have to explain it to a fellow student). Then, indicate the measurement level for each of the variables of interest (Stress, Smoking, etc.).</p>
+</section><section id="step-8" class="level3" data-number="5.1.9"><h3 data-number="5.1.9" class="anchored" data-anchor-id="step-8">
+<span class="header-section-number">5.1.9</span> Step 8</h3>
+<p>Congratulations, you have completed your first assignment!</p>
+<p>Before we proceed make sure that you save the data file (via file &gt; save). Because you changed the data, it is important to save the file under a different name. This way, you don’t risk losing the original data.</p>
+<p>In the next assignment we will generate descriptive statistics for this data.</p>
+</section></section><section id="plotting-data" class="level2" data-number="5.2"><h2 data-number="5.2" class="anchored" data-anchor-id="plotting-data">
+<span class="header-section-number">5.2</span> Plotting data</h2>
+<section id="step-1-1" class="level3" data-number="5.2.1"><h3 data-number="5.2.1" class="anchored" data-anchor-id="step-1-1">
+<span class="header-section-number">5.2.1</span> Step 1</h3>
+<p>The first step in any statistical analysis involves inspection of the data at hand by means of descriptive statistics and/or graphical summaries. Descriptive statistics include the mean, standard deviation, minimum and maximum value. Examples of graphical summaries are bar charts, histograms, and scatter plots.</p>
+<p>In this assignment we will look at graphical summaries. In particular, we will look at three: bar charts, histogram, and scatter plots.</p>
+<p>You may use the same data file as for the previous assignments.</p>
+</section><section id="step-2-1" class="level3" data-number="5.2.2"><h3 data-number="5.2.2" class="anchored" data-anchor-id="step-2-1">
+<span class="header-section-number">5.2.2</span> Step 2</h3>
+<p>First, we will create a bar chart for Stress.</p>
+<p>Proceed as follows:</p>
+<p>Graphs &gt; legacy dialogs &gt; bar Select Simple and click on define Select Stress under Category Axis (i.e., the variable at the x-axis) Then Click on OK and consult the graph in the output</p>
+</section><section id="step-3-1" class="level3" data-number="5.2.3"><h3 data-number="5.2.3" class="anchored" data-anchor-id="step-3-1">
+<span class="header-section-number">5.2.3</span> Step 3</h3>
+<p>You may have noticed that SPSS by default creates a bar chart with the observed frequency depicted on the y-axis. We will now create a new bar chart and instead ask SPSS to show the percentages on the y-axis.</p>
+<p>Proceed as follows:</p>
+<p>Graphs &gt; Legacy Dialogs &gt; Bar Again choose Simple and click on Define Under “Bars represent” choose “% of cases” Click on OK. SPSS will now create a bar chart, where the heights of the bars represent percentages.</p>
+</section><section id="step-4-1" class="level3" data-number="5.2.4"><h3 data-number="5.2.4" class="anchored" data-anchor-id="step-4-1">
+<span class="header-section-number">5.2.4</span> Step 4</h3>
+<p>Next, we will create a histogram for Negative Emotions.</p>
+<p>Proceed as follows:</p>
+<p>Graph &gt; Legacy Dialogs &gt; Histogram Select Negative Emotions under variable, and ask SPSS to Display normal curve (check the box). Click on OK.</p>
+<p>Investigate the histogram; What is shown on the x-axis and what is shown on the y-axis?</p>
+<p>How to read the histogram:</p>
+<ul>
+<li>x-axis: the scores on the negative emotions (here numbers between 0 and 50). bars represent score ranges; the more respondents with a score in that range, the higher the bar.</li>
+<li>y-axis: the observed number of respondents per score range.</li>
+</ul></section><section id="step-5-1" class="level3" data-number="5.2.5"><h3 data-number="5.2.5" class="anchored" data-anchor-id="step-5-1">
+<span class="header-section-number">5.2.5</span> Step 5</h3>
+<p>Finally, we will create a scatter plot for Negative Emotions and Life Satisfaction. Scatter plots are very useful to get a first impression of whether variables are associated.</p>
+<p>Create a scatter plot as follows:</p>
+<p>Graphs &gt; legacy dialogs &gt; scatter/dot Choose Simple Scatter Select Negative Emotions on the x-axis, and Life Satisfaction on the y-axis Click OK</p>
+<p>Consult the output. Look at the scatter plot and see if you understand the graph.</p>
+<p>How to read a scatter plot:</p>
+<ul>
+<li>x-axis represents the scores on Negative Emotions.</li>
+<li>y-axis represents the scores on Life Satisfaction.</li>
+<li>Each dot in the graph is a case, representing how the case scores on both Negative Emotions and Life Satisfaction.</li>
+</ul></section></section><section id="quiz" class="level2" data-number="5.3"><h2 data-number="5.3" class="anchored" data-anchor-id="quiz">
+<span class="header-section-number">5.3</span> Quiz</h2>
+<div class="webex-check webex-box">
+<p>Describe the first bar chart; What is shown on the x-axis? <select class="webex-select"><option value="blank"></option>
+<option value="">Frequency of Responses</option>
+<option value="">Numeric scores of Stress</option>
+<option value="">Percentages of Responses</option>
+<option value="answer">Categories of Stress</option></select></p>
+<p>In the first bar chart, what is shown on the y-axis? <select class="webex-select"><option value="blank"></option>
+<option value="">Numeric scores of Stress</option>
+<option value="">Percentages of Responses</option>
+<option value="">Categories of Stress</option>
+<option value="answer">Frequency of Responses</option></select></p>
+<p>What’s the approximate proportion of people experiencing work-related stress? <select class="webex-select"><option value="blank"></option>
+<option value="answer">33%</option>
+<option value="">70%</option>
+<option value="">66%</option></select></p>
+<p>Based on the bar charts, what can you say about differences in stress levels in the sample? Are most people stressed or not? In other words: How is stress distributed across the three categories? <select class="webex-select"><option value="blank"></option>
+<option value="">Most people report life stress</option>
+<option value="">Most people report work stress</option>
+<option value="answer">Evenly distributed</option>
+<option value="">Most people report no stress</option></select></p>
+<p>Describe the distribution of Negative Emotions. Are the scores normally distributed (i.e., like a bell-shape)? Really consider why this is / is not the case before checking your answer. <select class="webex-select"><option value="blank"></option>
+<option value="answer">Not normal</option>
+<option value="">Normal</option></select></p>
+<p>Based on the scatter plot from Step 5, would you expect an association between Negative Emotions and Life Satisfaction? <select class="webex-select"><option value="blank"></option>
+<option value="">Strong positive</option>
+<option value="">Small positive</option>
+<option value="">Small negative</option>
+<option value="answer">No association</option></select></p>
+</div>
+</section><section id="descriptive-statistics-1" class="level2" data-number="5.4"><h2 data-number="5.4" class="anchored" data-anchor-id="descriptive-statistics-1">
+<span class="header-section-number">5.4</span> Descriptive Statistics</h2>
+<section id="step-1-2" class="level3" data-number="5.4.1"><h3 data-number="5.4.1" class="anchored" data-anchor-id="step-1-2">
+<span class="header-section-number">5.4.1</span> Step 1</h3>
+<p>As explained before, the first step in any statistical analysis involves inspection of the data. In the previous assignment we looked at graphical summaries.</p>
+<p>This assignment shows you how to explore data using descriptive statistics. Descriptive statistics include values such as the mean, standard deviation, the maximum value and the minimum value.</p>
+<p>Use the same data file as for the previous assignments.</p>
+</section><section id="step-2-2" class="level3" data-number="5.4.2"><h3 data-number="5.4.2" class="anchored" data-anchor-id="step-2-2">
+<span class="header-section-number">5.4.2</span> Step 2</h3>
+<p>We will first take a look at the descriptive statistics for Optimism, Life Satisfaction, and Negative Emotions.</p>
+<p>Compute descriptive statistics as follows:</p>
+<p>Analyze &gt; Descriptive Statistics &gt; Descriptives</p>
+<p>Select the variables Optimism, Life Satisfaction and Negative Emotions Now click on OK SPSS will open a new window - the output window - including a table with the descriptives for the selected variables.</p>
+</section><section id="step-3-2" class="level3" data-number="5.4.3"><h3 data-number="5.4.3" class="anchored" data-anchor-id="step-3-2">
+<span class="header-section-number">5.4.3</span> Step 3</h3>
+<p>In the previous step we computed the average value and standard deviations. However, for nominal and ordinal variables, the average value is meaningless. To explore nominal and ordinal variables we may produce Frequency tables. A frequency table shows the observed percentage for each level of the variable.</p>
+<p>Let’s generate a frequency table for variables Smoke and Relation.</p>
+<p>Analyze &gt; Descriptive Statistics &gt; Frequencies</p>
+<p>Select the variables for which you want to have the frequency distribution (i.e., Smoke and Relation) Click OK. SPSS now adds a table with the frequency distributions of the selected variables to the output file.</p>
+<p>Note: SPSS reports percentages and valid percentages. Percentages differ when there are missing values. Because we don’t have missing values here, the numbers are the same. Missing values will be discussed in the next assignment.</p>
+<!-- source of stress (stress): 1 = no stress; 2 = work-related stress; 3 = personal-life stress. -->
+<!-- smoking behavior (smoke) 1 = non-smoker; 2 = smoker; -->
+<!-- being in a significant relationship (relation): 1 = single; 2 = relationship. -->
+<!-- optimism (optim): scale scores between 1 and 50. -->
+<!-- life satisfaction (satis): scale scores between 1 and 50. -->
+<!-- negative emotions (negemo): scale scores between 1 and 50. -->
+<!-- ### Step 5 -->
+<!-- You may have noticed that the maximum value for Optimism was 220, which is not allowed (scores should be in between 0 and 50). This means that there are indeed erroneous values. -->
+<!-- Did you find it? -->
+</section></section><section id="quiz-1" class="level2" data-number="5.5"><h2 data-number="5.5" class="anchored" data-anchor-id="quiz-1">
+<span class="header-section-number">5.5</span> Quiz</h2>
+<div class="webex-check webex-box">
+<p>How many participants are in the sample? <input class="webex-solveme nospaces" size="3" data-answer="[&quot;780&quot;]"></p>
+<p>What is the mean value of Optimism? <input class="webex-solveme nospaces" data-tol="0.01" size="5" data-answer="[&quot;19.13&quot;]"></p>
+<p>For which of the variables is the spread in the scores highest? <select class="webex-select"><option value="blank"></option>
+<option value="answer">OPTIM</option>
+<option value="">SATIS</option>
+<option value="">NEGEMO</option></select></p>
+<p>The minimum and maximum observed scores for Negative Emotions were: [ <input class="webex-solveme nospaces" size="1" data-answer="[&quot;3&quot;]">, <input class="webex-solveme nospaces" size="2" data-answer="[&quot;37&quot;]">].</p>
+<p>What percentage of participants is a non-smoker? <input class="webex-solveme nospaces" data-tol="0.1" size="4" data-answer="[&quot;48.1&quot;]"></p>
+<p>What percentage of participants is in a relationship? <input class="webex-solveme nospaces" data-tol="0.1" size="4" data-answer="[&quot;47.9&quot;]"></p>
+</div>
+<section id="step-4-2" class="level3" data-number="5.5.1"><h3 data-number="5.5.1" class="anchored" data-anchor-id="step-4-2">
+<span class="header-section-number">5.5.1</span> Step 4</h3>
+<p>One of the reasons to first inspect descriptive statistics is to have a first check if there are erroneous values in the data file. Erroneous values are values that are out of range, or impossible given the variable envisaged. For example, a person may have mistyped his/her age (e.g., 511 instead of 51).</p>
+<p>Now it’s your task to check for each variable whether there are erroneous values (out of range values) in the file using descriptive statistics and/or graphs.</p>
+<p>Use the descriptive statistics to find any erroneous values.</p>
+<p>One way to deal with missing values is by removing the entire case. This is not a recommended practice; however, at this point, it is the only method you have learned.</p>
+<p>To find the cases that have missing values you may sort the data file on a variable with suspect values from high to low (or low to high).</p>
+<p>This can be done as follows:</p>
+<p>Data &gt; Sort Cases Select the variable on which cases should be sorted Select the cases in descending order Click on OK Go the data view and verify that the cases are now ordered.</p>
+<p>Remove the case(s) (i.e., delete the row from the data file) with invalid values.</p>
+</section><section id="step-5-2" class="level3" data-number="5.5.2"><h3 data-number="5.5.2" class="anchored" data-anchor-id="step-5-2">
+<span class="header-section-number">5.5.2</span> Step 5</h3>
+<p>Now that we’ve “cleaned” the data file it’s time to answer our first research question!</p>
+<p>The question is: “Are non-smokers in our sample on average more satisfied with their life than smokers?”</p>
+<p>To answer this question, we need the mean of life satisfaction per smoking group. In order to generate those, we will use the Split File option in SPSS. This is an option in SPSS that allows us to get results for separate groups.</p>
+<p>Data &gt; Split File &gt; Compare Groups Select the groups based on the variable Smoke Click OK</p>
+<p>Notice that you don’t see any changes in the data file or anything in the output file yet (!). However, after running the Split file command, SPSS from now will do the analyses per group, as we will see next.</p>
+<p>Compute the mean of Life Satisfaction (via descriptive statistics) and consult the output.</p>
+<p>You may notice that SPSS provides the means of the non-smoking and smoking group separately. Compare the means for both groups to answer the following questions.</p>
+</section></section><section id="quiz-2" class="level2" data-number="5.6"><h2 data-number="5.6" class="anchored" data-anchor-id="quiz-2">
+<span class="header-section-number">5.6</span> Quiz</h2>
+<div class="webex-check webex-box">
+<p>Was there an erroneous value in the data file? If so, type the value of that erroneous value here: <input class="webex-solveme nospaces" size="3" data-answer="[&quot;220&quot;]"></p>
+<p>To answer this question, only use reasoning. If you delete that value, how do you think the mean of that variable will be affected? <select class="webex-select"><option value="blank"></option>
+<option value="">Stays the same</option>
+<option value="answer">Becomes smaller</option>
+<option value="">Becomes larger</option></select></p>
+<p>To answer this question, only use reasoning. If you delete that value, how do you think the standard deviation of that variable will be affected? <select class="webex-select"><option value="blank"></option>
+<option value="answer">Becomes smaller</option>
+<option value="">Stays the same</option>
+<option value="">Becomes larger</option></select></p>
+<p>To answer this question, only use reasoning. If you delete that value, how do you think the standard deviation of that variable will be affected? <select class="webex-select"><option value="blank"></option>
+<option value="">Stays the same</option>
+<option value="answer">Becomes smaller</option>
+<option value="">Becomes larger</option></select></p>
+<p>In this sample, who are more satisfied with life? <select class="webex-select"><option value="blank"></option>
+<option value="">Non-smokers</option>
+<option value="answer">Smokers</option></select></p>
+<p>Do you think this also holds for the population of all persons? <select class="webex-select"><option value="blank"></option>
+<option value="">No</option>
+<option value="">Yes</option>
+<option value="answer">Can’t tell</option></select></p>
+</div>
+</section><section id="missing-values" class="level2" data-number="5.7"><h2 data-number="5.7" class="anchored" data-anchor-id="missing-values">
+<span class="header-section-number">5.7</span> Missing Values</h2>
+<p>This is a short assignment about missing values.</p>
+<p>Missing values are ‘holes in the data matrix’. Missing data is a common issue in empirical research. Respondents may forget to fill in questions or refuse to answer questions (if the latter is the case, we are in trouble). It is important that missing data are adequately handled in data analysis.</p>
+<p>Use the same data file as for the previous assignments.</p>
+<p>In the previous assignment we activated the split file option. However, we don’t need this split file in the remaining questions, therefore we have to undo the split file option.</p>
+<p>Data &gt; split file Choose “Analyze all cases, do not create groups”</p>
+<p>Compute the frequency distribution of stress. Consult the output, and answer the following questions</p>
+</section><section id="quiz-3" class="level2" data-number="5.8"><h2 data-number="5.8" class="anchored" data-anchor-id="quiz-3">
+<span class="header-section-number">5.8</span> Quiz</h2>
+<div class="webex-check webex-box">
+<p>What is the percentage of respondents who experience No Stress? <input class="webex-solveme nospaces" data-tol="0.1" size="4" data-answer="[&quot;33.6&quot;]"></p>
+<p>Which type of stress is most common in the sample? <select class="webex-select"><option value="blank"></option>
+<option value="answer">Life stress</option>
+<option value="">No stress</option>
+<option value="">Work stress</option></select></p>
+<p><strong>For educational purposes only, we will now create missing values in the data file.</strong></p>
+<p>Navigate to the Data view and delete the value for Stress for the first 10 cases. Notice that you only have to delete the scores for the variable Stress, and not the complete case.</p>
+<p>Compute the frequency distribution for Stress again and compare the new table with the previous one.</p>
+<p>Explain what has changed and why.</p>
+<div class="webex-solution">
+<button>
+Answer
+</button>
+<p><em>We can see that the values of Percent and Valid Percent have changed and that a ‘missing’ row has been added to the table. It makes sense that the percentages have changed, as there are now missing values. You may have noticed that the values for Percent and Valid Percent differ. Percentage is obtained by dividing the observed frequency by the total (including respondents with a missing value). Valid Percentage is obtained by dividing the observed frequency by the number of respondents with a valid score (thus, not counting the respondents who had a missing value).</em></p>
+</div>
+<p>Imagine I have a sample of 65 participants, with 3 missing value. Of these participants, 15 reported no stress. What is the percentage of no stress, calculated by hand? <input class="webex-solveme nospaces" data-tol="0.1" size="4" data-answer="[&quot;23.1&quot;]"></p>
+<p>What is the percentage out of valid responses (i.e., valid percent), calculated by hand? <input class="webex-solveme nospaces" data-tol="0.1" size="4" data-answer="[&quot;24.2&quot;]"></p>
+</div>
+<p>By deleting the values we created empty cells in the data file. SPSS sees these empty cells as <em>system missing</em>. Some researchers instead use specific values to indicate missing values. For example, we may code missing values by 999 if the respondent <em>refused</em> to answer, and 998 if the respondent <em>accidentally</em> skipped the question. These are examples of <em>user missing</em> values, and we have to specify the values to be coded as missing in the Variable view.</p>
+<p>Let’s try this!</p>
+<p>Go to the Data View, and fill in 999 in the cells that have no value on the variable Stress. Then go to the variable view, look for the column ‘Missing’ and click on Missing for Stress. A new window opens. Specify 999 as a discrete missing value. SPSS now knows that the value 999 stands for “missing observation”. Click OK.</p>
+<p>Re-compute the frequency distribution for Stress.</p>
+<p>Examine how the table changed compared to the previous ones.</p>
+</section><section id="more-descriptive-statistics" class="level2" data-number="5.9"><h2 data-number="5.9" class="anchored" data-anchor-id="more-descriptive-statistics">
+<span class="header-section-number">5.9</span> More Descriptive Statistics</h2>
+<p>In this final assignment, we will continue with descriptive statistics.</p>
+<p>As mentioned in the lecture, describing the data is an important first step in any research situation.</p>
+<p>For didactic reasons, we will do some computations by hand, but this is not something you have to do on the exam. However, it is good to experience at least once how the computations work and that the numbers in SPSS are not the result of magic.</p>
+<p>Let’s first look at measures of central tendency:</p>
+<p>Consider the following grades for 10 students: 6, 3, 4, 6, 7, 6, 8, 9, 10, 9.</p>
+<p>Compute (by hand) the mean, median, and mode.</p>
+<div class="webex-solution">
+<button>
+Remind me how
+</button>
+<ul>
+<li>The mode is the most common value.</li>
+<li>The median is the middle value (or mean of two middle values for an equal number)</li>
+<li>The mean is calculated as the sum of all values, divided by the number of values: <span class="math inline">\(\frac{\sum_{i=1}^nX_i}{n}\)</span>
+</li>
+</ul>
+</div>
+</section><section id="quiz-4" class="level2" data-number="5.10"><h2 data-number="5.10" class="anchored" data-anchor-id="quiz-4">
+<span class="header-section-number">5.10</span> Quiz</h2>
+<div class="webex-check webex-box">
+<p>What is the mean? <input class="webex-solveme nospaces" data-tol="0.1" size="3" data-answer="[&quot;6.8&quot;]"></p>
+<p>What is the median? <input class="webex-solveme nospaces" size="3" data-answer="[&quot;6.5&quot;]"></p>
+<p>What is the mode? <input class="webex-solveme nospaces" size="1" data-answer="[&quot;6&quot;]"></p>
+</div>
+<p>Measures of variation</p>
+<p>Next we will look at a measure of variation (i.e., indicating the amount of spread in the observations).</p>
+<p>Consider the grades of 6 students: 2, 7, 6, 7, 8, 9.</p>
+<p>Compute the variance and standard deviation by hand.</p>
+<div class="webex-solution">
+<button>
+Remind me how
+</button>
+<p>The variance is the “average squared distance between observations and the mean”: <span class="math inline">\(\frac{\sum_{i=1}^n(X_i-\bar{X})^2}{n-1}\)</span></p>
+<p>The SD is the square root of the variance</p>
+<p>Follow these steps:</p>
+<ol type="1">
+<li>Compute the mean, e.g., <span class="math inline">\(\bar{X} = 5\)</span>
+</li>
+<li>For each observation, calculate the distance from the mean; e.g., <span class="math inline">\(3-5 = -2\)</span>
+</li>
+<li>Square these distances, e.g.: <span class="math inline">\((-2)^2 = 4\)</span>
+</li>
+<li>Add these distances for all observations</li>
+<li>Divide by number of observations minus 1</li>
+</ol>
+</div>
+</section><section id="quiz-5" class="level2" data-number="5.11"><h2 data-number="5.11" class="anchored" data-anchor-id="quiz-5">
+<span class="header-section-number">5.11</span> Quiz</h2>
+<div class="webex-check webex-box">
+<p>What is the variance? <input class="webex-solveme nospaces" data-tol="0.1" size="3" data-answer="[&quot;5.9&quot;]"></p>
+<p>What is the standard deviation? <input class="webex-solveme nospaces" data-tol="0.1" size="4" data-answer="[&quot;2.43&quot;]"></p>
+</div>
+<p>We now will verify the answer to the question in the previous step using SPSS!</p>
+<p>First, we have to enter the data in SPSS. Proceed as follows:</p>
+<p>Open SPSS (use Unicode, and close the opening windows)</p>
+<p>Make sure that you have the data view on the screen</p>
+<p>Type in the grades in SPSS (i.e.: 2, 7, 6, 7, 8, 9):</p>
+<p>Go to variable view and change the name of the variable and provide a meaningful label</p>
+<p>Second, we can compute the variance and standard deviation in SPSS.</p>
+<p>Proceed as follows:</p>
+<p>Analyze &gt; Descriptive statistics &gt; Descriptives</p>
+<p>Select the variable you just defined Now click op Options. A new window opens which shows many more descriptive options Enable the variance Click Continue and OK</p>
+<p>Consult the table descriptive statistics in the output window.</p>
+<p>Were your computations correct?</p>
+</section><section id="correlation" class="level2" data-number="5.12"><h2 data-number="5.12" class="anchored" data-anchor-id="correlation">
+<span class="header-section-number">5.12</span> Correlation</h2>
+<p>For the next few questions we need the data file <code>LAS_SocSc_DataLab2.sav</code>. Open the file in SPSS. You will see that the file contains data for six variables, named X1 through X6. We will inspect the associations between pairs of variables (so called bivariate relationships).</p>
+<p>First, generate a scatter plot for X1 and X2. Proceed as follows: Graphs &gt; Legacy dialogs &gt; Scatter/dot. Then ask for a Simple scatter. Put X1 on the X-Axis and X2 on the Y-Axis. Describe the association. Take into account whether the relationship follows a straight line (i.e., linearity), is positive or negative (i.e., direction), and whether the relationship seems to be weak, moderate or strong (i.e., strength).</p>
+<p>Second, generate a scatter plot for X3 and X4. Make sure that X3 is shown on the X-axis and X4 on the Y-axis. Describe the association in terms of linearity, direction and strength.</p>
+<p>Third, generate a scatter plot for X5 and X6. Describe the association in terms of linearity, direction and strength.</p>
+<div class="webex-check webex-box">
+<p>Is the relationship between X1-X2 positive? <select class="webex-select"><option value="blank"></option>
+<option value="answer">TRUE</option>
+<option value="NA">FALSE</option></select></p>
+<p>Is the relationship between X5-X6 positive? <select class="webex-select"><option value="blank"></option>
+<option value="NA">TRUE</option>
+<option value="answer">FALSE</option></select></p>
+<p>Is the relationship between X1-X2 linear? <select class="webex-select"><option value="blank"></option>
+<option value="answer">TRUE</option>
+<option value="NA">FALSE</option></select></p>
+<p>Is the relationship between X3-X4 linear? <select class="webex-select"><option value="blank"></option>
+<option value="NA">TRUE</option>
+<option value="answer">FALSE</option></select></p>
+<p>Give an indication of the strength of the relationship between X1-X2: <select class="webex-select"><option value="blank"></option>
+<option value="answer">moderate</option>
+<option value="">zero</option>
+<option value="">weak</option>
+<option value="">strong</option></select></p>
+<p>Give an indication of the strength of the relationship between X3-X4: <select class="webex-select"><option value="blank"></option>
+<option value="">zero</option>
+<option value="">weak</option>
+<option value="answer">strong</option>
+<option value="">moderate</option></select></p>
+<p>Give an indication of the strength of the relationship between X5-X6: <select class="webex-select"><option value="blank"></option>
+<option value="">weak</option>
+<option value="">zero</option>
+<option value="">strong</option>
+<option value="answer">moderate</option></select></p>
+</div>
+<p>Consider the relationship between X3 and X4, can you think of an example of two variables that would be associated in this way?</p>
+<div class="webex-solution">
+<button>
+Show answer
+</button>
+<p>Any cyclical process;</p>
+<ul>
+<li>Time in the day and how far the water reaches up the beach (ebb and flow)</li>
+<li>Location of the sun in the sky</li>
+</ul>
+</div>
+<section id="correlation-coefficient" class="level3" data-number="5.12.1"><h3 data-number="5.12.1" class="anchored" data-anchor-id="correlation-coefficient">
+<span class="header-section-number">5.12.1</span> Correlation Coefficient</h3>
+<p>In this step we will look at the correlation coefficient as numerical description of linear association.</p>
+<p>Notice that in the previous step we found a non-linear association. The correlation coefficient would not be a valid measure to describe such an association, but nevertheless it is instructive to see why caution should be exercised in drawing conclusions about association from the correlation coefficient alone.</p>
+<p>We will use SPSS to compute the correlation coefficient.</p>
+<p>Analyze &gt; Correlate &gt; Bivariate Select X1, X2, … X6 as the variables Click OK</p>
+<p>Consult the table Correlations in the output.</p>
+<p>There are several values in the table, but we are looking for the Pearson Correlation. The other numbers are the so called significance level, a concept we discuss soon, and the sample size.</p>
+</section></section><section id="quiz-6" class="level2" data-number="5.13"><h2 data-number="5.13" class="anchored" data-anchor-id="quiz-6">
+<span class="header-section-number">5.13</span> Quiz</h2>
+<div class="webex-check webex-box">
+<p>What is the correlation coefficient for the variables X1 and X2? <input class="webex-solveme nospaces" data-tol="0.01" size="3" data-answer="[&quot;0.5&quot;,&quot;.5&quot;]"></p>
+<p>What is the correlation coefficient for the variables X2 and X6? <input class="webex-solveme nospaces" data-tol="0.01" size="4" data-answer="[&quot;0.06&quot;,&quot;.06&quot;]"></p>
+<p>What is the correlation coefficient for the variables X3 and X4? <input class="webex-solveme nospaces" data-tol="0.01" size="4" data-answer="[&quot;-0.8&quot;,&quot;-.8&quot;]"></p>
+<p>Can we interpret this correlation coefficient? <select class="webex-select"><option value="blank"></option>
+<option value="">Yes, otherwise SPSS would give an error</option>
+<option value="">No, assumption of normality violated</option>
+<option value="answer">No, assumption of linearity violated</option>
+<option value="">No, assumption of association violated</option></select></p>
+<p>Interpret the correlation between X5 and X6? <select class="webex-select"><option value="blank"></option>
+<option value="answer">Moderate negative</option>
+<option value="">Moderate positive</option>
+<option value="">Weak negative</option>
+<option value="">Weak positive</option></select></p>
+</div>
+
+
+</section></section></main><!-- /main --><script>
+
+/* update total correct if #webex-total_correct exists */
+update_total_correct = function() {
+  console.log("webex: update total_correct");
+
+  var t = document.getElementsByClassName("webex-total_correct");
+  for (var i = 0; i < t.length; i++) {
+    p = t[i].parentElement;
+    var correct = p.getElementsByClassName("webex-correct").length;
+    var solvemes = p.getElementsByClassName("webex-solveme").length;
+    var radiogroups = p.getElementsByClassName("webex-radiogroup").length;
+    var selects = p.getElementsByClassName("webex-select").length;
+
+    t[i].innerHTML = correct + " of " + (solvemes + radiogroups + selects) + " correct";
+  }
+}
+
+/* webex-solution button toggling function */
+b_func = function() {
+  console.log("webex: toggle hide");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('open')) {
+    cl.remove("open");
+  } else {
+    cl.add("open");
+  }
+}
+
+/* check answers */
+check_func = function() {
+  console.log("webex: check answers");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('unchecked')) {
+    cl.remove("unchecked");
+    this.innerHTML = "Hide Answers";
+  } else {
+    cl.add("unchecked");
+    this.innerHTML = "Show Answers";
+  }
+}
+
+/* function for checking solveme answers */
+solveme_func = function(e) {
+  console.log("webex: check solveme");
+
+  var real_answers = JSON.parse(this.dataset.answer);
+  var my_answer = this.value;
+  var cl = this.classList;
+  if (cl.contains("ignorecase")) {
+    my_answer = my_answer.toLowerCase();
+  }
+  if (cl.contains("nospaces")) {
+    my_answer = my_answer.replace(/ /g, "")
+  }
+
+  if (my_answer == "") {
+    cl.remove("webex-correct");
+    cl.remove("webex-incorrect");
+  } else if (real_answers.includes(my_answer)) {
+    cl.add("webex-correct");
+    cl.remove("webex-incorrect");
+  } else {
+    cl.add("webex-incorrect");
+    cl.remove("webex-correct");
+  }
+
+  // match numeric answers within a specified tolerance
+  if(this.dataset.tol > 0){
+    var tol = JSON.parse(this.dataset.tol);
+    var matches = real_answers.map(x => Math.abs(x - my_answer) < tol)
+    if (matches.reduce((a, b) => a + b, 0) > 0) {
+      cl.add("webex-correct");
+    } else {
+      cl.remove("webex-correct");
+    }
+  }
+
+  // added regex bit
+  if (cl.contains("regex")){
+    answer_regex = RegExp(real_answers.join("|"))
+    if (answer_regex.test(my_answer)) {
+      cl.add("webex-correct");
+    }
+  }
+
+  update_total_correct();
+}
+
+/* function for checking select answers */
+select_func = function(e) {
+  console.log("webex: check select");
+
+  var cl = this.classList
+
+  /* add style */
+  cl.remove("webex-incorrect");
+  cl.remove("webex-correct");
+  if (this.value == "answer") {
+    cl.add("webex-correct");
+  } else if (this.value != "blank") {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+/* function for checking radiogroups answers */
+radiogroups_func = function(e) {
+  console.log("webex: check radiogroups");
+
+  var checked_button = document.querySelector('input[name=' + this.id + ']:checked');
+  var cl = checked_button.parentElement.classList;
+  var labels = checked_button.parentElement.parentElement.children;
+
+  /* get rid of styles */
+  for (i = 0; i < labels.length; i++) {
+    labels[i].classList.remove("webex-incorrect");
+    labels[i].classList.remove("webex-correct");
+  }
+
+  /* add style */
+  if (checked_button.value == "answer") {
+    cl.add("webex-correct");
+  } else {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+window.onload = function() {
+  console.log("webex onload");
+  /* set up solution buttons */
+  var buttons = document.getElementsByTagName("button");
+
+  for (var i = 0; i < buttons.length; i++) {
+    if (buttons[i].parentElement.classList.contains('webex-solution')) {
+      buttons[i].onclick = b_func;
+    }
+  }
+
+  var check_sections = document.getElementsByClassName("webex-check");
+  console.log("check:", check_sections.length);
+  for (var i = 0; i < check_sections.length; i++) {
+    check_sections[i].classList.add("unchecked");
+
+    let btn = document.createElement("button");
+    btn.innerHTML = "Show Answers";
+    btn.classList.add("webex-check-button");
+    btn.onclick = check_func;
+    check_sections[i].appendChild(btn);
+
+    let spn = document.createElement("span");
+    spn.classList.add("webex-total_correct");
+    check_sections[i].appendChild(spn);
+  }
+
+  /* set up webex-solveme inputs */
+  var solveme = document.getElementsByClassName("webex-solveme");
+
+  for (var i = 0; i < solveme.length; i++) {
+    /* make sure input boxes don't auto-anything */
+    solveme[i].setAttribute("autocomplete","off");
+    solveme[i].setAttribute("autocorrect", "off");
+    solveme[i].setAttribute("autocapitalize", "off");
+    solveme[i].setAttribute("spellcheck", "false");
+    solveme[i].value = "";
+
+    /* adjust answer for ignorecase or nospaces */
+    var cl = solveme[i].classList;
+    var real_answer = solveme[i].dataset.answer;
+    if (cl.contains("ignorecase")) {
+      real_answer = real_answer.toLowerCase();
+    }
+    if (cl.contains("nospaces")) {
+      real_answer = real_answer.replace(/ /g, "");
+    }
+    solveme[i].dataset.answer = real_answer;
+
+    /* attach checking function */
+    solveme[i].onkeyup = solveme_func;
+    solveme[i].onchange = solveme_func;
+
+    solveme[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+  }
+
+  /* set up radiogroups */
+  var radiogroups = document.getElementsByClassName("webex-radiogroup");
+  for (var i = 0; i < radiogroups.length; i++) {
+    radiogroups[i].onchange = radiogroups_func;
+  }
+
+  /* set up selects */
+  var selects = document.getElementsByClassName("webex-select");
+  for (var i = 0; i < selects.length; i++) {
+    selects[i].onchange = select_func;
+    selects[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+  }
+
+  update_total_correct();
+}
+
+</script><script>
+// open rdrr links externally ----
+
+var exlinks = document.querySelectorAll("a[href^='https://rdrr.io']");
+var exlink_func = function(){
+  window.open(this.href);
+  return false;
+};
+for (var i = 0; i < exlinks.length; i++) {
+    exlinks[i].addEventListener('click', exlink_func, false);
+}
+
+// visible second sidebar in mobile ----
+
+function move_sidebar() {
+  var toc = document.getElementById("TOC");
+  var small_sidebar = document.querySelector("#quarto-sidebar .sidebar-menu-container");
+  var right_sidebar = document.getElementById("quarto-margin-sidebar");
+
+  if (window.innerWidth < 768) {
+    small_sidebar.append(toc);
+  } else {
+    right_sidebar.append(toc);
+  }
+}
+move_sidebar();
+window.onresize = move_sidebar;
+</script><script>
+
+/* update total correct if #webex-total_correct exists */
+update_total_correct = function() {
+  console.log("webex: update total_correct");
+
+  var t = document.getElementsByClassName("webex-total_correct");
+  for (var i = 0; i < t.length; i++) {
+    p = t[i].parentElement;
+    var correct = p.getElementsByClassName("webex-correct").length;
+    var solvemes = p.getElementsByClassName("webex-solveme").length;
+    var radiogroups = p.getElementsByClassName("webex-radiogroup").length;
+    var selects = p.getElementsByClassName("webex-select").length;
+
+    t[i].innerHTML = correct + " of " + (solvemes + radiogroups + selects) + " correct";
+  }
+}
+
+/* webex-solution button toggling function */
+b_func = function() {
+  console.log("webex: toggle hide");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('open')) {
+    cl.remove("open");
+  } else {
+    cl.add("open");
+  }
+}
+
+/* check answers */
+check_func = function() {
+  console.log("webex: check answers");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('unchecked')) {
+    cl.remove("unchecked");
+    this.innerHTML = "Hide Answers";
+  } else {
+    cl.add("unchecked");
+    this.innerHTML = "Show Answers";
+  }
+}
+
+/* function for checking solveme answers */
+solveme_func = function(e) {
+  console.log("webex: check solveme");
+
+  var real_answers = JSON.parse(this.dataset.answer);
+  var my_answer = this.value;
+  var cl = this.classList;
+  if (cl.contains("ignorecase")) {
+    my_answer = my_answer.toLowerCase();
+  }
+  if (cl.contains("nospaces")) {
+    my_answer = my_answer.replace(/ /g, "")
+  }
+
+  if (my_answer == "") {
+    cl.remove("webex-correct");
+    cl.remove("webex-incorrect");
+  } else if (real_answers.includes(my_answer)) {
+    cl.add("webex-correct");
+    cl.remove("webex-incorrect");
+  } else {
+    cl.add("webex-incorrect");
+    cl.remove("webex-correct");
+  }
+
+  // match numeric answers within a specified tolerance
+  if(this.dataset.tol > 0){
+    var tol = JSON.parse(this.dataset.tol);
+    var matches = real_answers.map(x => Math.abs(x - my_answer) < tol)
+    if (matches.reduce((a, b) => a + b, 0) > 0) {
+      cl.add("webex-correct");
+    } else {
+      cl.remove("webex-correct");
+    }
+  }
+
+  // added regex bit
+  if (cl.contains("regex")){
+    answer_regex = RegExp(real_answers.join("|"))
+    if (answer_regex.test(my_answer)) {
+      cl.add("webex-correct");
+    }
+  }
+
+  update_total_correct();
+}
+
+/* function for checking select answers */
+select_func = function(e) {
+  console.log("webex: check select");
+
+  var cl = this.classList
+
+  /* add style */
+  cl.remove("webex-incorrect");
+  cl.remove("webex-correct");
+  if (this.value == "answer") {
+    cl.add("webex-correct");
+  } else if (this.value != "blank") {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+/* function for checking radiogroups answers */
+radiogroups_func = function(e) {
+  console.log("webex: check radiogroups");
+
+  var checked_button = document.querySelector('input[name=' + this.id + ']:checked');
+  var cl = checked_button.parentElement.classList;
+  var labels = checked_button.parentElement.parentElement.children;
+
+  /* get rid of styles */
+  for (i = 0; i < labels.length; i++) {
+    labels[i].classList.remove("webex-incorrect");
+    labels[i].classList.remove("webex-correct");
+  }
+
+  /* add style */
+  if (checked_button.value == "answer") {
+    cl.add("webex-correct");
+  } else {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+window.onload = function() {
+  console.log("webex onload");
+  /* set up solution buttons */
+  var buttons = document.getElementsByTagName("button");
+
+  for (var i = 0; i < buttons.length; i++) {
+    if (buttons[i].parentElement.classList.contains('webex-solution')) {
+      buttons[i].onclick = b_func;
+    }
+  }
+
+  var check_sections = document.getElementsByClassName("webex-check");
+  console.log("check:", check_sections.length);
+  for (var i = 0; i < check_sections.length; i++) {
+    check_sections[i].classList.add("unchecked");
+
+    let btn = document.createElement("button");
+    btn.innerHTML = "Show Answers";
+    btn.classList.add("webex-check-button");
+    btn.onclick = check_func;
+    check_sections[i].appendChild(btn);
+
+    let spn = document.createElement("span");
+    spn.classList.add("webex-total_correct");
+    check_sections[i].appendChild(spn);
+  }
+
+  /* set up webex-solveme inputs */
+  var solveme = document.getElementsByClassName("webex-solveme");
+
+  for (var i = 0; i < solveme.length; i++) {
+    /* make sure input boxes don't auto-anything */
+    solveme[i].setAttribute("autocomplete","off");
+    solveme[i].setAttribute("autocorrect", "off");
+    solveme[i].setAttribute("autocapitalize", "off");
+    solveme[i].setAttribute("spellcheck", "false");
+    solveme[i].value = "";
+
+    /* adjust answer for ignorecase or nospaces */
+    var cl = solveme[i].classList;
+    var real_answer = solveme[i].dataset.answer;
+    if (cl.contains("ignorecase")) {
+      real_answer = real_answer.toLowerCase();
+    }
+    if (cl.contains("nospaces")) {
+      real_answer = real_answer.replace(/ /g, "");
+    }
+    solveme[i].dataset.answer = real_answer;
+
+    /* attach checking function */
+    solveme[i].onkeyup = solveme_func;
+    solveme[i].onchange = solveme_func;
+
+    solveme[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+  }
+
+  /* set up radiogroups */
+  var radiogroups = document.getElementsByClassName("webex-radiogroup");
+  for (var i = 0; i < radiogroups.length; i++) {
+    radiogroups[i].onchange = radiogroups_func;
+  }
+
+  /* set up selects */
+  var selects = document.getElementsByClassName("webex-select");
+  for (var i = 0; i < selects.length; i++) {
+    selects[i].onchange = select_func;
+    selects[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+  }
+
+  update_total_correct();
+}
+
+</script><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="./index.html" class="pagination-link" aria-label="Overview">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Overview</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./probability.html" class="pagination-link" aria-label="Probability Distributions">
+        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Probability Distributions</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer"><div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>CC-BY (2023) Caspar J. Van Lissa</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

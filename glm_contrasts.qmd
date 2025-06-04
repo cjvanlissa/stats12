@@ -1,4 +1,4 @@
-# GLM: Contrasts {#sec-glm2}
+# GLM: Contrasts {#sec-glmcontrasts}
 
 ```{r, include = FALSE}
 source("R/booktem_setup.R")

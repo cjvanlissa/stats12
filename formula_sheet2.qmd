@@ -11,7 +11,7 @@ Variance: $S^2_x = \frac{\Sigma_{i=1}^n(x_i-\bar{x})^2}{n-1}$
 
 Standardized values (Z-values): $Z = \frac{X-\mu}{\sigma}$ 
 
-Z-statistic in one sample Z-test: $Z = \frac{\bar{x}-\mu}{\sigma_\bar{x}}$
+Z-statistic in one sample Z-test: $Z = \frac{\bar{x}-\mu_x}{\sigma_{x}}$
 
 Standard error of the mean: $\sigma_{\bar{x}} = \frac{\sigma}{\sqrt{n}}$
 

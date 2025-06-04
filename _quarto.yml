@@ -3,7 +3,7 @@ project:
   output-dir: docs
   resources: resources
 execute:
-  freeze: auto
+  freeze: true
   warnings: false
 book:
   title: Statistics 1 and 2
@@ -11,6 +11,8 @@ book:
   author: Caspar J. Van Lissa
   doi: ''
   license: CC-BY
+  downloads: [pdf]
+  repo-url: https://github.com/cjvanlissa/stats12
   description: Book Description
   cover-image: images/logos/logo.jpg
   image: images/logos/logo.jpg
@@ -99,5 +101,6 @@ format:
     - c:/gitbook_stats12/include/webex.js
   pdf:
     include-in-header: preamble.tex
-    extra_dependencies: awesomebox
-    fontfamily: libertinus
+    extra_dependencies: tcolorbox
+    output-file: "Statistics-1-and-2"
+    output-ext:  "pdf"
