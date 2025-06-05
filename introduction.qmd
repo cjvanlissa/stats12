@@ -5,29 +5,50 @@ source("R/booktem_setup.R")
 source("R/my_setup.R")
 ```
 
-Statistics are more relevant than ever in this digital age, where data about our entire lives is readily available, and software to analyze such data has become extremely user-friendly and freely available. We live in a world where everyone wants our data, and being data literate is becoming increasingly important across industries.
+Statistics are more relevant than ever in this digital age, where data about our entire lives is readily available, and software to analyze such data has become extremely user-friendly and freely available. We live in a world where organizations large and small collect data to tailor products and services, and being data literate is becoming increasingly important across industries.
 
 Statistics allows us to make sense of data and gain valuable insights. It helps us better understand social phenomena, predict sales and optimize marketing strategies, and even explore the relationship between brain activity and behavior. Data analysis is one of the most marketable skills taught at universities.
 
-Before we delve deeper into statistics, it's crucial to distinguish between methods and statistics. Methods refer to the procedures used in research, such as data collection, participant selection, and study design. On the other hand, statistics focuses on analyzing the data obtained from these methods.
+Before we delve deeper into statistics, it's crucial to distinguish between methods and statistics. Methods refer to the procedures used in research, such as data collection, participant selection, and study design. Statistics, on the other hand, focuses on analyzing the data obtained from these methods.
 
 Two fundamental branches of statistics covered in this course are descriptive statistics and inferential statistics. Descriptive statistics involves summarizing and describing the characteristics of a dataset, while inferential statistics allows us to make educated guesses about a larger population based on a smaller sample.
 
 Statistical modeling is another aspect of statistics where theories are represented mathematically. This enables us to predict important outcomes, such as sales figures, well-being, or the likelihood of neurological disorders. Statistical modeling also allows us to explore data for interesting patterns or to perform tests to answer theoretically driven research questions.
 
-In scientific research, statistics can help us test theories. The process of scientific knowledge acquisition is described by the empirical cycle: We start with a theory, from which we derive testable hypotheses. A theory is an abstract system of assumptions about the relationships between constructs. A hypothesis is a concrete statement, derived from the theory, about expected quantitative relationships between measured variables. We then collect data and test the hypothesis. If the hypothesis is refuted, we re-examine the theory and possibly ammend it. 
+In scientific research, statistics can help us test theories. The process of scientific knowledge acquisition is described by the empirical cycle: We start with a theory, from which we derive testable hypotheses. A theory is an abstract system of assumptions about the relationships between constructs. A hypothesis is a concrete statement, derived from the theory, about expected quantitative relationships between measured variables. We then collect data and test the hypothesis. If the hypothesis is refuted, we re-examine the theory and possibly amend it.
 
-To lay a foundation for understanding statistics, it's essential to be familiar with some basic concepts. First, data in the social sciences often comes in tabular format (e.g., spreadsheets), where each row represents an individual observation, and each column represents the individuals' scores on various variables.
+To lay a foundation for understanding statistics, it's essential to be familiar with some basic concepts. First, data in the social sciences often come in tabular format (e.g., spreadsheets), where each row represents an individual observation, and each column represents the individuals' scores on various variables.
 
-A crucial distinction is the one between population and sample. The population refers to the complete set of objects of interest, such as all people in a country or all students in a class. However, due to practical limitations, we usually do not have access to the population. Instead, we draw a sample from it, which is a subset of the population. Sampling theory establishes the rationale for drawing inferences about a population based on samples. Sample statistics serve as our best estimate of population parameters. If the sample is representative, those estimates will be unbiased. Moreover, we can estimate our uncertainty about the sample statistics as estimates of population parameters. The best way to ensure a representative sample is to use random sampling, where each individual in the population has an equal chance of being included.
+A crucial distinction is the one between population and sample. The population refers to the complete set of objects of interest, such as all people in a country or all students in a class. However, due to practical limitations, we usually do not have access to the population. Instead, we draw a sample from it, which is a subset of the population. Sampling theory establishes the rationale for drawing inferences about a population based on samples. Sample statistics serve as our best estimate of population parameters. If the sample is representative, those estimates will be unbiased. Moreover, we can estimate our uncertainty about the sample statistics as estimates of population parameters. The best way to ensure a representative sample is to use random sampling, where each individual in the population has an equal chance of being included—though in practice, constraints often lead researchers to rely on convenience or stratified sampling, which can limit the strength of our inferences.
 
-The distinction between constructs and variables is also important. Constructs are abstract features of interest within a population, like short-term memory, intelligence, or education. Variables, on the other hand, are mathematical placeholders that represent specific values associated with these constructs. Data, then, refers to the specific values of a variable.
+The distinction between constructs and variables is also important. Constructs are abstract features of interest within a population, like short-term memory, intelligence, or education. Variables, on the other hand, are placeholders that represent specific values associated with these constructs—much like column headers in a spreadsheet. Data then refer to the specific values of a variable.
 
-Measurement level refers to the kind of information contained in a variable. The four common measurement levels are nominal, ordinal, interval, and ratio. Nominal variables have categories that differ in name only, while ordinal variables have categories with a meaningful order. Interval variables have meaningful intervals between values, which allows for meaningful comparisons between values. Finally, ratio variables have a meaningful zero-point, which additionally allows for the computation of meaningful ratios between values.
+Measurement level refers to the kind of information contained in a variable. The four common measurement levels are nominal, ordinal, interval, and ratio. Nominal variables have categories that differ in name only, while ordinal variables have categories with a meaningful order. Interval variables have meaningful intervals between values (e.g., temperature in °C), which allows for meaningful comparisons between values. Finally, ratio variables have a meaningful zero-point (e.g., weight in kilograms), which additionally allows for the computation of meaningful ratios between values.
 
 Descriptive statistics are used to summarize and analyze data. They help us get a sense of the dataset and answer questions like the most common major among students or the average age of a group. Descriptive statistics can also be relevant in answering research questions, such as evaluating exam questions or determining if the proportion of correct answers on a multiple-choice question is greater than chance.
 
-In summary, statistics is a powerful tool for analyzing and interpreting data. It helps us gain insights into various aspects of social life, make predictions, and test theories. By understanding fundamental concepts, such as measurement levels and descriptive statistics, we can start exploring and making sense of data in a meaningful way.
+## Exploratory Data Analysis (EDA)
+Before applying statistical tests, researchers typically engage in exploratory data analysis (EDA): visualizing and summarizing the data to detect errors, spot patterns, and generate new questions. This step—popularized by John Tukey—often involves histograms, boxplots, and scatterplots that reveal outliers or interesting trends worth modeling.
+
+## Correlation ≠ Causation
+Because patterns can be visually compelling, it is crucial to remember that correlation does not imply causation. For instance, ice-cream sales and drowning deaths rise together in summer, but purchasing ice-cream does not cause drowning. Establishing causal claims requires careful design and statistical control.
+
+## Research Designs and Validity
+Researchers employ several designs—experimental, quasi-experimental, and observational—each with its own strengths and limitations. Two key pillars of quality are:
+
+Internal validity: the degree to which the study rules out alternative explanations, letting us attribute observed effects to the manipulated variables rather than confounds.
+
+External validity: the extent to which findings generalize beyond the specific sample, setting, and operationalizations used in the study.
+
+A tightly controlled laboratory experiment may score high on internal validity but lower on external validity, whereas a large-scale field survey often shows the opposite pattern. Balancing both is a central concern of scientific inquiry.
+
+## Sampling Distribution and Standard Error
+If we could repeatedly draw many random samples of the same size from a population, each sample statistic (e.g., a mean) would vary. The distribution of those statistics is called the sampling distribution, and its spread is summarized by the standard error. Understanding this concept allows us to place confidence intervals around estimates and to perform hypothesis tests.
+
+## Ethics, Privacy, and Reproducible Workflows
+Modern data analysis carries ethical responsibilities: protecting participant privacy, preregistering hypotheses, and sharing code to enable reproducibility. Tools like R Markdown (and its successor, Quarto) combine prose, code, and output in a single document, ensuring that results can be regenerated with a single click—an increasingly important professional standard.
+
+In summary, statistics is a powerful tool for analyzing and interpreting data. It helps us gain insights into various aspects of social life, make predictions, and test theories. By understanding fundamental concepts—such as measurement levels, internal and external validity, and descriptive versus inferential statistics—and by adopting good practices like EDA, ethical data handling, and reproducible workflows, we can start exploring and making sense of data in a meaningful way.
 
 # Lecture
 
