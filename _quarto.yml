@@ -85,7 +85,7 @@ format:
     - include/webex.css
     - include/glossary.css
     - include/style.css
-    - c:/gitbook_stats12/include/webex.css
+    - include/webex.css
     df-print: kable
     code-link: true
     code-fold: false
@@ -98,7 +98,7 @@ format:
     include-after-body:
     - include/webex.js
     - include/script.js
-    - c:/gitbook_stats12/include/webex.js
+    - include/webex.js
   pdf:
     include-in-header: preamble.tex
     extra_dependencies: tcolorbox
