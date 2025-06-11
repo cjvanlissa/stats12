@@ -1,0 +1,231 @@
+---
+title: "Lecture 2 – Descriptive statistics"
+author: "Caspar J. van Lissa"
+date: "`r format(Sys.Date(), '%d %b %Y')`"
+format: revealjs
+server: shiny
+---
+
+```{r setup, include = FALSE}
+library(ggplot2)           # only for making figures
+knitr::opts_chunk$set(
+  echo = FALSE,            
+  message = FALSE, warning = FALSE,
+  dev = "png",
+  fig.width = 6, fig.height = 4, fig.align = "center"
+)
+```
+
+# Learning Objectives
+
+- Explain **central tendency** (mean · median · mode).  
+- Explain **variability** (range · variance · SD).  
+- Describe how transformations and outliers affect the mean & SD.  
+- Interpret **degrees of freedom** (*n – 1*).  
+- Visualise why squaring deviations leads to variance.
+
+---
+
+## Why Descriptive Statistics?
+
+| Question                                  | Statistic                     |
+|-------------------------------------------|------------------------------|
+| What value is *typical*?                  | Centre → mean / median / mode |
+| How much do individual scores *differ*?   | Spread → range / variance / SD |
+
+Everything else in the course builds on these two headlines.
+
+---
+
+# Central Tendency
+
+*A single value that stands for the whole distribution.*
+
+---
+
+## Mean — the Balance Point
+
+**Definition**  
+The mean is **the sum of the scores divided by the number of scores**.
+
+$$
+\text{Population:}\quad
+\mu = \frac{\sum_{i=1}^{N} X_i}{N}
+\qquad
+\text{Sample:}\quad
+M = \frac{\sum_{i=1}^{n} X_i}{n}
+$$
+
+*Key properties*
+
+| Situation                                              | Effect on Mean |
+|--------------------------------------------------------|----------------|
+| Add a constant *k* to every score                      | + *k*          |
+| Multiply every score by *c*                            | × *c*          |
+| Change one score by +Δ                                 | + Δ / *n*      |
+| Add/remove a score equal to the mean                   | No change      |
+
+---
+
+## Weighted Mean
+
+**When groups differ in size, use a size-weighted average**
+
+$$
+M_{\text{overall}} \;=\;
+\frac{\sum_{g=1}^{G} n_g M_g}{\sum_{g=1}^{G} n_g}
+$$
+
+*Example*  
+Group A (n = 12, M = 6) Group B (n = 8, M = 7)
+
+$$
+M_{\text{overall}}
+= \frac{12 \times 6 \;+\; 8 \times 7}{20}
+= 6.4
+$$
+
+
+---
+
+## Median — the Middle Score
+
+- Order the scores; median splits them 50 % / 50 %.  
+- **Robust** to skew & outliers (e.g., income).  
+- Not defined by a formula but by position.
+
+---
+
+## Mode — Most Frequent
+
+- Only measure that works for **nominal** data.  
+- Handy with discrete counts (a “modal” family has 2 children).  
+- Multiple modes hint at sub-groups.
+
+---
+
+### Choosing the Measure of Centre
+
+```{r centre-tree}
+decision <- data.frame(
+  x = rep(1, 6),
+  y = 5:0,
+  label = c(
+    "Data scale?",
+    "Nominal → MODE",
+    "Ordered / numeric",
+    "Outliers / skew?",
+    "Yes → MEDIAN",
+    "No → MEAN"
+  )
+)
+ggplot(decision, aes(x, y, label = label)) +
+  geom_text(size = 6, hjust = 0) +
+  xlim(0.9, 4) + ylim(-0.5, 5.5) +
+  theme_void()
+```
+
+---
+
+# Variability
+
+*Centre tells us what is typical; variability tells how typical.*
+
+---
+
+## Range
+
+$$
+\text{Range}=X_{\max}-X_{\min}
+$$
+
+Quick but unstable (relies on two scores).
+
+---
+
+## Deviations & Sum of Squares (SS)
+
+1. **Deviation** $d_i = X_i - M$  
+2. $\sum d_i = 0$  
+3. Square deviations to avoid cancellation: $(X_i - M)^2$
+
+$$
+SS
+\;=\;
+\sum_{i=1}^{n} (X_i - M)^2
+\;=\;
+\sum_{i=1}^{n} X_i^{2}
+\;-\;
+\frac{\bigl(\sum_{i=1}^{n} X_i\bigr)^2}{n}
+$$
+
+
+---
+
+## Visualising Variance
+
+```{r var-plot}
+set.seed(2)
+scores <- c(rnorm(30, 50, 8), 90)   # one extreme value
+mn <- mean(scores)
+ggplot(data.frame(scores), aes(scores)) +
+  geom_histogram(binwidth = 5, fill = "steelblue", colour = "white") +
+  geom_vline(xintercept = mn, lwd = 1.2) +
+  geom_segment(aes(x = mn, xend = 90, y = 0, yend = 0),
+               arrow = arrow(type = "closed", length = unit(0.2, "cm")),
+               colour = "firebrick", lwd = 1) +
+  labs(title="Mean (solid) and an Extreme Deviation (arrow)",
+       x = "Score", y = "Count")
+```
+
+---
+
+## Variance & Standard Deviation
+
+| Statistic | Formula | Units |
+|-----------|---------|-------|
+| **Population variance** | $\sigma^{2} = SS/N$ | units² |
+| **Sample variance** | $s^{2} = SS/(n-1)$ | units² |
+| **Standard deviation** | $\sigma = \sqrt{\sigma^{2}}$  /  $s = \sqrt{s^{2}}$ | original |
+
+Why *n – 1*? Only **n – 1 degrees of freedom** remain after we estimate the mean; dividing by *n – 1* makes $s^{2}$ an unbiased estimator of $\\sigma^{2}$.
+
+---
+
+### How Transformations Affect SD
+
+| Transformation | Effect on SD |
+|----------------|--------------|
+| Add constant *k* | no change |
+| Multiply by *c*  | SD × *c* |
+| Add extreme score | increases SD |
+
+---
+
+## Recap
+
+| Statistic | Formula | Keeps units? | Outlier‑sensitive? |
+|-----------|---------|--------------|--------------------|
+| Mean      | $M = \frac{\sum X}{n}$            | Yes | **Yes** |
+| Median    | 50‑th percentile                   | Yes | No |
+| Mode      | Most frequent                      | Yes / NA | No |
+| Range     | $X_{\max}-X_{\min}$                | Yes | Yes |
+| Variance  | $s^{2}=SS/(n-1)$                   | units$^{2}$ | Yes |
+| SD        | $s=\sqrt{s^{2}}$                   | Yes | Yes |
+
+---
+
+## Key Take‑aways
+
+- Mean, median, mode each define “centre” differently.  
+- Variance and SD quantify spread; range is quick but crude.  
+- Sample variance uses *n – 1* to remain unbiased.  
+- Visualising deviations builds intuition for SS and variance.
+
+---
+
+# Next Week
+
+**Lecture 3 — Correlation & Covariance**
+
+Bring your SPSS cheat‑sheet!
