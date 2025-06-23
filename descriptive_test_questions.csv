@@ -1,0 +1,16 @@
+question,option1,option2,option3,option4,answer
+Which measure of central tendency is the only one that can be used with purely nominal data?,Mean,Median,Mode,Midrange,C
+Adding the same constant k to every score in a dataset will…,Increase both the mean and the standard deviation by k,Increase the mean by k but leave the standard deviation unchanged,Leave both the mean and the standard deviation unchanged,Increase the standard deviation by k but leave the mean unchanged,B
+"In a strongly right-skewed income distribution, which measure best represents 'typical' income?",Mean,Geometric mean,Median,Mode,C
+"Conceptually, the Sum of Squares (SS) represents…",The difference between the largest and smallest scores,The total of the raw scores squared,The accumulated “squared distance” of all scores from the mean,The square of the sample size multiplied by the mean,C
+Why does the sample variance divide by n – 1 instead of n?,To correct for rounding error in the mean,Because the sample mean underestimates the population mean,Because only n – 1 deviations are free to vary after estimating the mean (degrees of freedom),To inflate the variance and make confidence intervals wider,C
+"If every score in a dataset is multiplied by 3, what happens to the standard deviation?",It stays the same,It is multiplied by 3,It is multiplied by 9,It is divided by 3,B
+The range is considered an unstable measure of variability because…,It ignores the units of measurement,"It squares each deviation, exaggerating large distances","It relies on only two extreme scores, which may be outliers",It cannot be computed for small samples,C
+A standard deviation of 2.5 units should be interpreted as:,2.5 % of scores fall within this distance of the mean,Typical scores lie about 2.5 units away from the mean,2.5 % of the data are outliers,The mean error in measurement is 2.5 units,B
+A histogram shows two distinct peaks at 165 cm and 178 cm in adult-height data. This pattern most likely indicates…,Measurement error in the taller group,"Two sub-groups within the sample (e.g., women and men)",Truncation of extreme values,That the data are normally distributed,B
+Which statement about the median is FALSE?,It splits the ordered data into two equal halves,It can lie between two observed scores when n is even,It is highly sensitive to a single extreme score,It is defined by position rather than a formula,C
+"What is the mean of the following five scores: 3, 7, 5, 5, 10?",4,5,6,7,C
+"Six test scores are 12, 15, 14, 9, 8, 20. What is the median?",12,13,14,15,B
+"A dataset has a standard deviation of 2.4. If every score is increased by 7 points, what is the new standard deviation?",0,2.4,7,9.4,B
+"Five reaction times are 5, 8, 9, 11, 12 (units = ms). The range is 7 ms. If a new extreme score of 30 ms is added, what is the new range?",12 ms,20 ms,25 ms,37 ms,C
+Class A (n = 12) has an average quiz score of 6. Class B (n = 8) has an average of 7. What is the combined (weighted) mean for all 20 students?,6.1,6.2,6.4,6.8,C
