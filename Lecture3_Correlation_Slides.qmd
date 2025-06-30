@@ -1,0 +1,221 @@
+---
+title: "Lecture 3 - Correlation"
+author:   "Caspar J. van Lissa"
+date:     "`r format(Sys.Date(), '%d %b %Y')`"
+format: revealjs
+---
+```{r}
+library(kableExtra)
+library(tidySEM)
+options(knitr.kable.NA = '')
+set.seed(1)
+```
+
+
+--- ORDER FIX START ---
+
+# Why Study Correlation?
+
+* Describes **direction, form, and strength** of relationships  
+* Foundation for **prediction** (regression), **validity**, **reliability**, and **theory tests**  
+* A stepping-stone from single-variable statistics (mean/variance) to two-variable statistics (covariance/correlation)
+
+---
+
+## Definition
+
+> **Correlation:** A *standardised* measure of the *linear* association between two continuous variables.
+
+* Range **–1 to +1** (sample **r**, population **ρ**)  
+* **r = +1** → perfect positive relation  
+* **r =  0** → no linear relation  
+* **r = –1** → perfect negative relation
+
+---
+
+## Scatter-Plot Gallery
+
+
+:::
+
+---
+
+## Interpreting a Scatter Plot
+
+1. **Direction** – *Positive* slopes upward; *Negative* slopes downward  
+2. **Form** – Typically linear; curved forms need other measures  
+3. **Strength** – Tightness of points around the trend line  
+
+> **Scatter plot first, number second** – guards against outliers, non-linearity, restricted range.
+
+---
+
+## Pearson *r* – Conceptual Formula
+
+The Pearson correlation compares how much *X* and *Y* vary **together** with how much they vary **separately**:
+
+$$
+r
+   = \frac{\text{covariability of } X \text{ and } Y}
+          {\text{variability of } X \text{ and } Y \text{ separately}}
+$$
+
+Perfect shared variability ⇒ $|r| = 1.00$ • Zero shared variability ⇒ $r = 0$
+
+---
+
+## Sum of Products of Deviations (SP)
+
+To calculate the Pearson correlation we introduce the **sum of products of deviations** (SP).
+
+* **Analogy with SS** – SS measures variability of one variable; SP measures how two variables move together.  
+* **Sign of SP:** Positive ⇒ same-direction changes; Negative ⇒ opposite-direction changes.
+
+---
+
+### SP – Two Equivalent Formulas {.smaller}
+
+**Definitional**
+
+$$
+SP = \sum \bigl(X - \bar{X}\bigr)\bigl(Y - \bar{Y}\bigr)
+$$
+
+**Computational**
+
+$$
+SP = \sum XY \;-\; \frac{\sum X \,\sum Y}{n}
+$$
+
+---
+
+## SP – Numerical Example {.smaller}
+
+Dataset (n = 5)
+
+| X | Y |
+|---|---|
+| 1 | 2 |
+| 2 | 1 |
+| 3 | 3 |
+| 4 | 5 |
+| 5 | 4 |
+
+Means: $\bar X = 3$, $\bar Y = 3$
+
+| $X$ | $Y$ | $X-\bar X$ | $Y-\bar Y$ | $(X-\bar X)(Y-\bar Y)$ | $(X-\bar X)^{2}$ | $(Y-\bar Y)^{2}$ |
+|----:|----:|-----------:|-----------:|-----------------------:|-----------------:|-----------------:|
+| 1 | 2 | –2 | –1 | 2 | 4 | 1 |
+| 2 | 1 | –1 | –2 | 2 | 1 | 4 |
+| 3 | 3 | 0  | 0  | 0 | 0 | 0 |
+| 4 | 5 | 1  | 2  | 2 | 1 | 4 |
+| 5 | 4 | 2  | 1  | 2 | 4 | 1 |
+| **Totals** |   |   |   | **SP = 8** | **$SS_X = 10$** | **$SS_Y = 10$** |
+
+---
+
+## Computing **r**
+
+$$
+r = \frac{SP}{\sqrt{SS_{X}\,SS_{Y}}}
+$$
+
+* $SS_{X} = \sum (X - \bar{X})^{2}$ (single-variable variability for X)  
+* $SS_{Y} = \sum (Y - \bar{Y})^{2}$ (single-variable variability for Y)
+
+---
+
+## Numerical Example — Compute *r* {.smaller}
+
+$$
+r \;=\; \frac{8}{\sqrt{10 \times 10}} \;=\; 0.80
+$$
+
+* **Direction:** Positive  
+* **Explained variance:** $r^{2} = 0.64$ → 64 % of the variability in **Y** can be explain via **X**
+
+---
+
+## **r** via *z*-Scores
+
+$$
+r = \frac{\sum z_X z_Y}{\,n-1\,}\quad\text{(sample)}
+$$
+
+Same numerator—now in *standard-score* space.
+
+---
+
+## Partial Correlation – Definition & Formula {.smaller}
+
+Controls a third variable **Z**:
+
+$$
+r_{XY\cdot Z} =
+\frac{r_{XY} - r_{XZ} r_{YZ}}
+     {\sqrt{(1 - r_{XZ}^{2})(1 - r_{YZ}^{2})}}
+$$
+
+---
+
+## Partial Correlation – Numerical Example {.tiny}
+
+Given &nbsp;$r_{XY}=0.65$, &nbsp;$r_{XZ}=0.60$, &nbsp;$r_{YZ}=0.70$
+
+$$
+r_{XY\cdot Z} \;=\;
+\frac{\,r_{XY} \;-\; r_{XZ}\,r_{YZ}\,}
+     {\sqrt{\bigl(1 - r_{XZ}^{2}\bigr)\,\bigl(1 - r_{YZ}^{2}\bigr)}}
+$$
+
+Substitute the numbers:
+
+$$
+\begin{aligned}
+r_{XY\cdot Z}
+&= \frac{\,0.65 - (0.60)(0.70)\,}
+        {\sqrt{\,\bigl(1-0.60^{2}\bigr)\,\bigl(1-0.70^{2}\bigr)\,}} \\[6pt]
+&= \frac{0.65 - 0.42}{\sqrt{(1-0.36)(1-0.49)}} \\[6pt]
+&= \frac{0.23}{\sqrt{0.64 \times 0.51}} \\[6pt]
+&= \frac{0.23}{0.571} \\[6pt]
+&\approx 0.40
+\end{aligned}
+$$
+
+---
+
+**Interpretation**
+
+* Zero-order correlation: $r_{XY}=0.65$ (before controlling for $Z$).  
+* After holding $Z$ constant: $r_{XY\cdot Z}\approx0.40$ — still positive but weaker.  
+* **Explained variance now:** $(r_{XY\cdot Z})^{2} \approx 0.16$ → about **16 %** of Y’s variability is predictable from X once Z is removed.  
+* Reduction from $r^{2}=0.42$ to $0.16$ suggests that **Z** accounted for roughly **26 %** of the apparent X–Y association.
+
+---
+
+## Practical Uses
+
+1. **Prediction** – e.g., SAT ↔ GPA  
+2. **Validity** – new vs. established test alignment  
+3. **Reliability** – test–retest stability  
+4. **Theory Verification** – correlation tests predicted links
+
+---
+
+## Four Cautions
+
+* **Correlation ≠ Causation**  
+* **Restricted Range**  
+* **Outliers**  
+* **Proportion Explained (r²)**
+
+---
+
+## Wrap‑Up
+
+* Correlation summarises covariability into **r** (and **r²**)  
+* **SP** bridges single‑ and two‑variable statistics  
+* Interpretation demands visual checks and caution  
+* **Partial correlation** disentangles third‑variable confounds  
+
+Next: extend these ideas to **regression** for explicit prediction.
