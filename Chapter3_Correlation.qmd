@@ -1,0 +1,219 @@
+# Correlation: Measuring Relationships
+
+```{r, include = FALSE}
+source("R/booktem_setup.R")
+source("R/my_setup.R")
+```
+
+Correlation is a statistical technique used to **measure and describe the relationship between two variables**.  
+Typically, the two variables are observed as they occur naturally—there is **no manipulation** or experimental control.  
+For instance, a researcher might:
+
+* Retrieve each student’s high‑school GPA from records (academic performance)  
+* Survey that student’s family to record annual income  
+
+The researcher then examines whether a relationship exists between grades and family income.  
+> **Key point:** Each individual provides **two scores**—one for each variable—usually labelled *X* and *Y*.
+
+## Visualising Pairs of Scores
+
+Pairs of scores can be displayed in a **table** or on a **scatter plot**.
+
+* **Scatter plot:**  
+  *Horizontal axis* = X values  
+  *Vertical axis* = Y values  
+  Each point represents one individual.
+
+A scatter plot immediately reveals patterns—straight‑line trends, curves, clusters, or outliers.
+
+## What a Correlation Describes
+
+A single correlation number summarises **three characteristics** of the X–Y relationship.
+
+### 1  Direction  
+* **Positive (+)** – variables change together: when the value of **X** increases from one individual to another, the value of **Y** tends to increase as well; likewise, when **X** decreases, **Y** decreases.  
+* **Negative (–)** – variables move oppositely: as **X** increases, **Y** decreases (and vice-versa).
+
+### 2  Form  
+* Most common: **linear** – points cluster around a straight line.  
+* Other forms exist; special correlations can capture curves or monotonic trends.
+
+### 3  Strength (Consistency)  
+* **Perfect** relationship → points lie exactly on a line → |r| = 1.00  
+* **No** relationship → points scattered randomly → r = 0  
+* Values between 0 and 1 measure how tightly points hug the line.
+
+Direction (sign) and strength (magnitude) are **independent**.  
+*r* = +0.80 and *r* = –0.80 are equally strong but in opposite directions.  
+A valid correlation **cannot** exceed +1.00 or –1.00.
+
+## The Pearson Correlation
+
+The **Pearson correlation (r)** quantifies the **degree and direction of a linear relationship** between two variables.
+
+## Where and Why Correlations Are Used
+
+1. **Prediction**  
+   When two variables are correlated, knowing a person’s score on **X** helps you *predict* their likely score on **Y**. College admissions are a classic case: universities correlate applicants’ SAT scores with first-year GPA. A strong positive correlation means an admissions officer can forecast academic performance with quantifiable accuracy; the stronger the correlation, the smaller the typical prediction error (a concept formalised later in regression).
+
+2. **Validity – Does a test measure what it claims?**  
+   A new questionnaire that purports to assess *anxiety* should correlate highly with established anxiety inventories, moderately with related constructs such as neuroticism, and only weakly with unrelated traits like extraversion. These patterns—**convergent** and **discriminant** validity—show that the test taps the intended construct rather than something else.
+
+3. **Reliability – How stable or consistent is a measure?**  
+   Administer an intelligence test on Monday and again two weeks later: a large test-retest correlation (e.g., *r* ≈ 0.90) indicates score stability and hence reliability. Lower correlations suggest random measurement error or situational drift. The same logic underlies “split-half” and “internal consistency” checks, where correlations among test items show whether they all tap the same construct.
+
+4. **Theory Verification**  
+   Many psychological or biomedical theories predict that two variables should relate in a particular direction. A developmental theory, for example, may predict a positive correlation between parents’ IQs and their child’s IQ; a clinical hypothesis may expect a negative correlation between mindfulness and stress hormones. Demonstrating the predicted correlation supports the theory, whereas an absent or opposite correlation prompts revision or rejection of the theoretical account.
+
+## Interpreting Correlations – Four Cautions
+
+1. **Correlation ≠ Causation**  
+   A correlation simply indicates that **X** and **Y** move together—it says **nothing** about *why* they do so.  
+   *Example:* Ice-cream sales and drowning deaths correlate positively. Hot weather is the lurking third factor driving both. Concluding that buying ice-cream causes drowning would be a causal fallacy. Only a controlled experiment, where one variable is manipulated and others held constant, can establish cause-and-effect.
+
+2. **Restricted Range**  
+   A correlation computed from a narrow slice of data can understate—or occasionally overstate—the true relationship.  
+   *Example:* If you correlate IQ with creativity using only university students (IQ range perhaps 110–130), *r* may be near zero even though a broader sample (IQ 70–150) shows a clear positive trend. **Never generalise beyond the range of scores actually sampled.**
+
+3. **Outliers**  
+   One or two extreme data points can dominate the correlation calculation because *r* considers every pair of scores.  
+   *Example:* In a scatter plot of five ordinary points that show no trend, adding a single extreme point far out on both axes can swing *r* from ≈ 0 to +0.85 (or −0.85) and completely change the apparent conclusion. **Always inspect a scatter plot** before trusting the numerical value.
+
+4. **Proportion of Variability (r²)**  
+   The raw correlation coefficient can feel abstract. Squaring it yields **r²**, the *coefficient of determination*—the proportion of variability in **Y** that can be predicted from **X**.  
+   *Example:* *r* = 0.50 → *r²* = 0.25 → 25 % of the variation in **Y** is associated with differences in **X**; the other 75 % is due to factors not captured by the correlation. Reporting *r²* helps readers judge practical significance, not just statistical strength.
+
+## Partial Correlation
+
+A **partial correlation** measures the relationship between two variables **while statistically holding a third variable constant**—in effect, asking: “If that third factor were the same for everyone, how much association would remain between X and Y?”
+
+### Example – Churches and Crime
+
+Early sociologists noticed a striking positive correlation across U.S. cities between  
+
+* **X:** number of churches  
+* **Y:** number of serious crimes  
+
+At first glance this might suggest that churches somehow *cause* crime—a clearly implausible conclusion. The missing ingredient is **city population**:
+
+| City type | Population | Churches | Serious crimes |
+|-----------|-----------:|---------:|---------------:|
+| Small town |   10 000 |    10 |    70 |
+| Medium city|  100 000 |   120 |  1 100 |
+| Large city | 1 000 000| 1 300 | 13 000 |
+
+Larger populations naturally have **more of everything**: more churches *and* more crime.  
+So the raw Pearson correlation between Churches and Crime is high (say *r* = +0.85), but that relationship is **spurious**—driven by population size (the lurking third variable).
+
+Using a **partial correlation**:
+
+1. **Control for population** by regressing both Churches and Crime on Population.  
+2. **Remove** the predictable part attributable to population.  
+3. **Correlate the residuals**—the leftover variation in Churches with the leftover variation in Crime.
+
+If the partial correlation drops to near zero (e.g., *r₍Church,Crime·Population₎* ≈ 0.03), we conclude that **once population is held constant, churches and crime are essentially unrelated**.  
+Thus, partial correlation reveals the *true* relationship after stripping away the influence of a confounding variable.
+
+> **Take-away:** Whenever a third factor could be driving both variables of interest, use partial correlation to check whether the observed association survives once that factor is held constant.
+
+## Summary
+
+* Correlation summarises **direction, form, and strength** of relationships.  
+* Pearson’s *r* captures **linear** patterns.  
+* **Applications**: prediction, validity, reliability, theory tests.  
+* Interpret with care: consider causality, range, outliers, and r².  
+* **Partial correlation** isolates relationships when a third variable is controlled.
+
+Correlation is a powerful descriptive tool—but recognising its limits is crucial before drawing conclusions or making predictions.
+
+# Formative Test
+
+This short quiz checks your grasp of **Chapter 3 – Covariance & Correlation**.  
+Work through it after you’ve studied the lecture slides (and before the next live session) so we can focus on anything that still feels uncertain. Each incorrect answer reveals a hint that sends you back to the exact slide or numerical example you need.
+
+```{r}
+#| results = "asis"
+#| echo    = FALSE
+#| cache   = FALSE
+add_mcs("ch3_formative.csv")
+```
+
+# Tutorial
+
+```{r, include = FALSE}
+source("R/booktem_setup.R")
+source("R/my_setup.R")
+```
+
+## Correlation
+
+For the upcoming few questions we need the data file `LAS_SocSc_DataLab2.sav`.
+Open the file in SPSS. You will see that the file contains data for six variables, named X1 through X6. We will inspect the associations between pairs of variables (so called bivariate relationships).
+
+First, generate a scatter plot for X1 and X2. Proceed as follows: Graphs > Legacy dialogs > Scatter/dot. Then ask for a Simple scatter. Put X1 on the X-Axis and X2 on the Y-Axis. Describe the association. Take into account whether the relationship follows a straight line (i.e., linearity), is positive or negative (i.e., direction), and whether the relationship seems to be weak, moderate or strong (i.e., strength).
+
+Second, generate a scatter plot for X3 and X4. Make sure that X3 is shown on the X-axis and X4 on the Y-axis. Describe the association in terms of linearity, direction and strength.
+
+Third, generate a scatter plot for X5 and X6. Describe the association in terms of linearity, direction and strength.
+
+::: {.webex-check .webex-box}
+
+Is the relationship between X1-X2 positive? `r torf(TRUE)`
+
+Is the relationship between X5-X6 positive? `r torf(FALSE)`
+
+Is the relationship between X1-X2 linear? `r torf(TRUE)`
+
+Is the relationship between X3-X4 linear? `r torf(FALSE)`
+
+Give an indication of the strength of the relationship between X1-X2: `r mcq(c("answer" = "moderate", "weak", "zero", "strong")[sample.int(4)])`
+
+Give an indication of the strength of the relationship between X3-X4: `r mcq(c("moderate", "weak", "zero","answer" = "strong")[sample.int(4)])`
+
+Give an indication of the strength of the relationship between X5-X6: `r mcq(c("answer" = "moderate", "weak", "zero","strong")[sample.int(4)])`
+
+:::
+
+
+Consider the relationship between X3 and X4, can you think of an example of two variables that would be associated in this way?
+
+`r hide("Show answer")`
+
+Any cyclical process;
+
+* Time in the day and how far the water reaches up the beach (ebb and flow)
+* Location of the sun in the sky
+ 
+`r unhide()`
+
+### Correlation Coefficient
+
+In this step we will look at the correlation coefficient as numerical description of linear association.
+
+Notice that in the previous step we found a non-linear association. The correlation coefficient would not be a valid measure to describe such an association, but nevertheless it is instructive to see why caution should be exercised in drawing conclusions about association from the correlation coefficient alone.
+
+We will use SPSS to compute the correlation coefficient.
+
+Analyze > Correlate > Bivariate
+Select X1, X2, ... X6 as the variables
+Click OK
+
+Consult the table Correlations in the output.
+
+There are several values in the table, but we are looking for the Pearson Correlation. The other numbers are the so called significance level, a concept we discuss soon, and the sample size.
+
+## Quiz
+
+::: {.webex-check .webex-box}
+
+What is the correlation coefficient for the variables X1 and X2? `r fitb(.50, num = TRUE, tol = .01)`
+
+What is the correlation coefficient for the variables X2 and X6? `r fitb(.06, num = TRUE, tol = .01)`
+
+What is the correlation coefficient for the variables X3 and X4? `r fitb(-.80, num = TRUE, tol = .01)`
+
+Can we interpret this correlation coefficient? `r mcq(c("answer" = "No, assumption of linearity violated", "No, assumption of association violated", "No, assumption of normality violated", "Yes, otherwise SPSS would give an error")[sample.int(4)])`
+
+Interpret the correlation between X5 and X6? `r mcq(c("answer" = "Moderate negative", "Moderate positive", "Weak positive", "Weak negative")[sample.int(4)])`
+
+:::
