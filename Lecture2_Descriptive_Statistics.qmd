@@ -38,12 +38,24 @@ knitr::opts_chunk$set(
 
 ---
 
+## What Do We Mean by a *Statistical Model*? {.smaller}
+
+A statistical model is a *story* about how data arise:
+
+> **observed value = systematic part (signal) + random part (noise)**
+
+Descriptive statistics give us the **first draft** of that story:  
+* one number to stand in for the whole data set (**signal**), and  
+* one number that tells how far scores wander from that centre (**noise**).
+
+---
+
 ## Why Descriptive Statistics?
 
-| Question                                  | Statistic                     |
-|-------------------------------------------|------------------------------|
-| What value is *typical*?                  | Centre → mean / median / mode |
-| How much do individual scores *differ*?   | Spread → range / variance / SD |
+| Question                                 | Statistic                        |
+|------------------------------------------|----------------------------------|
+| What value is *typical*?                 | **Centre** → mean / median / mode |
+| How much do individual scores *differ*?  | **Spread** → range / variance / SD |
 
 Everything else in the course builds on these two headlines.
 
@@ -52,6 +64,13 @@ Everything else in the course builds on these two headlines.
 # Central Tendency
 
 *A single value that stands for the whole distribution.*
+
+> **What’s a distribution?**  
+> Think of it as the **shape** (or pattern) of all the observed scores: how many low values, how many high values, and everything in between.  
+>  
+> *Example:* a class-quiz histogram might show most students clustering around 7/10, a few scoring 10, and a long tail of lower marks.
+
+Our goal is to find **one number**—mean, median, or mode—that represents that entire pattern as faithfully as possible.
 
 ---
 
@@ -98,33 +117,62 @@ $$
 | Change one score by $\Delta = +3$ (10 → 13) | 4, 6, 7, 3, 13            | $6 + \tfrac{3}{5} = 6.6$   | 6.6           |
 | Add a new score equal to the mean (6)       | 4, 6, 7, 3, 10, 6         | —                          | 6             |
 
+---
 
 ---
 
-## Weighted Mean
+## Combining Means – Two Groups {.smaller}
 
-**When groups differ in size, use a size-weighted average**
+Suppose you have **two sub-samples** with equal or unequal sizes:
+
+| Group | Size $n$ | Mean $M$ | Sum of scores $\sum X$ |
+|-------|---------:|---------:|-----------------------:|
+| A | $n_{A}$ | $M_{A}$ | $n_{A} M_{A}$ |
+| B | $n_{B}$ | $M_{B}$ | $n_{B} M_{B}$ |
+
+**Overall mean** is simply
 
 $$
 M_{\text{overall}} \;=\;
-\frac{\sum_{g=1}^{G} n_g M_g}{\sum_{g=1}^{G} n_g}
+\frac{\sum X_{\text{total}}}{n_{\text{total}}}
+=
+\frac{\,n_{A} M_{A} + n_{B} M_{B}\,}{\,n_{A} + n_{B}\,}
 $$
 
-*Example*  
-Group A (n = 12, M = 6) Group B (n = 8, M = 7)
+*Same logic you use for a single mean—just add up **all** scores and divide by **all** people.*
+
+---
+
+## Weighted Mean – Unequal Group Sizes {.smaller}
+
+When groups **differ in size**, the larger group should influence the overall mean more.  
+The previous expression is therefore called a **weighted mean**—weights are the group sizes.
+
+**Formula (two groups)**
 
 $$
 M_{\text{overall}}
-= \frac{12 \times 6 \;+\; 8 \times 7}{20}
+= \frac{n_{A} M_{A} + n_{B} M_{B}}{n_{A} + n_{B}}
+$$
+
+*Numerical example*  
+Group A: $n_{A}=12$, $M_{A}=6$  Group B: $n_{B}=8$, $M_{B}=7$
+
+$$
+M_{\text{overall}}
+= \frac{12 \times 6 \;+\; 8 \times 7}{12 + 8}
+= \frac{72 + 56}{20}
 = 6.4
 $$
 
+> If both groups had **equal** size ($n_{A}=n_{B}$), each would carry equal weight and  
+> $M_{\text{overall}}$ would be the simple midpoint between their means.
 
 ---
 
 ## Median — the Middle Score
 
-> **Conceptually:** the median is the *middle milestone*—the 50th percentile—so half the data lie at or below it and half at or above it, making it a sturdy “typical” value even when the distribution is skewed.
+> **Conceptually:** the median is the *middle milestone*—the 50th percentile—so half the data lie at or below it and half at or above it, making it a robust “typical” value even when the distribution is skewed.
 
 - Order the scores; median splits them 50 % / 50 %.  
 - **Robust** to skew & outliers (e.g., income).  
@@ -221,19 +269,19 @@ Multiple modes often suggest distinct sub-groups within the sample.
 
 ---
 
-### Choosing the Measure of Centre
+### Choosing the Measure of Central Tendency
 
 ```{r centre-tree}
 decision <- data.frame(
   x = rep(1, 6),
   y = 5:0,
   label = c(
-    "Data scale?",
-    "Nominal → MODE",
-    "Ordered / numeric",
-    "Outliers / skew?",
-    "Yes → MEDIAN",
-    "No → MEAN"
+    "Measurement level?",
+    "Nominal  →  MODE",
+    "Ordinal / Interval / Ratio",
+    "Outliers or strong skew?",
+    "Yes  →  MEDIAN",
+    "No   →  MEAN"
   )
 )
 ggplot(decision, aes(x, y, label = label)) +

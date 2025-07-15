@@ -199,7 +199,7 @@ What percentage of participants is in a relationship? `r fitb(47.9, num = TRUE, 
 
 ---
 
-### Optional – Weighted Mean {.smaller}
+### Weighted Mean {.smaller}
 
 Suppose Class A (*n* = 12, mean = 6) and Class B (*n* = 8, mean = 7) are merged.  
 SPSS effectively multiplies each mean by its *n*, sums those products, and divides by the **total** 20 students, yielding **6.4**.
