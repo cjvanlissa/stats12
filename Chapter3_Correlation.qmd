@@ -47,6 +47,26 @@ Direction (sign) and strength (magnitude) are **independent**.
 *r* = +0.80 and *r* = –0.80 are equally strong but in opposite directions.  
 A valid correlation **cannot** exceed +1.00 or –1.00.
 
+## Covariance – the Raw “Move-Together” Score
+
+Before we standardise anything, statisticians look at **covariance**—a raw gauge of how two variables shift in tandem.
+
+* **Direction only**  
+  *Positive covariance* tells us the variables rise and fall together; *negative covariance* says they move in opposite directions.  
+  Crucially, the *size* of the number does **not** tell you “how strong” the relationship is, because…
+
+* **Units matter**  
+  Covariance is expressed in the combined units of the two variables (e.g., cm × kg). Change either scale (switch centimetres to metres, dollars to euros) and the covariance value changes—even though the underlying relationship is identical.
+
+* **Why we still need correlation**  
+  To talk meaningfully about *strength*, we divide covariance by the spreads of X and Y.  
+  That standardisation removes units and caps the result between –1 and +1, giving us
+  **Pearson’s *r***—a number whose magnitude *and* sign are comparable across studies.
+
+> Think of covariance as the raw “move-together” handshake; correlation turns that handshake
+> into a unit-free score, letting us discuss both **direction and strength** on a common scale.
+
+
 ## The Pearson Correlation
 
 The **Pearson correlation (r)** quantifies the **degree and direction of a linear relationship** between two variables.
@@ -83,46 +103,12 @@ The **Pearson correlation (r)** quantifies the **degree and direction of a linea
    The raw correlation coefficient can feel abstract. Squaring it yields **r²**, the *coefficient of determination*—the proportion of variability in **Y** that can be predicted from **X**.  
    *Example:* *r* = 0.50 → *r²* = 0.25 → 25 % of the variation in **Y** is associated with differences in **X**; the other 75 % is due to factors not captured by the correlation. Reporting *r²* helps readers judge practical significance, not just statistical strength.
 
-## Partial Correlation
-
-A **partial correlation** measures the relationship between two variables **while statistically holding a third variable constant**—in effect, asking: “If that third factor were the same for everyone, how much association would remain between X and Y?”
-
-### Example – Churches and Crime
-
-Early sociologists noticed a striking positive correlation across U.S. cities between  
-
-* **X:** number of churches  
-* **Y:** number of serious crimes  
-
-At first glance this might suggest that churches somehow *cause* crime—a clearly implausible conclusion. The missing ingredient is **city population**:
-
-| City type | Population | Churches | Serious crimes |
-|-----------|-----------:|---------:|---------------:|
-| Small town |   10 000 |    10 |    70 |
-| Medium city|  100 000 |   120 |  1 100 |
-| Large city | 1 000 000| 1 300 | 13 000 |
-
-Larger populations naturally have **more of everything**: more churches *and* more crime.  
-So the raw Pearson correlation between Churches and Crime is high (say *r* = +0.85), but that relationship is **spurious**—driven by population size (the lurking third variable).
-
-Using a **partial correlation**:
-
-1. **Control for population** by regressing both Churches and Crime on Population.  
-2. **Remove** the predictable part attributable to population.  
-3. **Correlate the residuals**—the leftover variation in Churches with the leftover variation in Crime.
-
-If the partial correlation drops to near zero (e.g., *r₍Church,Crime·Population₎* ≈ 0.03), we conclude that **once population is held constant, churches and crime are essentially unrelated**.  
-Thus, partial correlation reveals the *true* relationship after stripping away the influence of a confounding variable.
-
-> **Take-away:** Whenever a third factor could be driving both variables of interest, use partial correlation to check whether the observed association survives once that factor is held constant.
-
 ## Summary
 
 * Correlation summarises **direction, form, and strength** of relationships.  
 * Pearson’s *r* captures **linear** patterns.  
 * **Applications**: prediction, validity, reliability, theory tests.  
 * Interpret with care: consider causality, range, outliers, and r².  
-* **Partial correlation** isolates relationships when a third variable is controlled.
 
 Correlation is a powerful descriptive tool—but recognising its limits is crucial before drawing conclusions or making predictions.
 
