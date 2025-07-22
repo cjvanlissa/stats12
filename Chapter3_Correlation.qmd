@@ -105,12 +105,12 @@ The **Pearson correlation (r)** quantifies the **degree and direction of a linea
 
 ## Summary
 
-* Correlation summarises **direction, form, and strength** of relationships.  
-* Pearson’s *r* captures **linear** patterns.  
-* **Applications**: prediction, validity, reliability, theory tests.  
-* Interpret with care: consider causality, range, outliers, and r².  
+* **Covariance** is the raw “move-together” score—its sign shows *direction*, but its size depends on the measurement units.  
+* **Correlation (Pearson’s *r*)** is **standardised covariance**, giving a unit-free measure of linear *direction* **and** *strength* on a –1 … +1 scale.  
+* **Key applications:** prediction, test validity, test reliability, and theory checks.  
+* Always interpret with care—look at causality, restricted range, outliers, and remember to translate *r* into practical meaning via *r²*.
 
-Correlation is a powerful descriptive tool—but recognising its limits is crucial before drawing conclusions or making predictions.
+Covariance and correlation are powerful descriptive tools—knowing both their possibilities **and** their limits is essential before drawing conclusions or making predictions.
 
 # Formative Test
 
@@ -131,75 +131,164 @@ source("R/booktem_setup.R")
 source("R/my_setup.R")
 ```
 
-## Correlation
+# 5 Tutorial
 
-For the upcoming few questions we need the data file `LAS_SocSc_DataLab2.sav`.
-Open the file in SPSS. You will see that the file contains data for six variables, named X1 through X6. We will inspect the associations between pairs of variables (so called bivariate relationships).
+## 5.1 Correlation – Practice Dataset (`LAS_SocSc_DataLab2.sav`)
 
-First, generate a scatter plot for X1 and X2. Proceed as follows: Graphs > Legacy dialogs > Scatter/dot. Then ask for a Simple scatter. Put X1 on the X-Axis and X2 on the Y-Axis. Describe the association. Take into account whether the relationship follows a straight line (i.e., linearity), is positive or negative (i.e., direction), and whether the relationship seems to be weak, moderate or strong (i.e., strength).
+Open **`LAS_SocSc_DataLab2.sav`** (find it in the **`data`** folder you downloaded earlier).  
+The file contains six variables (`X1` … `X6`). You’ll inspect three bivariate relationships.
 
-Second, generate a scatter plot for X3 and X4. Make sure that X3 is shown on the X-axis and X4 on the Y-axis. Describe the association in terms of linearity, direction and strength.
+### 5.1.1 Plot the pairs
 
-Third, generate a scatter plot for X5 and X6. Describe the association in terms of linearity, direction and strength.
+Generate three simple scatter-plots:
+
+1. `Graphs` › `Legacy Dialogs` › `Scatter/Dot` ► **Simple Scatter**  
+2. Pairings & axis order  
+   * `X1` (X-axis) vs `X2` (Y-axis)  
+   * `X3` (X-axis) vs `X4` (Y-axis)  
+   * `X5` (X-axis) vs `X6` (Y-axis)  
+3. *Paste* and *Run* each syntax block.
+
+Describe **linearity**, **direction**, and **strength** for each plot.
 
 ::: {.webex-check .webex-box}
 
-Is the relationship between X1-X2 positive? `r torf(TRUE)`
+Is the relationship between `X1`–`X2` positive? `r torf(TRUE)`
 
-Is the relationship between X5-X6 positive? `r torf(FALSE)`
+Is the relationship between `X5`–`X6` positive? `r torf(FALSE)`
 
-Is the relationship between X1-X2 linear? `r torf(TRUE)`
+Is the relationship between `X1`–`X2` linear? `r torf(TRUE)`
 
-Is the relationship between X3-X4 linear? `r torf(FALSE)`
+Is the relationship between `X3`–`X4` linear? `r torf(FALSE)`
 
-Give an indication of the strength of the relationship between X1-X2: `r mcq(c("answer" = "moderate", "weak", "zero", "strong")[sample.int(4)])`
+Strength of `X1`–`X2`:  
+`r mcq(c("answer" = "moderate", "weak", "zero", "strong")[sample.int(4)])`
 
-Give an indication of the strength of the relationship between X3-X4: `r mcq(c("moderate", "weak", "zero","answer" = "strong")[sample.int(4)])`
+Strength of `X3`–`X4`:  
+`r mcq(c("moderate", "weak", "zero","answer" = "strong")[sample.int(4)])`
 
-Give an indication of the strength of the relationship between X5-X6: `r mcq(c("answer" = "moderate", "weak", "zero","strong")[sample.int(4)])`
+Strength of `X5`–`X6`:  
+`r mcq(c("answer" = "moderate", "weak", "zero","strong")[sample.int(4)])`
 
 :::
 
-
-Consider the relationship between X3 and X4, can you think of an example of two variables that would be associated in this way?
+**Example of a cyclical (non-linear) pair?**
 
 `r hide("Show answer")`
-
-Any cyclical process;
-
-* Time in the day and how far the water reaches up the beach (ebb and flow)
-* Location of the sun in the sky
- 
+Any cyclical process, e.g., “time of day vs. tide height” or “sun elevation vs. day length”.
 `r unhide()`
 
-### Correlation Coefficient
+### 5.1.2 Correlation coefficients
 
-In this step we will look at the correlation coefficient as numerical description of linear association.
+Even when the pattern is non-linear it’s useful to see why Pearson *r* can mislead.
 
-Notice that in the previous step we found a non-linear association. The correlation coefficient would not be a valid measure to describe such an association, but nevertheless it is instructive to see why caution should be exercised in drawing conclusions about association from the correlation coefficient alone.
-
-We will use SPSS to compute the correlation coefficient.
-
-Analyze > Correlate > Bivariate
-Select X1, X2, ... X6 as the variables
-Click OK
-
-Consult the table Correlations in the output.
-
-There are several values in the table, but we are looking for the Pearson Correlation. The other numbers are the so called significance level, a concept we discuss soon, and the sample size.
-
-## Quiz
+*Analyze* › *Correlate* › *Bivariate*  
+Select all six variables → **OK**.
 
 ::: {.webex-check .webex-box}
 
-What is the correlation coefficient for the variables X1 and X2? `r fitb(.50, num = TRUE, tol = .01)`
+`X1`–`X2` correlation: `r fitb(.50, num = TRUE, tol = .01)`
 
-What is the correlation coefficient for the variables X2 and X6? `r fitb(.06, num = TRUE, tol = .01)`
+`X2`–`X6` correlation: `r fitb(.06, num = TRUE, tol = .01)`
 
-What is the correlation coefficient for the variables X3 and X4? `r fitb(-.80, num = TRUE, tol = .01)`
+`X3`–`X4` correlation: `r fitb(-.80, num = TRUE, tol = .01)`
 
-Can we interpret this correlation coefficient? `r mcq(c("answer" = "No, assumption of linearity violated", "No, assumption of association violated", "No, assumption of normality violated", "Yes, otherwise SPSS would give an error")[sample.int(4)])`
+Can we interpret `X3`–`X4`’s *r* at face value?  
+`r mcq(c("answer" = "No, assumption of linearity violated",
+         "No, assumption of association violated",
+         "No, assumption of normality violated",
+         "Yes, otherwise SPSS would give an error")[sample.int(4)])`
 
-Interpret the correlation between X5 and X6? `r mcq(c("answer" = "Moderate negative", "Moderate positive", "Weak positive", "Weak negative")[sample.int(4)])`
+Interpret `X5`–`X6`:  
+`r mcq(c("answer" = "Moderate negative",
+         "Moderate positive",
+         "Weak positive",
+         "Weak negative")[sample.int(4)])`
 
 :::
+
+*Take-away:* linear *r* works well for straight clouds (X1–X2) but can mask strong curved links (X3–X4).
+
+---
+
+## 5.2 Correlation – Work Dataset (`Work.sav`)
+
+Having practised on simulated data, let’s repeat the workflow on a real workplace dataset.
+
+> **File location:** `data/Work.sav`
+
+### 5.2.1 Why inspect the plot first?
+
+Before trusting Pearson *r* we check for
+
+* an **approximately linear** pattern, and  
+* **extreme values** that could distort the statistic.
+
+::: {.webex-check .webex-box}
+
+Select the **two** key reasons:
+
+`r mcq(c("To check if the relationship is linear"  = TRUE,
+         "To check if there are any extreme values" = TRUE,
+         "To check if the relationship is positive" = FALSE,
+         "To check if the variables are normally distributed" = FALSE,
+         "To check if the relationship is strong enough" = FALSE))`
+
+:::
+
+### 5.2.2 Create the scatter-plot
+
+`Graphs` › `Legacy Dialogs` › `Scatter/Dot` → **Simple Scatter**
+
+* X-axis =`scmental` (Mental Pressure)  
+* Y-axis =`scemoti`  (Emotional Pressure)
+
+*Paste* and *Run*.
+
+::: {.webex-check .webex-box}
+
+Is the cloud roughly **linear**? `r torf(TRUE)`
+
+Any obvious **outliers**? `r torf(FALSE)`
+
+Visual strength:  
+`r mcq(c("Moderately strong and positive" = TRUE,
+         "Moderately weak and positive"  = FALSE,
+         "Moderately strong and negative" = FALSE,
+         "Moderately weak and negative"  = FALSE)[sample.int(4)])`
+
+:::
+
+### 5.2.3 Compute Pearson *r*
+
+`Analyze` › `Correlate` › `Bivariate` → (`scmental`, `scemoti`) → **OK**
+
+::: {.webex-check .webex-box}
+
+Correlation (3 decimals): `r fitb(.54, num = TRUE, tol = .01)`
+
+Significance (α = .05)
+
+*Relationship is:*  
+`r mcq(c("significant" = TRUE, "not significant" = FALSE))`
+
+*p-value:*  
+`r mcq(c("< .05" = TRUE, "≥ .05" = FALSE))`
+
+:::
+
+### 5.2.4 Interpretation
+
+::: {.webex-check .webex-box}
+
+Population inference:
+
+`r mcq(c("We can conclude that there is a relationship between mental and emotional pressure in the population." = TRUE,
+         "We can conclude that there is no relationship between mental and emotional pressure in the population." = FALSE,
+         "We cannot draw a conclusion on whether or not there is a relationship." = FALSE)[sample.int(3)])`
+
+:::
+
+*Take-away:* Mental and emotional pressure show a **moderately strong, significant positive relationship**—employees who feel more mentally pressured also tend to feel more emotionally pressured.
+
+---
