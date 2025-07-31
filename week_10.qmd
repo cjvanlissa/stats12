@@ -1,0 +1,154 @@
+# assumptions
+
+```{r, include = FALSE}
+source("R/booktem_setup.R")
+source("R/my_setup.R")
+```
+
+# Why Regression Assumptions Matter
+
+When we fit any linear regression model—whether a single-predictor (bivariate) or a multiple-predictor equation—we’re making a handful of working assumptions about the data. If those conditions hold, the slope estimates, their standard errors, and the associated p-values mean exactly what the textbook says they mean. When an assumption is violated, the model can still be run, but its numbers shift in interpretation (and sometimes in accuracy).
+
+This section reviews each assumption, explains why it matters, shows a quick diagnostic you can run, and lists practical fixes—so your regression, simple or multiple, rests on solid ground.
+
+### 1 Linearity – the “straight-line” assumption
+
+Regression lines answer the simple question  
+**“How much does Y change when X goes up by one step?”**  
+That answer only makes sense when the relationship is *roughly straight*.
+
+**Check**  
+1. Create a scatter-plot of *Y* vs. each *X*.  
+2. In your software, click **Add fitted line / Fit line at total** (the default straight trend line).  
+3. Ask: *Does the line run cleanly through the cloud, or does the cloud bend away from it?*
+
+**If the pattern is curved**  
+
+* Try a basic transformation (e.g., log X, √X, log Y).  
+* Add a squared term (X²) so the model can bend once.  
+
+### 2 Correct Scale of Measurement – keep numbers numeric
+
+Regression treats the outcome like a ruler, so **Y must be a continuous number** (height, test score, salary).  
+Predictors (the X’s) can be continuous or simple 0 / 1 codes such as 0 = “control”, 1 = “treatment”.
+
+**Why it matters**  
+Labeling an ordered group “1, 2, 3” pretends the gaps are equal; putting a category like “red, green, blue” on the Y-axis breaks the maths behind residuals and p-values.
+
+**Check**  
+Open *Variable View* (or the metadata pane) and confirm the **measurement level** and **value labels** for every variable before running the model.
+
+**If it’s wrong**  
+
+* Re-code an ordinal X into **dummy variables** (one 0/1 column per category).  
+* If Y is not continuous, choose a model designed for that scale (e.g., logistic for yes/no outcomes, Poisson for counts).
+
+### 3 Reliable Predictors – measure your X’s well
+
+Regression assumes each predictor is recorded **accurately**.  
+If the X-scores are noisy or inconsistent, the slope toward Y shrinks and your model blames “error” instead of the real effect.
+
+**Check**  
+
+* For multi-item questionnaires, look at **Cronbach’s α** (≥ 0.70 is a common rule of thumb).  
+* If you have repeat measurements, compare them—high test–retest correlation signals good reliability.
+
+**If reliability is low**  
+
+* Replace the instrument with a more precise one.  
+* Combine several related items into a single average or sum score (reduces random noise).  
+* Flag the issue in your write-up—interpreting weak or non-significant slopes is risky when the predictor itself is shaky.
+
+### 4 Homoscedasticity – equal “noise” everywhere
+
+A regression line assumes that the **scatter of residuals stays about the same** no matter whether the predicted value is low, medium, or high.  
+If the spread widens (or narrows) as Y grows, standard errors and confidence intervals become unreliable.
+
+**Check**  
+
+1. Save the residuals (`Save > Unstandardized residuals` in most software).  
+2. Make a **Residual-versus-Predicted** scatter-plot.  
+3. A random “cloud” is fine; a **megaphone** or **cone** shape signals trouble.
+
+**If the spread is unequal**  
+
+* Try a simple transformation of Y (e.g., log or square-root) to compress the scale.  
+* Or rerun the model with **robust standard errors** (sometimes called “sandwich” errors) which adjust for unequal variance.  
+* In severe cases, use **weighted least squares**, giving less weight to points in the high-variance region.
+
+
+### 5 Independence of Observations – no “copy-paste” data points
+
+Regression treats every row of data as a **separate**, unrelated piece of evidence.  
+When rows are actually **clustered**—students sharing a classroom, patients treated by the same doctor, repeated surveys from the same person—the errors line up and your model looks more precise than it really is.
+
+**Check** 
+
+* **Ask about the design:** Were the data collected from groups, time-points, siblings?  
+
+**If rows are not independent**  (I do not know whether this is appropriate for the level of the course)
+
+* Use a **multilevel (mixed-effects) model** to let each class/doctor/person have its own intercept (or slope).  
+* For time series, add **lagged terms** or switch to an autoregressive model.  
+* At minimum, cluster-robust (sandwich) standard errors can partially correct the bias.
+
+### 6 Normality of Residuals – bell-shaped “leftovers”
+
+After the line is fitted, the **residuals** (predicted minus actual) should flutter randomly around zero in a roughly bell shape.  
+For large samples this detail hardly matters, but with a small class-sized dataset the *t*-tests behind every p-value assume those bell-shaped tails.
+
+**Check**  
+
+* Save the residuals and draw a **histogram** or **Q–Q plot**.  
+* For really small *N* (≈ < 50) you can add a **Shapiro–Wilk** normality test.
+
+**When the curve looks lumpy**  
+
+* A gentle **log or square-root transform** of Y often straightens skew.  
+* Or skip normal-theory altogether: **bootstrap** the confidence intervals and p-values.  
+* Remember: with 30 + cases per predictor, the Central Limit Theorem already cushions minor non-normality.
+
+### 7 No Outliers – keep one point from hijacking the line
+
+A single extreme data point can yank the regression line toward itself, bending all estimates.
+
+**Check**  
+
+* Quick scan: **box-plot** each variable; anything beyond 1.5 × IQR deserves attention.  
+* Influence diagnostics: **leverage**, **Cook’s distance**, or **DFITS** highlight points with disproportionate pull.
+
+**If an outlier shows up**  
+
+1. **Verify the data entry** – is it a typo or genuine?  
+2. Re-run the model **with and without** the case; does the story change?  
+3. If the point is valid but influential, report both versions or switch to a **robust regression** (e.g., Huber weighting) that dampens its impact.
+
+
+### 8 No Multicollinearity – applies **only** to multiple regression
+
+When you have **two or more predictors**, they should each add something unique.  
+If two X-variables march in lock-step (say, `income` and `years of education`), the model can’t decide which one deserves credit for shifts in Y—slopes wobble and standard errors inflate.
+
+*(In simple, one-predictor regression this issue cannot occur because there’s nothing for X to “co-line” with.)*
+
+**Check**  
+
+* **Variance Inflation Factor (VIF)** – rule of thumb: VIF ≤ 5 is usually safe.  
+* **Condition index** – values above 30 hint at serious overlap.
+
+**If overlap is high**  
+
+* Drop one of the redundant predictors or combine them (e.g., average the two tests of verbal ability).  
+* Extract a **principal-components score** that captures their shared variance.  
+* Use a shrinkage method such as **ridge** or **lasso** regression, which dampens unstable coefficients.
+
+
+### Putting It All Together
+
+A sensible workflow is:
+
+1. **Plot first** – reveal curvature, heteroskedasticity, outliers, non-normality—often at a glance.  
+2. **Numerical diagnostics** – VIFs for multicollinearity, formal tests for heteroskedasticity or autocorrelation.  
+3. **Refine the model** – transform, add terms, or choose a model that matches the data structure.
+
+Only after those checks do the p-values and confidence intervals carry the weight we usually give them in a results section.
