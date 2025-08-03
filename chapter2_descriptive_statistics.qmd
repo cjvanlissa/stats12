@@ -104,7 +104,7 @@ A formative test helps you gauge how well you’ve grasped the ideas and calcula
 #| results = "asis"
 #| echo    = FALSE
 #| cache   = FALSE
-add_mcs("descriptive_test_questions.csv")
+add_mcs("ch2_formativ.csv")
 ```
 
 # Tutorial
