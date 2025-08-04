@@ -5,112 +5,31 @@ source("R/booktem_setup.R")
 source("R/my_setup.R")
 ```
 
-Correlation is a statistical technique used to **measure and describe the relationship between two variables**.  
-Typically, the two variables are observed as they occur naturally—there is **no manipulation** or experimental control.  
-For instance, a researcher might:
+## Correlation – Describing Relationships Between Variables {#sec-correlation}
 
-* Retrieve each student’s high‑school GPA from records (academic performance)  
-* Survey that student’s family to record annual income  
+Correlation is a statistical technique used to **quantify the degree to which two variables move together**. It provides a concise summary of the association between pairs of scores across individuals. For example, a researcher might retrieve each student’s high school GPA (a measure of academic performance) and pair it with their family’s annual income. The goal is to determine whether higher grades tend to correspond with higher income. In correlational studies, each individual contributes two measurements, commonly referred to as *X* and *Y* forming the foundation for analysis.
 
-The researcher then examines whether a relationship exists between grades and family income.  
-> **Key point:** Each individual provides **two scores**—one for each variable—usually labelled *X* and *Y*.
+To explore this relationship visually, researchers often rely on scatter plots. In a scatter plot, *X* values appear along the horizontal axis and *Y* values along the vertical. Each point on the plot corresponds to one participant’s pair of scores. These plots allow immediate detection of linear trends, and outliers—patterns that may remain obscured when examining data in purely numerical or tabular form.
 
-## Visualising Pairs of Scores
+At its core, correlation analysis is concerned with two key features of the relationship between variables: **direction** and **strength**. The direction may be positive—indicating that increases in *X* tend to be accompanied by increases in *Y*—or negative—suggesting that higher *X* values predict lower *Y* values. The **strength** of this association is expressed by the magnitude of the correlation coefficient. An *r* value close to ±1 indicates a near-perfect linear relationship, whereas an *r* near 0 signals little to no linear trend. Since Pearson’s *r* specifically quantifies linear associations, it is not suited for capturing non-linear patterns, even if a strong relationship exists in another form.
 
-Pairs of scores can be displayed in a **table** or on a **scatter plot**.
+Before arriving at the correlation coefficient, statisticians often begin with **covariance**—a preliminary measure of how two variables vary together. Covariance reflects direction: it is positive when high values of *X* accompany high values of *Y*, and negative when they move in opposite directions. However, its numerical value is not directly interpretable because it is tied to the units of the measurement. A covariance expressed in centimeters and kilograms will differ from one computed in meters and pounds, even if the underlying association remains unchanged. As a result, covariance cannot meaningfully convey the *strength* of a relationship—only whether the variables tend to move in the same or opposite directions.
 
-* **Scatter plot:**  
-  *Horizontal axis* = X values  
-  *Vertical axis* = Y values  
-  Each point represents one individual.
+To address this limitation, the **Pearson correlation coefficient (*r*)** is computed by standardizing covariance. Specifically, the covariance is divided by the product of the standard deviations of *X* and *Y*, which removes the influence of measurement units from the calculation. This standardization not only allows correlations to be expressed on a common –1 to +1 scale, but also enables meaningful interpretation of both **direction** and **strength**. Because the resulting value is unit-free, it can be compared across variables measured on different scales and across studies.
 
-A scatter plot immediately reveals patterns—straight‑line trends, curves, clusters, or outliers.
+Because the Pearson correlation coefficient expresses direction and strength independently of measurement units, it serves as a valuable tool for evaluating theoretical expectations. In psychology, medicine, and related fields, many theories propose that particular variables should exhibit a specific form of association. For example, a developmental framework might anticipate a positive correlation between parents’ IQs and their child’s IQ, whereas a clinical model could predict a negative association between mindfulness and cortisol levels. Observing the expected correlation offers empirical support for the theory; the absence or reversal of the relationship may call for theoretical refinement or reconsideration.
 
-## What a Correlation Describes
+Despite their utility, correlation coefficients must be interpreted with care. First and most importantly, **correlation does not imply causation**. A strong association between two variables does not mean that one causes the other. For example, ice-cream sales and drowning deaths may correlate positively—not because one causes the other, but because both increase with hot weather. Establishing causality requires experimental control, not statistical association. This topic will be explored in more depth in **Week 7**.
 
-A single correlation number summarises **three characteristics** of the X–Y relationship.
+Secondly, a **restricted range** of scores can obscure or distort relationships. If only a narrow segment of the variable is sampled, such as examining IQ and creativity within a highly selective university, correlations may appear weaker than they truly are. 
 
-### 1  Direction  
-* **Positive (+)** – variables change together: when the value of **X** increases from one individual to another, the value of **Y** tends to increase as well; likewise, when **X** decreases, **Y** decreases.  
-* **Negative (–)** – variables move oppositely: as **X** increases, **Y** decreases (and vice-versa).
+Third, **outliers** can have a disproportionate impact. A single extreme case can artificially inflate or deflate *r*, potentially leading to misleading conclusions. This is dramatically illustrated by **Anscombe’s Quartet**—a set of four datasets that share nearly identical statistical properties, including the same correlation coefficient, yet differ markedly in their underlying structure. In one case, a single outlier drives the correlation; in another, the relationship is non-linear. Despite similar *r* values, each scatter plot tells a different story. For this reason, **visual inspection of scatter plots** is essential before interpreting correlation coefficients.
 
-### 2  Form  
-* Most common: **linear** – points cluster around a straight line.  
-* Other forms exist; special correlations can capture curves or monotonic trends.
-
-### 3  Strength (Consistency)  
-* **Perfect** relationship → points lie exactly on a line → |r| = 1.00  
-* **No** relationship → points scattered randomly → r = 0  
-* Values between 0 and 1 measure how tightly points hug the line.
-
-Direction (sign) and strength (magnitude) are **independent**.  
-*r* = +0.80 and *r* = –0.80 are equally strong but in opposite directions.  
-A valid correlation **cannot** exceed +1.00 or –1.00.
-
-## Covariance – the Raw “Move-Together” Score
-
-Before we standardise anything, statisticians look at **covariance**—a raw gauge of how two variables shift in tandem.
-
-* **Direction only**  
-  *Positive covariance* tells us the variables rise and fall together; *negative covariance* says they move in opposite directions.  
-  Crucially, the *size* of the number does **not** tell you “how strong” the relationship is, because…
-
-* **Units matter**  
-  Covariance is expressed in the combined units of the two variables (e.g., cm × kg). Change either scale (switch centimetres to metres, dollars to euros) and the covariance value changes—even though the underlying relationship is identical.
-
-* **Why we still need correlation**  
-  To talk meaningfully about *strength*, we divide covariance by the spreads of X and Y.  
-  That standardisation removes units and caps the result between –1 and +1, giving us
-  **Pearson’s *r***—a number whose magnitude *and* sign are comparable across studies.
-
-> Think of covariance as the raw “move-together” handshake; correlation turns that handshake
-> into a unit-free score, letting us discuss both **direction and strength** on a common scale.
-
-
-## The Pearson Correlation
-
-The **Pearson correlation (r)** quantifies the **degree and direction of a linear relationship** between two variables.
-
-## Where and Why Correlations Are Used
-
-1. **Prediction**  
-   When two variables are correlated, knowing a person’s score on **X** helps you *predict* their likely score on **Y**. College admissions are a classic case: universities correlate applicants’ SAT scores with first-year GPA. A strong positive correlation means an admissions officer can forecast academic performance with quantifiable accuracy; the stronger the correlation, the smaller the typical prediction error (a concept formalised later in regression).
-
-2. **Validity – Does a test measure what it claims?**  
-   A new questionnaire that purports to assess *anxiety* should correlate highly with established anxiety inventories, moderately with related constructs such as neuroticism, and only weakly with unrelated traits like extraversion. These patterns—**convergent** and **discriminant** validity—show that the test taps the intended construct rather than something else.
-
-3. **Reliability – How stable or consistent is a measure?**  
-   Administer an intelligence test on Monday and again two weeks later: a large test-retest correlation (e.g., *r* ≈ 0.90) indicates score stability and hence reliability. Lower correlations suggest random measurement error or situational drift. The same logic underlies “split-half” and “internal consistency” checks, where correlations among test items show whether they all tap the same construct.
-
-4. **Theory Verification**  
-   Many psychological or biomedical theories predict that two variables should relate in a particular direction. A developmental theory, for example, may predict a positive correlation between parents’ IQs and their child’s IQ; a clinical hypothesis may expect a negative correlation between mindfulness and stress hormones. Demonstrating the predicted correlation supports the theory, whereas an absent or opposite correlation prompts revision or rejection of the theoretical account.
-
-## Interpreting Correlations – Four Cautions
-
-1. **Correlation ≠ Causation**  
-   A correlation simply indicates that **X** and **Y** move together—it says **nothing** about *why* they do so.  
-   *Example:* Ice-cream sales and drowning deaths correlate positively. Hot weather is the lurking third factor driving both. Concluding that buying ice-cream causes drowning would be a causal fallacy. Only a controlled experiment, where one variable is manipulated and others held constant, can establish cause-and-effect.
-
-2. **Restricted Range**  
-   A correlation computed from a narrow slice of data can understate—or occasionally overstate—the true relationship.  
-   *Example:* If you correlate IQ with creativity using only university students (IQ range perhaps 110–130), *r* may be near zero even though a broader sample (IQ 70–150) shows a clear positive trend. **Never generalise beyond the range of scores actually sampled.**
-
-3. **Outliers**  
-   One or two extreme data points can dominate the correlation calculation because *r* considers every pair of scores.  
-   *Example:* In a scatter plot of five ordinary points that show no trend, adding a single extreme point far out on both axes can swing *r* from ≈ 0 to +0.85 (or −0.85) and completely change the apparent conclusion. **Always inspect a scatter plot** before trusting the numerical value.
-
-4. **Proportion of Variability (r²)**  
-   The raw correlation coefficient can feel abstract. Squaring it yields **r²**, the *coefficient of determination*—the proportion of variability in **Y** that can be predicted from **X**.  
-   *Example:* *r* = 0.50 → *r²* = 0.25 → 25 % of the variation in **Y** is associated with differences in **X**; the other 75 % is due to factors not captured by the correlation. Reporting *r²* helps readers judge practical significance, not just statistical strength.
+![Anscombe’s Quartet](Anscombe's_quartet_3.svg.png)
 
 ## Summary
 
-* **Covariance** is the raw “move-together” score—its sign shows *direction*, but its size depends on the measurement units.  
-* **Correlation (Pearson’s *r*)** is **standardised covariance**, giving a unit-free measure of linear *direction* **and** *strength* on a –1 … +1 scale.  
-* **Key applications:** prediction, test validity, test reliability, and theory checks.  
-* Always interpret with care—look at causality, restricted range, outliers, and remember to translate *r* into practical meaning via *r²*.
-
-Covariance and correlation are powerful descriptive tools—knowing both their possibilities **and** their limits is essential before drawing conclusions or making predictions.
+In summary, **covariance** offers an initial metric for gauging whether two variables tend to vary in the same or opposite direction. However, because its magnitude depends on the measurement units of the variables involved, it cannot be directly interpreted in terms of strength. The **Pearson correlation coefficient (*r*)** addresses this limitation by standardizing the covariance, yielding a unit-free statistic bounded between –1 and +1. This standardized measure expresses both the **direction** and **strength** of a linear relationship, enabling meaningful comparisons across contexts. Nevertheless, interpreting correlations requires caution—particularly with respect to restricted sampling ranges, the influence of outliers, and the fundamental distinction between correlation and causation.
 
 # Formative Test
 
@@ -121,7 +40,7 @@ Work through it after you’ve studied the lecture slides (and before the next l
 #| results = "asis"
 #| echo    = FALSE
 #| cache   = FALSE
-add_mcs("ch3_formative.csv")
+add_mcs("ch3_formative_corrected.csv")
 ```
 
 # Tutorial
@@ -153,13 +72,13 @@ Describe **linearity**, **direction**, and **strength** for each plot.
 
 ::: {.webex-check .webex-box}
 
-Is the relationship between `X1`–`X2` positive? `r torf(TRUE)`
+“The relationship between `X1` and `X2` is positive.” `r torf(TRUE)`
 
-Is the relationship between `X5`–`X6` positive? `r torf(FALSE)`
+“The relationship between `X5` and `X6` is positive.” `r torf(FALSE)`
 
-Is the relationship between `X1`–`X2` linear? `r torf(TRUE)`
+“The relationship between `X1` and `X2` is linear.” `r torf(TRUE)`
 
-Is the relationship between `X3`–`X4` linear? `r torf(FALSE)`
+“The relationship between `X3` and `X4` is linear.” `r torf(FALSE)`
 
 Strength of `X1`–`X2`:  
 `r mcq(c("answer" = "moderate", "weak", "zero", "strong")[sample.int(4)])`
@@ -207,13 +126,13 @@ Interpret `X5`–`X6`:
 
 :::
 
-*Take-away:* linear *r* works well for straight clouds (X1–X2) but can mask strong curved links (X3–X4).
+*Take-away:* Pearson’s *r* is good at detecting linear patterns (like X1–X2), but it may be close to zero even when the variables have a strong curved pattern (like X3–X4).
 
 ---
 
 ## 5.2 Correlation – Work Dataset (`Work.sav`)
 
-Having practised on simulated data, let’s repeat the workflow on a real workplace dataset.
+Having practiced on simulated data, let’s now apply the same workflow to a real dataset related to the workplace.
 
 > **File location:** `data/Work.sav`
 
