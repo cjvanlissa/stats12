@@ -1,0 +1,335 @@
+
+# Descriptive Statistics {#sec-descriptive}
+
+```{r, include = FALSE}
+source("R/booktem_setup.R")
+source("R/my_setup.R")
+```
+
+Most rigorous analyses—especially those that are preregistered—begin with a planned, non-inferential step: **summarising the raw data**.  
+These *descriptive statistics* are part of the analysis plan itself; they do **not** involve testing hypotheses or fishing for effects. Their role is to provide a concise snapshot that answers two pre-specified questions:
+
+1. **Where is the centre of the distribution?**  
+2. **How much do scores spread out around that centre?**
+
+Because no analytical decisions are changed in light of these summaries, reporting them does not jeopardise the integrity of confirmatory tests. Instead, they:
+
+* spotlight data-entry errors and outliers flagged in the preregistration,  
+* reveal whether the data meet stated modelling assumptions (e.g., roughly symmetric errors), and  
+* give any reader—specialist or not—a transparent sense of scale and typical variation.
+
+---
+
+## What Do We Mean by a *Statistical Model*? {#sec-model}
+
+Think of a statistical model as a *story* about how data arise:
+
+> **observed value = systematic part (signal) + random part (noise)**
+
+Descriptive statistics give us the first rough draft of that story:
+* a single value that stands in for the whole data set (signal), and  
+* a measure of how far typical scores wander from that value (noise).
+
+---
+
+## Finding the Centre: Measures of Central Tendency {#sec-central}
+
+> *Central tendency* boils an entire distribution down to **one representative number**.
+
+### Mean – the balance point  
+Add everything up, divide by the count. Uses every score, so it is information-rich **and** sensitive to extreme values.
+
+### Median – the middle milestone  
+Line the scores up; the median sits where half lie below and half above. Because it depends only on order, it stays put even when outliers pull the mean around.
+
+### Mode – the crowd favourite  
+The most common score or category. It is the only valid “centre” for purely **nominal** data (e.g., favourite colour) and flags multiple peaks that may reveal hidden sub-groups.
+
+**Choosing a centre is a trade-off**:  
+*mean* for full precision, *median* for robustness, *mode* for categories or multi-peaked shapes.
+
+---
+
+## Gauging the Spread: Measures of Variability {#sec-variability}
+
+A centre tells us *what is typical*; a spread tells us *how typical*.
+
+### Range – full span  
+Subtract the smallest value from the largest. Quick, intuitive, but unstable because it relies on just two observations.
+
+### Sum of Squares – total “spread energy”  
+Take every distance from the mean, square it (so big gaps count a lot), and add them up. This raw “energy” fuels more refined measures.
+
+### Variance – average squared distance  
+Spreads the sum of squares evenly across all scores, giving a sense of the overall scatter. In samples we divide by one less than the number of scores to avoid systematic under-estimation.
+
+### Standard Deviation – back to original units  
+The square-root of the variance turns “squared distance” back into the same units as the data—years, centimetres, milliseconds. It reads as the *typical gap* between an individual score and the mean.
+
+Small SD → scores huddle close; large SD → scores fan out.
+
+---
+
+## Effects of Transformations & Outliers {#sec-transform}
+
+| Transformation            | What happens to the **centre** | What happens to **spread** |
+|---------------------------|---------------------------------|----------------------------|
+| Add / subtract constant   | Shifts by that constant         | No change                  |
+| Multiply / divide by constant | Scales by that factor        | Spread scales by the same factor (or its square for variance) |
+| Inject one extreme score  | Pulls centre toward outlier     | Spread balloons upward     |
+
+*Take-away*: Re-coding units (e.g., inches to centimetres) rescales both centre and spread, while an outlier can inflate variability without budging the median.
+
+---
+
+## Why Descriptives Matter {#sec-bridge}
+
+* **Data cleaning** – Outliers leap out when you know the usual range.  
+* **Analysis choices** – Skewed or heavy-tailed distributions may call for robust or non-parametric methods.  
+* **Transparency** – Readers can judge your results only if they see the data’s headline features.  
+* **Communication** – “Participants averaged *8.9 hours of screen time per day* (SD ≈ 1 hr)” paints an instant picture.
+
+Descriptive statistics are not a warm-up act; they are the **foundation** on which every inferential claim rests.
+
+---
+
+#Lecture 
+
+
+# Formative Test
+
+A formative test helps you gauge how well you’ve grasped the ideas and calculations from **Chapter 2 – Descriptive Statistics**. Try the quiz after working through the lecture slides but **before** our live meeting, so we can focus on any topics that still feel wobbly. If you miss a question you’ll see a hint that points you back to the relevant slide or worked example.
+
+```{r}
+#| results = "asis"
+#| echo    = FALSE
+#| cache   = FALSE
+add_mcs("ch2_formativ.csv")
+```
+
+# Tutorial
+
+
+## Descriptive Statistics
+
+### Step 1
+
+As explained before, the first step in any statistical analysis involves **inspection of the data**. In the previous assignment we looked at graphical summaries.
+
+This assignment shows you how to explore data using **descriptive statistics**—values such as the mean, standard deviation, maximum, and minimum.
+
+> **Use the same data file as in the previous tutorial.**
+
+---
+
+### Step 2 – Descriptives for Key Variables
+
+We will first examine the descriptive statistics for **Optimism, Life Satisfaction,** and **Negative Emotions**.
+
+Compute descriptive statistics as follows:
+
+1. *Analyze > Descriptive Statistics > Descriptives*  
+2. Select **Optimism**, **Life Satisfaction**, **Negative Emotions**  
+3. Click **OK**
+
+SPSS opens a new **Output** window with a table of descriptives for the selected variables.
+
+---
+
+### Step 3 – Frequency Tables
+
+In the previous step we computed the average value and standard deviations. However, for nominal and ordinal variables, the average value is meaningless. To explore nominal and ordinal variables we may produce **frequency tables**. A frequency table shows the observed percentage for each level of the variable.
+
+Generate frequencies for **Smoke** and **Relation**:
+
+1. *Analyze > Descriptive Statistics > Frequencies*  
+2. Select **Smoke** and **Relation**  
+3. Click **OK**
+
+SPSS now adds a table with the frequency distributions of the selected variables to the output file.
+
+*Note:* SPSS reports **Percent** and **Valid Percent**. These differ only when missing values are present (none in this dataset).
+
+---
+
+#### Extra – Spotting Multimodality {.smaller}
+
+Sometimes a single mean or median masks sub-groups.
+
+1. *Graphs > Legacy Dialogs > Histogram*  
+2. Choose **Life Satisfaction** for *Variable* and click **OK**
+
+If you notice **two peaks**, colour the bars by **Relation** (single vs. relationship):
+
+1. *Graphs > Chart Builder*  
+2. Drag **Histogram** onto the canvas  
+3. Place **Life Satisfaction** on the *x*-axis  
+4. Drag **Relation** into *Cluster on X*  
+5. Click **OK**
+
+*Take-away:* multiple modes often reveal hidden clusters that may need separate analysis.
+
+---
+
+<!-- variable descriptions kept for reference -->
+<!-- stress: 1 = no stress; 2 = work-related; 3 = personal-life -->
+<!-- smoke: 1 = non-smoker; 2 = smoker -->
+<!-- relation: 1 = single; 2 = relationship -->
+<!-- optim:   1–50 -->
+<!-- satis:   1–50 -->
+<!-- negemo:  1–50 -->
+
+## Quiz 1 – Basic Descriptives
+::: {.webex-check .webex-box}
+
+How many participants are in the sample? `r fitb(780, num = TRUE)`
+
+What is the mean value of Optimism? `r fitb(19.13, num = TRUE, tol = .01)`
+ 
+For which of the variables is the spread in the scores highest? `r mcq(c("answer" = "OPTIM", "SATIS", "NEGEMO")[sample.int(3)])`
+
+The minimum and maximum observed scores for Negative Emotions were: [`r fitb(3, num = TRUE)`, `r fitb(37, num = TRUE)`].
+
+What percentage of participants is a non-smoker? `r fitb(48.1, num = TRUE, tol = .1)`
+
+What percentage of participants is in a relationship? `r fitb(47.9, num = TRUE, tol = .1)`
+
+:::
+:::
+
+---
+
+### Weighted Mean {.smaller}
+
+Suppose Class A (*n* = 12, mean = 6) and Class B (*n* = 8, mean = 7) are merged.  
+SPSS effectively multiplies each mean by its *n*, sums those products, and divides by the **total** 20 students, yielding **6.4**.
+
+*Quick SPSS route*  
+
+- Merge the two files if separate (*Data > Merge Files*).  
+- Run *Analyze > Descriptive Statistics > Descriptives* on the combined score column.
+
+---
+
+### Step 4 – Finding Erroneous Values
+
+One reason to inspect descriptives first is to spot **erroneous values** (e.g., age 511 instead of 51).
+
+Use the descriptives to find any out-of-range values, then:
+
+1. *Data > Sort Cases*  
+2. Sort the suspect variable ascending or descending  
+3. Delete rows with invalid values
+
+At this stage we remove entire cases; later you’ll learn gentler missing-data techniques.
+
+---
+
+### Step 5 – Group Comparison with Split File
+
+Research question: *“Are non-smokers more satisfied with life than smokers?”*
+
+1. *Data > Split File > Compare Groups* → choose **Smoke**  
+2. Run *Analyze > Descriptives* on **Life Satisfaction**
+
+SPSS now outputs separate means for smokers and non-smokers.
+
+## Quiz 2 – Group Means
+::: {.webex-check .webex-box}
+
+Was there an erroneous value in the data file? Enter it here: `r fitb(220, num = TRUE)`
+
+If you delete that value, how will the **mean** change? `r mcq(c("answer" = "Becomes smaller", "Stays the same", "Becomes larger")[sample.int(3)])`
+
+If you delete that value, how will the **standard deviation** change? `r mcq(c("answer" = "Becomes smaller", "Stays the same", "Becomes larger")[sample.int(3)])`
+
+Who is more satisfied in this sample? `r mcq(c("answer" = "Smokers", "Non-smokers")[sample.int(2)])`
+
+Does this difference necessarily hold in the population? `r mcq(c("answer" = "Can't tell", "No", "Yes")[sample.int(3)])`
+
+:::
+
+---
+
+### Step 6 – Quick Check: How Recoding Affects Spread {.smaller}
+
+*Add 10 points* to every Life-Satisfaction score:
+
+1. *Transform > Compute Variable*  
+2. Target variable: `SATIS_plus10`  
+3. Numeric expression: `SATIS + 10` → **OK**
+
+Run Descriptives on both variables:
+
+- Mean shifts up by 10  
+- **SD is unchanged**
+
+*Multiply by 3* (expression `SATIS * 3`):
+
+- Mean × 3  
+- **SD × 3**
+
+---
+
+## More Descriptive Statistics
+
+Describing the data is an essential first step in any research context.
+
+### Central Tendency by Hand
+
+Grades: 6  3  4  6  7  6  8  9  10  9
+
+Compute **mean, median, mode** by hand.
+
+`r hide("Remind me how")`
+- Mode = most common value  
+- Median = middle value (or midpoint)  
+- Mean = sum / *n*  
+`r unhide()`
+
+#### Quiz 3 – Hand Computation
+::: {.webex-check .webex-box}
+
+Mean `r fitb(6.8, num = TRUE, tol = .1)`
+
+Median `r fitb(6.5, num = TRUE)`
+
+Mode `r fitb(6, num = TRUE)`
+
+:::
+
+---
+
+### Variation by Hand
+
+Grades: 2  7  6  7  8  9
+
+Compute **variance** and **standard deviation**.
+
+`r hide("Remind me how")`
+Variance = average squared distance from mean  
+SD = √ variance  
+`r unhide()`
+
+> **Why divide by *n – 1*?**  
+> After the mean is fixed, only *n – 1* deviations are free to vary, so dividing by *n – 1* keeps the sample variance unbiased.
+
+#### Quiz 4 – Hand Computation
+::: {.webex-check .webex-box}
+
+Variance `r fitb(5.9, num = TRUE, tol = .1)`
+
+Standard Deviation `r fitb(2.43, num = TRUE, tol = .1)`
+
+:::
+
+---
+
+### Verifying in SPSS
+
+Enter the six grades, name the variable, then:
+
+1. *Analyze > Descriptive Statistics > Descriptives*  
+2. **Options… > Variance** → **Continue > OK**
+
+Confirm SPSS matches your hand calculations.
