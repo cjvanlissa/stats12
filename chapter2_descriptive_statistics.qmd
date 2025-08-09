@@ -207,44 +207,59 @@ Imagine I tell you that, in one class, the average grade is a 5, with a standard
 
 ## Effects of Transformations & Outliers {#sec-transform}
 
-| Transformation            | What happens to the **centre** | What happens to **spread** |
+| Transformation            | The **mean**... | The **SD**... |
 |---------------------------|---------------------------------|----------------------------|
-| Add / subtract constant   | Shifts by that constant         | No change                  |
-| Multiply / divide by constant | Scales by that factor        | Spread scales by the same factor (or its square for variance) |
-| Inject one extreme score  | Pulls centre toward outlier     | Spread balloons upward     |
+| Add / subtract constant   | Shifts by that constant         | Doesn't change                  |
+| Multiply / divide by constant | Scales by that factor        | Scales by that factor |
+| Inject one extreme score  | Pulls center toward outlier     | Increases     |
 
-*Take-away*: Re-coding units (e.g., inches to centimetres) rescales both centre and spread, while an outlier can inflate variability without budging the median.
-
----
+*Example*: Changing units (e.g., converting centimeters to inches) would rescale both the mean and SD.
 
 ## Why Descriptives Matter {#sec-bridge}
 
-* **Data cleaning** – Outliers leap out when you know the usual range.  
-* **Analysis choices** – Skewed or heavy-tailed distributions may call for robust or non-parametric methods.  
-* **Transparency** – Readers can judge your results only if they see the data’s headline features.  
-* **Communication** – “Participants averaged *8.9 hours of screen time per day* (SD ≈ 1 hr)” paints an instant picture.
+* **Data cleaning**: Outliers leap out when you know the usual range.  
+* **Analysis choices**: Skewed or heavy-tailed distributions may call for robust or non-parametric methods.  
+* **Transparency**: Readers can judge your results only if they see the data’s headline features.  
+* **Communication**: "Participants averaged *8.9 hours of screen time per day* (SD = 1 hr)" paints an instant picture.
 
-Descriptive statistics are not a warm-up act; they are the **foundation** on which every inferential claim rests.
+## Context of Discovery VS Justification
 
----
+```{r figecwagenmakers, fig.cap="An interpretation of De Groot’s empirical cycle, by Wagenmakers, Dutilh, & Sarafoglou, 2018. CC-BY: Artwork by Viktor Beekman, concept by Eric-Jan Wagenmakers"}
+knitr::include_graphics("creativity_verification.jpg")
+```
 
-Most rigorous analyses—especially those that are preregistered—begin with a planned, non-inferential step: **summarising the raw data**.  
-These *descriptive statistics* are part of the analysis plan itself; they do **not** involve testing hypotheses or fishing for effects. Their role is to provide a concise snapshot that answers two pre-specified questions:
+In the first chapter, we described De Groot's empirical cycle as a model of cumulative knowledge acquisition through scientific research.
+A crucial assumption of this cycle, highlighted by Wagenmakers and colleagues (see \@ref(fig:figecwagenmakers)),
+is the distinction between the context of discovery and the context of justification.
+The context of discovery is exploratory: we peruse data, looking for interesting patterns that might spark a new hypothesis.
+The context of justification is confirmatory: we test a theory-driven hypothesis.
+In order to obtain an unbiased test of a hypothesis, the hypothesis cannot be shaped by prior exploration of the data.
+If we first observe an interesting pattern in data (exploratory), and then conduct a test of that pattern (confirmatory), the test is more likely to confirm the pattern.
+There are legitimate ways to explore data looking for interesting patterns, and machine learning can be a helpful tool in this search [@vanlissaDevelopmentalDataScience2022].
+However, be careful of any cross-contamination between exploration and confirmation.
+Any pattern observed during exploration can introduce bias in subsequent confirmatory tests [@hoijtinkOpenEmpiricalCycle2023].
 
-1. **Where is the centre of the distribution?**  
-2. **How much do scores spread out around that centre?**
+Very often, the first thing researchers do when collecting or accessing a dataset is to calculate and examine descriptive statistics.
+This common practice introduces a potential risk of cross-contamination between exploration and confirmation:
+observing the descriptive statistics may influence other downstream analysis decisions.
+This is not a problem when conducting purely exploratory analyses,
+and it is also not a problem if the analyses have been preregistered.
+Preregistration means that the analysis plans have been published in a time-stamped archive before collecting or accessing the data, so it's possible for others to check whether the reported analyses were executed as planned [@peikertWhyDoesPreregistration2023], with changes made after seeing the descriptive analyses.
+In all other cases: be mindful of the risk of introducing bias.
+For an example of how preregistered hypothesis tests can be combined with rigorous exploration using machine learning, see @vanlissaComplementingPreregisteredConfirmatory2022.
 
-Because no analytical decisions are changed in light of these summaries, reporting them does not jeopardise the integrity of confirmatory tests. Instead, they:
 
-* spotlight data-entry errors and outliers flagged in the preregistration,  
-* reveal whether the data meet stated modelling assumptions (e.g., roughly symmetric errors), and  
-* give any reader—specialist or not—a transparent sense of scale and typical variation.
+## Statistical Models in Descriptive Statistics {#sec-model}
 
----
+Descriptive statistics also present the first example of a *statistical model*.
+While we will get more deeply into statistical modeling in later chapters,
+let's briefly examine how the topic is relevant here.
 
-## What Do We Mean by a *Statistical Model*? {#sec-model}
+Note that there is a difference between 
 
-Think of a statistical model as a *story* about how data arise:
+
+
+as a *story* about how data arise:
 
 > **observed value = systematic part (signal) + random part (noise)**
 
