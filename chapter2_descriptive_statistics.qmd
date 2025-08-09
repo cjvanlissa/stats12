@@ -1,10 +1,232 @@
-
 # Descriptive Statistics {#sec-descriptive}
 
 ```{r, include = FALSE}
 source("R/booktem_setup.R")
 source("R/my_setup.R")
 ```
+
+Descriptive statistics describe or summarize properties of data collected in a sample.
+If you collect data on three variables for five participants, you could imagine that it is still feasible to print the entire dataset as a table, and to maintain the overview.
+Any time you collect data from more than just a handful of participants,
+however, this becomes unfeasible.
+Instead, we report descriptive statistics.
+While some descriptive statistics are *calculated in the same way* as inferential statistics (which are first introduced in the chapter on hypothesis testing),
+the distinctive feature of descriptive statistics is that we use them to describe the data observed in a sample, and not to make claims about the larger population.
+
+Descriptive statistics are almost always computed, for a variety of reasons:
+
+1. To describe properties of the sample (e.g., the demographic composition)
+1. To check for mistakes in data entry; e.g., if the maximum value of the variable `age` is 124, the person who entered the data might have made a mistake
+1. To check assumptions of a particular statistical model, which we will cover in later chapters
+1. To answer research questions that do not require hypothesis tests, for example:
+    + In which country are most of our sales conducted?
+    + What is the most common major in my classroom?
+    + Based on data collected from all inhabitants of the Netherlands (i.e.: a census, not a sample), what is the average income?
+
+
+## Measures of Central Tendency {#sec-central}
+
+Measures of central tendency are statistics that try to capture the "most common" value in a sample.
+The most common measure of central tendency is the "average", which statisticians would call the "mean".
+All measures of central tendency summarize the distribution of values of one particular variable as **one representative number**.
+
+### Mean: the "average" value
+
+The most common measure of central tendency is the mean (or average).
+It is computed by adding all observed scores, and dividing that total by the number of observations.
+
+As a formula, this looks like:
+
+$\bar{x} = \frac{\sum_{i=1}^{n}x_i}{n} = \frac{x_1 + x_2 + ... + x_n}{n}$
+
+An advantage of the mean is that every participant's score contributes to its value equally.
+This also implies that it is sensitive to extreme values (also called: outliers).
+If you calculate the mean income in a country where 99% of inhabitants live below the poverty level and 1% are ultra-rich oligarchs, then the mean income will make it look like, on average, people make good money.
+This sensitivity to extreme values implies that the mean is a good description of the distribution of scores if the distribution is approximately symmetrical (i.e., about 50% of scores are above the mean, and 50% are below it).
+
+### Median: the middle milestone
+
+If you were to order all scores of your variable from lowest to highest, then the median value is the value that splits your sample in half:
+half of the participants score lower than this value, and half score higher.
+
+Another name for the median is the *50th percentile*. This just means that 50% of participants score lower than the median (and, by extension, 50% score higher).
+
+Based on the explanation of the mean, you might already realize that this value should be equal to that of the mean in a perfectly symmetrical distribution.
+If there are outliers, though, the median is less strongly affected by them than the mean.
+We can thus say that the median is a measure of central tendency that is *more robust to outliers* than the mean.
+
+The median is not really "calculated", but it is found by literally sorting all values in order, and then picking the middle value (if you have an odd number of observations), or calculating the mean of the two middle values (if you have an even number of observations).
+
+If our variable has these values (which are already ordered):
+
+```
+2, 3, 6, 7, 100
+```
+
+Then the median value is the middle value, $Med = 6$. Note that the outlier with value `100` does not really affect it (the mean for this sample would be much higher, $M = 23.6$).
+
+If our variable has these values (which are already ordered):
+
+```
+1, 2, 3, 6, 7, 100
+```
+
+Then the median would be the mean of the middle two values: $(3+6) / 2 = 4.5$.
+
+### Mode: the most common value
+
+The mode is the most common value in a sample.
+We can calculate or find it by creating a frequency table, tabulating how often each score is observed in the sample, and then picking the score that occurs most frequently.
+
+While the mode can be obtained for variables with any measurement level, it is the only valid measure of "central tendency" for *nominal* data (e.g., sex, major, favourite color).
+The other measures of central tendency are *not* valid for nominal data, because these lack a numerical value.
+
+Again, note that in a perfectly symmetrical data distribution, the mode will be identical to the mean and the median.
+
+Imagine, for example, that I have students from three majors:
+
+```{r echo = F}
+knitr::kable(
+  data.frame(
+    Major = c("Social Science", "Cognitive Neuroscience", "Business & Economics"),
+    Frequency = c(43, 22, 11) 
+  )
+)
+```
+
+The mode of the variable major, in this case, is "Social science". Do you see why we cannot calculate a mean or median for the variable major? Because the majors don't have a numerical value.
+
+However, it would be perfectly reasonable for me to say that the mode grade obtained last year was a 6.5. This implies that 6.5 was the most common grade, but it doesn't tell you how many students got that grade, or whether the average grade was above or below the level required to pass.
+
+## Choosing a Measure of Central Tendency
+
+Which measure to choose depends, in part, on the measurement level of the variable.
+
+* **Nominal:** Mode
+* **Ordinal:** Mode; if you calculate the mean or median, that means you assume that the distances between all categories are equal (i.e., you're treating your ordinal variable as interval).
+* **Interval/Ratio:** Mode, mean, and median
+
+
+## Measures of Dispersion {#sec-variability}
+
+
+Measures of central tendency tell us what is a typical score;
+measures of dispersion tell *how typical* that score is.
+Dispersion simply means variability, so from now on, we will use this term.
+
+Here are several measures of variability:
+
+### Range: full span
+
+The range is the distance from the smallest to the largest value.
+You calculate it by subtracting the smallest value from the largest;
+for example, if your smallest value is 1 and the largest is 5, then the range is $5-1 = 4$.
+
+As a formula, this looks like:
+
+$R = x_\text{largest} - x_\text{smallest}$
+
+
+Sometimes, the range is also reported as an interval, $[1, 5]$, or as minimum and maximum values.
+The range is an intuitive metric, but it is unstable because its value is fully determined by just two observations (the lowest and highest).
+The variability of all of the other observations does not affect it.
+
+### Sum of Squared Distances to the Mean
+
+A metric of variability that does take all observations into account is the sum of squared distances to the mean - or "sum of squares".
+
+To calculate it, follow these steps:
+
+1. Calculate the mean of all observations, e.g. if our observations are `1,2,3`, then $M = 2$
+1. For each observation, calculate the distance from that mean (subtract the mean), so for our observations `1,2,3`, we get $1-2 = -1$, $2-2 = 0$, and $3-2 = 1$.
+1. Square all these distances to get rid of negative values, so $-1^2 = 1$, $0^2 = 0$, $1^2 = 1$.
+1. Sum the squared distances, in this case $1 + 0 + 1 = 2$
+
+As a formula, this looks like:
+
+$SS = \sum_{i=1}^{n}(x_i - \bar{x})^2$
+
+Note that if we would not square the distances, the sum would always be zero because the mean is mathematically in the middle of all scores, so the negative distances of values below the mean exactly cancel out the positive distances of values above the mean.
+
+The sum of squares has several important properties.
+First, note that its value depends on the sample size: sums of squares of larger samples tend to be larger than those of smaller samples.
+Second, note that they are not on a very meaningful scale.
+Without further information, you cannot interpret what it means to say that the sum of squares for the variable age is 6524.
+Third, note that squaring distances does mean that high deviations become (quadratically) more influential:
+
+```{r echo = FALSE}
+library(ggplot2)
+df <- data.frame(Deviation = 1:10,
+                 Squared = c(1:10)^2)
+ggplot(df, aes(x = Deviation, y = Squared)) + geom_point() + geom_line() + scale_x_continuous(breaks = 1:10) + theme_bw()
+```
+
+
+### Variance: mean squared distance
+
+One way to make the sum of squares more interpretable is to divide it by the number of observations.
+This tells us how far away each observation is from the sample mean, on average.
+
+Here are three formulas, that all describe the calculation of the variance.
+The first describes how you calculate the variance from the sum of squares (SS);
+the second includes the formula for the sum of squares, and the third describes how you calculate it by squaring the raw scores and subtracting a sum of $n$ times the squared mean of X, $\mu_{x}$:
+
+$s^2 = \frac{SS}{n} = \frac{\sum_{i=1}^{n}(x_i - \mu_{x})^2}{n} = \frac{\sum_{i=1}^{n}x_i^2 - n\mu_{x}^2}{n}$
+
+Note that here, we divide by the sample size $n$.
+When using the variance as a descriptive statistic, this is fine.
+
+However, in later lectures, we will use sample statistics to make claims about the population (inferential statistics).
+Then, it becomes very important to divide by $n-1$ if the population mean is unknown.
+The formulas then look like this:
+
+$s^2 = \frac{SS}{n-1} = \frac{\sum_{i=1}^{n-1}(x_i - \bar{x})^2}{n-1} = \frac{\sum_{i=1}^{n}x_i^2 - n\bar{x}^2}{n-1}$
+
+The consequence of dividing by $n-1$ is that we get a slightly higher value for the variance.
+We do this to account for the fact that we don't know the exact value of the population mean; we estimated it from the sample.
+If we just assume that the sample mean is a perfect representation of the population mean, we will systematically under-estimate the variance.
+By dividing by $n-1$, we get a slightly larger variance estimate, adjusted for our uncertainty about the value of the population mean.
+
+### Standard Deviation
+
+One disadvantage of the variance is that it is still on the squared scale we obtained by squaring the distances.
+So, if your variable measures age in years, than the variance of age is expressed in years squared.
+
+To restore the variance to the original units of the variable, we can simply take the square root. So if our variables are measured in euros, centimeters, and milliseconds - then the variances will be expressed in euros$^2$, centimeters$^2$, and milliseconds$^2$.
+Taking the square root restores the original units; we call the resulting statistic the *standard deviation*.
+
+You can think of the standard deviation as the *average deviation* between individual scores and the sample mean.
+Why don't we just call it the "average deviation" then?
+Because that would be mathematically inaccurate - when we squared the deviations before taking the average, we allowed larger deviations to have a disproportionately larger impact on the value of the variance.
+Taking the square root of the end result, the variance, does not cancel out that disproportionate influence of large deviations.
+
+So, intuitively it is fine to think of the standard deviation as the "average" deviation, as long as you're aware that mathematically, this is not exactly correct, because an average value should assign equal weight to each observation, whereas the standard deviation assigns greater weight to extreme observations.
+
+Imagine I tell you that, in one class, the average grade is a 5, with a standard deviation of .5. You would know that most students scored close to a 5, and many of them failed the course. If I told you that the average grade is 5 with a standard deviation of 2, you would know that scores are much more spread out, and a large portion of the students must have passed the course as well.
+
+
+## Effects of Transformations & Outliers {#sec-transform}
+
+| Transformation            | What happens to the **centre** | What happens to **spread** |
+|---------------------------|---------------------------------|----------------------------|
+| Add / subtract constant   | Shifts by that constant         | No change                  |
+| Multiply / divide by constant | Scales by that factor        | Spread scales by the same factor (or its square for variance) |
+| Inject one extreme score  | Pulls centre toward outlier     | Spread balloons upward     |
+
+*Take-away*: Re-coding units (e.g., inches to centimetres) rescales both centre and spread, while an outlier can inflate variability without budging the median.
+
+---
+
+## Why Descriptives Matter {#sec-bridge}
+
+* **Data cleaning** – Outliers leap out when you know the usual range.  
+* **Analysis choices** – Skewed or heavy-tailed distributions may call for robust or non-parametric methods.  
+* **Transparency** – Readers can judge your results only if they see the data’s headline features.  
+* **Communication** – “Participants averaged *8.9 hours of screen time per day* (SD ≈ 1 hr)” paints an instant picture.
+
+Descriptive statistics are not a warm-up act; they are the **foundation** on which every inferential claim rests.
+
+---
 
 Most rigorous analyses—especially those that are preregistered—begin with a planned, non-inferential step: **summarising the raw data**.  
 These *descriptive statistics* are part of the analysis plan itself; they do **not** involve testing hypotheses or fishing for effects. Their role is to provide a concise snapshot that answers two pre-specified questions:
@@ -32,66 +254,6 @@ Descriptive statistics give us the first rough draft of that story:
 
 ---
 
-## Finding the Centre: Measures of Central Tendency {#sec-central}
-
-> *Central tendency* boils an entire distribution down to **one representative number**.
-
-### Mean – the balance point  
-Add everything up, divide by the count. Uses every score, so it is information-rich **and** sensitive to extreme values.
-
-### Median – the middle milestone  
-Line the scores up; the median sits where half lie below and half above. Because it depends only on order, it stays put even when outliers pull the mean around.
-
-### Mode – the crowd favourite  
-The most common score or category. It is the only valid “centre” for purely **nominal** data (e.g., favourite colour) and flags multiple peaks that may reveal hidden sub-groups.
-
-**Choosing a centre is a trade-off**:  
-*mean* for full precision, *median* for robustness, *mode* for categories or multi-peaked shapes.
-
----
-
-## Gauging the Spread: Measures of Variability {#sec-variability}
-
-A centre tells us *what is typical*; a spread tells us *how typical*.
-
-### Range – full span  
-Subtract the smallest value from the largest. Quick, intuitive, but unstable because it relies on just two observations.
-
-### Sum of Squares – total “spread energy”  
-Take every distance from the mean, square it (so big gaps count a lot), and add them up. This raw “energy” fuels more refined measures.
-
-### Variance – average squared distance  
-Spreads the sum of squares evenly across all scores, giving a sense of the overall scatter. In samples we divide by one less than the number of scores to avoid systematic under-estimation.
-
-### Standard Deviation – back to original units  
-The square-root of the variance turns “squared distance” back into the same units as the data—years, centimetres, milliseconds. It reads as the *typical gap* between an individual score and the mean.
-
-Small SD → scores huddle close; large SD → scores fan out.
-
----
-
-## Effects of Transformations & Outliers {#sec-transform}
-
-| Transformation            | What happens to the **centre** | What happens to **spread** |
-|---------------------------|---------------------------------|----------------------------|
-| Add / subtract constant   | Shifts by that constant         | No change                  |
-| Multiply / divide by constant | Scales by that factor        | Spread scales by the same factor (or its square for variance) |
-| Inject one extreme score  | Pulls centre toward outlier     | Spread balloons upward     |
-
-*Take-away*: Re-coding units (e.g., inches to centimetres) rescales both centre and spread, while an outlier can inflate variability without budging the median.
-
----
-
-## Why Descriptives Matter {#sec-bridge}
-
-* **Data cleaning** – Outliers leap out when you know the usual range.  
-* **Analysis choices** – Skewed or heavy-tailed distributions may call for robust or non-parametric methods.  
-* **Transparency** – Readers can judge your results only if they see the data’s headline features.  
-* **Communication** – “Participants averaged *8.9 hours of screen time per day* (SD ≈ 1 hr)” paints an instant picture.
-
-Descriptive statistics are not a warm-up act; they are the **foundation** on which every inferential claim rests.
-
----
 
 #Lecture 
 
