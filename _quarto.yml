@@ -5,6 +5,7 @@ project:
 execute:
   freeze: true
   warnings: false
+  echo: false
 book:
   title: Statistics 1 and 2
   subtitle: ''
@@ -44,6 +45,7 @@ book:
   chapters:
   - index.qmd
   - introduction.qmd
+  - chapter2_descriptive_statistics.qmd
   - probability.qmd
   - samplingdistribution.qmd
   - testing.qmd

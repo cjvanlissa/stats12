@@ -44,6 +44,46 @@ This also implies that it is sensitive to extreme values (also called: outliers)
 If you calculate the mean income in a country where 99% of inhabitants live below the poverty level and 1% are ultra-rich oligarchs, then the mean income will make it look like, on average, people make good money.
 This sensitivity to extreme values implies that the mean is a good description of the distribution of scores if the distribution is approximately symmetrical (i.e., about 50% of scores are above the mean, and 50% are below it).
 
+Take a look at the figures below; they show different possible distributions of scores in a sample.
+On the X-axis is the number line.
+Exact values are not given here because the important point is the *shape* of the distribution, but you can imagine that the X-axis is a scale of height from 150-210 centimeter, or a self-report questionnaire scale from 1-10.
+On the Y-axis is the frequency with which each number is reported by the participants; a higher value on this axis means that this response is more common.
+The red line indicates the location of the mean.
+
+Notice that the distributions labeled a-c are all symmetrical: In distribution a,
+scores cluster around one common value and quickly drop off when you get further away from that common value.
+In distribution b, scores also cluster around one common value, but they drop off more gradually.
+In distribution c, every value is exactly equally common.
+For distributions a-c, the mean would be a good measure of central tendency - it gives you the middle of the distribution.
+However, also notice that the mean is a better representation of the "most common" value in distributions a-b, but not in distribution c.
+
+```{r}
+library(ggplot2)
+library(ggpubr)
+base <- ggplot() +
+    xlim(-5, 5) +
+    theme_void() +
+    theme(axis.title.x = element_text(), axis.title.y = element_text(angle = 90))+
+    labs(x = "Value", y = "Frequency") +
+  geom_vline(xintercept = 0, color = "red", linewidth = 2)
+p1 <- base + geom_function(fun = dnorm)
+p2 <- base + geom_function(fun = function(x){5-abs(x)})
+p3 <- base + geom_function(fun = function(x){5})
+p4 <- ggplot() +
+    xlim(0, 1) +
+    theme_void() +
+    theme(axis.title.x = element_text(), axis.title.y = element_text(angle = 90))+
+    labs(x = "Value", y = "Frequency") +
+    geom_vline(xintercept = .5, color = "red", linewidth = 2) +
+    geom_function(fun = dbeta, args = list(shape1 = 2, shape2 = 6)) 
+
+figure <- ggarrange(p1, p2, p3, p4,
+                    labels = letters[1:4],
+                    ncol = 4, nrow = 1)
+figure
+```
+
+
 ### Median: the middle milestone
 
 If you were to order all scores of your variable from lowest to highest, then the median value is the value that splits your sample in half:
@@ -73,6 +113,21 @@ If our variable has these values (which are already ordered):
 
 Then the median would be the mean of the middle two values: $(3+6) / 2 = 4.5$.
 
+Below is the picture of the means again, but now, the location of the median is indicated with a blue line.
+Note that for the symmetrical distributions a-c, the median is identical to the mean - but for the asymmetrical distribution d, the median is a much better representation of the "most common value" than the mean is.
+
+```{r fig-medians, fig.cap="Location of the median in symmetrical and asymmetrical distributions."}
+p1 <- p1 + geom_vline(xintercept = 0, color = "blue", linewidth = 2)
+p2 <- p2 + geom_vline(xintercept = 0, color = "blue", linewidth = 2)
+p3 <- p3  + geom_vline(xintercept = 0, color = "blue", linewidth = 2)
+p4 <- p4 + geom_vline(xintercept = .17, color = "blue", linewidth = 2)
+
+figure <- ggarrange(p1, p2, p3, p4,
+                    labels = letters[1:4],
+                    ncol = 4, nrow = 1)
+figure
+```
+
 ### Mode: the most common value
 
 The mode is the most common value in a sample.
@@ -97,6 +152,9 @@ knitr::kable(
 The mode of the variable major, in this case, is "Social science". Do you see why we cannot calculate a mean or median for the variable major? Because the majors don't have a numerical value.
 
 However, it would be perfectly reasonable for me to say that the mode grade obtained last year was a 6.5. This implies that 6.5 was the most common grade, but it doesn't tell you how many students got that grade, or whether the average grade was above or below the level required to pass.
+
+Visually, the location of the mode is the same as the location of the median in plots a, b, and d in Figure @fig-medians.
+Plot c does not have a mode; no score is more common than any other score.
 
 ## Choosing a Measure of Central Tendency
 
@@ -154,7 +212,7 @@ Second, note that they are not on a very meaningful scale.
 Without further information, you cannot interpret what it means to say that the sum of squares for the variable age is 6524.
 Third, note that squaring distances does mean that high deviations become (quadratically) more influential:
 
-```{r echo = FALSE}
+```{r figsquare, fig.cap="When squared, large values are more influential than small values."}
 library(ggplot2)
 df <- data.frame(Deviation = 1:10,
                  Squared = c(1:10)^2)
@@ -224,12 +282,12 @@ Imagine I tell you that, in one class, the average grade is a 5, with a standard
 
 ## Context of Discovery VS Justification
 
-```{r figecwagenmakers, fig.cap="An interpretation of De Groot’s empirical cycle, by Wagenmakers, Dutilh, & Sarafoglou, 2018. CC-BY: Artwork by Viktor Beekman, concept by Eric-Jan Wagenmakers"}
-knitr::include_graphics("creativity_verification.jpg")
+```{r fig-ecwagenmakers, fig.cap="An interpretation of De Groot’s empirical cycle, by Wagenmakers, Dutilh, & Sarafoglou, 2018. CC-BY: Artwork by Viktor Beekman, concept by Eric-Jan Wagenmakers"}
+knitr::include_graphics("images/creativity_verification.jpg")
 ```
 
 In the first chapter, we described De Groot's empirical cycle as a model of cumulative knowledge acquisition through scientific research.
-A crucial assumption of this cycle, highlighted by Wagenmakers and colleagues (see \@ref(fig:figecwagenmakers)),
+A crucial assumption of this cycle, highlighted by Wagenmakers and colleagues (see @fig-ecwagenmakers),
 is the distinction between the context of discovery and the context of justification.
 The context of discovery is exploratory: we peruse data, looking for interesting patterns that might spark a new hypothesis.
 The context of justification is confirmatory: we test a theory-driven hypothesis.
@@ -249,25 +307,23 @@ In all other cases: be mindful of the risk of introducing bias.
 For an example of how preregistered hypothesis tests can be combined with rigorous exploration using machine learning, see @vanlissaComplementingPreregisteredConfirmatory2022.
 
 
-## Statistical Models in Descriptive Statistics {#sec-model}
+<!-- ## Introducing Statistical Models {#sec-model} -->
 
-Descriptive statistics also present the first example of a *statistical model*.
-While we will get more deeply into statistical modeling in later chapters,
-let's briefly examine how the topic is relevant here.
+<!-- Descriptive statistics also represent the first example of a *statistical model*. -->
+<!-- While we will get more deeply into statistical modeling in later chapters, -->
+<!-- let's briefly examine how the topic is relevant here. -->
 
-Note that there is a difference between 
+<!-- Note that there is a difference between  -->
 
 
 
-as a *story* about how data arise:
+<!-- as a *story* about how data arise: -->
 
-> **observed value = systematic part (signal) + random part (noise)**
+<!-- > **observed value = systematic part (signal) + random part (noise)** -->
 
-Descriptive statistics give us the first rough draft of that story:
-* a single value that stands in for the whole data set (signal), and  
-* a measure of how far typical scores wander from that value (noise).
-
----
+<!-- Descriptive statistics give us the first rough draft of that story: -->
+<!-- * a single value that stands in for the whole data set (signal), and   -->
+<!-- * a measure of how far typical scores wander from that value (noise). -->
 
 
 #Lecture 
@@ -277,10 +333,7 @@ Descriptive statistics give us the first rough draft of that story:
 
 A formative test helps you gauge how well you’ve grasped the ideas and calculations from **Chapter 2 – Descriptive Statistics**. Try the quiz after working through the lecture slides but **before** our live meeting, so we can focus on any topics that still feel wobbly. If you miss a question you’ll see a hint that points you back to the relevant slide or worked example.
 
-```{r}
-#| results = "asis"
-#| echo    = FALSE
-#| cache   = FALSE
+```{r results='asis'}
 add_mcs("ch2_formativ.csv")
 ```
 
@@ -297,7 +350,6 @@ This assignment shows you how to explore data using **descriptive statistics**�
 
 > **Use the same data file as in the previous tutorial.**
 
----
 
 ### Step 2 – Descriptives for Key Variables
 
@@ -311,7 +363,6 @@ Compute descriptive statistics as follows:
 
 SPSS opens a new **Output** window with a table of descriptives for the selected variables.
 
----
 
 ### Step 3 – Frequency Tables
 
@@ -327,7 +378,6 @@ SPSS now adds a table with the frequency distributions of the selected variables
 
 *Note:* SPSS reports **Percent** and **Valid Percent**. These differ only when missing values are present (none in this dataset).
 
----
 
 #### Extra – Spotting Multimodality {.smaller}
 
@@ -346,7 +396,6 @@ If you notice **two peaks**, colour the bars by **Relation** (single vs. relatio
 
 *Take-away:* multiple modes often reveal hidden clusters that may need separate analysis.
 
----
 
 <!-- variable descriptions kept for reference -->
 <!-- stress: 1 = no stress; 2 = work-related; 3 = personal-life -->
@@ -357,6 +406,7 @@ If you notice **two peaks**, colour the bars by **Relation** (single vs. relatio
 <!-- negemo:  1–50 -->
 
 ## Quiz 1 – Basic Descriptives
+
 ::: {.webex-check .webex-box}
 
 How many participants are in the sample? `r fitb(780, num = TRUE)`
@@ -374,7 +424,6 @@ What percentage of participants is in a relationship? `r fitb(47.9, num = TRUE, 
 :::
 :::
 
----
 
 ### Weighted Mean {.smaller}
 
@@ -386,7 +435,7 @@ SPSS effectively multiplies each mean by its *n*, sums those products, and divid
 - Merge the two files if separate (*Data > Merge Files*).  
 - Run *Analyze > Descriptive Statistics > Descriptives* on the combined score column.
 
----
+
 
 ### Step 4 – Finding Erroneous Values
 
@@ -400,7 +449,7 @@ Use the descriptives to find any out-of-range values, then:
 
 At this stage we remove entire cases; later you’ll learn gentler missing-data techniques.
 
----
+
 
 ### Step 5 – Group Comparison with Split File
 
@@ -412,6 +461,7 @@ Research question: *“Are non-smokers more satisfied with life than smokers?”
 SPSS now outputs separate means for smokers and non-smokers.
 
 ## Quiz 2 – Group Means
+
 ::: {.webex-check .webex-box}
 
 Was there an erroneous value in the data file? Enter it here: `r fitb(220, num = TRUE)`
@@ -426,7 +476,6 @@ Does this difference necessarily hold in the population? `r mcq(c("answer" = "Ca
 
 :::
 
----
 
 ### Step 6 – Quick Check: How Recoding Affects Spread {.smaller}
 
@@ -446,7 +495,7 @@ Run Descriptives on both variables:
 - Mean × 3  
 - **SD × 3**
 
----
+
 
 ## More Descriptive Statistics
 
@@ -465,6 +514,7 @@ Compute **mean, median, mode** by hand.
 `r unhide()`
 
 #### Quiz 3 – Hand Computation
+
 ::: {.webex-check .webex-box}
 
 Mean `r fitb(6.8, num = TRUE, tol = .1)`
@@ -475,7 +525,6 @@ Mode `r fitb(6, num = TRUE)`
 
 :::
 
----
 
 ### Variation by Hand
 
@@ -492,6 +541,7 @@ SD = √ variance
 > After the mean is fixed, only *n – 1* deviations are free to vary, so dividing by *n – 1* keeps the sample variance unbiased.
 
 #### Quiz 4 – Hand Computation
+
 ::: {.webex-check .webex-box}
 
 Variance `r fitb(5.9, num = TRUE, tol = .1)`
@@ -500,7 +550,6 @@ Standard Deviation `r fitb(2.43, num = TRUE, tol = .1)`
 
 :::
 
----
 
 ### Verifying in SPSS
 
