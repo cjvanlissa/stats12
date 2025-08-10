@@ -1,0 +1,135 @@
+---
+title: "Causality"
+author:   "Caspar J. van Lissa"
+date:     "`r format(Sys.Date(), '%d %b %Y')`"
+format: revealjs
+---
+```{r}
+library(kableExtra)
+library(tidySEM)
+options(knitr.kable.NA = '')
+set.seed(1)
+```
+
+
+## Can we ever confidently say that $X$ causes $Y$? {.center .middle}
+
+---
+
+## Why does causality matter? {.center .middle}
+
+Causal knowledge guides effective action: it identifies which changes to $X$ will bring about desired changes in $Y$, and which interventions to avoid to prevent harm. In research and policy, causal claims turn descriptions into prescriptions—linking evidence to decisions (Shadish et al., 2002).
+
+---
+
+## Two notions of causality
+
+- **Type (general) causality:** broad regularities  
+  _“Smoking causes lung cancer.”_
+- **Actual (token) causality:** a specific event caused this outcome  
+  _“This crash happened because the brakes failed.”_
+
+We’ll focus on **actual causality** (Halpern, 2015). 
+
+---
+
+## Actual causality (modified Halpern–Pearl) — concept
+
+In this account, an event **X** counts as an actual cause of outcome **Y** when (Halpern, 2015):
+
+- **AC1 — Actuality:** **X** happened and **Y** happened.
+- **AC2 — Counterfactual dependence with fixed background:** If **X** had been different, while keeping certain other relevant factors the way they actually were, **Y** would have been different.
+- **AC3 — Minimality:** Nothing extra is included in **X**; if you remove any part of **X**, it would no longer qualify as a cause.
+
+---
+
+## Example — The bumped table {.smaller}
+
+**Story:** You brush past a table; a glass wobbles, falls, and shatters. The cat is asleep on the couch; no one else touches the table.
+
+**Why the bump counts as the cause:**
+
+- **AC1 — Actuality:** The bump happened, and the shattering happened.
+
+- **AC2 — Counterfactual with fixed background:** If you hadn’t bumped the table—keeping everything else as it actually was (cat still asleep, same floor, same glass)—the glass wouldn’t have fallen and shattered.
+
+- **AC3 — Minimality:** We don’t need to add anything like “bumped the table **and** hummed a song.” The bump alone does the work; remove the bump and the shattering doesn’t follow.
+
+**Why “fixed background” matters.** Someone might say, “Well, the cat could have jumped later anyway.” In this account, we ignore such non-actual detours; we hold the background to what actually occurred (the cat stayed asleep). That keeps the judgment tied to the real sequence of events (Halpern, 2015).
+
+---
+
+## Mill’s three requirements (everyday test)
+
+When is **X** a cause of **Y**? (Oppewal, 2010)
+
+1) **Covariation:** When **X** changes, **Y** changes.  
+2) **Temporal precedence:** **X** changes **before** **Y**.  
+3) **Non-spuriousness:** No third factor **Z** explains both **X** and **Y**.
+
+---
+
+## 1) Covariation — examples
+
+- **Weather:** Clouds in the sky → rain more likely; no clouds → rain would surprise us.  
+- **Marketing:** More promotion → some increase in sales; no promotion → no bump (we’d be surprised otherwise).
+
+**Key idea:** If X doesn’t “move” Y at all, causality is doubtful.
+
+---
+
+## 2) Temporal precedence — examples
+
+- **Weather sanity check:** Clouds appear **before** the rain, not after.  
+- **Campaigns:** The sales lift should begin **after** the campaign starts; if sales jump **before** launch, the campaign didn’t cause it.
+
+**Key idea:** Effects do not occur before their causes.
+
+---
+
+## 3) Non-spuriousness — examples
+
+- **Holiday confound:**  
+  - **Z = Holiday season** boosts both **promotion (X)** and **sales (Y)**.  
+  - Then **X → Y** is **spurious**; Z explains both.  
+  - Same logic for clouds vs. upstream snowmelt and stream levels.
+
+**Key idea:** Rule out plausible third variables **Z**.
+
+---
+
+## How experiments satisfy Mill’s three requirements {.smaller}
+
+In a randomized experiment, we can **enforce** each condition (Shadish et al., 2002):
+
+- **Non-spuriousness (Z controlled):** Random assignment of X breaks links from third variables Z to X, making groups exchangeable in expectation.
+- **Temporal precedence:** We assign X first and measure Y afterward by design, so causes come before effects.
+- **Covariation:** Comparing outcomes between treatment and control provides the required co-movement of X and Y.
+
+*Link to Mill:* These design levers map directly onto Mill’s requirements for causation (Oppewal, 2010).
+
+---
+
+## A note on “the active ingredient”
+
+Even when **X causes Y**, we often don’t know **which part of X** did the work (media channel? message? timing?). That’s why careful design and modeling matter.
+
+---
+
+## Bringing it together
+
+- Start with the attention question: **Can we ensure causation?**  
+- Use Mill’s three requirements to **structure evidence**.  
+- For **actual events**, summarize with the **HP framework** (AC1–AC3), using the **modified** version’s “freeze others at actual values” insight to test counterfactual dependence cleanly.
+
+---
+
+## References (for further reading)
+
+- Halpern, J. Y. (2015). A modification of the Halpern–Pearl definition of causality. *Proceedings of the Twenty-Fourth International Joint Conference on Artificial Intelligence (IJCAI-15)*, 3022–3033. 
+
+- Oppewal, H. (2010). Concept of causality and conditions for causality. In J. N. Sheth & N. K. Malhotra (Eds.), *Wiley International Encyclopedia of Marketing*. John Wiley & Sons. https://doi.org/10.1002/9781444316568.wiem02059 
+
+- Shadish, W. R., Cook, T. D., & Campbell, D. T. (2002). *Experimental and quasi-experimental designs for generalized causal inference*. Houghton Mifflin.
+
+
