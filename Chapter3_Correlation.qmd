@@ -1,35 +1,217 @@
-# Correlation: Measuring Relationships
+# Bivariate Descriptive Statistics
 
 ```{r, include = FALSE}
 source("R/booktem_setup.R")
 source("R/my_setup.R")
 ```
 
-## Correlation – Describing Relationships Between Variables {#sec-correlation}
+In the previous chapter, we covered univariate (= single variable) descriptive statistics.
+In this chapter, we introduce the first *bivariate* (= two variables) descriptive statistics.
+Let's take stock of the road so far, and set a goal for where we want to go.
+Last week, we ended with the variance.
+The variance is a statistic that tells us, on average, how much people's scores deviate from the mean.
+Today we will move into bivariate descriptive statistics.
+We will learn about the *covariance*, which tells us:
+If someone's score on one variable deviates positively from the mean,
+is their score on another variable also likely to deviate positively from the mean?
+We will also learn about the *correlation*, which tells us:
+How strong is the association between two variables, and is it positive or negative?
 
-Correlation is a statistical technique used to **quantify the degree to which two variables move together**. It provides a concise summary of the association between pairs of scores across individuals. For example, a researcher might retrieve each student’s high school GPA (a measure of academic performance) and pair it with their family’s annual income. The goal is to determine whether higher grades tend to correspond with higher income. In correlational studies, each individual contributes two measurements, commonly referred to as *X* and *Y* forming the foundation for analysis.
-
-To explore this relationship visually, researchers often rely on scatter plots. In a scatter plot, *X* values appear along the horizontal axis and *Y* values along the vertical. Each point on the plot corresponds to one participant’s pair of scores. These plots allow immediate detection of linear trends, and outliers—patterns that may remain obscured when examining data in purely numerical or tabular form.
-
-At its core, correlation analysis is concerned with two key features of the relationship between variables: **direction** and **strength**. The direction may be positive—indicating that increases in *X* tend to be accompanied by increases in *Y*—or negative—suggesting that higher *X* values predict lower *Y* values. The **strength** of this association is expressed by the magnitude of the correlation coefficient. An *r* value close to ±1 indicates a near-perfect linear relationship, whereas an *r* near 0 signals little to no linear trend. Since Pearson’s *r* specifically quantifies linear associations, it is not suited for capturing non-linear patterns, even if a strong relationship exists in another form.
+In this chapter, we will talk about two hypothetical variables, *X* and *Y*.
+In your mind, you can substitute any two variables you like; for example, *X = hours studied*, *Y = grade obtained*, or *X = extraversion*, *Y = number of friends*.
 
 Before arriving at the correlation coefficient, statisticians often begin with **covariance**—a preliminary measure of how two variables vary together. Covariance reflects direction: it is positive when high values of *X* accompany high values of *Y*, and negative when they move in opposite directions. However, its numerical value is not directly interpretable because it is tied to the units of the measurement. A covariance expressed in centimeters and kilograms will differ from one computed in meters and pounds, even if the underlying association remains unchanged. As a result, covariance cannot meaningfully convey the *strength* of a relationship—only whether the variables tend to move in the same or opposite directions.
 
-To address this limitation, the **Pearson correlation coefficient (*r*)** is computed by standardizing covariance. Specifically, the covariance is divided by the product of the standard deviations of *X* and *Y*, which removes the influence of measurement units from the calculation. This standardization not only allows correlations to be expressed on a common –1 to +1 scale, but also enables meaningful interpretation of both **direction** and **strength**. Because the resulting value is unit-free, it can be compared across variables measured on different scales and across studies.
 
-Because the Pearson correlation coefficient expresses direction and strength independently of measurement units, it serves as a valuable tool for evaluating theoretical expectations. In psychology, medicine, and related fields, many theories propose that particular variables should exhibit a specific form of association. For example, a developmental framework might anticipate a positive correlation between parents’ IQs and their child’s IQ, whereas a clinical model could predict a negative association between mindfulness and cortisol levels. Observing the expected correlation offers empirical support for the theory; the absence or reversal of the relationship may call for theoretical refinement or reconsideration.
+It provides a concise summary of the association between pairs of scores across individuals. For example, a researcher might retrieve each student’s high school GPA (a measure of academic performance) and pair it with their family’s annual income. The goal is to determine whether higher grades tend to correspond with higher income. In correlational studies, each individual contributes two measurements, commonly referred to as *X* and *Y* forming the foundation for analysis.
 
-Despite their utility, correlation coefficients must be interpreted with care. First and most importantly, **correlation does not imply causation**. A strong association between two variables does not mean that one causes the other. For example, ice-cream sales and drowning deaths may correlate positively—not because one causes the other, but because both increase with hot weather. Establishing causality requires experimental control, not statistical association. This topic will be explored in more depth in **Week 7**.
 
-Secondly, a **restricted range** of scores can obscure or distort relationships. If only a narrow segment of the variable is sampled, such as examining IQ and creativity within a highly selective university, correlations may appear weaker than they truly are. 
+The correlation coefficient is a statistic that quantifies the strength and direction of association between two variables.
+It tells us the degree to which two variables move together.
+One way to think of the correlation coefficient is as a *bivariate (= two variables) descriptive statistic*.
 
-Third, **outliers** can have a disproportionate impact. A single extreme case can artificially inflate or deflate *r*, potentially leading to misleading conclusions. This is dramatically illustrated by **Anscombe’s Quartet**—a set of four datasets that share nearly identical statistical properties, including the same correlation coefficient, yet differ markedly in their underlying structure. In one case, a single outlier drives the correlation; in another, the relationship is non-linear. Despite similar *r* values, each scatter plot tells a different story. For this reason, **visual inspection of scatter plots** is essential before interpreting correlation coefficients.
+To explore this relationship visually, researchers often rely on scatter plots. In a scatter plot, *X* values appear along the horizontal axis and *Y* values along the vertical. Each point on the plot corresponds to one participant’s pair of scores. These plots allow immediate detection of linear trends, and outliers—patterns that may remain obscured when examining data in purely numerical or tabular form.
 
-![Anscombe’s Quartet](Anscombe's_quartet_3.svg.png)
+## Covariance
+
+The word "covariance" means: varying, or moving, together.
+Let's have a look at mock data from five students on hours studied and final grade obtained:
+
+```{r}
+set.seed(2)
+grads <- data.frame(
+  Hours = round(runif(5, 2, 20))
+)
+grads$Grade <- round(scales::rescale(.7*grads$Hours + rnorm(5), to = c(1, 10)))
+knitr::kable(grads)
+```
+
+We can visualize these data using a "scatterplot"; a simple graph where each observation is shown as a dot with X-coordinate determined by their value on the X variable (Hours), and Y-coordinate determined by the Y variable (Grade):
+
+```{r}
+library(ggplot2)
+ggplot(grads, aes(x = Hours, y = Grade)) + geom_point() + theme_bw()
+```
+
+Notice that, if you squint, it appears like there might be some pattern in the data: more hours studied tends to go hand in hand with a higher grade.
+There might be a positive association between these variables!
+In the next sections, we go about quantifying this association numerically, step by step.
+
+### Sum of Products (SP)
+
+The first stage in quantifying the association between two variables is to compute the **sum of products of deviations** (SP).
+The SP is similar to the sum of squares (SS),
+but whereas the SS captures the variability of one variable,
+the SP measures how two variables vary together.
+
+To calculate the SP, take the following steps:
+
+#### Step 1: Calculate the variables' means
+
+Take the mean of each column (bold in the table below):
+
+```{r}
+library(kableExtra)
+mns <- grads
+mns[] <- lapply(mns, as.character)
+mns <- rbind(mns, colMeans(grads))
+names(mns) <- c("X", "Y")
+kable(mns) |>
+  kable_styling() |>
+  row_spec(nrow(mns),bold=T,hline_after = T)
+```
+
+#### Step 2: Calculate Deviations
+
+For each variable, calculate the deviations by subtracting the mean from the observed scores:
+
+```{r}
+library(kableExtra)
+devs <- grads
+devs <- cbind(devs, sweep(devs, 2, colMeans(devs)))
+names(devs) <- c("X", "Y", "X-mean(X)", "Y-mean(Y)")
+kable(devs)
+```
+
+#### Step 3: Multiply Deviations
+
+If we were to calculate the SS, we would now square the deviations and add them up in each column.
+To get the SP, instead of squaring the deviations - we multiply them across variables.
+Note that if the deviations for both variables have the same sign, then this will give a positive result (positive times positive is positive, and negative times negative is positive too).
+Moreover, if the deviations from both variables are high, the product will be a high number too.
+So the SP tends to be a large positive number if high positive (or negative) deviations on one variable go hand in hand with high positive (or negative) deviations on the other variable.
+
+
+```{r}
+prods <- devs
+prods <- cbind(prods, apply(devs[, 3:4], 1, prod))
+names(prods)[5] <- "Product"
+kable(prods)
+```
+
+Now, we calculate the SP just by taking the sum of the column of products: `r sum(prods[[5]])`.
+
+Note that if the SP is positive, then there is a positive association between the variables;
+if it is negative, there is a negative association.
+In this case, the association is positive.
+
+Here is a formula describing what we just did: we took the sum $\Sigma$ of the product $()()$ of the deviations of X from the mean of X, $X-\bar{X}$ times the deviations of Y from the mean of Y, $Y-\bar{Y}$:
+
+$$
+SP = \sum \bigl(X - \bar{X}\bigr)\bigl(Y - \bar{Y}\bigr)
+$$
+
+
+### Covariance
+
+To get the covariance from the sum of products, we divide by the sample size, so in this case, $\frac{`r sum(prods[[5]])`}{5}$.
+
+Another way to think about this is: we standardize the SP by the sample size $n$.
+This gives us the "average co-deviation" per participant.
+That number is called the covariance.
+
+If the covariance is positive, there is a positive association between the two variables.
+If it is negative, there is a negative association.
+
+But how strong is the association?
+It is hard to say, because the *size* of the covariance depends on the units and scale of the two variables involved.
+
+## Correlation
+
+To answer the question of how strong the association is,
+we must standardize the covariance to drop the units of both variables.
+This gives us the so-called **Pearson correlation coefficient (*r*)**.
+Specifically, the covariance is divided by the product of the standard deviations of *X* and *Y*.
+This standardization results in a number between -1 and +1, where 0 means no association, -1 means perfect negative association, and +1 means perfect positive association.
+This number, the correlation coefficient, tells us both the **direction** (-/+) and **strength** (value) of association between two variables.
+Because the correlation coefficients is unit-free, or standardized, it can also be compared across variables measured on different scales and across studies.
+
+## Limitations
+
+While correlation coefficients are useful,
+they must be interpreted with care.
+
+To illustrate the limitations of correlations, the statistician Anscombe (1973) created four data sets with identical correlation coefficients, $r = 0.82$.
+When plotting the data, however, it becomes clear that the correlation coefficient can only be meaningfully interpreted for the first dataset (figure a below).
+
+```{r}
+plts <- lapply(1:4, function(i){
+  df <- anscombe[, paste0(c("x", "y"), i)]
+  names(df) <- c("X", "Y")
+  print(cor(df))
+  ggplot(df, aes(x = X, y = Y)) + geom_point(shape = 21, size = 3, fill = "orange") + theme_linedraw()
+})
+ggpubr::ggarrange(plotlist = plts, ncol = 2, nrow = 2, labels = "auto")
+```
+
+The first and most important limitation is that, Pearson's correlation coefficient only meaningfully captures *linear associations*, or: patterns that look like a straight line.
+Note that figure a shows such a linear pattern of association;
+the correlation coefficient of $r = .82$ tells us that there is a strong - but not perfect - positive association.
+
+Figure b, on the other hand, shows a *perfect non-linear* association.
+All dots are perfectly in line; the line is just not straight.
+This illustrates that Pearson's correlation coefficient is not suited for capturing non-linear patterns, even if a strong relationship exists in another form.
+
+Figure c shows a correlation of $r = 1$ for most of the points - but one outlier brings it down to $r = .82$.
+
+Figure d shows no association at all for most of the points (they all have the same value for X, and if X does not vary, it cannot covary/correlate with Y) - but a single outlier makes it look like there is a strong correlation..
+
+Secondly, these plots illustrate that **outliers** can have a disproportionate impact.
+In figures c and d, a single extreme observation artificially deflates (c) or inflates (d) the correlation coefficient,
+potentially leading to misleading conclusions.
+
+Thirdly, a **restricted range** of scores can obscure or distort relationships.
+For example, if you were to examine the pattern in figure b for values of X between [4, 9], you would conclude that $r = 0.99$, or near perfect positive correlation.
+If you examined the same pattern for values of X between (0, 13), you would conclude that $r = -0.07$, or near-zero.
+If you examined the same pattern for values of X between [13, 20), you would conclude that $r = -1.00$, or perfect negative correlation.
+The figures below split up the pattern from figure b above into these three segments:
+
+```{r}
+df <- anscombe[, paste0(c("x", "y"), 2)]
+names(df) <- c("X", "Y")
+p1 <- ggplot(df[df$X <= 9, ], aes(x = X, y = Y)) + geom_point(shape = 21, size = 3, fill = "orange") + theme_linedraw()+ geom_smooth(method = "lm", se = FALSE)
+p2 <- ggplot(df[df$X > 9 & df$X < 13, ], aes(x = X, y = Y)) + geom_point(shape = 21, size = 3, fill = "orange") + theme_linedraw() + geom_smooth(method = "lm", se = FALSE)
+p3 <- ggplot(df[df$X >= 13, ], aes(x = X, y = Y)) + geom_point(shape = 21, size = 3, fill = "orange") + theme_linedraw() + geom_smooth(method = "lm", se = FALSE)
+ggpubr::ggarrange(p1,p2,p3, ncol = 3, nrow = 1, labels = "auto")
+```
+
+Restriction of range can easily happen in real life.
+For example, if your sample only consists of university students, you will probably havce restriction of range on IQ.
+
+Finally, you may have heard the phrase **correlation does not imply causation**.
+Observing a strong association between two variables does not mean that one causes the other.
+In general, it is not possible to conclude causality from statistics:
+causality is an assumption, which can be either supported by a theory,
+or by a particular methodology.
+In a randomized controlled experiment, participants are randomly assigned to receive either a treatment or control condition.
+Thus, any differences between the two groups should be due to the experimental treatment, or random chance.
+We will revisit the topic of causality later.
+
+Anscombe's quartet is a good illustration of the limitations of causality, and also demonstrates the value of **visually inspecting your data (including with  scatter plots)** before interpreting any statistics.
 
 ## Summary
 
-In summary, **covariance** offers an initial metric for gauging whether two variables tend to vary in the same or opposite direction. However, because its magnitude depends on the measurement units of the variables involved, it cannot be directly interpreted in terms of strength. The **Pearson correlation coefficient (*r*)** addresses this limitation by standardizing the covariance, yielding a unit-free statistic bounded between –1 and +1. This standardized measure expresses both the **direction** and **strength** of a linear relationship, enabling meaningful comparisons across contexts. Nevertheless, interpreting correlations requires caution—particularly with respect to restricted sampling ranges, the influence of outliers, and the fundamental distinction between correlation and causation.
+In summary, **covariance** offers an initial metric for gauging whether two variables tend to vary in the same or opposite direction. However, because its magnitude depends on the measurement units of the variables involved, it cannot be directly interpreted in terms of strength. The **Pearson correlation coefficient (*r*)** addresses this limitation by standardizing the covariance, yielding a unit-free statistic bounded between –1 and +1. This standardized measure expresses both the **direction** and **strength** of a linear relationship, enabling meaningful comparisons across contexts. Nevertheless, interpreting correlations requires caution, particularly with respect to restricted sampling ranges, the influence of outliers, and the fundamental distinction between correlation and causation.
 
 # Formative Test
 
@@ -44,11 +226,6 @@ add_mcs("ch3_formative_corrected.csv")
 ```
 
 # Tutorial
-
-```{r, include = FALSE}
-source("R/booktem_setup.R")
-source("R/my_setup.R")
-```
 
 # 5 Tutorial
 
