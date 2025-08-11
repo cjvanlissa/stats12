@@ -1,58 +1,47 @@
 ---
-title: "Lecture 3 - Correlation"
+title: "Bivariate Descriptive Statistics: Correlation"
 author:   "Caspar J. van Lissa"
 date:     "`r format(Sys.Date(), '%d %b %Y')`"
 format: revealjs
 ---
 ```{r}
 library(kableExtra)
-library(tidySEM)
+
+library(ggplot2)
 options(knitr.kable.NA = '')
 set.seed(1)
 ```
 
 
---- ORDER FIX START ---
+## Recap & Roadmap
 
-# Why Study Correlation?
+* Previously: **Univariate statistics**
+* Today: First **bivariate statistics**
 
-* Describes **direction, form, and strength** of relationships  
-* Foundation for **prediction** (regression), **validity**, **reliability**, and **theory tests**  
-* A stepping-stone from single-variable statistics (mean/variance) to two-variable statistics (covariance/correlation)
-
----
-
-## Definition
-
-> **Correlation:** A *standardised* measure of the *linear* association between two continuous variables.
-
-* Range **–1 to +1** (sample **r**, population **ρ**)  
-* **r = +1** → perfect positive relation  
-* **r =  0** → no linear relation  
-* **r = –1** → perfect negative relation
+  * Covariance
+  * Correlation
 
 ---
 
-## Scatter-Plot Gallery
+## Motivation
 
-
-:::
-
----
-
-## Interpreting a Scatter Plot
-
-1. **Direction** – *Positive* slopes upward; *Negative* slopes downward  
-2. **Form** – Typically linear; curved forms need other measures  
-3. **Strength** – Tightness of points around the trend line  
-
-> **Scatter plot first, number second** – guards against outliers, non-linearity, restricted range.
+* Variance: tells us how scores deviate from the mean.
+* Covariance: do deviations on one variable go with deviations on another?
+* Correlation: strength & direction of association.
 
 ---
 
+## Example: Two Variables
+
+* We'll use *X* and *Y*
+    + *X = hours studied*, *Y = grade*
+    + *X = extraversion*, *Y = number of friends*
+
 ---
 
-## Covariance in Two Columns {.smaller}
+## Example {.smaller}
+
+High X associated with high Y:
 
 | Person | X (Hours studied) | Y (Quiz score) |
 |-------:|------------------:|---------------:|
@@ -60,87 +49,78 @@ set.seed(1)
 | 2 | 4 | 6 |
 | 3 | 6 | 8 |
 
-Both columns **rise together** → positive deviations pair with positive → **positive covariance**  
-Now swap the Y scores (high X with low Y):
+High X associated with low Y:
 
-| Person | X | Y (swapped) |
+| Person | X | Y |
 |-------:|--:|-------------:|
 | 1 | 2 | 8 |
 | 2 | 4 | 6 |
 | 3 | 6 | 4 |
 
-High X now pairs with low Y → positive X-deviation meets negative Y-deviation → **negative covariance**
 
-> **Key visual:** when the two columns grow (or shrink) **together**, the products of their deviations are positive; when they move **oppositely**, the products are negative.
 
 ---
 
-## Covariance – Raw “Grow-Together” Signal
 
-* **Sign only**:  
-  *Positive* → higher-than-average X accompanies higher-than-average Y  
-  *Negative* → higher-than-average X accompanies lower-than-average Y  
-* **Magnitude tied to units** (e.g., cm · kg) → not comparable across studies
-* **No automatic 0–1 scale** → great for direction, poor for “how strong?”
+## Scatterplots
 
----
+* **Visual inspection** is crucial.
+* Each dot represents the (X, Y) observations for one participant.
 
-## Why Standardise? Enter Pearson’s *r*
+```{r}
+df <- data.frame(X = c(2,4,6), Y = c(4, 6, 8))
+p1 <- ggplot(df, aes(x = X, y = Y)) + geom_point(shape = 21, size = 3, fill = "orange") + theme_minimal()
+df2 <- df
+df2$Y <- rev(df2$Y)
+p2 <- ggplot(df2, aes(x = X, y = Y)) + geom_point(shape = 21, size = 3, fill = "orange") + theme_minimal()
 
-1. Start with **covariance** (raw move-together).  
-2. Divide by the spreads (SDs) of X and Y.  
-3. Result = **correlation** (unit-free, –1 … +1).
+ggpubr::ggarrange(p1, p2, ncol = 2, nrow = 2, labels = "auto")
+```
 
-> **Interpretation recipe**  
-> • **Sign** comes from the covariance (same vs opposite direction)  
-> • **Strength** comes from standardising (tight vs loose clustering)
+<!-- When X and Y increase together, we can imagine a diagonal line going upward in the data. -->
 
-Now we’re ready for the Sum-of-Products (SP) formula that turns this idea into numbers.
+<!-- When an increase in X is associated with a decrease in Y, we can imagine a diagonal line going downward. -->
 
 ---
 
-## Pearson *r* – Conceptual Formula
 
-The Pearson correlation compares how much *X* and *Y* vary **together** with how much they vary **separately**:
+## Interpreting a Scatter Plot
 
-$$
-r
-   = \frac{\text{covariability of } X \text{ and } Y}
-          {\text{variability of } X \text{ and } Y \text{ separately}}
-$$
-
-Perfect shared variability ⇒ $|r| = 1.00$ • Zero shared variability ⇒ $r = 0$
+1. **Direction** – *Positive* slopes upward; *Negative* slopes downward  
+2. **Form** – Pattern must be linear for the measures of association we discuss today
+3. **Strength** – Tightness of points around an imaginary diagonal line  
 
 ---
 
-## Sum of Products of Deviations (SP)
 
-To calculate the Pearson correlation we introduce the **sum of products of deviations** (SP).
+## Measuring association: Sum of Products
 
-* **Analogy with SS** – SS measures variability of one variable; SP measures how two variables move together.  
-* **Sign of SP:** Positive ⇒ same-direction changes; Negative ⇒ opposite-direction changes.
+* **Analogy with SS** – SS measures variability of one variable; SP measures how two variables vary together (co-vary).
+* **Sign of SP:** Positive: same-direction changes; Negative: opposite-direction changes.
 
 ---
 
-### SP – Two Equivalent Formulas {.smaller}
+### SP Formula {.smaller}
 
-**Definitional**
 
 $$
 SP = \sum \bigl(X - \bar{X}\bigr)\bigl(Y - \bar{Y}\bigr)
 $$
 
-**Computational**
+---
 
-$$
-SP = \sum XY \;-\; \frac{\sum X \,\sum Y}{n}
-$$
+## SP - Steps
+
+1. Calculate Means
+2. Deviations from Means
+3. Multiply Deviations
+4. Sum the products of deviations
 
 ---
 
-## SP – Numerical Example {.smaller}
+## SP - Numerical Example
 
-Dataset (n = 5)
+<font size = 4>
 
 | X | Y |
 |---|---|
@@ -161,16 +141,111 @@ Means: $\bar X = 3$, $\bar Y = 3$
 | 5 | 4 | 2  | 1  | 2 | 4 | 1 |
 | **Totals** |   |   |   | **SP = 8** | **$SS_X = 10$** | **$SS_Y = 10$** |
 
+</font>
+
 ---
 
-## Computing **r**
+
+
+## SP - interpretation
+
+* **Sign only**:  
+  *Positive* → higher-than-average X accompanies higher-than-average Y  
+  *Negative* → higher-than-average X accompanies lower-than-average Y  
+
+---
+
+## SP and Covariance
+
+We can standardize the SP by number of participants $n$
+
+This gives us the **covariance**: average SP
+
+$$
+\frac{SP}{n}
+$$
+
+* Still tells us direction (+/-) but not strength
+
+---
+
+## Covariance - Interpretation
+
+* **Sign only**:  
+  *Positive* → higher-than-average X accompanies higher-than-average Y  
+  *Negative* → higher-than-average X accompanies lower-than-average Y  
+* **Magnitude tied to units** (e.g., cm * kg), not comparable across studies
+
+---
+
+## Pearson's Correlation Coefficient
+
+
+* Standardized version of covariance (drop units)
+* Bounded between -1 and +1
+* +1: perfect positive linear relationship
+* 0: no linear relationship
+* -1: perfect negative linear relationship
+
+---
+
+
+## Pearson *r* - Formula {.smaller}
+
+From covariance:
+
+$$
+r = \frac{Cov(x,y)}{\sigma_x \sigma_y}
+$$
+
+From SP (neither numerator nor denominator standardized by $n$:
 
 $$
 r = \frac{SP}{\sqrt{SS_{X}\,SS_{Y}}}
 $$
 
-* $SS_{X} = \sum (X - \bar{X})^{2}$ (single-variable variability for X)  
-* $SS_{Y} = \sum (Y - \bar{Y})^{2}$ (single-variable variability for Y)
+Conceptual formula:
+
+$$
+r
+   = \frac{\text{raw association between } X \text{ and } Y}
+          {\text{amount and units of variability in } X \text{ and } Y}
+$$
+
+---
+
+
+## SP - Numerical Example
+
+<font size = 4>
+
+| X | Y |
+|---|---|
+| 1 | 2 |
+| 2 | 1 |
+| 3 | 3 |
+| 4 | 5 |
+| 5 | 4 |
+
+Means: $\bar X = 3$, $\bar Y = 3$
+
+| $X$ | $Y$ | $X-\bar X$ | $Y-\bar Y$ | $(X-\bar X)(Y-\bar Y)$ | $(X-\bar X)^{2}$ | $(Y-\bar Y)^{2}$ |
+|----:|----:|-----------:|-----------:|-----------------------:|-----------------:|-----------------:|
+| 1 | 2 | –2 | –1 | 2 | 4 | 1 |
+| 2 | 1 | –1 | –2 | 2 | 1 | 4 |
+| 3 | 3 | 0  | 0  | 0 | 0 | 0 |
+| 4 | 5 | 1  | 2  | 2 | 1 | 4 |
+| 5 | 4 | 2  | 1  | 2 | 4 | 1 |
+| **Totals** |   |   |   | **SP = 8** | **$SS_X = 10$** | **$SS_Y = 10$** |
+
+</font>
+
+---
+
+## Computing **r**
+
+* $SS_{X} = \sum (X - \bar{X})^{2}$ (single-variable variability for X)  
+* $SS_{Y} = \sum (Y - \bar{Y})^{2}$ (single-variable variability for Y)
 
 ---
 
@@ -180,91 +255,86 @@ $$
 r \;=\; \frac{8}{\sqrt{10 \times 10}} \;=\; 0.80
 $$
 
-* **Direction:** Positive  
-* **Explained variance:** $r^{2} = 0.64$ → 64 % of the variability in **Y** can be explain via **X**
+Interpretation (Cohen, 1988):
+
+```{r}
+knitr::kable(
+  data.frame("Effect size" = c("Negligible", "Small", "Medium", "Large"),
+             Value = c("[0, .10]" ,"[.10, .30)", "[.30. .50)", "[.50, 1.00]"), check.names = FALSE)
+)
+```
+
 
 ---
 
-## **r** via *z*-Scores
 
-$$
-r = \frac{\sum z_X z_Y}{\,n-1\,}\quad\text{(sample)}
-$$
+## Limitations of *r*
 
-Same numerator—now in *standard-score* space.
+* Only reflects **linear** patterns
+* **Outliers** can distort it
+* **Restricted range** may hide real effects
+* **Correlation does not imply Causation**
+    + Just because X correlates with Y does not mean X caused Y
+    + You can ASSUME that X causes Y, and observing correlation is consistent with that assumption
 
----
-
-## Partial Correlation – Definition & Formula {.smaller}
-
-Controls a third variable **Z**:
-
-$$
-r_{XY\cdot Z} =
-\frac{r_{XY} - r_{XZ} r_{YZ}}
-     {\sqrt{(1 - r_{XZ}^{2})(1 - r_{YZ}^{2})}}
-$$
+<!-- https://youtu.be/JyoefJ68T5I?si=VamyyAeB51H8tXMF -->
 
 ---
 
-## Partial Correlation – Numerical Example {.tiny}
+## Anscombe’s Quartet
 
-Given &nbsp;$r_{XY}=0.65$, &nbsp;$r_{XZ}=0.60$, &nbsp;$r_{YZ}=0.70$
-
-$$
-r_{XY\cdot Z} \;=\;
-\frac{\,r_{XY} \;-\; r_{XZ}\,r_{YZ}\,}
-     {\sqrt{\bigl(1 - r_{XZ}^{2}\bigr)\,\bigl(1 - r_{YZ}^{2}\bigr)}}
-$$
-
-Substitute the numbers:
-
-$$
-\begin{aligned}
-r_{XY\cdot Z}
-&= \frac{\,0.65 - (0.60)(0.70)\,}
-        {\sqrt{\,\bigl(1-0.60^{2}\bigr)\,\bigl(1-0.70^{2}\bigr)\,}} \\[6pt]
-&= \frac{0.65 - 0.42}{\sqrt{(1-0.36)(1-0.49)}} \\[6pt]
-&= \frac{0.23}{\sqrt{0.64 \times 0.51}} \\[6pt]
-&= \frac{0.23}{0.571} \\[6pt]
-&\approx 0.40
-\end{aligned}
-$$
+```{r fig-anscombe, fig.cap="Anscombe's quartet"}
+plts <- lapply(1:4, function(i){
+  df <- anscombe[, paste0(c("x", "y"), i)]
+  names(df) <- c("X", "Y")
+  ggplot(df, aes(x = X, y = Y)) + geom_point(shape = 21, size = 3, fill = "orange") + theme_linedraw()
+})
+ggpubr::ggarrange(plotlist = plts, ncol = 2, nrow = 2, labels = "auto")
+```
 
 ---
 
-**Interpretation**
+## Interpretation: Anscombe
 
-* Zero-order correlation: $r_{XY}=0.65$ (before controlling for $Z$).  
-* After holding $Z$ constant: $r_{XY\cdot Z}\approx0.40$ — still positive but weaker.  
-* **Explained variance now:** $(r_{XY\cdot Z})^{2} \approx 0.16$ → about **16 %** of Y’s variability is predictable from X once Z is removed.  
-* Reduction from $r^{2}=0.42$ to $0.16$ suggests that **Z** accounted for roughly **26 %** of the apparent X–Y association.
+All four have *r = 0.82*
 
----
-
-## Practical Uses
-
-1. **Prediction** – e.g., SAT ↔ GPA  
-2. **Validity** – new vs. established test alignment  
-3. **Reliability** – test–retest stability  
-4. **Theory Verification** – correlation tests predicted links
+a. meets the assumption of linearity
+b. non-linear perfect association
+c. perfect association, diluted by one outlier
+d. no association (X is constant, not a variable), distorted by one outlier
 
 ---
 
-## Four Cautions
+## Restricted Range Example
 
-* **Correlation ≠ Causation**  
-* **Restricted Range**  
-* **Outliers**  
-* **Proportion Explained (r²)**
+```{r fig-nonlin}
+df <- anscombe[, paste0(c("x", "y"), 2)]
+names(df) <- c("X", "Y")
+p1 <- ggplot(df[df$X <= 9, ], aes(x = X, y = Y)) + geom_point(shape = 21, size = 3, fill = "orange") + theme_linedraw() + geom_smooth(method = "lm", se = FALSE)
+p2 <- ggplot(df[df$X > 9 & df$X < 13, ], aes(x = X, y = Y)) + geom_point(shape = 21, size = 3, fill = "orange") + theme_linedraw() + geom_smooth(method = "lm", se = FALSE)
+p3 <- ggplot(df[df$X >= 13, ], aes(x = X, y = Y)) + geom_point(shape = 21, size = 3, fill = "orange") + theme_linedraw() + geom_smooth(method = "lm", se = FALSE)
+ggpubr::ggarrange(p1, p2, p3, ncol = 3, nrow = 1, labels = "auto")
+```
 
 ---
 
-## Wrap‑Up
+## Visual Inspection
 
-* Correlation summarises covariability into **r** (and **r²**)  
-* **SP** bridges single‑ and two‑variable statistics  
-* Interpretation demands visual checks and caution  
-* **Partial correlation** disentangles third‑variable confounds  
+* Always **inspect your data**
+* Use scatter plots
+* Don’t trust summary statistics blindly; if assumptions are violated, they can be misleading
 
-Next: extend these ideas to **regression** for explicit prediction.
+---
+
+## Summary
+
+* **SP**: Intermediate in the calculation of covariance
+* **Covariance**: direction of relationship
+* **Correlation (*r*)**: direction + strength (unit-free)
+* Limitations:
+    + Only linear patterns
+    + Sensitive to outliers
+    + Restricted range
+    + Correlation does not imply causation
+
+---
