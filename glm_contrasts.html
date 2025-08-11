@@ -2,10 +2,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.57">
+<meta name="generator" content="quarto-1.7.33">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="description" content="Book Description">
-<title>13&nbsp; GLM: Contrasts – Statistics 1 and 2</title>
+<title>14&nbsp; GLM: Contrasts – Statistics 1 and 2</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -29,17 +29,20 @@ ul.task-list li input[type="checkbox"] {
 <link href="./factorial.html" rel="next">
 <link href="./logistic.html" rel="prev">
 <link href="./images/logos/favicon.png" rel="icon" type="image/png">
-<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-c2894b54f4b00a27b9651b11dcf5df54.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-7530c408590d20eba92ebedbb433c75c.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-c2894b54f4b00a27b9651b11dcf5df54.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark"><script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap-e5f62320892960dc23dd0786c8482584.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-11ad583e60b2cd5ac7d46970bf1aa65a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-e5f62320892960dc23dd0786c8482584.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -95,16 +98,178 @@ window.Quarto = {
 <link rel="stylesheet" href="include/webex.css">
 <link rel="stylesheet" href="include/glossary.css">
 <link rel="stylesheet" href="include/style.css">
-<link rel="stylesheet" href="c:/gitbook_stats12/include/webex.css">
+<link rel="stylesheet" href="include/webex.css">
 </head>
-<body class="nav-sidebar floating">
+<body class="nav-sidebar floating quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./glm_contrasts.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">GLM: Contrasts</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./glm_contrasts.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">GLM: Contrasts</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -167,110 +332,116 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./chapter2_descriptive_statistics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Descriptive Statistics</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./probability.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Probability Distributions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Probability Distributions</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./samplingdistribution.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">The Sampling Distribution</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">The Sampling Distribution</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./testing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Hypothesis Testing</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Hypothesis Testing</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./glm1_regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">GLM-I: Linear Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">GLM-I: Linear Regression</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./glm2_sum_squares.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">GLM-II: Sums of Squares</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">GLM-II: Sums of Squares</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./glm3binary.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">GLM-III: Binary Predictors</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">GLM-III: Binary Predictors</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./glm4anova.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">GLM-IV: ANOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">GLM-IV: ANOVA</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./glm5multiple.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">GLM-V: Multiple regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">GLM-V: Multiple regression</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./glm6nested.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">GLM-VI: Nested models</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">GLM-VI: Nested models</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./glm7interaction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">GLM-VII: Interaction</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">GLM-VII: Interaction</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./logistic.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">GLM VIII - Logistic Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">GLM VIII - Logistic Regression</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./glm_contrasts.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">GLM: Contrasts</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">GLM: Contrasts</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./factorial.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">GLM: Factorial ANOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">GLM: Factorial ANOVA</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ancova.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">GLM: ANCOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">GLM: ANCOVA</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./rmanova.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">GLM: Repeated Measures ANOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">GLM: Repeated Measures ANOVA</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./reliability_validity.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Reliability and Validity</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Reliability and Validity</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./data_reduction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Dimension Reduction</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Dimension Reduction</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./confint.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">BE2 - Confidence Intervals</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">BE2 - Confidence Intervals</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -316,41 +487,41 @@ window.Quarto = {
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#effects-coding" id="toc-effects-coding" class="nav-link active" data-scroll-target="#effects-coding"><span class="header-section-number">13.1</span> Effects Coding</a></li>
-  <li><a href="#contrast-coding" id="toc-contrast-coding" class="nav-link" data-scroll-target="#contrast-coding"><span class="header-section-number">13.2</span> Contrast Coding</a></li>
-  <li><a href="#post-hoc-tests" id="toc-post-hoc-tests" class="nav-link" data-scroll-target="#post-hoc-tests"><span class="header-section-number">13.3</span> ‘Post-Hoc’ Tests</a></li>
-  <li><a href="#adjusting-for-multiple-comparisons" id="toc-adjusting-for-multiple-comparisons" class="nav-link" data-scroll-target="#adjusting-for-multiple-comparisons"><span class="header-section-number">13.4</span> Adjusting for Multiple Comparisons</a></li>
-  <li><a href="#lecture" id="toc-lecture" class="nav-link" data-scroll-target="#lecture"><span class="header-section-number">14</span> Lecture</a></li>
+<li><a href="#effects-coding" id="toc-effects-coding" class="nav-link active" data-scroll-target="#effects-coding"><span class="header-section-number">14.1</span> Effects Coding</a></li>
+  <li><a href="#contrast-coding" id="toc-contrast-coding" class="nav-link" data-scroll-target="#contrast-coding"><span class="header-section-number">14.2</span> Contrast Coding</a></li>
+  <li><a href="#post-hoc-tests" id="toc-post-hoc-tests" class="nav-link" data-scroll-target="#post-hoc-tests"><span class="header-section-number">14.3</span> ‘Post-Hoc’ Tests</a></li>
+  <li><a href="#adjusting-for-multiple-comparisons" id="toc-adjusting-for-multiple-comparisons" class="nav-link" data-scroll-target="#adjusting-for-multiple-comparisons"><span class="header-section-number">14.4</span> Adjusting for Multiple Comparisons</a></li>
+  <li><a href="#lecture" id="toc-lecture" class="nav-link" data-scroll-target="#lecture"><span class="header-section-number">15</span> Lecture</a></li>
   <li>
-<a href="#tutorial" id="toc-tutorial" class="nav-link" data-scroll-target="#tutorial"><span class="header-section-number">15</span> Tutorial</a>
+<a href="#tutorial" id="toc-tutorial" class="nav-link" data-scroll-target="#tutorial"><span class="header-section-number">16</span> Tutorial</a>
   <ul class="collapse">
-<li><a href="#group-means" id="toc-group-means" class="nav-link" data-scroll-target="#group-means"><span class="header-section-number">15.1</span> Group Means</a></li>
-  <li><a href="#more-dummies" id="toc-more-dummies" class="nav-link" data-scroll-target="#more-dummies"><span class="header-section-number">15.2</span> More Dummies</a></li>
-  <li><a href="#estimating-group-means" id="toc-estimating-group-means" class="nav-link" data-scroll-target="#estimating-group-means"><span class="header-section-number">15.3</span> Estimating group means</a></li>
-  <li><a href="#comparing-to-overall-mean" id="toc-comparing-to-overall-mean" class="nav-link" data-scroll-target="#comparing-to-overall-mean"><span class="header-section-number">15.4</span> Comparing to Overall Mean</a></li>
+<li><a href="#group-means" id="toc-group-means" class="nav-link" data-scroll-target="#group-means"><span class="header-section-number">16.1</span> Group Means</a></li>
+  <li><a href="#more-dummies" id="toc-more-dummies" class="nav-link" data-scroll-target="#more-dummies"><span class="header-section-number">16.2</span> More Dummies</a></li>
+  <li><a href="#estimating-group-means" id="toc-estimating-group-means" class="nav-link" data-scroll-target="#estimating-group-means"><span class="header-section-number">16.3</span> Estimating group means</a></li>
+  <li><a href="#comparing-to-overall-mean" id="toc-comparing-to-overall-mean" class="nav-link" data-scroll-target="#comparing-to-overall-mean"><span class="header-section-number">16.4</span> Comparing to Overall Mean</a></li>
   <li>
-<a href="#comparing-groups-of-means" id="toc-comparing-groups-of-means" class="nav-link" data-scroll-target="#comparing-groups-of-means"><span class="header-section-number">15.5</span> Comparing Groups of Means</a>
+<a href="#comparing-groups-of-means" id="toc-comparing-groups-of-means" class="nav-link" data-scroll-target="#comparing-groups-of-means"><span class="header-section-number">16.5</span> Comparing Groups of Means</a>
   <ul class="collapse">
-<li><a href="#step-1-plan-contrasts" id="toc-step-1-plan-contrasts" class="nav-link" data-scroll-target="#step-1-plan-contrasts"><span class="header-section-number">15.5.1</span> Step 1: Plan Contrasts</a></li>
-  <li><a href="#step-2-account-for-group-size" id="toc-step-2-account-for-group-size" class="nav-link" data-scroll-target="#step-2-account-for-group-size"><span class="header-section-number">15.5.2</span> Step 2: Account for Group Size</a></li>
-  <li><a href="#step-3-do-matrix-algebra" id="toc-step-3-do-matrix-algebra" class="nav-link" data-scroll-target="#step-3-do-matrix-algebra"><span class="header-section-number">15.5.3</span> Step 3: Do Matrix Algebra</a></li>
+<li><a href="#step-1-plan-contrasts" id="toc-step-1-plan-contrasts" class="nav-link" data-scroll-target="#step-1-plan-contrasts"><span class="header-section-number">16.5.1</span> Step 1: Plan Contrasts</a></li>
+  <li><a href="#step-2-account-for-group-size" id="toc-step-2-account-for-group-size" class="nav-link" data-scroll-target="#step-2-account-for-group-size"><span class="header-section-number">16.5.2</span> Step 2: Account for Group Size</a></li>
+  <li><a href="#step-3-do-matrix-algebra" id="toc-step-3-do-matrix-algebra" class="nav-link" data-scroll-target="#step-3-do-matrix-algebra"><span class="header-section-number">16.5.3</span> Step 3: Do Matrix Algebra</a></li>
   </ul>
 </li>
-  <li><a href="#run-the-analysis" id="toc-run-the-analysis" class="nav-link" data-scroll-target="#run-the-analysis"><span class="header-section-number">15.6</span> Run the Analysis</a></li>
+  <li><a href="#run-the-analysis" id="toc-run-the-analysis" class="nav-link" data-scroll-target="#run-the-analysis"><span class="header-section-number">16.6</span> Run the Analysis</a></li>
   <li>
-<a href="#adjusting-for-multiple-comparisons-1" id="toc-adjusting-for-multiple-comparisons-1" class="nav-link" data-scroll-target="#adjusting-for-multiple-comparisons-1"><span class="header-section-number">15.7</span> Adjusting for Multiple Comparisons</a>
+<a href="#adjusting-for-multiple-comparisons-1" id="toc-adjusting-for-multiple-comparisons-1" class="nav-link" data-scroll-target="#adjusting-for-multiple-comparisons-1"><span class="header-section-number">16.7</span> Adjusting for Multiple Comparisons</a>
   <ul class="collapse">
-<li><a href="#bonferroni-correction" id="toc-bonferroni-correction" class="nav-link" data-scroll-target="#bonferroni-correction"><span class="header-section-number">15.7.1</span> Bonferroni correction</a></li>
+<li><a href="#bonferroni-correction" id="toc-bonferroni-correction" class="nav-link" data-scroll-target="#bonferroni-correction"><span class="header-section-number">16.7.1</span> Bonferroni correction</a></li>
   </ul>
 </li>
-  <li><a href="#compare-all-groups" id="toc-compare-all-groups" class="nav-link" data-scroll-target="#compare-all-groups"><span class="header-section-number">15.8</span> Compare All Groups</a></li>
+  <li><a href="#compare-all-groups" id="toc-compare-all-groups" class="nav-link" data-scroll-target="#compare-all-groups"><span class="header-section-number">16.8</span> Compare All Groups</a></li>
   </ul>
 </li>
   </ul></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
-<h1 class="title"><span id="sec-glmcontrasts" class="quarto-section-identifier"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">GLM: Contrasts</span></span></h1>
+<h1 class="title"><span id="sec-glmcontrasts" class="quarto-section-identifier"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">GLM: Contrasts</span></span></h1>
 </div>
 
 
@@ -372,26 +543,26 @@ window.Quarto = {
 <p>A different way to specify the same model is to omit the intercept, and include a dummy for each of the <span class="math inline">\(k\)</span> groups, so we represent <span class="math inline">\(k\)</span> groups with <span class="math inline">\(k\)</span> dummies:</p>
 <p><span class="math inline">\(\hat{Y}_i = b_1D_{1i}+ b_2D_{2i}+ b_3D_{3i}+ b_4D_{4i}+ b_5D_{5i}\)</span></p>
 <p>Both of these models are mathematically identical. The advantage of estimating all group means is that this model provides a standard error for each group mean, allowing us to test each group mean against hypothesized values.</p>
-<section id="effects-coding" class="level2" data-number="13.1"><h2 data-number="13.1" class="anchored" data-anchor-id="effects-coding">
-<span class="header-section-number">13.1</span> Effects Coding</h2>
+<section id="effects-coding" class="level2" data-number="14.1"><h2 data-number="14.1" class="anchored" data-anchor-id="effects-coding">
+<span class="header-section-number">14.1</span> Effects Coding</h2>
 <p>Another way to include a categorical predictor is via effects coding. Effects coding compares each group to the grand mean. When we have unequal group sizes, the coding scheme should account for relative group size.</p>
-</section><section id="contrast-coding" class="level2" data-number="13.2"><h2 data-number="13.2" class="anchored" data-anchor-id="contrast-coding">
-<span class="header-section-number">13.2</span> Contrast Coding</h2>
+</section><section id="contrast-coding" class="level2" data-number="14.2"><h2 data-number="14.2" class="anchored" data-anchor-id="contrast-coding">
+<span class="header-section-number">14.2</span> Contrast Coding</h2>
 <p>Contrast coding is yet another coding scheme; it compares groups of means. This allows us to test specific hypotheses about differences between groups. Contrast coding is a very advanced technique that requires you to perform some basic matrix algebra in Excel.</p>
-</section><section id="post-hoc-tests" class="level2" data-number="13.3"><h2 data-number="13.3" class="anchored" data-anchor-id="post-hoc-tests">
-<span class="header-section-number">13.3</span> ‘Post-Hoc’ Tests</h2>
+</section><section id="post-hoc-tests" class="level2" data-number="14.3"><h2 data-number="14.3" class="anchored" data-anchor-id="post-hoc-tests">
+<span class="header-section-number">14.3</span> ‘Post-Hoc’ Tests</h2>
 <p>The notion of post-hoc tests is a bit outdated; it essentially refers to making all possible comparisons between group means. The name is based on the fact that such tests are rarely hypothesized beforehand. They can be considered an exploratory procedure to look for differences between groups. Note that performing many tests inflates the risk of drawing false-positive conclusions (Type I error).</p>
-</section><section id="adjusting-for-multiple-comparisons" class="level2" data-number="13.4"><h2 data-number="13.4" class="anchored" data-anchor-id="adjusting-for-multiple-comparisons">
-<span class="header-section-number">13.4</span> Adjusting for Multiple Comparisons</h2>
+</section><section id="adjusting-for-multiple-comparisons" class="level2" data-number="14.4"><h2 data-number="14.4" class="anchored" data-anchor-id="adjusting-for-multiple-comparisons">
+<span class="header-section-number">14.4</span> Adjusting for Multiple Comparisons</h2>
 <p>When conducting multiple tests, we face an increased risk of committing Type I errors (false positives). If we perform <span class="math inline">\(m\)</span> tests within one study, the experiment-wise Type I error rate is <span class="math inline">\(1- (1-\alpha)^m\)</span>. To control the experiment-wise Type I error rate, we can apply a Bonferroni correction, which divides the significance level <span class="math inline">\(\alpha\)</span> by the number of tests <span class="math inline">\(m\)</span>. This trades off fewer false positive results for more false negative results.</p>
 <p>Planning to test specific hypotheses before conducting the study also helps control Type I error.</p>
-</section><section id="lecture" class="level1" data-number="14"><h1 data-number="14">
-<span class="header-section-number">14</span> Lecture</h1>
+</section><section id="lecture" class="level1" data-number="15"><h1 data-number="15">
+<span class="header-section-number">15</span> Lecture</h1>
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/8UDpTwXoINU" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
-</section><section id="tutorial" class="level1" data-number="15"><h1 data-number="15">
-<span class="header-section-number">15</span> Tutorial</h1>
-<section id="group-means" class="level2" data-number="15.1"><h2 data-number="15.1" class="anchored" data-anchor-id="group-means">
-<span class="header-section-number">15.1</span> Group Means</h2>
+</section><section id="tutorial" class="level1" data-number="16"><h1 data-number="16">
+<span class="header-section-number">16</span> Tutorial</h1>
+<section id="group-means" class="level2" data-number="16.1"><h2 data-number="16.1" class="anchored" data-anchor-id="group-means">
+<span class="header-section-number">16.1</span> Group Means</h2>
 <p>In this tutorial, you will learn to use the general linear model to estimate means and to test the difference between two group means, the difference between individual group means and the overall mean, and between groups of means.</p>
 <p>Open hiking_long.sav in SPSS.</p>
 <p>The data file describes the result of a fictitious experiment. A hiking guide has displayed five different types of behavior towards different groups of hikers. The treatment that each person received from the guide is recorded in the variable <code>behavior</code>.</p>
@@ -512,8 +683,8 @@ REGRESSION
 <div id="radio_KKHMPUZXVK" class="webex-radiogroup">
 <label><input type="radio" autocomplete="off" name="radio_KKHMPUZXVK" value="answer"><span>The difference between the mean of the singing group and the mean of the stories group.</span></label><label><input type="radio" autocomplete="off" name="radio_KKHMPUZXVK" value=""><span>The mean of the stories group.</span></label>
 </div>
-</section><section id="more-dummies" class="level2" data-number="15.2"><h2 data-number="15.2" class="anchored" data-anchor-id="more-dummies">
-<span class="header-section-number">15.2</span> More Dummies</h2>
+</section><section id="more-dummies" class="level2" data-number="16.2"><h2 data-number="16.2" class="anchored" data-anchor-id="more-dummies">
+<span class="header-section-number">16.2</span> More Dummies</h2>
 <p>As we’ve previously established, dummy variables allow us to test the significance of mean differences between one reference group and all other groups.</p>
 <p>Now, imagine we expect rushing to have a negative effect on behavior, and we want to know which other behaviors are “better” (i.e., result in a higher score on behavior) than rushing.</p>
 <p>Specify your hypotheses, then check your answer.</p>
@@ -549,8 +720,8 @@ Answer
 </div>
 <p>You can use this technique any time you want to test the significance of the difference between one reference group and other groups.</p>
 <p>Note that, in the first assignment, we used a different set of dummy variables than in the second assignment. This means that you can always use different sets of dummy variables when want to compare against multiple reference groups.</p>
-</section><section id="estimating-group-means" class="level2" data-number="15.3"><h2 data-number="15.3" class="anchored" data-anchor-id="estimating-group-means">
-<span class="header-section-number">15.3</span> Estimating group means</h2>
+</section><section id="estimating-group-means" class="level2" data-number="16.3"><h2 data-number="16.3" class="anchored" data-anchor-id="estimating-group-means">
+<span class="header-section-number">16.3</span> Estimating group means</h2>
 <p>In the first assignment, we computed the group means. But remember that the ANOVA model allows us to estimate them using the general linear model. In this assignment, we will do so by hand. After the previous assignment, you should have five dummy variables to represent the five groups of <code>behavior</code>.</p>
 <p>Until now, you’ve always included four dummy variables to represent five categories, as the last category is represented by the intercept.</p>
 <p>However, it is also possible to represent five groups as follows:</p>
@@ -629,8 +800,8 @@ Answer
 <option value="">Yes</option>
 <option value="answer">No</option></select></p>
 <p>You can use regression without an intercept any time you wish to estimate <em>all</em> group means in a single analysis and/or test the group means against specific hypothesized values.</p>
-</section><section id="comparing-to-overall-mean" class="level2" data-number="15.4"><h2 data-number="15.4" class="anchored" data-anchor-id="comparing-to-overall-mean">
-<span class="header-section-number">15.4</span> Comparing to Overall Mean</h2>
+</section><section id="comparing-to-overall-mean" class="level2" data-number="16.4"><h2 data-number="16.4" class="anchored" data-anchor-id="comparing-to-overall-mean">
+<span class="header-section-number">16.4</span> Comparing to Overall Mean</h2>
 <p>Until now, we’ve represented levels of a categorical variable using <em>dummy variables</em> with values 0 or 1.</p>
 <p>In this assignment, we introduce an alternative coding system: <em>effects coding</em>.</p>
 <p>The main difference with dummy coding is that the reference category does not receive 0 values on all indicator variables, but instead, receives a negative value. In a balanced design (with equal sizes for each group), this value is -1.</p>
@@ -729,13 +900,13 @@ REGRESSION
 </div>
 <p>Using the coefficients table, calculate the mean of the jokes group. What value do you get? <input class="webex-solveme nospaces" data-tol="0.01" size="3" data-answer="[&quot;6.3&quot;]"></p>
 <p>This should be identical to the mean you observed in the previous assignment (using regression to estimate means), and in the first assignment (just computing the means).</p>
-</section><section id="comparing-groups-of-means" class="level2" data-number="15.5"><h2 data-number="15.5" class="anchored" data-anchor-id="comparing-groups-of-means">
-<span class="header-section-number">15.5</span> Comparing Groups of Means</h2>
+</section><section id="comparing-groups-of-means" class="level2" data-number="16.5"><h2 data-number="16.5" class="anchored" data-anchor-id="comparing-groups-of-means">
+<span class="header-section-number">16.5</span> Comparing Groups of Means</h2>
 <p>Extending the methods above, it is also possible to compare <em>groups</em> of means. For example, we might wonder whether negative behaviors (rushing and insulting) differ significantly from positive behaviors (stories, jokes, and singing).</p>
 <p>This approach builds upon the logic of effects coding, where the weights for the reference category were based on the relative sample size of the reference category. This time, however, the weights for the category to be compared to the reference category are <em>also</em> based on a sample size.</p>
 <p>We are going to perform several steps, as explained in the lecture.</p>
-<section id="step-1-plan-contrasts" class="level3" data-number="15.5.1"><h3 data-number="15.5.1" class="anchored" data-anchor-id="step-1-plan-contrasts">
-<span class="header-section-number">15.5.1</span> Step 1: Plan Contrasts</h3>
+<section id="step-1-plan-contrasts" class="level3" data-number="16.5.1"><h3 data-number="16.5.1" class="anchored" data-anchor-id="step-1-plan-contrasts">
+<span class="header-section-number">16.5.1</span> Step 1: Plan Contrasts</h3>
 <p>Keep in mind these rules:</p>
 <ol type="1">
 <li>The possible values of each indicator variable must sum to 0.</li>
@@ -799,8 +970,8 @@ REGRESSION
 </ul>
 <p>In this case, we only care about C1; we created C2, C3 and C4 to ensure that every level of behavior is uniquely identified. But what do C2-C4 test?</p>
 <p>C2 compares the two negative behaviors; C3 compares stories against jokes and singing. C4 compares jokes and singing.</p>
-</section><section id="step-2-account-for-group-size" class="level3" data-number="15.5.2"><h3 data-number="15.5.2" class="anchored" data-anchor-id="step-2-account-for-group-size">
-<span class="header-section-number">15.5.2</span> Step 2: Account for Group Size</h3>
+</section><section id="step-2-account-for-group-size" class="level3" data-number="16.5.2"><h3 data-number="16.5.2" class="anchored" data-anchor-id="step-2-account-for-group-size">
+<span class="header-section-number">16.5.2</span> Step 2: Account for Group Size</h3>
 <p>Now, we have to account for the relative sample sizes of these groups to ensure that we can interpret the coefficients as the difference between the means of those combinations of groups.</p>
 <p>Use the descriptive statistics you previously obtained to weight the contrasts from step 1.</p>
 <p>E.g., contrast C3 below is already completed. Which other contrasts do you still need to change? <select class="webex-select"><option value="blank"></option>
@@ -856,8 +1027,8 @@ REGRESSION
 <td>-1</td>
 </tr>
 </tbody>
-</table></section><section id="step-3-do-matrix-algebra" class="level3" data-number="15.5.3"><h3 data-number="15.5.3" class="anchored" data-anchor-id="step-3-do-matrix-algebra">
-<span class="header-section-number">15.5.3</span> Step 3: Do Matrix Algebra</h3>
+</table></section><section id="step-3-do-matrix-algebra" class="level3" data-number="16.5.3"><h3 data-number="16.5.3" class="anchored" data-anchor-id="step-3-do-matrix-algebra">
+<span class="header-section-number">16.5.3</span> Step 3: Do Matrix Algebra</h3>
 <p>Enter the complete matrix into a spreadsheet program. Add one column before the contrasts with an intercept for each group, equal to <span class="math inline">\(1/k\)</span>.</p>
 <p>What’s the value of this intercept for this study? <input class="webex-solveme nospaces" size="3" data-answer="[&quot;0.2&quot;,&quot;.2&quot;]"></p>
 <ul>
@@ -886,8 +1057,8 @@ EXECUTE.</code></pre>
 <option value="">all levels</option>
 <option value="answer">joke versus singing</option>
 <option value="">story vs singing</option></select></p>
-</section></section><section id="run-the-analysis" class="level2" data-number="15.6"><h2 data-number="15.6" class="anchored" data-anchor-id="run-the-analysis">
-<span class="header-section-number">15.6</span> Run the Analysis</h2>
+</section></section><section id="run-the-analysis" class="level2" data-number="16.6"><h2 data-number="16.6" class="anchored" data-anchor-id="run-the-analysis">
+<span class="header-section-number">16.6</span> Run the Analysis</h2>
 <p>Create the indicator variables and run the regression analysis.</p>
 <p>What is the mean difference in feeling between rushing and insulting behaviors? <input class="webex-solveme nospaces" data-tol="0.01" size="5" data-answer="[&quot;-0.65&quot;,&quot;-.65&quot;]"></p>
 <p>Which effects are significant? <select class="webex-select"><option value="blank"></option>
@@ -895,21 +1066,21 @@ EXECUTE.</code></pre>
 <option value="">positive V negative behaviors</option>
 <option value="answer">story V jokes, singing</option>
 <option value="">rushing V insulting</option></select></p>
-</section><section id="adjusting-for-multiple-comparisons-1" class="level2" data-number="15.7"><h2 data-number="15.7" class="anchored" data-anchor-id="adjusting-for-multiple-comparisons-1">
-<span class="header-section-number">15.7</span> Adjusting for Multiple Comparisons</h2>
+</section><section id="adjusting-for-multiple-comparisons-1" class="level2" data-number="16.7"><h2 data-number="16.7" class="anchored" data-anchor-id="adjusting-for-multiple-comparisons-1">
+<span class="header-section-number">16.7</span> Adjusting for Multiple Comparisons</h2>
 <p>In these assignments, we have been conducting many tests. You have learned that the significance level <span class="math inline">\(\alpha\)</span> indicates the probability of drawing a false-positive conclusion (Type I error). However, these probabilities add up for multiple tests! So when you perform many tests, you can be in a situation where you have a very high probability of comitting at least one Type I error.</p>
 <p>We call the total probability of committing at least one Type I error across multiple tests in the same study the “family-wise” or experiment-wise Type I error. You compute it as:</p>
 <p><span class="math inline">\(P(1+ Type I error) = 1 − (1 − \alpha)^{\text{number of tests}}\)</span></p>
 <p>So if we perform 3 comparisons, the probability of committing at least one Type I error is: <input class="webex-solveme nospaces" data-tol="0.01" size="4" data-answer="[&quot;0.14&quot;,&quot;.14&quot;]"></p>
 <p>And if we perform 10 tests? <input class="webex-solveme nospaces" data-tol="0.01" size="3" data-answer="[&quot;0.4&quot;,&quot;.4&quot;]"></p>
 <p>If this makes you uncomfortable - you’re not alone! People often seek to maintain a low risk of drawing any false-positive conclusions, and we can do so simply by lowering <span class="math inline">\(\alpha\)</span>.</p>
-<section id="bonferroni-correction" class="level3" data-number="15.7.1"><h3 data-number="15.7.1" class="anchored" data-anchor-id="bonferroni-correction">
-<span class="header-section-number">15.7.1</span> Bonferroni correction</h3>
+<section id="bonferroni-correction" class="level3" data-number="16.7.1"><h3 data-number="16.7.1" class="anchored" data-anchor-id="bonferroni-correction">
+<span class="header-section-number">16.7.1</span> Bonferroni correction</h3>
 <p>Bonferroni proposed a simple correction of <span class="math inline">\(\alpha = \alpha_{EW}/m\)</span>, where <span class="math inline">\(\alpha_{EW}\)</span> is the desired experiment-wise Type I error rate (e.g., .05), and <span class="math inline">\(m\)</span> is the number of tests.</p>
 <p>What alpha level would you use per test if you want to achieve an experiment-wise alpha of .05 and conduct 7 tests? <input class="webex-solveme nospaces" data-tol="0.001" size="11" data-answer="[&quot;0.007142857&quot;,&quot;.007142857&quot;]"></p>
 <p>The Bonferroni correction is quite conservative; in other words - although Bonferroni helps you avoid false-positive conclusions, it becomes much harder to detect true effects.</p>
-</section></section><section id="compare-all-groups" class="level2" data-number="15.8"><h2 data-number="15.8" class="anchored" data-anchor-id="compare-all-groups">
-<span class="header-section-number">15.8</span> Compare All Groups</h2>
+</section></section><section id="compare-all-groups" class="level2" data-number="16.8"><h2 data-number="16.8" class="anchored" data-anchor-id="compare-all-groups">
+<span class="header-section-number">16.8</span> Compare All Groups</h2>
 <p>Through the ANOVA interface, you can compare all groups to one another. This is equivalent to repeating a regression analysis multiple times, making each category the reference category in turn.</p>
 <p>Go to Analyze -&gt; Compare Means -&gt; One Way ANOVA. Enter Feeling as dependent variable and behavior as Factor.</p>
 <p>Now, click post-hoc. Note that you can select many different tests. Select LSD; this corresponds to “normal” p-values.</p>
@@ -1361,383 +1532,255 @@ window.onload = function() {
 }
 
 </script><script id="quarto-html-after-body" type="application/javascript">
-window.document.addEventListener("DOMContentLoaded", function (event) {
-  const toggleBodyColorMode = (bsSheetEl) => {
-    const mode = bsSheetEl.getAttribute("data-mode");
-    const bodyEl = window.document.querySelector("body");
-    if (mode === "dark") {
-      bodyEl.classList.add("quarto-dark");
-      bodyEl.classList.remove("quarto-light");
-    } else {
-      bodyEl.classList.add("quarto-light");
-      bodyEl.classList.remove("quarto-dark");
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
     }
-  }
-  const toggleBodyColorPrimary = () => {
-    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-    if (bsSheetEl) {
-      toggleBodyColorMode(bsSheetEl);
-    }
-  }
-  toggleBodyColorPrimary();  
-  const disableStylesheet = (stylesheets) => {
-    for (let i=0; i < stylesheets.length; i++) {
-      const stylesheet = stylesheets[i];
-      stylesheet.rel = 'prefetch';
-    }
-  }
-  const enableStylesheet = (stylesheets) => {
-    for (let i=0; i < stylesheets.length; i++) {
-      const stylesheet = stylesheets[i];
-      stylesheet.rel = 'stylesheet';
-    }
-  }
-  const manageTransitions = (selector, allowTransitions) => {
-    const els = window.document.querySelectorAll(selector);
-    for (let i=0; i < els.length; i++) {
-      const el = els[i];
-      if (allowTransitions) {
-        el.classList.remove('notransition');
-      } else {
-        el.classList.add('notransition');
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
       }
+      return false;
     }
-  }
-  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
-    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
-    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
-    let newTheme = '';
-    if(darkModeDefault) {
-      newTheme = isAlternate ? baseTheme : alternateTheme;
-    } else {
-      newTheme = isAlternate ? alternateTheme : baseTheme;
-    }
-    const changeGiscusTheme = () => {
-      // From: https://github.com/giscus/giscus/issues/336
-      const sendMessage = (message) => {
-        const iframe = document.querySelector('iframe.giscus-frame');
-        if (!iframe) return;
-        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
       }
-      sendMessage({
-        setConfig: {
-          theme: newTheme
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
         }
       });
     }
-    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
-    if (isGiscussLoaded) {
-      changeGiscusTheme();
-    }
-  }
-  const toggleColorMode = (alternate) => {
-    // Switch the stylesheets
-    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
-    manageTransitions('#quarto-margin-sidebar .nav-link', false);
-    if (alternate) {
-      enableStylesheet(alternateStylesheets);
-      for (const sheetNode of alternateStylesheets) {
-        if (sheetNode.id === "quarto-bootstrap") {
-          toggleBodyColorMode(sheetNode);
-        }
-      }
-    } else {
-      disableStylesheet(alternateStylesheets);
-      toggleBodyColorPrimary();
-    }
-    manageTransitions('#quarto-margin-sidebar .nav-link', true);
-    // Switch the toggles
-    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
-    for (let i=0; i < toggles.length; i++) {
-      const toggle = toggles[i];
-      if (toggle) {
-        if (alternate) {
-          toggle.classList.add("alternate");     
-        } else {
-          toggle.classList.remove("alternate");
-        }
-      }
-    }
-    // Hack to workaround the fact that safari doesn't
-    // properly recolor the scrollbar when toggling (#1455)
-    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
-      manageTransitions("body", false);
-      window.scrollTo(0, 1);
-      setTimeout(() => {
-        window.scrollTo(0, 0);
-        manageTransitions("body", true);
-      }, 40);  
-    }
-  }
-  const isFileUrl = () => { 
-    return window.location.protocol === 'file:';
-  }
-  const hasAlternateSentinel = () => {  
-    let styleSentinel = getColorSchemeSentinel();
-    if (styleSentinel !== null) {
-      return styleSentinel === "alternate";
-    } else {
-      return false;
-    }
-  }
-  const setStyleSentinel = (alternate) => {
-    const value = alternate ? "alternate" : "default";
-    if (!isFileUrl()) {
-      window.localStorage.setItem("quarto-color-scheme", value);
-    } else {
-      localAlternateSentinel = value;
-    }
-  }
-  const getColorSchemeSentinel = () => {
-    if (!isFileUrl()) {
-      const storageValue = window.localStorage.getItem("quarto-color-scheme");
-      return storageValue != null ? storageValue : localAlternateSentinel;
-    } else {
-      return localAlternateSentinel;
-    }
-  }
-  const darkModeDefault = false;
-  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
-  // Dark / light mode switch
-  window.quartoToggleColorScheme = () => {
-    // Read the current dark / light value 
-    let toAlternate = !hasAlternateSentinel();
-    toggleColorMode(toAlternate);
-    setStyleSentinel(toAlternate);
-    toggleGiscusIfUsed(toAlternate, darkModeDefault);
-  };
-  // Ensure there is a toggle, if there isn't float one in the top right
-  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
-    const a = window.document.createElement('a');
-    a.classList.add('top-right');
-    a.classList.add('quarto-color-scheme-toggle');
-    a.href = "";
-    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
-    const i = window.document.createElement("i");
-    i.classList.add('bi');
-    a.appendChild(i);
-    window.document.body.appendChild(a);
-  }
-  // Switch to dark mode if need be
-  if (hasAlternateSentinel()) {
-    toggleColorMode(true);
-  } else {
-    toggleColorMode(false);
-  }
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
-  const isCodeAnnotation = (el) => {
-    for (const clz of el.classList) {
-      if (clz.startsWith('code-annotation-')) {                     
-        return true;
-      }
-    }
-    return false;
-  }
-  const onCopySuccess = function(e) {
-    // button target
-    const button = e.trigger;
-    // don't keep focus
-    button.blur();
-    // flash "checked"
-    button.classList.add('code-copy-button-checked');
-    var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Copied!");
-    let tooltip;
-    if (window.bootstrap) {
-      button.setAttribute("data-bs-toggle", "tooltip");
-      button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Copied!");
-      tooltip = new bootstrap.Tooltip(button, 
-        { trigger: "manual", 
-          customClass: "code-copy-button-tooltip",
-          offset: [0, -8]});
-      tooltip.show();    
-    }
-    setTimeout(function() {
-      if (tooltip) {
-        tooltip.hide();
-        button.removeAttribute("data-bs-title");
-        button.removeAttribute("data-bs-toggle");
-        button.removeAttribute("data-bs-placement");
-      }
-      button.setAttribute("title", currentTitle);
-      button.classList.remove('code-copy-button-checked');
-    }, 1000);
-    // clear code selection
-    e.clearSelection();
-  }
-  const getTextToCopy = function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-  }
-  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-    text: getTextToCopy
-  });
-  clipboard.on('success', onCopySuccess);
-  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
-    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-      text: getTextToCopy,
-      container: window.document.getElementById('quarto-embedded-source-code-modal')
-    });
-    clipboardModal.on('success', onCopySuccess);
-  }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
-      }
-    }
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-    const config = {
-      allowHTML: true,
-      maxWidth: 500,
-      delay: 100,
-      arrow: false,
-      appendTo: function(el) {
-          return el.parentElement;
-      },
-      interactive: true,
-      interactiveBorder: 10,
-      theme: 'quarto',
-      placement: 'bottom-start',
-    };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
-    window.tippy(el, config); 
-  }
-  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-  for (var i=0; i<noterefs.length; i++) {
-    const ref = noterefs[i];
-    tippyHover(ref, function() {
-      // use id or data attribute instead here
-      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-      try { href = new URL(href).hash; } catch {}
-      const id = href.replace(/^#\/?/, "");
-      const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
-    });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
-        }
-      }
-    }
-    stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
-          } else {
-            container.appendChild(child.cloneNode(true));
-            break;
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
           }
         }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
         }
-        return container.innerHTML
       } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
         if (window.Quarto?.typesetMath) {
           window.Quarto.typesetMath(note);
         }
-        return note.innerHTML;
-      }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      // TODO in 1.5, we should make sure this works without a callout special case
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
       }
     }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
           }
         } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
           .then(res => res.text())
           .then(html => {
             const parser = new DOMParser();
             const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
+            const note = htmlDoc.querySelector('main.content');
             if (note !== null) {
-              const html = processXRef(id, note);
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
               instance.setContent(html);
             } 
           }).finally(() => {
@@ -1745,192 +1788,168 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
-    });
-  }
-      let selectedAnnoteEl;
-      const selectorForAnnotation = ( cell, annotation) => {
-        let cellAttr = 'data-code-cell="' + cell + '"';
-        let lineAttr = 'data-code-annotation="' +  annotation + '"';
-        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-        return selector;
-      }
-      const selectCodeLines = (annoteEl) => {
-        const doc = window.document;
-        const targetCell = annoteEl.getAttribute("data-target-cell");
-        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-        const lineIds = lines.map((line) => {
-          return targetCell + "-" + line;
-        })
-        let top = null;
-        let height = null;
-        let parent = null;
-        if (lineIds.length > 0) {
-            //compute the position of the single el (top and bottom and make a div)
-            const el = window.document.getElementById(lineIds[0]);
-            top = el.offsetTop;
-            height = el.offsetHeight;
-            parent = el.parentElement.parentElement;
-          if (lineIds.length > 1) {
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-            height = bottom - top;
-          }
-          if (top !== null && height !== null && parent !== null) {
-            // cook up a div (if necessary) and position it 
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
-            }
-            div.style.top = top - 2 + "px";
-            div.style.height = height + 4 + "px";
-            div.style.left = 0;
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
-            }
-            gutterDiv.style.top = top - 2 + "px";
-            gutterDiv.style.height = height + 4 + "px";
-          }
-          selectedAnnoteEl = annoteEl;
-        }
-      };
-      const unselectCodeLines = () => {
-        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-        elementsIds.forEach((elId) => {
-          const div = window.document.getElementById(elId);
-          if (div) {
-            div.remove();
-          }
-        });
-        selectedAnnoteEl = undefined;
-      };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
-          }
-        });
-      }
-  const findCites = (el) => {
-    const parentEl = el.parentElement;
-    if (parentEl) {
-      const cites = parentEl.dataset.cites;
-      if (cites) {
-        return {
-          el,
-          cites: cites.split(' ')
-        };
-      } else {
-        return findCites(el.parentElement)
-      }
-    } else {
-      return undefined;
-    }
-  };
-  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-  for (var i=0; i<bibliorefs.length; i++) {
-    const ref = bibliorefs[i];
-    const citeInfo = findCites(ref);
-    if (citeInfo) {
-      tippyHover(citeInfo.el, function() {
-        var popup = window.document.createElement('div');
-        citeInfo.cites.forEach(function(cite) {
-          var citeDiv = window.document.createElement('div');
-          citeDiv.classList.add('hanging-indent');
-          citeDiv.classList.add('csl-entry');
-          var biblioDiv = window.document.getElementById('ref-' + cite);
-          if (biblioDiv) {
-            citeDiv.innerHTML = biblioDiv.innerHTML;
-          }
-          popup.appendChild(citeDiv);
-        });
-        return popup.innerHTML;
+      }, function(instance) {
       });
     }
-  }
-});
-</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="./logistic.html" class="pagination-link" aria-label="GLM VIII - Logistic Regression">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">GLM VIII - Logistic Regression</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">GLM VIII - Logistic Regression</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./factorial.html" class="pagination-link" aria-label="GLM: Factorial ANOVA">
-        <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">GLM: Factorial ANOVA</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">GLM: Factorial ANOVA</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

@@ -2,10 +2,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.57">
+<meta name="generator" content="quarto-1.7.33">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="description" content="Book Description">
-<title>4&nbsp; Hypothesis Testing – Statistics 1 and 2</title>
+<title>5&nbsp; Hypothesis Testing – Statistics 1 and 2</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -29,17 +29,20 @@ ul.task-list li input[type="checkbox"] {
 <link href="./glm1_regression.html" rel="next">
 <link href="./samplingdistribution.html" rel="prev">
 <link href="./images/logos/favicon.png" rel="icon" type="image/png">
-<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-c2894b54f4b00a27b9651b11dcf5df54.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-7530c408590d20eba92ebedbb433c75c.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-c2894b54f4b00a27b9651b11dcf5df54.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark"><script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap-e5f62320892960dc23dd0786c8482584.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-11ad583e60b2cd5ac7d46970bf1aa65a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-e5f62320892960dc23dd0786c8482584.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -95,16 +98,178 @@ window.Quarto = {
 <link rel="stylesheet" href="include/webex.css">
 <link rel="stylesheet" href="include/glossary.css">
 <link rel="stylesheet" href="include/style.css">
-<link rel="stylesheet" href="c:/gitbook_stats12/include/webex.css">
+<link rel="stylesheet" href="include/webex.css">
 </head>
-<body class="nav-sidebar floating">
+<body class="nav-sidebar floating quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./testing.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Hypothesis Testing</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./testing.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Hypothesis Testing</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -167,110 +332,116 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./chapter2_descriptive_statistics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Descriptive Statistics</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./probability.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Probability Distributions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Probability Distributions</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./samplingdistribution.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">The Sampling Distribution</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">The Sampling Distribution</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./testing.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Hypothesis Testing</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Hypothesis Testing</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./glm1_regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">GLM-I: Linear Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">GLM-I: Linear Regression</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./glm2_sum_squares.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">GLM-II: Sums of Squares</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">GLM-II: Sums of Squares</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./glm3binary.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">GLM-III: Binary Predictors</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">GLM-III: Binary Predictors</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./glm4anova.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">GLM-IV: ANOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">GLM-IV: ANOVA</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./glm5multiple.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">GLM-V: Multiple regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">GLM-V: Multiple regression</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./glm6nested.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">GLM-VI: Nested models</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">GLM-VI: Nested models</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./glm7interaction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">GLM-VII: Interaction</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">GLM-VII: Interaction</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./logistic.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">GLM VIII - Logistic Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">GLM VIII - Logistic Regression</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./glm_contrasts.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">GLM: Contrasts</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">GLM: Contrasts</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./factorial.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">GLM: Factorial ANOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">GLM: Factorial ANOVA</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ancova.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">GLM: ANCOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">GLM: ANCOVA</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./rmanova.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">GLM: Repeated Measures ANOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">GLM: Repeated Measures ANOVA</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./reliability_validity.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Reliability and Validity</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Reliability and Validity</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./data_reduction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Dimension Reduction</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Dimension Reduction</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./confint.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">BE2 - Confidence Intervals</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">BE2 - Confidence Intervals</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -316,40 +487,40 @@ window.Quarto = {
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#lecture" id="toc-lecture" class="nav-link active" data-scroll-target="#lecture"><span class="header-section-number">5</span> Lecture</a></li>
+<li><a href="#lecture" id="toc-lecture" class="nav-link active" data-scroll-target="#lecture"><span class="header-section-number">6</span> Lecture</a></li>
   <li>
-<a href="#statistical-power" id="toc-statistical-power" class="nav-link" data-scroll-target="#statistical-power"><span class="header-section-number">6</span> Statistical Power</a>
+<a href="#statistical-power" id="toc-statistical-power" class="nav-link" data-scroll-target="#statistical-power"><span class="header-section-number">7</span> Statistical Power</a>
   <ul class="collapse">
 <li>
-<a href="#hypothesis-testing-type-i-and-type-ii-errors" id="toc-hypothesis-testing-type-i-and-type-ii-errors" class="nav-link" data-scroll-target="#hypothesis-testing-type-i-and-type-ii-errors"><span class="header-section-number">6.1</span> Hypothesis Testing: Type I and Type II Errors</a>
+<a href="#hypothesis-testing-type-i-and-type-ii-errors" id="toc-hypothesis-testing-type-i-and-type-ii-errors" class="nav-link" data-scroll-target="#hypothesis-testing-type-i-and-type-ii-errors"><span class="header-section-number">7.1</span> Hypothesis Testing: Type I and Type II Errors</a>
   <ul class="collapse">
-<li><a href="#how-big-the-effect-is" id="toc-how-big-the-effect-is" class="nav-link" data-scroll-target="#how-big-the-effect-is"><span class="header-section-number">6.1.1</span> How big the effect is</a></li>
-  <li><a href="#how-big-the-sample-is" id="toc-how-big-the-sample-is" class="nav-link" data-scroll-target="#how-big-the-sample-is"><span class="header-section-number">6.1.2</span> How big the sample is</a></li>
-  <li><a href="#how-noisy-the-data-are" id="toc-how-noisy-the-data-are" class="nav-link" data-scroll-target="#how-noisy-the-data-are"><span class="header-section-number">6.1.3</span> How ‘noisy’ the data are</a></li>
+<li><a href="#how-big-the-effect-is" id="toc-how-big-the-effect-is" class="nav-link" data-scroll-target="#how-big-the-effect-is"><span class="header-section-number">7.1.1</span> How big the effect is</a></li>
+  <li><a href="#how-big-the-sample-is" id="toc-how-big-the-sample-is" class="nav-link" data-scroll-target="#how-big-the-sample-is"><span class="header-section-number">7.1.2</span> How big the sample is</a></li>
+  <li><a href="#how-noisy-the-data-are" id="toc-how-noisy-the-data-are" class="nav-link" data-scroll-target="#how-noisy-the-data-are"><span class="header-section-number">7.1.3</span> How ‘noisy’ the data are</a></li>
   </ul>
 </li>
-  <li><a href="#power-of-a-test" id="toc-power-of-a-test" class="nav-link" data-scroll-target="#power-of-a-test"><span class="header-section-number">6.2</span> Power of a Test</a></li>
-  <li><a href="#try-it-yourself" id="toc-try-it-yourself" class="nav-link" data-scroll-target="#try-it-yourself"><span class="header-section-number">6.3</span> Try it Yourself</a></li>
+  <li><a href="#power-of-a-test" id="toc-power-of-a-test" class="nav-link" data-scroll-target="#power-of-a-test"><span class="header-section-number">7.2</span> Power of a Test</a></li>
+  <li><a href="#try-it-yourself" id="toc-try-it-yourself" class="nav-link" data-scroll-target="#try-it-yourself"><span class="header-section-number">7.3</span> Try it Yourself</a></li>
   </ul>
 </li>
-  <li><a href="#formative-test" id="toc-formative-test" class="nav-link" data-scroll-target="#formative-test"><span class="header-section-number">7</span> Formative Test</a></li>
+  <li><a href="#formative-test" id="toc-formative-test" class="nav-link" data-scroll-target="#formative-test"><span class="header-section-number">8</span> Formative Test</a></li>
   <li>
-<a href="#tutorial" id="toc-tutorial" class="nav-link" data-scroll-target="#tutorial"><span class="header-section-number">8</span> Tutorial</a>
+<a href="#tutorial" id="toc-tutorial" class="nav-link" data-scroll-target="#tutorial"><span class="header-section-number">9</span> Tutorial</a>
   <ul class="collapse">
-<li><a href="#assignment-1-hypothesis-testing---formulating-hypotheses" id="toc-assignment-1-hypothesis-testing---formulating-hypotheses" class="nav-link" data-scroll-target="#assignment-1-hypothesis-testing---formulating-hypotheses"><span class="header-section-number">8.1</span> Assignment 1: Hypothesis Testing - Formulating Hypotheses</a></li>
-  <li><a href="#assignment-2-test-statistics-alpha-and-significance" id="toc-assignment-2-test-statistics-alpha-and-significance" class="nav-link" data-scroll-target="#assignment-2-test-statistics-alpha-and-significance"><span class="header-section-number">8.2</span> Assignment 2: Test Statistics, Alpha and Significance</a></li>
-  <li><a href="#assignment-3-z-test" id="toc-assignment-3-z-test" class="nav-link" data-scroll-target="#assignment-3-z-test"><span class="header-section-number">8.3</span> Assignment 3: Z-test</a></li>
-  <li><a href="#quiz" id="toc-quiz" class="nav-link" data-scroll-target="#quiz"><span class="header-section-number">8.4</span> Quiz</a></li>
-  <li><a href="#assignment-4-z-test-and-alpha-levels" id="toc-assignment-4-z-test-and-alpha-levels" class="nav-link" data-scroll-target="#assignment-4-z-test-and-alpha-levels"><span class="header-section-number">8.5</span> Assignment 4: Z-test and Alpha-levels</a></li>
-  <li><a href="#quiz-1" id="toc-quiz-1" class="nav-link" data-scroll-target="#quiz-1"><span class="header-section-number">8.6</span> Quiz</a></li>
-  <li><a href="#assignment-5-p-values" id="toc-assignment-5-p-values" class="nav-link" data-scroll-target="#assignment-5-p-values"><span class="header-section-number">8.7</span> Assignment 5: P-values</a></li>
+<li><a href="#assignment-1-hypothesis-testing---formulating-hypotheses" id="toc-assignment-1-hypothesis-testing---formulating-hypotheses" class="nav-link" data-scroll-target="#assignment-1-hypothesis-testing---formulating-hypotheses"><span class="header-section-number">9.1</span> Assignment 1: Hypothesis Testing - Formulating Hypotheses</a></li>
+  <li><a href="#assignment-2-test-statistics-alpha-and-significance" id="toc-assignment-2-test-statistics-alpha-and-significance" class="nav-link" data-scroll-target="#assignment-2-test-statistics-alpha-and-significance"><span class="header-section-number">9.2</span> Assignment 2: Test Statistics, Alpha and Significance</a></li>
+  <li><a href="#assignment-3-z-test" id="toc-assignment-3-z-test" class="nav-link" data-scroll-target="#assignment-3-z-test"><span class="header-section-number">9.3</span> Assignment 3: Z-test</a></li>
+  <li><a href="#quiz" id="toc-quiz" class="nav-link" data-scroll-target="#quiz"><span class="header-section-number">9.4</span> Quiz</a></li>
+  <li><a href="#assignment-4-z-test-and-alpha-levels" id="toc-assignment-4-z-test-and-alpha-levels" class="nav-link" data-scroll-target="#assignment-4-z-test-and-alpha-levels"><span class="header-section-number">9.5</span> Assignment 4: Z-test and Alpha-levels</a></li>
+  <li><a href="#quiz-1" id="toc-quiz-1" class="nav-link" data-scroll-target="#quiz-1"><span class="header-section-number">9.6</span> Quiz</a></li>
+  <li><a href="#assignment-5-p-values" id="toc-assignment-5-p-values" class="nav-link" data-scroll-target="#assignment-5-p-values"><span class="header-section-number">9.7</span> Assignment 5: P-values</a></li>
   </ul>
 </li>
   </ul></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
-<h1 class="title"><span id="sec-testing" class="quarto-section-identifier"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Hypothesis Testing</span></span></h1>
+<h1 class="title"><span id="sec-testing" class="quarto-section-identifier"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Hypothesis Testing</span></span></h1>
 </div>
 
 
@@ -381,17 +552,17 @@ window.Quarto = {
 <p>When interpreting p-values, it’s crucial to understand that they give the probability of observing certain data assuming the null hypothesis is true, rather than providing the probability of the null hypothesis being true or false. The p-value is then compared to a pre-determined significance level (usually denoted as alpha) to make a decision about accepting or rejecting the null hypothesis.</p>
 <p>Rejecting the null hypothesis indicates that the observed data is unlikely to occur if the null hypothesis were true. On the other hand, failing to reject the null hypothesis means that the observed data is not surprising or does not provide sufficient evidence to reject it.</p>
 <p>When testing hypotheses, we can make two types of errors: A Type I error refers to rejecting the null hypothesis when it is true (a false-positive conclusion), while Type II error refers to accepting the null hypothesis when it is false (failing to detect a true effect).</p>
-<section id="lecture" class="level1" data-number="5"><h1 data-number="5">
-<span class="header-section-number">5</span> Lecture</h1>
+<section id="lecture" class="level1" data-number="6"><h1 data-number="6">
+<span class="header-section-number">6</span> Lecture</h1>
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/-1J2Ge0B3Ro" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
-</section><section id="statistical-power" class="level1" data-number="6"><h1 data-number="6">
-<span class="header-section-number">6</span> Statistical Power</h1>
-<section id="hypothesis-testing-type-i-and-type-ii-errors" class="level2" data-number="6.1"><h2 data-number="6.1" class="anchored" data-anchor-id="hypothesis-testing-type-i-and-type-ii-errors">
-<span class="header-section-number">6.1</span> Hypothesis Testing: Type I and Type II Errors</h2>
+</section><section id="statistical-power" class="level1" data-number="7"><h1 data-number="7">
+<span class="header-section-number">7</span> Statistical Power</h1>
+<section id="hypothesis-testing-type-i-and-type-ii-errors" class="level2" data-number="7.1"><h2 data-number="7.1" class="anchored" data-anchor-id="hypothesis-testing-type-i-and-type-ii-errors">
+<span class="header-section-number">7.1</span> Hypothesis Testing: Type I and Type II Errors</h2>
 <p>When we conduct a null-hypothesis significance test, we select the significance level <span class="math inline">\(\alpha\)</span>. Alpha is the probability of committing a Type I error (drawing a false-positive conclusion). Since we select the alpha level, it is known. If we use <span class="math inline">\(\alpha = .05\)</span>, that means that - by definition - we accept a 5% risk of committing a Type I error.</p>
 <p>There is also the probability of committing a Type II error. This is called <span class="math inline">\(\beta\)</span>. We don’t know the value of <span class="math inline">\(\beta\)</span> beforehand, but we can calculate it if we make some assumptions. The probability of committing a Type II error (drawing a false-negative conclusion) depends on a few factors:</p>
-<section id="how-big-the-effect-is" class="level3" data-number="6.1.1"><h3 data-number="6.1.1" class="anchored" data-anchor-id="how-big-the-effect-is">
-<span class="header-section-number">6.1.1</span> How big the effect is</h3>
+<section id="how-big-the-effect-is" class="level3" data-number="7.1.1"><h3 data-number="7.1.1" class="anchored" data-anchor-id="how-big-the-effect-is">
+<span class="header-section-number">7.1.1</span> How big the effect is</h3>
 <p>Big effects are harder to miss; imagine trying to detect a difference between two groups. If the mean of both groups is really close together, it will be harder to detect a difference (see below):</p>
 <div id="fig-effectsize" class="quarto-layout-panel">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-effectsize-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -415,11 +586,11 @@ window.Quarto = {
 </div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-effectsize-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;6.1: Effect of Effect Size
+Figure&nbsp;7.1: Effect of Effect Size
 </figcaption></figure>
 </div>
-</section><section id="how-big-the-sample-is" class="level3" data-number="6.1.2"><h3 data-number="6.1.2" class="anchored" data-anchor-id="how-big-the-sample-is">
-<span class="header-section-number">6.1.2</span> How big the sample is</h3>
+</section><section id="how-big-the-sample-is" class="level3" data-number="7.1.2"><h3 data-number="7.1.2" class="anchored" data-anchor-id="how-big-the-sample-is">
+<span class="header-section-number">7.1.2</span> How big the sample is</h3>
 <p>Large samples make it easier to detect smaller effects; imagine that the two distributions below are sampling distributions for two groups with very small sample sizes (left) and very large sample sizes (right):</p>
 <div id="fig-effectsize" class="quarto-layout-panel">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-effectsize-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -443,17 +614,17 @@ Figure&nbsp;6.1: Effect of Effect Size
 </div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-effectsize-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;6.2: Effect of Sample Size
+Figure&nbsp;7.2: Effect of Sample Size
 </figcaption></figure>
 </div>
-</section><section id="how-noisy-the-data-are" class="level3" data-number="6.1.3"><h3 data-number="6.1.3" class="anchored" data-anchor-id="how-noisy-the-data-are">
-<span class="header-section-number">6.1.3</span> How ‘noisy’ the data are</h3>
+</section><section id="how-noisy-the-data-are" class="level3" data-number="7.1.3"><h3 data-number="7.1.3" class="anchored" data-anchor-id="how-noisy-the-data-are">
+<span class="header-section-number">7.1.3</span> How ‘noisy’ the data are</h3>
 <p>The standard deviation is a measure of how “noisy” the data are. If observations are very spread out (high standard deviation), it will be harder to detect small differences. Consider that a small difference between two groups would be hard to detect if the two groups overlapped very much (= high standard deviation). Look at the same picture from the previous point (sample size); it illustrates this principle. The reason that both sample size and “noise in the data” have an impact on the probability of committing a Type II error is because they are used to calculate the standard error:</p>
 <p><span class="math display">\[
 SE_M = \frac{SD}{\sqrt{n}}
 \]</span></p>
-</section></section><section id="power-of-a-test" class="level2" data-number="6.2"><h2 data-number="6.2" class="anchored" data-anchor-id="power-of-a-test">
-<span class="header-section-number">6.2</span> Power of a Test</h2>
+</section></section><section id="power-of-a-test" class="level2" data-number="7.2"><h2 data-number="7.2" class="anchored" data-anchor-id="power-of-a-test">
+<span class="header-section-number">7.2</span> Power of a Test</h2>
 <p>The “power” of a test is the probability that it will correctly detect a true effect of a specific size. Since <span class="math inline">\(\beta\)</span> is the probability of <em>missing</em> a true effect, it follows that <span class="math inline">\(1-\beta\)</span> must be the probability of <em>detecting</em> a true effect, or the power.</p>
 <p>As explained in the previous paragraph, we must know a few pieces of information to be able to calculate <span class="math inline">\(\beta\)</span>:</p>
 <ol type="1">
@@ -471,8 +642,8 @@ SE_M = \frac{SD}{\sqrt{n}}
 </div>
 </div>
 </div>
-</section><section id="try-it-yourself" class="level2" data-number="6.3"><h2 data-number="6.3" class="anchored" data-anchor-id="try-it-yourself">
-<span class="header-section-number">6.3</span> Try it Yourself</h2>
+</section><section id="try-it-yourself" class="level2" data-number="7.3"><h2 data-number="7.3" class="anchored" data-anchor-id="try-it-yourself">
+<span class="header-section-number">7.3</span> Try it Yourself</h2>
 <p>Now, let’s calculate this by hand. Imagine that last year’s average grade was <span class="math inline">\(M = 5\)</span>, with a standard deviation of <span class="math inline">\(SD = 1.5\)</span>. This year, we have 73 students. We’ve made some changes to the teaching material, and we hope to reach an average grade of <span class="math inline">\(M = 6\)</span>.</p>
 <p>Assume that the standard deviation this year will be the same as last year, and calculate the power of being able to detect a mean grade of <span class="math inline">\(H_i: \mu = 6\)</span> when the null hypothesis is that the mean grade is the same as last year, <span class="math inline">\(H_0: \mu = 5\)</span>.</p>
 <p><strong>Step 1: Calculate the SE</strong></p>
@@ -491,56 +662,56 @@ Z = \frac{\text{Grade}_{\text{critical}}-\mu_{H_i}}{SE} = \frac{5.3 - 6}{0.18}  
 \]</span></p>
 <p>This is an extremely large (negative) Z-value; it’s not even in our table. Thus, the left-tail probability <span class="math inline">\(\beta\)</span> will be tiny - <span class="math inline">\(\beta &lt; .01\)</span>.</p>
 <p><strong>That means that our power to detect a true effect of 6 would be very high - <span class="math inline">\(1-\beta = 1-.01 = .99\)</span>, 99%!</strong></p>
-</section></section><section id="formative-test" class="level1" data-number="7"><h1 data-number="7">
-<span class="header-section-number">7</span> Formative Test</h1>
+</section></section><section id="formative-test" class="level1" data-number="8"><h1 data-number="8">
+<span class="header-section-number">8</span> Formative Test</h1>
 <p>A formative test helps you assess your progress in the course, and helps you address any blind spots in your understanding of the material. If you get a question wrong, you will receive a hint on how to improve your understanding of the material.</p>
 <p>Complete the formative test ideally after you’ve seen the lecture, but before the lecture meeting in which we can discuss any topics that need more attention</p>
 <div class="cell" data-layout-align="center">
 <div class="webex-check webex-box">
 <p><strong>Question 1</strong></p>
 For a two-tailed Z-test of the sample mean, the p-value is the probability of finding a more extreme sample mean than the observed sample mean, if the alternative hypothesis were true.
-<div id="radio_PVEBXCFVPK" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_PVEBXCFVPK" value="answer"><span>FALSE</span></label><label><input type="radio" autocomplete="off" name="radio_PVEBXCFVPK" value=""><span>TRUE</span></label>
+<div id="radio_PNXSDCDVME" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_PNXSDCDVME" value="answer"><span>FALSE</span></label><label><input type="radio" autocomplete="off" name="radio_PNXSDCDVME" value=""><span>TRUE</span></label>
 </div>
 <p><strong>Question 2</strong></p>
 A researcher performs a Z-test to test the hypotheses H0: mu = 0 versus H1: mu &gt; 0. She finds a test statistic of Z = 2.03 and a one-tailed p-value of 0.02. Statement: If the researcher had performed a two-tailed Z-test, the value of the two-tailed p-value would have been halved: 0.01.
-<div id="radio_ATNYQICLYF" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_ATNYQICLYF" value="answer"><span>FALSE</span></label><label><input type="radio" autocomplete="off" name="radio_ATNYQICLYF" value=""><span>TRUE</span></label>
+<div id="radio_KDSPTZGFYM" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_KDSPTZGFYM" value=""><span>TRUE</span></label><label><input type="radio" autocomplete="off" name="radio_KDSPTZGFYM" value="answer"><span>FALSE</span></label>
 </div>
 <p><strong>Question 3</strong></p>
 Chris expects that people who have bungee jumped will score high on average on the Big 5 personality trait ‘Openness to Experience’. Openness to Experience has been measured on a 10 point scale (1= not at all open, 10 = extremely open). He takes a random sample of 45 persons who have bungee jumped and observes a mean of 6 and SD of 1.954. He tests the following hypotheses: H0: mu =&lt; 5.5 versus H1: mu &gt; 5.5 with a one-sample t-test. He assumes that Openness to Experience is normally distributed in the population. What is the smallest significance level for which Chris can reject the null hypothesis?
-<div id="radio_YRVEGQDYMR" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_YRVEGQDYMR" value="answer"><span>0.05</span></label><label><input type="radio" autocomplete="off" name="radio_YRVEGQDYMR" value=""><span>0.1</span></label><label><input type="radio" autocomplete="off" name="radio_YRVEGQDYMR" value=""><span>0.01</span></label><label><input type="radio" autocomplete="off" name="radio_YRVEGQDYMR" value=""><span>Cannot reject H0</span></label>
+<div id="radio_YJLKCPTQZL" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_YJLKCPTQZL" value=""><span>0.01</span></label><label><input type="radio" autocomplete="off" name="radio_YJLKCPTQZL" value=""><span>0.1</span></label><label><input type="radio" autocomplete="off" name="radio_YJLKCPTQZL" value=""><span>Cannot reject H0</span></label><label><input type="radio" autocomplete="off" name="radio_YJLKCPTQZL" value="answer"><span>0.05</span></label>
 </div>
 <p><strong>Question 4</strong></p>
 What is the purpose of inferential statistics?
-<div id="radio_LKQLMNFPJL" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_LKQLMNFPJL" value=""><span>Estimation of population parameters</span></label><label><input type="radio" autocomplete="off" name="radio_LKQLMNFPJL" value=""><span>Testing the null hypothesis</span></label><label><input type="radio" autocomplete="off" name="radio_LKQLMNFPJL" value=""><span>Calculating sample statistics</span></label><label><input type="radio" autocomplete="off" name="radio_LKQLMNFPJL" value="answer"><span>Using sample data to infer properties of the population</span></label>
+<div id="radio_XLCUBSGNLQ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_XLCUBSGNLQ" value=""><span>Estimation of population parameters</span></label><label><input type="radio" autocomplete="off" name="radio_XLCUBSGNLQ" value=""><span>Testing the null hypothesis</span></label><label><input type="radio" autocomplete="off" name="radio_XLCUBSGNLQ" value=""><span>Calculating sample statistics</span></label><label><input type="radio" autocomplete="off" name="radio_XLCUBSGNLQ" value="answer"><span>Using sample data to infer properties of the population</span></label>
 </div>
 <p><strong>Question 5</strong></p>
 What is the standard error?
-<div id="radio_MZSBGMPVSI" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_MZSBGMPVSI" value="answer"><span>An estimate of the average sampling error when estimating a population parameter using a sample statistic</span></label><label><input type="radio" autocomplete="off" name="radio_MZSBGMPVSI" value=""><span>An estimate of the uncertainty about the sample statistic</span></label><label><input type="radio" autocomplete="off" name="radio_MZSBGMPVSI" value=""><span>The spread of the sample data</span></label><label><input type="radio" autocomplete="off" name="radio_MZSBGMPVSI" value=""><span>An estimate of the uncertainty about the average of the sample values</span></label>
+<div id="radio_DTZVSEGYYU" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_DTZVSEGYYU" value=""><span>An estimate of the uncertainty about the sample statistic</span></label><label><input type="radio" autocomplete="off" name="radio_DTZVSEGYYU" value=""><span>The spread of the sample data</span></label><label><input type="radio" autocomplete="off" name="radio_DTZVSEGYYU" value=""><span>An estimate of the uncertainty about the average of the sample values</span></label><label><input type="radio" autocomplete="off" name="radio_DTZVSEGYYU" value="answer"><span>An estimate of the average sampling error when estimating a population parameter using a sample statistic</span></label>
 </div>
 <p><strong>Question 6</strong></p>
 What is a hypothesis in the context of statistical testing?
-<div id="radio_TDLOIPZOAE" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_TDLOIPZOAE" value=""><span>Something you want to know about the population</span></label><label><input type="radio" autocomplete="off" name="radio_TDLOIPZOAE" value="answer"><span>A proposition about the population that can be tested in a sample</span></label><label><input type="radio" autocomplete="off" name="radio_TDLOIPZOAE" value=""><span>A statement that some parameter is equal to zero</span></label><label><input type="radio" autocomplete="off" name="radio_TDLOIPZOAE" value=""><span>An explanation for observed phenomena</span></label>
+<div id="radio_ATLCXGAAGV" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ATLCXGAAGV" value=""><span>An explanation for observed phenomena</span></label><label><input type="radio" autocomplete="off" name="radio_ATLCXGAAGV" value=""><span>A statement that some parameter is equal to zero</span></label><label><input type="radio" autocomplete="off" name="radio_ATLCXGAAGV" value="answer"><span>A proposition about the population that can be tested in a sample</span></label><label><input type="radio" autocomplete="off" name="radio_ATLCXGAAGV" value=""><span>Something you want to know about the population</span></label>
 </div>
 <p><strong>Question 7</strong></p>
 What is meant by ‘power’ in statistical testing?
-<div id="radio_MGSYGVSUYF" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_MGSYGVSUYF" value=""><span>The probability of rejecting the null hypothesis</span></label><label><input type="radio" autocomplete="off" name="radio_MGSYGVSUYF" value="answer"><span>The probability of correctly finding a true effect</span></label><label><input type="radio" autocomplete="off" name="radio_MGSYGVSUYF" value=""><span>The probability of committing a Type II error</span></label><label><input type="radio" autocomplete="off" name="radio_MGSYGVSUYF" value=""><span>The probability of committing a Type I error</span></label>
+<div id="radio_DEBDKOSBDZ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_DEBDKOSBDZ" value=""><span>The probability of committing a Type II error</span></label><label><input type="radio" autocomplete="off" name="radio_DEBDKOSBDZ" value=""><span>The probability of rejecting the null hypothesis</span></label><label><input type="radio" autocomplete="off" name="radio_DEBDKOSBDZ" value=""><span>The probability of committing a Type I error</span></label><label><input type="radio" autocomplete="off" name="radio_DEBDKOSBDZ" value="answer"><span>The probability of correctly finding a true effect</span></label>
 </div>
 <p><strong>Question 8</strong></p>
 You want to test if the mean height of a sample of 50 students is significantly different from the population mean of 65 inches. The sample mean is 68 inches, and the standard deviation is 2 inches. What is the calculated t-value for this hypothesis test?
-<div id="radio_XVXKOKNRKE" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_XVXKOKNRKE" value=""><span>1.50</span></label><label><input type="radio" autocomplete="off" name="radio_XVXKOKNRKE" value="answer"><span>10.61</span></label><label><input type="radio" autocomplete="off" name="radio_XVXKOKNRKE" value=""><span>75.00</span></label><label><input type="radio" autocomplete="off" name="radio_XVXKOKNRKE" value=""><span>240.42</span></label>
+<div id="radio_OTTPLBUAOI" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_OTTPLBUAOI" value=""><span>240.42</span></label><label><input type="radio" autocomplete="off" name="radio_OTTPLBUAOI" value="answer"><span>10.61</span></label><label><input type="radio" autocomplete="off" name="radio_OTTPLBUAOI" value=""><span>1.50</span></label><label><input type="radio" autocomplete="off" name="radio_OTTPLBUAOI" value=""><span>75.00</span></label>
 </div>
 <p><strong>Question 9</strong></p>
 You want to test if the average time spent on a particular task is different from 30 minutes. You collect a sample of 25 participants, and the sample mean time spent on the task is 28 minutes with a standard deviation of 3 minutes. Conducting a two-tailed t-test, what is the calculated t-value?
-<div id="radio_YBNAYIFILF" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_YBNAYIFILF" value=""><span>3.33</span></label><label><input type="radio" autocomplete="off" name="radio_YBNAYIFILF" value=""><span>-0.67</span></label><label><input type="radio" autocomplete="off" name="radio_YBNAYIFILF" value="answer"><span>-3.33</span></label><label><input type="radio" autocomplete="off" name="radio_YBNAYIFILF" value=""><span>-16.67</span></label>
+<div id="radio_GJCFRKAMGN" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_GJCFRKAMGN" value="answer"><span>-3.33</span></label><label><input type="radio" autocomplete="off" name="radio_GJCFRKAMGN" value=""><span>-16.67</span></label><label><input type="radio" autocomplete="off" name="radio_GJCFRKAMGN" value=""><span>3.33</span></label><label><input type="radio" autocomplete="off" name="radio_GJCFRKAMGN" value=""><span>-0.67</span></label>
 </div>
 </div>
 <div class="webex-solution">
@@ -567,10 +738,10 @@ Show explanations
 <p>The t-value for a two-tailed t-test can be calculated using the formula: t = (sample mean - population mean) / (standard deviation / square root of sample size). In this case, the population mean is 30 minutes. Plugging in the values, t = (28 - 30) / (3 / sqrt(25)) = -3.33.</p>
 </div>
 </div>
-</section><section id="tutorial" class="level1" data-number="8"><h1 data-number="8">
-<span class="header-section-number">8</span> Tutorial</h1>
-<section id="assignment-1-hypothesis-testing---formulating-hypotheses" class="level2" data-number="8.1"><h2 data-number="8.1" class="anchored" data-anchor-id="assignment-1-hypothesis-testing---formulating-hypotheses">
-<span class="header-section-number">8.1</span> Assignment 1: Hypothesis Testing - Formulating Hypotheses</h2>
+</section><section id="tutorial" class="level1" data-number="9"><h1 data-number="9">
+<span class="header-section-number">9</span> Tutorial</h1>
+<section id="assignment-1-hypothesis-testing---formulating-hypotheses" class="level2" data-number="9.1"><h2 data-number="9.1" class="anchored" data-anchor-id="assignment-1-hypothesis-testing---formulating-hypotheses">
+<span class="header-section-number">9.1</span> Assignment 1: Hypothesis Testing - Formulating Hypotheses</h2>
 <p>Discuss with your portfolio group the logic behind hypothesis testing, and how it relates to your personal (and group’s) research interests.</p>
 <p>Consider the following three research descriptions. Formulate H0 and H1 in words. Discuss your answers with your group members.</p>
 <p>Researchers want to know whether it matters for test performance if an exam is completed on a computer or using paper and pencil. Hence, the research question reads: Is there an effect of the type of administration (computer or paper and pencil) on the test performance?</p>
@@ -601,8 +772,8 @@ Show answer
 <p><span class="math inline">\(H_0: \rho = 0\)</span> <span class="math inline">\(H_A: \rho \neq 0\)</span></p>
 </div>
 <p>Formulating the hypothesis is an important very first step in hypotheses testing. Continue with the next assignment, in which we will go through the steps of a hypothesis test.</p>
-</section><section id="assignment-2-test-statistics-alpha-and-significance" class="level2" data-number="8.2"><h2 data-number="8.2" class="anchored" data-anchor-id="assignment-2-test-statistics-alpha-and-significance">
-<span class="header-section-number">8.2</span> Assignment 2: Test Statistics, Alpha and Significance</h2>
+</section><section id="assignment-2-test-statistics-alpha-and-significance" class="level2" data-number="9.2"><h2 data-number="9.2" class="anchored" data-anchor-id="assignment-2-test-statistics-alpha-and-significance">
+<span class="header-section-number">9.2</span> Assignment 2: Test Statistics, Alpha and Significance</h2>
 <p>In this assignment we will go through the steps of a hypothesis test.</p>
 <p>While going through the steps we will come across the most important concepts related to hypothesis testing.</p>
 <p>For the next steps, we consider the following situation:</p>
@@ -690,8 +861,8 @@ Explanation
 <p>Used to test hypotheses about the mean in a population, assuming <span class="math inline">\(\sigma\)</span> known.</p>
 <p>The test-statistic equals <span class="math inline">\(z = \frac{\bar{X}-\mu}{\sigma_{\bar{X}}}\)</span></p>
 <p>The test statistic is normally distributed.</p>
-</section><section id="assignment-3-z-test" class="level2" data-number="8.3"><h2 data-number="8.3" class="anchored" data-anchor-id="assignment-3-z-test">
-<span class="header-section-number">8.3</span> Assignment 3: Z-test</h2>
+</section><section id="assignment-3-z-test" class="level2" data-number="9.3"><h2 data-number="9.3" class="anchored" data-anchor-id="assignment-3-z-test">
+<span class="header-section-number">9.3</span> Assignment 3: Z-test</h2>
 <p>In this assignment we will apply the Z-test.</p>
 <p>This assignment first presents an example, followed by two practice questions.</p>
 <p>A researcher wants to test <span class="math inline">\(H_0: \mu = 50\)</span> against <span class="math inline">\(H_1: \mu \neq 50\)</span></p>
@@ -731,8 +902,8 @@ Show answer
 <p>Step 4: Draw conclusion</p>
 <p><span class="math inline">\(H_0\)</span> is not rejected.</p>
 </div>
-</section><section id="quiz" class="level2" data-number="8.4"><h2 data-number="8.4" class="anchored" data-anchor-id="quiz">
-<span class="header-section-number">8.4</span> Quiz</h2>
+</section><section id="quiz" class="level2" data-number="9.4"><h2 data-number="9.4" class="anchored" data-anchor-id="quiz">
+<span class="header-section-number">9.4</span> Quiz</h2>
 <div class="webex-check webex-box">
 <p>“The null and alternative hypothesis are deduced from the data.” <select class="webex-select"><option value="blank"></option>
 <option value="NA">TRUE</option>
@@ -772,8 +943,8 @@ Explanation
 <p>Increasing the sample size n (and holding all the rest constant) does not decrease the probability of a Type I error.</p>
 </div>
 </div>
-</section><section id="assignment-4-z-test-and-alpha-levels" class="level2" data-number="8.5"><h2 data-number="8.5" class="anchored" data-anchor-id="assignment-4-z-test-and-alpha-levels">
-<span class="header-section-number">8.5</span> Assignment 4: Z-test and Alpha-levels</h2>
+</section><section id="assignment-4-z-test-and-alpha-levels" class="level2" data-number="9.5"><h2 data-number="9.5" class="anchored" data-anchor-id="assignment-4-z-test-and-alpha-levels">
+<span class="header-section-number">9.5</span> Assignment 4: Z-test and Alpha-levels</h2>
 <p>In this assignment we will practice some more with the Z-test, meanwhile we will review important concepts of hypothesis testing. In particular, we will look at significance levels.</p>
 <p>To test hypotheses, we need to specify the “significance level”, usually denoted by <span class="math inline">\(\alpha\)</span>. The significance level is our <em>decision criterion</em> to reject H0.</p>
 <p>The most common choice is .05. But what does this criterion exactly entail?</p>
@@ -795,8 +966,8 @@ Explanation
 <span class="math inline">\(Z_\text{crit} = 1.96\)</span>, if <span class="math inline">\(\alpha = 0.05\)</span> (two-tailed)</li>
 <li>
 <span class="math inline">\(Z_\text{crit} = 2.58\)</span>, if <span class="math inline">\(\alpha = 0.01\)</span> (two-tailed)</li>
-</ul></section><section id="quiz-1" class="level2" data-number="8.6"><h2 data-number="8.6" class="anchored" data-anchor-id="quiz-1">
-<span class="header-section-number">8.6</span> Quiz</h2>
+</ul></section><section id="quiz-1" class="level2" data-number="9.6"><h2 data-number="9.6" class="anchored" data-anchor-id="quiz-1">
+<span class="header-section-number">9.6</span> Quiz</h2>
 <div class="webex-check webex-box">
 <p>Researchers want to test whether <span class="math inline">\(\mu=70\)</span>. They assume that <span class="math inline">\(\sigma = 10\)</span>. Researchers found a mean of 72 in a random sample of 40 persons.</p>
 <p>True or false:</p>
@@ -816,8 +987,8 @@ Explanation
 <option value="NA">TRUE</option>
 <option value="answer">FALSE</option></select></p>
 </div>
-</section><section id="assignment-5-p-values" class="level2" data-number="8.7"><h2 data-number="8.7" class="anchored" data-anchor-id="assignment-5-p-values">
-<span class="header-section-number">8.7</span> Assignment 5: P-values</h2>
+</section><section id="assignment-5-p-values" class="level2" data-number="9.7"><h2 data-number="9.7" class="anchored" data-anchor-id="assignment-5-p-values">
+<span class="header-section-number">9.7</span> Assignment 5: P-values</h2>
 <p>We will now focus on the interpretation of the p-values and how to use the p-values to decide about significance.</p>
 <p>Consider the following situation:</p>
 <p>Scores on a test measuring confidence in police are normally distributed in the general population, with <span class="math inline">\(\mu = 500\)</span> and an <span class="math inline">\(\sigma = 50\)</span>. Researchers want to know if the average confidence level is different for those who have been a victim of crime. They collect data for 60 victims. They find a sample mean of 511. They test <span class="math inline">\(H_0: \mu = 500\)</span> against <span class="math inline">\(H_1: \mu \neq 500\)</span>, while assuming that the population variance is <span class="math inline">\(\sigma = 50\)</span>.</p>
@@ -844,14 +1015,14 @@ Explanation
 <p>Researchers test whether <span class="math inline">\(\mu = 90\)</span>. They assume that <span class="math inline">\(\sigma=21\)</span>. The sample mean was 85. Sample size was 50.</p>
 <p>What is the two-tailed p-value? <input class="webex-solveme nospaces" data-tol="0.01" size="4" data-answer="[&quot;0.09&quot;,&quot;.09&quot;]"></p>
 <p>What is the highest level at which the test is significant? <select class="webex-select"><option value="blank"></option>
+<option value="">0.005</option>
 <option value="">0.1</option>
-<option value="">0.01</option>
 <option value="answer">0.05</option>
-<option value="">0.005</option></select></p>
+<option value="">0.01</option></select></p>
 <p>Researchers test whether <span class="math inline">\(\mu = 35\)</span>. They assume <span class="math inline">\(\sigma =16\)</span>. The sample mean was 38. Sample size was 64.</p>
 <p>Compute the two-tailed p-value and indicate which of the following statements is true.</p>
-<div id="radio_DYCRASFKVE" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_DYCRASFKVE" value=""><span>The test is significant at the 10% level, but not at 5% or 1% level.</span></label><label><input type="radio" autocomplete="off" name="radio_DYCRASFKVE" value=""><span>The test is significant at the 10% and 5% level, but not at the 1% level.</span></label><label><input type="radio" autocomplete="off" name="radio_DYCRASFKVE" value=""><span>The test is significant at the 10%, 5% level, and 1% level.</span></label><label><input type="radio" autocomplete="off" name="radio_DYCRASFKVE" value="answer"><span>The test is not significant at 10%, not significant at 5% and not significant at 1%.</span></label>
+<div id="radio_UEHLYTKLFQ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_UEHLYTKLFQ" value=""><span>The test is significant at the 10% level, but not at 5% or 1% level.</span></label><label><input type="radio" autocomplete="off" name="radio_UEHLYTKLFQ" value="answer"><span>The test is not significant at 10%, not significant at 5% and not significant at 1%.</span></label><label><input type="radio" autocomplete="off" name="radio_UEHLYTKLFQ" value=""><span>The test is significant at the 10%, 5% level, and 1% level.</span></label><label><input type="radio" autocomplete="off" name="radio_UEHLYTKLFQ" value=""><span>The test is significant at the 10% and 5% level, but not at the 1% level.</span></label>
 </div>
 <p>Consider these true- or false statements:</p>
 <p>If a two-tailed p-value is .0567 then the test is significant at the 10% level but not at the 5% level. <select class="webex-select"><option value="blank"></option>
@@ -1303,383 +1474,255 @@ window.onload = function() {
 }
 
 </script><script id="quarto-html-after-body" type="application/javascript">
-window.document.addEventListener("DOMContentLoaded", function (event) {
-  const toggleBodyColorMode = (bsSheetEl) => {
-    const mode = bsSheetEl.getAttribute("data-mode");
-    const bodyEl = window.document.querySelector("body");
-    if (mode === "dark") {
-      bodyEl.classList.add("quarto-dark");
-      bodyEl.classList.remove("quarto-light");
-    } else {
-      bodyEl.classList.add("quarto-light");
-      bodyEl.classList.remove("quarto-dark");
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
     }
-  }
-  const toggleBodyColorPrimary = () => {
-    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-    if (bsSheetEl) {
-      toggleBodyColorMode(bsSheetEl);
-    }
-  }
-  toggleBodyColorPrimary();  
-  const disableStylesheet = (stylesheets) => {
-    for (let i=0; i < stylesheets.length; i++) {
-      const stylesheet = stylesheets[i];
-      stylesheet.rel = 'prefetch';
-    }
-  }
-  const enableStylesheet = (stylesheets) => {
-    for (let i=0; i < stylesheets.length; i++) {
-      const stylesheet = stylesheets[i];
-      stylesheet.rel = 'stylesheet';
-    }
-  }
-  const manageTransitions = (selector, allowTransitions) => {
-    const els = window.document.querySelectorAll(selector);
-    for (let i=0; i < els.length; i++) {
-      const el = els[i];
-      if (allowTransitions) {
-        el.classList.remove('notransition');
-      } else {
-        el.classList.add('notransition');
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
       }
+      return false;
     }
-  }
-  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
-    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
-    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
-    let newTheme = '';
-    if(darkModeDefault) {
-      newTheme = isAlternate ? baseTheme : alternateTheme;
-    } else {
-      newTheme = isAlternate ? alternateTheme : baseTheme;
-    }
-    const changeGiscusTheme = () => {
-      // From: https://github.com/giscus/giscus/issues/336
-      const sendMessage = (message) => {
-        const iframe = document.querySelector('iframe.giscus-frame');
-        if (!iframe) return;
-        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
       }
-      sendMessage({
-        setConfig: {
-          theme: newTheme
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
         }
       });
     }
-    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
-    if (isGiscussLoaded) {
-      changeGiscusTheme();
-    }
-  }
-  const toggleColorMode = (alternate) => {
-    // Switch the stylesheets
-    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
-    manageTransitions('#quarto-margin-sidebar .nav-link', false);
-    if (alternate) {
-      enableStylesheet(alternateStylesheets);
-      for (const sheetNode of alternateStylesheets) {
-        if (sheetNode.id === "quarto-bootstrap") {
-          toggleBodyColorMode(sheetNode);
-        }
-      }
-    } else {
-      disableStylesheet(alternateStylesheets);
-      toggleBodyColorPrimary();
-    }
-    manageTransitions('#quarto-margin-sidebar .nav-link', true);
-    // Switch the toggles
-    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
-    for (let i=0; i < toggles.length; i++) {
-      const toggle = toggles[i];
-      if (toggle) {
-        if (alternate) {
-          toggle.classList.add("alternate");     
-        } else {
-          toggle.classList.remove("alternate");
-        }
-      }
-    }
-    // Hack to workaround the fact that safari doesn't
-    // properly recolor the scrollbar when toggling (#1455)
-    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
-      manageTransitions("body", false);
-      window.scrollTo(0, 1);
-      setTimeout(() => {
-        window.scrollTo(0, 0);
-        manageTransitions("body", true);
-      }, 40);  
-    }
-  }
-  const isFileUrl = () => { 
-    return window.location.protocol === 'file:';
-  }
-  const hasAlternateSentinel = () => {  
-    let styleSentinel = getColorSchemeSentinel();
-    if (styleSentinel !== null) {
-      return styleSentinel === "alternate";
-    } else {
-      return false;
-    }
-  }
-  const setStyleSentinel = (alternate) => {
-    const value = alternate ? "alternate" : "default";
-    if (!isFileUrl()) {
-      window.localStorage.setItem("quarto-color-scheme", value);
-    } else {
-      localAlternateSentinel = value;
-    }
-  }
-  const getColorSchemeSentinel = () => {
-    if (!isFileUrl()) {
-      const storageValue = window.localStorage.getItem("quarto-color-scheme");
-      return storageValue != null ? storageValue : localAlternateSentinel;
-    } else {
-      return localAlternateSentinel;
-    }
-  }
-  const darkModeDefault = false;
-  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
-  // Dark / light mode switch
-  window.quartoToggleColorScheme = () => {
-    // Read the current dark / light value 
-    let toAlternate = !hasAlternateSentinel();
-    toggleColorMode(toAlternate);
-    setStyleSentinel(toAlternate);
-    toggleGiscusIfUsed(toAlternate, darkModeDefault);
-  };
-  // Ensure there is a toggle, if there isn't float one in the top right
-  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
-    const a = window.document.createElement('a');
-    a.classList.add('top-right');
-    a.classList.add('quarto-color-scheme-toggle');
-    a.href = "";
-    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
-    const i = window.document.createElement("i");
-    i.classList.add('bi');
-    a.appendChild(i);
-    window.document.body.appendChild(a);
-  }
-  // Switch to dark mode if need be
-  if (hasAlternateSentinel()) {
-    toggleColorMode(true);
-  } else {
-    toggleColorMode(false);
-  }
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
-  const isCodeAnnotation = (el) => {
-    for (const clz of el.classList) {
-      if (clz.startsWith('code-annotation-')) {                     
-        return true;
-      }
-    }
-    return false;
-  }
-  const onCopySuccess = function(e) {
-    // button target
-    const button = e.trigger;
-    // don't keep focus
-    button.blur();
-    // flash "checked"
-    button.classList.add('code-copy-button-checked');
-    var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Copied!");
-    let tooltip;
-    if (window.bootstrap) {
-      button.setAttribute("data-bs-toggle", "tooltip");
-      button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Copied!");
-      tooltip = new bootstrap.Tooltip(button, 
-        { trigger: "manual", 
-          customClass: "code-copy-button-tooltip",
-          offset: [0, -8]});
-      tooltip.show();    
-    }
-    setTimeout(function() {
-      if (tooltip) {
-        tooltip.hide();
-        button.removeAttribute("data-bs-title");
-        button.removeAttribute("data-bs-toggle");
-        button.removeAttribute("data-bs-placement");
-      }
-      button.setAttribute("title", currentTitle);
-      button.classList.remove('code-copy-button-checked');
-    }, 1000);
-    // clear code selection
-    e.clearSelection();
-  }
-  const getTextToCopy = function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-  }
-  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-    text: getTextToCopy
-  });
-  clipboard.on('success', onCopySuccess);
-  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
-    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-      text: getTextToCopy,
-      container: window.document.getElementById('quarto-embedded-source-code-modal')
-    });
-    clipboardModal.on('success', onCopySuccess);
-  }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
-      }
-    }
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-    const config = {
-      allowHTML: true,
-      maxWidth: 500,
-      delay: 100,
-      arrow: false,
-      appendTo: function(el) {
-          return el.parentElement;
-      },
-      interactive: true,
-      interactiveBorder: 10,
-      theme: 'quarto',
-      placement: 'bottom-start',
-    };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
-    window.tippy(el, config); 
-  }
-  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-  for (var i=0; i<noterefs.length; i++) {
-    const ref = noterefs[i];
-    tippyHover(ref, function() {
-      // use id or data attribute instead here
-      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-      try { href = new URL(href).hash; } catch {}
-      const id = href.replace(/^#\/?/, "");
-      const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
-    });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
-        }
-      }
-    }
-    stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
-          } else {
-            container.appendChild(child.cloneNode(true));
-            break;
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
           }
         }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
         }
-        return container.innerHTML
       } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
         if (window.Quarto?.typesetMath) {
           window.Quarto.typesetMath(note);
         }
-        return note.innerHTML;
-      }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      // TODO in 1.5, we should make sure this works without a callout special case
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
       }
     }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
           }
         } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
           .then(res => res.text())
           .then(html => {
             const parser = new DOMParser();
             const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
+            const note = htmlDoc.querySelector('main.content');
             if (note !== null) {
-              const html = processXRef(id, note);
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
               instance.setContent(html);
             } 
           }).finally(() => {
@@ -1687,192 +1730,168 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
-    });
-  }
-      let selectedAnnoteEl;
-      const selectorForAnnotation = ( cell, annotation) => {
-        let cellAttr = 'data-code-cell="' + cell + '"';
-        let lineAttr = 'data-code-annotation="' +  annotation + '"';
-        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-        return selector;
-      }
-      const selectCodeLines = (annoteEl) => {
-        const doc = window.document;
-        const targetCell = annoteEl.getAttribute("data-target-cell");
-        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-        const lineIds = lines.map((line) => {
-          return targetCell + "-" + line;
-        })
-        let top = null;
-        let height = null;
-        let parent = null;
-        if (lineIds.length > 0) {
-            //compute the position of the single el (top and bottom and make a div)
-            const el = window.document.getElementById(lineIds[0]);
-            top = el.offsetTop;
-            height = el.offsetHeight;
-            parent = el.parentElement.parentElement;
-          if (lineIds.length > 1) {
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-            height = bottom - top;
-          }
-          if (top !== null && height !== null && parent !== null) {
-            // cook up a div (if necessary) and position it 
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
-            }
-            div.style.top = top - 2 + "px";
-            div.style.height = height + 4 + "px";
-            div.style.left = 0;
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
-            }
-            gutterDiv.style.top = top - 2 + "px";
-            gutterDiv.style.height = height + 4 + "px";
-          }
-          selectedAnnoteEl = annoteEl;
-        }
-      };
-      const unselectCodeLines = () => {
-        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-        elementsIds.forEach((elId) => {
-          const div = window.document.getElementById(elId);
-          if (div) {
-            div.remove();
-          }
-        });
-        selectedAnnoteEl = undefined;
-      };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
-          }
-        });
-      }
-  const findCites = (el) => {
-    const parentEl = el.parentElement;
-    if (parentEl) {
-      const cites = parentEl.dataset.cites;
-      if (cites) {
-        return {
-          el,
-          cites: cites.split(' ')
-        };
-      } else {
-        return findCites(el.parentElement)
-      }
-    } else {
-      return undefined;
-    }
-  };
-  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-  for (var i=0; i<bibliorefs.length; i++) {
-    const ref = bibliorefs[i];
-    const citeInfo = findCites(ref);
-    if (citeInfo) {
-      tippyHover(citeInfo.el, function() {
-        var popup = window.document.createElement('div');
-        citeInfo.cites.forEach(function(cite) {
-          var citeDiv = window.document.createElement('div');
-          citeDiv.classList.add('hanging-indent');
-          citeDiv.classList.add('csl-entry');
-          var biblioDiv = window.document.getElementById('ref-' + cite);
-          if (biblioDiv) {
-            citeDiv.innerHTML = biblioDiv.innerHTML;
-          }
-          popup.appendChild(citeDiv);
-        });
-        return popup.innerHTML;
+      }, function(instance) {
       });
     }
-  }
-});
-</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="./samplingdistribution.html" class="pagination-link" aria-label="The Sampling Distribution">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">The Sampling Distribution</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">The Sampling Distribution</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./glm1_regression.html" class="pagination-link" aria-label="GLM-I: Linear Regression">
-        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">GLM-I: Linear Regression</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">GLM-I: Linear Regression</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

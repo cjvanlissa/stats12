@@ -2,10 +2,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.57">
+<meta name="generator" content="quarto-1.7.33">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="description" content="Book Description">
-<title>3&nbsp; The Sampling Distribution – Statistics 1 and 2</title>
+<title>4&nbsp; The Sampling Distribution – Statistics 1 and 2</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -29,17 +29,20 @@ ul.task-list li input[type="checkbox"] {
 <link href="./testing.html" rel="next">
 <link href="./probability.html" rel="prev">
 <link href="./images/logos/favicon.png" rel="icon" type="image/png">
-<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-c2894b54f4b00a27b9651b11dcf5df54.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-7530c408590d20eba92ebedbb433c75c.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-c2894b54f4b00a27b9651b11dcf5df54.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark"><script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap-e5f62320892960dc23dd0786c8482584.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-11ad583e60b2cd5ac7d46970bf1aa65a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-e5f62320892960dc23dd0786c8482584.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -95,16 +98,178 @@ window.Quarto = {
 <link rel="stylesheet" href="include/webex.css">
 <link rel="stylesheet" href="include/glossary.css">
 <link rel="stylesheet" href="include/style.css">
-<link rel="stylesheet" href="c:/gitbook_stats12/include/webex.css">
+<link rel="stylesheet" href="include/webex.css">
 </head>
-<body class="nav-sidebar floating">
+<body class="nav-sidebar floating quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./samplingdistribution.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">The Sampling Distribution</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./samplingdistribution.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">The Sampling Distribution</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -167,110 +332,116 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./chapter2_descriptive_statistics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Descriptive Statistics</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./probability.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Probability Distributions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Probability Distributions</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./samplingdistribution.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">The Sampling Distribution</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">The Sampling Distribution</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./testing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Hypothesis Testing</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Hypothesis Testing</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./glm1_regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">GLM-I: Linear Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">GLM-I: Linear Regression</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./glm2_sum_squares.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">GLM-II: Sums of Squares</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">GLM-II: Sums of Squares</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./glm3binary.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">GLM-III: Binary Predictors</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">GLM-III: Binary Predictors</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./glm4anova.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">GLM-IV: ANOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">GLM-IV: ANOVA</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./glm5multiple.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">GLM-V: Multiple regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">GLM-V: Multiple regression</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./glm6nested.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">GLM-VI: Nested models</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">GLM-VI: Nested models</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./glm7interaction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">GLM-VII: Interaction</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">GLM-VII: Interaction</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./logistic.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">GLM VIII - Logistic Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">GLM VIII - Logistic Regression</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./glm_contrasts.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">GLM: Contrasts</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">GLM: Contrasts</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./factorial.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">GLM: Factorial ANOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">GLM: Factorial ANOVA</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ancova.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">GLM: ANCOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">GLM: ANCOVA</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./rmanova.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">GLM: Repeated Measures ANOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">GLM: Repeated Measures ANOVA</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./reliability_validity.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Reliability and Validity</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Reliability and Validity</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./data_reduction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Dimension Reduction</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Dimension Reduction</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./confint.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">BE2 - Confidence Intervals</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">BE2 - Confidence Intervals</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -316,18 +487,18 @@ window.Quarto = {
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#lecture" id="toc-lecture" class="nav-link active" data-scroll-target="#lecture"><span class="header-section-number">4</span> Lecture</a></li>
-  <li><a href="#formative-test" id="toc-formative-test" class="nav-link" data-scroll-target="#formative-test"><span class="header-section-number">5</span> Formative Test</a></li>
+<li><a href="#lecture" id="toc-lecture" class="nav-link active" data-scroll-target="#lecture"><span class="header-section-number">5</span> Lecture</a></li>
+  <li><a href="#formative-test" id="toc-formative-test" class="nav-link" data-scroll-target="#formative-test"><span class="header-section-number">6</span> Formative Test</a></li>
   <li>
-<a href="#tutorial" id="toc-tutorial" class="nav-link" data-scroll-target="#tutorial"><span class="header-section-number">6</span> Tutorial</a>
+<a href="#tutorial" id="toc-tutorial" class="nav-link" data-scroll-target="#tutorial"><span class="header-section-number">7</span> Tutorial</a>
   <ul class="collapse">
-<li><a href="#sampling-distribution" id="toc-sampling-distribution" class="nav-link" data-scroll-target="#sampling-distribution"><span class="header-section-number">6.1</span> Sampling Distribution</a></li>
+<li><a href="#sampling-distribution" id="toc-sampling-distribution" class="nav-link" data-scroll-target="#sampling-distribution"><span class="header-section-number">7.1</span> Sampling Distribution</a></li>
   <li>
-<a href="#in-spss" id="toc-in-spss" class="nav-link" data-scroll-target="#in-spss"><span class="header-section-number">6.2</span> In SPSS</a>
+<a href="#in-spss" id="toc-in-spss" class="nav-link" data-scroll-target="#in-spss"><span class="header-section-number">7.2</span> In SPSS</a>
   <ul class="collapse">
-<li><a href="#se-for-means" id="toc-se-for-means" class="nav-link" data-scroll-target="#se-for-means"><span class="header-section-number">6.2.1</span> SE for Means</a></li>
-  <li><a href="#se-for-proportions" id="toc-se-for-proportions" class="nav-link" data-scroll-target="#se-for-proportions"><span class="header-section-number">6.2.2</span> SE for Proportions</a></li>
-  <li><a href="#se-for-correlation" id="toc-se-for-correlation" class="nav-link" data-scroll-target="#se-for-correlation"><span class="header-section-number">6.2.3</span> SE for Correlation</a></li>
+<li><a href="#se-for-means" id="toc-se-for-means" class="nav-link" data-scroll-target="#se-for-means"><span class="header-section-number">7.2.1</span> SE for Means</a></li>
+  <li><a href="#se-for-proportions" id="toc-se-for-proportions" class="nav-link" data-scroll-target="#se-for-proportions"><span class="header-section-number">7.2.2</span> SE for Proportions</a></li>
+  <li><a href="#se-for-correlation" id="toc-se-for-correlation" class="nav-link" data-scroll-target="#se-for-correlation"><span class="header-section-number">7.2.3</span> SE for Correlation</a></li>
   </ul>
 </li>
   </ul>
@@ -336,7 +507,7 @@ window.Quarto = {
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
-<h1 class="title"><span id="sec-sampdist" class="quarto-section-identifier"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">The Sampling Distribution</span></span></h1>
+<h1 class="title"><span id="sec-sampdist" class="quarto-section-identifier"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">The Sampling Distribution</span></span></h1>
 </div>
 
 
@@ -355,65 +526,65 @@ window.Quarto = {
 <p>The standard deviation of the sampling distribution plays a central role in inferential statistics. It is so important that we give it a unique name: we call this particular standard deviation the <em>standard error</em> (SE). The standard error quantifies the average, or expected, amount of sampling error when we use a sample statistic to estimate the population parameter. If the standard error is small, our estimates based on the sample are likely to be accurate, whereas a large standard error indicates greater uncertainty.</p>
 <p>With the help of the normal distribution, and given a particular (hypothesized or known) population mean and standard error, we can calculate how likely it is to observe specific sample means. For example, if we want to determine the probability that the mean of a random sample exceeds a certain value, we can standardize the sample mean using the formula <span class="math inline">\(Z = \frac{M - \mu}{SE_M}\)</span>, where M is the sample mean, <span class="math inline">\(\mu\)</span> is the known or hypothesized population mean, and SE is the standard error. By looking up the corresponding probability on the standard normal distribution table or using statistical software, we can assess the likelihood of observing a specific sample mean (or greater, or smaller).</p>
 <p>Confidence intervals are a way to express our uncertainty about the sample statistic as estimator of the population parameter. A confidence interval is a range of values - a window - within which we expect the true population parameter to fall with a certain level of confidence. Typically, we select a 95% confidence interval, which means that if we could repeat the sampling process many times and calculated confidence intervals each time, 95% of those intervals would contain the true population parameter. The width of the confidence interval is determined by the standard error and is proportional to the level of confidence desired. The formula for a confidence interval is often written as: <span class="math inline">\(M \pm Z_{95\%} * SE_M\)</span>. In practice, this comes down to approximately: <span class="math inline">\(M \pm 2 * SE_M\)</span>.</p>
-<section id="lecture" class="level1" data-number="4"><h1 data-number="4">
-<span class="header-section-number">4</span> Lecture</h1>
+<section id="lecture" class="level1" data-number="5"><h1 data-number="5">
+<span class="header-section-number">5</span> Lecture</h1>
 <p><strong>VIDEO ERRATA: from 19:40 - 19:50 I incorrectly report the probability of P(Z &gt; 1) as .025, but it is .16.</strong></p>
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/iNxF0Tr6R9M" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
-</section><section id="formative-test" class="level1" data-number="5"><h1 data-number="5">
-<span class="header-section-number">5</span> Formative Test</h1>
+</section><section id="formative-test" class="level1" data-number="6"><h1 data-number="6">
+<span class="header-section-number">6</span> Formative Test</h1>
 <p>A formative test helps you assess your progress in the course, and helps you address any blind spots in your understanding of the material. If you get a question wrong, you will receive a hint on how to improve your understanding of the material.</p>
 <p>Complete the formative test ideally after you’ve seen the lecture, but before the lecture meeting in which we can discuss any topics that need more attention</p>
 <div class="cell" data-layout-align="center">
 <div class="webex-check webex-box">
 <p><strong>Question 1</strong></p>
 Introversion is normally distributed with a mean of 50 and a standard deviation of 10. What is the probability that the mean introversion level of a randomly selected group of 16 people is smaller than 52? Round the answer to 3 decimal places.
-<div id="radio_DWMNODTMBB" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_DWMNODTMBB" value="answer"><span>0.788</span></label><label><input type="radio" autocomplete="off" name="radio_DWMNODTMBB" value=""><span>0.045</span></label><label><input type="radio" autocomplete="off" name="radio_DWMNODTMBB" value=""><span>0.345</span></label><label><input type="radio" autocomplete="off" name="radio_DWMNODTMBB" value=""><span>0.655</span></label>
+<div id="radio_ZWISZZEHPF" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ZWISZZEHPF" value=""><span>0.045</span></label><label><input type="radio" autocomplete="off" name="radio_ZWISZZEHPF" value=""><span>0.345</span></label><label><input type="radio" autocomplete="off" name="radio_ZWISZZEHPF" value="answer"><span>0.788</span></label><label><input type="radio" autocomplete="off" name="radio_ZWISZZEHPF" value=""><span>0.655</span></label>
 </div>
 <p><strong>Question 2</strong></p>
 Variable X is not normally distributed in the population. Variable X has a population mean of 30 and a population standard deviation of 6. A random sample of N = 36 scores is drawn from the population for variable X. The sample mean is equal to 32. Which of the following statements about the sampling distribution of the sample means for this sample (n = 36) is incorrect?
-<div id="radio_JITZVHOKEB" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_JITZVHOKEB" value=""><span>The sampling distribution of sample means is approximately normally distributed.</span></label><label><input type="radio" autocomplete="off" name="radio_JITZVHOKEB" value="answer"><span>The mean of the sampling distribution of the sample means is equal to 32.</span></label><label><input type="radio" autocomplete="off" name="radio_JITZVHOKEB" value=""><span>The standard error is smaller than the population standard deviation.</span></label><label><input type="radio" autocomplete="off" name="radio_JITZVHOKEB" value=""><span>The standard deviation of the sampling distribution of sample means is equal to 1.</span></label>
+<div id="radio_VMKAXQCVCK" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_VMKAXQCVCK" value=""><span>The sampling distribution of sample means is approximately normally distributed.</span></label><label><input type="radio" autocomplete="off" name="radio_VMKAXQCVCK" value=""><span>The standard error is smaller than the population standard deviation.</span></label><label><input type="radio" autocomplete="off" name="radio_VMKAXQCVCK" value="answer"><span>The mean of the sampling distribution of the sample means is equal to 32.</span></label><label><input type="radio" autocomplete="off" name="radio_VMKAXQCVCK" value=""><span>The standard deviation of the sampling distribution of sample means is equal to 1.</span></label>
 </div>
 <p><strong>Question 3</strong></p>
 What does the sampling distribution represent?
-<div id="radio_YTTGFKYUFU" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_YTTGFKYUFU" value="answer"><span>A theoretical distribution of sample statistics</span></label><label><input type="radio" autocomplete="off" name="radio_YTTGFKYUFU" value=""><span>The distribution of sample means</span></label><label><input type="radio" autocomplete="off" name="radio_YTTGFKYUFU" value=""><span>The distribution of population parameters</span></label><label><input type="radio" autocomplete="off" name="radio_YTTGFKYUFU" value=""><span>The distribution of raw data</span></label>
+<div id="radio_QDQFRYHUAE" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_QDQFRYHUAE" value=""><span>The distribution of sample means</span></label><label><input type="radio" autocomplete="off" name="radio_QDQFRYHUAE" value="answer"><span>A theoretical distribution of sample statistics</span></label><label><input type="radio" autocomplete="off" name="radio_QDQFRYHUAE" value=""><span>The distribution of population parameters</span></label><label><input type="radio" autocomplete="off" name="radio_QDQFRYHUAE" value=""><span>The distribution of raw data</span></label>
 </div>
 <p><strong>Question 4</strong></p>
 Which of the following statements about the sampling distribution is true?
-<div id="radio_DQBZPEXLQT" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_DQBZPEXLQT" value="answer"><span>The sampling distribution is centered around the population parameter</span></label><label><input type="radio" autocomplete="off" name="radio_DQBZPEXLQT" value=""><span>The sampling distribution is identical to the population distribution</span></label><label><input type="radio" autocomplete="off" name="radio_DQBZPEXLQT" value=""><span>The sampling distribution is based on a single sample</span></label><label><input type="radio" autocomplete="off" name="radio_DQBZPEXLQT" value=""><span>The sampling distribution of a skewed variable is also skewed</span></label>
+<div id="radio_XCKVIWQWWR" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_XCKVIWQWWR" value=""><span>The sampling distribution of a skewed variable is also skewed</span></label><label><input type="radio" autocomplete="off" name="radio_XCKVIWQWWR" value=""><span>The sampling distribution is identical to the population distribution</span></label><label><input type="radio" autocomplete="off" name="radio_XCKVIWQWWR" value="answer"><span>The sampling distribution is centered around the population parameter</span></label><label><input type="radio" autocomplete="off" name="radio_XCKVIWQWWR" value=""><span>The sampling distribution is based on a single sample</span></label>
 </div>
 <p><strong>Question 5</strong></p>
 What is the standard deviation of the sampling distribution called?
-<div id="radio_HBNABCBRHD" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_HBNABCBRHD" value=""><span>Bias</span></label><label><input type="radio" autocomplete="off" name="radio_HBNABCBRHD" value="answer"><span>Standard error</span></label><label><input type="radio" autocomplete="off" name="radio_HBNABCBRHD" value=""><span>Variance</span></label><label><input type="radio" autocomplete="off" name="radio_HBNABCBRHD" value=""><span>Population standard deviation</span></label>
+<div id="radio_CKHMBMNFBW" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_CKHMBMNFBW" value="answer"><span>Standard error</span></label><label><input type="radio" autocomplete="off" name="radio_CKHMBMNFBW" value=""><span>Population standard deviation</span></label><label><input type="radio" autocomplete="off" name="radio_CKHMBMNFBW" value=""><span>Bias</span></label><label><input type="radio" autocomplete="off" name="radio_CKHMBMNFBW" value=""><span>Variance</span></label>
 </div>
 <p><strong>Question 6</strong></p>
 How does sample size affect the shape of the sampling distribution?
-<div id="radio_CBVLVHXPWP" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_CBVLVHXPWP" value="answer"><span>Larger sample sizes result in smaller standard errors</span></label><label><input type="radio" autocomplete="off" name="radio_CBVLVHXPWP" value=""><span>Larger sample sizes increase the variability of sample statistics</span></label><label><input type="radio" autocomplete="off" name="radio_CBVLVHXPWP" value=""><span>Larger sample sizes make the sampling distribution more spread out</span></label><label><input type="radio" autocomplete="off" name="radio_CBVLVHXPWP" value=""><span>Larger sample sizes have no impact on the sampling distribution</span></label>
+<div id="radio_UOSSDWIQMT" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_UOSSDWIQMT" value=""><span>Larger sample sizes make the sampling distribution more spread out</span></label><label><input type="radio" autocomplete="off" name="radio_UOSSDWIQMT" value=""><span>Larger sample sizes have no impact on the sampling distribution</span></label><label><input type="radio" autocomplete="off" name="radio_UOSSDWIQMT" value=""><span>Larger sample sizes increase the variability of sample statistics</span></label><label><input type="radio" autocomplete="off" name="radio_UOSSDWIQMT" value="answer"><span>Larger sample sizes result in smaller standard errors</span></label>
 </div>
 <p><strong>Question 7</strong></p>
 What is the probability that a sample mean falls within +/- 1 standard deviation of the population mean, assuming a normal distribution of sample means?
-<div id="radio_TGDXDHMDEC" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_TGDXDHMDEC" value=""><span>0.34</span></label><label><input type="radio" autocomplete="off" name="radio_TGDXDHMDEC" value="answer"><span>0.68</span></label><label><input type="radio" autocomplete="off" name="radio_TGDXDHMDEC" value=""><span>0.95</span></label><label><input type="radio" autocomplete="off" name="radio_TGDXDHMDEC" value=""><span>0.48</span></label>
+<div id="radio_FDFIPPKBPA" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_FDFIPPKBPA" value=""><span>0.48</span></label><label><input type="radio" autocomplete="off" name="radio_FDFIPPKBPA" value="answer"><span>0.68</span></label><label><input type="radio" autocomplete="off" name="radio_FDFIPPKBPA" value=""><span>0.34</span></label><label><input type="radio" autocomplete="off" name="radio_FDFIPPKBPA" value=""><span>0.95</span></label>
 </div>
 <p><strong>Question 8</strong></p>
 If the standard deviation of the population is 10 and the sample size is 25, what is the standard error of the sample mean?
-<div id="radio_XFNWVNMJUF" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_XFNWVNMJUF" value=""><span>0.2</span></label><label><input type="radio" autocomplete="off" name="radio_XFNWVNMJUF" value=""><span>5</span></label><label><input type="radio" autocomplete="off" name="radio_XFNWVNMJUF" value="answer"><span>2</span></label><label><input type="radio" autocomplete="off" name="radio_XFNWVNMJUF" value=""><span>0.4</span></label>
+<div id="radio_MONRBMQAFM" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_MONRBMQAFM" value="answer"><span>2</span></label><label><input type="radio" autocomplete="off" name="radio_MONRBMQAFM" value=""><span>0.4</span></label><label><input type="radio" autocomplete="off" name="radio_MONRBMQAFM" value=""><span>5</span></label><label><input type="radio" autocomplete="off" name="radio_MONRBMQAFM" value=""><span>0.2</span></label>
 </div>
 <p><strong>Question 9</strong></p>
 What is the probability that the sample proportion falls within +/- 2 standard deviations of the population proportion, assuming a large sample size?
-<div id="radio_XPBKTLBXTL" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_XPBKTLBXTL" value=""><span>0.34</span></label><label><input type="radio" autocomplete="off" name="radio_XPBKTLBXTL" value=""><span>0.68</span></label><label><input type="radio" autocomplete="off" name="radio_XPBKTLBXTL" value=""><span>0.48</span></label><label><input type="radio" autocomplete="off" name="radio_XPBKTLBXTL" value="answer"><span>0.95</span></label>
+<div id="radio_MWHXDLOGME" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_MWHXDLOGME" value=""><span>0.48</span></label><label><input type="radio" autocomplete="off" name="radio_MWHXDLOGME" value=""><span>0.34</span></label><label><input type="radio" autocomplete="off" name="radio_MWHXDLOGME" value="answer"><span>0.95</span></label><label><input type="radio" autocomplete="off" name="radio_MWHXDLOGME" value=""><span>0.68</span></label>
 </div>
 <p><strong>Question 10</strong></p>
 If the standard deviation of the population is 5 and the sample size is 50, what is the standard error of the sample mean?
-<div id="radio_VPXPSXUSYC" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_VPXPSXUSYC" value="answer"><span>0.707</span></label><label><input type="radio" autocomplete="off" name="radio_VPXPSXUSYC" value=""><span>0.0707</span></label><label><input type="radio" autocomplete="off" name="radio_VPXPSXUSYC" value=""><span>0.141</span></label><label><input type="radio" autocomplete="off" name="radio_VPXPSXUSYC" value=""><span>0.283</span></label>
+<div id="radio_ZKIDAVWTQT" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ZKIDAVWTQT" value=""><span>0.283</span></label><label><input type="radio" autocomplete="off" name="radio_ZKIDAVWTQT" value=""><span>0.0707</span></label><label><input type="radio" autocomplete="off" name="radio_ZKIDAVWTQT" value=""><span>0.141</span></label><label><input type="radio" autocomplete="off" name="radio_ZKIDAVWTQT" value="answer"><span>0.707</span></label>
 </div>
 </div>
 <div class="webex-solution">
@@ -442,35 +613,35 @@ Show explanations
 <p>The standard error of the sample mean is SD/sqrt(n), so 5/sqrt(50) = .707</p>
 </div>
 </div>
-</section><section id="tutorial" class="level1" data-number="6"><h1 data-number="6">
-<span class="header-section-number">6</span> Tutorial</h1>
-<section id="sampling-distribution" class="level2" data-number="6.1"><h2 data-number="6.1" class="anchored" data-anchor-id="sampling-distribution">
-<span class="header-section-number">6.1</span> Sampling Distribution</h2>
+</section><section id="tutorial" class="level1" data-number="7"><h1 data-number="7">
+<span class="header-section-number">7</span> Tutorial</h1>
+<section id="sampling-distribution" class="level2" data-number="7.1"><h2 data-number="7.1" class="anchored" data-anchor-id="sampling-distribution">
+<span class="header-section-number">7.1</span> Sampling Distribution</h2>
 <p>Complete the following sentences:</p>
 <p>IQ scores in the population of potential students are normally distributed with mean 120 and an SD of 10. If a cohort contains 75 students, 95% of cohorts will have an average IQ in between <select class="webex-select"><option value="blank"></option>
-<option value="">118.27</option>
-<option value="answer">117.69</option>
 <option value="">100</option>
+<option value="answer">117.69</option>
+<option value="">118.27</option>
 <option value="">118.85</option></select> and <select class="webex-select"><option value="blank"></option>
-<option value="">121.15</option>
 <option value="">121.73</option>
 <option value="">130</option>
+<option value="">121.15</option>
 <option value="answer">122.31</option></select>.</p>
 <p>After graduating, a cohort of 75 LAS students can expect to earn a starter salary of 2650 Euros, with an SD of 300 euros. What percentage of cohorts will have a mean starter salary greater than 2750 euros? <select class="webex-select"><option value="blank"></option>
 <option value="">4%</option>
-<option value="">99%</option>
 <option value="answer">0.2%</option>
+<option value="">99%</option>
 <option value="">2%</option></select>.</p>
 <p>In a sample of 5000 babies, the average birthweight is 3.213 kg, with an SD of 254 grams. What is the mean birthweight of the sampling distribution? <select class="webex-select"><option value="blank"></option>
-<option value="">3.213 kg</option>
+<option value="">Between 3202.22 and 3223.78 grams</option>
 <option value="answer">Can’t say</option>
-<option value="">Between 3202.22 and 3223.78 grams</option></select></p>
+<option value="">3.213 kg</option></select></p>
 <p>Consider a continuous variable X, which is normally distributed with <span class="math inline">\(X \sim(\mu = 30, \sigma = 4)\)</span>. We draw a sample of 15 participants. What is the probability that the sample mean will be smaller than 32? <input class="webex-solveme nospaces" data-tol="0.01" size="5" data-answer="[&quot;0.974&quot;,&quot;.974&quot;]"></p>
 <p>The proportion of male babies is .51. Assume babies born in each hospital in a given month constitute a random sample of size 100. The standard error of a proportion is given by <span class="math inline">\(\sqrt(p*(1-p) / n) = \sqrt(.51*.49 / 100) = 0.05\)</span>. What proportion of hospitals will have more than 60% male babies? <input class="webex-solveme nospaces" data-tol="0.01" size="4" data-answer="[&quot;0.04&quot;,&quot;.04&quot;]"></p>
-</section><section id="in-spss" class="level2" data-number="6.2"><h2 data-number="6.2" class="anchored" data-anchor-id="in-spss">
-<span class="header-section-number">6.2</span> In SPSS</h2>
-<section id="se-for-means" class="level3" data-number="6.2.1"><h3 data-number="6.2.1" class="anchored" data-anchor-id="se-for-means">
-<span class="header-section-number">6.2.1</span> SE for Means</h3>
+</section><section id="in-spss" class="level2" data-number="7.2"><h2 data-number="7.2" class="anchored" data-anchor-id="in-spss">
+<span class="header-section-number">7.2</span> In SPSS</h2>
+<section id="se-for-means" class="level3" data-number="7.2.1"><h3 data-number="7.2.1" class="anchored" data-anchor-id="se-for-means">
+<span class="header-section-number">7.2.1</span> SE for Means</h3>
 <p>Open the file called <code>student_questionnaire.sav</code>.</p>
 <p>These are data from a previous cohort of students. Note that we have data about biometric differences (e.g., age, height, shoesize), as well as school-related questions (which program they are enrolled in), variables about their love for statistics, and about moral preferences (based on the “Morality As Cooperation” questionnaire that I helped develop).</p>
 <p>Go to Analyze -&gt; Descriptives and ask for descriptive statistics on height and shoesize. Click Options, and notice that there’s an option to request the standard error of the mean. Select this option, then paste and run your syntax. Check if it corresponds to the syntax below.</p>
@@ -491,8 +662,8 @@ Explanation
 <p><span class="math inline">\(\frac{174.62-177.34}{.772} = -3.65\)</span></p>
 <p>A Z-score of nearly -4, so this probability is going to be extremely small, &lt; .001.</p>
 </div>
-</section><section id="se-for-proportions" class="level3" data-number="6.2.2"><h3 data-number="6.2.2" class="anchored" data-anchor-id="se-for-proportions">
-<span class="header-section-number">6.2.2</span> SE for Proportions</h3>
+</section><section id="se-for-proportions" class="level3" data-number="7.2.2"><h3 data-number="7.2.2" class="anchored" data-anchor-id="se-for-proportions">
+<span class="header-section-number">7.2.2</span> SE for Proportions</h3>
 <p>Go to Analyze -&gt; Compare Means -&gt; One Sample Proportions.</p>
 <p>This procedure allows you to estimate proportions and their standard errors. It’s not very common, in fact I learned about it by Googling “standard error for proportion spss”! Any time you need to know how to do something in SPSS, you can find advice on the internet.</p>
 <p>Calculate the proportion for the variable sex, and paste and run your syntax.</p>
@@ -508,11 +679,11 @@ PROPORTIONS
 <p>The 95% CI for the proportion of male students is [<input class="webex-solveme nospaces" data-tol="0.01" size="5" data-answer="[&quot;0.359&quot;,&quot;.359&quot;]">, <input class="webex-solveme nospaces" data-tol="0.01" size="5" data-answer="[&quot;0.507&quot;,&quot;.507&quot;]">].</p>
 <p>Note that the differences between this procedure and the three procedures in the table only differ in the third decimal.</p>
 <p>How do you interpret a confidence interval?</p>
-<div id="radio_AXLXUBIPLH" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_AXLXUBIPLH" value=""><span>A range of values that contains the population parameter with 95% certainty.</span></label><label><input type="radio" autocomplete="off" name="radio_AXLXUBIPLH" value="answer"><span>A range of values that, 95% of the time, contains the population parameter.</span></label><label><input type="radio" autocomplete="off" name="radio_AXLXUBIPLH" value=""><span>The population value, with a 95% margin of error.</span></label><label><input type="radio" autocomplete="off" name="radio_AXLXUBIPLH" value=""><span>The range of likely population values.</span></label>
+<div id="radio_CJZJEFSAJW" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_CJZJEFSAJW" value=""><span>The range of likely population values.</span></label><label><input type="radio" autocomplete="off" name="radio_CJZJEFSAJW" value=""><span>A range of values that contains the population parameter with 95% certainty.</span></label><label><input type="radio" autocomplete="off" name="radio_CJZJEFSAJW" value=""><span>The population value, with a 95% margin of error.</span></label><label><input type="radio" autocomplete="off" name="radio_CJZJEFSAJW" value="answer"><span>A range of values that, 95% of the time, contains the population parameter.</span></label>
 </div>
-</section><section id="se-for-correlation" class="level3" data-number="6.2.3"><h3 data-number="6.2.3" class="anchored" data-anchor-id="se-for-correlation">
-<span class="header-section-number">6.2.3</span> SE for Correlation</h3>
+</section><section id="se-for-correlation" class="level3" data-number="7.2.3"><h3 data-number="7.2.3" class="anchored" data-anchor-id="se-for-correlation">
+<span class="header-section-number">7.2.3</span> SE for Correlation</h3>
 <p>Recall from the first lecture that the correlation coefficient is a measure of linear association between two variables, or: a descriptive statistic that describes how strongly two continuous variables are associated.</p>
 <p>Go to Analyze -&gt; Correlate -&gt; Bivariate. Add the variables work_hours and study_hours, paste and run the syntax.</p>
 <p>The value of the correlation coefficient is labelled “Pearson Correlation”. What value do you observe? <input class="webex-solveme nospaces" data-tol="0.01" size="5" data-answer="[&quot;0.057&quot;,&quot;.057&quot;]"></p>
@@ -976,383 +1147,255 @@ window.onload = function() {
 }
 
 </script><script id="quarto-html-after-body" type="application/javascript">
-window.document.addEventListener("DOMContentLoaded", function (event) {
-  const toggleBodyColorMode = (bsSheetEl) => {
-    const mode = bsSheetEl.getAttribute("data-mode");
-    const bodyEl = window.document.querySelector("body");
-    if (mode === "dark") {
-      bodyEl.classList.add("quarto-dark");
-      bodyEl.classList.remove("quarto-light");
-    } else {
-      bodyEl.classList.add("quarto-light");
-      bodyEl.classList.remove("quarto-dark");
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
     }
-  }
-  const toggleBodyColorPrimary = () => {
-    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-    if (bsSheetEl) {
-      toggleBodyColorMode(bsSheetEl);
-    }
-  }
-  toggleBodyColorPrimary();  
-  const disableStylesheet = (stylesheets) => {
-    for (let i=0; i < stylesheets.length; i++) {
-      const stylesheet = stylesheets[i];
-      stylesheet.rel = 'prefetch';
-    }
-  }
-  const enableStylesheet = (stylesheets) => {
-    for (let i=0; i < stylesheets.length; i++) {
-      const stylesheet = stylesheets[i];
-      stylesheet.rel = 'stylesheet';
-    }
-  }
-  const manageTransitions = (selector, allowTransitions) => {
-    const els = window.document.querySelectorAll(selector);
-    for (let i=0; i < els.length; i++) {
-      const el = els[i];
-      if (allowTransitions) {
-        el.classList.remove('notransition');
-      } else {
-        el.classList.add('notransition');
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
       }
+      return false;
     }
-  }
-  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
-    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
-    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
-    let newTheme = '';
-    if(darkModeDefault) {
-      newTheme = isAlternate ? baseTheme : alternateTheme;
-    } else {
-      newTheme = isAlternate ? alternateTheme : baseTheme;
-    }
-    const changeGiscusTheme = () => {
-      // From: https://github.com/giscus/giscus/issues/336
-      const sendMessage = (message) => {
-        const iframe = document.querySelector('iframe.giscus-frame');
-        if (!iframe) return;
-        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
       }
-      sendMessage({
-        setConfig: {
-          theme: newTheme
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
         }
       });
     }
-    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
-    if (isGiscussLoaded) {
-      changeGiscusTheme();
-    }
-  }
-  const toggleColorMode = (alternate) => {
-    // Switch the stylesheets
-    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
-    manageTransitions('#quarto-margin-sidebar .nav-link', false);
-    if (alternate) {
-      enableStylesheet(alternateStylesheets);
-      for (const sheetNode of alternateStylesheets) {
-        if (sheetNode.id === "quarto-bootstrap") {
-          toggleBodyColorMode(sheetNode);
-        }
-      }
-    } else {
-      disableStylesheet(alternateStylesheets);
-      toggleBodyColorPrimary();
-    }
-    manageTransitions('#quarto-margin-sidebar .nav-link', true);
-    // Switch the toggles
-    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
-    for (let i=0; i < toggles.length; i++) {
-      const toggle = toggles[i];
-      if (toggle) {
-        if (alternate) {
-          toggle.classList.add("alternate");     
-        } else {
-          toggle.classList.remove("alternate");
-        }
-      }
-    }
-    // Hack to workaround the fact that safari doesn't
-    // properly recolor the scrollbar when toggling (#1455)
-    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
-      manageTransitions("body", false);
-      window.scrollTo(0, 1);
-      setTimeout(() => {
-        window.scrollTo(0, 0);
-        manageTransitions("body", true);
-      }, 40);  
-    }
-  }
-  const isFileUrl = () => { 
-    return window.location.protocol === 'file:';
-  }
-  const hasAlternateSentinel = () => {  
-    let styleSentinel = getColorSchemeSentinel();
-    if (styleSentinel !== null) {
-      return styleSentinel === "alternate";
-    } else {
-      return false;
-    }
-  }
-  const setStyleSentinel = (alternate) => {
-    const value = alternate ? "alternate" : "default";
-    if (!isFileUrl()) {
-      window.localStorage.setItem("quarto-color-scheme", value);
-    } else {
-      localAlternateSentinel = value;
-    }
-  }
-  const getColorSchemeSentinel = () => {
-    if (!isFileUrl()) {
-      const storageValue = window.localStorage.getItem("quarto-color-scheme");
-      return storageValue != null ? storageValue : localAlternateSentinel;
-    } else {
-      return localAlternateSentinel;
-    }
-  }
-  const darkModeDefault = false;
-  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
-  // Dark / light mode switch
-  window.quartoToggleColorScheme = () => {
-    // Read the current dark / light value 
-    let toAlternate = !hasAlternateSentinel();
-    toggleColorMode(toAlternate);
-    setStyleSentinel(toAlternate);
-    toggleGiscusIfUsed(toAlternate, darkModeDefault);
-  };
-  // Ensure there is a toggle, if there isn't float one in the top right
-  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
-    const a = window.document.createElement('a');
-    a.classList.add('top-right');
-    a.classList.add('quarto-color-scheme-toggle');
-    a.href = "";
-    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
-    const i = window.document.createElement("i");
-    i.classList.add('bi');
-    a.appendChild(i);
-    window.document.body.appendChild(a);
-  }
-  // Switch to dark mode if need be
-  if (hasAlternateSentinel()) {
-    toggleColorMode(true);
-  } else {
-    toggleColorMode(false);
-  }
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
-  const isCodeAnnotation = (el) => {
-    for (const clz of el.classList) {
-      if (clz.startsWith('code-annotation-')) {                     
-        return true;
-      }
-    }
-    return false;
-  }
-  const onCopySuccess = function(e) {
-    // button target
-    const button = e.trigger;
-    // don't keep focus
-    button.blur();
-    // flash "checked"
-    button.classList.add('code-copy-button-checked');
-    var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Copied!");
-    let tooltip;
-    if (window.bootstrap) {
-      button.setAttribute("data-bs-toggle", "tooltip");
-      button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Copied!");
-      tooltip = new bootstrap.Tooltip(button, 
-        { trigger: "manual", 
-          customClass: "code-copy-button-tooltip",
-          offset: [0, -8]});
-      tooltip.show();    
-    }
-    setTimeout(function() {
-      if (tooltip) {
-        tooltip.hide();
-        button.removeAttribute("data-bs-title");
-        button.removeAttribute("data-bs-toggle");
-        button.removeAttribute("data-bs-placement");
-      }
-      button.setAttribute("title", currentTitle);
-      button.classList.remove('code-copy-button-checked');
-    }, 1000);
-    // clear code selection
-    e.clearSelection();
-  }
-  const getTextToCopy = function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-  }
-  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-    text: getTextToCopy
-  });
-  clipboard.on('success', onCopySuccess);
-  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
-    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-      text: getTextToCopy,
-      container: window.document.getElementById('quarto-embedded-source-code-modal')
-    });
-    clipboardModal.on('success', onCopySuccess);
-  }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
-      }
-    }
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-    const config = {
-      allowHTML: true,
-      maxWidth: 500,
-      delay: 100,
-      arrow: false,
-      appendTo: function(el) {
-          return el.parentElement;
-      },
-      interactive: true,
-      interactiveBorder: 10,
-      theme: 'quarto',
-      placement: 'bottom-start',
-    };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
-    window.tippy(el, config); 
-  }
-  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-  for (var i=0; i<noterefs.length; i++) {
-    const ref = noterefs[i];
-    tippyHover(ref, function() {
-      // use id or data attribute instead here
-      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-      try { href = new URL(href).hash; } catch {}
-      const id = href.replace(/^#\/?/, "");
-      const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
-    });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
-        }
-      }
-    }
-    stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
-          } else {
-            container.appendChild(child.cloneNode(true));
-            break;
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
           }
         }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
         }
-        return container.innerHTML
       } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
         if (window.Quarto?.typesetMath) {
           window.Quarto.typesetMath(note);
         }
-        return note.innerHTML;
-      }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      // TODO in 1.5, we should make sure this works without a callout special case
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
       }
     }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
           }
         } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
           .then(res => res.text())
           .then(html => {
             const parser = new DOMParser();
             const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
+            const note = htmlDoc.querySelector('main.content');
             if (note !== null) {
-              const html = processXRef(id, note);
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
               instance.setContent(html);
             } 
           }).finally(() => {
@@ -1360,192 +1403,168 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
-    });
-  }
-      let selectedAnnoteEl;
-      const selectorForAnnotation = ( cell, annotation) => {
-        let cellAttr = 'data-code-cell="' + cell + '"';
-        let lineAttr = 'data-code-annotation="' +  annotation + '"';
-        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-        return selector;
-      }
-      const selectCodeLines = (annoteEl) => {
-        const doc = window.document;
-        const targetCell = annoteEl.getAttribute("data-target-cell");
-        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-        const lineIds = lines.map((line) => {
-          return targetCell + "-" + line;
-        })
-        let top = null;
-        let height = null;
-        let parent = null;
-        if (lineIds.length > 0) {
-            //compute the position of the single el (top and bottom and make a div)
-            const el = window.document.getElementById(lineIds[0]);
-            top = el.offsetTop;
-            height = el.offsetHeight;
-            parent = el.parentElement.parentElement;
-          if (lineIds.length > 1) {
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-            height = bottom - top;
-          }
-          if (top !== null && height !== null && parent !== null) {
-            // cook up a div (if necessary) and position it 
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
-            }
-            div.style.top = top - 2 + "px";
-            div.style.height = height + 4 + "px";
-            div.style.left = 0;
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
-            }
-            gutterDiv.style.top = top - 2 + "px";
-            gutterDiv.style.height = height + 4 + "px";
-          }
-          selectedAnnoteEl = annoteEl;
-        }
-      };
-      const unselectCodeLines = () => {
-        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-        elementsIds.forEach((elId) => {
-          const div = window.document.getElementById(elId);
-          if (div) {
-            div.remove();
-          }
-        });
-        selectedAnnoteEl = undefined;
-      };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
-          }
-        });
-      }
-  const findCites = (el) => {
-    const parentEl = el.parentElement;
-    if (parentEl) {
-      const cites = parentEl.dataset.cites;
-      if (cites) {
-        return {
-          el,
-          cites: cites.split(' ')
-        };
-      } else {
-        return findCites(el.parentElement)
-      }
-    } else {
-      return undefined;
-    }
-  };
-  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-  for (var i=0; i<bibliorefs.length; i++) {
-    const ref = bibliorefs[i];
-    const citeInfo = findCites(ref);
-    if (citeInfo) {
-      tippyHover(citeInfo.el, function() {
-        var popup = window.document.createElement('div');
-        citeInfo.cites.forEach(function(cite) {
-          var citeDiv = window.document.createElement('div');
-          citeDiv.classList.add('hanging-indent');
-          citeDiv.classList.add('csl-entry');
-          var biblioDiv = window.document.getElementById('ref-' + cite);
-          if (biblioDiv) {
-            citeDiv.innerHTML = biblioDiv.innerHTML;
-          }
-          popup.appendChild(citeDiv);
-        });
-        return popup.innerHTML;
+      }, function(instance) {
       });
     }
-  }
-});
-</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="./probability.html" class="pagination-link" aria-label="Probability Distributions">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Probability Distributions</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Probability Distributions</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./testing.html" class="pagination-link" aria-label="Hypothesis Testing">
-        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Hypothesis Testing</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Hypothesis Testing</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

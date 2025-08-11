@@ -2,10 +2,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.57">
+<meta name="generator" content="quarto-1.7.33">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="description" content="Book Description">
-<title>16&nbsp; GLM: Repeated Measures ANOVA – Statistics 1 and 2</title>
+<title>17&nbsp; GLM: Repeated Measures ANOVA – Statistics 1 and 2</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -29,17 +29,20 @@ ul.task-list li input[type="checkbox"] {
 <link href="./reliability_validity.html" rel="next">
 <link href="./ancova.html" rel="prev">
 <link href="./images/logos/favicon.png" rel="icon" type="image/png">
-<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-c2894b54f4b00a27b9651b11dcf5df54.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-7530c408590d20eba92ebedbb433c75c.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-c2894b54f4b00a27b9651b11dcf5df54.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark"><script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap-e5f62320892960dc23dd0786c8482584.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-11ad583e60b2cd5ac7d46970bf1aa65a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-e5f62320892960dc23dd0786c8482584.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -70,16 +73,178 @@ ul.task-list li input[type="checkbox"] {
 <link rel="stylesheet" href="include/webex.css">
 <link rel="stylesheet" href="include/glossary.css">
 <link rel="stylesheet" href="include/style.css">
-<link rel="stylesheet" href="c:/gitbook_stats12/include/webex.css">
+<link rel="stylesheet" href="include/webex.css">
 </head>
-<body class="nav-sidebar floating">
+<body class="nav-sidebar floating quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./rmanova.html"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">GLM: Repeated Measures ANOVA</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./rmanova.html"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">GLM: Repeated Measures ANOVA</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -142,110 +307,116 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./chapter2_descriptive_statistics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Descriptive Statistics</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./probability.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Probability Distributions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Probability Distributions</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./samplingdistribution.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">The Sampling Distribution</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">The Sampling Distribution</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./testing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Hypothesis Testing</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Hypothesis Testing</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./glm1_regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">GLM-I: Linear Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">GLM-I: Linear Regression</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./glm2_sum_squares.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">GLM-II: Sums of Squares</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">GLM-II: Sums of Squares</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./glm3binary.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">GLM-III: Binary Predictors</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">GLM-III: Binary Predictors</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./glm4anova.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">GLM-IV: ANOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">GLM-IV: ANOVA</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./glm5multiple.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">GLM-V: Multiple regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">GLM-V: Multiple regression</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./glm6nested.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">GLM-VI: Nested models</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">GLM-VI: Nested models</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./glm7interaction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">GLM-VII: Interaction</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">GLM-VII: Interaction</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./logistic.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">GLM VIII - Logistic Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">GLM VIII - Logistic Regression</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./glm_contrasts.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">GLM: Contrasts</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">GLM: Contrasts</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./factorial.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">GLM: Factorial ANOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">GLM: Factorial ANOVA</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ancova.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">GLM: ANCOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">GLM: ANCOVA</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./rmanova.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">GLM: Repeated Measures ANOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">GLM: Repeated Measures ANOVA</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./reliability_validity.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Reliability and Validity</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Reliability and Validity</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./data_reduction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Dimension Reduction</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Dimension Reduction</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./confint.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">BE2 - Confidence Intervals</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">BE2 - Confidence Intervals</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -291,30 +462,30 @@ ul.task-list li input[type="checkbox"] {
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#two-repeated-measurements" id="toc-two-repeated-measurements" class="nav-link active" data-scroll-target="#two-repeated-measurements"><span class="header-section-number">16.1</span> Two Repeated Measurements</a></li>
-  <li><a href="#more-than-two-measurements" id="toc-more-than-two-measurements" class="nav-link" data-scroll-target="#more-than-two-measurements"><span class="header-section-number">16.2</span> More Than Two Measurements</a></li>
-  <li><a href="#sphericity-assumption" id="toc-sphericity-assumption" class="nav-link" data-scroll-target="#sphericity-assumption"><span class="header-section-number">16.3</span> Sphericity Assumption</a></li>
-  <li><a href="#mixed-designs" id="toc-mixed-designs" class="nav-link" data-scroll-target="#mixed-designs"><span class="header-section-number">16.4</span> Mixed Designs</a></li>
-  <li><a href="#lecture" id="toc-lecture" class="nav-link" data-scroll-target="#lecture"><span class="header-section-number">17</span> Lecture</a></li>
-  <li><a href="#formative-test" id="toc-formative-test" class="nav-link" data-scroll-target="#formative-test"><span class="header-section-number">18</span> Formative Test</a></li>
+<li><a href="#two-repeated-measurements" id="toc-two-repeated-measurements" class="nav-link active" data-scroll-target="#two-repeated-measurements"><span class="header-section-number">17.1</span> Two Repeated Measurements</a></li>
+  <li><a href="#more-than-two-measurements" id="toc-more-than-two-measurements" class="nav-link" data-scroll-target="#more-than-two-measurements"><span class="header-section-number">17.2</span> More Than Two Measurements</a></li>
+  <li><a href="#sphericity-assumption" id="toc-sphericity-assumption" class="nav-link" data-scroll-target="#sphericity-assumption"><span class="header-section-number">17.3</span> Sphericity Assumption</a></li>
+  <li><a href="#mixed-designs" id="toc-mixed-designs" class="nav-link" data-scroll-target="#mixed-designs"><span class="header-section-number">17.4</span> Mixed Designs</a></li>
+  <li><a href="#lecture" id="toc-lecture" class="nav-link" data-scroll-target="#lecture"><span class="header-section-number">18</span> Lecture</a></li>
+  <li><a href="#formative-test" id="toc-formative-test" class="nav-link" data-scroll-target="#formative-test"><span class="header-section-number">19</span> Formative Test</a></li>
   <li>
-<a href="#tutorial" id="toc-tutorial" class="nav-link" data-scroll-target="#tutorial"><span class="header-section-number">19</span> Tutorial</a>
+<a href="#tutorial" id="toc-tutorial" class="nav-link" data-scroll-target="#tutorial"><span class="header-section-number">20</span> Tutorial</a>
   <ul class="collapse">
 <li>
-<a href="#repeated-measures-anova" id="toc-repeated-measures-anova" class="nav-link" data-scroll-target="#repeated-measures-anova"><span class="header-section-number">19.1</span> Repeated Measures ANOVA</a>
+<a href="#repeated-measures-anova" id="toc-repeated-measures-anova" class="nav-link" data-scroll-target="#repeated-measures-anova"><span class="header-section-number">20.1</span> Repeated Measures ANOVA</a>
   <ul class="collapse">
-<li><a href="#defining-the-within-subjects-factor" id="toc-defining-the-within-subjects-factor" class="nav-link" data-scroll-target="#defining-the-within-subjects-factor"><span class="header-section-number">19.1.1</span> Defining the Within-Subjects Factor</a></li>
-  <li><a href="#defining-within-subjects-variables" id="toc-defining-within-subjects-variables" class="nav-link" data-scroll-target="#defining-within-subjects-variables"><span class="header-section-number">19.1.2</span> Defining Within-Subjects Variables</a></li>
+<li><a href="#defining-the-within-subjects-factor" id="toc-defining-the-within-subjects-factor" class="nav-link" data-scroll-target="#defining-the-within-subjects-factor"><span class="header-section-number">20.1.1</span> Defining the Within-Subjects Factor</a></li>
+  <li><a href="#defining-within-subjects-variables" id="toc-defining-within-subjects-variables" class="nav-link" data-scroll-target="#defining-within-subjects-variables"><span class="header-section-number">20.1.2</span> Defining Within-Subjects Variables</a></li>
   </ul>
 </li>
-  <li><a href="#pairwise-comparisons" id="toc-pairwise-comparisons" class="nav-link" data-scroll-target="#pairwise-comparisons"><span class="header-section-number">19.2</span> Pairwise Comparisons</a></li>
+  <li><a href="#pairwise-comparisons" id="toc-pairwise-comparisons" class="nav-link" data-scroll-target="#pairwise-comparisons"><span class="header-section-number">20.2</span> Pairwise Comparisons</a></li>
   </ul>
 </li>
   </ul></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
-<h1 class="title"><span id="sec-rmanova" class="quarto-section-identifier"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">GLM: Repeated Measures ANOVA</span></span></h1>
+<h1 class="title"><span id="sec-rmanova" class="quarto-section-identifier"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">GLM: Repeated Measures ANOVA</span></span></h1>
 </div>
 
 
@@ -332,77 +503,77 @@ ul.task-list li input[type="checkbox"] {
 <p>A study design in which the same participants are assessed repeatedly is called a <em>Within-Participants Design</em>. Within-participants designs have distinct advantages in comparison to between-participants designs. In these designs, participants serve as their own control, eliminating variability due to individual differences from the error term. This intrinsic control enhances statistical power and efficiency. These designs are used, for example, in longitudinal studies, test-retest designs, diary studies, and repeated physiological assessments.</p>
 <p>While within-participants designs offer significant advantages, they also present challenges that require careful consideration. Order effects, where the sequence of experimental conditions influences results, are a common concern. Differential order effects, where the influence of order varies across different sequences, can further complicate data interpretation. An example of a differential order effect is wen the effect of a drug administered before a placebo condition persists into the placebo phase of the experiment. To mitigate order effects, researchers often employ the Latin square design. This experimental design ensures each condition appears once in every position within the order, thus minimizing the influence of sequence on outcomes. By controlling for order effects, researchers enhance the internal validity of their experiments.</p>
 <p>Beyond order effects, within-participants designs are also affected by learning- and historical effects. A learning effect occurs when participants’ increasing familiarity with questionnaires affects their subsequent responding. Historical effects occurr when external events happen during the study, and influence participants’ responses. Finally, the effect of time is often confounded with the effect of experimental conditions.</p>
-<section id="two-repeated-measurements" class="level2" data-number="16.1"><h2 data-number="16.1" class="anchored" data-anchor-id="two-repeated-measurements">
-<span class="header-section-number">16.1</span> Two Repeated Measurements</h2>
+<section id="two-repeated-measurements" class="level2" data-number="17.1"><h2 data-number="17.1" class="anchored" data-anchor-id="two-repeated-measurements">
+<span class="header-section-number">17.1</span> Two Repeated Measurements</h2>
 <p>The paired samples t-test is suitable for scenarios where participants are measured before and after an intervention. This technique simply analyzes the difference score between pretest and posttest scores.</p>
-</section><section id="more-than-two-measurements" class="level2" data-number="16.2"><h2 data-number="16.2" class="anchored" data-anchor-id="more-than-two-measurements">
-<span class="header-section-number">16.2</span> More Than Two Measurements</h2>
+</section><section id="more-than-two-measurements" class="level2" data-number="17.2"><h2 data-number="17.2" class="anchored" data-anchor-id="more-than-two-measurements">
+<span class="header-section-number">17.2</span> More Than Two Measurements</h2>
 <p>For scenarios with more than two repeated measurements, there are two potential solutions: the linear mixed model, and the multivariate approach. The linear mixed model, treats all repeated measurements as a single variable with multiple observations per participant. Thus, if one participant gave four repeated measurements, we would have four rows in the data for that participant. The multivariate approach treats the repeated measurements as correlated outcomes. Each measurement occasion is analyzed while controlling for the other measurement occasions.</p>
-</section><section id="sphericity-assumption" class="level2" data-number="16.3"><h2 data-number="16.3" class="anchored" data-anchor-id="sphericity-assumption">
-<span class="header-section-number">16.3</span> Sphericity Assumption</h2>
+</section><section id="sphericity-assumption" class="level2" data-number="17.3"><h2 data-number="17.3" class="anchored" data-anchor-id="sphericity-assumption">
+<span class="header-section-number">17.3</span> Sphericity Assumption</h2>
 <p>The linear mixed model assumes <em>sphericity</em>, which is analogous to the assumption of homogeneity of error variance. Sphericity implies that the variances of the differences between all combinations of repeated measures are equal.</p>
 <p>If you do not, or can not, assume sphericity, you can use a corrected test for the linear mixed model, or switch to the multivariate approach.</p>
-</section><section id="mixed-designs" class="level2" data-number="16.4"><h2 data-number="16.4" class="anchored" data-anchor-id="mixed-designs">
-<span class="header-section-number">16.4</span> Mixed Designs</h2>
+</section><section id="mixed-designs" class="level2" data-number="17.4"><h2 data-number="17.4" class="anchored" data-anchor-id="mixed-designs">
+<span class="header-section-number">17.4</span> Mixed Designs</h2>
 <p>A mixed design involves both within-participants and between-participants factors. This factorial design allows researchers to examine interactions between these factors, such as the interplay between time and exposure conditions. Post hoc analyses can be used to understand the direction and significance of these interactions.</p>
-</section><section id="lecture" class="level1" data-number="17"><h1 data-number="17">
-<span class="header-section-number">17</span> Lecture</h1>
+</section><section id="lecture" class="level1" data-number="18"><h1 data-number="18">
+<span class="header-section-number">18</span> Lecture</h1>
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/K1elAF1SFrM" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
-</section><section id="formative-test" class="level1" data-number="18"><h1 data-number="18">
-<span class="header-section-number">18</span> Formative Test</h1>
+</section><section id="formative-test" class="level1" data-number="19"><h1 data-number="19">
+<span class="header-section-number">19</span> Formative Test</h1>
 <p>A formative test helps you assess your progress in the course, and helps you address any blind spots in your understanding of the material. If you get a question wrong, you will receive a hint on how to improve your understanding of the material.</p>
 <p>Complete the formative test ideally after you’ve seen the lecture, but before the lecture meeting in which we can discuss any topics that need more attention</p>
 <div class="cell" data-layout-align="center">
 <div class="webex-check webex-box">
 <p><strong>Question 1</strong></p>
 In Repeated Measures ANOVA, what type of experimental design involves the same participants being exposed to multiple conditions?
-<div id="radio_UBICYIELDK" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_UBICYIELDK" value=""><span>Longitudinal design</span></label><label><input type="radio" autocomplete="off" name="radio_UBICYIELDK" value=""><span>Between-participants design</span></label><label><input type="radio" autocomplete="off" name="radio_UBICYIELDK" value=""><span>Cross-sectional design</span></label><label><input type="radio" autocomplete="off" name="radio_UBICYIELDK" value="answer"><span>Within-participants design</span></label>
+<div id="radio_OZISNSUWWD" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_OZISNSUWWD" value=""><span>Longitudinal design</span></label><label><input type="radio" autocomplete="off" name="radio_OZISNSUWWD" value="answer"><span>Within-participants design</span></label><label><input type="radio" autocomplete="off" name="radio_OZISNSUWWD" value=""><span>Cross-sectional design</span></label><label><input type="radio" autocomplete="off" name="radio_OZISNSUWWD" value=""><span>Between-participants design</span></label>
 </div>
 <p><strong>Question 2</strong></p>
 Which of these is NOT a methodological concern in within-participants designs?
-<div id="radio_XTZUKYBCYH" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_XTZUKYBCYH" value=""><span>Learning effects</span></label><label><input type="radio" autocomplete="off" name="radio_XTZUKYBCYH" value=""><span>Order effects</span></label><label><input type="radio" autocomplete="off" name="radio_XTZUKYBCYH" value="answer"><span>Interaction effects</span></label><label><input type="radio" autocomplete="off" name="radio_XTZUKYBCYH" value=""><span>Historical effects</span></label>
+<div id="radio_XUATKUOHPD" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_XUATKUOHPD" value=""><span>Order effects</span></label><label><input type="radio" autocomplete="off" name="radio_XUATKUOHPD" value="answer"><span>Interaction effects</span></label><label><input type="radio" autocomplete="off" name="radio_XUATKUOHPD" value=""><span>Historical effects</span></label><label><input type="radio" autocomplete="off" name="radio_XUATKUOHPD" value=""><span>Learning effects</span></label>
 </div>
 <p><strong>Question 3</strong></p>
 How does the Latin square design address order effects in experiments?
-<div id="radio_PTQOLTVFJU" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_PTQOLTVFJU" value=""><span>Selects a single condition for all participants</span></label><label><input type="radio" autocomplete="off" name="radio_PTQOLTVFJU" value="answer"><span>Controls for order effects by ensuring each condition appears once in every position</span></label><label><input type="radio" autocomplete="off" name="radio_PTQOLTVFJU" value=""><span>Manipulates the order of conditions for experimental purposes</span></label><label><input type="radio" autocomplete="off" name="radio_PTQOLTVFJU" value=""><span>Randomly assigns participants to different conditions</span></label>
+<div id="radio_YKRUTQGRQT" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_YKRUTQGRQT" value="answer"><span>Controls for order effects by ensuring each condition appears once in every position</span></label><label><input type="radio" autocomplete="off" name="radio_YKRUTQGRQT" value=""><span>Manipulates the order of conditions for experimental purposes</span></label><label><input type="radio" autocomplete="off" name="radio_YKRUTQGRQT" value=""><span>Selects a single condition for all participants</span></label><label><input type="radio" autocomplete="off" name="radio_YKRUTQGRQT" value=""><span>Randomly assigns participants to different conditions</span></label>
 </div>
 <p><strong>Question 4</strong></p>
 What is the primary advantage of within-participants designs in comparison to between-participants designs?
-<div id="radio_HMUPLKMIDH" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_HMUPLKMIDH" value=""><span>Lower cost</span></label><label><input type="radio" autocomplete="off" name="radio_HMUPLKMIDH" value="answer"><span>Elimination of variability due to individual differences from the error term</span></label><label><input type="radio" autocomplete="off" name="radio_HMUPLKMIDH" value=""><span>Greater external validity</span></label><label><input type="radio" autocomplete="off" name="radio_HMUPLKMIDH" value=""><span>Larger sample sizes</span></label>
+<div id="radio_QRVLHQKYYW" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_QRVLHQKYYW" value=""><span>Greater external validity</span></label><label><input type="radio" autocomplete="off" name="radio_QRVLHQKYYW" value="answer"><span>Elimination of variability due to individual differences from the error term</span></label><label><input type="radio" autocomplete="off" name="radio_QRVLHQKYYW" value=""><span>Larger sample sizes</span></label><label><input type="radio" autocomplete="off" name="radio_QRVLHQKYYW" value=""><span>Lower cost</span></label>
 </div>
 <p><strong>Question 5</strong></p>
 What statistical technique is commonly used to analyze data collected in within-participants designs with two repeated measurements?
-<div id="radio_IXDCWXHFPM" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_IXDCWXHFPM" value=""><span>Chi-square test</span></label><label><input type="radio" autocomplete="off" name="radio_IXDCWXHFPM" value="answer"><span>Paired samples t-test</span></label><label><input type="radio" autocomplete="off" name="radio_IXDCWXHFPM" value=""><span>Analysis of variance</span></label><label><input type="radio" autocomplete="off" name="radio_IXDCWXHFPM" value=""><span>Independent samples t-test</span></label>
+<div id="radio_CNTJQOPQFC" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_CNTJQOPQFC" value=""><span>Independent samples t-test</span></label><label><input type="radio" autocomplete="off" name="radio_CNTJQOPQFC" value=""><span>Chi-square test</span></label><label><input type="radio" autocomplete="off" name="radio_CNTJQOPQFC" value="answer"><span>Paired samples t-test</span></label><label><input type="radio" autocomplete="off" name="radio_CNTJQOPQFC" value=""><span>Analysis of variance</span></label>
 </div>
 <p><strong>Question 6</strong></p>
 What assumption of the general linear model is violated when analyzing data with repeated measurements?
-<div id="radio_EURCRZWCQB" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_EURCRZWCQB" value=""><span>Homogeneity of variances</span></label><label><input type="radio" autocomplete="off" name="radio_EURCRZWCQB" value=""><span>Normal distribution of errors</span></label><label><input type="radio" autocomplete="off" name="radio_EURCRZWCQB" value="answer"><span>Independence of errors</span></label><label><input type="radio" autocomplete="off" name="radio_EURCRZWCQB" value=""><span>Linearity of relationships</span></label>
+<div id="radio_MBNZWCOREI" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_MBNZWCOREI" value=""><span>Homogeneity of variances</span></label><label><input type="radio" autocomplete="off" name="radio_MBNZWCOREI" value=""><span>Linearity of relationships</span></label><label><input type="radio" autocomplete="off" name="radio_MBNZWCOREI" value=""><span>Normal distribution of errors</span></label><label><input type="radio" autocomplete="off" name="radio_MBNZWCOREI" value="answer"><span>Independence of errors</span></label>
 </div>
 <p><strong>Question 7</strong></p>
 What is the purpose of using a multivariate approach in analyzing data with more than two repeated measurements?
-<div id="radio_QKANNCHCYP" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_QKANNCHCYP" value="answer"><span>To perform a test that is robust to violations of sphericity</span></label><label><input type="radio" autocomplete="off" name="radio_QKANNCHCYP" value=""><span>To assess the order effects in the data</span></label><label><input type="radio" autocomplete="off" name="radio_QKANNCHCYP" value=""><span>To calculate mean differences between measurements</span></label><label><input type="radio" autocomplete="off" name="radio_QKANNCHCYP" value=""><span>To ignore the repeated measurements</span></label>
+<div id="radio_XCIZXQSJHQ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_XCIZXQSJHQ" value=""><span>To ignore the repeated measurements</span></label><label><input type="radio" autocomplete="off" name="radio_XCIZXQSJHQ" value=""><span>To calculate mean differences between measurements</span></label><label><input type="radio" autocomplete="off" name="radio_XCIZXQSJHQ" value=""><span>To assess the order effects in the data</span></label><label><input type="radio" autocomplete="off" name="radio_XCIZXQSJHQ" value="answer"><span>To perform a test that is robust to violations of sphericity</span></label>
 </div>
 <p><strong>Question 8</strong></p>
 What is the key assumption in the multivariate approach for analyzing data with repeated measurements?
-<div id="radio_VAOGIKYFZU" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_VAOGIKYFZU" value=""><span>Independence assumption</span></label><label><input type="radio" autocomplete="off" name="radio_VAOGIKYFZU" value="answer"><span>Sphericity assumption</span></label><label><input type="radio" autocomplete="off" name="radio_VAOGIKYFZU" value=""><span>Homoscedasticity assumption</span></label><label><input type="radio" autocomplete="off" name="radio_VAOGIKYFZU" value=""><span>Normality assumption</span></label>
+<div id="radio_OOMNODCUWP" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_OOMNODCUWP" value=""><span>Normality assumption</span></label><label><input type="radio" autocomplete="off" name="radio_OOMNODCUWP" value=""><span>Homoscedasticity assumption</span></label><label><input type="radio" autocomplete="off" name="radio_OOMNODCUWP" value=""><span>Independence assumption</span></label><label><input type="radio" autocomplete="off" name="radio_OOMNODCUWP" value="answer"><span>Sphericity assumption</span></label>
 </div>
 <p><strong>Question 9</strong></p>
 In mixed design ANOVA, what type of factors are considered?
-<div id="radio_WFHPQNAIPI" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_WFHPQNAIPI" value=""><span>Categorical and continuous factors</span></label><label><input type="radio" autocomplete="off" name="radio_WFHPQNAIPI" value=""><span>Only between-participants factors</span></label><label><input type="radio" autocomplete="off" name="radio_WFHPQNAIPI" value=""><span>Only within-participants factors</span></label><label><input type="radio" autocomplete="off" name="radio_WFHPQNAIPI" value="answer"><span>Both within-participants and between-participants factors</span></label>
+<div id="radio_FXKKRKCJBO" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_FXKKRKCJBO" value=""><span>Only within-participants factors</span></label><label><input type="radio" autocomplete="off" name="radio_FXKKRKCJBO" value=""><span>Only between-participants factors</span></label><label><input type="radio" autocomplete="off" name="radio_FXKKRKCJBO" value="answer"><span>Both within-participants and between-participants factors</span></label><label><input type="radio" autocomplete="off" name="radio_FXKKRKCJBO" value=""><span>Categorical and continuous factors</span></label>
 </div>
 <p><strong>Question 10</strong></p>
 What does the term ‘sphericity’ refer to in the context of repeated measures ANOVA?
-<div id="radio_IDYBTMKTPC" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_IDYBTMKTPC" value=""><span>The distribution of the residuals</span></label><label><input type="radio" autocomplete="off" name="radio_IDYBTMKTPC" value=""><span>The distribution of the predictor variables</span></label><label><input type="radio" autocomplete="off" name="radio_IDYBTMKTPC" value="answer"><span>Equal variances and correlations of differences scores of all pairs of repeated measurements</span></label><label><input type="radio" autocomplete="off" name="radio_IDYBTMKTPC" value=""><span>The shape of the distribution of the outcomes</span></label>
+<div id="radio_SJWAGDCGHS" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_SJWAGDCGHS" value=""><span>The distribution of the residuals</span></label><label><input type="radio" autocomplete="off" name="radio_SJWAGDCGHS" value="answer"><span>Equal variances and correlations of differences scores of all pairs of repeated measurements</span></label><label><input type="radio" autocomplete="off" name="radio_SJWAGDCGHS" value=""><span>The shape of the distribution of the outcomes</span></label><label><input type="radio" autocomplete="off" name="radio_SJWAGDCGHS" value=""><span>The distribution of the predictor variables</span></label>
 </div>
 </div>
 <div class="webex-solution">
@@ -431,23 +602,23 @@ Show explanations
 <p>Sphericity refers to the assumption that the variances and correlations among all difference scores between pairs of repeated measurements are equal, which is crucial for accurate analysis.</p>
 </div>
 </div>
-</section><section id="tutorial" class="level1" data-number="19"><h1 data-number="19">
-<span class="header-section-number">19</span> Tutorial</h1>
-<section id="repeated-measures-anova" class="level2" data-number="19.1"><h2 data-number="19.1" class="anchored" data-anchor-id="repeated-measures-anova">
-<span class="header-section-number">19.1</span> Repeated Measures ANOVA</h2>
+</section><section id="tutorial" class="level1" data-number="20"><h1 data-number="20">
+<span class="header-section-number">20</span> Tutorial</h1>
+<section id="repeated-measures-anova" class="level2" data-number="20.1"><h2 data-number="20.1" class="anchored" data-anchor-id="repeated-measures-anova">
+<span class="header-section-number">20.1</span> Repeated Measures ANOVA</h2>
 <p>In this tutorial, we will explore how to perform a repeated-measures ANOVA using SPSS to assess the effect of repeated measurements of depression symptoms in a sample of military veterans. The primary objective is to determine whether there are significant changes in depression symptom scores across multiple time points.</p>
 <p>Load the dataset called <code>depression.sav</code> containing depression symptom scores at different time points for each participant.</p>
 <ol start="3" type="1">
 <li>Click on “Analyze” in the top menu and select “General Linear Model” and then “Repeated Measures.”</li>
 </ol>
-<section id="defining-the-within-subjects-factor" class="level3" data-number="19.1.1"><h3 data-number="19.1.1" class="anchored" data-anchor-id="defining-the-within-subjects-factor">
-<span class="header-section-number">19.1.1</span> Defining the Within-Subjects Factor</h3>
+<section id="defining-the-within-subjects-factor" class="level3" data-number="20.1.1"><h3 data-number="20.1.1" class="anchored" data-anchor-id="defining-the-within-subjects-factor">
+<span class="header-section-number">20.1.1</span> Defining the Within-Subjects Factor</h3>
 <ol type="1">
 <li>In the “Repeated Measures” dialog box, name your within-subjects factor as “time.”</li>
 <li>Specify the number of levels as 4 (since there are four repeated measurements).</li>
 <li>Click the “Add” button.</li>
-</ol></section><section id="defining-within-subjects-variables" class="level3" data-number="19.1.2"><h3 data-number="19.1.2" class="anchored" data-anchor-id="defining-within-subjects-variables">
-<span class="header-section-number">19.1.2</span> Defining Within-Subjects Variables</h3>
+</ol></section><section id="defining-within-subjects-variables" class="level3" data-number="20.1.2"><h3 data-number="20.1.2" class="anchored" data-anchor-id="defining-within-subjects-variables">
+<span class="header-section-number">20.1.2</span> Defining Within-Subjects Variables</h3>
 <ol type="1">
 <li>Click on the “Define” button to configure within-subjects variables.</li>
 <li>In the “Repeated Measures” dialog box, move the variables corresponding to each time point (e.g., scl1, scl2, scl3, scl4) to the “Within-Subjects Variables” box while maintaining their correct order.</li>
@@ -480,14 +651,14 @@ Show explanations
 <p>Let’s assume sphericity for now. Choose the appropriate test and correction based on this assumption.</p>
 <p>What is the appropriate F-value for the chosen test? <input class="webex-solveme nospaces" data-tol="0.01" size="4" data-answer="[&quot;7.29&quot;]"></p>
 <p>What is the appropriate df for the chosen test? <input class="webex-solveme nospaces" size="1" data-answer="[&quot;3&quot;]"></p>
-</section></section><section id="pairwise-comparisons" class="level2" data-number="19.2"><h2 data-number="19.2" class="anchored" data-anchor-id="pairwise-comparisons">
-<span class="header-section-number">19.2</span> Pairwise Comparisons</h2>
+</section></section><section id="pairwise-comparisons" class="level2" data-number="20.2"><h2 data-number="20.2" class="anchored" data-anchor-id="pairwise-comparisons">
+<span class="header-section-number">20.2</span> Pairwise Comparisons</h2>
 <p>Examine the table of pairwise comparisons.</p>
 <p>Which difference is smallest? <select class="webex-select"><option value="blank"></option>
+<option value="">T1 v T2</option>
 <option value="">T3 v T4</option>
 <option value="answer">T2 v T3</option>
-<option value="">T2 v T4</option>
-<option value="">T1 v T2</option></select></p>
+<option value="">T2 v T4</option></select></p>
 <p>If you were to use Bonferroni correction to control for multiple comparisons, you would divide the experiment-wise alpha level by the number of comparisons. How many comparisons are you making here? <input class="webex-solveme nospaces" size="1" data-answer="[&quot;6&quot;]"></p>
 <p>Report your results. Make sure to reference both the RM-ANOVA test, and post hoc comparisons with Bonferroni correction. Then, check your answer.</p>
 <div class="webex-solution">
@@ -940,383 +1111,255 @@ window.onload = function() {
 }
 
 </script><script id="quarto-html-after-body" type="application/javascript">
-window.document.addEventListener("DOMContentLoaded", function (event) {
-  const toggleBodyColorMode = (bsSheetEl) => {
-    const mode = bsSheetEl.getAttribute("data-mode");
-    const bodyEl = window.document.querySelector("body");
-    if (mode === "dark") {
-      bodyEl.classList.add("quarto-dark");
-      bodyEl.classList.remove("quarto-light");
-    } else {
-      bodyEl.classList.add("quarto-light");
-      bodyEl.classList.remove("quarto-dark");
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
     }
-  }
-  const toggleBodyColorPrimary = () => {
-    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-    if (bsSheetEl) {
-      toggleBodyColorMode(bsSheetEl);
-    }
-  }
-  toggleBodyColorPrimary();  
-  const disableStylesheet = (stylesheets) => {
-    for (let i=0; i < stylesheets.length; i++) {
-      const stylesheet = stylesheets[i];
-      stylesheet.rel = 'prefetch';
-    }
-  }
-  const enableStylesheet = (stylesheets) => {
-    for (let i=0; i < stylesheets.length; i++) {
-      const stylesheet = stylesheets[i];
-      stylesheet.rel = 'stylesheet';
-    }
-  }
-  const manageTransitions = (selector, allowTransitions) => {
-    const els = window.document.querySelectorAll(selector);
-    for (let i=0; i < els.length; i++) {
-      const el = els[i];
-      if (allowTransitions) {
-        el.classList.remove('notransition');
-      } else {
-        el.classList.add('notransition');
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
       }
+      return false;
     }
-  }
-  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
-    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
-    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
-    let newTheme = '';
-    if(darkModeDefault) {
-      newTheme = isAlternate ? baseTheme : alternateTheme;
-    } else {
-      newTheme = isAlternate ? alternateTheme : baseTheme;
-    }
-    const changeGiscusTheme = () => {
-      // From: https://github.com/giscus/giscus/issues/336
-      const sendMessage = (message) => {
-        const iframe = document.querySelector('iframe.giscus-frame');
-        if (!iframe) return;
-        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
       }
-      sendMessage({
-        setConfig: {
-          theme: newTheme
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
         }
       });
     }
-    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
-    if (isGiscussLoaded) {
-      changeGiscusTheme();
-    }
-  }
-  const toggleColorMode = (alternate) => {
-    // Switch the stylesheets
-    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
-    manageTransitions('#quarto-margin-sidebar .nav-link', false);
-    if (alternate) {
-      enableStylesheet(alternateStylesheets);
-      for (const sheetNode of alternateStylesheets) {
-        if (sheetNode.id === "quarto-bootstrap") {
-          toggleBodyColorMode(sheetNode);
-        }
-      }
-    } else {
-      disableStylesheet(alternateStylesheets);
-      toggleBodyColorPrimary();
-    }
-    manageTransitions('#quarto-margin-sidebar .nav-link', true);
-    // Switch the toggles
-    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
-    for (let i=0; i < toggles.length; i++) {
-      const toggle = toggles[i];
-      if (toggle) {
-        if (alternate) {
-          toggle.classList.add("alternate");     
-        } else {
-          toggle.classList.remove("alternate");
-        }
-      }
-    }
-    // Hack to workaround the fact that safari doesn't
-    // properly recolor the scrollbar when toggling (#1455)
-    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
-      manageTransitions("body", false);
-      window.scrollTo(0, 1);
-      setTimeout(() => {
-        window.scrollTo(0, 0);
-        manageTransitions("body", true);
-      }, 40);  
-    }
-  }
-  const isFileUrl = () => { 
-    return window.location.protocol === 'file:';
-  }
-  const hasAlternateSentinel = () => {  
-    let styleSentinel = getColorSchemeSentinel();
-    if (styleSentinel !== null) {
-      return styleSentinel === "alternate";
-    } else {
-      return false;
-    }
-  }
-  const setStyleSentinel = (alternate) => {
-    const value = alternate ? "alternate" : "default";
-    if (!isFileUrl()) {
-      window.localStorage.setItem("quarto-color-scheme", value);
-    } else {
-      localAlternateSentinel = value;
-    }
-  }
-  const getColorSchemeSentinel = () => {
-    if (!isFileUrl()) {
-      const storageValue = window.localStorage.getItem("quarto-color-scheme");
-      return storageValue != null ? storageValue : localAlternateSentinel;
-    } else {
-      return localAlternateSentinel;
-    }
-  }
-  const darkModeDefault = false;
-  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
-  // Dark / light mode switch
-  window.quartoToggleColorScheme = () => {
-    // Read the current dark / light value 
-    let toAlternate = !hasAlternateSentinel();
-    toggleColorMode(toAlternate);
-    setStyleSentinel(toAlternate);
-    toggleGiscusIfUsed(toAlternate, darkModeDefault);
-  };
-  // Ensure there is a toggle, if there isn't float one in the top right
-  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
-    const a = window.document.createElement('a');
-    a.classList.add('top-right');
-    a.classList.add('quarto-color-scheme-toggle');
-    a.href = "";
-    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
-    const i = window.document.createElement("i");
-    i.classList.add('bi');
-    a.appendChild(i);
-    window.document.body.appendChild(a);
-  }
-  // Switch to dark mode if need be
-  if (hasAlternateSentinel()) {
-    toggleColorMode(true);
-  } else {
-    toggleColorMode(false);
-  }
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
-  const isCodeAnnotation = (el) => {
-    for (const clz of el.classList) {
-      if (clz.startsWith('code-annotation-')) {                     
-        return true;
-      }
-    }
-    return false;
-  }
-  const onCopySuccess = function(e) {
-    // button target
-    const button = e.trigger;
-    // don't keep focus
-    button.blur();
-    // flash "checked"
-    button.classList.add('code-copy-button-checked');
-    var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Copied!");
-    let tooltip;
-    if (window.bootstrap) {
-      button.setAttribute("data-bs-toggle", "tooltip");
-      button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Copied!");
-      tooltip = new bootstrap.Tooltip(button, 
-        { trigger: "manual", 
-          customClass: "code-copy-button-tooltip",
-          offset: [0, -8]});
-      tooltip.show();    
-    }
-    setTimeout(function() {
-      if (tooltip) {
-        tooltip.hide();
-        button.removeAttribute("data-bs-title");
-        button.removeAttribute("data-bs-toggle");
-        button.removeAttribute("data-bs-placement");
-      }
-      button.setAttribute("title", currentTitle);
-      button.classList.remove('code-copy-button-checked');
-    }, 1000);
-    // clear code selection
-    e.clearSelection();
-  }
-  const getTextToCopy = function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-  }
-  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-    text: getTextToCopy
-  });
-  clipboard.on('success', onCopySuccess);
-  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
-    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-      text: getTextToCopy,
-      container: window.document.getElementById('quarto-embedded-source-code-modal')
-    });
-    clipboardModal.on('success', onCopySuccess);
-  }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
-      }
-    }
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-    const config = {
-      allowHTML: true,
-      maxWidth: 500,
-      delay: 100,
-      arrow: false,
-      appendTo: function(el) {
-          return el.parentElement;
-      },
-      interactive: true,
-      interactiveBorder: 10,
-      theme: 'quarto',
-      placement: 'bottom-start',
-    };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
-    window.tippy(el, config); 
-  }
-  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-  for (var i=0; i<noterefs.length; i++) {
-    const ref = noterefs[i];
-    tippyHover(ref, function() {
-      // use id or data attribute instead here
-      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-      try { href = new URL(href).hash; } catch {}
-      const id = href.replace(/^#\/?/, "");
-      const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
-    });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
-        }
-      }
-    }
-    stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
-          } else {
-            container.appendChild(child.cloneNode(true));
-            break;
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
           }
         }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
         }
-        return container.innerHTML
       } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
         if (window.Quarto?.typesetMath) {
           window.Quarto.typesetMath(note);
         }
-        return note.innerHTML;
-      }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      // TODO in 1.5, we should make sure this works without a callout special case
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
       }
     }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
           }
         } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
           .then(res => res.text())
           .then(html => {
             const parser = new DOMParser();
             const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
+            const note = htmlDoc.querySelector('main.content');
             if (note !== null) {
-              const html = processXRef(id, note);
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
               instance.setContent(html);
             } 
           }).finally(() => {
@@ -1324,192 +1367,168 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
-    });
-  }
-      let selectedAnnoteEl;
-      const selectorForAnnotation = ( cell, annotation) => {
-        let cellAttr = 'data-code-cell="' + cell + '"';
-        let lineAttr = 'data-code-annotation="' +  annotation + '"';
-        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-        return selector;
-      }
-      const selectCodeLines = (annoteEl) => {
-        const doc = window.document;
-        const targetCell = annoteEl.getAttribute("data-target-cell");
-        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-        const lineIds = lines.map((line) => {
-          return targetCell + "-" + line;
-        })
-        let top = null;
-        let height = null;
-        let parent = null;
-        if (lineIds.length > 0) {
-            //compute the position of the single el (top and bottom and make a div)
-            const el = window.document.getElementById(lineIds[0]);
-            top = el.offsetTop;
-            height = el.offsetHeight;
-            parent = el.parentElement.parentElement;
-          if (lineIds.length > 1) {
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-            height = bottom - top;
-          }
-          if (top !== null && height !== null && parent !== null) {
-            // cook up a div (if necessary) and position it 
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
-            }
-            div.style.top = top - 2 + "px";
-            div.style.height = height + 4 + "px";
-            div.style.left = 0;
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
-            }
-            gutterDiv.style.top = top - 2 + "px";
-            gutterDiv.style.height = height + 4 + "px";
-          }
-          selectedAnnoteEl = annoteEl;
-        }
-      };
-      const unselectCodeLines = () => {
-        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-        elementsIds.forEach((elId) => {
-          const div = window.document.getElementById(elId);
-          if (div) {
-            div.remove();
-          }
-        });
-        selectedAnnoteEl = undefined;
-      };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
-          }
-        });
-      }
-  const findCites = (el) => {
-    const parentEl = el.parentElement;
-    if (parentEl) {
-      const cites = parentEl.dataset.cites;
-      if (cites) {
-        return {
-          el,
-          cites: cites.split(' ')
-        };
-      } else {
-        return findCites(el.parentElement)
-      }
-    } else {
-      return undefined;
-    }
-  };
-  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-  for (var i=0; i<bibliorefs.length; i++) {
-    const ref = bibliorefs[i];
-    const citeInfo = findCites(ref);
-    if (citeInfo) {
-      tippyHover(citeInfo.el, function() {
-        var popup = window.document.createElement('div');
-        citeInfo.cites.forEach(function(cite) {
-          var citeDiv = window.document.createElement('div');
-          citeDiv.classList.add('hanging-indent');
-          citeDiv.classList.add('csl-entry');
-          var biblioDiv = window.document.getElementById('ref-' + cite);
-          if (biblioDiv) {
-            citeDiv.innerHTML = biblioDiv.innerHTML;
-          }
-          popup.appendChild(citeDiv);
-        });
-        return popup.innerHTML;
+      }, function(instance) {
       });
     }
-  }
-});
-</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="./ancova.html" class="pagination-link" aria-label="GLM: ANCOVA">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">GLM: ANCOVA</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">GLM: ANCOVA</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./reliability_validity.html" class="pagination-link" aria-label="Reliability and Validity">
-        <span class="nav-page-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Reliability and Validity</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Reliability and Validity</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
