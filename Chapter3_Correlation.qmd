@@ -154,21 +154,21 @@ they must be interpreted with care.
 To illustrate the limitations of correlations, the statistician Anscombe (1973) created four data sets with identical correlation coefficients, $r = 0.82$.
 When plotting the data, however, it becomes clear that the correlation coefficient can only be meaningfully interpreted for the first dataset (figure a below).
 
-```{r}
+```{r fig-anscombe, fig.cap="Anscombe's quartet, 1973"}
 plts <- lapply(1:4, function(i){
   df <- anscombe[, paste0(c("x", "y"), i)]
   names(df) <- c("X", "Y")
-  print(cor(df))
+
   ggplot(df, aes(x = X, y = Y)) + geom_point(shape = 21, size = 3, fill = "orange") + theme_linedraw()
 })
 ggpubr::ggarrange(plotlist = plts, ncol = 2, nrow = 2, labels = "auto")
 ```
 
 The first and most important limitation is that, Pearson's correlation coefficient only meaningfully captures *linear associations*, or: patterns that look like a straight line.
-Note that figure a shows such a linear pattern of association;
+Note that figure a in @fig-anscombe shows such a linear pattern of association;
 the correlation coefficient of $r = .82$ tells us that there is a strong - but not perfect - positive association.
 
-Figure b, on the other hand, shows a *perfect non-linear* association.
+Figure b in @fig-anscombe , on the other hand, shows a *perfect non-linear* association.
 All dots are perfectly in line; the line is just not straight.
 This illustrates that Pearson's correlation coefficient is not suited for capturing non-linear patterns, even if a strong relationship exists in another form.
 
@@ -181,12 +181,12 @@ In figures c and d, a single extreme observation artificially deflates (c) or in
 potentially leading to misleading conclusions.
 
 Thirdly, a **restricted range** of scores can obscure or distort relationships.
-For example, if you were to examine the pattern in figure b for values of X between [4, 9], you would conclude that $r = 0.99$, or near perfect positive correlation.
+For example, if you were to examine the pattern in figure b of @fig-anscombe for values of X between [4, 9], you would conclude that $r = 0.99$, or near perfect positive correlation.
 If you examined the same pattern for values of X between (0, 13), you would conclude that $r = -0.07$, or near-zero.
 If you examined the same pattern for values of X between [13, 20), you would conclude that $r = -1.00$, or perfect negative correlation.
-The figures below split up the pattern from figure b above into these three segments:
+Figure @fig-nonlin below zooms into the pattern from figure b, by restricting the range of variable X into three segments:
 
-```{r}
+```{r fig-nonlin, fig.cap="Zooming in on panel b of Anscombe's quartet, restricting the range of X"}
 df <- anscombe[, paste0(c("x", "y"), 2)]
 names(df) <- c("X", "Y")
 p1 <- ggplot(df[df$X <= 9, ], aes(x = X, y = Y)) + geom_point(shape = 21, size = 3, fill = "orange") + theme_linedraw()+ geom_smooth(method = "lm", se = FALSE)
@@ -219,24 +219,20 @@ This short quiz checks your grasp of **Chapter 3 – Covariance & Correlation**.
 Work through it after you’ve studied the lecture slides (and before the next live session) so we can focus on anything that still feels uncertain. Each incorrect answer reveals a hint that sends you back to the exact slide or numerical example you need.
 
 ```{r}
-#| results = "asis"
-#| echo    = FALSE
-#| cache   = FALSE
 add_mcs("ch3_formative_corrected.csv")
 ```
 
+
 # Tutorial
 
-# 5 Tutorial
-
-## 5.1 Correlation – Practice Dataset (`LAS_SocSc_DataLab2.sav`)
+## Load Data
 
 Open **`LAS_SocSc_DataLab2.sav`** (find it in the **`data`** folder you downloaded earlier).  
 The file contains six variables (`X1` … `X6`). You’ll inspect three bivariate relationships.
 
-### 5.1.1 Plot the pairs
+### Plot the pairs
 
-Generate three simple scatter-plots:
+Generate three simple scatterplots:
 
 1. `Graphs` › `Legacy Dialogs` › `Scatter/Dot` ► **Simple Scatter**  
 2. Pairings & axis order  
@@ -258,23 +254,19 @@ Describe **linearity**, **direction**, and **strength** for each plot.
 “The relationship between `X3` and `X4` is linear.” `r torf(FALSE)`
 
 Strength of `X1`–`X2`:  
-`r mcq(c("answer" = "moderate", "weak", "zero", "strong")[sample.int(4)])`
+`r mcq(sample(c("answer" = "moderate", "weak", "zero", "strong")))`
 
 Strength of `X3`–`X4`:  
-`r mcq(c("moderate", "weak", "zero","answer" = "strong")[sample.int(4)])`
+`r mcq(sample(c("moderate", "weak", "zero","answer" = "strong")))`
 
 Strength of `X5`–`X6`:  
-`r mcq(c("answer" = "moderate", "weak", "zero","strong")[sample.int(4)])`
+`r mcq(sample(c("answer" = "moderate", "weak", "zero","strong")))`
 
 :::
 
-**Example of a cyclical (non-linear) pair?**
 
-`r hide("Show answer")`
-Any cyclical process, e.g., “time of day vs. tide height” or “sun elevation vs. day length”.
-`r unhide()`
 
-### 5.1.2 Correlation coefficients
+### Correlation coefficients
 
 Even when the pattern is non-linear it’s useful to see why Pearson *r* can mislead.
 
@@ -290,30 +282,28 @@ Select all six variables → **OK**.
 `X3`–`X4` correlation: `r fitb(-.80, num = TRUE, tol = .01)`
 
 Can we interpret `X3`–`X4`’s *r* at face value?  
-`r mcq(c("answer" = "No, assumption of linearity violated",
+`r mcq(sample(c("answer" = "No, assumption of linearity violated",
          "No, assumption of association violated",
          "No, assumption of normality violated",
-         "Yes, otherwise SPSS would give an error")[sample.int(4)])`
+         "Yes, otherwise SPSS would give an error")))`
 
 Interpret `X5`–`X6`:  
-`r mcq(c("answer" = "Moderate negative",
+`r mcq(sample(c("answer" = "Moderate negative",
          "Moderate positive",
          "Weak positive",
-         "Weak negative")[sample.int(4)])`
+         "Weak negative")))`
 
 :::
 
 *Take-away:* Pearson’s *r* is good at detecting linear patterns (like X1–X2), but it may be close to zero even when the variables have a strong curved pattern (like X3–X4).
 
----
-
-## 5.2 Correlation – Work Dataset (`Work.sav`)
+## Correlation – Work Dataset (`Work.sav`)
 
 Having practiced on simulated data, let’s now apply the same workflow to a real dataset related to the workplace.
 
 > **File location:** `data/Work.sav`
 
-### 5.2.1 Why inspect the plot first?
+### Why inspect the plot first?
 
 Before trusting Pearson *r* we check for
 
@@ -322,17 +312,13 @@ Before trusting Pearson *r* we check for
 
 ::: {.webex-check .webex-box}
 
-Select the **two** key reasons:
+Select the correct reason:
 
-`r mcq(c("To check if the relationship is linear"  = TRUE,
-         "To check if there are any extreme values" = TRUE,
-         "To check if the relationship is positive" = FALSE,
-         "To check if the variables are normally distributed" = FALSE,
-         "To check if the relationship is strong enough" = FALSE))`
+`r mcq(sample(c(answer = "To check if the relationship is linear", "To check if the relationship is positive", "To check if the relationship is strong enough")))`
 
 :::
 
-### 5.2.2 Create the scatter-plot
+### Create the scatter-plot
 
 `Graphs` › `Legacy Dialogs` › `Scatter/Dot` → **Simple Scatter**
 
@@ -343,48 +329,24 @@ Select the **two** key reasons:
 
 ::: {.webex-check .webex-box}
 
-Is the cloud roughly **linear**? `r torf(TRUE)`
+The cloud of data points is roughly **linear**: `r torf(TRUE)`
 
-Any obvious **outliers**? `r torf(FALSE)`
+There are obvious **outliers**: `r torf(FALSE)`
 
-Visual strength:  
-`r mcq(c("Moderately strong and positive" = TRUE,
-         "Moderately weak and positive"  = FALSE,
-         "Moderately strong and negative" = FALSE,
-         "Moderately weak and negative"  = FALSE)[sample.int(4)])`
+Approximate strength:  
+
+`r mcq(sample(c(answer = "Moderately strong and positive", "Moderately weak and positive", "Moderately strong and negative", "Moderately weak and negative")))`
 
 :::
 
-### 5.2.3 Compute Pearson *r*
+### Compute Pearson *r*
 
 `Analyze` › `Correlate` › `Bivariate` → (`scmental`, `scemoti`) → **OK**
 
-::: {.webex-check .webex-box}
+The correlation coefficient is (2 decimals): `r fitb(.54, num = TRUE, tol = .01)`
 
-Correlation (3 decimals): `r fitb(.54, num = TRUE, tol = .01)`
+Interpretation:
 
-Significance (α = .05)
-
-*Relationship is:*  
-`r mcq(c("significant" = TRUE, "not significant" = FALSE))`
-
-*p-value:*  
-`r mcq(c("< .05" = TRUE, "≥ .05" = FALSE))`
-
-:::
-
-### 5.2.4 Interpretation
-
-::: {.webex-check .webex-box}
-
-Population inference:
-
-`r mcq(c("We can conclude that there is a relationship between mental and emotional pressure in the population." = TRUE,
-         "We can conclude that there is no relationship between mental and emotional pressure in the population." = FALSE,
-         "We cannot draw a conclusion on whether or not there is a relationship." = FALSE)[sample.int(3)])`
-
-:::
+`r mcq(sample(c(answer = "There is a relationship between mental and emotional pressure.", "There is no relationship between mental and emotional pressure.", "We cannot draw a conclusion on whether or not there is a relationship.")))`
 
 *Take-away:* Mental and emotional pressure show a **moderately strong, significant positive relationship**—employees who feel more mentally pressured also tend to feel more emotionally pressured.
-
----

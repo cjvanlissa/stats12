@@ -46,6 +46,7 @@ book:
   - index.qmd
   - introduction.qmd
   - chapter2_descriptive_statistics.qmd
+  - Chapter3_Correlation.qmd
   - probability.qmd
   - samplingdistribution.qmd
   - testing.qmd
