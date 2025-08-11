@@ -1,0 +1,2048 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.33">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="description" content="Book Description">
+<title>3&nbsp; Bivariate Descriptive Statistics – Statistics 1 and 2</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./probability.html" rel="next">
+<link href="./chapter2_descriptive_statistics.html" rel="prev">
+<link href="./images/logos/favicon.png" rel="icon" type="image/png">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-c2894b54f4b00a27b9651b11dcf5df54.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-7530c408590d20eba92ebedbb433c75c.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-c2894b54f4b00a27b9651b11dcf5df54.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-e5f62320892960dc23dd0786c8482584.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-11ad583e60b2cd5ac7d46970bf1aa65a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-e5f62320892960dc23dd0786c8482584.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script><script src="site_libs/kePrint-0.0.1/kePrint.js"></script><link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
+<link rel="stylesheet" href="include/booktem.css">
+<link rel="stylesheet" href="include/webex.css">
+<link rel="stylesheet" href="include/glossary.css">
+<link rel="stylesheet" href="include/style.css">
+<link rel="stylesheet" href="include/webex.css">
+</head>
+<body class="nav-sidebar floating quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Chapter3_Correlation.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Bivariate Descriptive Statistics</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Statistics 1 and 2</a> 
+        <div class="sidebar-tools-main tools-wide">
+    <a href="https://github.com/cjvanlissa/stats12" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="./Statistics-1-and-2.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+    <div class="dropdown">
+      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Share"><i class="bi bi-share"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+<li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
+              <i class="bi bi-twitter pe-1"></i>
+            Twitter
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=|url|">
+              <i class="bi bi-facebook pe-1"></i>
+            Facebook
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=|url|">
+              <i class="bi bi-linkedin pe-1"></i>
+            LinkedIn
+            </a>
+          </li>
+      </ul>
+</div>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Overview</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to Statistics</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter2_descriptive_statistics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Descriptive Statistics</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Chapter3_Correlation.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Bivariate Descriptive Statistics</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./probability.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Probability Distributions</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./samplingdistribution.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">The Sampling Distribution</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./testing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Hypothesis Testing</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glm1_regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">GLM-I: Linear Regression</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glm2_sum_squares.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">GLM-II: Sums of Squares</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glm3binary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">GLM-III: Binary Predictors</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glm4anova.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">GLM-IV: ANOVA</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glm5multiple.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">GLM-V: Multiple regression</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glm6nested.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">GLM-VI: Nested models</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glm7interaction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">GLM-VII: Interaction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./logistic.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">GLM VIII - Logistic Regression</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glm_contrasts.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">GLM: Contrasts</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./factorial.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">GLM: Factorial ANOVA</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ancova.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">GLM: ANCOVA</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./rmanova.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">GLM: Repeated Measures ANOVA</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./reliability_validity.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Reliability and Validity</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data_reduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Dimension Reduction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./confint.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">BE2 - Confidence Intervals</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data for Portfolio</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./probability_tables.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Z-table</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./formula_sheet2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Formula sheet</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+    </ul>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+<li>
+<a href="#covariance" id="toc-covariance" class="nav-link active" data-scroll-target="#covariance"><span class="header-section-number">3.1</span> Covariance</a>
+  <ul class="collapse">
+<li><a href="#sum-of-products-sp" id="toc-sum-of-products-sp" class="nav-link" data-scroll-target="#sum-of-products-sp"><span class="header-section-number">3.1.1</span> Sum of Products (SP)</a></li>
+  <li><a href="#covariance-1" id="toc-covariance-1" class="nav-link" data-scroll-target="#covariance-1"><span class="header-section-number">3.1.2</span> Covariance</a></li>
+  </ul>
+</li>
+  <li><a href="#correlation" id="toc-correlation" class="nav-link" data-scroll-target="#correlation"><span class="header-section-number">3.2</span> Correlation</a></li>
+  <li><a href="#limitations" id="toc-limitations" class="nav-link" data-scroll-target="#limitations"><span class="header-section-number">3.3</span> Limitations</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">3.4</span> Summary</a></li>
+  <li><a href="#formative-test" id="toc-formative-test" class="nav-link" data-scroll-target="#formative-test"><span class="header-section-number">4</span> Formative Test</a></li>
+  <li>
+<a href="#tutorial" id="toc-tutorial" class="nav-link" data-scroll-target="#tutorial"><span class="header-section-number">5</span> Tutorial</a>
+  <ul class="collapse">
+<li>
+<a href="#load-data" id="toc-load-data" class="nav-link" data-scroll-target="#load-data"><span class="header-section-number">5.1</span> Load Data</a>
+  <ul class="collapse">
+<li><a href="#plot-the-pairs" id="toc-plot-the-pairs" class="nav-link" data-scroll-target="#plot-the-pairs"><span class="header-section-number">5.1.1</span> Plot the pairs</a></li>
+  <li><a href="#correlation-coefficients" id="toc-correlation-coefficients" class="nav-link" data-scroll-target="#correlation-coefficients"><span class="header-section-number">5.1.2</span> Correlation coefficients</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#correlation-work-dataset-work.sav" id="toc-correlation-work-dataset-work.sav" class="nav-link" data-scroll-target="#correlation-work-dataset-work.sav"><span class="header-section-number">5.2</span> Correlation – Work Dataset (<code>Work.sav</code>)</a>
+  <ul class="collapse">
+<li><a href="#why-inspect-the-plot-first" id="toc-why-inspect-the-plot-first" class="nav-link" data-scroll-target="#why-inspect-the-plot-first"><span class="header-section-number">5.2.1</span> Why inspect the plot first?</a></li>
+  <li><a href="#create-the-scatter-plot" id="toc-create-the-scatter-plot" class="nav-link" data-scroll-target="#create-the-scatter-plot"><span class="header-section-number">5.2.2</span> Create the scatter-plot</a></li>
+  <li><a href="#compute-pearson-r" id="toc-compute-pearson-r" class="nav-link" data-scroll-target="#compute-pearson-r"><span class="header-section-number">5.2.3</span> Compute Pearson <em>r</em></a></li>
+  </ul>
+</li>
+  </ul>
+</li>
+  </ul></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<h1 class="title">
+<span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Bivariate Descriptive Statistics</span>
+</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header><p>In the previous chapter, we covered univariate (= single variable) descriptive statistics. In this chapter, we introduce the first <em>bivariate</em> (= two variables) descriptive statistics. Let’s take stock of the road so far, and set a goal for where we want to go. Last week, we ended with the variance. The variance is a statistic that tells us, on average, how much people’s scores deviate from the mean. Today we will move into bivariate descriptive statistics. We will learn about the <em>covariance</em>, which tells us: If someone’s score on one variable deviates positively from the mean, is their score on another variable also likely to deviate positively from the mean? We will also learn about the <em>correlation</em>, which tells us: How strong is the association between two variables, and is it positive or negative?</p>
+<p>In this chapter, we will talk about two hypothetical variables, <em>X</em> and <em>Y</em>. In your mind, you can substitute any two variables you like; for example, <em>X = hours studied</em>, <em>Y = grade obtained</em>, or <em>X = extraversion</em>, <em>Y = number of friends</em>.</p>
+<p>Before arriving at the correlation coefficient, statisticians often begin with <strong>covariance</strong>—a preliminary measure of how two variables vary together. Covariance reflects direction: it is positive when high values of <em>X</em> accompany high values of <em>Y</em>, and negative when they move in opposite directions. However, its numerical value is not directly interpretable because it is tied to the units of the measurement. A covariance expressed in centimeters and kilograms will differ from one computed in meters and pounds, even if the underlying association remains unchanged. As a result, covariance cannot meaningfully convey the <em>strength</em> of a relationship—only whether the variables tend to move in the same or opposite directions.</p>
+<p>It provides a concise summary of the association between pairs of scores across individuals. For example, a researcher might retrieve each student’s high school GPA (a measure of academic performance) and pair it with their family’s annual income. The goal is to determine whether higher grades tend to correspond with higher income. In correlational studies, each individual contributes two measurements, commonly referred to as <em>X</em> and <em>Y</em> forming the foundation for analysis.</p>
+<p>The correlation coefficient is a statistic that quantifies the strength and direction of association between two variables. It tells us the degree to which two variables move together. One way to think of the correlation coefficient is as a <em>bivariate (= two variables) descriptive statistic</em>.</p>
+<p>To explore this relationship visually, researchers often rely on scatter plots. In a scatter plot, <em>X</em> values appear along the horizontal axis and <em>Y</em> values along the vertical. Each point on the plot corresponds to one participant’s pair of scores. These plots allow immediate detection of linear trends, and outliers—patterns that may remain obscured when examining data in purely numerical or tabular form.</p>
+<section id="covariance" class="level2" data-number="3.1"><h2 data-number="3.1" class="anchored" data-anchor-id="covariance">
+<span class="header-section-number">3.1</span> Covariance</h2>
+<p>The word “covariance” means: varying, or moving, together. Let’s have a look at mock data from five students on hours studied and final grade obtained:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">set.seed</span>(<span class="dv">2</span>)</span>
+<span id="cb1-2"><a href="#cb1-2"></a>grads <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb1-3"><a href="#cb1-3"></a>  <span class="at">Hours =</span> <span class="fu">round</span>(<span class="fu">runif</span>(<span class="dv">5</span>, <span class="dv">2</span>, <span class="dv">20</span>))</span>
+<span id="cb1-4"><a href="#cb1-4"></a>)</span>
+<span id="cb1-5"><a href="#cb1-5"></a>grads<span class="sc">$</span>Grade <span class="ot">&lt;-</span> <span class="fu">round</span>(scales<span class="sc">::</span><span class="fu">rescale</span>(.<span class="dv">7</span><span class="sc">*</span>grads<span class="sc">$</span>Hours <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">5</span>), <span class="at">to =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">10</span>)))</span>
+<span id="cb1-6"><a href="#cb1-6"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(grads)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<thead><tr class="header">
+<th style="text-align: right;">Hours</th>
+<th style="text-align: right;">Grade</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">9</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">6</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">19</td>
+<td style="text-align: right;">10</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>We can visualize these data using a “scatterplot”; a simple graph where each observation is shown as a dot with X-coordinate determined by their value on the X variable (Hours), and Y-coordinate determined by the Y variable (Grade):</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="fu">ggplot</span>(grads, <span class="fu">aes</span>(<span class="at">x =</span> Hours, <span class="at">y =</span> Grade)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="Chapter3_Correlation_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Notice that, if you squint, it appears like there might be some pattern in the data: more hours studied tends to go hand in hand with a higher grade. There might be a positive association between these variables! In the next sections, we go about quantifying this association numerically, step by step.</p>
+<section id="sum-of-products-sp" class="level3" data-number="3.1.1"><h3 data-number="3.1.1" class="anchored" data-anchor-id="sum-of-products-sp">
+<span class="header-section-number">3.1.1</span> Sum of Products (SP)</h3>
+<p>The first stage in quantifying the association between two variables is to compute the <strong>sum of products of deviations</strong> (SP). The SP is similar to the sum of squares (SS), but whereas the SS captures the variability of one variable, the SP measures how two variables vary together.</p>
+<p>To calculate the SP, take the following steps:</p>
+<section id="step-1-calculate-the-variables-means" class="level4" data-number="3.1.1.1"><h4 data-number="3.1.1.1" class="anchored" data-anchor-id="step-1-calculate-the-variables-means">
+<span class="header-section-number">3.1.1.1</span> Step 1: Calculate the variables’ means</h4>
+<p>Take the mean of each column (bold in the table below):</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">library</span>(kableExtra)</span>
+<span id="cb3-2"><a href="#cb3-2"></a>mns <span class="ot">&lt;-</span> grads</span>
+<span id="cb3-3"><a href="#cb3-3"></a>mns[] <span class="ot">&lt;-</span> <span class="fu">lapply</span>(mns, as.character)</span>
+<span id="cb3-4"><a href="#cb3-4"></a>mns <span class="ot">&lt;-</span> <span class="fu">rbind</span>(mns, <span class="fu">colMeans</span>(grads))</span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="fu">names</span>(mns) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"X"</span>, <span class="st">"Y"</span>)</span>
+<span id="cb3-6"><a href="#cb3-6"></a><span class="fu">kable</span>(mns) <span class="sc">|&gt;</span></span>
+<span id="cb3-7"><a href="#cb3-7"></a>  <span class="fu">kable_styling</span>() <span class="sc">|&gt;</span></span>
+<span id="cb3-8"><a href="#cb3-8"></a>  <span class="fu">row_spec</span>(<span class="fu">nrow</span>(mns),<span class="at">bold=</span>T,<span class="at">hline_after =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table caption-top table-sm table-striped small" data-quarto-postprocess="true">
+<thead><tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">X</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Y</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">5</td>
+<td style="text-align: left;">3</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">15</td>
+<td style="text-align: left;">9</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">12</td>
+<td style="text-align: left;">6</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">5</td>
+<td style="text-align: left;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">19</td>
+<td style="text-align: left;">10</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; font-weight: bold;">11.2</td>
+<td style="text-align: left; font-weight: bold;">5.8</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section><section id="step-2-calculate-deviations" class="level4" data-number="3.1.1.2"><h4 data-number="3.1.1.2" class="anchored" data-anchor-id="step-2-calculate-deviations">
+<span class="header-section-number">3.1.1.2</span> Step 2: Calculate Deviations</h4>
+<p>For each variable, calculate the deviations by subtracting the mean from the observed scores:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">library</span>(kableExtra)</span>
+<span id="cb4-2"><a href="#cb4-2"></a>devs <span class="ot">&lt;-</span> grads</span>
+<span id="cb4-3"><a href="#cb4-3"></a>devs <span class="ot">&lt;-</span> <span class="fu">cbind</span>(devs, <span class="fu">sweep</span>(devs, <span class="dv">2</span>, <span class="fu">colMeans</span>(devs)))</span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="fu">names</span>(devs) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"X"</span>, <span class="st">"Y"</span>, <span class="st">"X-mean(X)"</span>, <span class="st">"Y-mean(Y)"</span>)</span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="fu">kable</span>(devs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<thead><tr class="header">
+<th style="text-align: right;">X</th>
+<th style="text-align: right;">Y</th>
+<th style="text-align: right;">X-mean(X)</th>
+<th style="text-align: right;">Y-mean(Y)</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">-6.2</td>
+<td style="text-align: right;">-2.8</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">3.8</td>
+<td style="text-align: right;">3.2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">0.8</td>
+<td style="text-align: right;">0.2</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">-6.2</td>
+<td style="text-align: right;">-4.8</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">19</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">7.8</td>
+<td style="text-align: right;">4.2</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section><section id="step-3-multiply-deviations" class="level4" data-number="3.1.1.3"><h4 data-number="3.1.1.3" class="anchored" data-anchor-id="step-3-multiply-deviations">
+<span class="header-section-number">3.1.1.3</span> Step 3: Multiply Deviations</h4>
+<p>If we were to calculate the SS, we would now square the deviations and add them up in each column. To get the SP, instead of squaring the deviations - we multiply them across variables. Note that if the deviations for both variables have the same sign, then this will give a positive result (positive times positive is positive, and negative times negative is positive too). Moreover, if the deviations from both variables are high, the product will be a high number too. So the SP tends to be a large positive number if high positive (or negative) deviations on one variable go hand in hand with high positive (or negative) deviations on the other variable.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>prods <span class="ot">&lt;-</span> devs</span>
+<span id="cb5-2"><a href="#cb5-2"></a>prods <span class="ot">&lt;-</span> <span class="fu">cbind</span>(prods, <span class="fu">apply</span>(devs[, <span class="dv">3</span><span class="sc">:</span><span class="dv">4</span>], <span class="dv">1</span>, prod))</span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="fu">names</span>(prods)[<span class="dv">5</span>] <span class="ot">&lt;-</span> <span class="st">"Product"</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="fu">kable</span>(prods)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<thead><tr class="header">
+<th style="text-align: right;">X</th>
+<th style="text-align: right;">Y</th>
+<th style="text-align: right;">X-mean(X)</th>
+<th style="text-align: right;">Y-mean(Y)</th>
+<th style="text-align: right;">Product</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">-6.2</td>
+<td style="text-align: right;">-2.8</td>
+<td style="text-align: right;">17.36</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">3.8</td>
+<td style="text-align: right;">3.2</td>
+<td style="text-align: right;">12.16</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">0.8</td>
+<td style="text-align: right;">0.2</td>
+<td style="text-align: right;">0.16</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">-6.2</td>
+<td style="text-align: right;">-4.8</td>
+<td style="text-align: right;">29.76</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">19</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">7.8</td>
+<td style="text-align: right;">4.2</td>
+<td style="text-align: right;">32.76</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Now, we calculate the SP just by taking the sum of the column of products: 92.2.</p>
+<p>Note that if the SP is positive, then there is a positive association between the variables; if it is negative, there is a negative association. In this case, the association is positive.</p>
+<p>Here is a formula describing what we just did: we took the sum <span class="math inline">\(\Sigma\)</span> of the product <span class="math inline">\(()()\)</span> of the deviations of X from the mean of X, <span class="math inline">\(X-\bar{X}\)</span> times the deviations of Y from the mean of Y, <span class="math inline">\(Y-\bar{Y}\)</span>:</p>
+<p><span class="math display">\[
+SP = \sum \bigl(X - \bar{X}\bigr)\bigl(Y - \bar{Y}\bigr)
+\]</span></p>
+</section></section><section id="covariance-1" class="level3" data-number="3.1.2"><h3 data-number="3.1.2" class="anchored" data-anchor-id="covariance-1">
+<span class="header-section-number">3.1.2</span> Covariance</h3>
+<p>To get the covariance from the sum of products, we divide by the sample size, so in this case, <span class="math inline">\(\frac{92.2}{5}\)</span>.</p>
+<p>Another way to think about this is: we standardize the SP by the sample size <span class="math inline">\(n\)</span>. This gives us the “average co-deviation” per participant. That number is called the covariance.</p>
+<p>If the covariance is positive, there is a positive association between the two variables. If it is negative, there is a negative association.</p>
+<p>But how strong is the association? It is hard to say, because the <em>size</em> of the covariance depends on the units and scale of the two variables involved.</p>
+</section></section><section id="correlation" class="level2" data-number="3.2"><h2 data-number="3.2" class="anchored" data-anchor-id="correlation">
+<span class="header-section-number">3.2</span> Correlation</h2>
+<p>To answer the question of how strong the association is, we must standardize the covariance to drop the units of both variables. This gives us the so-called <strong>Pearson correlation coefficient (<em>r</em>)</strong>. Specifically, the covariance is divided by the product of the standard deviations of <em>X</em> and <em>Y</em>. This standardization results in a number between -1 and +1, where 0 means no association, -1 means perfect negative association, and +1 means perfect positive association. This number, the correlation coefficient, tells us both the <strong>direction</strong> (-/+) and <strong>strength</strong> (value) of association between two variables. Because the correlation coefficients is unit-free, or standardized, it can also be compared across variables measured on different scales and across studies.</p>
+</section><section id="limitations" class="level2" data-number="3.3"><h2 data-number="3.3" class="anchored" data-anchor-id="limitations">
+<span class="header-section-number">3.3</span> Limitations</h2>
+<p>While correlation coefficients are useful, they must be interpreted with care.</p>
+<p>To illustrate the limitations of correlations, the statistician Anscombe (1973) created four data sets with identical correlation coefficients, <span class="math inline">\(r = 0.82\)</span>. When plotting the data, however, it becomes clear that the correlation coefficient can only be meaningfully interpreted for the first dataset (figure a below).</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>plts <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="cf">function</span>(i){</span>
+<span id="cb6-2"><a href="#cb6-2"></a>  df <span class="ot">&lt;-</span> anscombe[, <span class="fu">paste0</span>(<span class="fu">c</span>(<span class="st">"x"</span>, <span class="st">"y"</span>), i)]</span>
+<span id="cb6-3"><a href="#cb6-3"></a>  <span class="fu">names</span>(df) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"X"</span>, <span class="st">"Y"</span>)</span>
+<span id="cb6-4"><a href="#cb6-4"></a></span>
+<span id="cb6-5"><a href="#cb6-5"></a>  <span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> X, <span class="at">y =</span> Y)) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">shape =</span> <span class="dv">21</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">fill =</span> <span class="st">"orange"</span>) <span class="sc">+</span> <span class="fu">theme_linedraw</span>()</span>
+<span id="cb6-6"><a href="#cb6-6"></a>})</span>
+<span id="cb6-7"><a href="#cb6-7"></a>ggpubr<span class="sc">::</span><span class="fu">ggarrange</span>(<span class="at">plotlist =</span> plts, <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">labels =</span> <span class="st">"auto"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-anscombe" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-anscombe-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Chapter3_Correlation_files/figure-html/fig-anscombe-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-anscombe-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.1: Anscombe’s quartet, 1973
+</figcaption></figure>
+</div>
+</div>
+</div>
+<p>The first and most important limitation is that, Pearson’s correlation coefficient only meaningfully captures <em>linear associations</em>, or: patterns that look like a straight line. Note that figure a in <a href="#fig-anscombe" class="quarto-xref">Figure&nbsp;<span>3.1</span></a> shows such a linear pattern of association; the correlation coefficient of <span class="math inline">\(r = .82\)</span> tells us that there is a strong - but not perfect - positive association.</p>
+<p>Figure b in <a href="#fig-anscombe" class="quarto-xref">Figure&nbsp;<span>3.1</span></a> , on the other hand, shows a <em>perfect non-linear</em> association. All dots are perfectly in line; the line is just not straight. This illustrates that Pearson’s correlation coefficient is not suited for capturing non-linear patterns, even if a strong relationship exists in another form.</p>
+<p>Figure c shows a correlation of <span class="math inline">\(r = 1\)</span> for most of the points - but one outlier brings it down to <span class="math inline">\(r = .82\)</span>.</p>
+<p>Figure d shows no association at all for most of the points (they all have the same value for X, and if X does not vary, it cannot covary/correlate with Y) - but a single outlier makes it look like there is a strong correlation..</p>
+<p>Secondly, these plots illustrate that <strong>outliers</strong> can have a disproportionate impact. In figures c and d, a single extreme observation artificially deflates (c) or inflates (d) the correlation coefficient, potentially leading to misleading conclusions.</p>
+<p>Thirdly, a <strong>restricted range</strong> of scores can obscure or distort relationships. For example, if you were to examine the pattern in figure b of <a href="#fig-anscombe" class="quarto-xref">Figure&nbsp;<span>3.1</span></a> for values of X between [4, 9], you would conclude that <span class="math inline">\(r = 0.99\)</span>, or near perfect positive correlation. If you examined the same pattern for values of X between (0, 13), you would conclude that <span class="math inline">\(r = -0.07\)</span>, or near-zero. If you examined the same pattern for values of X between [13, 20), you would conclude that <span class="math inline">\(r = -1.00\)</span>, or perfect negative correlation. Figure <a href="#fig-nonlin" class="quarto-xref">Figure&nbsp;<span>3.2</span></a> below zooms into the pattern from figure b, by restricting the range of variable X into three segments:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>df <span class="ot">&lt;-</span> anscombe[, <span class="fu">paste0</span>(<span class="fu">c</span>(<span class="st">"x"</span>, <span class="st">"y"</span>), <span class="dv">2</span>)]</span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="fu">names</span>(df) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"X"</span>, <span class="st">"Y"</span>)</span>
+<span id="cb7-3"><a href="#cb7-3"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df[df<span class="sc">$</span>X <span class="sc">&lt;=</span> <span class="dv">9</span>, ], <span class="fu">aes</span>(<span class="at">x =</span> X, <span class="at">y =</span> Y)) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">shape =</span> <span class="dv">21</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">fill =</span> <span class="st">"orange"</span>) <span class="sc">+</span> <span class="fu">theme_linedraw</span>()<span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb7-4"><a href="#cb7-4"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df[df<span class="sc">$</span>X <span class="sc">&gt;</span> <span class="dv">9</span> <span class="sc">&amp;</span> df<span class="sc">$</span>X <span class="sc">&lt;</span> <span class="dv">13</span>, ], <span class="fu">aes</span>(<span class="at">x =</span> X, <span class="at">y =</span> Y)) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">shape =</span> <span class="dv">21</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">fill =</span> <span class="st">"orange"</span>) <span class="sc">+</span> <span class="fu">theme_linedraw</span>() <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb7-5"><a href="#cb7-5"></a>p3 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df[df<span class="sc">$</span>X <span class="sc">&gt;=</span> <span class="dv">13</span>, ], <span class="fu">aes</span>(<span class="at">x =</span> X, <span class="at">y =</span> Y)) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">shape =</span> <span class="dv">21</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">fill =</span> <span class="st">"orange"</span>) <span class="sc">+</span> <span class="fu">theme_linedraw</span>() <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb7-6"><a href="#cb7-6"></a>ggpubr<span class="sc">::</span><span class="fu">ggarrange</span>(p1,p2,p3, <span class="at">ncol =</span> <span class="dv">3</span>, <span class="at">nrow =</span> <span class="dv">1</span>, <span class="at">labels =</span> <span class="st">"auto"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'
+`geom_smooth()` using formula = 'y ~ x'
+`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<div id="fig-nonlin" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-nonlin-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Chapter3_Correlation_files/figure-html/fig-nonlin-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-nonlin-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.2: Zooming in on panel b of Anscombe’s quartet, restricting the range of X
+</figcaption></figure>
+</div>
+</div>
+</div>
+<p>Restriction of range can easily happen in real life. For example, if your sample only consists of university students, you will probably havce restriction of range on IQ.</p>
+<p>Finally, you may have heard the phrase <strong>correlation does not imply causation</strong>. Observing a strong association between two variables does not mean that one causes the other. In general, it is not possible to conclude causality from statistics: causality is an assumption, which can be either supported by a theory, or by a particular methodology. In a randomized controlled experiment, participants are randomly assigned to receive either a treatment or control condition. Thus, any differences between the two groups should be due to the experimental treatment, or random chance. We will revisit the topic of causality later.</p>
+<p>Anscombe’s quartet is a good illustration of the limitations of causality, and also demonstrates the value of <strong>visually inspecting your data (including with scatter plots)</strong> before interpreting any statistics.</p>
+</section><section id="summary" class="level2" data-number="3.4"><h2 data-number="3.4" class="anchored" data-anchor-id="summary">
+<span class="header-section-number">3.4</span> Summary</h2>
+<p>In summary, <strong>covariance</strong> offers an initial metric for gauging whether two variables tend to vary in the same or opposite direction. However, because its magnitude depends on the measurement units of the variables involved, it cannot be directly interpreted in terms of strength. The <strong>Pearson correlation coefficient (<em>r</em>)</strong> addresses this limitation by standardizing the covariance, yielding a unit-free statistic bounded between –1 and +1. This standardized measure expresses both the <strong>direction</strong> and <strong>strength</strong> of a linear relationship, enabling meaningful comparisons across contexts. Nevertheless, interpreting correlations requires caution, particularly with respect to restricted sampling ranges, the influence of outliers, and the fundamental distinction between correlation and causation.</p>
+</section><section id="formative-test" class="level1" data-number="4"><h1 data-number="4">
+<span class="header-section-number">4</span> Formative Test</h1>
+<p>This short quiz checks your grasp of <strong>Chapter 3 – Covariance &amp; Correlation</strong>.<br>
+Work through it after you’ve studied the lecture slides (and before the next live session) so we can focus on anything that still feels uncertain. Each incorrect answer reveals a hint that sends you back to the exact slide or numerical example you need.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">add_mcs</span>(<span class="st">"ch3_formative_corrected.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>::: {.webex-check .webex-box}
+
+**Question 1**
+
+question &lt;div class='webex-radiogroup' id='radio_HGAVIPDKFI'&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_HGAVIPDKFI" value=""&gt;&lt;/input&gt; &lt;span&gt;B&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_HGAVIPDKFI" value=""&gt;&lt;/input&gt; &lt;span&gt;A&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_HGAVIPDKFI" value=""&gt;&lt;/input&gt; &lt;span&gt;C&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_HGAVIPDKFI" value="answer"&gt;&lt;/input&gt; &lt;span&gt;answer&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_HGAVIPDKFI" value=""&gt;&lt;/input&gt; &lt;span&gt;D&lt;/span&gt;&lt;/label&gt;&lt;/div&gt;
+
+
+**Question 2**
+
+A covariance of +120 cm·kg tells you… &lt;div class='webex-radiogroup' id='radio_WHMFBWRCTC'&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_WHMFBWRCTC" value=""&gt;&lt;/input&gt; &lt;span&gt;The units have been standardised&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_WHMFBWRCTC" value=""&gt;&lt;/input&gt; &lt;span&gt;A perfect linear trend&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_WHMFBWRCTC" value=""&gt;&lt;/input&gt; &lt;span&gt;120 % of Y variance explained&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_WHMFBWRCTC" value="answer"&gt;&lt;/input&gt; &lt;span&gt;X and Y tend to rise together&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_WHMFBWRCTC" value=""&gt;&lt;/input&gt; &lt;span&gt;X and Y tend to rise together&lt;/span&gt;&lt;/label&gt;&lt;/div&gt;
+
+
+**Question 3**
+
+If the covariance between study hours and stress level is negative, what does that imply? &lt;div class='webex-radiogroup' id='radio_ARHDMEBUVM'&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_ARHDMEBUVM" value="answer"&gt;&lt;/input&gt; &lt;span&gt;Longer study → lower stress&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_ARHDMEBUVM" value=""&gt;&lt;/input&gt; &lt;span&gt;Longer study → lower stress&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_ARHDMEBUVM" value=""&gt;&lt;/input&gt; &lt;span&gt;Units are incomparable&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_ARHDMEBUVM" value=""&gt;&lt;/input&gt; &lt;span&gt;No relationship&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_ARHDMEBUVM" value=""&gt;&lt;/input&gt; &lt;span&gt;Longer study → higher stress&lt;/span&gt;&lt;/label&gt;&lt;/div&gt;
+
+
+**Question 4**
+
+Which statement about covariance magnitude is true? &lt;div class='webex-radiogroup' id='radio_DIJORFVSOM'&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_DIJORFVSOM" value=""&gt;&lt;/input&gt; &lt;span&gt;It ranges only from –1 to +1&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_DIJORFVSOM" value=""&gt;&lt;/input&gt; &lt;span&gt;It equals the regression slope&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_DIJORFVSOM" value=""&gt;&lt;/input&gt; &lt;span&gt;A larger value always means a stronger relationship&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_DIJORFVSOM" value=""&gt;&lt;/input&gt; &lt;span&gt;Its size depends on measurement units&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_DIJORFVSOM" value="answer"&gt;&lt;/input&gt; &lt;span&gt;Its size depends on measurement units&lt;/span&gt;&lt;/label&gt;&lt;/div&gt;
+
+
+**Question 5**
+
+Converting temperatures from Celsius to Fahrenheit will make the covariance between temperature and ice-cream sales… &lt;div class='webex-radiogroup' id='radio_MQEFQZIUXO'&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_MQEFQZIUXO" value=""&gt;&lt;/input&gt; &lt;span&gt;Increase by a constant factor&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_MQEFQZIUXO" value=""&gt;&lt;/input&gt; &lt;span&gt;Switch sign&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_MQEFQZIUXO" value=""&gt;&lt;/input&gt; &lt;span&gt;Stay exactly the same&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_MQEFQZIUXO" value="answer"&gt;&lt;/input&gt; &lt;span&gt;Increase by a constant factor&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_MQEFQZIUXO" value=""&gt;&lt;/input&gt; &lt;span&gt;Become unit‑free&lt;/span&gt;&lt;/label&gt;&lt;/div&gt;
+
+
+**Question 6**
+
+Pearson’s r is best described as… &lt;div class='webex-radiogroup' id='radio_UKIOJNEKQL'&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_UKIOJNEKQL" value=""&gt;&lt;/input&gt; &lt;span&gt;Mean of X and Y combined&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_UKIOJNEKQL" value="answer"&gt;&lt;/input&gt; &lt;span&gt;Standardised (unit-free) covariance&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_UKIOJNEKQL" value=""&gt;&lt;/input&gt; &lt;span&gt;Raw measure of joint variability&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_UKIOJNEKQL" value=""&gt;&lt;/input&gt; &lt;span&gt;Ratio of two variances&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_UKIOJNEKQL" value=""&gt;&lt;/input&gt; &lt;span&gt;Standardised (unit-free) covariance&lt;/span&gt;&lt;/label&gt;&lt;/div&gt;
+
+
+**Question 7**
+
+If r = 0, we can conclude that… &lt;div class='webex-radiogroup' id='radio_TADVXYFWNG'&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_TADVXYFWNG" value="answer"&gt;&lt;/input&gt; &lt;span&gt;No linear relationship is present&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_TADVXYFWNG" value=""&gt;&lt;/input&gt; &lt;span&gt;X causes Y&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_TADVXYFWNG" value=""&gt;&lt;/input&gt; &lt;span&gt;X and Y are unrelated in every way&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_TADVXYFWNG" value=""&gt;&lt;/input&gt; &lt;span&gt;The data contain no outliers&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_TADVXYFWNG" value=""&gt;&lt;/input&gt; &lt;span&gt;No linear relationship is present&lt;/span&gt;&lt;/label&gt;&lt;/div&gt;
+
+
+**Question 8**
+
+A positive covariance but r ≈ 0.05 usually indicates that… &lt;div class='webex-radiogroup' id='radio_IEZCAGNYKE'&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_IEZCAGNYKE" value=""&gt;&lt;/input&gt; &lt;span&gt;The variables move together only slightly&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_IEZCAGNYKE" value="answer"&gt;&lt;/input&gt; &lt;span&gt;The variables move together only slightly&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_IEZCAGNYKE" value=""&gt;&lt;/input&gt; &lt;span&gt;Units have been standardised&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_IEZCAGNYKE" value=""&gt;&lt;/input&gt; &lt;span&gt;Data range is restricted to zero&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_IEZCAGNYKE" value=""&gt;&lt;/input&gt; &lt;span&gt;The relationship is strong&lt;/span&gt;&lt;/label&gt;&lt;/div&gt;
+
+
+**Question 9**
+
+Which scatter‑plot feature primarily determines the sign of covariance (and r)? &lt;div class='webex-radiogroup' id='radio_LBZTIQWSEH'&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_LBZTIQWSEH" value=""&gt;&lt;/input&gt; &lt;span&gt;Overall slope direction&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_LBZTIQWSEH" value=""&gt;&lt;/input&gt; &lt;span&gt;Point density&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_LBZTIQWSEH" value=""&gt;&lt;/input&gt; &lt;span&gt;Sample size&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_LBZTIQWSEH" value=""&gt;&lt;/input&gt; &lt;span&gt;Presence of a mode&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_LBZTIQWSEH" value="answer"&gt;&lt;/input&gt; &lt;span&gt;Overall slope direction&lt;/span&gt;&lt;/label&gt;&lt;/div&gt;
+
+
+**Question 10**
+
+You multiply every X score by 10 but leave Y unchanged. What happens? &lt;div class='webex-radiogroup' id='radio_HMQEPDGXSH'&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_HMQEPDGXSH" value=""&gt;&lt;/input&gt; &lt;span&gt;Covariance × 10; r unchanged&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_HMQEPDGXSH" value=""&gt;&lt;/input&gt; &lt;span&gt;Both covariance and r unchanged&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_HMQEPDGXSH" value=""&gt;&lt;/input&gt; &lt;span&gt;Covariance unchanged; r × 10&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_HMQEPDGXSH" value=""&gt;&lt;/input&gt; &lt;span&gt;Covariance × 10; r × 10&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_HMQEPDGXSH" value="answer"&gt;&lt;/input&gt; &lt;span&gt;Covariance × 10; r unchanged&lt;/span&gt;&lt;/label&gt;&lt;/div&gt;
+
+
+**Question 11**
+
+A covariance of 0 implies that… &lt;div class='webex-radiogroup' id='radio_TJRTMRLVPV'&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_TJRTMRLVPV" value=""&gt;&lt;/input&gt; &lt;span&gt;X and Y are unrelated in every way&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_TJRTMRLVPV" value="answer"&gt;&lt;/input&gt; &lt;span&gt;Their linear relationship (r) is 0&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_TJRTMRLVPV" value=""&gt;&lt;/input&gt; &lt;span&gt;Their linear relationship (r) is 0&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_TJRTMRLVPV" value=""&gt;&lt;/input&gt; &lt;span&gt;They have opposite scales&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_TJRTMRLVPV" value=""&gt;&lt;/input&gt; &lt;span&gt;X causes Z&lt;/span&gt;&lt;/label&gt;&lt;/div&gt;
+
+
+**Question 12**
+
+Two variables show r = 0.85. Which conclusion is justified? &lt;div class='webex-radiogroup' id='radio_ORROVCURTK'&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_ORROVCURTK" value=""&gt;&lt;/input&gt; &lt;span&gt;X and Y are associated; causal direction unknown&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_ORROVCURTK" value=""&gt;&lt;/input&gt; &lt;span&gt;Y causes X&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_ORROVCURTK" value="answer"&gt;&lt;/input&gt; &lt;span&gt;X and Y are associated; causal direction unknown&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_ORROVCURTK" value=""&gt;&lt;/input&gt; &lt;span&gt;A third variable is impossible&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_ORROVCURTK" value=""&gt;&lt;/input&gt; &lt;span&gt;X causes Y&lt;/span&gt;&lt;/label&gt;&lt;/div&gt;
+
+
+**Question 13**
+
+Analysing data with a restricted range typically makes r… &lt;div class='webex-radiogroup' id='radio_XLKCVYNXFP'&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_XLKCVYNXFP" value=""&gt;&lt;/input&gt; &lt;span&gt;Larger in magnitude&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_XLKCVYNXFP" value=""&gt;&lt;/input&gt; &lt;span&gt;Smaller in magnitude&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_XLKCVYNXFP" value=""&gt;&lt;/input&gt; &lt;span&gt;Exactly zero&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_XLKCVYNXFP" value=""&gt;&lt;/input&gt; &lt;span&gt;Change sign&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_XLKCVYNXFP" value="answer"&gt;&lt;/input&gt; &lt;span&gt;Smaller in magnitude&lt;/span&gt;&lt;/label&gt;&lt;/div&gt;
+
+
+**Question 14**
+
+An extreme outlier that follows the overall trend will most likely… &lt;div class='webex-radiogroup' id='radio_PFXFMKRLCS'&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_PFXFMKRLCS" value="answer"&gt;&lt;/input&gt; &lt;span&gt;Inflate the magnitude of r&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_PFXFMKRLCS" value=""&gt;&lt;/input&gt; &lt;span&gt;Inflate the magnitude of r&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_PFXFMKRLCS" value=""&gt;&lt;/input&gt; &lt;span&gt;Drive r toward zero&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_PFXFMKRLCS" value=""&gt;&lt;/input&gt; &lt;span&gt;Remove measurement error&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_PFXFMKRLCS" value=""&gt;&lt;/input&gt; &lt;span&gt;Make covariance negative&lt;/span&gt;&lt;/label&gt;&lt;/div&gt;
+
+
+**Question 15**
+
+A coefficient of determination (r²) of 0.49 means that… &lt;div class='webex-radiogroup' id='radio_HWDADJCQNI'&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_HWDADJCQNI" value=""&gt;&lt;/input&gt; &lt;span&gt;49 % of Y variance is explained by X&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_HWDADJCQNI" value=""&gt;&lt;/input&gt; &lt;span&gt;49 % of X variance is explained by Y&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_HWDADJCQNI" value=""&gt;&lt;/input&gt; &lt;span&gt;The correlation is −0.70&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_HWDADJCQNI" value="answer"&gt;&lt;/input&gt; &lt;span&gt;49 % of Y variance is explained by X&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_HWDADJCQNI" value=""&gt;&lt;/input&gt; &lt;span&gt;Covariance is unit‑free&lt;/span&gt;&lt;/label&gt;&lt;/div&gt;
+
+
+**Question 16**
+
+After converting both X and Y to z‑scores, the covariance of those z‑variables equals… &lt;div class='webex-radiogroup' id='radio_ZKRKUCTKUW'&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_ZKRKUCTKUW" value="answer"&gt;&lt;/input&gt; &lt;span&gt;Pearson’s r&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_ZKRKUCTKUW" value=""&gt;&lt;/input&gt; &lt;span&gt;Pearson’s r&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_ZKRKUCTKUW" value=""&gt;&lt;/input&gt; &lt;span&gt;Their geometric mean&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_ZKRKUCTKUW" value=""&gt;&lt;/input&gt; &lt;span&gt;Always zero&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_ZKRKUCTKUW" value=""&gt;&lt;/input&gt; &lt;span&gt;Sample size&lt;/span&gt;&lt;/label&gt;&lt;/div&gt;
+
+
+:::
+
+
+&lt;div class='webex-solution'&gt;&lt;button&gt;Show explanations&lt;/button&gt;
+**Question 1**
+
+explanation
+
+**Question 2**
+
+Positive sign = same-direction movement; magnitude is unit-dependent so strength not directly interpretable.
+
+**Question 3**
+
+Negative covariance means high X pairs with low Y and vice‑versa.
+
+**Question 4**
+
+Rescaling either variable rescales covariance; therefore magnitude alone is not comparable across units.
+
+**Question 5**
+
+Multiplying Celsius by 1.8 and adding 32 rescales covariance by 1.8; adding a constant does not affect it.
+
+**Question 6**
+
+Dividing covariance by the product of SDs removes units and bounds the result between –1 and +1.
+
+**Question 7**
+
+r only detects linear association; other patterns may still exist.
+
+**Question 8**
+
+Small r means weak linear association despite positive sign.
+
+**Question 9**
+
+Positive slope → positive sign; negative slope → negative sign.
+
+**Question 10**
+
+Scaling one variable scales covariance by that factor but leaves r (unit‑free) unchanged.
+
+**Question 11**
+
+Zero covariance means no linear co‑movement; nonlinear links could still exist.
+
+**Question 12**
+
+Correlation quantifies association but cannot establish causality without experimental control.
+
+**Question 13**
+
+Less variability reduces covariance relative to the SDs, shrinking r.
+
+**Question 14**
+
+Trend‑consistent outliers add leverage, increasing |r|.
+
+**Question 15**
+
+r² translates correlation into variance‑explained terms.
+
+**Question 16**
+
+Standardising divides by SDs, so covariance in z‑space equals r.
+
+
+&lt;/div&gt;</code></pre>
+</div>
+</div>
+</section><section id="tutorial" class="level1" data-number="5"><h1 data-number="5">
+<span class="header-section-number">5</span> Tutorial</h1>
+<section id="load-data" class="level2" data-number="5.1"><h2 data-number="5.1" class="anchored" data-anchor-id="load-data">
+<span class="header-section-number">5.1</span> Load Data</h2>
+<p>Open <strong><code>LAS_SocSc_DataLab2.sav</code></strong> (find it in the <strong><code>data</code></strong> folder you downloaded earlier).<br>
+The file contains six variables (<code>X1</code> … <code>X6</code>). You’ll inspect three bivariate relationships.</p>
+<section id="plot-the-pairs" class="level3" data-number="5.1.1"><h3 data-number="5.1.1" class="anchored" data-anchor-id="plot-the-pairs">
+<span class="header-section-number">5.1.1</span> Plot the pairs</h3>
+<p>Generate three simple scatterplots:</p>
+<ol type="1">
+<li>
+<code>Graphs</code> › <code>Legacy Dialogs</code> › <code>Scatter/Dot</code> ► <strong>Simple Scatter</strong><br>
+</li>
+<li>Pairings &amp; axis order
+<ul>
+<li>
+<code>X1</code> (X-axis) vs <code>X2</code> (Y-axis)<br>
+</li>
+<li>
+<code>X3</code> (X-axis) vs <code>X4</code> (Y-axis)<br>
+</li>
+<li>
+<code>X5</code> (X-axis) vs <code>X6</code> (Y-axis)<br>
+</li>
+</ul>
+</li>
+<li>
+<em>Paste</em> and <em>Run</em> each syntax block.</li>
+</ol>
+<p>Describe <strong>linearity</strong>, <strong>direction</strong>, and <strong>strength</strong> for each plot.</p>
+<div class="webex-check webex-box">
+<p>“The relationship between <code>X1</code> and <code>X2</code> is positive.” <select class="webex-select"><option value="blank"></option>
+<option value="answer">TRUE</option>
+<option value="NA">FALSE</option></select></p>
+<p>“The relationship between <code>X5</code> and <code>X6</code> is positive.” <select class="webex-select"><option value="blank"></option>
+<option value="NA">TRUE</option>
+<option value="answer">FALSE</option></select></p>
+<p>“The relationship between <code>X1</code> and <code>X2</code> is linear.” <select class="webex-select"><option value="blank"></option>
+<option value="answer">TRUE</option>
+<option value="NA">FALSE</option></select></p>
+<p>“The relationship between <code>X3</code> and <code>X4</code> is linear.” <select class="webex-select"><option value="blank"></option>
+<option value="NA">TRUE</option>
+<option value="answer">FALSE</option></select></p>
+<p>Strength of <code>X1</code>–<code>X2</code>:<br><select class="webex-select"><option value="blank"></option>
+<option value="answer">moderate</option>
+<option value="">strong</option>
+<option value="">weak</option>
+<option value="">zero</option></select></p>
+<p>Strength of <code>X3</code>–<code>X4</code>:<br><select class="webex-select"><option value="blank"></option>
+<option value="answer">strong</option>
+<option value="">weak</option>
+<option value="">zero</option>
+<option value="">moderate</option></select></p>
+<p>Strength of <code>X5</code>–<code>X6</code>:<br><select class="webex-select"><option value="blank"></option>
+<option value="">strong</option>
+<option value="">weak</option>
+<option value="">zero</option>
+<option value="answer">moderate</option></select></p>
+</div>
+</section><section id="correlation-coefficients" class="level3" data-number="5.1.2"><h3 data-number="5.1.2" class="anchored" data-anchor-id="correlation-coefficients">
+<span class="header-section-number">5.1.2</span> Correlation coefficients</h3>
+<p>Even when the pattern is non-linear it’s useful to see why Pearson <em>r</em> can mislead.</p>
+<p><em>Analyze</em> › <em>Correlate</em> › <em>Bivariate</em><br>
+Select all six variables → <strong>OK</strong>.</p>
+<div class="webex-check webex-box">
+<p><code>X1</code>–<code>X2</code> correlation: <input class="webex-solveme nospaces" data-tol="0.01" size="3" data-answer="[&quot;0.5&quot;,&quot;.5&quot;]"></p>
+<p><code>X2</code>–<code>X6</code> correlation: <input class="webex-solveme nospaces" data-tol="0.01" size="4" data-answer="[&quot;0.06&quot;,&quot;.06&quot;]"></p>
+<p><code>X3</code>–<code>X4</code> correlation: <input class="webex-solveme nospaces" data-tol="0.01" size="4" data-answer="[&quot;-0.8&quot;,&quot;-.8&quot;]"></p>
+<p>Can we interpret <code>X3</code>–<code>X4</code>’s <em>r</em> at face value?<br><select class="webex-select"><option value="blank"></option>
+<option value="">No, assumption of association violated</option>
+<option value="answer">No, assumption of linearity violated</option>
+<option value="">No, assumption of normality violated</option>
+<option value="">Yes, otherwise SPSS would give an error</option></select></p>
+<p>Interpret <code>X5</code>–<code>X6</code>:<br><select class="webex-select"><option value="blank"></option>
+<option value="">Weak negative</option>
+<option value="answer">Moderate negative</option>
+<option value="">Weak positive</option>
+<option value="">Moderate positive</option></select></p>
+</div>
+<p><em>Take-away:</em> Pearson’s <em>r</em> is good at detecting linear patterns (like X1–X2), but it may be close to zero even when the variables have a strong curved pattern (like X3–X4).</p>
+</section></section><section id="correlation-work-dataset-work.sav" class="level2" data-number="5.2"><h2 data-number="5.2" class="anchored" data-anchor-id="correlation-work-dataset-work.sav">
+<span class="header-section-number">5.2</span> Correlation – Work Dataset (<code>Work.sav</code>)</h2>
+<p>Having practiced on simulated data, let’s now apply the same workflow to a real dataset related to the workplace.</p>
+<blockquote class="blockquote">
+<p><strong>File location:</strong> <code>data/Work.sav</code></p>
+</blockquote>
+<section id="why-inspect-the-plot-first" class="level3" data-number="5.2.1"><h3 data-number="5.2.1" class="anchored" data-anchor-id="why-inspect-the-plot-first">
+<span class="header-section-number">5.2.1</span> Why inspect the plot first?</h3>
+<p>Before trusting Pearson <em>r</em> we check for</p>
+<ul>
+<li>an <strong>approximately linear</strong> pattern, and<br>
+</li>
+<li>
+<strong>extreme values</strong> that could distort the statistic.</li>
+</ul>
+<div class="webex-check webex-box">
+<p>Select the correct reason:</p>
+<p><select class="webex-select"><option value="blank"></option>
+<option value="answer">To check if the relationship is linear</option>
+<option value="">To check if the relationship is positive</option>
+<option value="">To check if the relationship is strong enough</option></select></p>
+</div>
+</section><section id="create-the-scatter-plot" class="level3" data-number="5.2.2"><h3 data-number="5.2.2" class="anchored" data-anchor-id="create-the-scatter-plot">
+<span class="header-section-number">5.2.2</span> Create the scatter-plot</h3>
+<p><code>Graphs</code> › <code>Legacy Dialogs</code> › <code>Scatter/Dot</code> → <strong>Simple Scatter</strong></p>
+<ul>
+<li>X-axis =<code>scmental</code> (Mental Pressure)<br>
+</li>
+<li>Y-axis =<code>scemoti</code> (Emotional Pressure)</li>
+</ul>
+<p><em>Paste</em> and <em>Run</em>.</p>
+<div class="webex-check webex-box">
+<p>The cloud of data points is roughly <strong>linear</strong>: <select class="webex-select"><option value="blank"></option>
+<option value="answer">TRUE</option>
+<option value="NA">FALSE</option></select></p>
+<p>There are obvious <strong>outliers</strong>: <select class="webex-select"><option value="blank"></option>
+<option value="NA">TRUE</option>
+<option value="answer">FALSE</option></select></p>
+<p>Approximate strength:</p>
+<p><select class="webex-select"><option value="blank"></option>
+<option value="answer">Moderately strong and positive</option>
+<option value="">Moderately weak and positive</option>
+<option value="">Moderately strong and negative</option>
+<option value="">Moderately weak and negative</option></select></p>
+</div>
+</section><section id="compute-pearson-r" class="level3" data-number="5.2.3"><h3 data-number="5.2.3" class="anchored" data-anchor-id="compute-pearson-r">
+<span class="header-section-number">5.2.3</span> Compute Pearson <em>r</em>
+</h3>
+<p><code>Analyze</code> › <code>Correlate</code> › <code>Bivariate</code> → (<code>scmental</code>, <code>scemoti</code>) → <strong>OK</strong></p>
+<p>The correlation coefficient is (2 decimals): <input class="webex-solveme nospaces" data-tol="0.01" size="4" data-answer="[&quot;0.54&quot;,&quot;.54&quot;]"></p>
+<p>Interpretation:</p>
+<p><select class="webex-select"><option value="blank"></option>
+<option value="answer">There is a relationship between mental and emotional pressure.</option>
+<option value="">There is no relationship between mental and emotional pressure.</option>
+<option value="">We cannot draw a conclusion on whether or not there is a relationship.</option></select></p>
+<p><em>Take-away:</em> Mental and emotional pressure show a <strong>moderately strong, significant positive relationship</strong>—employees who feel more mentally pressured also tend to feel more emotionally pressured.</p>
+
+
+</section></section></section></main><!-- /main --><script>
+
+/* update total correct if #webex-total_correct exists */
+update_total_correct = function() {
+  console.log("webex: update total_correct");
+
+  var t = document.getElementsByClassName("webex-total_correct");
+  for (var i = 0; i < t.length; i++) {
+    p = t[i].parentElement;
+    var correct = p.getElementsByClassName("webex-correct").length;
+    var solvemes = p.getElementsByClassName("webex-solveme").length;
+    var radiogroups = p.getElementsByClassName("webex-radiogroup").length;
+    var selects = p.getElementsByClassName("webex-select").length;
+
+    t[i].innerHTML = correct + " of " + (solvemes + radiogroups + selects) + " correct";
+  }
+}
+
+/* webex-solution button toggling function */
+b_func = function() {
+  console.log("webex: toggle hide");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('open')) {
+    cl.remove("open");
+  } else {
+    cl.add("open");
+  }
+}
+
+/* check answers */
+check_func = function() {
+  console.log("webex: check answers");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('unchecked')) {
+    cl.remove("unchecked");
+    this.innerHTML = "Hide Answers";
+  } else {
+    cl.add("unchecked");
+    this.innerHTML = "Show Answers";
+  }
+}
+
+/* function for checking solveme answers */
+solveme_func = function(e) {
+  console.log("webex: check solveme");
+
+  var real_answers = JSON.parse(this.dataset.answer);
+  var my_answer = this.value;
+  var cl = this.classList;
+  if (cl.contains("ignorecase")) {
+    my_answer = my_answer.toLowerCase();
+  }
+  if (cl.contains("nospaces")) {
+    my_answer = my_answer.replace(/ /g, "")
+  }
+
+  if (my_answer == "") {
+    cl.remove("webex-correct");
+    cl.remove("webex-incorrect");
+  } else if (real_answers.includes(my_answer)) {
+    cl.add("webex-correct");
+    cl.remove("webex-incorrect");
+  } else {
+    cl.add("webex-incorrect");
+    cl.remove("webex-correct");
+  }
+
+  // match numeric answers within a specified tolerance
+  if(this.dataset.tol > 0){
+    var tol = JSON.parse(this.dataset.tol);
+    var matches = real_answers.map(x => Math.abs(x - my_answer) < tol)
+    if (matches.reduce((a, b) => a + b, 0) > 0) {
+      cl.add("webex-correct");
+    } else {
+      cl.remove("webex-correct");
+    }
+  }
+
+  // added regex bit
+  if (cl.contains("regex")){
+    answer_regex = RegExp(real_answers.join("|"))
+    if (answer_regex.test(my_answer)) {
+      cl.add("webex-correct");
+    }
+  }
+
+  update_total_correct();
+}
+
+/* function for checking select answers */
+select_func = function(e) {
+  console.log("webex: check select");
+
+  var cl = this.classList
+
+  /* add style */
+  cl.remove("webex-incorrect");
+  cl.remove("webex-correct");
+  if (this.value == "answer") {
+    cl.add("webex-correct");
+  } else if (this.value != "blank") {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+/* function for checking radiogroups answers */
+radiogroups_func = function(e) {
+  console.log("webex: check radiogroups");
+
+  var checked_button = document.querySelector('input[name=' + this.id + ']:checked');
+  var cl = checked_button.parentElement.classList;
+  var labels = checked_button.parentElement.parentElement.children;
+
+  /* get rid of styles */
+  for (i = 0; i < labels.length; i++) {
+    labels[i].classList.remove("webex-incorrect");
+    labels[i].classList.remove("webex-correct");
+  }
+
+  /* add style */
+  if (checked_button.value == "answer") {
+    cl.add("webex-correct");
+  } else {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+window.onload = function() {
+  console.log("webex onload");
+  /* set up solution buttons */
+  var buttons = document.getElementsByTagName("button");
+
+  for (var i = 0; i < buttons.length; i++) {
+    if (buttons[i].parentElement.classList.contains('webex-solution')) {
+      buttons[i].onclick = b_func;
+    }
+  }
+
+  var check_sections = document.getElementsByClassName("webex-check");
+  console.log("check:", check_sections.length);
+  for (var i = 0; i < check_sections.length; i++) {
+    check_sections[i].classList.add("unchecked");
+
+    let btn = document.createElement("button");
+    btn.innerHTML = "Show Answers";
+    btn.classList.add("webex-check-button");
+    btn.onclick = check_func;
+    check_sections[i].appendChild(btn);
+
+    let spn = document.createElement("span");
+    spn.classList.add("webex-total_correct");
+    check_sections[i].appendChild(spn);
+  }
+
+  /* set up webex-solveme inputs */
+  var solveme = document.getElementsByClassName("webex-solveme");
+
+  for (var i = 0; i < solveme.length; i++) {
+    /* make sure input boxes don't auto-anything */
+    solveme[i].setAttribute("autocomplete","off");
+    solveme[i].setAttribute("autocorrect", "off");
+    solveme[i].setAttribute("autocapitalize", "off");
+    solveme[i].setAttribute("spellcheck", "false");
+    solveme[i].value = "";
+
+    /* adjust answer for ignorecase or nospaces */
+    var cl = solveme[i].classList;
+    var real_answer = solveme[i].dataset.answer;
+    if (cl.contains("ignorecase")) {
+      real_answer = real_answer.toLowerCase();
+    }
+    if (cl.contains("nospaces")) {
+      real_answer = real_answer.replace(/ /g, "");
+    }
+    solveme[i].dataset.answer = real_answer;
+
+    /* attach checking function */
+    solveme[i].onkeyup = solveme_func;
+    solveme[i].onchange = solveme_func;
+
+    solveme[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+  }
+
+  /* set up radiogroups */
+  var radiogroups = document.getElementsByClassName("webex-radiogroup");
+  for (var i = 0; i < radiogroups.length; i++) {
+    radiogroups[i].onchange = radiogroups_func;
+  }
+
+  /* set up selects */
+  var selects = document.getElementsByClassName("webex-select");
+  for (var i = 0; i < selects.length; i++) {
+    selects[i].onchange = select_func;
+    selects[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+  }
+
+  update_total_correct();
+}
+
+</script><script>
+// open rdrr links externally ----
+
+var exlinks = document.querySelectorAll("a[href^='https://rdrr.io']");
+var exlink_func = function(){
+  window.open(this.href);
+  return false;
+};
+for (var i = 0; i < exlinks.length; i++) {
+    exlinks[i].addEventListener('click', exlink_func, false);
+}
+
+// visible second sidebar in mobile ----
+
+function move_sidebar() {
+  var toc = document.getElementById("TOC");
+  var small_sidebar = document.querySelector("#quarto-sidebar .sidebar-menu-container");
+  var right_sidebar = document.getElementById("quarto-margin-sidebar");
+
+  if (window.innerWidth < 768) {
+    small_sidebar.append(toc);
+  } else {
+    right_sidebar.append(toc);
+  }
+}
+move_sidebar();
+window.onresize = move_sidebar;
+</script><script>
+
+/* update total correct if #webex-total_correct exists */
+update_total_correct = function() {
+  console.log("webex: update total_correct");
+
+  var t = document.getElementsByClassName("webex-total_correct");
+  for (var i = 0; i < t.length; i++) {
+    p = t[i].parentElement;
+    var correct = p.getElementsByClassName("webex-correct").length;
+    var solvemes = p.getElementsByClassName("webex-solveme").length;
+    var radiogroups = p.getElementsByClassName("webex-radiogroup").length;
+    var selects = p.getElementsByClassName("webex-select").length;
+
+    t[i].innerHTML = correct + " of " + (solvemes + radiogroups + selects) + " correct";
+  }
+}
+
+/* webex-solution button toggling function */
+b_func = function() {
+  console.log("webex: toggle hide");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('open')) {
+    cl.remove("open");
+  } else {
+    cl.add("open");
+  }
+}
+
+/* check answers */
+check_func = function() {
+  console.log("webex: check answers");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('unchecked')) {
+    cl.remove("unchecked");
+    this.innerHTML = "Hide Answers";
+  } else {
+    cl.add("unchecked");
+    this.innerHTML = "Show Answers";
+  }
+}
+
+/* function for checking solveme answers */
+solveme_func = function(e) {
+  console.log("webex: check solveme");
+
+  var real_answers = JSON.parse(this.dataset.answer);
+  var my_answer = this.value;
+  var cl = this.classList;
+  if (cl.contains("ignorecase")) {
+    my_answer = my_answer.toLowerCase();
+  }
+  if (cl.contains("nospaces")) {
+    my_answer = my_answer.replace(/ /g, "")
+  }
+
+  if (my_answer == "") {
+    cl.remove("webex-correct");
+    cl.remove("webex-incorrect");
+  } else if (real_answers.includes(my_answer)) {
+    cl.add("webex-correct");
+    cl.remove("webex-incorrect");
+  } else {
+    cl.add("webex-incorrect");
+    cl.remove("webex-correct");
+  }
+
+  // match numeric answers within a specified tolerance
+  if(this.dataset.tol > 0){
+    var tol = JSON.parse(this.dataset.tol);
+    var matches = real_answers.map(x => Math.abs(x - my_answer) < tol)
+    if (matches.reduce((a, b) => a + b, 0) > 0) {
+      cl.add("webex-correct");
+    } else {
+      cl.remove("webex-correct");
+    }
+  }
+
+  // added regex bit
+  if (cl.contains("regex")){
+    answer_regex = RegExp(real_answers.join("|"))
+    if (answer_regex.test(my_answer)) {
+      cl.add("webex-correct");
+    }
+  }
+
+  update_total_correct();
+}
+
+/* function for checking select answers */
+select_func = function(e) {
+  console.log("webex: check select");
+
+  var cl = this.classList
+
+  /* add style */
+  cl.remove("webex-incorrect");
+  cl.remove("webex-correct");
+  if (this.value == "answer") {
+    cl.add("webex-correct");
+  } else if (this.value != "blank") {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+/* function for checking radiogroups answers */
+radiogroups_func = function(e) {
+  console.log("webex: check radiogroups");
+
+  var checked_button = document.querySelector('input[name=' + this.id + ']:checked');
+  var cl = checked_button.parentElement.classList;
+  var labels = checked_button.parentElement.parentElement.children;
+
+  /* get rid of styles */
+  for (i = 0; i < labels.length; i++) {
+    labels[i].classList.remove("webex-incorrect");
+    labels[i].classList.remove("webex-correct");
+  }
+
+  /* add style */
+  if (checked_button.value == "answer") {
+    cl.add("webex-correct");
+  } else {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+window.onload = function() {
+  console.log("webex onload");
+  /* set up solution buttons */
+  var buttons = document.getElementsByTagName("button");
+
+  for (var i = 0; i < buttons.length; i++) {
+    if (buttons[i].parentElement.classList.contains('webex-solution')) {
+      buttons[i].onclick = b_func;
+    }
+  }
+
+  var check_sections = document.getElementsByClassName("webex-check");
+  console.log("check:", check_sections.length);
+  for (var i = 0; i < check_sections.length; i++) {
+    check_sections[i].classList.add("unchecked");
+
+    let btn = document.createElement("button");
+    btn.innerHTML = "Show Answers";
+    btn.classList.add("webex-check-button");
+    btn.onclick = check_func;
+    check_sections[i].appendChild(btn);
+
+    let spn = document.createElement("span");
+    spn.classList.add("webex-total_correct");
+    check_sections[i].appendChild(spn);
+  }
+
+  /* set up webex-solveme inputs */
+  var solveme = document.getElementsByClassName("webex-solveme");
+
+  for (var i = 0; i < solveme.length; i++) {
+    /* make sure input boxes don't auto-anything */
+    solveme[i].setAttribute("autocomplete","off");
+    solveme[i].setAttribute("autocorrect", "off");
+    solveme[i].setAttribute("autocapitalize", "off");
+    solveme[i].setAttribute("spellcheck", "false");
+    solveme[i].value = "";
+
+    /* adjust answer for ignorecase or nospaces */
+    var cl = solveme[i].classList;
+    var real_answer = solveme[i].dataset.answer;
+    if (cl.contains("ignorecase")) {
+      real_answer = real_answer.toLowerCase();
+    }
+    if (cl.contains("nospaces")) {
+      real_answer = real_answer.replace(/ /g, "");
+    }
+    solveme[i].dataset.answer = real_answer;
+
+    /* attach checking function */
+    solveme[i].onkeyup = solveme_func;
+    solveme[i].onchange = solveme_func;
+
+    solveme[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+  }
+
+  /* set up radiogroups */
+  var radiogroups = document.getElementsByClassName("webex-radiogroup");
+  for (var i = 0; i < radiogroups.length; i++) {
+    radiogroups[i].onchange = radiogroups_func;
+  }
+
+  /* set up selects */
+  var selects = document.getElementsByClassName("webex-select");
+  for (var i = 0; i < selects.length; i++) {
+    selects[i].onchange = select_func;
+    selects[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+  }
+
+  update_total_correct();
+}
+
+</script><script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="./chapter2_descriptive_statistics.html" class="pagination-link" aria-label="Descriptive Statistics">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Descriptive Statistics</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./probability.html" class="pagination-link" aria-label="Probability Distributions">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Probability Distributions</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer"><div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>CC-BY (2023) Caspar J. Van Lissa</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+</body></html>
