@@ -51,7 +51,7 @@ This book is a work in progress, so you might find errors. Please help me fix th
 You are also welcome to suggest fixes directly by [opening a pull request](https://github.com/cjvanlissa/stats12/pulls), if you know how to.
 
 
-## Software  {#sec-software}
+## Software {#sec-software}
 
 By default, it is assumed that you will be making the exercises in this book using the commercial program 'SPSS'. 
 
