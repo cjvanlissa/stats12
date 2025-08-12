@@ -1,5 +1,5 @@
 ---
-title: "Lecture 2 – Descriptive statistics"
+title: "Descriptive statistics"
 author: "Caspar J. van Lissa"
 date: "`r format(Sys.Date(), '%d %b %Y')`"
 format: revealjs
@@ -16,68 +16,103 @@ knitr::opts_chunk$set(
 )
 ```
 
-# Learning Objectives {.smaller .tiny data-font-size="60%"}
+## Learning Objectives
 
-- **Central tendency**  
-  - Calculate the mean, median, and mode.  
-  - Decide which measure is most appropriate given the variable’s scale, shape, and outliers.
-
-- **Weighted mean**  
-  - Compute a weighted mean and explain when weighting is necessary (e.g., unequal group sizes).
-
+- **Central tendency**
+  - What value is *typical*?
+  - Mean, median, and mode.  
 - **Variability**  
-  - Compute and interpret the range, variance, and standard deviation.  
-  - *Visual intuition*: turn each deviation from the mean into a square and show how the total area (sum of squares) motivates the variance formula.
-
+  - How much do individual scores *differ*?
+  - Range, variance, and standard deviation.  
 - **Effect of transformations & outliers**  
-  - Predict how adding/subtracting or multiplying/dividing every score—and how extreme outliers—alter the mean and SD.
-
-- **Degrees of freedom**  
-  - Explain why the sample variance divides by **n – 1** (only *n – 1* independent pieces of information remain after estimating the mean).
-
 
 ---
 
-## What Do We Mean by a *Statistical Model*? {.smaller}
 
-A statistical model is a *story* about how data arise:
+## variable and Distribution
 
-> **observed value = systematic part (signal) + random part (noise)**
+```{r}
+set.seed(1)
+scrs <- cut(rnorm(20), 8, labels = FALSE)+2L
 
-Descriptive statistics give us the **first draft** of that story:  
-* one number to stand in for the whole data set (**signal**), and  
-* one number that tells how far scores wander from that centre (**noise**).
+```
 
----
-
-## Why Descriptive Statistics?
-
-| Question                                 | Statistic                        |
-|------------------------------------------|----------------------------------|
-| What value is *typical*?                 | **Centre** → mean / median / mode |
-| How much do individual scores *differ*?  | **Spread** → range / variance / SD |
-
-Everything else in the course builds on these two headlines.
+* **Variable:** students' grades
+* **Scores:** `r paste0(scrs, collapse = ", ")`
+* **Distribution:** The general shape of these scores
 
 ---
 
-# Central Tendency
+## Summarizing Scores: Frequency Table
 
-*A single value that stands for the whole distribution.*
-
-> **What’s a distribution?**  
-> Think of it as the **shape** (or pattern) of all the observed scores: how many low values, how many high values, and everything in between.  
->  
-> *Example:* a class-quiz histogram might show most students clustering around 7/10, a few scoring 10, and a long tail of lower marks.
-
-Our goal is to find **one number**—mean, median, or mode—that represents that entire pattern as faithfully as possible.
+```{r}
+tab <- as.data.frame.table(table(scrs))
+names(tab) <- c("Score", "Frequency")
+knitr::kable(tab)
+```
 
 ---
 
-## Mean — The Balance Point {.smaller}
+## Summarizing Scores: Bar Chart
 
-**Definition**  
-The mean is **the sum of the scores divided by the number of scores**.
+For discrete variables (= not continuous), use a bar chart
+
+* Each value has a bar
+* Bars are ordered
+* Visually *distinct* to signal that scores are discrete
+
+```{r}
+barplot(table(scrs), xlab = "Score", ylab = "Frequency")
+```
+
+---
+
+## Summarizing Scores: Histogram
+
+<font size=5>
+
+* Categorize continuous variable into non-overlapping intervals (bins)
+* Count number of observations per bin
+* Each bin has a bar
+* Visually *connected* to signal that scores are continuous
+
+</font>
+
+```{r}
+set.seed(2)
+x <- rnorm(20, mean = 175, sd = 15)
+hist(x, xlab = "Height (cm)", main = NULL)
+```
+
+---
+
+
+## Summarizing Scores: Density Plot
+
+<font size=5>
+
+* Instead of categorizing continuous variable, approximates a continuous distribution
+* Uses a "smoothing" algorithm
+* Area under the curve is the proportion of scores, which adds to 1
+* Less common, because not available in SPSS
+
+</font>
+
+```{r}
+plot(density(x), xlab = "Height (cm)", main = "")
+```
+
+---
+
+## Central Tendency
+
+*The most typical value of a distribution.*
+
+---
+
+## Mean - The Mathematical Middle {.smaller}
+
+**Definition**: the sum of the scores divided by the number of scores. Mathematically, the mean is the middle point of the data.
 
 $$
 \text{Population:}\quad
@@ -98,7 +133,7 @@ $$
 
 ---
 
-## Mean — Example {.smaller}
+## Mean - Example {.smaller}
 
 Suppose five exam scores: 4, 6, 7, 3, 10  
 
@@ -110,43 +145,21 @@ $$
 
 **Check the key properties**
 
-| Operation                                   | New scores                | Predicted mean             | Verified mean |
-|---------------------------------------------|---------------------------|----------------------------|---------------|
-| Add $k = 2$ to every score                  | 6, 8, 9, 5, 12            | $6 + 2 = 8$                | 8             |
-| Multiply every score by $c = 3$             | 12, 18, 21, 9, 30         | $6 \times 3 = 18$          | 18            |
-| Change one score by $\Delta = +3$ (10 → 13) | 4, 6, 7, 3, 13            | $6 + \tfrac{3}{5} = 6.6$   | 6.6           |
-| Add a new score equal to the mean (6)       | 4, 6, 7, 3, 10, 6         | —                          | 6             |
+| Operation                                   | New scores                | New mean             |
+|---------------------------------------------|---------------------------|----------------------------|
+| Add $k = 2$ to every score                  | 6, 8, 9, 5, 12            | $6 + 2 = 8$                |
+| Multiply every score by $c = 3$             | 12, 18, 21, 9, 30         | $6 \times 3 = 18$          |
+| Change one score by $\Delta = +3$ (10: 13) | 4, 6, 7, 3, 13            | $6 + \tfrac{3}{5} = 6.6$   |
+| Add a new score equal to the mean (6)       | 4, 6, 7, 3, 10, 6         | 6             |
 
 ---
 
----
 
-## Combining Means – Two Groups {.smaller}
-
-Suppose you have **two sub-samples** with equal or unequal sizes:
-
-| Group | Size $n$ | Mean $M$ | Sum of scores $\sum X$ |
-|-------|---------:|---------:|-----------------------:|
-| A | $n_{A}$ | $M_{A}$ | $n_{A} M_{A}$ |
-| B | $n_{B}$ | $M_{B}$ | $n_{B} M_{B}$ |
-
-**Overall mean** is simply
-
-$$
-M_{\text{overall}} \;=\;
-\frac{\sum X_{\text{total}}}{n_{\text{total}}}
-=
-\frac{\,n_{A} M_{A} + n_{B} M_{B}\,}{\,n_{A} + n_{B}\,}
-$$
-
-*Same logic you use for a single mean—just add up **all** scores and divide by **all** people.*
-
----
 
 ## Weighted Mean – Unequal Group Sizes {.smaller}
 
 When groups **differ in size**, the larger group should influence the overall mean more.  
-The previous expression is therefore called a **weighted mean**—weights are the group sizes.
+The previous expression is therefore called a **weighted mean**-weights are the group sizes.
 
 **Formula (two groups)**
 
@@ -165,22 +178,25 @@ M_{\text{overall}}
 = 6.4
 $$
 
-> If both groups had **equal** size ($n_{A}=n_{B}$), each would carry equal weight and  
-> $M_{\text{overall}}$ would be the simple midpoint between their means.
+> If both groups have **equal** size ($n_{A}=n_{B}$), they carry equal weight and  
+> $M_{\text{overall}}$ is simply the mean of the means.
 
 ---
 
-## Median — the Middle Score
+## Median - Rank Order Middle Score
 
-> **Conceptually:** the median is the *middle milestone*—the 50th percentile—so half the data lie at or below it and half at or above it, making it a robust “typical” value even when the distribution is skewed.
+> **Conceptually:** the median is the *middle score*, or 50th percentile, making it a robust “typical” value even when the distribution is skewed.
 
-- Order the scores; median splits them 50 % / 50 %.  
-- **Robust** to skew & outliers (e.g., income).  
+- *n*th percentile: *n*% of the scores are below this value
+    + 50th percentile: half of scores below this value
 - Not defined by a formula but by position.
+- Order scores; median is middle score.
+- **Robust** to skew & outliers (e.g., income).  
+
 
 ---
 
-## Median — Example
+## Median - Example
 
 **Dataset (unordered)**  
 52, 70, 55, 65, 63, 57, 60, 59, 67  
@@ -220,17 +236,19 @@ $$
 
 ---
 
-## Mode — Most Frequent
+## Mode - Most Common Score
 
-> **Conceptually:** the mode is the *crowd favorite*—the value or category that appears most often—so it marks the peak of the distribution and spotlights what’s most typical when “typical” means “most common.”
+> **Conceptually:** in discrete variables, the mode is the value or category that appears most often. In continuous variables, it marks the peak of the distribution.
 
 - Only measure that works for **nominal** data.  
-- Handy with discrete counts (a “modal” family has 2 children).  
-- Multiple modes hint at sub-groups.
+    + But also works with ordinal, interval and ratio
+    + But it's rare for two scores to be identical with interval and continuous variables
+- Useful for discrete ratio variables (e.g., number of children; modal family has 2).  
+
 
 ---
 
-## Mode — Example (1 / 2) {.smaller}
+## Mode - Example (1 / 2) {.smaller}
 
 **Numeric dataset (children per family)**  
 2, 3, 2, 4, 1, 2, 2, 3, 1, 2  
@@ -247,7 +265,7 @@ The most frequent value is **2**, so the **mode = 2**.
 
 ---
 
-## Mode — Example (2 / 2) {.smaller}
+## Mode - Example (2 / 2) {.smaller}
 
 **Nominal dataset (favourite ice-cream flavour)**  
 Chocolate, Vanilla, Strawberry, Chocolate, Vanilla, Chocolate, Mint  
@@ -259,48 +277,24 @@ Chocolate, Vanilla, Strawberry, Chocolate, Vanilla, Chocolate, Mint
 | Strawberry  | 1     |
 | Mint        | 1     |
 
-Mode = **Chocolate** → works for nominal data.
+Mode = **Chocolate**: works for nominal data.
 
-**Multimodal case**  
-If we add one more *Vanilla* and one more *Mint*:
+**Multimodal:**
 
-Chocolate (3), Vanilla (3), Mint (2), Strawberry (1) → **bimodal** (Chocolate & Vanilla).  
-Multiple modes often suggest distinct sub-groups within the sample.
+If we add one more *Vanilla* lover, Chocolate (3) and Vanilla (3) are both modes. This is called **bimodal**
 
 ---
 
-### Choosing the Measure of Central Tendency
-
-```{r centre-tree}
-decision <- data.frame(
-  x = rep(1, 6),
-  y = 5:0,
-  label = c(
-    "Measurement level?",
-    "Nominal  →  MODE",
-    "Ordinal / Interval / Ratio",
-    "Outliers or strong skew?",
-    "Yes  →  MEDIAN",
-    "No   →  MEAN"
-  )
-)
-ggplot(decision, aes(x, y, label = label)) +
-  geom_text(size = 6, hjust = 0) +
-  xlim(0.9, 4) + ylim(-0.5, 5.5) +
-  theme_void()
-```
-
----
 
 # Variability
 
-*Centre tells us what is typical; variability tells how typical.*
+*Center tells us what is typical; variability tells how typical.*
 
 ---
 
 ## Range
 
-> **Conceptually:** the range is the dataset’s full span—from the smallest to the largest value—so it shows the overall width of the data, but because it uses only those two extremes it is very sensitive to outliers.
+> **Conceptually:** the range is the dataset’s full span-from the smallest to the largest value-so it shows the overall width of the data, but because it uses only those two extremes it is very sensitive to outliers.
 
 $$
 \text{Range}=X_{\max}-X_{\min}
@@ -308,7 +302,7 @@ $$
 
 ---
 
-## Range — Example (1 / 2) {.smaller}
+## Range - Example (1 / 2) {.smaller}
 
 **Dataset**  
 4, 6, 7, 3, 10  
@@ -321,7 +315,7 @@ $$
 
 ---
 
-## Range — Example (2 / 2) {.smaller}
+## Range - Example (2 / 2) {.smaller}
 
 **Effect of a single outlier**
 
@@ -335,17 +329,17 @@ X_{\max} = 42, \qquad
 \text{Range} = 42 - 3 = 39
 $$
 
-Just one score changed, yet the range jumped from 7 to 39—demonstrating how unstable the range can be.  
+Just one score changed, yet the range jumped from 7 to 39-demonstrating how unstable the range can be.  
 
 ---
 
 ## Deviations & Sum of Squares (SS) {.smaller}
 
-> **Conceptually:** the Sum of Squares is the data’s total “spread energy” — each deviation is squared (so large gaps count a lot) and then added up, giving one number whose size grows with the overall scatter of the data. SS is the raw material from which variance and standard deviation are built.
+> The Sum of Squares is the total spread of all data points. It is an intermediate step in the calculation of many spread-related statistics.
 
-1. **Deviation** $d_i = X_i - M$  
-2. $\sum d_i = 0$  
-3. Square deviations to avoid cancellation: $(X_i - M)^2$
+1. **Deviation** of each observation $d_i = X_i - M$  
+2. Adding all deviations always gives $\sum d_i = 0$ 
+3. Squaring deviations removes negative values to avoid cancellation: $(X_i - M)^2$
 
 $$
 SS
@@ -358,7 +352,7 @@ SS
 $$
 ---
 
-## Deviations & SS — Example (1 / 2) {.smaller}
+## Deviations & SS - Example (1 / 2) {.smaller}
 
 Dataset: 4, 6, 7, 3, 10  
 Mean \(M = 6\)
@@ -376,7 +370,7 @@ Sum of deviations: $-2 + 0 + 1 - 3 + 4 = 0\;\checkmark$
 
 ---
 
-## Deviations & SS — Example (2 / 2) {.smaller}
+## Deviations & SS - Example (2 / 2) {.smaller}
 
 | $X_i$ | $d_i$ | $d_i^{2}$ |
 |-------|-------|-----------|
@@ -405,43 +399,32 @@ $$
 
 ---
 
-## Visualising Variance
 
-```{r var-plot}
-set.seed(2)
-scores <- c(rnorm(30, 50, 8), 90)   # one extreme value
-mn <- mean(scores)
-ggplot(data.frame(scores), aes(scores)) +
-  geom_histogram(binwidth = 5, fill = "steelblue", colour = "white") +
-  geom_vline(xintercept = mn, lwd = 1.2) +
-  geom_segment(aes(x = mn, xend = 90, y = 0, yend = 0),
-               arrow = arrow(type = "closed", length = unit(0.2, "cm")),
-               colour = "firebrick", lwd = 1) +
-  labs(title="Mean (solid) and an Extreme Deviation (arrow)",
-       x = "Score", y = "Count")
-```
+## Variance - Definition {.smaller}
 
----
-
-## Variance — Definition {.smaller}
-
-**What is variance?**  
-
-> The **average of the squared deviations** from the mean —yielding a single number that captures how much the scores “fan out” around their center: the larger the average squared distance, the more widely dispersed the data; the smaller it is, the more tightly the scores cluster near the mean.
+> The **average squared deviation** from the mean. Captures average spread of scores around the center: larger variance implies widely dispersed the data; smaller variance implies scores are tightly clustered around the mean.
 
 | Statistic | Formula | Units |
 |-----------|---------|-------|
-| Population variance | $\displaystyle \sigma^{2} \;=\; \frac{SS}{N}$ | units² |
-| Sample variance | $\displaystyle s^{2} \;=\; \frac{SS}{\,n-1\,}$ | units² |
+| Population variance | $\displaystyle \sigma^{2} \;=\; \frac{SS}{N}$ | units$^2$ |
+| Sample variance | $\displaystyle s^{2} \;=\; \frac{SS}{\,n-1\,}$ | units$^2$ |
 
-**Why divide the sample SS by $n-1$?**  
+## Degrees of Freedom {.smaller}
+
+**Why divide the sample SS by $n-1$?**
+
+* A sample contains *n* unique pieces of information.
+* If we estimate the mean from the sample, we have $n-1$ remaining unique pieces of information (plus the mean)
+* We pay for each estimated quantity with a "degree of freedom"
+* Degrees of freedom of $df$ is a "counter" of how many more things we can estimate
+* Once $df$ reaches zero, we have estimated as many statistics as we had pieces of information, so we cannot estimate anything more
 Only **$n-1$ degrees of freedom** remain once we have estimated the sample mean ($\bar X$). Using $n-1$ instead of $n$ corrects the bias and makes $s^{2}$ an *unbiased* estimator of the population variance $\sigma^{2}$.
 
 ---
 
-## Variance — Numerical Example {.smaller}
+## Variance - Numerical Example {.smaller}
 
-Dataset: 4, 6, 7, 3, 10 (mean $M = 6$)
+Dataset: 4, 6, 7, 3, 10 (mean $M = 6$)
 
 | $X_i$ | $d_i = X_i - M$ | $d_i^{2}$ |
 |-------|-----------------|-----------|
@@ -461,24 +444,26 @@ So the **sample variance** is **7.5 units²**.
 
 ---
 
-## Standard Deviation — Definition {.smaller}
+## Standard Deviation - Definition {.smaller}
 
 **What does SD tell us?**  
 
-> The **typical distance** (spread) of scores from the mean, expressed in the *same units* as the data.
+> **Typical distance** of scores from the mean, in the *same units* as the data.
 
-Because variance squares deviations (units²), we take the **square-root** to get back to the original scale.
+Because variance is expressed in squared units, we take the **square-root** to get back the original scale.
 
 | Statistic | Formula | Units |
 |-----------|---------|-------|
 | Population SD | $\displaystyle \sigma = \sqrt{\sigma^{2}}$ | original |
 | Sample SD     | $\displaystyle s = \sqrt{s^{2}}$           | original |
 
-Key idea: One SD ≈ the average amount by which scores deviate from the mean.
+Conceptually: One SD is the average deviation from the mean.
+
+Mathematically, this is not correct. The variance is computed from squared deviations, so extreme scores have more impact than scores near the mean. That is why we say *standard* deviation, not *average* deviation.
 
 ---
 
-## Standard Deviation — Example {.smaller}
+## Standard Deviation - Example {.smaller}
 
 From the variance slide we found a **sample variance** of $s^{2} = 7.5$.
 
@@ -527,20 +512,20 @@ ggplot(df, aes(x, density, colour = group, fill = group)) +
 | Transformation | Effect on SD |
 |----------------|--------------|
 | Add constant *k* | no change |
-| Multiply by *c*  | SD × *c* |
+| Multiply by *c*  | $c*\text{SD}$ |
 | Add extreme score | increases SD |
 
 ---
 
-## SD — Effect of Transformations {.smaller}
+## SD - Effect of Transformations {.smaller}
 
-Original dataset: 4, 6, 7, 3, 10 (sample SD ≈ **2.74**)
+Original dataset: 4, 6, 7, 3, 10; SD = 2.74
 
 | Transformation | New scores (after transformation) | New SD | What happened? |
 |----------------|------------------------------------|--------|----------------|
 | Add $k = 5$    | 9, 11, 12, 8, 15                  | **2.74** | No change |
-| Multiply by $c = 3$ | 12, 18, 21, 9, 30           | **8.22** | SD × 3 |
-| Add extreme score (42) | 4, 6, 7, 3, 10, 42        | **14.9** | SD ↑ sharply |
+| Multiply by $c = 3$ | 12, 18, 21, 9, 30           | **8.22** | 3*SD |
+| Add extreme score (42) | 4, 6, 7, 3, 10, 42        | **14.9** | SD increases |
 
 **Take-away**
 
@@ -565,15 +550,31 @@ Original dataset: 4, 6, 7, 3, 10 (sample SD ≈ **2.74**)
 
 ## Key Take‑aways
 
-- Mean, median, mode each define “centre” differently.  
+- Mean, median, mode each define “center” differently.  
 - Variance and SD quantify spread; range is quick but crude.  
 - Sample variance uses *n – 1* to remain unbiased.  
 - Visualising deviations builds intuition for SS and variance.
 
 ---
 
-# Next Week
+## Bonus plot: Boxplot
 
-**Lecture 3 — Correlation & Covariance**
+```{r}
+set.seed(2)
+x <- rnorm(20, mean = 175, sd = 15)
+boxplot(x, horizontal = TRUE, col = "lightblue", xlab = "Height (cm)")
+```
 
-Bring your SPSS cheat‑sheet!
+<font size = 4>
+
+* **Median**: 50th percentile, or second quartile (Q2)
+    + Thick line in the middle
+* **Box**: ranges from 25th percentile (Q1) to 75th percentile (Q3)
+* **Interquartile Range (IQR)**: distance between Q3 - Q1
+* **Whiskers**: extend to last data point within 1.5*IQR from the box
+* **Outliers**: observations outside the whiskers
+
+</font> 
+
+---
+

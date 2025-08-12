@@ -11,8 +11,8 @@
   <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Caspar J. van Lissa">
-  <meta name="dcterms.date" content="2025-08-11">
-  <title>Lecture 2 – Descriptive statistics</title>
+  <meta name="dcterms.date" content="2025-08-12">
+  <title>Descriptive statistics</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -327,7 +327,7 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Lecture 2 – Descriptive statistics</h1>
+  <h1 class="title">Descriptive statistics</h1>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -337,92 +337,120 @@ Caspar J. van Lissa
 </div>
 </div>
 
-  <p class="date">2025-08-11</p>
+  <p class="date">2025-08-12</p>
 </section>
-<section>
-<section id="learning-objectives" class="title-slide slide level1 smaller tiny center" data-font-size="60%">
-<h1>Learning Objectives</h1>
+<section id="learning-objectives" class="slide level2">
+<h2>Learning Objectives</h2>
 <ul>
 <li><strong>Central tendency</strong>
 <ul>
-<li>Calculate the mean, median, and mode.<br>
+<li>What value is <em>typical</em>?</li>
+<li>Mean, median, and mode.<br>
 </li>
-<li>Decide which measure is most appropriate given the variable’s scale, shape, and outliers.</li>
-</ul></li>
-<li><strong>Weighted mean</strong>
-<ul>
-<li>Compute a weighted mean and explain when weighting is necessary (e.g., unequal group sizes).</li>
 </ul></li>
 <li><strong>Variability</strong>
 <ul>
-<li>Compute and interpret the range, variance, and standard deviation.<br>
+<li>How much do individual scores <em>differ</em>?</li>
+<li>Range, variance, and standard deviation.<br>
 </li>
-<li><em>Visual intuition</em>: turn each deviation from the mean into a square and show how the total area (sum of squares) motivates the variance formula.</li>
 </ul></li>
-<li><strong>Effect of transformations &amp; outliers</strong>
-<ul>
-<li>Predict how adding/subtracting or multiplying/dividing every score—and how extreme outliers—alter the mean and SD.</li>
-</ul></li>
-<li><strong>Degrees of freedom</strong>
-<ul>
-<li>Explain why the sample variance divides by <strong>n – 1</strong> (only <em>n – 1</em> independent pieces of information remain after estimating the mean).</li>
-</ul></li>
+<li><strong>Effect of transformations &amp; outliers</strong></li>
 </ul>
 </section>
-<section id="what-do-we-mean-by-a-statistical-model" class="slide level2 smaller">
-<h2>What Do We Mean by a <em>Statistical Model</em>?</h2>
-<p>A statistical model is a <em>story</em> about how data arise:</p>
-<blockquote>
-<p><strong>observed value = systematic part (signal) + random part (noise)</strong></p>
-</blockquote>
-<p>Descriptive statistics give us the <strong>first draft</strong> of that story:<br>
-* one number to stand in for the whole data set (<strong>signal</strong>), and<br>
-* one number that tells how far scores wander from that centre (<strong>noise</strong>).</p>
+<section id="variable-and-distribution" class="slide level2">
+<h2>variable and Distribution</h2>
+<ul>
+<li><strong>Variable:</strong> students’ grades</li>
+<li><strong>Scores:</strong> 6, 8, 5, 10, 8, 5, 8, 9, 8, 7, 10, 8, 6, 3, 10, 7, 7, 9, 9, 8</li>
+<li><strong>Distribution:</strong> The general shape of these scores</li>
+</ul>
 </section>
-<section id="why-descriptive-statistics" class="slide level2">
-<h2>Why Descriptive Statistics?</h2>
+<section id="summarizing-scores-frequency-table" class="slide level2">
+<h2>Summarizing Scores: Frequency Table</h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
 <table class="caption-top">
-<colgroup>
-<col style="width: 55%">
-<col style="width: 44%">
-</colgroup>
 <thead>
 <tr class="header">
-<th>Question</th>
-<th>Statistic</th>
+<th style="text-align: left;">Score</th>
+<th style="text-align: right;">Frequency</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>What value is <em>typical</em>?</td>
-<td><strong>Centre</strong> → mean / median / mode</td>
+<td style="text-align: left;">3</td>
+<td style="text-align: right;">1</td>
 </tr>
 <tr class="even">
-<td>How much do individual scores <em>differ</em>?</td>
-<td><strong>Spread</strong> → range / variance / SD</td>
+<td style="text-align: left;">5</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">6</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">7</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">8</td>
+<td style="text-align: right;">6</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">9</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">10</td>
+<td style="text-align: right;">3</td>
 </tr>
 </tbody>
 </table>
-<p>Everything else in the course builds on these two headlines.</p>
+</div>
+</div>
 </section>
-<section class="slide level2">
+<section id="summarizing-scores-bar-chart" class="slide level2">
+<h2>Summarizing Scores: Bar Chart</h2>
+<p>For discrete variables (= not continuous), use a bar chart</p>
+<ul>
+<li>Each value has a bar</li>
+<li>Bars are ordered</li>
+<li>Visually <em>distinct</em> to signal that scores are discrete</li>
+</ul>
 
-</section></section>
-<section>
-<section id="central-tendency" class="title-slide slide level1 center">
-<h1>Central Tendency</h1>
-<p><em>A single value that stands for the whole distribution.</em></p>
-<blockquote>
-<p><strong>What’s a distribution?</strong><br>
-Think of it as the <strong>shape</strong> (or pattern) of all the observed scores: how many low values, how many high values, and everything in between.</p>
-<p><em>Example:</em> a class-quiz histogram might show most students clustering around 7/10, a few scoring 10, and a long tail of lower marks.</p>
-</blockquote>
-<p>Our goal is to find <strong>one number</strong>—mean, median, or mode—that represents that entire pattern as faithfully as possible.</p>
+<img data-src="Lecture2_Descriptive_Statistics_files/figure-revealjs/unnamed-chunk-3-1.png" class="quarto-figure quarto-figure-center r-stretch" style="width:100.0%"></section>
+<section id="summarizing-scores-histogram" class="slide level2">
+<h2>Summarizing Scores: Histogram</h2>
+<p><font size="5"></font></p><font size="5">
+<ul>
+<li>Categorize continuous variable into non-overlapping intervals (bins)</li>
+<li>Count number of observations per bin</li>
+<li>Each bin has a bar</li>
+<li>Visually <em>connected</em> to signal that scores are continuous</li>
+</ul>
+</font><p><font size="5"></font></p>
+
+<img data-src="Lecture2_Descriptive_Statistics_files/figure-revealjs/unnamed-chunk-4-1.png" class="quarto-figure quarto-figure-center r-stretch" style="width:100.0%"></section>
+<section id="summarizing-scores-density-plot" class="slide level2">
+<h2>Summarizing Scores: Density Plot</h2>
+<p><font size="5"></font></p><font size="5">
+<ul>
+<li>Instead of categorizing continuous variable, approximates a continuous distribution</li>
+<li>Uses a “smoothing” algorithm</li>
+<li>Area under the curve is the proportion of scores, which adds to 1</li>
+<li>Less common, because not available in SPSS</li>
+</ul>
+</font><p><font size="5"></font></p>
+
+<img data-src="Lecture2_Descriptive_Statistics_files/figure-revealjs/unnamed-chunk-5-1.png" class="quarto-figure quarto-figure-center r-stretch" style="width:100.0%"></section>
+<section id="central-tendency" class="slide level2">
+<h2>Central Tendency</h2>
+<p><em>The most typical value of a distribution.</em></p>
 </section>
-<section id="mean-the-balance-point" class="slide level2 smaller">
-<h2>Mean — The Balance Point</h2>
-<p><strong>Definition</strong><br>
-The mean is <strong>the sum of the scores divided by the number of scores</strong>.</p>
+<section id="mean---the-mathematical-middle" class="slide level2 smaller">
+<h2>Mean - The Mathematical Middle</h2>
+<p><strong>Definition</strong>: the sum of the scores divided by the number of scores. Mathematically, the mean is the middle point of the data.</p>
 <p><span class="math display">\[
 \text{Population:}\quad
 \mu = \frac{\sum_{i=1}^{N} X_i}{N}
@@ -458,8 +486,8 @@ M = \frac{\sum_{i=1}^{n} X_i}{n}
 </tbody>
 </table>
 </section>
-<section id="mean-example" class="slide level2 smaller">
-<h2>Mean — Example</h2>
+<section id="mean---example" class="slide level2 smaller">
+<h2>Mean - Example</h2>
 <p>Suppose five exam scores: 4, 6, 7, 3, 10</p>
 <p><strong>Compute the mean</strong></p>
 <p><span class="math display">\[
@@ -468,17 +496,15 @@ M = \frac{4 + 6 + 7 + 3 + 10}{5} = \frac{30}{5} = 6
 <p><strong>Check the key properties</strong></p>
 <table class="caption-top">
 <colgroup>
-<col style="width: 39%">
-<col style="width: 23%">
-<col style="width: 24%">
-<col style="width: 13%">
+<col style="width: 45%">
+<col style="width: 27%">
+<col style="width: 28%">
 </colgroup>
 <thead>
 <tr class="header">
 <th>Operation</th>
 <th>New scores</th>
-<th>Predicted mean</th>
-<th>Verified mean</th>
+<th>New mean</th>
 </tr>
 </thead>
 <tbody>
@@ -486,72 +512,29 @@ M = \frac{4 + 6 + 7 + 3 + 10}{5} = \frac{30}{5} = 6
 <td>Add <span class="math inline">\(k = 2\)</span> to every score</td>
 <td>6, 8, 9, 5, 12</td>
 <td><span class="math inline">\(6 + 2 = 8\)</span></td>
-<td>8</td>
 </tr>
 <tr class="even">
 <td>Multiply every score by <span class="math inline">\(c = 3\)</span></td>
 <td>12, 18, 21, 9, 30</td>
 <td><span class="math inline">\(6 \times 3 = 18\)</span></td>
-<td>18</td>
 </tr>
 <tr class="odd">
-<td>Change one score by <span class="math inline">\(\Delta = +3\)</span> (10 → 13)</td>
+<td>Change one score by <span class="math inline">\(\Delta = +3\)</span> (10: 13)</td>
 <td>4, 6, 7, 3, 13</td>
 <td><span class="math inline">\(6 + \tfrac{3}{5} = 6.6\)</span></td>
-<td>6.6</td>
 </tr>
 <tr class="even">
 <td>Add a new score equal to the mean (6)</td>
 <td>4, 6, 7, 3, 10, 6</td>
-<td>—</td>
 <td>6</td>
 </tr>
 </tbody>
 </table>
 </section>
-<section class="slide level2">
-
-</section>
-<section id="combining-means-two-groups" class="slide level2 smaller">
-<h2>Combining Means – Two Groups</h2>
-<p>Suppose you have <strong>two sub-samples</strong> with equal or unequal sizes:</p>
-<table class="caption-top">
-<thead>
-<tr class="header">
-<th>Group</th>
-<th style="text-align: right;">Size <span class="math inline">\(n\)</span></th>
-<th style="text-align: right;">Mean <span class="math inline">\(M\)</span></th>
-<th style="text-align: right;">Sum of scores <span class="math inline">\(\sum X\)</span></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>A</td>
-<td style="text-align: right;"><span class="math inline">\(n_{A}\)</span></td>
-<td style="text-align: right;"><span class="math inline">\(M_{A}\)</span></td>
-<td style="text-align: right;"><span class="math inline">\(n_{A} M_{A}\)</span></td>
-</tr>
-<tr class="even">
-<td>B</td>
-<td style="text-align: right;"><span class="math inline">\(n_{B}\)</span></td>
-<td style="text-align: right;"><span class="math inline">\(M_{B}\)</span></td>
-<td style="text-align: right;"><span class="math inline">\(n_{B} M_{B}\)</span></td>
-</tr>
-</tbody>
-</table>
-<p><strong>Overall mean</strong> is simply</p>
-<p><span class="math display">\[
-M_{\text{overall}} \;=\;
-\frac{\sum X_{\text{total}}}{n_{\text{total}}}
-=
-\frac{\,n_{A} M_{A} + n_{B} M_{B}\,}{\,n_{A} + n_{B}\,}
-\]</span></p>
-<p><em>Same logic you use for a single mean—just add up <strong>all</strong> scores and divide by <strong>all</strong> people.</em></p>
-</section>
 <section id="weighted-mean-unequal-group-sizes" class="slide level2 smaller">
 <h2>Weighted Mean – Unequal Group Sizes</h2>
 <p>When groups <strong>differ in size</strong>, the larger group should influence the overall mean more.<br>
-The previous expression is therefore called a <strong>weighted mean</strong>—weights are the group sizes.</p>
+The previous expression is therefore called a <strong>weighted mean</strong>-weights are the group sizes.</p>
 <p><strong>Formula (two groups)</strong></p>
 <p><span class="math display">\[
 M_{\text{overall}}
@@ -566,25 +549,27 @@ M_{\text{overall}}
 = 6.4
 \]</span></p>
 <blockquote>
-<p>If both groups had <strong>equal</strong> size (<span class="math inline">\(n_{A}=n_{B}\)</span>), each would carry equal weight and<br>
-<span class="math inline">\(M_{\text{overall}}\)</span> would be the simple midpoint between their means.</p>
+<p>If both groups have <strong>equal</strong> size (<span class="math inline">\(n_{A}=n_{B}\)</span>), they carry equal weight and<br>
+<span class="math inline">\(M_{\text{overall}}\)</span> is simply the mean of the means.</p>
 </blockquote>
 </section>
-<section id="median-the-middle-score" class="slide level2">
-<h2>Median — the Middle Score</h2>
+<section id="median---rank-order-middle-score" class="slide level2">
+<h2>Median - Rank Order Middle Score</h2>
 <blockquote>
-<p><strong>Conceptually:</strong> the median is the <em>middle milestone</em>—the 50th percentile—so half the data lie at or below it and half at or above it, making it a robust “typical” value even when the distribution is skewed.</p>
+<p><strong>Conceptually:</strong> the median is the <em>middle score</em>, or 50th percentile, making it a robust “typical” value even when the distribution is skewed.</p>
 </blockquote>
 <ul>
-<li>Order the scores; median splits them 50 % / 50 %.<br>
-</li>
-<li><strong>Robust</strong> to skew &amp; outliers (e.g., income).<br>
-</li>
+<li><em>n</em>th percentile: <em>n</em>% of the scores are below this value
+<ul>
+<li>50th percentile: half of scores below this value</li>
+</ul></li>
 <li>Not defined by a formula but by position.</li>
+<li>Order scores; median is middle score.</li>
+<li><strong>Robust</strong> to skew &amp; outliers (e.g., income).</li>
 </ul>
 </section>
-<section id="median-example" class="slide level2">
-<h2>Median — Example</h2>
+<section id="median---example" class="slide level2">
+<h2>Median - Example</h2>
 <p><strong>Dataset (unordered)</strong><br>
 52, 70, 55, 65, 63, 57, 60, 59, 67</p>
 </section>
@@ -616,21 +601,22 @@ M_{\text{overall}}
 <p>Median is still <strong>60</strong> (mean would jump to 126), showing the median’s resistance to extreme values.</p></li>
 </ol>
 </section>
-<section id="mode-most-frequent" class="slide level2">
-<h2>Mode — Most Frequent</h2>
+<section id="mode---most-common-score" class="slide level2">
+<h2>Mode - Most Common Score</h2>
 <blockquote>
-<p><strong>Conceptually:</strong> the mode is the <em>crowd favorite</em>—the value or category that appears most often—so it marks the peak of the distribution and spotlights what’s most typical when “typical” means “most common.”</p>
+<p><strong>Conceptually:</strong> in discrete variables, the mode is the value or category that appears most often. In continuous variables, it marks the peak of the distribution.</p>
 </blockquote>
 <ul>
-<li>Only measure that works for <strong>nominal</strong> data.<br>
-</li>
-<li>Handy with discrete counts (a “modal” family has 2 children).<br>
-</li>
-<li>Multiple modes hint at sub-groups.</li>
+<li>Only measure that works for <strong>nominal</strong> data.
+<ul>
+<li>But also works with ordinal, interval and ratio</li>
+<li>But it’s rare for two scores to be identical with interval and continuous variables</li>
+</ul></li>
+<li>Useful for discrete ratio variables (e.g., number of children; modal family has 2).</li>
 </ul>
 </section>
-<section id="mode-example-1-2" class="slide level2 smaller">
-<h2>Mode — Example (1 / 2)</h2>
+<section id="mode---example-1-2" class="slide level2 smaller">
+<h2>Mode - Example (1 / 2)</h2>
 <p><strong>Numeric dataset (children per family)</strong><br>
 2, 3, 2, 4, 1, 2, 2, 3, 1, 2</p>
 <table class="caption-top">
@@ -662,8 +648,8 @@ M_{\text{overall}}
 <p>The most frequent value is <strong>2</strong>, so the <strong>mode = 2</strong>.<br>
 “A modal family has two children.”</p>
 </section>
-<section id="mode-example-2-2" class="slide level2 smaller">
-<h2>Mode — Example (2 / 2)</h2>
+<section id="mode---example-2-2" class="slide level2 smaller">
+<h2>Mode - Example (2 / 2)</h2>
 <p><strong>Nominal dataset (favourite ice-cream flavour)</strong><br>
 Chocolate, Vanilla, Strawberry, Chocolate, Vanilla, Chocolate, Mint</p>
 <table class="caption-top">
@@ -692,36 +678,29 @@ Chocolate, Vanilla, Strawberry, Chocolate, Vanilla, Chocolate, Mint</p>
 </tr>
 </tbody>
 </table>
-<p>Mode = <strong>Chocolate</strong> → works for nominal data.</p>
-<p><strong>Multimodal case</strong><br>
-If we add one more <em>Vanilla</em> and one more <em>Mint</em>:</p>
-<p>Chocolate (3), Vanilla (3), Mint (2), Strawberry (1) → <strong>bimodal</strong> (Chocolate &amp; Vanilla).<br>
-Multiple modes often suggest distinct sub-groups within the sample.</p>
+<p>Mode = <strong>Chocolate</strong>: works for nominal data.</p>
+<p><strong>Multimodal:</strong></p>
+<p>If we add one more <em>Vanilla</em> lover, Chocolate (3) and Vanilla (3) are both modes. This is called <strong>bimodal</strong></p>
 </section>
 <section class="slide level2">
 
-<h3 id="choosing-the-measure-of-central-tendency">Choosing the Measure of Central Tendency</h3>
-
-<img data-src="Lecture2_Descriptive_Statistics_files/figure-revealjs/centre-tree-1.png" class="quarto-figure quarto-figure-center r-stretch" style="width:100.0%"></section>
-<section class="slide level2">
-
-</section></section>
+</section>
 <section>
 <section id="variability" class="title-slide slide level1 center">
 <h1>Variability</h1>
-<p><em>Centre tells us what is typical; variability tells how typical.</em></p>
+<p><em>Center tells us what is typical; variability tells how typical.</em></p>
 </section>
 <section id="range" class="slide level2">
 <h2>Range</h2>
 <blockquote>
-<p><strong>Conceptually:</strong> the range is the dataset’s full span—from the smallest to the largest value—so it shows the overall width of the data, but because it uses only those two extremes it is very sensitive to outliers.</p>
+<p><strong>Conceptually:</strong> the range is the dataset’s full span-from the smallest to the largest value-so it shows the overall width of the data, but because it uses only those two extremes it is very sensitive to outliers.</p>
 </blockquote>
 <p><span class="math display">\[
 \text{Range}=X_{\max}-X_{\min}
 \]</span></p>
 </section>
-<section id="range-example-1-2" class="slide level2 smaller">
-<h2>Range — Example (1 / 2)</h2>
+<section id="range---example-1-2" class="slide level2 smaller">
+<h2>Range - Example (1 / 2)</h2>
 <p><strong>Dataset</strong><br>
 4, 6, 7, 3, 10</p>
 <p><span class="math display">\[
@@ -730,8 +709,8 @@ X_{\max} = 10, \qquad
 \text{Range} = 10 - 3 = 7
 \]</span></p>
 </section>
-<section id="range-example-2-2" class="slide level2 smaller">
-<h2>Range — Example (2 / 2)</h2>
+<section id="range---example-2-2" class="slide level2 smaller">
+<h2>Range - Example (2 / 2)</h2>
 <p><strong>Effect of a single outlier</strong></p>
 <p>Add one extreme value (42):</p>
 <p>4, 6, 7, 3, 10, <strong>42</strong></p>
@@ -740,19 +719,18 @@ X_{\min} = 3, \qquad
 X_{\max} = 42, \qquad
 \text{Range} = 42 - 3 = 39
 \]</span></p>
-<p>Just one score changed, yet the range jumped from 7 to 39—demonstrating how unstable the range can be.</p>
+<p>Just one score changed, yet the range jumped from 7 to 39-demonstrating how unstable the range can be.</p>
 </section>
 <section id="deviations-sum-of-squares-ss" class="slide level2 smaller">
 <h2>Deviations &amp; Sum of Squares (SS)</h2>
 <blockquote>
-<p><strong>Conceptually:</strong> the Sum of Squares is the data’s total “spread energy” — each deviation is squared (so large gaps count a lot) and then added up, giving one number whose size grows with the overall scatter of the data. SS is the raw material from which variance and standard deviation are built.</p>
+<p>The Sum of Squares is the total spread of all data points. It is an intermediate step in the calculation of many spread-related statistics.</p>
 </blockquote>
 <ol type="1">
-<li><strong>Deviation</strong> <span class="math inline">\(d_i = X_i - M\)</span><br>
+<li><strong>Deviation</strong> of each observation <span class="math inline">\(d_i = X_i - M\)</span><br>
 </li>
-<li><span class="math inline">\(\sum d_i = 0\)</span><br>
-</li>
-<li>Square deviations to avoid cancellation: <span class="math inline">\((X_i - M)^2\)</span></li>
+<li>Adding all deviations always gives <span class="math inline">\(\sum d_i = 0\)</span></li>
+<li>Squaring deviations removes negative values to avoid cancellation: <span class="math inline">\((X_i - M)^2\)</span></li>
 </ol>
 <p><span class="math display">\[
 SS
@@ -764,8 +742,8 @@ SS
 \frac{\bigl(\sum_{i=1}^{n} X_i\bigr)^2}{n}
 \]</span></p>
 </section>
-<section id="deviations-ss-example-1-2" class="slide level2 smaller">
-<h2>Deviations &amp; SS — Example (1 / 2)</h2>
+<section id="deviations-ss---example-1-2" class="slide level2 smaller">
+<h2>Deviations &amp; SS - Example (1 / 2)</h2>
 <p>Dataset: 4, 6, 7, 3, 10<br>
 Mean (M = 6)</p>
 <table class="caption-top">
@@ -800,8 +778,8 @@ Mean (M = 6)</p>
 </table>
 <p>Sum of deviations: <span class="math inline">\(-2 + 0 + 1 - 3 + 4 = 0\;\checkmark\)</span></p>
 </section>
-<section id="deviations-ss-example-2-2" class="slide level2 smaller">
-<h2>Deviations &amp; SS — Example (2 / 2)</h2>
+<section id="deviations-ss---example-2-2" class="slide level2 smaller">
+<h2>Deviations &amp; SS - Example (2 / 2)</h2>
 <table class="caption-top">
 <thead>
 <tr class="header">
@@ -851,15 +829,10 @@ SS = 4 + 0 + 1 + 9 + 16 = 30
 SS = 210 - 180 = 30 \;\checkmark
 \]</span></p>
 </section>
-<section id="visualising-variance" class="slide level2">
-<h2>Visualising Variance</h2>
-
-<img data-src="Lecture2_Descriptive_Statistics_files/figure-revealjs/var-plot-1.png" class="quarto-figure quarto-figure-center r-stretch" style="width:100.0%"></section>
-<section id="variance-definition" class="slide level2 smaller">
-<h2>Variance — Definition</h2>
-<p><strong>What is variance?</strong></p>
+<section id="variance---definition" class="slide level2 smaller">
+<h2>Variance - Definition</h2>
 <blockquote>
-<p>The <strong>average of the squared deviations</strong> from the mean —yielding a single number that captures how much the scores “fan out” around their center: the larger the average squared distance, the more widely dispersed the data; the smaller it is, the more tightly the scores cluster near the mean.</p>
+<p>The <strong>average squared deviation</strong> from the mean. Captures average spread of scores around the center: larger variance implies widely dispersed the data; smaller variance implies scores are tightly clustered around the mean.</p>
 </blockquote>
 <table class="caption-top">
 <colgroup>
@@ -878,21 +851,30 @@ SS = 210 - 180 = 30 \;\checkmark
 <tr class="odd">
 <td>Population variance</td>
 <td><span class="math inline">\(\displaystyle \sigma^{2} \;=\; \frac{SS}{N}\)</span></td>
-<td>units²</td>
+<td>units<span class="math inline">\(^2\)</span></td>
 </tr>
 <tr class="even">
 <td>Sample variance</td>
 <td><span class="math inline">\(\displaystyle s^{2} \;=\; \frac{SS}{\,n-1\,}\)</span></td>
-<td>units²</td>
+<td>units<span class="math inline">\(^2\)</span></td>
 </tr>
 </tbody>
 </table>
-<p><strong>Why divide the sample SS by <span class="math inline">\(n-1\)</span>?</strong><br>
-Only <strong><span class="math inline">\(n-1\)</span> degrees of freedom</strong> remain once we have estimated the sample mean (<span class="math inline">\(\bar X\)</span>). Using <span class="math inline">\(n-1\)</span> instead of <span class="math inline">\(n\)</span> corrects the bias and makes <span class="math inline">\(s^{2}\)</span> an <em>unbiased</em> estimator of the population variance <span class="math inline">\(\sigma^{2}\)</span>.</p>
 </section>
-<section id="variance-numerical-example" class="slide level2 smaller">
-<h2>Variance — Numerical Example</h2>
-<p>Dataset: 4, 6, 7, 3, 10 (mean <span class="math inline">\(M = 6\)</span>)</p>
+<section id="degrees-of-freedom" class="slide level2 smaller">
+<h2>Degrees of Freedom</h2>
+<p><strong>Why divide the sample SS by <span class="math inline">\(n-1\)</span>?</strong></p>
+<ul>
+<li>A sample contains <em>n</em> unique pieces of information.</li>
+<li>If we estimate the mean from the sample, we have <span class="math inline">\(n-1\)</span> remaining unique pieces of information (plus the mean)</li>
+<li>We pay for each estimated quantity with a “degree of freedom”</li>
+<li>Degrees of freedom of <span class="math inline">\(df\)</span> is a “counter” of how many more things we can estimate</li>
+<li>Once <span class="math inline">\(df\)</span> reaches zero, we have estimated as many statistics as we had pieces of information, so we cannot estimate anything more Only <strong><span class="math inline">\(n-1\)</span> degrees of freedom</strong> remain once we have estimated the sample mean (<span class="math inline">\(\bar X\)</span>). Using <span class="math inline">\(n-1\)</span> instead of <span class="math inline">\(n\)</span> corrects the bias and makes <span class="math inline">\(s^{2}\)</span> an <em>unbiased</em> estimator of the population variance <span class="math inline">\(\sigma^{2}\)</span>.</li>
+</ul>
+</section>
+<section id="variance---numerical-example" class="slide level2 smaller">
+<h2>Variance - Numerical Example</h2>
+<p>Dataset: 4, 6, 7, 3, 10 (mean <span class="math inline">\(M = 6\)</span>)</p>
 <table class="caption-top">
 <thead>
 <tr class="header">
@@ -936,13 +918,13 @@ s^{2} \;=\; \frac{SS}{n-1} \;=\; \frac{30}{4} \;=\; 7.5
 \]</span></p>
 <p>So the <strong>sample variance</strong> is <strong>7.5 units²</strong>.</p>
 </section>
-<section id="standard-deviation-definition" class="slide level2 smaller">
-<h2>Standard Deviation — Definition</h2>
+<section id="standard-deviation---definition" class="slide level2 smaller">
+<h2>Standard Deviation - Definition</h2>
 <p><strong>What does SD tell us?</strong></p>
 <blockquote>
-<p>The <strong>typical distance</strong> (spread) of scores from the mean, expressed in the <em>same units</em> as the data.</p>
+<p><strong>Typical distance</strong> of scores from the mean, in the <em>same units</em> as the data.</p>
 </blockquote>
-<p>Because variance squares deviations (units²), we take the <strong>square-root</strong> to get back to the original scale.</p>
+<p>Because variance is expressed in squared units, we take the <strong>square-root</strong> to get back the original scale.</p>
 <table class="caption-top">
 <colgroup>
 <col style="width: 40%">
@@ -969,10 +951,11 @@ s^{2} \;=\; \frac{SS}{n-1} \;=\; \frac{30}{4} \;=\; 7.5
 </tr>
 </tbody>
 </table>
-<p>Key idea: One SD ≈ the average amount by which scores deviate from the mean.</p>
+<p>Conceptually: One SD is the average deviation from the mean.</p>
+<p>Mathematically, this is not correct. The variance is computed from squared deviations, so extreme scores have more impact than scores near the mean. That is why we say <em>standard</em> deviation, not <em>average</em> deviation.</p>
 </section>
-<section id="standard-deviation-example" class="slide level2 smaller">
-<h2>Standard Deviation — Example</h2>
+<section id="standard-deviation---example" class="slide level2 smaller">
+<h2>Standard Deviation - Example</h2>
 <p>From the variance slide we found a <strong>sample variance</strong> of <span class="math inline">\(s^{2} = 7.5\)</span>.</p>
 <p><span class="math display">\[
 s \;=\; \sqrt{7.5} \;\approx\; 2.74
@@ -1001,7 +984,7 @@ s \;=\; \sqrt{7.5} \;\approx\; 2.74
 </tr>
 <tr class="even">
 <td>Multiply by <em>c</em></td>
-<td>SD × <em>c</em></td>
+<td><span class="math inline">\(c*\text{SD}\)</span></td>
 </tr>
 <tr class="odd">
 <td>Add extreme score</td>
@@ -1010,9 +993,9 @@ s \;=\; \sqrt{7.5} \;\approx\; 2.74
 </tbody>
 </table>
 </section>
-<section id="sd-effect-of-transformations" class="slide level2 smaller">
-<h2>SD — Effect of Transformations</h2>
-<p>Original dataset: 4, 6, 7, 3, 10 (sample SD ≈ <strong>2.74</strong>)</p>
+<section id="sd---effect-of-transformations" class="slide level2 smaller">
+<h2>SD - Effect of Transformations</h2>
+<p>Original dataset: 4, 6, 7, 3, 10; SD = 2.74</p>
 <table class="caption-top" style="width:100%;">
 <colgroup>
 <col style="width: 21%">
@@ -1039,13 +1022,13 @@ s \;=\; \sqrt{7.5} \;\approx\; 2.74
 <td>Multiply by <span class="math inline">\(c = 3\)</span></td>
 <td>12, 18, 21, 9, 30</td>
 <td><strong>8.22</strong></td>
-<td>SD × 3</td>
+<td>3*SD</td>
 </tr>
 <tr class="odd">
 <td>Add extreme score (42)</td>
 <td>4, 6, 7, 3, 10, 42</td>
 <td><strong>14.9</strong></td>
-<td>SD ↑ sharply</td>
+<td>SD increases</td>
 </tr>
 </tbody>
 </table>
@@ -1112,7 +1095,7 @@ s \;=\; \sqrt{7.5} \;\approx\; 2.74
 <section id="key-takeaways" class="slide level2">
 <h2>Key Take‑aways</h2>
 <ul>
-<li>Mean, median, mode each define “centre” differently.<br>
+<li>Mean, median, mode each define “center” differently.<br>
 </li>
 <li>Variance and SD quantify spread; range is quick but crude.<br>
 </li>
@@ -1121,13 +1104,24 @@ s \;=\; \sqrt{7.5} \;\approx\; 2.74
 <li>Visualising deviations builds intuition for SS and variance.</li>
 </ul>
 </section>
+<section id="bonus-plot-boxplot" class="slide level2">
+<h2>Bonus plot: Boxplot</h2>
+
+<img data-src="Lecture2_Descriptive_Statistics_files/figure-revealjs/unnamed-chunk-6-1.png" class="quarto-figure quarto-figure-center r-stretch" style="width:100.0%"><p><font size="4"></font></p><font size="4">
+<ul>
+<li><strong>Median</strong>: 50th percentile, or second quartile (Q2)
+<ul>
+<li>Thick line in the middle</li>
+</ul></li>
+<li><strong>Box</strong>: ranges from 25th percentile (Q1) to 75th percentile (Q3)</li>
+<li><strong>Interquartile Range (IQR)</strong>: distance between Q3 - Q1</li>
+<li><strong>Whiskers</strong>: extend to last data point within 1.5*IQR from the box</li>
+<li><strong>Outliers</strong>: observations outside the whiskers</li>
+</ul>
+</font><p><font size="4"></font></p>
+</section>
 <section class="slide level2">
 
-</section></section>
-<section id="next-week" class="title-slide slide level1 center">
-<h1>Next Week</h1>
-<p><strong>Lecture&nbsp;3 — Correlation &amp; Covariance</strong></p>
-<p>Bring your SPSS cheat‑sheet!</p>
 <p>
 <script type="application/shiny-prerendered" data-context="server-start">
 library(ggplot2)           # only for making figures
@@ -1181,7 +1175,7 @@ ojs_define <- function(..., .session = shiny::getDefaultReactiveDomain()) {
 
 </div>
 </div>
-</section>
+</section></section>
     </div>
   </div>
 
