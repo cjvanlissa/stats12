@@ -1,0 +1,46 @@
+# Open science and questionable research practices {#sec-testing}
+
+```{r, include = FALSE}
+source("R/booktem_setup.R")
+source("R/my_setup.R")
+```
+## Introduction — Open Science and Questionable Research Practices {#week-open-science-intro}
+
+Scientific claims should earn credibility because their evidence is **transparent and reproducible**, not because results are surprising or the narrative is compelling. Over the past decade, large-scale replication efforts have shown that many published effects weaken or fail to reappear when re-tested with high-powered designs and original materials (e.g., replication effects were, on average, about half the size of originals; 36% of replications were statistically significant versus 97% of originals) (Open Science Collaboration, 2015). At the same time, incentives often reward **publishability**—novel, positive results—over **verifiability**, creating a misalignment between what advances careers and what advances knowledge (Nosek et al., 2012).
+
+This week examines how research practices and incentive structures can **inflate false positives** and **distort effect estimates**. Psychology has reported an unusually high share of significant findings (≈96%) despite typical studies being underpowered—conditions that favor publication bias and exaggerated effects (Bakker, van Dijk, & Wicherts, 2012). When samples are small, hypotheses are numerous, and analytic choices are flexible, the **positive predictive value** of a single significant result is low (Ioannidis, 2005). These problems motivate **open-science** reforms that reward accuracy over novelty: preregistration to reduce researcher degrees of freedom and to separate confirmatory from exploratory work; routine sharing of data, code, and materials; and explicit valuing of replication (Nosek et al., 2012; Bakker et al., 2020).
+
+## Questionable Research Practices (QRPs) {#sec-qrps}
+
+**Definition:** QRPs are research and reporting choices that may be defensible in isolation but, when guided by the pursuit of statistical significance, **inflate false positives and effect sizes** and distort the published record. In psychology, unusually high rates of “positive” findings alongside typically low power indicate conditions under which QRPs and publication bias can thrive (Bakker et al., 2012).
+
+**Why they matter.** Small samples produce **imprecise estimates** (high sampling variability). When results are preferentially reported only if $p<.05$, selection operates on that noise: estimates that are **upwardly biased by chance** are more likely to appear in print, yielding **selection-induced overestimation** of effects (Bakker et al., 2012; Ioannidis, 2005). Added **analytic flexibility**—post hoc exclusions, outcome switching, and multiple model specifications—introduces multiplicity and raises the **effective Type I error rate**, further increasing the share of statistically significant findings (Bakker et al., 2012). Under more stringent tests, the pattern reverses: high-powered, preplanned replications recover **smaller effects** and **fewer rejections** (≈36% significant vs. 97% in the originals), indicating that the original record was shaped by QRPs and selective reporting (Open Science Collaboration, 2015).
+
+**Common forms (mechanism → consequence).**
+
+- **Optional stopping / sequential testing:** Peeking at results and adding participants until $p<.05$ → inflates Type I error and exaggerates effects (Bakker et al., 2012).
+- **Selective outcome reporting:** Measuring many dependent variables but reporting only those that are significant → increases the chance of spurious “discoveries” (Bakker et al., 2012; Nosek et al., 2012).
+- **Flexible data cleaning:** Post hoc exclusions, outlier rules, and transformations chosen after seeing results → capitalizes on chance and inflates effects (Bakker et al., 2012).
+- **Researcher degrees of freedom in modeling:** After inspecting the data, trying multiple reasonable model specifications (e.g., covariate sets, transformations, interactions) and reporting only the one with $p<.05$ → inflates the false-positive rate; prespecifying a primary analysis and reporting all specifications mitigate this risk (Bakker et al., 2012; Nosek et al., 2012).
+- **HARKing (hypothesizing after results are known):** Presenting post hoc explanations as if they were a priori predictions → blurs confirmatory and exploratory claims and overstates evidential value (Nosek et al., 2012).
+- **Publication bias (“file drawer”):** Studies with $p<.05$ are more likely to be submitted and published than null results. When typical power is low (e.g., 20–40%), only about 20–40% of studies should be significant **even if effects are real**; yet many literatures report 80–95% significant findings. This gap signals selective publication and inflated effects (Bakker et al., 2012; Open Science Collaboration, 2015).
+
+## Open Science Practices — Preregistration and Registered Reports {#sec-open-practices}
+
+Open practices aim to **realign incentives with accuracy** by making plans, analyses, and materials transparent before outcomes are known, and by valuing methodological rigor over positive results (Nosek et al., 2012).
+
+### Preregistration {#sec-prereg}
+
+**Purpose:** Reduce undisclosed flexibility by **specifying key decisions in advance**—hypotheses, primary outcomes, sampling plan and stopping rule, inclusion/exclusion criteria, randomization, and the primary analysis plan. Preregistration **separates confirmatory from exploratory work**; it does not forbid exploration. Deviations are permitted, but they should be **documented and justified**, with the original, time-stamped plan remaining visible. This transparency lets readers follow the study’s evolution, evaluate analytic degrees of freedom, and interpret results accordingly; it also encourages **follow-up confirmation** of exploratory findings with new data (Bakker et al., 2020; Nosek et al., 2012).
+
+**Quality matters.** Effective preregistrations are **specific, precise, and comprehensive**. Structured templates with itemized prompts constrain opportunistic degrees of freedom better than unstructured formats, though **neither eliminates** flexibility entirely (Bakker et al., 2020).
+
+**What preregistration is not.** It is not a ban on creativity. Exploratory analyses remain valuable, preregistration simply makes their status transparent and encourages follow-up confirmation with **new data** (Bakker et al., 2020).
+
+### Registered Reports {#sec-rr}
+
+**Model.** A two-stage publication track in which the **study rationale, design, and analysis plan** are peer-reviewed **before data collection** (Stage 1). Upon **in-principle acceptance**, the journal commits to publish the results regardless of outcome **if** authors follow the approved protocol (Stage 2). This shifts incentives away from “significance” toward **design quality and theoretical contribution**, reducing publication bias and HARKing pressure (Nosek et al., 2012; Bakker et al., 2020).
+
+**Practical payoff.** Registered Reports move the credibility test **upstream**. Peer review and in-principle acceptance occur **before** data collection, which (a) locks key design and analysis decisions, (b) commits publication regardless of outcome, and (c) requires transparent documentation of any deviations. By decoupling publication from statistical significance and limiting undisclosed flexibility, Registered Reports reduce publication bias, HARKing, and selective reporting, complementing preregistration with editorial enforcement at the design stage (Nosek et al., 2012; Bakker et al., 2020).
+
+

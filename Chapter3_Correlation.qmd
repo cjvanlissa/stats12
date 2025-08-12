@@ -196,7 +196,7 @@ ggpubr::ggarrange(p1,p2,p3, ncol = 3, nrow = 1, labels = "auto")
 ```
 
 Restriction of range can easily happen in real life.
-For example, if your sample only consists of university students, you will probably havce restriction of range on IQ.
+For example, if your sample only consists of university students, you will probably have restriction of range on IQ.
 
 Finally, you may have heard the phrase **correlation does not imply causation**.
 Observing a strong association between two variables does not mean that one causes the other.
