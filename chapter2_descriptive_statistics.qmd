@@ -10,7 +10,7 @@ If you collect data on three variables for five participants, you could imagine 
 Any time you collect data from more than just a handful of participants,
 however, this becomes unfeasible.
 Instead, we report descriptive statistics.
-While some descriptive statistics are *calculated in the same way* as inferential statistics (which are first introduced in the chapter on hypothesis testing),
+While some descriptive statistics are *calculated in the same way* as inferential statistics (which are first introduced in later chapters),
 the distinctive feature of descriptive statistics is that we use them to describe the data observed in a sample, and not to make claims about the larger population.
 
 Descriptive statistics are almost always computed, for a variety of reasons:
@@ -68,7 +68,11 @@ base <- ggplot() +
   geom_vline(xintercept = 0, color = "red", linewidth = 2)
 p1 <- base + geom_function(fun = dnorm)
 p2 <- base + geom_function(fun = function(x){5-abs(x)})
-p3 <- base + geom_function(fun = function(x){5})
+p3 <- base + geom_function(fun = function(x){
+  out <- rep(0, length(x))
+  out[abs(x) < 4] <- 5
+  out
+})
 p4 <- ggplot() +
     xlim(0, 1) +
     theme_void() +
