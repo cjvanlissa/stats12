@@ -1,85 +1,169 @@
-# Falsificationism, Hypothesis Testing, Causality {#sec-testing}
+# Philosophy of Science {#sec-testing}
 
 ```{r, include = FALSE}
 source("R/booktem_setup.R")
 source("R/my_setup.R")
 ```
 
+Students of statistics often have the impression that this course is all about cold, hard facts.
+Nothing could be further from the truth: statistics is a direct extension of philosophy of science.
+The numbers we calculate here only have relevance to real-world research questions thanks to some complex philosophical arguments.
+While most of these are outside the scope of the present course,
+we want you to be familiar with the main concepts before moving on.
+
+## Deduction and Induction in Hypothesis Testing
+
+Hypothesis testing has roots in the philosophy of logic, or correct reasoning.
+In logic, arguments consist of a set of premises, which can be true or false, that together lead to a conclusion, which can also be true or false.
+The most famous example is:
+
+> 1. **Premise:** All men are mortal  
+> 1. **Premise:** Socrates is a man  
+> 1. **Conclusion:** Therefore, Socrates is mortal.
+
+This is a *deductive* argument, which has the property that if the premises are true, then the conclusion must also be true.
+Deductive arguments are also often thought of as arguments from the general to the specific.
+In this case, the general rule "all men are mortal" gives rise to the specific claim that one specific man, Socrates, is also mortal.
+
+The counterpart to deductive reasoning is *inductive* reasoning,
+which proceeds from specific observations or claims to general rules.
+The most famous example is:
+
+> 1. **Premise:** All swans I have ever seen are white  
+> 1. **Conclusion:** Therefore, all swans are white.
+
+Unlike the deductive argument above, however, inductive reasoning does not guarantee that true premises always produce true conclusions.
+Even if it is true that I have only seen white swans, the conclusion is false - black swans exist.
+David Hume introduced another famous example:
+
+> 1. **Premise:** The sun has risen in the east every morning up until now.  
+> 1. **Conclusion:**	The sun will also rise in the east tomorrow.
+
+Here, too, the conclusion is not supported by the premise.
+This might make us feel uncomfortable - which sane person would reject the conclusion that the sun will rise in the east tomorrow?
+This discomfort illustrates that people are naturally inclined to reason inductively.
+As scientists, however, we should be very cautious to remember that this way of reasoning is not guaranteed to produce true conclusions.
+
+Inductive and deductive reasoning are both used in statistical hypothesis testing.
+Deduction is used when we derive a specific prediction (hypothesis) from a general theory.
+For example, we could say that:
+
+> 1. **Premise:** More time spent studying causes better grades.  
+> 1. **Conclusion:** In my dataset, time spent studying should correlate positively with grades.
+
+If the premise is true, then we would expect to observe the corresponding pattern in our data.
+
+Induction comes into play when we draw general conclusions from observed data.
+
+> 1. **Premise:** I observed a positive correlation between time spent studying and grades in my dataset  
+> 1. **Conclusion:** Therefore, time spent studying causes better grades.
+
+This conclusion does not logically follow from the premise. The problem is not resolved by removing the word "causes":
+
+> 1. **Premise:** I observed a positive correlation between time spent studying and grades in my dataset  
+> 1. **Conclusion:** Therefore, time spent studying correlates positively with grades in the general population of students.
+
+It follows that we can never conclusively "prove" general conclusions from specific observations.
+The philosopher David Hume wrote extensively about this "problem of induction":
+How can we justify the assumption that unobserved cases will follow the same patterns as observed ones?
+Hume argued that this assumption cannot be logically justified.
+Our sense that generalization is justified might be based on intuition, but not logic.
+The problem of induction challenges the very foundation of science.
+We cannot escape the use of induction when seeking to learn general insights from specific observations,
+but Hume showed that induction lacks a purely rational justification.
+
 ## Falsificationism
 
-In science, it is often impossible to definitively prove a theory to be true. Instead, scientific theories gain credibility by surviving rigorous attempts to refute them. This idea lies at the heart of **falsificationism**, a philosophical approach most famously articulated by Karl Popper.
+It follows from the problem of induction that it is impossible to definitively prove a theory to be true.
+No matter how much evidence I have observed that supports a theory (white swans),
+all it takes is one refuting observation (black swan) to reject is.
+Karl Popper sought to avoid the problem of induction by devising a scientific method that relies exclusively on deduction:
+[falsificationism](https://plato.stanford.edu/entries/pseudo-science/#PopFal).
+Popper demarcated the distinction between "pseudo-science" and science by arguing that *"[scientific] statements [...] must be capable of conflicting with [...] observations"* (Popper 1962, 39).
+The core business of science, according to Popper, should be to try to reject theories.
+Note that - while Popper's work has been heavily criticized (for good reasons),
+his work is very influential in social science.
+Therefore, Popper is a good *starting point* for our course - even though he probably should not be the *endpoint* for students with a genuine interest in philosophy of science.
 
-According to falsificationism, scientific theories must be **testable** and **falsifiable**. That means they must make predictions that could, in principle, be shown to be false by empirical evidence. A theory that cannot be proven wrong is not scientific—no matter how elegant or persuasive it may seem.
+## Falsificationism and Hypothesis Testing
 
-A classic example is the theory:  
-> “All swans are white.”  
-As long as one observes only white swans, this theory seems to hold. However, the discovery of a **single black swan** is sufficient to falsify it. No number of white swan sightings can conclusively prove the theory true, but just one black swan is enough to disprove it.
+The idea of falsificationism has been very influential in applied statistics in the social sciences, particularly in the practice of "Null-Hypothesis Significance Testing" (NHST).
+In NHST, researchers proceed as follows:
 
-This principle carries over to statistics. When we conduct a hypothesis test, we **do not prove** that a theory is true. Instead, we formulate a **null hypothesis**—a precise claim that we subject to empirical scrutiny. We then examine whether the data are inconsistent with this null hypothesis. If they are, we may reject it, which aligns with the logic of falsification.
+1. Develop a testable proposition about a population parameter; for example:
+    + "On average, my students understand the course material. Their mean grade is $\mu \geq 6$".
+    + "On average, there is a positive association between hours studied and grade, $\rho \geq 0$".
+1. Develop a second hypothesis whose sole purpose is to be rejected, to pay lip service to falsificationism. Call this the "null hypothesis". The "null hypothesis" is often taken to be the exact opposite of the researcher's true belief, or "alternative hypothesis":
+    + "On average, my students **DO NOT** understand the course material. Their mean grade is $\mu < 6$".
+    + "On average, there is **NO** positive association between hours studied and grade, $\rho < 0$".
+1. Execute a procedure to make a decision to reject (falsify) or not reject the null hypothesis (next chapters).
+1. If the null hypothesis is rejected, act as if this finding supports the alternative hypothesis.
 
-For example, suppose we hypothesize that a new drug has no effect on blood pressure. This null hypothesis (*H₀*) is then tested using data. If the evidence strongly contradicts *H₀*, we reject it—not because we have proven it false, but because the data are inconsistent with it under reasonable probabilistic assumptions.
+As argued by Andrew Gelman in [this blog post](https://statmodeling.stat.columbia.edu/2014/09/05/confirmationist-falsificationist-paradigms-science/), this approach only pays lip service to falsificationism.
+A true falsificationist would put their true belief (alternative hypothesis) to the test.
+Fake falsificationism is creating a meaningless, "straw man" null-hypothesis, whose sole purpose is to be rejected.
 
-Falsificationism reminds us that **scientific conclusions are always tentative**. Theories are not confirmed but rather survive successive attempts to falsify them. Statistical methods, when used appropriately, offer a formal mechanism for such attempts.
+## Moving Forward
 
-## Hypothesis Testing 
-
-Hypothesis testing is a method of inferential statistics which allows researchers to draw conclusions about the population based on sample data. It involves formulating hypotheses, calculating test statistics, determining p-values, and drawing conclusions about the null hypothesis.
-
-Hypothesis testing builds upon previously covered topics like sampling theory and estimation, where sample statistics are used as the best estimate of population parameters;
-standard errors to express the uncertainty surrounding those estimates;
-and probability calculus, using probability distributions - like the standard normal distribution - to compute the probability of observing certain values based on the sampling distribution.
-
-To introduce the concept of hypothesis testing, let's consider an intuitive example. Imagine your car won't start, and you hypothesize that the battery is dead. You then perform an experiment by replacing the battery. If the car starts, you conclude that your initial hypothesis was correct - the battery was indeed dead.
-
-In this thought experiment, you only need one piece of evidence.
-Statistical hypothesis instead rely on evidence from many observations, and use probability calculus to test hypotheses in the presence of uncertainty.
-Statistical tests use probability calculations to compute how probable it is to observe the sample data if the null hypothesis were true.
-If the resulting probability is very low, we may doubt whether the null hypothesis is indeed true.
-
-The steps involved in hypothesis testing are as follows:
-
-1. Formulate hypotheses: This involves stating a testable proposition about population parameters.
-2. Calculate a test statistic: The test statistic describes how many standard errors away from the population statistic, under the null hypothesis, the sample statistic is.
-3. Calculate the p-value: The p-value represents the probability of observing a value at least as extreme as the sample statistic, assuming the null hypothesis is true.
-4. Draw a conclusion about the null hypothesis: Based on the p-value, we either reject or fail to reject the null hypothesis.
-
-Hypotheses can be formulated as equality or inequality statements. Equality hypotheses state that a value, difference, or effect is equal to zero, while inequality hypotheses state that a value, difference, or effect is larger or smaller than a specific value. It's important to keep in mind that hypothesis testing does not provide evidence for hypotheses but rather helps in casting doubt on a null hypothesis.
-
-In addition to the null hypothesis, we can also specify an alternative hypothesis.
-The specification of the alternative hypothesis depends on a bit of philosophy of science.
-Fisher's philosophy suggests using only a null hypothesis; if this null hypothesis is rejected, the "truth" must be anything other than the null hypothesis.
-We could thus say that, according to Fisher's philosophy, the alternative hypothesis is the negation of the null hypothesis. If $H_0: \mu = 0$, then $H_a: \mu \neq 0$; or, if $H_0: \mu > 0$, then $H_a: \mu \leq 0$. The alternative hypothesis is in both cases the "opposite" of the null hypothesis.
-
-Neyman-Pearson's philosophy instead involves stating specific null and alternative hypotheses, with an explicit expected effect size for the alternative hypothesis. Assuming a specific expected effect size allows us to calculate the probabilities of drawing correct or incorrect conclusions.
-
-In hypothesis testing, we calculate a test statistic, which measures the distance between the hypothesized population value and the sample statistic in terms of standard errors.
-The probability of observing a test statistic at least as extreme as the one we did observe is computed using an appropriate probability distribution.
-For many tests, we use either the Z-distribution or t-distribution, depending on whether we know the population standard deviation or not.
-This gives us a probability value (p-value), representing the probability of observing data as extreme as or more extreme than the sample data, assuming that the null hypothesis is true.
-
-When interpreting p-values, it's crucial to understand that they give the probability of observing certain data assuming the null hypothesis is true, rather than providing the probability of the null hypothesis being true or false. The p-value is then compared to a pre-determined significance level (usually denoted as alpha) to make a decision about accepting or rejecting the null hypothesis.
-
-Rejecting the null hypothesis indicates that the observed data is unlikely to occur if the null hypothesis were true. On the other hand, failing to reject the null hypothesis means that the observed data is not surprising or does not provide sufficient evidence to reject it.
-
-When testing hypotheses, we can make two types of errors: A Type I error refers to rejecting the null hypothesis when it is true (a false-positive conclusion), while Type II error refers to accepting the null hypothesis when it is false (failing to detect a true effect).
+Where does this leave us? The most important point is that there are important limitations to commonly used methods,
+including null-hypothesis significance testing.
+There is no real satisfying solution.
+Just keep in mind that no statistical test can give evidence in support of a theory or hypothesis; neither a null nor an alternative hypothesis.
 
 ## Causality
 
-A statistical association between variables does not necessarily imply a causal relationship. Instead, causality is either assumed on theoretical grounds, or established using the experimental method. In an experiment, researchers manipulate an independent variable and observe its effects on the dependent variable. However, in many social science studies, experiments are not feasible or ethical, so researchers rely on observational data. In these cases, establishing causal relationships relies on theory and careful statistical analysis.
+Another crucial philosophical issue relevant for statistics is the question of causality.
+Scientists are often interested in causal questions.
+We assume causality, for example, any time we want to *act on* knowledge derived from scientific research.
+For example, say that I do find a strong correlation between hours studied and grade obtained.
+If, based on this finding, you increase your study hours in order to improve your grade - then you are assuming causality.
+The same applies for governments making evidence-based policy,
+companies adjusting sales strategies based on customer analytics,
+or drugs that replenish a particular neurotransmitter that has been found lacking in patients with a specific diagnosis.
 
-One important concept in causal inference is the direction of effects. While statistical methods can identify associations between variables, determining the direction of causality is a causal assumption that cannot be estimated using statistics alone. The assumed direction of effects is often based on theory and prior knowledge of the subject matter. Researchers make informed assumptions about which variable is likely to have a causal effect on the other based on theoretical reasoning and empirical evidence.
+Despite the fact that causality is so important in scientific research,
+it is rarely defined.
+Contemporary definitions are typically based on *counterfactuals*:
+A is a cause of B if B would not have happened if A had not happened.
+This definition has important limitations, but it is sufficient for our course [@halpernModificationHalpernPearlDefinition2015].
 
-In the process of analyzing causal relationships, it is essential to consider the presence of confounders, mediators, and colliders. Confounders are variables that are associated with both the independent and dependent variables and can create a spurious association or distort the true causal relationship. Identifying and controlling for confounders is crucial to ensure accurate causal inference.
+Most people have heard the phrase "correlation does not imply causation".
+What does this mean?
+One important misunderstanding is that the *correlation coefficient* is an inappropriate statistic for investigating causal research questions.
+This is not the case.
+This phrase warns us that, just because observe a statistical association between variables X and Y (for example, a correlation of $r = .43$), that does not mean that X caused Y.
+Importantly, observing this correlation is consistent with a causal effect of X on Y - but also with other explanations.
+For example, maybe Y caused X, or maybe a third variable caused both X and Y, and that is why they are correlated.
 
-Mediators, on the other hand, are variables that explain the relationship between the independent and dependent variables. They act as intermediate steps or process variables in the causal pathway. Understanding and analyzing mediation effects help us understand the underlying mechanisms through which the independent variable affects the dependent variable.
+The problem is related to the previous section:
+observing a pattern in data that is consistent with a causal association between X and Y cannot conclusively prove that X caused Y, no matter what statistic you use to describe the pattern.
 
-Colliders are variables that are caused by both the independent and dependent variables. Controlling for colliders can lead to spurious statistical relationships between unrelated variables. It is essential to be cautious when including variables in the analysis and consider the causal structure of the variables involved.
+So where does causality come from?
+The short answer is: from theory or methodology.
+Causality can be assumed on theoretical grounds,
+or established using a randomized controlled experiment.
+In such an experiment, researchers randomly assign participants to either an experimental condition (e.g., receiving a drug, instruction, treatment, et cetera), or a control condition (e.g., receiving a placebo, no instruction, non-effective treatment, et cetera).
+The random assignment should, theoretically, result in two groups with no systematic differences that could explain between-group differences in the outcome of interest.
+Of course, due to pure chance, it could happen that there are systematic differences (more men in one group, taller people in one group, et cetera).
+But there is no procedure that has a better chance of resulting in comparable groups than random assignment.
 
-One important take-home message is that, in multiple regression, the distinction between confounders and colliders is crucial. Including confounders as control variables in multiple regression improves our inferences - but accidentally including a collider as control variable (severely) biases our inferences. You therefore have to carefully reason about each variable's role in relation to the other variables in the model.
+In the social sciences, experiments are not always feasible or ethical, so researchers often use observational data.
+Does this preclude all causal claims?
+It does not.
+It is perfectly legitimate to present a theory that predicts a causal effect in the Introduction section of your scientific writing,
+and then present empirical data that show a pattern *consistent with* that effect.
+For example, if I assume that hours studied causes improved grades,
+a correlation of $r = .43$ is consistent with that assumption.
+An alternative explanation might be that having receiving high grades in the past has motivated some students to study harder.
+Just make sure not to take the observed data as *evidence for* a causal effect.
+The field of *causal inference* focuses on developing methods that can estimate causal effects (like you would get from a randomized controlled experiment) from observational data [@pearlCausalInferenceStatistics2009].
+
 
 # Lecture
 
-{{< video https://www.youtube.com/embed/-1J2Ge0B3Ro >}}
+TO DO
+
+<!-- {{< video https://www.youtube.com/embed/-1J2Ge0B3Ro >}} -->
 
 # Formative Test
 
