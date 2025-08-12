@@ -5,7 +5,7 @@
 <meta name="generator" content="quarto-1.7.33">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="description" content="Book Description">
-<title>7&nbsp; Hypothesis Testing – Statistics 1 and 2</title>
+<title>6&nbsp; Philosophy of Science – Statistics 1 and 2</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -18,7 +18,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
@@ -26,8 +46,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./glm1_regression.html" rel="next">
-<link href="./Week_4.html" rel="prev">
+<link href="./testing.html" rel="next">
+<link href="./samplingdistribution.html" rel="prev">
 <link href="./images/logos/favicon.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -269,7 +289,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./testing.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Hypothesis Testing</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Week_4.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Philosophy of Science</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -356,13 +376,13 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Week_4.html" class="sidebar-item-text sidebar-link">
+  <a href="./Week_4.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Philosophy of Science</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./testing.html" class="sidebar-item-text sidebar-link active">
+  <a href="./testing.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Hypothesis Testing</span></span></a>
   </div>
 </li>
@@ -499,40 +519,30 @@ window.Quarto = {
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#lecture" id="toc-lecture" class="nav-link active" data-scroll-target="#lecture"><span class="header-section-number">8</span> Lecture</a></li>
+<li><a href="#deduction-and-induction-in-hypothesis-testing" id="toc-deduction-and-induction-in-hypothesis-testing" class="nav-link active" data-scroll-target="#deduction-and-induction-in-hypothesis-testing"><span class="header-section-number">6.1</span> Deduction and Induction in Hypothesis Testing</a></li>
+  <li><a href="#falsificationism" id="toc-falsificationism" class="nav-link" data-scroll-target="#falsificationism"><span class="header-section-number">6.2</span> Falsificationism</a></li>
+  <li><a href="#falsificationism-and-hypothesis-testing" id="toc-falsificationism-and-hypothesis-testing" class="nav-link" data-scroll-target="#falsificationism-and-hypothesis-testing"><span class="header-section-number">6.3</span> Falsificationism and Hypothesis Testing</a></li>
+  <li><a href="#moving-forward" id="toc-moving-forward" class="nav-link" data-scroll-target="#moving-forward"><span class="header-section-number">6.4</span> Moving Forward</a></li>
+  <li><a href="#causality" id="toc-causality" class="nav-link" data-scroll-target="#causality"><span class="header-section-number">6.5</span> Causality</a></li>
+  <li><a href="#lecture" id="toc-lecture" class="nav-link" data-scroll-target="#lecture"><span class="header-section-number">7</span> Lecture</a></li>
+  <li><a href="#formative-test" id="toc-formative-test" class="nav-link" data-scroll-target="#formative-test"><span class="header-section-number">8</span> Formative Test</a></li>
   <li>
-<a href="#statistical-power" id="toc-statistical-power" class="nav-link" data-scroll-target="#statistical-power"><span class="header-section-number">9</span> Statistical Power</a>
+<a href="#tutorial" id="toc-tutorial" class="nav-link" data-scroll-target="#tutorial"><span class="header-section-number">9</span> Tutorial</a>
   <ul class="collapse">
-<li>
-<a href="#hypothesis-testing-type-i-and-type-ii-errors" id="toc-hypothesis-testing-type-i-and-type-ii-errors" class="nav-link" data-scroll-target="#hypothesis-testing-type-i-and-type-ii-errors"><span class="header-section-number">9.1</span> Hypothesis Testing: Type I and Type II Errors</a>
-  <ul class="collapse">
-<li><a href="#how-big-the-effect-is" id="toc-how-big-the-effect-is" class="nav-link" data-scroll-target="#how-big-the-effect-is"><span class="header-section-number">9.1.1</span> How big the effect is</a></li>
-  <li><a href="#how-big-the-sample-is" id="toc-how-big-the-sample-is" class="nav-link" data-scroll-target="#how-big-the-sample-is"><span class="header-section-number">9.1.2</span> How big the sample is</a></li>
-  <li><a href="#how-noisy-the-data-are" id="toc-how-noisy-the-data-are" class="nav-link" data-scroll-target="#how-noisy-the-data-are"><span class="header-section-number">9.1.3</span> How ‘noisy’ the data are</a></li>
-  </ul>
-</li>
-  <li><a href="#power-of-a-test" id="toc-power-of-a-test" class="nav-link" data-scroll-target="#power-of-a-test"><span class="header-section-number">9.2</span> Power of a Test</a></li>
-  <li><a href="#try-it-yourself" id="toc-try-it-yourself" class="nav-link" data-scroll-target="#try-it-yourself"><span class="header-section-number">9.3</span> Try it Yourself</a></li>
-  </ul>
-</li>
-  <li><a href="#formative-test" id="toc-formative-test" class="nav-link" data-scroll-target="#formative-test"><span class="header-section-number">10</span> Formative Test</a></li>
-  <li>
-<a href="#tutorial" id="toc-tutorial" class="nav-link" data-scroll-target="#tutorial"><span class="header-section-number">11</span> Tutorial</a>
-  <ul class="collapse">
-<li><a href="#assignment-1-hypothesis-testing---formulating-hypotheses" id="toc-assignment-1-hypothesis-testing---formulating-hypotheses" class="nav-link" data-scroll-target="#assignment-1-hypothesis-testing---formulating-hypotheses"><span class="header-section-number">11.1</span> Assignment 1: Hypothesis Testing - Formulating Hypotheses</a></li>
-  <li><a href="#assignment-2-test-statistics-alpha-and-significance" id="toc-assignment-2-test-statistics-alpha-and-significance" class="nav-link" data-scroll-target="#assignment-2-test-statistics-alpha-and-significance"><span class="header-section-number">11.2</span> Assignment 2: Test Statistics, Alpha and Significance</a></li>
-  <li><a href="#assignment-3-z-test" id="toc-assignment-3-z-test" class="nav-link" data-scroll-target="#assignment-3-z-test"><span class="header-section-number">11.3</span> Assignment 3: Z-test</a></li>
-  <li><a href="#quiz" id="toc-quiz" class="nav-link" data-scroll-target="#quiz"><span class="header-section-number">11.4</span> Quiz</a></li>
-  <li><a href="#assignment-4-z-test-and-alpha-levels" id="toc-assignment-4-z-test-and-alpha-levels" class="nav-link" data-scroll-target="#assignment-4-z-test-and-alpha-levels"><span class="header-section-number">11.5</span> Assignment 4: Z-test and Alpha-levels</a></li>
-  <li><a href="#quiz-1" id="toc-quiz-1" class="nav-link" data-scroll-target="#quiz-1"><span class="header-section-number">11.6</span> Quiz</a></li>
-  <li><a href="#assignment-5-p-values" id="toc-assignment-5-p-values" class="nav-link" data-scroll-target="#assignment-5-p-values"><span class="header-section-number">11.7</span> Assignment 5: P-values</a></li>
+<li><a href="#assignment-1-hypothesis-testing---formulating-hypotheses" id="toc-assignment-1-hypothesis-testing---formulating-hypotheses" class="nav-link" data-scroll-target="#assignment-1-hypothesis-testing---formulating-hypotheses"><span class="header-section-number">9.1</span> Assignment 1: Hypothesis Testing - Formulating Hypotheses</a></li>
+  <li><a href="#assignment-2-test-statistics-alpha-and-significance" id="toc-assignment-2-test-statistics-alpha-and-significance" class="nav-link" data-scroll-target="#assignment-2-test-statistics-alpha-and-significance"><span class="header-section-number">9.2</span> Assignment 2: Test Statistics, Alpha and Significance</a></li>
+  <li><a href="#assignment-3-z-test" id="toc-assignment-3-z-test" class="nav-link" data-scroll-target="#assignment-3-z-test"><span class="header-section-number">9.3</span> Assignment 3: Z-test</a></li>
+  <li><a href="#quiz" id="toc-quiz" class="nav-link" data-scroll-target="#quiz"><span class="header-section-number">9.4</span> Quiz</a></li>
+  <li><a href="#assignment-4-z-test-and-alpha-levels" id="toc-assignment-4-z-test-and-alpha-levels" class="nav-link" data-scroll-target="#assignment-4-z-test-and-alpha-levels"><span class="header-section-number">9.5</span> Assignment 4: Z-test and Alpha-levels</a></li>
+  <li><a href="#quiz-1" id="toc-quiz-1" class="nav-link" data-scroll-target="#quiz-1"><span class="header-section-number">9.6</span> Quiz</a></li>
+  <li><a href="#assignment-5-p-values" id="toc-assignment-5-p-values" class="nav-link" data-scroll-target="#assignment-5-p-values"><span class="header-section-number">9.7</span> Assignment 5: P-values</a></li>
   </ul>
 </li>
   </ul></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
-<h1 class="title"><span id="sec-testing" class="quarto-section-identifier"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Hypothesis Testing</span></span></h1>
+<h1 class="title"><span id="sec-testing" class="quarto-section-identifier"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Philosophy of Science</span></span></h1>
 </div>
 
 
@@ -546,184 +556,184 @@ window.Quarto = {
   
 
 
-</header><p>Hypothesis testing is a method of inferential statistics which allows researchers to draw conclusions about the population based on sample data. It involves formulating hypotheses, calculating test statistics, determining p-values, and drawing conclusions about the null hypothesis.</p>
-<p>Hypothesis testing builds upon previously covered topics like sampling theory and estimation, where sample statistics are used as the best estimate of population parameters; standard errors to express the uncertainty surrounding those estimates; and probability calculus, using probability distributions - like the standard normal distribution - to compute the probability of observing certain values based on the sampling distribution.</p>
-<p>To introduce the concept of hypothesis testing, let’s consider an intuitive example. Imagine your car won’t start, and you hypothesize that the battery is dead. You then perform an experiment by replacing the battery. If the car starts, you conclude that your initial hypothesis was correct - the battery was indeed dead.</p>
-<p>In this thought experiment, you only need one piece of evidence. Statistical hypothesis instead rely on evidence from many observations, and use probability calculus to test hypotheses in the presence of uncertainty. Statistical tests use probability calculations to compute how probable it is to observe the sample data if the null hypothesis were true. If the resulting probability is very low, we may doubt whether the null hypothesis is indeed true.</p>
-<p>The steps involved in hypothesis testing are as follows:</p>
+</header><p>Students of statistics often have the impression that this course is all about cold, hard facts. Nothing could be further from the truth: statistics is a direct extension of philosophy of science. The numbers we calculate here only have relevance to real-world research questions thanks to some complex philosophical arguments. While most of these are outside the scope of the present course, we want you to be familiar with the main concepts before moving on.</p>
+<section id="deduction-and-induction-in-hypothesis-testing" class="level2" data-number="6.1"><h2 data-number="6.1" class="anchored" data-anchor-id="deduction-and-induction-in-hypothesis-testing">
+<span class="header-section-number">6.1</span> Deduction and Induction in Hypothesis Testing</h2>
+<p>Hypothesis testing has roots in the philosophy of logic, or correct reasoning. In logic, arguments consist of a set of premises, which can be true or false, that together lead to a conclusion, which can also be true or false. The most famous example is:</p>
+<blockquote class="blockquote">
 <ol type="1">
-<li>Formulate hypotheses: This involves stating a testable proposition about population parameters.</li>
-<li>Calculate a test statistic: The test statistic describes how many standard errors away from the population statistic, under the null hypothesis, the sample statistic is.</li>
-<li>Calculate the p-value: The p-value represents the probability of observing a value at least as extreme as the sample statistic, assuming the null hypothesis is true.</li>
-<li>Draw a conclusion about the null hypothesis: Based on the p-value, we either reject or fail to reject the null hypothesis.</li>
+<li>
+<strong>Premise:</strong> All men are mortal<br>
+</li>
+<li>
+<strong>Premise:</strong> Socrates is a man<br>
+</li>
+<li>
+<strong>Conclusion:</strong> Therefore, Socrates is mortal.</li>
 </ol>
-<p>Hypotheses can be formulated as equality or inequality statements. Equality hypotheses state that a value, difference, or effect is equal to zero, while inequality hypotheses state that a value, difference, or effect is larger or smaller than a specific value. It’s important to keep in mind that hypothesis testing does not provide evidence for hypotheses but rather helps in casting doubt on a null hypothesis.</p>
-<p>In addition to the null hypothesis, we can also specify an alternative hypothesis. The specification of the alternative hypothesis depends on a bit of philosophy of science. Fisher’s philosophy suggests using only a null hypothesis; if this null hypothesis is rejected, the “truth” must be anything other than the null hypothesis. We could thus say that, according to Fisher’s philosophy, the alternative hypothesis is the negation of the null hypothesis. If <span class="math inline">\(H_0: \mu = 0\)</span>, then <span class="math inline">\(H_a: \mu \neq 0\)</span>; or, if <span class="math inline">\(H_0: \mu &gt; 0\)</span>, then <span class="math inline">\(H_a: \mu \leq 0\)</span>. The alternative hypothesis is in both cases the “opposite” of the null hypothesis.</p>
-<p>Neyman-Pearson’s philosophy instead involves stating specific null and alternative hypotheses, with an explicit expected effect size for the alternative hypothesis. Assuming a specific expected effect size allows us to calculate the probabilities of drawing correct or incorrect conclusions.</p>
-<p>In hypothesis testing, we calculate a test statistic, which measures the distance between the hypothesized population value and the sample statistic in terms of standard errors. The probability of observing a test statistic at least as extreme as the one we did observe is computed using an appropriate probability distribution. For many tests, we use either the Z-distribution or t-distribution, depending on whether we know the population standard deviation or not. This gives us a probability value (p-value), representing the probability of observing data as extreme as or more extreme than the sample data, assuming that the null hypothesis is true.</p>
-<p>When interpreting p-values, it’s crucial to understand that they give the probability of observing certain data assuming the null hypothesis is true, rather than providing the probability of the null hypothesis being true or false. The p-value is then compared to a pre-determined significance level (usually denoted as alpha) to make a decision about accepting or rejecting the null hypothesis.</p>
-<p>Rejecting the null hypothesis indicates that the observed data is unlikely to occur if the null hypothesis were true. On the other hand, failing to reject the null hypothesis means that the observed data is not surprising or does not provide sufficient evidence to reject it.</p>
-<p>When testing hypotheses, we can make two types of errors: A Type I error refers to rejecting the null hypothesis when it is true (a false-positive conclusion), while Type II error refers to accepting the null hypothesis when it is false (failing to detect a true effect).</p>
-<section id="lecture" class="level1" data-number="8"><h1 data-number="8">
-<span class="header-section-number">8</span> Lecture</h1>
-<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/-1J2Ge0B3Ro" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
-</section><section id="statistical-power" class="level1" data-number="9"><h1 data-number="9">
-<span class="header-section-number">9</span> Statistical Power</h1>
-<section id="hypothesis-testing-type-i-and-type-ii-errors" class="level2" data-number="9.1"><h2 data-number="9.1" class="anchored" data-anchor-id="hypothesis-testing-type-i-and-type-ii-errors">
-<span class="header-section-number">9.1</span> Hypothesis Testing: Type I and Type II Errors</h2>
-<p>When we conduct a null-hypothesis significance test, we select the significance level <span class="math inline">\(\alpha\)</span>. Alpha is the probability of committing a Type I error (drawing a false-positive conclusion). Since we select the alpha level, it is known. If we use <span class="math inline">\(\alpha = .05\)</span>, that means that - by definition - we accept a 5% risk of committing a Type I error.</p>
-<p>There is also the probability of committing a Type II error. This is called <span class="math inline">\(\beta\)</span>. We don’t know the value of <span class="math inline">\(\beta\)</span> beforehand, but we can calculate it if we make some assumptions. The probability of committing a Type II error (drawing a false-negative conclusion) depends on a few factors:</p>
-<section id="how-big-the-effect-is" class="level3" data-number="9.1.1"><h3 data-number="9.1.1" class="anchored" data-anchor-id="how-big-the-effect-is">
-<span class="header-section-number">9.1.1</span> How big the effect is</h3>
-<p>Big effects are harder to miss; imagine trying to detect a difference between two groups. If the mean of both groups is really close together, it will be harder to detect a difference (see below):</p>
-<div id="fig-effectsize" class="quarto-layout-panel">
-<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-effectsize-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="quarto-layout-row">
-<div class="cell quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="testing_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="cell quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="testing_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-effectsize-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;9.1: Effect of Effect Size
-</figcaption></figure>
-</div>
-</section><section id="how-big-the-sample-is" class="level3" data-number="9.1.2"><h3 data-number="9.1.2" class="anchored" data-anchor-id="how-big-the-sample-is">
-<span class="header-section-number">9.1.2</span> How big the sample is</h3>
-<p>Large samples make it easier to detect smaller effects; imagine that the two distributions below are sampling distributions for two groups with very small sample sizes (left) and very large sample sizes (right):</p>
-<div id="fig-effectsize" class="quarto-layout-panel">
-<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-effectsize-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="quarto-layout-row">
-<div class="cell quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="testing_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="cell quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="testing_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-effectsize-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;9.2: Effect of Sample Size
-</figcaption></figure>
-</div>
-</section><section id="how-noisy-the-data-are" class="level3" data-number="9.1.3"><h3 data-number="9.1.3" class="anchored" data-anchor-id="how-noisy-the-data-are">
-<span class="header-section-number">9.1.3</span> How ‘noisy’ the data are</h3>
-<p>The standard deviation is a measure of how “noisy” the data are. If observations are very spread out (high standard deviation), it will be harder to detect small differences. Consider that a small difference between two groups would be hard to detect if the two groups overlapped very much (= high standard deviation). Look at the same picture from the previous point (sample size); it illustrates this principle. The reason that both sample size and “noise in the data” have an impact on the probability of committing a Type II error is because they are used to calculate the standard error:</p>
-<p><span class="math display">\[
-SE_M = \frac{SD}{\sqrt{n}}
-\]</span></p>
-</section></section><section id="power-of-a-test" class="level2" data-number="9.2"><h2 data-number="9.2" class="anchored" data-anchor-id="power-of-a-test">
-<span class="header-section-number">9.2</span> Power of a Test</h2>
-<p>The “power” of a test is the probability that it will correctly detect a true effect of a specific size. Since <span class="math inline">\(\beta\)</span> is the probability of <em>missing</em> a true effect, it follows that <span class="math inline">\(1-\beta\)</span> must be the probability of <em>detecting</em> a true effect, or the power.</p>
-<p>As explained in the previous paragraph, we must know a few pieces of information to be able to calculate <span class="math inline">\(\beta\)</span>:</p>
+</blockquote>
+<p>This is a <em>deductive</em> argument, which has the property that if the premises are true, then the conclusion must also be true. Deductive arguments are also often thought of as arguments from the general to the specific. In this case, the general rule “all men are mortal” gives rise to the specific claim that one specific man, Socrates, is also mortal.</p>
+<p>The counterpart to deductive reasoning is <em>inductive</em> reasoning, which proceeds from specific observations or claims to general rules. The most famous example is:</p>
+<blockquote class="blockquote">
 <ol type="1">
-<li>Effect size</li>
-<li>Sample size</li>
-<li>Standard deviation</li>
+<li>
+<strong>Premise:</strong> All swans I have ever seen are white<br>
+</li>
+<li>
+<strong>Conclusion:</strong> Therefore, all swans are white.</li>
 </ol>
-<p>When we conduct a study, we often know the sample size and standard deviation. The effect size is unknown, but we can assume a specific effect size. Think of this as an “informative” alternative hypothesis. The standard alternative hypothesis in null-hypothesis significance testing is just “anything that’s not the null hypothesis”. So if <span class="math inline">\(H_0: \mu = 0\)</span>, then <span class="math inline">\(H_a: \mu \neq 0\)</span>. Now, we must specify an exact value. For example, we could choose the smallest effect size of interest as the alternative hypothesis: Let’s say we’d be interested in a mean value of <span class="math inline">\(\mu = 0.2\)</span>. Then we could set our informative alternative hypothesis as <span class="math inline">\(H_i: \mu = 0.2\)</span>.</p>
-<p>Now we have all the information needed to calculate the power of the test. To do so, we draw two sampling distributions (see illustration below): One (in red) centered around the null hypothesis, <span class="math inline">\(H_0: \mu = 0\)</span>, and one centered around the informative alternative hypothesis, <span class="math inline">\(H_i: \mu = 0.2\)</span>. We find the critical value in the red distribution around the null hypothesis; remember that <span class="math inline">\(\alpha\)</span> is the 5% of probability in the right tail of the red distribution. But we can now also calculate <span class="math inline">\(\beta\)</span>, the unknown probability in the tail of the blue distribution <strong>to the left</strong> of the critical value. If the informative alternative hypothesis is true, then this is the probability of failing to detect that true effect. Although this example has no numeric values, we see that the blue shaded area representing <span class="math inline">\(\beta\)</span> is slightly smaller than the red shaded area representing <span class="math inline">\(\alpha\)</span>, so the probability of committing a Type II error must be less than .05, and therefore the power <span class="math inline">\(1-\beta\)</span> must be greater than 95%! If our assumptions are correct, we’d be really well able to detect a true effect of the size specified under <span class="math inline">\(H_i\)</span>.</p>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="testing_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
-</figure>
-</div>
-</div>
-</div>
-</section><section id="try-it-yourself" class="level2" data-number="9.3"><h2 data-number="9.3" class="anchored" data-anchor-id="try-it-yourself">
-<span class="header-section-number">9.3</span> Try it Yourself</h2>
-<p>Now, let’s calculate this by hand. Imagine that last year’s average grade was <span class="math inline">\(M = 5\)</span>, with a standard deviation of <span class="math inline">\(SD = 1.5\)</span>. This year, we have 73 students. We’ve made some changes to the teaching material, and we hope to reach an average grade of <span class="math inline">\(M = 6\)</span>.</p>
-<p>Assume that the standard deviation this year will be the same as last year, and calculate the power of being able to detect a mean grade of <span class="math inline">\(H_i: \mu = 6\)</span> when the null hypothesis is that the mean grade is the same as last year, <span class="math inline">\(H_0: \mu = 5\)</span>.</p>
-<p><strong>Step 1: Calculate the SE</strong></p>
-<p>We calculate the SE as <span class="math inline">\(SE = \frac{SD}{\sqrt{n}} = \frac{1.5}{\sqrt{73}} = 0.18\)</span></p>
-<p><strong>Step 2: Calculate Critical Value</strong></p>
-<p>The critical value is the boundary that corresponds to <span class="math inline">\(\alpha = .05\)</span> in the distribution centered around <span class="math inline">\(H_0\)</span>. Looking at the t- or Z-table (because sample size is &gt;&gt;30), we see that this corresponds to a Z-value of about 1.64.</p>
-<p><img src="./z-05.png" class="img-fluid"></p>
-<p>Converting this back to a score on the grades scale, we get:</p>
-<p><span class="math display">\[
-\text{Grade}_{\text{critical}} = (Z_{\text{critical}} * SE) + \mu_{H_0} = (1.64 * 0.18) + 5 = 5.3
-\]</span></p>
-<p><strong>Step 3: Get Left-Tail Probability for That Value</strong></p>
-<p>Now, we just need to get the left-tail probability for that critical value, in the blue distribution. Convert that critical value back to a Z-value, but now in the blue distribution which is centered around <span class="math inline">\(\mu_{H_i} = 6\)</span>:</p>
-<p><span class="math display">\[
-Z = \frac{\text{Grade}_{\text{critical}}-\mu_{H_i}}{SE} = \frac{5.3 - 6}{0.18}  = -3.89
-\]</span></p>
-<p>This is an extremely large (negative) Z-value; it’s not even in our table. Thus, the left-tail probability <span class="math inline">\(\beta\)</span> will be tiny - <span class="math inline">\(\beta &lt; .01\)</span>.</p>
-<p><strong>That means that our power to detect a true effect of 6 would be very high - <span class="math inline">\(1-\beta = 1-.01 = .99\)</span>, 99%!</strong></p>
-</section></section><section id="formative-test" class="level1" data-number="10"><h1 data-number="10">
-<span class="header-section-number">10</span> Formative Test</h1>
+</blockquote>
+<p>Unlike the deductive argument above, however, inductive reasoning does not guarantee that true premises always produce true conclusions. Even if it is true that I have only seen white swans, the conclusion is false - black swans exist. David Hume introduced another famous example:</p>
+<blockquote class="blockquote">
+<ol type="1">
+<li>
+<strong>Premise:</strong> The sun has risen in the east every morning up until now.<br>
+</li>
+<li>
+<strong>Conclusion:</strong> The sun will also rise in the east tomorrow.</li>
+</ol>
+</blockquote>
+<p>Here, too, the conclusion is not supported by the premise. This might make us feel uncomfortable - which sane person would reject the conclusion that the sun will rise in the east tomorrow? This discomfort illustrates that people are naturally inclined to reason inductively. As scientists, however, we should be very cautious to remember that this way of reasoning is not guaranteed to produce true conclusions.</p>
+<p>Inductive and deductive reasoning are both used in statistical hypothesis testing. Deduction is used when we derive a specific prediction (hypothesis) from a general theory. For example, we could say that:</p>
+<blockquote class="blockquote">
+<ol type="1">
+<li>
+<strong>Premise:</strong> More time spent studying causes better grades.<br>
+</li>
+<li>
+<strong>Conclusion:</strong> In my dataset, time spent studying should correlate positively with grades.</li>
+</ol>
+</blockquote>
+<p>If the premise is true, then we would expect to observe the corresponding pattern in our data.</p>
+<p>Induction comes into play when we draw general conclusions from observed data.</p>
+<blockquote class="blockquote">
+<ol type="1">
+<li>
+<strong>Premise:</strong> I observed a positive correlation between time spent studying and grades in my dataset<br>
+</li>
+<li>
+<strong>Conclusion:</strong> Therefore, time spent studying causes better grades.</li>
+</ol>
+</blockquote>
+<p>This conclusion does not logically follow from the premise. The problem is not resolved by removing the word “causes”:</p>
+<blockquote class="blockquote">
+<ol type="1">
+<li>
+<strong>Premise:</strong> I observed a positive correlation between time spent studying and grades in my dataset<br>
+</li>
+<li>
+<strong>Conclusion:</strong> Therefore, time spent studying correlates positively with grades in the general population of students.</li>
+</ol>
+</blockquote>
+<p>It follows that we can never conclusively “prove” general conclusions from specific observations. The philosopher David Hume wrote extensively about this “problem of induction”: How can we justify the assumption that unobserved cases will follow the same patterns as observed ones? Hume argued that this assumption cannot be logically justified. Our sense that generalization is justified might be based on intuition, but not logic. The problem of induction challenges the very foundation of science. We cannot escape the use of induction when seeking to learn general insights from specific observations, but Hume showed that induction lacks a purely rational justification.</p>
+</section><section id="falsificationism" class="level2" data-number="6.2"><h2 data-number="6.2" class="anchored" data-anchor-id="falsificationism">
+<span class="header-section-number">6.2</span> Falsificationism</h2>
+<p>It follows from the problem of induction that it is impossible to definitively prove a theory to be true. No matter how much evidence I have observed that supports a theory (white swans), all it takes is one refuting observation (black swan) to reject is. Karl Popper sought to avoid the problem of induction by devising a scientific method that relies exclusively on deduction: <a href="https://plato.stanford.edu/entries/pseudo-science/#PopFal">falsificationism</a>. Popper demarcated the distinction between “pseudo-science” and science by arguing that <em>“[scientific] statements […] must be capable of conflicting with […] observations”</em> (Popper 1962, 39). The core business of science, according to Popper, should be to try to reject theories. Note that - while Popper’s work has been heavily criticized (for good reasons), his work is very influential in social science. Therefore, Popper is a good <em>starting point</em> for our course - even though he probably should not be the <em>endpoint</em> for students with a genuine interest in philosophy of science.</p>
+</section><section id="falsificationism-and-hypothesis-testing" class="level2" data-number="6.3"><h2 data-number="6.3" class="anchored" data-anchor-id="falsificationism-and-hypothesis-testing">
+<span class="header-section-number">6.3</span> Falsificationism and Hypothesis Testing</h2>
+<p>The idea of falsificationism has been very influential in applied statistics in the social sciences, particularly in the practice of “Null-Hypothesis Significance Testing” (NHST). In NHST, researchers proceed as follows:</p>
+<ol type="1">
+<li>Develop a testable proposition about a population parameter; for example:
+<ul>
+<li>“On average, my students understand the course material. Their mean grade is <span class="math inline">\(\mu \geq 6\)</span>”.</li>
+<li>“On average, there is a positive association between hours studied and grade, <span class="math inline">\(\rho \geq 0\)</span>”.</li>
+</ul>
+</li>
+<li>Develop a second hypothesis whose sole purpose is to be rejected, to pay lip service to falsificationism. Call this the “null hypothesis”. The “null hypothesis” is often taken to be the exact opposite of the researcher’s true belief, or “alternative hypothesis”:
+<ul>
+<li>“On average, my students <strong>DO NOT</strong> understand the course material. Their mean grade is <span class="math inline">\(\mu &lt; 6\)</span>”.</li>
+<li>“On average, there is <strong>NO</strong> positive association between hours studied and grade, <span class="math inline">\(\rho &lt; 0\)</span>”.</li>
+</ul>
+</li>
+<li>Execute a procedure to make a decision to reject (falsify) or not reject the null hypothesis (next chapters).</li>
+<li>If the null hypothesis is rejected, act as if this finding supports the alternative hypothesis.</li>
+</ol>
+<p>As argued by Andrew Gelman in <a href="https://statmodeling.stat.columbia.edu/2014/09/05/confirmationist-falsificationist-paradigms-science/">this blog post</a>, this approach only pays lip service to falsificationism. A true falsificationist would put their true belief (alternative hypothesis) to the test. Fake falsificationism is creating a meaningless, “straw man” null-hypothesis, whose sole purpose is to be rejected.</p>
+</section><section id="moving-forward" class="level2" data-number="6.4"><h2 data-number="6.4" class="anchored" data-anchor-id="moving-forward">
+<span class="header-section-number">6.4</span> Moving Forward</h2>
+<p>Where does this leave us? The most important point is that there are important limitations to commonly used methods, including null-hypothesis significance testing. There is no real satisfying solution. Just keep in mind that no statistical test can give evidence in support of a theory or hypothesis; neither a null nor an alternative hypothesis.</p>
+</section><section id="causality" class="level2" data-number="6.5"><h2 data-number="6.5" class="anchored" data-anchor-id="causality">
+<span class="header-section-number">6.5</span> Causality</h2>
+<p>Another crucial philosophical issue relevant for statistics is the question of causality. Scientists are often interested in causal questions. We assume causality, for example, any time we want to <em>act on</em> knowledge derived from scientific research. For example, say that I do find a strong correlation between hours studied and grade obtained. If, based on this finding, you increase your study hours in order to improve your grade - then you are assuming causality. The same applies for governments making evidence-based policy, companies adjusting sales strategies based on customer analytics, or drugs that replenish a particular neurotransmitter that has been found lacking in patients with a specific diagnosis.</p>
+<p>Despite the fact that causality is so important in scientific research, it is rarely defined. Contemporary definitions are typically based on <em>counterfactuals</em>: A is a cause of B if B would not have happened if A had not happened. This definition has important limitations, but it is sufficient for our course <span class="citation" data-cites="halpernModificationHalpernPearlDefinition2015">(<a href="references.html#ref-halpernModificationHalpernPearlDefinition2015" role="doc-biblioref">Halpern, 2015</a>)</span>.</p>
+<p>Most people have heard the phrase “correlation does not imply causation”. What does this mean? One important misunderstanding is that the <em>correlation coefficient</em> is an inappropriate statistic for investigating causal research questions. This is not the case. This phrase warns us that, just because observe a statistical association between variables X and Y (for example, a correlation of <span class="math inline">\(r = .43\)</span>), that does not mean that X caused Y. Importantly, observing this correlation is consistent with a causal effect of X on Y - but also with other explanations. For example, maybe Y caused X, or maybe a third variable caused both X and Y, and that is why they are correlated.</p>
+<p>The problem is related to the previous section: observing a pattern in data that is consistent with a causal association between X and Y cannot conclusively prove that X caused Y, no matter what statistic you use to describe the pattern.</p>
+<p>So where does causality come from? The short answer is: from theory or methodology. Causality can be assumed on theoretical grounds, or established using a randomized controlled experiment. In such an experiment, researchers randomly assign participants to either an experimental condition (e.g., receiving a drug, instruction, treatment, et cetera), or a control condition (e.g., receiving a placebo, no instruction, non-effective treatment, et cetera). The random assignment should, theoretically, result in two groups with no systematic differences that could explain between-group differences in the outcome of interest. Of course, due to pure chance, it could happen that there are systematic differences (more men in one group, taller people in one group, et cetera). But there is no procedure that has a better chance of resulting in comparable groups than random assignment.</p>
+<p>In the social sciences, experiments are not always feasible or ethical, so researchers often use observational data. Does this preclude all causal claims? It does not. It is perfectly legitimate to present a theory that predicts a causal effect in the Introduction section of your scientific writing, and then present empirical data that show a pattern <em>consistent with</em> that effect. For example, if I assume that hours studied causes improved grades, a correlation of <span class="math inline">\(r = .43\)</span> is consistent with that assumption. An alternative explanation might be that having receiving high grades in the past has motivated some students to study harder. Just make sure not to take the observed data as <em>evidence for</em> a causal effect.</p>
+<p>What is required to argue that X has a causal effect on Y? Several philosophers have addressed this issue; most notably Hume and Mill <span class="citation" data-cites="morabiaHumeMillHill2013">(see <a href="references.html#ref-morabiaHumeMillHill2013" role="doc-biblioref">Morabia, 2013</a>)</span>. The necessary conditions for causality are sometimes summarized as association, temporal precedence, and non-spuriousness. Below, each is supported with quotes from <a href="https://www.gutenberg.org/files/9662/9662-h/9662-h.htm">Hume (1902)</a><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>:</p>
+<ol type="1">
+<li>
+<strong>Association</strong>: Cause and effect must be associated (this could be statistical association)
+<ul>
+<li>“When one particular species of event has always […] been conjoined with another, we […] call the one object, Cause; the other, Effect.” (VII, II, 59)</li>
+<li>“familiar objects or events to be constantly conjoined together” (V, I, 35) There must be a “constant union” between cause and effect, and they must be “contiguous in space and time” (Hume 1739,16, pp.&nbsp;173–175).</li>
+</ul>
+</li>
+<li>
+<strong>Temporal precedence</strong>: The cause must occur before the effect.
+<ul>
+<li>observe a continual succession of objects, and one event following another (V, I, 35)</li>
+<li>“[when] the same object is always followed by the same event; we then begin to entertain the notion of cause and connexion.” (VII, II, 61)</li>
+</ul>
+</li>
+<li>
+<strong>Non-spuriousness</strong>: All alternative explanations of the effect are excluded.
+<ul>
+<li>“Their conjunction may be arbitrary and casual. There may be no reason to infer the existence of one from the appearance of the other.” (describing spuriousness; V, I, 35)</li>
+<li>“we may define a cause to be an object, followed by another, and where all the objects similar to the first are followed by objects similar to the second. Or in other words where, if the first object had not been, the second never had existed.” (VII, II, 61)</li>
+</ul>
+</li>
+</ol>
+<p>This latter definition resembles the aforementioned counterfactual definition of causality. Note that this definition does not <em>require</em> randomized experimentation, but randomized experiments do help us meet all three criteria. The field of <em>causal inference</em> focuses on developing methods that can estimate causal effects (like you would get from a randomized controlled experiment) from observational data <span class="citation" data-cites="pearlCausalInferenceStatistics2009">(<a href="references.html#ref-pearlCausalInferenceStatistics2009" role="doc-biblioref">Pearl, 2009</a>)</span>.</p>
+</section><section id="lecture" class="level1" data-number="7"><h1 data-number="7">
+<span class="header-section-number">7</span> Lecture</h1>
+<p>TO DO</p>
+<!--  -->
+</section><section id="formative-test" class="level1" data-number="8"><h1 data-number="8">
+<span class="header-section-number">8</span> Formative Test</h1>
 <p>A formative test helps you assess your progress in the course, and helps you address any blind spots in your understanding of the material. If you get a question wrong, you will receive a hint on how to improve your understanding of the material.</p>
 <p>Complete the formative test ideally after you’ve seen the lecture, but before the lecture meeting in which we can discuss any topics that need more attention</p>
 <div class="cell" data-layout-align="center">
 <div class="webex-check webex-box">
 <p><strong>Question 1</strong></p>
-For a two-tailed Z-test of the sample mean, the p-value is the probability of finding a more extreme sample mean than the observed sample mean, if the alternative hypothesis were true.
-<div id="radio_PNXSDCDVME" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_PNXSDCDVME" value="answer"><span>FALSE</span></label><label><input type="radio" autocomplete="off" name="radio_PNXSDCDVME" value=""><span>TRUE</span></label>
+What is the main difference between deductive and inductive reasoning?
+<div id="radio_RUAZPPMGYQ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_RUAZPPMGYQ" value="answer"><span>Deductive reasoning guarantees the conclusion if the premises are true, while inductive reasoning does not.</span></label><label><input type="radio" autocomplete="off" name="radio_RUAZPPMGYQ" value=""><span>There is no real difference; both produce valid conclusions.</span></label><label><input type="radio" autocomplete="off" name="radio_RUAZPPMGYQ" value=""><span>Deductive reasoning is used in science; inductive is not.</span></label><label><input type="radio" autocomplete="off" name="radio_RUAZPPMGYQ" value=""><span>Inductive reasoning guarantees conclusions; deductive does not.</span></label>
 </div>
 <p><strong>Question 2</strong></p>
-A researcher performs a Z-test to test the hypotheses H0: mu = 0 versus H1: mu &gt; 0. She finds a test statistic of Z = 2.03 and a one-tailed p-value of 0.02. Statement: If the researcher had performed a two-tailed Z-test, the value of the two-tailed p-value would have been halved: 0.01.
-<div id="radio_KDSPTZGFYM" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_KDSPTZGFYM" value=""><span>TRUE</span></label><label><input type="radio" autocomplete="off" name="radio_KDSPTZGFYM" value="answer"><span>FALSE</span></label>
+Which of the following is an example of inductive reasoning?
+<div id="radio_OFNZEZQAJB" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_OFNZEZQAJB" value=""><span>All humans are mortal, so Socrates is mortal.</span></label><label><input type="radio" autocomplete="off" name="radio_OFNZEZQAJB" value=""><span>Water boils at 100 degrees at sea level.</span></label><label><input type="radio" autocomplete="off" name="radio_OFNZEZQAJB" value="answer"><span>The sun has always risen in the east, so it will rise in the east tomorrow.</span></label><label><input type="radio" autocomplete="off" name="radio_OFNZEZQAJB" value=""><span>Students who study more get better grades.</span></label>
 </div>
 <p><strong>Question 3</strong></p>
-Chris expects that people who have bungee jumped will score high on average on the Big 5 personality trait ‘Openness to Experience’. Openness to Experience has been measured on a 10 point scale (1= not at all open, 10 = extremely open). He takes a random sample of 45 persons who have bungee jumped and observes a mean of 6 and SD of 1.954. He tests the following hypotheses: H0: mu =&lt; 5.5 versus H1: mu &gt; 5.5 with a one-sample t-test. He assumes that Openness to Experience is normally distributed in the population. What is the smallest significance level for which Chris can reject the null hypothesis?
-<div id="radio_YJLKCPTQZL" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_YJLKCPTQZL" value=""><span>0.01</span></label><label><input type="radio" autocomplete="off" name="radio_YJLKCPTQZL" value=""><span>0.1</span></label><label><input type="radio" autocomplete="off" name="radio_YJLKCPTQZL" value=""><span>Cannot reject H0</span></label><label><input type="radio" autocomplete="off" name="radio_YJLKCPTQZL" value="answer"><span>0.05</span></label>
+What is the role of deduction in statistical hypothesis testing?
+<div id="radio_EKKIZUCXVL" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_EKKIZUCXVL" value="answer"><span>It is used to derive specific predictions from general theories.</span></label><label><input type="radio" autocomplete="off" name="radio_EKKIZUCXVL" value=""><span>It determines the sample size needed.</span></label><label><input type="radio" autocomplete="off" name="radio_EKKIZUCXVL" value=""><span>It tests if data supports any hypothesis.</span></label><label><input type="radio" autocomplete="off" name="radio_EKKIZUCXVL" value=""><span>It is used to generalize observations to populations.</span></label>
 </div>
 <p><strong>Question 4</strong></p>
-What is the purpose of inferential statistics?
-<div id="radio_XLCUBSGNLQ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_XLCUBSGNLQ" value=""><span>Estimation of population parameters</span></label><label><input type="radio" autocomplete="off" name="radio_XLCUBSGNLQ" value=""><span>Testing the null hypothesis</span></label><label><input type="radio" autocomplete="off" name="radio_XLCUBSGNLQ" value=""><span>Calculating sample statistics</span></label><label><input type="radio" autocomplete="off" name="radio_XLCUBSGNLQ" value="answer"><span>Using sample data to infer properties of the population</span></label>
+What was Karl Popper’s proposed solution to the problem of induction?
+<div id="radio_VFRYXKEYEC" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_VFRYXKEYEC" value="answer"><span>Falsification: trying to disprove theories rather than prove them.</span></label><label><input type="radio" autocomplete="off" name="radio_VFRYXKEYEC" value=""><span>Only using observational data.</span></label><label><input type="radio" autocomplete="off" name="radio_VFRYXKEYEC" value=""><span>Using more data to confirm theories.</span></label><label><input type="radio" autocomplete="off" name="radio_VFRYXKEYEC" value=""><span>Renouncing inductively constructed theories as pseudoscience.</span></label>
 </div>
 <p><strong>Question 5</strong></p>
-What is the standard error?
-<div id="radio_DTZVSEGYYU" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_DTZVSEGYYU" value=""><span>An estimate of the uncertainty about the sample statistic</span></label><label><input type="radio" autocomplete="off" name="radio_DTZVSEGYYU" value=""><span>The spread of the sample data</span></label><label><input type="radio" autocomplete="off" name="radio_DTZVSEGYYU" value=""><span>An estimate of the uncertainty about the average of the sample values</span></label><label><input type="radio" autocomplete="off" name="radio_DTZVSEGYYU" value="answer"><span>An estimate of the average sampling error when estimating a population parameter using a sample statistic</span></label>
+In Null-Hypothesis Significance Testing (NHST), what role does the null hypothesis play?
+<div id="radio_SENVWJGDFM" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_SENVWJGDFM" value="answer"><span>It merely exists to be refuted.</span></label><label><input type="radio" autocomplete="off" name="radio_SENVWJGDFM" value=""><span>It shows causality when rejected.</span></label><label><input type="radio" autocomplete="off" name="radio_SENVWJGDFM" value=""><span>It provides definitive proof of a theory.</span></label><label><input type="radio" autocomplete="off" name="radio_SENVWJGDFM" value=""><span>It reflects the researcher’s true belief.</span></label>
 </div>
 <p><strong>Question 6</strong></p>
-What is a hypothesis in the context of statistical testing?
-<div id="radio_ATLCXGAAGV" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_ATLCXGAAGV" value=""><span>An explanation for observed phenomena</span></label><label><input type="radio" autocomplete="off" name="radio_ATLCXGAAGV" value=""><span>A statement that some parameter is equal to zero</span></label><label><input type="radio" autocomplete="off" name="radio_ATLCXGAAGV" value="answer"><span>A proposition about the population that can be tested in a sample</span></label><label><input type="radio" autocomplete="off" name="radio_ATLCXGAAGV" value=""><span>Something you want to know about the population</span></label>
+What does the phrase ‘correlation does not imply causation’ mean?
+<div id="radio_XWCDEDLTVW" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_XWCDEDLTVW" value=""><span>Causation can only be studied with regression.</span></label><label><input type="radio" autocomplete="off" name="radio_XWCDEDLTVW" value="answer"><span>A statistical association may not reflect a true causal relationship.</span></label><label><input type="radio" autocomplete="off" name="radio_XWCDEDLTVW" value=""><span>Causal relationships cannot be studied using statistics.</span></label><label><input type="radio" autocomplete="off" name="radio_XWCDEDLTVW" value=""><span>Don't use a correlation coefficient if the effect is causal.</span></label>
 </div>
 <p><strong>Question 7</strong></p>
-What is meant by ‘power’ in statistical testing?
-<div id="radio_DEBDKOSBDZ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_DEBDKOSBDZ" value=""><span>The probability of committing a Type II error</span></label><label><input type="radio" autocomplete="off" name="radio_DEBDKOSBDZ" value=""><span>The probability of rejecting the null hypothesis</span></label><label><input type="radio" autocomplete="off" name="radio_DEBDKOSBDZ" value=""><span>The probability of committing a Type I error</span></label><label><input type="radio" autocomplete="off" name="radio_DEBDKOSBDZ" value="answer"><span>The probability of correctly finding a true effect</span></label>
+According to a common interpretation of Hume, which three conditions are necessary for causality?
+<div id="radio_KSNJWHFPGM" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_KSNJWHFPGM" value=""><span>Observation, correlation, and prediction.</span></label><label><input type="radio" autocomplete="off" name="radio_KSNJWHFPGM" value="answer"><span>Association, temporal precedence, and non-spuriousness.</span></label><label><input type="radio" autocomplete="off" name="radio_KSNJWHFPGM" value=""><span>Falsifiability, deduction, and experimentation.</span></label><label><input type="radio" autocomplete="off" name="radio_KSNJWHFPGM" value=""><span>Randomization, generalization, and verification.</span></label>
 </div>
 <p><strong>Question 8</strong></p>
-You want to test if the mean height of a sample of 50 students is significantly different from the population mean of 65 inches. The sample mean is 68 inches, and the standard deviation is 2 inches. What is the calculated t-value for this hypothesis test?
-<div id="radio_OTTPLBUAOI" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_OTTPLBUAOI" value=""><span>240.42</span></label><label><input type="radio" autocomplete="off" name="radio_OTTPLBUAOI" value="answer"><span>10.61</span></label><label><input type="radio" autocomplete="off" name="radio_OTTPLBUAOI" value=""><span>1.50</span></label><label><input type="radio" autocomplete="off" name="radio_OTTPLBUAOI" value=""><span>75.00</span></label>
-</div>
-<p><strong>Question 9</strong></p>
-You want to test if the average time spent on a particular task is different from 30 minutes. You collect a sample of 25 participants, and the sample mean time spent on the task is 28 minutes with a standard deviation of 3 minutes. Conducting a two-tailed t-test, what is the calculated t-value?
-<div id="radio_GJCFRKAMGN" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_GJCFRKAMGN" value="answer"><span>-3.33</span></label><label><input type="radio" autocomplete="off" name="radio_GJCFRKAMGN" value=""><span>-16.67</span></label><label><input type="radio" autocomplete="off" name="radio_GJCFRKAMGN" value=""><span>3.33</span></label><label><input type="radio" autocomplete="off" name="radio_GJCFRKAMGN" value=""><span>-0.67</span></label>
+How do randomized controlled experiments support causal inference?
+<div id="radio_ATMRVTAMWA" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ATMRVTAMWA" value=""><span>They confirm inductive conclusions.</span></label><label><input type="radio" autocomplete="off" name="radio_ATMRVTAMWA" value="answer"><span>They eliminate alternative explanations through random assignment.</span></label><label><input type="radio" autocomplete="off" name="radio_ATMRVTAMWA" value=""><span>They eliminate the need for statistical testing.</span></label><label><input type="radio" autocomplete="off" name="radio_ATMRVTAMWA" value=""><span>They always prove causality through replication.</span></label>
 </div>
 </div>
 <div class="webex-solution">
@@ -731,29 +741,27 @@ You want to test if the average time spent on a particular task is different fro
 Show explanations
 </button>
 <p><strong>Question 1</strong></p>
-<p>When calculating a test statistic, we assume the null hypothesis to be true - not the alternative hypothesis.</p>
+<p>Deductive reasoning leads to necessarily true conclusions if the premises are true, while inductive reasoning involves probable conclusions based on patterns.</p>
 <p><strong>Question 2</strong></p>
-<p>The p-value for a two-tailed test is twice as large as for a one-tailed test (because you have the same one-tailed probability in both tails). For two-tailed tests, if the observed effect is in the direction of the alternative hypothesis, you can half the two-tailed p-value.</p>
+<p>Assuming that the sun will rise tomorrow because it always has is an example of induction, and it is not logically justified.</p>
 <p><strong>Question 3</strong></p>
-<p>Divide the standard deviation by the square root of 45 to get the standard error. Then, divide the difference between the observed mean of 6 and the hypothesized mean of 5.5 by that standard error to get the test statistic. Then, find the critical t-values for a one-sided test with the three alpha levels mentioned in the answers in the t-distribution for 44 degrees of freedom (n - 1). Note that the answer is .05!</p>
+<p>Deduction is used to derive derive specific, testable predictions from general theories, such as expecting a correlation between study time and grades if studying improves performance.</p>
 <p><strong>Question 4</strong></p>
-<p>Inferential statistics involves using sample data to make inferences or draw conclusions about the larger population from which the sample was drawn. It allows researchers to make educated guesses about population parameters based on the information collected from the sample. Calculating sample statistics is a step in the inferential process, but it is not the primary purpose of inferential statistics. Testing the null hypothesis is another inferential procedure, but it is a specific type of hypothesis testing, and not the overall purpose of inferential statistics.</p>
+<p>Popper argued that science should focus on rejecting falsifiable hypotheses rather than confirming them, avoiding the pitfalls of induction.</p>
 <p><strong>Question 5</strong></p>
-<p>The standard error is a measure of the uncertainty associated with the sample statistic as estimator of the population parameter. It represents how much the sample statistic is expected to vary from one sample to another if multiple samples were drawn from the same population.</p>
+<p>The null hypothesis is a ‘straw man’ hypothesis, only intended to be rejected. This interpretation of Popper’s falsificationism actually never submits theories to the test, and aligns more closely with confirmationism.</p>
 <p><strong>Question 6</strong></p>
-<p>In statistical testing, a hypothesis is a testable proposition about the population that can be examined using sample data. It is a statement or assumption that researchers put to the test to determine if there is evidence to support it or not. The hypothesis is formulated based on the theory or observations made about the population.</p>
+<p>No statistical finding can prove causation, so a correlation (or other type of association) between two variables doesn’t confirm a causal link.</p>
 <p><strong>Question 7</strong></p>
-<p>Power in statistical testing refers to the probability of correctly detecting a true effect or relationship between variables. It is the likelihood of finding a significant result in a study when the effect being investigated truly exists in the population. It is important to have sufficient power in a study to avoid false-negative findings, where we fail to reject the null hypothesis when there is a real effect. Power is one minus the probability of committing a Type II error, or 1-beta.</p>
+<p>A common interpretation of Hume is that for a cause-effect relationship, the variables must be associated, the cause must precede the effect, and other explanations must be ruled out.</p>
 <p><strong>Question 8</strong></p>
-<p>To calculate the t-value for this hypothesis test, you can use the formula: t = (sample mean - population mean) / (standard deviation / square root of sample size). Plugging in the values, t = (68 - 65) / (2 / sqrt(50)) = 10.61.</p>
-<p><strong>Question 9</strong></p>
-<p>The t-value for a two-tailed t-test can be calculated using the formula: t = (sample mean - population mean) / (standard deviation / square root of sample size). In this case, the population mean is 30 minutes. Plugging in the values, t = (28 - 30) / (3 / sqrt(25)) = -3.33.</p>
+<p>Random assignment maximizes the probability that the treatment and control groups do not differ on any confounding variables, thus ensuring nonspuriousness. Furthermore, a well-designed experiment ensures association (if there is an effect) and temporal precedence.</p>
 </div>
 </div>
-</section><section id="tutorial" class="level1" data-number="11"><h1 data-number="11">
-<span class="header-section-number">11</span> Tutorial</h1>
-<section id="assignment-1-hypothesis-testing---formulating-hypotheses" class="level2" data-number="11.1"><h2 data-number="11.1" class="anchored" data-anchor-id="assignment-1-hypothesis-testing---formulating-hypotheses">
-<span class="header-section-number">11.1</span> Assignment 1: Hypothesis Testing - Formulating Hypotheses</h2>
+</section><section id="tutorial" class="level1" data-number="9"><h1 data-number="9">
+<span class="header-section-number">9</span> Tutorial</h1>
+<section id="assignment-1-hypothesis-testing---formulating-hypotheses" class="level2" data-number="9.1"><h2 data-number="9.1" class="anchored" data-anchor-id="assignment-1-hypothesis-testing---formulating-hypotheses">
+<span class="header-section-number">9.1</span> Assignment 1: Hypothesis Testing - Formulating Hypotheses</h2>
 <p>Discuss with your portfolio group the logic behind hypothesis testing, and how it relates to your personal (and group’s) research interests.</p>
 <p>Consider the following three research descriptions. Formulate H0 and H1 in words. Discuss your answers with your group members.</p>
 <p>Researchers want to know whether it matters for test performance if an exam is completed on a computer or using paper and pencil. Hence, the research question reads: Is there an effect of the type of administration (computer or paper and pencil) on the test performance?</p>
@@ -784,8 +792,8 @@ Show answer
 <p><span class="math inline">\(H_0: \rho = 0\)</span> <span class="math inline">\(H_A: \rho \neq 0\)</span></p>
 </div>
 <p>Formulating the hypothesis is an important very first step in hypotheses testing. Continue with the next assignment, in which we will go through the steps of a hypothesis test.</p>
-</section><section id="assignment-2-test-statistics-alpha-and-significance" class="level2" data-number="11.2"><h2 data-number="11.2" class="anchored" data-anchor-id="assignment-2-test-statistics-alpha-and-significance">
-<span class="header-section-number">11.2</span> Assignment 2: Test Statistics, Alpha and Significance</h2>
+</section><section id="assignment-2-test-statistics-alpha-and-significance" class="level2" data-number="9.2"><h2 data-number="9.2" class="anchored" data-anchor-id="assignment-2-test-statistics-alpha-and-significance">
+<span class="header-section-number">9.2</span> Assignment 2: Test Statistics, Alpha and Significance</h2>
 <p>In this assignment we will go through the steps of a hypothesis test.</p>
 <p>While going through the steps we will come across the most important concepts related to hypothesis testing.</p>
 <p>For the next steps, we consider the following situation:</p>
@@ -873,8 +881,8 @@ Explanation
 <p>Used to test hypotheses about the mean in a population, assuming <span class="math inline">\(\sigma\)</span> known.</p>
 <p>The test-statistic equals <span class="math inline">\(z = \frac{\bar{X}-\mu}{\sigma_{\bar{X}}}\)</span></p>
 <p>The test statistic is normally distributed.</p>
-</section><section id="assignment-3-z-test" class="level2" data-number="11.3"><h2 data-number="11.3" class="anchored" data-anchor-id="assignment-3-z-test">
-<span class="header-section-number">11.3</span> Assignment 3: Z-test</h2>
+</section><section id="assignment-3-z-test" class="level2" data-number="9.3"><h2 data-number="9.3" class="anchored" data-anchor-id="assignment-3-z-test">
+<span class="header-section-number">9.3</span> Assignment 3: Z-test</h2>
 <p>In this assignment we will apply the Z-test.</p>
 <p>This assignment first presents an example, followed by two practice questions.</p>
 <p>A researcher wants to test <span class="math inline">\(H_0: \mu = 50\)</span> against <span class="math inline">\(H_1: \mu \neq 50\)</span></p>
@@ -914,8 +922,8 @@ Show answer
 <p>Step 4: Draw conclusion</p>
 <p><span class="math inline">\(H_0\)</span> is not rejected.</p>
 </div>
-</section><section id="quiz" class="level2" data-number="11.4"><h2 data-number="11.4" class="anchored" data-anchor-id="quiz">
-<span class="header-section-number">11.4</span> Quiz</h2>
+</section><section id="quiz" class="level2" data-number="9.4"><h2 data-number="9.4" class="anchored" data-anchor-id="quiz">
+<span class="header-section-number">9.4</span> Quiz</h2>
 <div class="webex-check webex-box">
 <p>“The null and alternative hypothesis are deduced from the data.” <select class="webex-select"><option value="blank"></option>
 <option value="NA">TRUE</option>
@@ -955,8 +963,8 @@ Explanation
 <p>Increasing the sample size n (and holding all the rest constant) does not decrease the probability of a Type I error.</p>
 </div>
 </div>
-</section><section id="assignment-4-z-test-and-alpha-levels" class="level2" data-number="11.5"><h2 data-number="11.5" class="anchored" data-anchor-id="assignment-4-z-test-and-alpha-levels">
-<span class="header-section-number">11.5</span> Assignment 4: Z-test and Alpha-levels</h2>
+</section><section id="assignment-4-z-test-and-alpha-levels" class="level2" data-number="9.5"><h2 data-number="9.5" class="anchored" data-anchor-id="assignment-4-z-test-and-alpha-levels">
+<span class="header-section-number">9.5</span> Assignment 4: Z-test and Alpha-levels</h2>
 <p>In this assignment we will practice some more with the Z-test, meanwhile we will review important concepts of hypothesis testing. In particular, we will look at significance levels.</p>
 <p>To test hypotheses, we need to specify the “significance level”, usually denoted by <span class="math inline">\(\alpha\)</span>. The significance level is our <em>decision criterion</em> to reject H0.</p>
 <p>The most common choice is .05. But what does this criterion exactly entail?</p>
@@ -978,8 +986,8 @@ Explanation
 <span class="math inline">\(Z_\text{crit} = 1.96\)</span>, if <span class="math inline">\(\alpha = 0.05\)</span> (two-tailed)</li>
 <li>
 <span class="math inline">\(Z_\text{crit} = 2.58\)</span>, if <span class="math inline">\(\alpha = 0.01\)</span> (two-tailed)</li>
-</ul></section><section id="quiz-1" class="level2" data-number="11.6"><h2 data-number="11.6" class="anchored" data-anchor-id="quiz-1">
-<span class="header-section-number">11.6</span> Quiz</h2>
+</ul></section><section id="quiz-1" class="level2" data-number="9.6"><h2 data-number="9.6" class="anchored" data-anchor-id="quiz-1">
+<span class="header-section-number">9.6</span> Quiz</h2>
 <div class="webex-check webex-box">
 <p>Researchers want to test whether <span class="math inline">\(\mu=70\)</span>. They assume that <span class="math inline">\(\sigma = 10\)</span>. Researchers found a mean of 72 in a random sample of 40 persons.</p>
 <p>True or false:</p>
@@ -999,8 +1007,8 @@ Explanation
 <option value="NA">TRUE</option>
 <option value="answer">FALSE</option></select></p>
 </div>
-</section><section id="assignment-5-p-values" class="level2" data-number="11.7"><h2 data-number="11.7" class="anchored" data-anchor-id="assignment-5-p-values">
-<span class="header-section-number">11.7</span> Assignment 5: P-values</h2>
+</section><section id="assignment-5-p-values" class="level2" data-number="9.7"><h2 data-number="9.7" class="anchored" data-anchor-id="assignment-5-p-values">
+<span class="header-section-number">9.7</span> Assignment 5: P-values</h2>
 <p>We will now focus on the interpretation of the p-values and how to use the p-values to decide about significance.</p>
 <p>Consider the following situation:</p>
 <p>Scores on a test measuring confidence in police are normally distributed in the general population, with <span class="math inline">\(\mu = 500\)</span> and an <span class="math inline">\(\sigma = 50\)</span>. Researchers want to know if the average confidence level is different for those who have been a victim of crime. They collect data for 60 victims. They find a sample mean of 511. They test <span class="math inline">\(H_0: \mu = 500\)</span> against <span class="math inline">\(H_1: \mu \neq 500\)</span>, while assuming that the population variance is <span class="math inline">\(\sigma = 50\)</span>.</p>
@@ -1027,14 +1035,14 @@ Explanation
 <p>Researchers test whether <span class="math inline">\(\mu = 90\)</span>. They assume that <span class="math inline">\(\sigma=21\)</span>. The sample mean was 85. Sample size was 50.</p>
 <p>What is the two-tailed p-value? <input class="webex-solveme nospaces" data-tol="0.01" size="4" data-answer="[&quot;0.09&quot;,&quot;.09&quot;]"></p>
 <p>What is the highest level at which the test is significant? <select class="webex-select"><option value="blank"></option>
-<option value="">0.005</option>
+<option value="">0.01</option>
 <option value="">0.1</option>
-<option value="answer">0.05</option>
-<option value="">0.01</option></select></p>
+<option value="">0.005</option>
+<option value="answer">0.05</option></select></p>
 <p>Researchers test whether <span class="math inline">\(\mu = 35\)</span>. They assume <span class="math inline">\(\sigma =16\)</span>. The sample mean was 38. Sample size was 64.</p>
 <p>Compute the two-tailed p-value and indicate which of the following statements is true.</p>
-<div id="radio_UEHLYTKLFQ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_UEHLYTKLFQ" value=""><span>The test is significant at the 10% level, but not at 5% or 1% level.</span></label><label><input type="radio" autocomplete="off" name="radio_UEHLYTKLFQ" value="answer"><span>The test is not significant at 10%, not significant at 5% and not significant at 1%.</span></label><label><input type="radio" autocomplete="off" name="radio_UEHLYTKLFQ" value=""><span>The test is significant at the 10%, 5% level, and 1% level.</span></label><label><input type="radio" autocomplete="off" name="radio_UEHLYTKLFQ" value=""><span>The test is significant at the 10% and 5% level, but not at the 1% level.</span></label>
+<div id="radio_AFCRMVMIHS" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_AFCRMVMIHS" value="answer"><span>The test is not significant at 10%, not significant at 5% and not significant at 1%.</span></label><label><input type="radio" autocomplete="off" name="radio_AFCRMVMIHS" value=""><span>The test is significant at the 10% level, but not at 5% or 1% level.</span></label><label><input type="radio" autocomplete="off" name="radio_AFCRMVMIHS" value=""><span>The test is significant at the 10% and 5% level, but not at the 1% level.</span></label><label><input type="radio" autocomplete="off" name="radio_AFCRMVMIHS" value=""><span>The test is significant at the 10%, 5% level, and 1% level.</span></label>
 </div>
 <p>Consider these true- or false statements:</p>
 <p>If a two-tailed p-value is .0567 then the test is significant at the 10% level but not at the 5% level. <select class="webex-select"><option value="blank"></option>
@@ -1048,7 +1056,21 @@ Explanation
 <option value="answer">FALSE</option></select></p>
 
 
-</section></section></main><!-- /main --><script>
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
+<div id="ref-halpernModificationHalpernPearlDefinition2015" class="csl-entry" role="listitem">
+Halpern, J. Y. (2015, May 1). <em>A <span>Modification</span> of the <span>Halpern-Pearl Definition</span> of <span>Causality</span></em>. <a href="https://doi.org/10.48550/arXiv.1505.00162">https://doi.org/10.48550/arXiv.1505.00162</a>
+</div>
+<div id="ref-morabiaHumeMillHill2013" class="csl-entry" role="listitem">
+Morabia, A. (2013). Hume, <span>Mill</span>, <span>Hill</span>, and the <span>Sui Generis Epidemiologic Approach</span> to <span>Causal Inference</span>. <em>American Journal of Epidemiology</em>, <em>178</em>(10), 1526–1532. <a href="https://doi.org/10.1093/aje/kwt223">https://doi.org/10.1093/aje/kwt223</a>
+</div>
+<div id="ref-pearlCausalInferenceStatistics2009" class="csl-entry" role="listitem">
+Pearl, J. (2009). Causal inference in statistics: <span>An</span> overview. <em>Statistics Surveys</em>, <em>3</em>, 96–146. <a href="https://doi.org/10.1214/09-SS057">https://doi.org/10.1214/09-SS057</a>
+</div>
+</div>
+</section></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><hr>
+<ol>
+<li id="fn1"><p>With thanks to <a href="https://www.mpib-berlin.mpg.de/person/103737">Aaron Peikert</a> for identifying these quotes.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol></section></main><!-- /main --><script>
 
 /* update total correct if #webex-total_correct exists */
 update_total_correct = function() {
@@ -1897,13 +1919,13 @@ window.onload = function() {
     }
   });
   </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="./Week_4.html" class="pagination-link" aria-label="Philosophy of Science">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Philosophy of Science</span></span>
+      <a href="./samplingdistribution.html" class="pagination-link" aria-label="The Sampling Distribution">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">The Sampling Distribution</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./glm1_regression.html" class="pagination-link" aria-label="GLM-I: Linear Regression">
-        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">GLM-I: Linear Regression</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./testing.html" class="pagination-link" aria-label="Hypothesis Testing">
+        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Hypothesis Testing</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
