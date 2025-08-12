@@ -1,4 +1,4 @@
-# Philosophy of Science {#sec-testing}
+# Philosophy of Science {#sec-philosophy}
 
 ```{r, include = FALSE}
 source("R/booktem_setup.R")
@@ -159,7 +159,7 @@ Just make sure not to take the observed data as *evidence for* a causal effect.
 
 What is required to argue that X has a causal effect on Y?
 Several philosophers have addressed this issue; most notably Hume and Mill [see @morabiaHumeMillHill2013].
-The necessary conditions for causality are sometimes summarized as association, temporal precedence, and non-spuriousness. Below, each is supported with quotes from [Hume (1902)](https://www.gutenberg.org/files/9662/9662-h/9662-h.htm):
+The necessary conditions for causality are sometimes summarized as association, temporal precedence, and non-spuriousness. Below, each is supported with quotes from [Hume (1902)](https://www.gutenberg.org/files/9662/9662-h/9662-h.htm)^[With thanks to [Aaron Peikert](https://www.mpib-berlin.mpg.de/person/103737) for identifying these quotes.]:
 
 1. **Association**: Cause and effect must be associated (this could be statistical association)
     + "When one particular species of event has always [...] been conjoined with another, we [...] call the one object, Cause; the other, Effect." (VII, II, 59)
@@ -193,7 +193,7 @@ Complete the formative test ideally after you’ve seen the lecture, but before 
 #| results = "asis",
 #| echo = FALSE,
 #| cache = FALSE
-add_mcs("ch4_formative.csv")
+add_mcs("philosophy.csv")
 ```
 
 # Tutorial
