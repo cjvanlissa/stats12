@@ -156,6 +156,24 @@ For example, if I assume that hours studied causes improved grades,
 a correlation of $r = .43$ is consistent with that assumption.
 An alternative explanation might be that having receiving high grades in the past has motivated some students to study harder.
 Just make sure not to take the observed data as *evidence for* a causal effect.
+
+What is required to argue that X has a causal effect on Y?
+Several philosophers have addressed this issue; most notably Hume and Mill [see @morabiaHumeMillHill2013].
+The necessary conditions for causality are sometimes summarized as association, temporal precedence, and non-spuriousness. Below, each is supported with quotes from [Hume (1902)](https://www.gutenberg.org/files/9662/9662-h/9662-h.htm):
+
+1. **Association**: Cause and effect must be associated (this could be statistical association)
+    + "When one particular species of event has always [...] been conjoined with another, we [...] call the one object, Cause; the other, Effect." (VII, II, 59)
+    + "familiar objects or events to be constantly conjoined together" (V, I, 35)
+There must be a "constant union" between cause and effect, and they must be "contiguous in space and time" (Hume 1739,16, pp. 173–175).
+1. **Temporal precedence**: The cause must occur before the effect.
+    + observe a continual succession of objects, and one event following another (V, I, 35)
+    + "[when] the same object is always followed by the same event; we then begin to entertain the notion of cause and connexion." (VII, II, 61)
+1. **Non-spuriousness**: All alternative explanations of the effect are excluded. 
+    + "Their conjunction may be arbitrary and casual. There may be no reason to infer the existence of one from the appearance of the other." (describing spuriousness; V, I, 35)
+    + "we may define a cause to be an object, followed by another, and where all the objects similar to the first are followed by objects similar to the second. Or in other words where, if the first object had not been, the second never had existed." (VII, II, 61)
+
+This latter definition resembles the aforementioned counterfactual definition of causality.
+Note that this definition does not *require* randomized experimentation, but randomized experiments do help us meet all three criteria.
 The field of *causal inference* focuses on developing methods that can estimate causal effects (like you would get from a randomized controlled experiment) from observational data [@pearlCausalInferenceStatistics2009].
 
 
