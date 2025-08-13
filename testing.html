@@ -499,7 +499,10 @@ window.Quarto = {
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#lecture" id="toc-lecture" class="nav-link active" data-scroll-target="#lecture"><span class="header-section-number">8</span> Lecture</a></li>
+<li><a href="#sec-falsificationism" id="toc-sec-falsificationism" class="nav-link active" data-scroll-target="#sec-falsificationism"><span class="header-section-number">7.1</span> Falsificationism</a></li>
+  <li><a href="#hypothesis-testing-sec-hypothesis-testing" id="toc-hypothesis-testing-sec-hypothesis-testing" class="nav-link" data-scroll-target="#hypothesis-testing-sec-hypothesis-testing"><span class="header-section-number">7.2</span> Hypothesis testing {#sec-Hypothesis testing}</a></li>
+  <li><a href="#sec-causality" id="toc-sec-causality" class="nav-link" data-scroll-target="#sec-causality"><span class="header-section-number">7.3</span> Causality</a></li>
+  <li><a href="#lecture" id="toc-lecture" class="nav-link" data-scroll-target="#lecture"><span class="header-section-number">8</span> Lecture</a></li>
   <li>
 <a href="#statistical-power" id="toc-statistical-power" class="nav-link" data-scroll-target="#statistical-power"><span class="header-section-number">9</span> Statistical Power</a>
   <ul class="collapse">
@@ -546,7 +549,13 @@ window.Quarto = {
   
 
 
-</header><p>Hypothesis testing is a method of inferential statistics which allows researchers to draw conclusions about the population based on sample data. It involves formulating hypotheses, calculating test statistics, determining p-values, and drawing conclusions about the null hypothesis.</p>
+</header><section id="sec-falsificationism" class="level2" data-number="7.1"><h2 data-number="7.1" class="anchored" data-anchor-id="sec-falsificationism">
+<span class="header-section-number">7.1</span> Falsificationism</h2>
+<p>In science, it is rarely possible to <strong>prove</strong> a general theory true. Instead, theories earn credibility by <strong>surviving</strong> serious attempts to refute them. This is the core of <strong>falsificationism</strong>, most closely associated with Karl Popper (Popper, 1959/2002). A scientific claim must be <strong>testable</strong> and <strong>falsifiable</strong>: it should make predictions that could, in principle, be shown false by observation. The proverbially simple example is “All swans are white.” No number of white swans can verify the claim, but a <strong>single</strong> black swan would falsify it.</p>
+<p>This logic connects directly to statistical practice. In hypothesis testing we do not “prove the theory”; rather, we pose a <strong>precise</strong> claim—the null hypothesis <span class="math inline">\(H_0\)</span>—and ask whether the observed data are sufficiently incompatible with <span class="math inline">\(H_0\)</span> to warrant rejecting it. A small <span class="math inline">\(p\)</span>-value is evidence <strong>against</strong> <span class="math inline">\(H_0\)</span>, not proof <strong>for</strong> any particular alternative. Likewise, <strong>failing to reject</strong> <span class="math inline">\(H_0\)</span> does not verify <span class="math inline">\(H_0\)</span>; it merely indicates that the data are not unusually discordant with it given the test’s design and assumptions. Good scientific practice increases the <em>riskiness</em> of tests—deriving clear, prior predictions; minimizing researcher degrees of freedom; and using designs that would make discordant data likely <strong>if</strong> the theory were false (e.g., preregistration and prospective power analysis). In short, falsificationism reminds us that scientific conclusions are <strong>provisional</strong> and should be sharpened by attempts to refute, not by post hoc confirmation.</p>
+</section><section id="hypothesis-testing-sec-hypothesis-testing" class="level2" data-number="7.2"><h2 data-number="7.2" class="anchored" data-anchor-id="hypothesis-testing-sec-hypothesis-testing">
+<span class="header-section-number">7.2</span> Hypothesis testing {#sec-Hypothesis testing}</h2>
+<p>Hypothesis testing is a method of inferential statistics which allows researchers to draw conclusions about the population based on sample data. It involves formulating hypotheses, calculating test statistics, determining p-values, and drawing conclusions about the null hypothesis.</p>
 <p>Hypothesis testing builds upon previously covered topics like sampling theory and estimation, where sample statistics are used as the best estimate of population parameters; standard errors to express the uncertainty surrounding those estimates; and probability calculus, using probability distributions - like the standard normal distribution - to compute the probability of observing certain values based on the sampling distribution.</p>
 <p>To introduce the concept of hypothesis testing, let’s consider an intuitive example. Imagine your car won’t start, and you hypothesize that the battery is dead. You then perform an experiment by replacing the battery. If the car starts, you conclude that your initial hypothesis was correct - the battery was indeed dead.</p>
 <p>In this thought experiment, you only need one piece of evidence. Statistical hypothesis instead rely on evidence from many observations, and use probability calculus to test hypotheses in the presence of uncertainty. Statistical tests use probability calculations to compute how probable it is to observe the sample data if the null hypothesis were true. If the resulting probability is very low, we may doubt whether the null hypothesis is indeed true.</p>
@@ -564,7 +573,11 @@ window.Quarto = {
 <p>When interpreting p-values, it’s crucial to understand that they give the probability of observing certain data assuming the null hypothesis is true, rather than providing the probability of the null hypothesis being true or false. The p-value is then compared to a pre-determined significance level (usually denoted as alpha) to make a decision about accepting or rejecting the null hypothesis.</p>
 <p>Rejecting the null hypothesis indicates that the observed data is unlikely to occur if the null hypothesis were true. On the other hand, failing to reject the null hypothesis means that the observed data is not surprising or does not provide sufficient evidence to reject it.</p>
 <p>When testing hypotheses, we can make two types of errors: A Type I error refers to rejecting the null hypothesis when it is true (a false-positive conclusion), while Type II error refers to accepting the null hypothesis when it is false (failing to detect a true effect).</p>
-<section id="lecture" class="level1" data-number="8"><h1 data-number="8">
+</section><section id="sec-causality" class="level2" data-number="7.3"><h2 data-number="7.3" class="anchored" data-anchor-id="sec-causality">
+<span class="header-section-number">7.3</span> Causality</h2>
+<p>Causal knowledge explains <strong>what would change if we intervened</strong>: “If we change <span class="math inline">\(X\)</span>, <span class="math inline">\(Y\)</span> will tend to change in a predictable direction.” This is why causality matters for science and policy—causal claims connect description to <strong>action</strong> (Shadish, Cook, &amp; Campbell, 2002). Two levels are useful to distinguish. <strong>Type (general) causality</strong> concerns population regularities (e.g., “Smoking causes lung cancer.”). <strong>Actual (token) causality</strong> concerns whether a <strong>specific</strong> event in a concrete situation caused a particular outcome (e.g., “This crash occurred because the brakes failed.”). For the latter, the modified Halpern–Pearl account captures the core intuition: <span class="math inline">\(X\)</span> counts as a cause of <span class="math inline">\(Y\)</span> when (i) both occurred; (ii) had <span class="math inline">\(X\)</span> been different, and relevant background factors held as they actually were, <span class="math inline">\(Y\)</span> would have been different; and (iii) nothing extraneous is needed for the claim (Halpern, 2015).</p>
+<p>How do we justify causal claims in practice? A helpful everyday test traces to Mill’s requirements: <strong>covariation</strong>, <strong>temporal precedence</strong>, and <strong>non-spuriousness</strong> (Oppewal, 2010). Randomized experiments are powerful because they <strong>enforce</strong> these conditions by design: random assignment severs links from unmeasured causes to treatment, outcomes are measured <strong>after</strong> assignment, and treatment–control contrasts establish covariation (Shadish et al., 2002). Outside experiments, causal inference relies on design and assumptions—e.g., careful measurement of confounders, quasi-experimental strategies, and transparent modeling. Hypothesis tests then assess whether the observed data are compatible with specific causal predictions, but <strong>testing alone does not create causality</strong>: the strength of a causal claim ultimately rests on research design, the plausibility of assumptions, and the theory’s survival of severe attempts at refutation.</p>
+</section><section id="lecture" class="level1" data-number="8"><h1 data-number="8">
 <span class="header-section-number">8</span> Lecture</h1>
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/-1J2Ge0B3Ro" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 </section><section id="statistical-power" class="level1" data-number="9"><h1 data-number="9">
@@ -682,48 +695,48 @@ Z = \frac{\text{Grade}_{\text{critical}}-\mu_{H_i}}{SE} = \frac{5.3 - 6}{0.18}  
 <div class="webex-check webex-box">
 <p><strong>Question 1</strong></p>
 For a two-tailed Z-test of the sample mean, the p-value is the probability of finding a more extreme sample mean than the observed sample mean, if the alternative hypothesis were true.
-<div id="radio_PNXSDCDVME" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_PNXSDCDVME" value="answer"><span>FALSE</span></label><label><input type="radio" autocomplete="off" name="radio_PNXSDCDVME" value=""><span>TRUE</span></label>
+<div id="radio_RMRZKYIWPV" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_RMRZKYIWPV" value=""><span>TRUE</span></label><label><input type="radio" autocomplete="off" name="radio_RMRZKYIWPV" value="answer"><span>FALSE</span></label>
 </div>
 <p><strong>Question 2</strong></p>
 A researcher performs a Z-test to test the hypotheses H0: mu = 0 versus H1: mu &gt; 0. She finds a test statistic of Z = 2.03 and a one-tailed p-value of 0.02. Statement: If the researcher had performed a two-tailed Z-test, the value of the two-tailed p-value would have been halved: 0.01.
-<div id="radio_KDSPTZGFYM" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_KDSPTZGFYM" value=""><span>TRUE</span></label><label><input type="radio" autocomplete="off" name="radio_KDSPTZGFYM" value="answer"><span>FALSE</span></label>
+<div id="radio_KJFUBXMKYZ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_KJFUBXMKYZ" value=""><span>TRUE</span></label><label><input type="radio" autocomplete="off" name="radio_KJFUBXMKYZ" value="answer"><span>FALSE</span></label>
 </div>
 <p><strong>Question 3</strong></p>
 Chris expects that people who have bungee jumped will score high on average on the Big 5 personality trait ‘Openness to Experience’. Openness to Experience has been measured on a 10 point scale (1= not at all open, 10 = extremely open). He takes a random sample of 45 persons who have bungee jumped and observes a mean of 6 and SD of 1.954. He tests the following hypotheses: H0: mu =&lt; 5.5 versus H1: mu &gt; 5.5 with a one-sample t-test. He assumes that Openness to Experience is normally distributed in the population. What is the smallest significance level for which Chris can reject the null hypothesis?
-<div id="radio_YJLKCPTQZL" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_YJLKCPTQZL" value=""><span>0.01</span></label><label><input type="radio" autocomplete="off" name="radio_YJLKCPTQZL" value=""><span>0.1</span></label><label><input type="radio" autocomplete="off" name="radio_YJLKCPTQZL" value=""><span>Cannot reject H0</span></label><label><input type="radio" autocomplete="off" name="radio_YJLKCPTQZL" value="answer"><span>0.05</span></label>
+<div id="radio_RKABSSCGGK" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_RKABSSCGGK" value=""><span>0.01</span></label><label><input type="radio" autocomplete="off" name="radio_RKABSSCGGK" value="answer"><span>0.05</span></label><label><input type="radio" autocomplete="off" name="radio_RKABSSCGGK" value=""><span>0.1</span></label><label><input type="radio" autocomplete="off" name="radio_RKABSSCGGK" value=""><span>Cannot reject H0</span></label>
 </div>
 <p><strong>Question 4</strong></p>
 What is the purpose of inferential statistics?
-<div id="radio_XLCUBSGNLQ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_XLCUBSGNLQ" value=""><span>Estimation of population parameters</span></label><label><input type="radio" autocomplete="off" name="radio_XLCUBSGNLQ" value=""><span>Testing the null hypothesis</span></label><label><input type="radio" autocomplete="off" name="radio_XLCUBSGNLQ" value=""><span>Calculating sample statistics</span></label><label><input type="radio" autocomplete="off" name="radio_XLCUBSGNLQ" value="answer"><span>Using sample data to infer properties of the population</span></label>
+<div id="radio_EJAUZMBFPY" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_EJAUZMBFPY" value=""><span>Calculating sample statistics</span></label><label><input type="radio" autocomplete="off" name="radio_EJAUZMBFPY" value=""><span>Testing the null hypothesis</span></label><label><input type="radio" autocomplete="off" name="radio_EJAUZMBFPY" value=""><span>Estimation of population parameters</span></label><label><input type="radio" autocomplete="off" name="radio_EJAUZMBFPY" value="answer"><span>Using sample data to infer properties of the population</span></label>
 </div>
 <p><strong>Question 5</strong></p>
 What is the standard error?
-<div id="radio_DTZVSEGYYU" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_DTZVSEGYYU" value=""><span>An estimate of the uncertainty about the sample statistic</span></label><label><input type="radio" autocomplete="off" name="radio_DTZVSEGYYU" value=""><span>The spread of the sample data</span></label><label><input type="radio" autocomplete="off" name="radio_DTZVSEGYYU" value=""><span>An estimate of the uncertainty about the average of the sample values</span></label><label><input type="radio" autocomplete="off" name="radio_DTZVSEGYYU" value="answer"><span>An estimate of the average sampling error when estimating a population parameter using a sample statistic</span></label>
+<div id="radio_BMPXJWIXIH" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_BMPXJWIXIH" value=""><span>An estimate of the uncertainty about the average of the sample values</span></label><label><input type="radio" autocomplete="off" name="radio_BMPXJWIXIH" value=""><span>The spread of the sample data</span></label><label><input type="radio" autocomplete="off" name="radio_BMPXJWIXIH" value=""><span>An estimate of the uncertainty about the sample statistic</span></label><label><input type="radio" autocomplete="off" name="radio_BMPXJWIXIH" value="answer"><span>An estimate of the average sampling error when estimating a population parameter using a sample statistic</span></label>
 </div>
 <p><strong>Question 6</strong></p>
 What is a hypothesis in the context of statistical testing?
-<div id="radio_ATLCXGAAGV" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_ATLCXGAAGV" value=""><span>An explanation for observed phenomena</span></label><label><input type="radio" autocomplete="off" name="radio_ATLCXGAAGV" value=""><span>A statement that some parameter is equal to zero</span></label><label><input type="radio" autocomplete="off" name="radio_ATLCXGAAGV" value="answer"><span>A proposition about the population that can be tested in a sample</span></label><label><input type="radio" autocomplete="off" name="radio_ATLCXGAAGV" value=""><span>Something you want to know about the population</span></label>
+<div id="radio_RWMKQBHMQP" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_RWMKQBHMQP" value="answer"><span>A proposition about the population that can be tested in a sample</span></label><label><input type="radio" autocomplete="off" name="radio_RWMKQBHMQP" value=""><span>A statement that some parameter is equal to zero</span></label><label><input type="radio" autocomplete="off" name="radio_RWMKQBHMQP" value=""><span>Something you want to know about the population</span></label><label><input type="radio" autocomplete="off" name="radio_RWMKQBHMQP" value=""><span>An explanation for observed phenomena</span></label>
 </div>
 <p><strong>Question 7</strong></p>
 What is meant by ‘power’ in statistical testing?
-<div id="radio_DEBDKOSBDZ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_DEBDKOSBDZ" value=""><span>The probability of committing a Type II error</span></label><label><input type="radio" autocomplete="off" name="radio_DEBDKOSBDZ" value=""><span>The probability of rejecting the null hypothesis</span></label><label><input type="radio" autocomplete="off" name="radio_DEBDKOSBDZ" value=""><span>The probability of committing a Type I error</span></label><label><input type="radio" autocomplete="off" name="radio_DEBDKOSBDZ" value="answer"><span>The probability of correctly finding a true effect</span></label>
+<div id="radio_CJWKSSCNXY" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_CJWKSSCNXY" value="answer"><span>The probability of correctly finding a true effect</span></label><label><input type="radio" autocomplete="off" name="radio_CJWKSSCNXY" value=""><span>The probability of committing a Type I error</span></label><label><input type="radio" autocomplete="off" name="radio_CJWKSSCNXY" value=""><span>The probability of rejecting the null hypothesis</span></label><label><input type="radio" autocomplete="off" name="radio_CJWKSSCNXY" value=""><span>The probability of committing a Type II error</span></label>
 </div>
 <p><strong>Question 8</strong></p>
 You want to test if the mean height of a sample of 50 students is significantly different from the population mean of 65 inches. The sample mean is 68 inches, and the standard deviation is 2 inches. What is the calculated t-value for this hypothesis test?
-<div id="radio_OTTPLBUAOI" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_OTTPLBUAOI" value=""><span>240.42</span></label><label><input type="radio" autocomplete="off" name="radio_OTTPLBUAOI" value="answer"><span>10.61</span></label><label><input type="radio" autocomplete="off" name="radio_OTTPLBUAOI" value=""><span>1.50</span></label><label><input type="radio" autocomplete="off" name="radio_OTTPLBUAOI" value=""><span>75.00</span></label>
+<div id="radio_ZLHOVXDDOC" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ZLHOVXDDOC" value="answer"><span>10.61</span></label><label><input type="radio" autocomplete="off" name="radio_ZLHOVXDDOC" value=""><span>1.50</span></label><label><input type="radio" autocomplete="off" name="radio_ZLHOVXDDOC" value=""><span>240.42</span></label><label><input type="radio" autocomplete="off" name="radio_ZLHOVXDDOC" value=""><span>75.00</span></label>
 </div>
 <p><strong>Question 9</strong></p>
 You want to test if the average time spent on a particular task is different from 30 minutes. You collect a sample of 25 participants, and the sample mean time spent on the task is 28 minutes with a standard deviation of 3 minutes. Conducting a two-tailed t-test, what is the calculated t-value?
-<div id="radio_GJCFRKAMGN" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_GJCFRKAMGN" value="answer"><span>-3.33</span></label><label><input type="radio" autocomplete="off" name="radio_GJCFRKAMGN" value=""><span>-16.67</span></label><label><input type="radio" autocomplete="off" name="radio_GJCFRKAMGN" value=""><span>3.33</span></label><label><input type="radio" autocomplete="off" name="radio_GJCFRKAMGN" value=""><span>-0.67</span></label>
+<div id="radio_THMVONQCMP" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_THMVONQCMP" value=""><span>-16.67</span></label><label><input type="radio" autocomplete="off" name="radio_THMVONQCMP" value="answer"><span>-3.33</span></label><label><input type="radio" autocomplete="off" name="radio_THMVONQCMP" value=""><span>3.33</span></label><label><input type="radio" autocomplete="off" name="radio_THMVONQCMP" value=""><span>-0.67</span></label>
 </div>
 </div>
 <div class="webex-solution">
@@ -1033,8 +1046,8 @@ Explanation
 <option value="">0.01</option></select></p>
 <p>Researchers test whether <span class="math inline">\(\mu = 35\)</span>. They assume <span class="math inline">\(\sigma =16\)</span>. The sample mean was 38. Sample size was 64.</p>
 <p>Compute the two-tailed p-value and indicate which of the following statements is true.</p>
-<div id="radio_UEHLYTKLFQ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_UEHLYTKLFQ" value=""><span>The test is significant at the 10% level, but not at 5% or 1% level.</span></label><label><input type="radio" autocomplete="off" name="radio_UEHLYTKLFQ" value="answer"><span>The test is not significant at 10%, not significant at 5% and not significant at 1%.</span></label><label><input type="radio" autocomplete="off" name="radio_UEHLYTKLFQ" value=""><span>The test is significant at the 10%, 5% level, and 1% level.</span></label><label><input type="radio" autocomplete="off" name="radio_UEHLYTKLFQ" value=""><span>The test is significant at the 10% and 5% level, but not at the 1% level.</span></label>
+<div id="radio_QWHMSLNKEV" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_QWHMSLNKEV" value=""><span>The test is significant at the 10%, 5% level, and 1% level.</span></label><label><input type="radio" autocomplete="off" name="radio_QWHMSLNKEV" value="answer"><span>The test is not significant at 10%, not significant at 5% and not significant at 1%.</span></label><label><input type="radio" autocomplete="off" name="radio_QWHMSLNKEV" value=""><span>The test is significant at the 10% and 5% level, but not at the 1% level.</span></label><label><input type="radio" autocomplete="off" name="radio_QWHMSLNKEV" value=""><span>The test is significant at the 10% level, but not at 5% or 1% level.</span></label>
 </div>
 <p>Consider these true- or false statements:</p>
 <p>If a two-tailed p-value is .0567 then the test is significant at the 10% level but not at the 5% level. <select class="webex-select"><option value="blank"></option>
