@@ -159,7 +159,7 @@ Just make sure not to take the observed data as *evidence for* a causal effect.
 
 What is required to argue that X has a causal effect on Y?
 Several philosophers have addressed this issue; most notably Hume and Mill [see @morabiaHumeMillHill2013].
-The necessary conditions for causality are sometimes summarized as association, temporal precedence, and non-spuriousness. Below, each is supported with quotes from [Hume (1902)](https://www.gutenberg.org/files/9662/9662-h/9662-h.htm)^[With thanks to [Aaron Peikert](https://www.mpib-berlin.mpg.de/person/103737) for identifying these quotes.]:
+The necessary conditions for causality are sometimes summarized as association, temporal precedence, and non-spuriousness. Below, each is supported with quotes from [Hume (1902)](https://www.gutenberg.org/files/9662/9662-h/9662-h.htm), which were selected by [Aaron Peikert](https://www.mpib-berlin.mpg.de/person/103737):
 
 1. **Association**: Cause and effect must be associated (this could be statistical association)
     + "When one particular species of event has always [...] been conjoined with another, we [...] call the one object, Cause; the other, Effect." (VII, II, 59)
@@ -215,4 +215,45 @@ a. Are all inductive and deductive inferences warranted? Do the fragments show s
 **Fragment B**: 
 
 > Social norms theory posits that behavior is shaped by perceptions of typical peer behavior. We thus hypothesized that providing households with descriptive norm feedback about neighborhood electricity use would reduce individual electricity consumption, relative to a neutral informational control. We preregistered H1: households receiving monthly comparative reports will exhibit lower kWh usage over three billing cycles than controls. The null hypothesis H0 was that there was no difference between the experimental and control conditions. In a randomized field experiment (N = 3,042 households), treatment households received reports comparing their usage to that of "similar homes", alongside efficiency tips; control households received tips only. Mixed-effects models with random intercepts for household indicated a 2.4% reduction in usage for households in the experimental condition, $\beta$ = −0.024, SE = 0.007, p < .001. We rejected the null hypothesis of no difference. These results are consistent with H1, indicating that social norms theory is a relevant framework for understanding household electricity consumption.
+
+
+## Assignment X: Causality
+
+Below are five examples of statements from social scientific papers, courtesy of [Calvin Isch](https://www.asc.upenn.edu/people/graduate-student/calvin-isch).
+
+a. First, read all the examples, and sort them into causal claims/non-causal claims. Discuss with your groupmates: did you classify each claim the same way? What makes the difference for you?
+a. With your group, choose one of these claims and examine the associated paper. Discuss: 
+    i. Do you still think the claim is causal/noncausal?
+    ii. Would a causal claim be justified in this case?
+    iii. Why/why not?
+
+**Example 1**: 
+
+> Violence exposure hampers compromise among Israelis, emphasizing the importance of abstaining from violence for conflict resolution.
+
+<https://doi.org/10.1093/pnasnexus/pgae581>
+
+**Example 2**:
+
+> We investigate both the role of gender and feminism in friends-with-benefits (FWB) relationships at a United States college, and ask whether identification with feminist ideology impacts students’ motivations and assessments of their relationships.
+
+<https://link.springer.com/article/10.1007/s12119-014-9252-3>
+
+**Exampe 3**:
+
+> This distrust of atheists is driven by religious predictors, social location, and broader value orientations.
+
+<https://doi.org/10.1177/000312240607100203>
+
+**Example 4**:
+
+> we show that being in a dual-career household increases one's willingness and lowers the perceived risk of leaving their job and joining a startup venture—especially if the household prioritizes their spouse's career.
+
+<https://doi.org/10.1002/smj.3481>
+
+**Example 5**:
+
+> We find that those who live in regions with a greater share of migrants from Eastern Europe have more positive attitudes towards the EU but that this positive influence diminishes in highly segregated areas.
+
+<https://doi.org/10.1080/13501763.2023.2271504>
 

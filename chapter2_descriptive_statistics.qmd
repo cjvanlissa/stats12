@@ -6,14 +6,23 @@ source("R/my_setup.R")
 ```
 
 Descriptive statistics describe or summarize properties of data collected in a sample.
-If you collect data on three variables for five participants, you could imagine that it is still feasible to print the entire dataset as a table, and to maintain the overview.
+If you collect data on three variables for five participants, you can still print the entire dataset as a table and maintain the overview:
+
+```{r}
+set.seed(2)
+knitr::kable(
+  data.frame(
+  Sex = sample(c("M", "F", "X"), size = 5, replace = TRUE, prob = c(.47, .45, .08)),
+  Height = sample(c(160:205), size = 5, replace = TRUE),
+  Age = sample(c(17:23), size = 5, replace = TRUE))
+)
+```
+
 Any time you collect data from more than just a handful of participants,
 however, this becomes unfeasible.
 Instead, we report descriptive statistics.
-While some descriptive statistics are *calculated in the same way* as inferential statistics (which are first introduced in later chapters),
-the distinctive feature of descriptive statistics is that we use them to describe the data observed in a sample, and not to make claims about the larger population.
 
-Descriptive statistics are almost always computed, for a variety of reasons:
+Descriptive statistics are almost always computed when data are collected, for a variety of reasons:
 
 1. To describe properties of the sample (e.g., the demographic composition)
 1. To check for mistakes in data entry; e.g., if the maximum value of the variable `age` is 124, the person who entered the data might have made a mistake
@@ -22,7 +31,6 @@ Descriptive statistics are almost always computed, for a variety of reasons:
     + In which country are most of our sales conducted?
     + What is the most common major in my classroom?
     + Based on data collected from all inhabitants of the Netherlands (i.e.: a census, not a sample), what is the average income?
-
 
 ## Measures of Central Tendency {#sec-central}
 
@@ -93,7 +101,9 @@ figure
 If you were to order all scores of your variable from lowest to highest, then the median value is the value that splits your sample in half:
 half of the participants score lower than this value, and half score higher.
 
-Another name for the median is the *50th percentile*. This just means that 50% of participants score lower than the median (and, by extension, 50% score higher).
+Another name for the median is the *50th percentile*.
+The *$n$th percentile* is the score that divides the sample so that $n$% of participants score lower.
+Thus, the 50th percentile means that 50% of participants score lower than the median (and, of course, 50% score higher).
 
 Based on the explanation of the mean, you might already realize that this value should be equal to that of the mean in a perfectly symmetrical distribution.
 If there are outliers, though, the median is less strongly affected by them than the mean.
@@ -107,7 +117,7 @@ If our variable has these values (which are already ordered):
 2, 3, 6, 7, 100
 ```
 
-Then the median value is the middle value, $Med = 6$. Note that the outlier with value `100` does not really affect it (the mean for this sample would be much higher, $M = 23.6$).
+Then the median value is the middle value, $Med = 6$. Note that the outlier with value `100` does not really affect it (the mean for this sample is much higher, $M = 23.6$).
 
 If our variable has these values (which are already ordered):
 
@@ -166,8 +176,7 @@ Which measure to choose depends, in part, on the measurement level of the variab
 
 * **Nominal:** Mode
 * **Ordinal:** Mode; if you calculate the mean or median, that means you assume that the distances between all categories are equal (i.e., you're treating your ordinal variable as interval).
-* **Interval/Ratio:** Mode, mean, and median
-
+* **Interval/Ratio:** Mode (but: it is rare for multiple interval/ratio scores to have identical values, unless they are integer), mean, and median
 
 ## Measures of Dispersion {#sec-variability}
 
@@ -283,6 +292,12 @@ Imagine I tell you that, in one class, the average grade is a 5, with a standard
 * **Analysis choices**: Skewed or heavy-tailed distributions may call for robust or non-parametric methods.  
 * **Transparency**: Readers can judge your results only if they see the data’s headline features.  
 * **Communication**: "Participants averaged *8.9 hours of screen time per day* (SD = 1 hr)" paints an instant picture.
+
+## Descriptive VS Inferential Statistics
+
+Descriptive statistics describe sample properties, while inferential statistics (which are covered in later chapters) give us a best guess for the corresponding population parameter.
+It is important to realize that some descriptive statistics are *calculated in the same way*, or very similar, as inferential statistics.
+The distinctive feature of descriptive statistics is how they are used: use them to describe the data observed in a sample, and not to make claims about the larger population.
 
 ## Context of Discovery VS Justification
 
@@ -426,7 +441,6 @@ What percentage of participants is a non-smoker? `r fitb(48.1, num = TRUE, tol =
 What percentage of participants is in a relationship? `r fitb(47.9, num = TRUE, tol = .1)`
 
 :::
-:::
 
 
 ### Weighted Mean {.smaller}
@@ -438,7 +452,6 @@ SPSS effectively multiplies each mean by its *n*, sums those products, and divid
 
 - Merge the two files if separate (*Data > Merge Files*).  
 - Run *Analyze > Descriptive Statistics > Descriptives* on the combined score column.
-
 
 
 ### Step 4 – Finding Erroneous Values
