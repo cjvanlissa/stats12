@@ -1,14 +1,18 @@
 # Descriptive Statistics {#sec-descriptive}
 
-```{r, include = FALSE}
+```{r echo = FALSE, include = FALSE}
 source("R/booktem_setup.R")
 source("R/my_setup.R")
 ```
 
+[Data from data folder](data/chalk.sav)
+[Data from include folder](include/chalk.sav)
+[Data from "root" folder](chalk.sav)
+
 Descriptive statistics describe or summarize properties of data collected in a sample.
 If you collect data on three variables for five participants, you can still print the entire dataset as a table and maintain the overview:
 
-```{r}
+```{r echo = FALSE}
 set.seed(2)
 knitr::kable(
   data.frame(
@@ -65,7 +69,7 @@ In distribution c, every value is exactly equally common.
 For distributions a-c, the mean would be a good measure of central tendency - it gives you the middle of the distribution.
 However, also notice that the mean is a better representation of the "most common" value in distributions a-b, but not in distribution c.
 
-```{r}
+```{r echo = FALSE, warning=FALSE}
 library(ggplot2)
 library(ggpubr)
 base <- ggplot() +
@@ -130,7 +134,7 @@ Then the median would be the mean of the middle two values: $(3+6) / 2 = 4.5$.
 Below is the picture of the means again, but now, the location of the median is indicated with a blue line.
 Note that for the symmetrical distributions a-c, the median is identical to the mean - but for the asymmetrical distribution d, the median is a much better representation of the "most common value" than the mean is.
 
-```{r fig-medians, fig.cap="Location of the median in symmetrical and asymmetrical distributions."}
+```{r fig-medians, echo = FALSE, fig.cap="Location of the median in symmetrical and asymmetrical distributions."}
 p1 <- p1 + geom_vline(xintercept = 0, color = "blue", linewidth = 2)
 p2 <- p2 + geom_vline(xintercept = 0, color = "blue", linewidth = 2)
 p3 <- p3  + geom_vline(xintercept = 0, color = "blue", linewidth = 2)
@@ -225,7 +229,7 @@ Second, note that they are not on a very meaningful scale.
 Without further information, you cannot interpret what it means to say that the sum of squares for the variable age is 6524.
 Third, note that squaring distances does mean that high deviations become (quadratically) more influential:
 
-```{r figsquare, fig.cap="When squared, large values are more influential than small values."}
+```{r figsquare, echo = FALSE, fig.cap="When squared, large values are more influential than small values."}
 library(ggplot2)
 df <- data.frame(Deviation = 1:10,
                  Squared = c(1:10)^2)
@@ -301,7 +305,7 @@ The distinctive feature of descriptive statistics is how they are used: use them
 
 ## Context of Discovery VS Justification
 
-```{r fig-ecwagenmakers, fig.cap="An interpretation of De Groot’s empirical cycle, by Wagenmakers, Dutilh, & Sarafoglou, 2018. CC-BY: Artwork by Viktor Beekman, concept by Eric-Jan Wagenmakers"}
+```{r fig-ecwagenmakers, echo = FALSE, fig.cap="An interpretation of De Groot’s empirical cycle, by Wagenmakers, Dutilh, & Sarafoglou, 2018. CC-BY: Artwork by Viktor Beekman, concept by Eric-Jan Wagenmakers"}
 knitr::include_graphics("images/creativity_verification.jpg")
 ```
 
@@ -345,14 +349,15 @@ For an example of how preregistered hypothesis tests can be combined with rigoro
 <!-- * a measure of how far typical scores wander from that value (noise). -->
 
 
-#Lecture 
+# Lecture 
 
+TO DO
 
 # Formative Test
 
 A formative test helps you gauge how well you’ve grasped the ideas and calculations from **Chapter 2 – Descriptive Statistics**. Try the quiz after working through the lecture slides but **before** our live meeting, so we can focus on any topics that still feel wobbly. If you miss a question you’ll see a hint that points you back to the relevant slide or worked example.
 
-```{r results='asis'}
+```{r formative_descriptives, echo = FALSE, results ='asis'}
 add_mcs("ch2_formativ.csv")
 ```
 
@@ -367,7 +372,7 @@ As explained before, the first step in any statistical analysis involves **inspe
 
 This assignment shows you how to explore data using **descriptive statistics**—values such as the mean, standard deviation, maximum, and minimum.
 
-> **Use the same data file as in the previous tutorial.**
+Use the data file `stressLAS.sav`, as in the previous chapter.
 
 
 ### Step 2 – Descriptives for Key Variables
@@ -405,7 +410,7 @@ Sometimes a single mean or median masks sub-groups.
 1. *Graphs > Legacy Dialogs > Histogram*  
 2. Choose **Life Satisfaction** for *Variable* and click **OK**
 
-If you notice **two peaks**, colour the bars by **Relation** (single vs. relationship):
+If you notice **two peaks**, color the bars by **Relation** (single vs. relationship):
 
 1. *Graphs > Chart Builder*  
 2. Drag **Histogram** onto the canvas  
@@ -433,6 +438,7 @@ How many participants are in the sample? `r fitb(780, num = TRUE)`
 What is the mean value of Optimism? `r fitb(19.13, num = TRUE, tol = .01)`
  
 For which of the variables is the spread in the scores highest? `r mcq(c("answer" = "OPTIM", "SATIS", "NEGEMO")[sample.int(3)])`
+
 
 The minimum and maximum observed scores for Negative Emotions were: [`r fitb(3, num = TRUE)`, `r fitb(37, num = TRUE)`].
 
