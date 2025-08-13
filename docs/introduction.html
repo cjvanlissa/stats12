@@ -334,7 +334,12 @@ window.Quarto = {
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#lecture" id="toc-lecture" class="nav-link active" data-scroll-target="#lecture"><span class="header-section-number">2</span> Lecture</a></li>
+<li><a href="#exploratory-data-analysis-eda" id="toc-exploratory-data-analysis-eda" class="nav-link active" data-scroll-target="#exploratory-data-analysis-eda"><span class="header-section-number">1.1</span> Exploratory Data Analysis (EDA)</a></li>
+  <li><a href="#correlation-causation" id="toc-correlation-causation" class="nav-link" data-scroll-target="#correlation-causation"><span class="header-section-number">1.2</span> Correlation ≠ Causation</a></li>
+  <li><a href="#research-designs-and-validity" id="toc-research-designs-and-validity" class="nav-link" data-scroll-target="#research-designs-and-validity"><span class="header-section-number">1.3</span> Research Designs and Validity</a></li>
+  <li><a href="#sampling-distribution-and-standard-error" id="toc-sampling-distribution-and-standard-error" class="nav-link" data-scroll-target="#sampling-distribution-and-standard-error"><span class="header-section-number">1.4</span> Sampling Distribution and Standard Error</a></li>
+  <li><a href="#ethics-privacy-and-reproducible-workflows" id="toc-ethics-privacy-and-reproducible-workflows" class="nav-link" data-scroll-target="#ethics-privacy-and-reproducible-workflows"><span class="header-section-number">1.5</span> Ethics, Privacy, and Reproducible Workflows</a></li>
+  <li><a href="#lecture" id="toc-lecture" class="nav-link" data-scroll-target="#lecture"><span class="header-section-number">2</span> Lecture</a></li>
   <li><a href="#formative-test" id="toc-formative-test" class="nav-link" data-scroll-target="#formative-test"><span class="header-section-number">3</span> Formative Test</a></li>
   <li>
 <a href="#in-spss" id="toc-in-spss" class="nav-link" data-scroll-target="#in-spss"><span class="header-section-number">4</span> In SPSS</a>
@@ -420,19 +425,37 @@ window.Quarto = {
   
 
 
-</header><p>Statistics are more relevant than ever in this digital age, where data about our entire lives is readily available, and software to analyze such data has become extremely user-friendly and freely available. We live in a world where everyone wants our data, and being data literate is becoming increasingly important across industries.</p>
+</header><p>Statistics are more relevant than ever in this digital age, where data about our entire lives is readily available, and software to analyze such data has become extremely user-friendly and freely available. We live in a world where organizations large and small collect data to tailor products and services, and being data literate is becoming increasingly important across industries.</p>
 <p>Statistics allows us to make sense of data and gain valuable insights. It helps us better understand social phenomena, predict sales and optimize marketing strategies, and even explore the relationship between brain activity and behavior. Data analysis is one of the most marketable skills taught at universities.</p>
-<p>Before we delve deeper into statistics, it’s crucial to distinguish between methods and statistics. Methods refer to the procedures used in research, such as data collection, participant selection, and study design. On the other hand, statistics focuses on analyzing the data obtained from these methods.</p>
+<p>Before we delve deeper into statistics, it’s crucial to distinguish between methods and statistics. Methods refer to the procedures used in research, such as data collection, participant selection, and study design. Statistics, on the other hand, focuses on analyzing the data obtained from these methods.</p>
 <p>Two fundamental branches of statistics covered in this course are descriptive statistics and inferential statistics. Descriptive statistics involves summarizing and describing the characteristics of a dataset, while inferential statistics allows us to make educated guesses about a larger population based on a smaller sample.</p>
 <p>Statistical modeling is another aspect of statistics where theories are represented mathematically. This enables us to predict important outcomes, such as sales figures, well-being, or the likelihood of neurological disorders. Statistical modeling also allows us to explore data for interesting patterns or to perform tests to answer theoretically driven research questions.</p>
-<p>In scientific research, statistics can help us test theories. The process of scientific knowledge acquisition is described by the empirical cycle: We start with a theory, from which we derive testable hypotheses. A theory is an abstract system of assumptions about the relationships between constructs. A hypothesis is a concrete statement, derived from the theory, about expected quantitative relationships between measured variables. We then collect data and test the hypothesis. If the hypothesis is refuted, we re-examine the theory and possibly ammend it.</p>
-<p>To lay a foundation for understanding statistics, it’s essential to be familiar with some basic concepts. First, data in the social sciences often comes in tabular format (e.g., spreadsheets), where each row represents an individual observation, and each column represents the individuals’ scores on various variables.</p>
-<p>A crucial distinction is the one between population and sample. The population refers to the complete set of objects of interest, such as all people in a country or all students in a class. However, due to practical limitations, we usually do not have access to the population. Instead, we draw a sample from it, which is a subset of the population. Sampling theory establishes the rationale for drawing inferences about a population based on samples. Sample statistics serve as our best estimate of population parameters. If the sample is representative, those estimates will be unbiased. Moreover, we can estimate our uncertainty about the sample statistics as estimates of population parameters. The best way to ensure a representative sample is to use random sampling, where each individual in the population has an equal chance of being included.</p>
-<p>The distinction between constructs and variables is also important. Constructs are abstract features of interest within a population, like short-term memory, intelligence, or education. Variables, on the other hand, are mathematical placeholders that represent specific values associated with these constructs. Data, then, refers to the specific values of a variable.</p>
-<p>Measurement level refers to the kind of information contained in a variable. The four common measurement levels are nominal, ordinal, interval, and ratio. Nominal variables have categories that differ in name only, while ordinal variables have categories with a meaningful order. Interval variables have meaningful intervals between values, which allows for meaningful comparisons between values. Finally, ratio variables have a meaningful zero-point, which additionally allows for the computation of meaningful ratios between values.</p>
+<p>In scientific research, statistics can help us test theories. The process of scientific knowledge acquisition is described by the empirical cycle: We start with a theory, from which we derive testable hypotheses. A theory is an abstract system of assumptions about the relationships between constructs. A hypothesis is a concrete statement, derived from the theory, about expected quantitative relationships between measured variables. We then collect data and test the hypothesis. If the hypothesis is refuted, we re-examine the theory and possibly amend it.</p>
+<p>To lay a foundation for understanding statistics, it’s essential to be familiar with some basic concepts. First, data in the social sciences often come in tabular format (e.g., spreadsheets), where each row represents an individual observation, and each column represents the individuals’ scores on various variables.</p>
+<p>A crucial distinction is the one between population and sample. The population refers to the complete set of objects of interest, such as all people in a country or all students in a class. However, due to practical limitations, we usually do not have access to the population. Instead, we draw a sample from it, which is a subset of the population. Sampling theory establishes the rationale for drawing inferences about a population based on samples. Sample statistics serve as our best estimate of population parameters. If the sample is representative, those estimates will be unbiased. Moreover, we can estimate our uncertainty about the sample statistics as estimates of population parameters. The best way to ensure a representative sample is to use random sampling, where each individual in the population has an equal chance of being included—though in practice, constraints often lead researchers to rely on convenience or stratified sampling, which can limit the strength of our inferences.</p>
+<p>The distinction between constructs and variables is also important. Constructs are abstract features of interest within a population, like short-term memory, intelligence, or education. Variables, on the other hand, are placeholders that represent specific values associated with these constructs—much like column headers in a spreadsheet. Data then refer to the specific values of a variable.</p>
+<p>Measurement level refers to the kind of information contained in a variable. The four common measurement levels are nominal, ordinal, interval, and ratio. Nominal variables have categories that differ in name only, while ordinal variables have categories with a meaningful order. Interval variables have meaningful intervals between values (e.g., temperature in °C), which allows for meaningful comparisons between values. Finally, ratio variables have a meaningful zero-point (e.g., weight in kilograms), which additionally allows for the computation of meaningful ratios between values.</p>
 <p>Descriptive statistics are used to summarize and analyze data. They help us get a sense of the dataset and answer questions like the most common major among students or the average age of a group. Descriptive statistics can also be relevant in answering research questions, such as evaluating exam questions or determining if the proportion of correct answers on a multiple-choice question is greater than chance.</p>
-<p>In summary, statistics is a powerful tool for analyzing and interpreting data. It helps us gain insights into various aspects of social life, make predictions, and test theories. By understanding fundamental concepts, such as measurement levels and descriptive statistics, we can start exploring and making sense of data in a meaningful way.</p>
-<section id="lecture" class="level1" data-number="2"><h1 data-number="2">
+<section id="exploratory-data-analysis-eda" class="level2" data-number="1.1"><h2 data-number="1.1" class="anchored" data-anchor-id="exploratory-data-analysis-eda">
+<span class="header-section-number">1.1</span> Exploratory Data Analysis (EDA)</h2>
+<p>Before applying statistical tests, researchers typically engage in exploratory data analysis (EDA): visualizing and summarizing the data to detect errors, spot patterns, and generate new questions. This step—popularized by John Tukey—often involves histograms, boxplots, and scatterplots that reveal outliers or interesting trends worth modeling.</p>
+</section><section id="correlation-causation" class="level2" data-number="1.2"><h2 data-number="1.2" class="anchored" data-anchor-id="correlation-causation">
+<span class="header-section-number">1.2</span> Correlation ≠ Causation</h2>
+<p>Because patterns can be visually compelling, it is crucial to remember that correlation does not imply causation. For instance, ice-cream sales and drowning deaths rise together in summer, but purchasing ice-cream does not cause drowning. Establishing causal claims requires careful design and statistical control.</p>
+</section><section id="research-designs-and-validity" class="level2" data-number="1.3"><h2 data-number="1.3" class="anchored" data-anchor-id="research-designs-and-validity">
+<span class="header-section-number">1.3</span> Research Designs and Validity</h2>
+<p>Researchers employ several designs—experimental, quasi-experimental, and observational—each with its own strengths and limitations. Two key pillars of quality are:</p>
+<p>Internal validity: the degree to which the study rules out alternative explanations, letting us attribute observed effects to the manipulated variables rather than confounds.</p>
+<p>External validity: the extent to which findings generalize beyond the specific sample, setting, and operationalizations used in the study.</p>
+<p>A tightly controlled laboratory experiment may score high on internal validity but lower on external validity, whereas a large-scale field survey often shows the opposite pattern. Balancing both is a central concern of scientific inquiry.</p>
+</section><section id="sampling-distribution-and-standard-error" class="level2" data-number="1.4"><h2 data-number="1.4" class="anchored" data-anchor-id="sampling-distribution-and-standard-error">
+<span class="header-section-number">1.4</span> Sampling Distribution and Standard Error</h2>
+<p>If we could repeatedly draw many random samples of the same size from a population, each sample statistic (e.g., a mean) would vary. The distribution of those statistics is called the sampling distribution, and its spread is summarized by the standard error. Understanding this concept allows us to place confidence intervals around estimates and to perform hypothesis tests.</p>
+</section><section id="ethics-privacy-and-reproducible-workflows" class="level2" data-number="1.5"><h2 data-number="1.5" class="anchored" data-anchor-id="ethics-privacy-and-reproducible-workflows">
+<span class="header-section-number">1.5</span> Ethics, Privacy, and Reproducible Workflows</h2>
+<p>Modern data analysis carries ethical responsibilities: protecting participant privacy, preregistering hypotheses, and sharing code to enable reproducibility. Tools like R Markdown (and its successor, Quarto) combine prose, code, and output in a single document, ensuring that results can be regenerated with a single click—an increasingly important professional standard.</p>
+<p>In summary, statistics is a powerful tool for analyzing and interpreting data. It helps us gain insights into various aspects of social life, make predictions, and test theories. By understanding fundamental concepts—such as measurement levels, internal and external validity, and descriptive versus inferential statistics—and by adopting good practices like EDA, ethical data handling, and reproducible workflows, we can start exploring and making sense of data in a meaningful way.</p>
+</section><section id="lecture" class="level1" data-number="2"><h1 data-number="2">
 <span class="header-section-number">2</span> Lecture</h1>
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/_TZIIANBt94" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 </section><section id="formative-test" class="level1" data-number="3"><h1 data-number="3">
@@ -443,43 +466,43 @@ window.Quarto = {
 <div class="webex-check webex-box">
 <p><strong>Question 1</strong></p>
 What is the primary purpose of statistics?
-<div id="radio_TAJTTOYUKB" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_TAJTTOYUKB" value="answer"><span>To summarize and analyze data</span></label><label><input type="radio" autocomplete="off" name="radio_TAJTTOYUKB" value=""><span>To design research studies</span></label><label><input type="radio" autocomplete="off" name="radio_TAJTTOYUKB" value=""><span>To collect and store data</span></label><label><input type="radio" autocomplete="off" name="radio_TAJTTOYUKB" value=""><span>To create data visualizations</span></label>
+<div id="radio_DCGVHEFZCN" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_DCGVHEFZCN" value=""><span>To collect and store data</span></label><label><input type="radio" autocomplete="off" name="radio_DCGVHEFZCN" value=""><span>To create data visualizations</span></label><label><input type="radio" autocomplete="off" name="radio_DCGVHEFZCN" value="answer"><span>To summarize and analyze data</span></label><label><input type="radio" autocomplete="off" name="radio_DCGVHEFZCN" value=""><span>To design research studies</span></label>
 </div>
 <p><strong>Question 2</strong></p>
 What is the difference between descriptive statistics and inferential statistics?
-<div id="radio_SZCOPLQKXG" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_SZCOPLQKXG" value=""><span>Descriptive statistics involves analyzing data, while inferential statistics involves collecting data.</span></label><label><input type="radio" autocomplete="off" name="radio_SZCOPLQKXG" value=""><span>Descriptive statistics is used in social sciences, while inferential statistics is used in natural sciences.</span></label><label><input type="radio" autocomplete="off" name="radio_SZCOPLQKXG" value="answer"><span>Descriptive statistics summarize data, while inferential statistics involves making informed guesses about parameters in a larger population.</span></label><label><input type="radio" autocomplete="off" name="radio_SZCOPLQKXG" value=""><span>Descriptive statistics deals with nominal variables, while inferential statistics deals with ratio variables.</span></label>
+<div id="radio_DMCQVLNMNO" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_DMCQVLNMNO" value=""><span>Descriptive statistics involves analyzing data, while inferential statistics involves collecting data.</span></label><label><input type="radio" autocomplete="off" name="radio_DMCQVLNMNO" value="answer"><span>Descriptive statistics summarize data, while inferential statistics involves making informed guesses about parameters in a larger population.</span></label><label><input type="radio" autocomplete="off" name="radio_DMCQVLNMNO" value=""><span>Descriptive statistics is used in social sciences, while inferential statistics is used in natural sciences.</span></label><label><input type="radio" autocomplete="off" name="radio_DMCQVLNMNO" value=""><span>Descriptive statistics deals with nominal variables, while inferential statistics deals with ratio variables.</span></label>
 </div>
 <p><strong>Question 3</strong></p>
 What is the purpose of statistical modeling?
-<div id="radio_CBEHUFJPQP" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_CBEHUFJPQP" value="answer"><span>To represent a theory as a testable statistical model.</span></label><label><input type="radio" autocomplete="off" name="radio_CBEHUFJPQP" value=""><span>To summarize data using graphs and charts</span></label><label><input type="radio" autocomplete="off" name="radio_CBEHUFJPQP" value=""><span>To make educated guesses about a larger population based on a smaller sample</span></label><label><input type="radio" autocomplete="off" name="radio_CBEHUFJPQP" value=""><span>To predict outcomes and explore patterns in data</span></label><label><input type="radio" autocomplete="off" name="radio_CBEHUFJPQP" value=""><span>To describe the characteristics of a dataset</span></label>
+<div id="radio_TFGDTKSGWV" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_TFGDTKSGWV" value=""><span>To make educated guesses about a larger population based on a smaller sample</span></label><label><input type="radio" autocomplete="off" name="radio_TFGDTKSGWV" value=""><span>To predict outcomes and explore patterns in data</span></label><label><input type="radio" autocomplete="off" name="radio_TFGDTKSGWV" value=""><span>To describe the characteristics of a dataset</span></label><label><input type="radio" autocomplete="off" name="radio_TFGDTKSGWV" value="answer"><span>To represent a theory as a testable statistical model.</span></label><label><input type="radio" autocomplete="off" name="radio_TFGDTKSGWV" value=""><span>To summarize data using graphs and charts</span></label>
 </div>
 <p><strong>Question 4</strong></p>
 What is the empirical cycle in scientific research?
-<div id="radio_ASETOYVDBV" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_ASETOYVDBV" value="answer"><span>The process of formulating a theory, deriving hypotheses, testing these with data, and reflecting on theory</span></label><label><input type="radio" autocomplete="off" name="radio_ASETOYVDBV" value=""><span>The process of repeatedly collecting and analyzing data</span></label><label><input type="radio" autocomplete="off" name="radio_ASETOYVDBV" value=""><span>The process of designing research studies and selecting participants</span></label><label><input type="radio" autocomplete="off" name="radio_ASETOYVDBV" value=""><span>The process of summarizing and describing data using statistics</span></label>
+<div id="radio_JRWTROMXTI" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_JRWTROMXTI" value="answer"><span>The process of formulating a theory, deriving hypotheses, testing these with data, and reflecting on theory</span></label><label><input type="radio" autocomplete="off" name="radio_JRWTROMXTI" value=""><span>The process of repeatedly collecting and analyzing data</span></label><label><input type="radio" autocomplete="off" name="radio_JRWTROMXTI" value=""><span>The process of designing research studies and selecting participants</span></label><label><input type="radio" autocomplete="off" name="radio_JRWTROMXTI" value=""><span>The process of summarizing and describing data using statistics</span></label>
 </div>
 <p><strong>Question 5</strong></p>
 What is the distinction between population and sample in statistics?
-<div id="radio_BDZVHDIJOL" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_BDZVHDIJOL" value=""><span>Population refers to all participants in a study, while sample refers all participants who provided complete answers.</span></label><label><input type="radio" autocomplete="off" name="radio_BDZVHDIJOL" value=""><span>Population refers to inferential statistics, while sample refers to descriptive statistics.</span></label><label><input type="radio" autocomplete="off" name="radio_BDZVHDIJOL" value="answer"><span>Population refers to the complete set of potential participants, of which the sample is a subset.</span></label>
+<div id="radio_QAVJNBOWTS" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_QAVJNBOWTS" value="answer"><span>Population refers to the complete set of potential participants, of which the sample is a subset.</span></label><label><input type="radio" autocomplete="off" name="radio_QAVJNBOWTS" value=""><span>Population refers to all participants in a study, while sample refers all participants who provided complete answers.</span></label><label><input type="radio" autocomplete="off" name="radio_QAVJNBOWTS" value=""><span>Population refers to inferential statistics, while sample refers to descriptive statistics.</span></label>
 </div>
 <p><strong>Question 6</strong></p>
 What is the variance?
-<div id="radio_BFORFOZHGC" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_BFORFOZHGC" value=""><span>The distance between the lowest and highest value on a continuous variable.</span></label><label><input type="radio" autocomplete="off" name="radio_BFORFOZHGC" value="answer"><span>The average squared distance of observations to the mean.</span></label><label><input type="radio" autocomplete="off" name="radio_BFORFOZHGC" value=""><span>The measure of dispersion for scores on a continuous variable.</span></label><label><input type="radio" autocomplete="off" name="radio_BFORFOZHGC" value=""><span>The average distance of observations to the mean.</span></label>
+<div id="radio_ZKGYXKNMPO" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ZKGYXKNMPO" value=""><span>The average distance of observations to the mean.</span></label><label><input type="radio" autocomplete="off" name="radio_ZKGYXKNMPO" value="answer"><span>The average squared distance of observations to the mean.</span></label><label><input type="radio" autocomplete="off" name="radio_ZKGYXKNMPO" value=""><span>The distance between the lowest and highest value on a continuous variable.</span></label><label><input type="radio" autocomplete="off" name="radio_ZKGYXKNMPO" value=""><span>The measure of dispersion for scores on a continuous variable.</span></label>
 </div>
 <p><strong>Question 7</strong></p>
 Six students work on a Statistics exam. They obtain the following grades: 8, 9, 5, 6, 7 and 8. The teacher calculates a measure of central tendency, which is equal to 7.5. Which statistic did the teacher calculate?
-<div id="radio_SPMTGXJDAN" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_SPMTGXJDAN" value="answer"><span>Median</span></label><label><input type="radio" autocomplete="off" name="radio_SPMTGXJDAN" value=""><span>Standard deviation</span></label><label><input type="radio" autocomplete="off" name="radio_SPMTGXJDAN" value=""><span>Mean</span></label><label><input type="radio" autocomplete="off" name="radio_SPMTGXJDAN" value=""><span>Mode</span></label>
+<div id="radio_RECQPSZMMO" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_RECQPSZMMO" value="answer"><span>Median</span></label><label><input type="radio" autocomplete="off" name="radio_RECQPSZMMO" value=""><span>Standard deviation</span></label><label><input type="radio" autocomplete="off" name="radio_RECQPSZMMO" value=""><span>Mean</span></label><label><input type="radio" autocomplete="off" name="radio_RECQPSZMMO" value=""><span>Mode</span></label>
 </div>
 <p><strong>Question 8</strong></p>
 For which of the three scatterplots below is the correlation coefficient strongest?
-<div id="radio_GWZEKMYZMA" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_GWZEKMYZMA" value="answer"><span>A</span></label><label><input type="radio" autocomplete="off" name="radio_GWZEKMYZMA" value=""><span>C</span></label><label><input type="radio" autocomplete="off" name="radio_GWZEKMYZMA" value=""><span>B</span></label>
+<div id="radio_EVSUOVLUQA" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_EVSUOVLUQA" value=""><span>C</span></label><label><input type="radio" autocomplete="off" name="radio_EVSUOVLUQA" value=""><span>B</span></label><label><input type="radio" autocomplete="off" name="radio_EVSUOVLUQA" value="answer"><span>A</span></label>
 </div>
 </div>
 <div class="webex-solution">
@@ -643,31 +666,31 @@ Figure&nbsp;3.1: Scatterplots
 <div class="webex-check webex-box">
 <p>Describe the first bar chart; What is shown on the x-axis? <select class="webex-select"><option value="blank"></option>
 <option value="">Frequency of Responses</option>
-<option value="">Numeric scores of Stress</option>
 <option value="">Percentages of Responses</option>
+<option value="">Numeric scores of Stress</option>
 <option value="answer">Categories of Stress</option></select></p>
 <p>In the first bar chart, what is shown on the y-axis? <select class="webex-select"><option value="blank"></option>
 <option value="">Numeric scores of Stress</option>
-<option value="">Percentages of Responses</option>
+<option value="answer">Frequency of Responses</option>
 <option value="">Categories of Stress</option>
-<option value="answer">Frequency of Responses</option></select></p>
+<option value="">Percentages of Responses</option></select></p>
 <p>What’s the approximate proportion of people experiencing work-related stress? <select class="webex-select"><option value="blank"></option>
-<option value="answer">33%</option>
 <option value="">70%</option>
+<option value="answer">33%</option>
 <option value="">66%</option></select></p>
 <p>Based on the bar charts, what can you say about differences in stress levels in the sample? Are most people stressed or not? In other words: How is stress distributed across the three categories? <select class="webex-select"><option value="blank"></option>
-<option value="">Most people report life stress</option>
 <option value="">Most people report work stress</option>
-<option value="answer">Evenly distributed</option>
-<option value="">Most people report no stress</option></select></p>
+<option value="">Most people report life stress</option>
+<option value="">Most people report no stress</option>
+<option value="answer">Evenly distributed</option></select></p>
 <p>Describe the distribution of Negative Emotions. Are the scores normally distributed (i.e., like a bell-shape)? Really consider why this is / is not the case before checking your answer. <select class="webex-select"><option value="blank"></option>
-<option value="answer">Not normal</option>
-<option value="">Normal</option></select></p>
+<option value="">Normal</option>
+<option value="answer">Not normal</option></select></p>
 <p>Based on the scatter plot from Step 5, would you expect an association between Negative Emotions and Life Satisfaction? <select class="webex-select"><option value="blank"></option>
 <option value="">Strong positive</option>
-<option value="">Small positive</option>
+<option value="answer">No association</option>
 <option value="">Small negative</option>
-<option value="answer">No association</option></select></p>
+<option value="">Small positive</option></select></p>
 </div>
 </section><section id="descriptive-statistics-1" class="level2" data-number="5.4"><h2 data-number="5.4" class="anchored" data-anchor-id="descriptive-statistics-1">
 <span class="header-section-number">5.4</span> Descriptive Statistics</h2>
@@ -704,9 +727,9 @@ Figure&nbsp;3.1: Scatterplots
 <p>How many participants are in the sample? <input class="webex-solveme nospaces" size="3" data-answer="[&quot;780&quot;]"></p>
 <p>What is the mean value of Optimism? <input class="webex-solveme nospaces" data-tol="0.01" size="5" data-answer="[&quot;19.13&quot;]"></p>
 <p>For which of the variables is the spread in the scores highest? <select class="webex-select"><option value="blank"></option>
-<option value="answer">OPTIM</option>
+<option value="">NEGEMO</option>
 <option value="">SATIS</option>
-<option value="">NEGEMO</option></select></p>
+<option value="answer">OPTIM</option></select></p>
 <p>The minimum and maximum observed scores for Negative Emotions were: [ <input class="webex-solveme nospaces" size="1" data-answer="[&quot;3&quot;]">, <input class="webex-solveme nospaces" size="2" data-answer="[&quot;37&quot;]">].</p>
 <p>What percentage of participants is a non-smoker? <input class="webex-solveme nospaces" data-tol="0.1" size="4" data-answer="[&quot;48.1&quot;]"></p>
 <p>What percentage of participants is in a relationship? <input class="webex-solveme nospaces" data-tol="0.1" size="4" data-answer="[&quot;47.9&quot;]"></p>
@@ -735,24 +758,24 @@ Figure&nbsp;3.1: Scatterplots
 <div class="webex-check webex-box">
 <p>Was there an erroneous value in the data file? If so, type the value of that erroneous value here: <input class="webex-solveme nospaces" size="3" data-answer="[&quot;220&quot;]"></p>
 <p>To answer this question, only use reasoning. If you delete that value, how do you think the mean of that variable will be affected? <select class="webex-select"><option value="blank"></option>
-<option value="">Stays the same</option>
+<option value="">Becomes larger</option>
 <option value="answer">Becomes smaller</option>
-<option value="">Becomes larger</option></select></p>
+<option value="">Stays the same</option></select></p>
 <p>To answer this question, only use reasoning. If you delete that value, how do you think the standard deviation of that variable will be affected? <select class="webex-select"><option value="blank"></option>
 <option value="answer">Becomes smaller</option>
-<option value="">Stays the same</option>
-<option value="">Becomes larger</option></select></p>
+<option value="">Becomes larger</option>
+<option value="">Stays the same</option></select></p>
 <p>To answer this question, only use reasoning. If you delete that value, how do you think the standard deviation of that variable will be affected? <select class="webex-select"><option value="blank"></option>
-<option value="">Stays the same</option>
 <option value="answer">Becomes smaller</option>
-<option value="">Becomes larger</option></select></p>
+<option value="">Becomes larger</option>
+<option value="">Stays the same</option></select></p>
 <p>In this sample, who are more satisfied with life? <select class="webex-select"><option value="blank"></option>
 <option value="">Non-smokers</option>
 <option value="answer">Smokers</option></select></p>
 <p>Do you think this also holds for the population of all persons? <select class="webex-select"><option value="blank"></option>
-<option value="">No</option>
+<option value="answer">Can’t tell</option>
 <option value="">Yes</option>
-<option value="answer">Can’t tell</option></select></p>
+<option value="">No</option></select></p>
 </div>
 </section><section id="missing-values" class="level2" data-number="5.7"><h2 data-number="5.7" class="anchored" data-anchor-id="missing-values">
 <span class="header-section-number">5.7</span> Missing Values</h2>
@@ -767,9 +790,9 @@ Figure&nbsp;3.1: Scatterplots
 <div class="webex-check webex-box">
 <p>What is the percentage of respondents who experience No Stress? <input class="webex-solveme nospaces" data-tol="0.1" size="4" data-answer="[&quot;33.6&quot;]"></p>
 <p>Which type of stress is most common in the sample? <select class="webex-select"><option value="blank"></option>
-<option value="answer">Life stress</option>
 <option value="">No stress</option>
-<option value="">Work stress</option></select></p>
+<option value="">Work stress</option>
+<option value="answer">Life stress</option></select></p>
 <p><strong>For educational purposes only, we will now create missing values in the data file.</strong></p>
 <p>Navigate to the Data view and delete the value for Stress for the first 10 cases. Notice that you only have to delete the scores for the variable Stress, and not the complete case.</p>
 <p>Compute the frequency distribution for Stress again and compare the new table with the previous one.</p>
@@ -874,18 +897,18 @@ Remind me how
 <option value="NA">TRUE</option>
 <option value="answer">FALSE</option></select></p>
 <p>Give an indication of the strength of the relationship between X1-X2: <select class="webex-select"><option value="blank"></option>
-<option value="answer">moderate</option>
 <option value="">zero</option>
+<option value="answer">moderate</option>
 <option value="">weak</option>
 <option value="">strong</option></select></p>
 <p>Give an indication of the strength of the relationship between X3-X4: <select class="webex-select"><option value="blank"></option>
 <option value="">zero</option>
-<option value="">weak</option>
+<option value="">moderate</option>
 <option value="answer">strong</option>
-<option value="">moderate</option></select></p>
+<option value="">weak</option></select></p>
 <p>Give an indication of the strength of the relationship between X5-X6: <select class="webex-select"><option value="blank"></option>
-<option value="">weak</option>
 <option value="">zero</option>
+<option value="">weak</option>
 <option value="">strong</option>
 <option value="answer">moderate</option></select></p>
 </div>
@@ -915,15 +938,15 @@ Show answer
 <p>What is the correlation coefficient for the variables X2 and X6? <input class="webex-solveme nospaces" data-tol="0.01" size="4" data-answer="[&quot;0.06&quot;,&quot;.06&quot;]"></p>
 <p>What is the correlation coefficient for the variables X3 and X4? <input class="webex-solveme nospaces" data-tol="0.01" size="4" data-answer="[&quot;-0.8&quot;,&quot;-.8&quot;]"></p>
 <p>Can we interpret this correlation coefficient? <select class="webex-select"><option value="blank"></option>
-<option value="">Yes, otherwise SPSS would give an error</option>
 <option value="">No, assumption of normality violated</option>
-<option value="answer">No, assumption of linearity violated</option>
-<option value="">No, assumption of association violated</option></select></p>
+<option value="">Yes, otherwise SPSS would give an error</option>
+<option value="">No, assumption of association violated</option>
+<option value="answer">No, assumption of linearity violated</option></select></p>
 <p>Interpret the correlation between X5 and X6? <select class="webex-select"><option value="blank"></option>
-<option value="answer">Moderate negative</option>
+<option value="">Weak positive</option>
 <option value="">Moderate positive</option>
 <option value="">Weak negative</option>
-<option value="">Weak positive</option></select></p>
+<option value="answer">Moderate negative</option></select></p>
 </div>
 
 

@@ -1,19 +1,32 @@
 # Descriptive Statistics {#sec-descriptive}
 
-```{r, include = FALSE}
+```{r echo = FALSE, include = FALSE}
 source("R/booktem_setup.R")
 source("R/my_setup.R")
 ```
 
+[Data from data folder](data/chalk.sav)
+[Data from include folder](include/chalk.sav)
+[Data from "root" folder](chalk.sav)
+
 Descriptive statistics describe or summarize properties of data collected in a sample.
-If you collect data on three variables for five participants, you could imagine that it is still feasible to print the entire dataset as a table, and to maintain the overview.
+If you collect data on three variables for five participants, you can still print the entire dataset as a table and maintain the overview:
+
+```{r echo = FALSE}
+set.seed(2)
+knitr::kable(
+  data.frame(
+  Sex = sample(c("M", "F", "X"), size = 5, replace = TRUE, prob = c(.47, .45, .08)),
+  Height = sample(c(160:205), size = 5, replace = TRUE),
+  Age = sample(c(17:23), size = 5, replace = TRUE))
+)
+```
+
 Any time you collect data from more than just a handful of participants,
 however, this becomes unfeasible.
 Instead, we report descriptive statistics.
-While some descriptive statistics are *calculated in the same way* as inferential statistics (which are first introduced in later chapters),
-the distinctive feature of descriptive statistics is that we use them to describe the data observed in a sample, and not to make claims about the larger population.
 
-Descriptive statistics are almost always computed, for a variety of reasons:
+Descriptive statistics are almost always computed when data are collected, for a variety of reasons:
 
 1. To describe properties of the sample (e.g., the demographic composition)
 1. To check for mistakes in data entry; e.g., if the maximum value of the variable `age` is 124, the person who entered the data might have made a mistake
@@ -22,7 +35,6 @@ Descriptive statistics are almost always computed, for a variety of reasons:
     + In which country are most of our sales conducted?
     + What is the most common major in my classroom?
     + Based on data collected from all inhabitants of the Netherlands (i.e.: a census, not a sample), what is the average income?
-
 
 ## Measures of Central Tendency {#sec-central}
 
@@ -57,7 +69,7 @@ In distribution c, every value is exactly equally common.
 For distributions a-c, the mean would be a good measure of central tendency - it gives you the middle of the distribution.
 However, also notice that the mean is a better representation of the "most common" value in distributions a-b, but not in distribution c.
 
-```{r}
+```{r echo = FALSE, warning=FALSE}
 library(ggplot2)
 library(ggpubr)
 base <- ggplot() +
@@ -93,7 +105,9 @@ figure
 If you were to order all scores of your variable from lowest to highest, then the median value is the value that splits your sample in half:
 half of the participants score lower than this value, and half score higher.
 
-Another name for the median is the *50th percentile*. This just means that 50% of participants score lower than the median (and, by extension, 50% score higher).
+Another name for the median is the *50th percentile*.
+The *$n$th percentile* is the score that divides the sample so that $n$% of participants score lower.
+Thus, the 50th percentile means that 50% of participants score lower than the median (and, of course, 50% score higher).
 
 Based on the explanation of the mean, you might already realize that this value should be equal to that of the mean in a perfectly symmetrical distribution.
 If there are outliers, though, the median is less strongly affected by them than the mean.
@@ -107,7 +121,7 @@ If our variable has these values (which are already ordered):
 2, 3, 6, 7, 100
 ```
 
-Then the median value is the middle value, $Med = 6$. Note that the outlier with value `100` does not really affect it (the mean for this sample would be much higher, $M = 23.6$).
+Then the median value is the middle value, $Med = 6$. Note that the outlier with value `100` does not really affect it (the mean for this sample is much higher, $M = 23.6$).
 
 If our variable has these values (which are already ordered):
 
@@ -120,7 +134,7 @@ Then the median would be the mean of the middle two values: $(3+6) / 2 = 4.5$.
 Below is the picture of the means again, but now, the location of the median is indicated with a blue line.
 Note that for the symmetrical distributions a-c, the median is identical to the mean - but for the asymmetrical distribution d, the median is a much better representation of the "most common value" than the mean is.
 
-```{r fig-medians, fig.cap="Location of the median in symmetrical and asymmetrical distributions."}
+```{r fig-medians, echo = FALSE, fig.cap="Location of the median in symmetrical and asymmetrical distributions."}
 p1 <- p1 + geom_vline(xintercept = 0, color = "blue", linewidth = 2)
 p2 <- p2 + geom_vline(xintercept = 0, color = "blue", linewidth = 2)
 p3 <- p3  + geom_vline(xintercept = 0, color = "blue", linewidth = 2)
@@ -166,8 +180,7 @@ Which measure to choose depends, in part, on the measurement level of the variab
 
 * **Nominal:** Mode
 * **Ordinal:** Mode; if you calculate the mean or median, that means you assume that the distances between all categories are equal (i.e., you're treating your ordinal variable as interval).
-* **Interval/Ratio:** Mode, mean, and median
-
+* **Interval/Ratio:** Mode (but: it is rare for multiple interval/ratio scores to have identical values, unless they are integer), mean, and median
 
 ## Measures of Dispersion {#sec-variability}
 
@@ -216,7 +229,7 @@ Second, note that they are not on a very meaningful scale.
 Without further information, you cannot interpret what it means to say that the sum of squares for the variable age is 6524.
 Third, note that squaring distances does mean that high deviations become (quadratically) more influential:
 
-```{r figsquare, fig.cap="When squared, large values are more influential than small values."}
+```{r figsquare, echo = FALSE, fig.cap="When squared, large values are more influential than small values."}
 library(ggplot2)
 df <- data.frame(Deviation = 1:10,
                  Squared = c(1:10)^2)
@@ -284,9 +297,15 @@ Imagine I tell you that, in one class, the average grade is a 5, with a standard
 * **Transparency**: Readers can judge your results only if they see the data’s headline features.  
 * **Communication**: "Participants averaged *8.9 hours of screen time per day* (SD = 1 hr)" paints an instant picture.
 
+## Descriptive VS Inferential Statistics
+
+Descriptive statistics describe sample properties, while inferential statistics (which are covered in later chapters) give us a best guess for the corresponding population parameter.
+It is important to realize that some descriptive statistics are *calculated in the same way*, or very similar, as inferential statistics.
+The distinctive feature of descriptive statistics is how they are used: use them to describe the data observed in a sample, and not to make claims about the larger population.
+
 ## Context of Discovery VS Justification
 
-```{r fig-ecwagenmakers, fig.cap="An interpretation of De Groot’s empirical cycle, by Wagenmakers, Dutilh, & Sarafoglou, 2018. CC-BY: Artwork by Viktor Beekman, concept by Eric-Jan Wagenmakers"}
+```{r fig-ecwagenmakers, echo = FALSE, fig.cap="An interpretation of De Groot’s empirical cycle, by Wagenmakers, Dutilh, & Sarafoglou, 2018. CC-BY: Artwork by Viktor Beekman, concept by Eric-Jan Wagenmakers"}
 knitr::include_graphics("images/creativity_verification.jpg")
 ```
 
@@ -330,14 +349,15 @@ For an example of how preregistered hypothesis tests can be combined with rigoro
 <!-- * a measure of how far typical scores wander from that value (noise). -->
 
 
-#Lecture 
+# Lecture 
 
+TO DO
 
 # Formative Test
 
 A formative test helps you gauge how well you’ve grasped the ideas and calculations from **Chapter 2 – Descriptive Statistics**. Try the quiz after working through the lecture slides but **before** our live meeting, so we can focus on any topics that still feel wobbly. If you miss a question you’ll see a hint that points you back to the relevant slide or worked example.
 
-```{r results='asis'}
+```{r formative_descriptives, echo = FALSE, results ='asis'}
 add_mcs("ch2_formativ.csv")
 ```
 
@@ -352,7 +372,7 @@ As explained before, the first step in any statistical analysis involves **inspe
 
 This assignment shows you how to explore data using **descriptive statistics**—values such as the mean, standard deviation, maximum, and minimum.
 
-> **Use the same data file as in the previous tutorial.**
+Use the data file `stressLAS.sav`, as in the previous chapter.
 
 
 ### Step 2 – Descriptives for Key Variables
@@ -390,7 +410,7 @@ Sometimes a single mean or median masks sub-groups.
 1. *Graphs > Legacy Dialogs > Histogram*  
 2. Choose **Life Satisfaction** for *Variable* and click **OK**
 
-If you notice **two peaks**, colour the bars by **Relation** (single vs. relationship):
+If you notice **two peaks**, color the bars by **Relation** (single vs. relationship):
 
 1. *Graphs > Chart Builder*  
 2. Drag **Histogram** onto the canvas  
@@ -419,13 +439,13 @@ What is the mean value of Optimism? `r fitb(19.13, num = TRUE, tol = .01)`
  
 For which of the variables is the spread in the scores highest? `r mcq(c("answer" = "OPTIM", "SATIS", "NEGEMO")[sample.int(3)])`
 
+
 The minimum and maximum observed scores for Negative Emotions were: [`r fitb(3, num = TRUE)`, `r fitb(37, num = TRUE)`].
 
 What percentage of participants is a non-smoker? `r fitb(48.1, num = TRUE, tol = .1)`
 
 What percentage of participants is in a relationship? `r fitb(47.9, num = TRUE, tol = .1)`
 
-:::
 :::
 
 
@@ -438,7 +458,6 @@ SPSS effectively multiplies each mean by its *n*, sums those products, and divid
 
 - Merge the two files if separate (*Data > Merge Files*).  
 - Run *Analyze > Descriptive Statistics > Descriptives* on the combined score column.
-
 
 
 ### Step 4 – Finding Erroneous Values

@@ -3,7 +3,7 @@ project:
   output-dir: docs
   resources: resources
 execute:
-  freeze: true
+  freeze: auto
   warnings: false
   echo: false
 book:
