@@ -49,6 +49,7 @@ book:
   - Chapter3_Correlation.qmd
   - probability.qmd
   - samplingdistribution.qmd
+  - Week_4.qmd
   - testing.qmd
   - glm1_regression.qmd
   - glm2_sum_squares.qmd
