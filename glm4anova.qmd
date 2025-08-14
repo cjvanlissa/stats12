@@ -61,7 +61,7 @@ Using the ANOVA interface and the regression interface:
 
 ## ANOVA
 
-For this assignment, we will use the data file 5groups.sav Download 5groups.sav. Please open it in SPSS.
+For this assignment, we will use the data file [`5groups.sav`](data/5groups.sav). Please open it in SPSS.
 
 As you have seen in the previous assignments, this file contains the measurements of the y variable for 5 different groups. So far, we have - at most - compared two groups at once. This time, we will compare the means of all 5 groups simultaneously using an Analysis of Variance (ANOVA).
 
@@ -225,7 +225,7 @@ If the assumption of homoscedasticity is met, we should see that the dots in thi
 
 ## One-Way ANOVA
 
-We have prepared the following data file for this assignment: hiking.sav Download hiking.sav. Please download it and open it in SPSS.
+We have prepared the following data file for this assignment: [`hiking.sav`](data/hiking.sav). Please download it and open it in SPSS.
 
 The data file describes the result of a fictitious experiment in which a hiking guide has displayed five different types of behavior towards different groups of hikers. The treatment that each person received from the guide is recorded in the variable behavior.
 

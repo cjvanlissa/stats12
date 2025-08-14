@@ -160,7 +160,7 @@ add_mcs("questions_dimension_reduction.csv")
 
 ## PCA
 
-Open the data file: emotions.sav.
+Open the data file: [`emotions.sav`](data/emotions.sav).
 
 The data file consists of data from the International College Survey 2001 (Diener and colleagues, 2001). In this survey, data on emotions was collected for 41 countries. The data you’ll analyze in this assignment is about norms for experiencing/expressing 12 emotions in Belgium.
 
@@ -282,7 +282,7 @@ CFA is used when we DO know which items belong to which dimension. With CFA we c
 
  
 
-Open the file evs.sav in SPSS.
+Open the file [`evs.sav`](data/evs.sav) in SPSS.
 
 <!-- To check whether we are allowed to carry out factor analysis and to know how many factors we should select, we first run another quick PCA. -->
 
@@ -374,7 +374,7 @@ There appears to be a distinction between legal and religious issues.
 
 ## Exploratory Factor Analysis II
 
-Open the dataset called "student_questionnaire.sav".
+Open the dataset called [`student_questionnaire.sav`](data/student_questionnaire.sav).
 
 It contains data on moral judgment in a variety of domains of social life (variables whose names start with MACJ). Note that you need the variable `MACJ13_imputed`, not `MACJ13`.
 

@@ -19,36 +19,70 @@ In scientific research, statistics can help us test theories. The process of sci
 
 To lay a foundation for understanding statistics, it's essential to be familiar with some basic concepts. First, data in the social sciences often come in tabular format (e.g., spreadsheets), where each row represents an individual observation, and each column represents the individuals' scores on various variables.
 
+## Population and Sample
+
 A crucial distinction is the one between population and sample. The population refers to the complete set of objects of interest, such as all people in a country or all students in a class. However, due to practical limitations, we usually do not have access to the population. Instead, we draw a sample from it, which is a subset of the population. Sampling theory establishes the rationale for drawing inferences about a population based on samples. Sample statistics serve as our best estimate of population parameters. If the sample is representative, those estimates will be unbiased. Moreover, we can estimate our uncertainty about the sample statistics as estimates of population parameters. The best way to ensure a representative sample is to use random sampling, where each individual in the population has an equal chance of being included—though in practice, constraints often lead researchers to rely on convenience or stratified sampling, which can limit the strength of our inferences.
 
 The distinction between constructs and variables is also important. Constructs are abstract features of interest within a population, like short-term memory, intelligence, or education. Variables, on the other hand, are placeholders that represent specific values associated with these constructs—much like column headers in a spreadsheet. Data then refer to the specific values of a variable.
 
-Measurement level refers to the kind of information contained in a variable. The four common measurement levels are nominal, ordinal, interval, and ratio. Nominal variables have categories that differ in name only, while ordinal variables have categories with a meaningful order. Interval variables have meaningful intervals between values (e.g., temperature in °C), which allows for meaningful comparisons between values. Finally, ratio variables have a meaningful zero-point (e.g., weight in kilograms), which additionally allows for the computation of meaningful ratios between values.
+## Measurement Levels
+
+Measurement level refers to the kind of information contained in a variable. 
+The four common measurement levels are nominal, ordinal, interval, and ratio (NOIR).
+Each subsequent level of the NOIR taxonomy carries more information than the previous level,
+thus permitting different comparisons and statistics.
+
+Nominal variables sort cases into categories with no inherent order (e.g., academic major, country); you can count them, calculate proportions, and the mode).
+Ordinal variables have a rank order but not equal spacing (e.g., Likert agreement, socioeconomic status quintiles). You can use them to calculate medians and percentiles.
+Interval variables have equal spacing between units, but no true zero value (e.g., temperature in Celsius, calendar year).
+Differences between values on an interval scale are therefore meaningful, allowing for the calculation of means, standard deviations, and Pearson's correlation coefficient.
+You can apply a linear transformation to an interval scale (e.g., $a + b*X$), but ratios between values on an interval scale are not interpretable (20 degrees Celsius is **not** twice as hot as 10 degrees Celsius).
+Ratio variables have equal units and a meaningful zero (e.g., income, reaction time, number of friends); both differences and ratios are meaningful.
+
+In practice, researchers sometimes treat coarse ordinal scales (e.g., 5‑point Likert scales) as interval (or even ratio) for convenience's sake. 
+This is a pretty strong assumption about measurement level.
+
+## Descriptive Statistics
 
 Descriptive statistics are used to summarize and analyze data. They help us get a sense of the dataset and answer questions like the most common major among students or the average age of a group. Descriptive statistics can also be relevant in answering research questions, such as evaluating exam questions or determining if the proportion of correct answers on a multiple-choice question is greater than chance.
 
-## Exploratory Data Analysis (EDA)
-Before applying statistical tests, researchers typically engage in exploratory data analysis (EDA): visualizing and summarizing the data to detect errors, spot patterns, and generate new questions. This step—popularized by John Tukey—often involves histograms, boxplots, and scatterplots that reveal outliers or interesting trends worth modeling.
 
-## Correlation ≠ Causation
-Because patterns can be visually compelling, it is crucial to remember that correlation does not imply causation. For instance, ice-cream sales and drowning deaths rise together in summer, but purchasing ice-cream does not cause drowning. Establishing causal claims requires careful design and statistical control.
+<!-- ## Correlation ≠ Causation -->
+<!-- Because patterns can be visually compelling, it is crucial to remember that correlation does not imply causation. For instance, ice-cream sales and drowning deaths rise together in summer, but purchasing ice-cream does not cause drowning. Establishing causal claims requires careful design and statistical control. -->
 
-## Research Designs and Validity
-Researchers employ several designs—experimental, quasi-experimental, and observational—each with its own strengths and limitations. Two key pillars of quality are:
+## Study Design and Validity
 
-Internal validity: the degree to which the study rules out alternative explanations, letting us attribute observed effects to the manipulated variables rather than confounds.
+Researchers employ several study designs to collect data, for example, experimental, quasi-experimental, and observational studies.
+Each has its own strengths and limitations. The quality of study designs can be evaluated along two dimensions:
 
-External validity: the extent to which findings generalize beyond the specific sample, setting, and operationalizations used in the study.
+**Internal validity**: the credibility of a finding *within* the context of the study. To what degree does the study design rule out alternative explanations for key findings?
+In the case of an experiment, for example, 
+can observed differences in outcomes between the experimental and control condition be attributed to the manipulation rather than to alternative explanations such as confounding, selection bias, measurement error, history/maturation effects, demand characteristics, noncompliance, or interference between units? Methods to increase internal validity include: Random assignment, using pretests/pilot studies, reliable instruments, blinding experimentors, participants, and coders (where feasible), manipulation checks, preregistration, and management of participant drop-out. 
 
+<!-- , letting us attribute observed effects to the manipulated variables rather than confounds. -->
+
+**External validity**: the extent to which findings generalize beyond the specific sample, setting, and operationalizations used in the study.
+It is threatened by, for example, using convenience samples and artificial laboratory tasks that do not resemble the real world (low "ecological validity").
+It can be strengthened through random sampling,
+conducting experiments with high ecological validity, such as field experiments,
+and conducting conceptual replications (using different methods to find the same effect).
 A tightly controlled laboratory experiment may score high on internal validity but lower on external validity, whereas a large-scale field survey often shows the opposite pattern. Balancing both is a central concern of scientific inquiry.
 
-## Sampling Distribution and Standard Error
-If we could repeatedly draw many random samples of the same size from a population, each sample statistic (e.g., a mean) would vary. The distribution of those statistics is called the sampling distribution, and its spread is summarized by the standard error. Understanding this concept allows us to place confidence intervals around estimates and to perform hypothesis tests.
 
 ## Ethics, Privacy, and Reproducible Workflows
-Modern data analysis carries ethical responsibilities: protecting participant privacy, preregistering hypotheses, and sharing code to enable reproducibility. Tools like R Markdown (and its successor, Quarto) combine prose, code, and output in a single document, ensuring that results can be regenerated with a single click—an increasingly important professional standard.
 
-In summary, statistics is a powerful tool for analyzing and interpreting data. It helps us gain insights into various aspects of social life, make predictions, and test theories. By understanding fundamental concepts—such as measurement levels, internal and external validity, and descriptive versus inferential statistics—and by adopting good practices like EDA, ethical data handling, and reproducible workflows, we can start exploring and making sense of data in a meaningful way.
+Modern data analysis carries legal and ethical responsibilities.
+Ethical social science research involves protecting participants’ autonomy, welfare, and privacy.
+In the EU, the GDPR legislation requires researchers to establish a lawful basis for processing participants' data (which can include informed consent).
+Informed consent - participants agreeing to participate in the study and share their data after receiving information about the study and purposes of data collection - must be freely given, specific, and unambiguous
+Finally, there have been concerns about a lack of reproducibility in the social sciences and many other fields.
+By some estimates, as many as 70% of published research findings cannot be independently reproduced.
+Contemporary practices in social scientific data analysis seek to address this issue.
+For example, preregistration and registered reports are used to demarkate confirmatory hypothesis tests from exploratory data analysiss.
+Many researchers also produce reproducible code for their analyses (which can be done in SPSS by generating syntax, instead of running analyses interactively).
+They sometimes create "replication packages" or "reproducible research archives" that contain the data and code to produce the results,
+so that other researchers (and sometimes, anyone) can re-use the code, and reproduce and verify the results.
+
 
 # Lecture
 
@@ -81,17 +115,9 @@ Scatterplots
 
 # In SPSS
 
-## Frequency Distributions
+## Instruction Video
 
-{{< video https://www.youtube.com/embed/q1ER4MAngFE >}}
-
-## Descriptive Statistics
-
-{{< video https://www.youtube.com/embed/lXG7HWGdKNk >}}
-
-## Bar Charts and Histograms
-
-{{< video https://www.youtube.com/embed/0NeaD1Mojp0 >}}
+{{< video https://www.youtube.com/embed/bapuGcjwiLQ?si=51NN65ETr3evOBWb >}}
 
 
 # Tutorial
@@ -129,9 +155,9 @@ Your first task is to start the SPSS program. You can easily find SPSS via the W
 
 Now you’ve got SPSS running, we’re ready to go!
 
-We will start with a number of introductory exercises using the data file `stressLAS.sav`. To obtain this and other tutorial data files, download the GitBook, and open the `data` folder to find all files.
+We will start with a number of introductory exercises using the data file [`stressLAS.sav`](data/stressLAS.sav). To obtain this and other tutorial data files, download the GitBook, and open the `data` folder to find all files.
 
-Open the file in SPSS. Proceed as follows: via the op menu follow the route: File -> open -> data. SPSS now opens a new window. Search for the file StressLAS.sav and open the file in SPSS.
+Open the file in SPSS. Proceed as follows: via the op menu follow the route: File -> open -> data. SPSS now opens a new window. Search for the file [`stressLAS.sav`](data/stressLAS.sav) and open the file in SPSS.
 
 
  
@@ -587,7 +613,7 @@ Were your computations correct?
  
 ## Correlation
 
-For the next few questions we need the data file `LAS_SocSc_DataLab2.sav`.
+For the next few questions we need the data file [`LAS_SocSc_DataLab2.sav`](data/LAS_SocSc_DataLab2.sav).
 Open the file in SPSS. You will see that the file contains data for six variables, named X1 through X6. We will inspect the associations between pairs of variables (so called bivariate relationships).
 
 First, generate a scatter plot for X1 and X2. Proceed as follows: Graphs > Legacy dialogs > Scatter/dot. Then ask for a Simple scatter. Put X1 on the X-Axis and X2 on the Y-Axis. Describe the association. Take into account whether the relationship follows a straight line (i.e., linearity), is positive or negative (i.e., direction), and whether the relationship seems to be weak, moderate or strong (i.e., strength).

@@ -74,7 +74,7 @@ Researchers are interested in the relationship between age and depression.
 
 They hypothesized that older people are more vulnerable to depressive thoughts than younger people.
 
-To test their research hypothesis, they collected data in a random sample of 164 persons from the general population. Open the dataset `HADShealthyGroup.sav`.
+To test their research hypothesis, they collected data in a random sample of 164 persons from the general population. Open the dataset [`HADShealthyGroup.sav`](data/HADShealthyGroup.sav).
 
 Run a linear regression analysis using age as the independent variable and depression as the dependent variable.
 
@@ -169,7 +169,7 @@ Researchers are interested in effects of stereotyping on cognitive performance. 
 
 Afterwards the researchers compare the average math grades across the three groups. Because the schools may also differ in the student population, researchers also measured scholastic aptitude and use that as a covariate in the analysis.
 
-Open the dataset `stereotyping.sav`.
+Open the dataset [`stereotyping.sav`](data/stereotyping.sav).
 
 In your own words, explain what a covariate is and give two examples of covariates that should/can be included in neuro-psychological research.
 

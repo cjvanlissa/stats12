@@ -43,7 +43,7 @@ add_mcs("questions_nested.csv")
 
 This assignment revolves around multiple regression with more than two predictors.
 
-Use the data file called Work.sav. These data were about work characteristics.
+Use the data file called [`Work.sav`](data/Work.sav). These data were about work characteristics.
 
 Open the date file in SPSS to get started!
 
@@ -113,7 +113,7 @@ In the final couple of steps we went through the output displayed in the "Coeffi
 
 ## Unique Contributions
 
-Use the data file called Work.sav. These data were about work characteristics.
+Use the data file called [`Work.sav`](data/Work.sav). These data were about work characteristics.
 
 In this assignment, we will look more closely at how to evaluate the “added value” of one predictor in addition to the other predictors in an analysis explaining the dependent variable. Or, put the other way around, how much we lose if we would remove a certain predictor from the model.
  
@@ -164,7 +164,7 @@ Which of the following models is/are nested within the larger model presented ab
 
 `r longmcq(c(answer = "$Y′=b0+b1X1+b2X2+b4X4$", "$Y′=b0+b1X1+b3X3+b4X4$", "$Y′=b0+b1X1+b2X2+b6X6$")[sample.int(3)])`
 
-We will now get back to our data on work characteristics using the data file Work.sav.
+We will now get back to our data on work characteristics using the data file [`Work.sav`](data/Work.sav).
 
 
 Consider the following situation in which researchers are interested in clusters of variables:
@@ -289,7 +289,7 @@ Health variables explain an additional 7.8% of variance in Need for Recovery, an
 
 In this assignment we will predict a continuous outcome variable from a dichotomous predictor (i.e. gender).
 
-The data file that we will use is PublicParticipation.sav.
+The data file that we will use is [`PublicParticipation.sav`](data/PublicParticipation.sav).
 
 This data file contains data on the following variables:
 

@@ -72,7 +72,7 @@ As you can see, the dependent variable is Tip money, and the independent variabl
 
 `r unhide()`
 
-Now, open the dataset `WaiterBehavior.sav`.
+Now, open the dataset [`WaiterBehavior.sav`](data/WaiterBehavior.sav).
 
 We will run the analysis to find out what the results of the experiment are. We can do so with a factorial ANOVA.
 
@@ -456,7 +456,7 @@ We do see a significant effect of behavior on average tip money for waitresses, 
 
 ## Optional: do it yourself!
 
-Open the datafile hiking.sav. The data file also contains data on weather.
+Open the datafile [`hiking.sav`](data/hiking.sav). The data file also contains data on weather.
 
 Examine the effect of weather and behavior and their potential interaction, with feelings as the dependent variable. 
 

@@ -11,7 +11,7 @@ In this assignment we will make a start with regression analysis.
 
 We will go through the different steps of running and interpreting a regression analysis.
 
-Open the file LAS_SS_Work-1.sav to get started.
+Open the file [`Work.sav`](data/Work.sav) to get started.
 
 Correlations and regression analyses can both be used to study the relationship between variables, but there is an important difference.
 
@@ -161,7 +161,7 @@ Consult the output of the regression analysis again, particularly the table Mode
 
 Verify that the R-square that is reported in the table is the same as the proportion of explained variance that you have calculated yourself.
 
-Finally, independently go through all the steps of a simple regression analysis using the data file LAS_SS_Work.sav.
+Finally, independently go through all the steps of a simple regression analysis using the data file `Work.sav`.
 
 Your theory suggests that independence at work predicts emotional pressure.
 

@@ -7,7 +7,7 @@ source("R/my_setup.R")
 
 ## Bivariate Regression
 
-Social science students were asked about their opinion towards Tilburg’s nightlife, number of Facebook friends, and some other characteristics. The data are in the SocScSurvey.sav file.
+Social science students were asked about their opinion towards Tilburg’s nightlife, number of Facebook friends, and some other characteristics. The data are in the [`SocScSurvey.sav`](data/SocScSurvey.sav) file.
 
 
 Download the file to your computer and open it in SPSS. 
@@ -200,7 +200,7 @@ In the next lecture we will learn more about nested models, model comparisons, a
 
 ## Multiple Regression II
 
-For this assignment we need the file HealthyFood.sav.
+For this assignment we need the file [`HealthyFood.sav`](data/HealthyFood.sav).
 
 This file contains hypothetical data on three variables:
 

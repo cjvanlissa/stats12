@@ -59,7 +59,7 @@ In this assignment we will make a start with regression analysis.
 
 We will go through the different steps of running and interpreting a regression analysis.
 
-Open the file Work.sav to get started.
+Open the file [`Work.sav`](data/Work.sav) to get started.
 
 
 Consider the following research question: “Does variety at work predict pleasure at work?”

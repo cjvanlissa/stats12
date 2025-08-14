@@ -26,7 +26,7 @@ source("R/my_setup.R")
 
 In this tutorial, you will learn to use the general linear model to estimate means and to test the difference between two group means, the difference between individual group means and the overall mean, and between groups of means.
 
-Open hiking_long.sav in SPSS.
+Open [`hiking_long.sav`](data/hiking_long.sav) in SPSS.
 
 The data file describes the result of a fictitious experiment. A hiking guide has displayed five different types of behavior towards different groups of hikers. The treatment that each person received from the guide is recorded in the variable `behavior`.
 

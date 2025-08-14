@@ -227,7 +227,7 @@ add_mcs("ch3_formative_corrected.csv")
 
 ## Load Data
 
-Open **`LAS_SocSc_DataLab2.sav`** (find it in the **`data`** folder you downloaded earlier).  
+Open [`LAS_SocSc_DataLab2.sav`](data/LAS_SocSc_DataLab2.sav).  
 The file contains six variables (`X1` … `X6`). You’ll inspect three bivariate relationships.
 
 ### Plot the pairs
@@ -301,7 +301,7 @@ Interpret `X5`–`X6`:
 
 Having practiced on simulated data, let’s now apply the same workflow to a real dataset related to the workplace.
 
-> **File location:** `data/Work.sav`
+**Data File:** [`Work.sav`](data/Work.sav)
 
 ### Why inspect the plot first?
 
