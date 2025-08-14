@@ -29,21 +29,14 @@ This book covers the following learning goals:
 
 This GitBook is "Open Educational Material". It is intended to replace conventional statistics textbooks, for free.
 
-All essential information is contained within this GitBook. To ensure that you always have access to the GitBook, it is recommended that you download it to your local computer as follows:
+All essential information is contained within this GitBook. However, it is recommended that you download several materials to your local hard drive, and use them from your your local computer throughout the course:
 
-1. Go to <https://github.com/cjvanlissa/stats12>
-2. Click the green Code button
-3. Select "Download ZIP" (see figure below)
-4. Save the ZIP archive to your drive
-5. Right-click the downloaded file, and select "Extract here" (or similar option, depending on your operating system)
-6. You should now have a folder with the contents of the book.
-7. To launch the book in your browser, open the file `docs\index.html`.
-8. The "data" folder contains all SPSS datasets you need for the course.
-9. The "pdfs" folder contains all PDF files you need for the course.
-
-**It is possible that the book will be updated during the course. If this happens, I will notify you via Canvas to re-download the book.**
-
-![](images/downloadgitbook.png)
+1. [Download all data files](data/data.zip) for the tutorials
+    + Save the ZIP archive to your drive
+    + Right-click the downloaded file, and select "Extract here" (or similar option, depending on your operating system)
+    + You should now have a folder with the data files.
+1. [Download all lecture PDFs](include/pdfs.zip)
+1. *Optional:* [Download the PDF of the book](https://cjvanlissa.github.io/stats12/Statistics-1-and-2.pdf)
 
 ## Contributing / Fixing Errors
 

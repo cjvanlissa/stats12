@@ -60,7 +60,7 @@ add_mcs("questions_rmanova.csv")
 
 In this tutorial, we will explore how to perform a repeated-measures ANOVA using SPSS to assess the effect of repeated measurements of depression symptoms in a sample of military veterans. The primary objective is to determine whether there are significant changes in depression symptom scores across multiple time points.
 
-Load the dataset called `depression.sav` containing depression symptom scores at different time points for each participant.
+Load the dataset called [`depression.sav`](data/depression.sav) containing depression symptom scores at different time points for each participant.
 
 3. Click on "Analyze" in the top menu and select "General Linear Model" and then "Repeated Measures."
 

@@ -16,9 +16,9 @@ Up until now, we ran the analyses by "click-and-point" via the menu. This is a g
 
 First, we will see how to set-up a basic syntax via the menu. Once you have the basic syntax, you can modify it to your own needs and preferences.
 
-To get there, we will use the data file LAS-CNS_stress.sav Download LAS-CNS_stress.sav.
+To get there, we will use the data file [`LAS-CNS_stress.sav`](data/LAS-CNS_stress.sav).
 
-Download and open the data file in SPSS.
+Open the data file in SPSS.
 
 We will now generate the syntax for computing basic descriptive statistics for the variable optimism.
 
@@ -80,7 +80,7 @@ I hope you already noticed the added value of syntax. It may take a bit more eff
 
 ## Independent Samples T-Test
 
-In this assignment we will use the data file 5groups.sav Download 5groups.sav. Download the file and open it in SPSS.
+In this assignment we will use the data file [`5groups.sav`](data/5groups.sav).
  
 This time, we will compare the means of the variable y of two specific groups: group 1 and group 4. To test the difference between two sample means, we will use the t-test for independent samples.
 
@@ -138,7 +138,7 @@ Do you reject the null hypothesis of this t-test at alpha 0.05? `r mcq(c(answer 
 
 ## ANOVA
 
-For this assignment, we will use the data file 5groups.sav Download 5groups.sav. Please open it in SPSS.
+For this assignment, we will use the data file `5groups.sav`.
 
 As you have seen in the previous assignments, this file contains the measurements of the y variable for 5 different groups. So far, we have - at most - compared two groups at once. This time, we will compare the means of all 5 groups simultaneously using an Analysis of Variance (ANOVA).
 
@@ -224,7 +224,7 @@ Large	| 0.138
 
 ## One-Way ANOVA
 
-We have prepared the following data file for this assignment: hiking.sav Download hiking.sav. Please download it and open it in SPSS.
+We have prepared the following data file for this assignment: [`hiking.sav`](data/hiking.sav). Please  open it in SPSS.
 
 The data file describes the result of a fictitious experiment in which a hiking guide has displayed five different types of behavior towards different groups of hikers. The treatment that each person received from the guide is recorded in the variable behavior.
 

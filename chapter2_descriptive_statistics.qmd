@@ -5,10 +5,6 @@ source("R/booktem_setup.R")
 source("R/my_setup.R")
 ```
 
-[Data from data folder](data/chalk.sav)
-[Data from include folder](include/chalk.sav)
-[Data from "root" folder](chalk.sav)
-
 Descriptive statistics describe or summarize properties of data collected in a sample.
 If you collect data on three variables for five participants, you can still print the entire dataset as a table and maintain the overview:
 
@@ -320,11 +316,12 @@ There are legitimate ways to explore data looking for interesting patterns, and 
 However, be careful of any cross-contamination between exploration and confirmation.
 Any pattern observed during exploration can introduce bias in subsequent confirmatory tests [@hoijtinkOpenEmpiricalCycle2023].
 
-Very often, the first thing researchers do when collecting or accessing a dataset is to calculate and examine descriptive statistics.
-This common practice introduces a potential risk of cross-contamination between exploration and confirmation:
-observing the descriptive statistics may influence other downstream analysis decisions.
+Very often, the first thing researchers do when collecting or accessing a dataset is to engage in exploratory data analysis (EDA): visualizing and summarizing the data to detect errors, spot patterns, and generate new ideas or research questions. EDA was popularized by John Tukey, and it often involves histograms, boxplots, and scatterplots that reveal outliers or interesting trends worth modeling.
+
+There is one important caveat to this common practice, namely that it introduces a potential risk of cross-contamination between exploration and confirmation.
+Observing the descriptive statistics may influence other downstream analysis decisions.
 This is not a problem when conducting purely exploratory analyses,
-and it is also not a problem if the analyses have been preregistered.
+and it is also not a problem if any confirmatory analyses have already been preregistered.
 Preregistration means that the analysis plans have been published in a time-stamped archive before collecting or accessing the data, so it's possible for others to check whether the reported analyses were executed as planned [@peikertWhyDoesPreregistration2023], with changes made after seeing the descriptive analyses.
 In all other cases: be mindful of the risk of introducing bias.
 For an example of how preregistered hypothesis tests can be combined with rigorous exploration using machine learning, see @vanlissaComplementingPreregisteredConfirmatory2022.
@@ -372,7 +369,7 @@ As explained before, the first step in any statistical analysis involves **inspe
 
 This assignment shows you how to explore data using **descriptive statistics**—values such as the mean, standard deviation, maximum, and minimum.
 
-Use the data file `stressLAS.sav`, as in the previous chapter.
+Use the data file [`stressLAS.sav`](data/stressLAS.sav), as in the previous chapter.
 
 
 ### Step 2 – Descriptives for Key Variables

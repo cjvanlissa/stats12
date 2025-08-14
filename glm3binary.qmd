@@ -54,7 +54,7 @@ As a t-test and as regression with a dummy predictor:
 
 ## Independent Samples T-Test
 
-In this assignment we will use the data file 5groups.sav Download 5groups.sav. Download the file and open it in SPSS.
+In this assignment we will use the data file [`5groups.sav`](data/5groups.sav). Download the file and open it in SPSS.
  
 This time, we will compare the means of the variable y of two specific groups: group 1 and group 4. To test the difference between two sample means, we will use the t-test for independent samples.
 

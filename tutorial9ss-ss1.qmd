@@ -7,7 +7,7 @@ source("R/my_setup.R")
 
 ## One-Way ANOVA
 
-Open hiking.sav in SPSS.
+Open [`hiking.sav`](data/hiking.sav) in SPSS.
 
 The data file describes the result of a fictitious experiment. A hiking guide has displayed five different types of behavior towards different groups of hikers. The treatment that each person received from the guide is recorded in the variable behavior.
 
@@ -327,7 +327,7 @@ from one another.
 
 In the previous assignment you have performed Tukey post-hoc comparisons. This is the easiest way to see how groups differ. However, there is a drawback. Tukey comparisons are always pairwise, never comparing more than two groups at once. However, we may want to do a post-hoc comparison that is more ‘complex’.
 
-Based on the ANOVA of the hiking data (assignment 2) (hiking.sav Download hiking.sav), we might suspect that the two groups with the lowest feeling scores differ significantly from the two groups with the highest feeling scores. To test this specific post-hoc comparison, we will use a Scheffé contrast (i.e. post-hoc complex comparison). Click next when you’re ready.
+Based on the ANOVA of the hiking data (assignment 2), we might suspect that the two groups with the lowest feeling scores differ significantly from the two groups with the highest feeling scores. To test this specific post-hoc comparison, we will use a Scheffé contrast (i.e. post-hoc complex comparison). Click next when you’re ready.
 
  
 
@@ -523,7 +523,7 @@ Additionally, we will introduce contrasts.
  
 
 
-We will start working with the dataset PublicParticipation.sav Download PublicParticipation.sav.
+We will start working with the dataset [`PublicParticipation.sav`](data/PublicParticipation.sav).
 
 This data set contains (fictional) data on the following variables:
 
@@ -705,7 +705,7 @@ Correct answer
   No 
 ## Bla 
 
-In this assignment we work with the PublicParticipation.sav data.
+In this assignment we work with the `PublicParticipation.sav` data.
 It contains (fictional) data on the following variables:  income (higher scores, more income), public participation, education, age, and gender (0 = females; 1 = males). Public participation involves being member of school boards, municipal councillor, etc.
 
 In this assignment we will see how we can model interaction between a continuous predictor and a dichotomous predictor. 

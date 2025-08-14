@@ -7,7 +7,7 @@ source("R/my_setup.R")
 
 ## Interaction
 
-In this assignment we work with the PublicParticipation.sav data.
+In this assignment we work with the [`PublicParticipation.sav`](data/PublicParticipation.sav) data.
 It contains (fictional) data on the following variables:  income (higher scores, more income), public participation, education, age, and gender (0 = females; 1 = males). Public participation involves being member of school boards, municipal councillor, etc.
 
 In this assignment we will see how we can model interaction between a continuous predictor and a dichotomous predictor. 
@@ -320,7 +320,7 @@ In this assignment, you will examine whether the effect of relationship with cow
 
 If there is an interaction effect, the effect of sccowork on scemoti depends on the value of the variable gender. 
 
-Open Work.sav. 
+Open [`Work.sav`](data/Work.sav). 
 
  
 To be able to examine the interaction effect, you should first create a product variable. 

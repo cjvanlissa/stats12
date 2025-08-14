@@ -9,7 +9,7 @@ source("R/my_setup.R")
 
 Today, we will work with a data set on nerdy personality types. For this study, participants completed a survey on how nerdy their personality was and what their general personality was like. Finally, they had to answer some general questions.
 
-Open the data set: Nerdy.sav
+Open the data set: [`Nerdy.sav`](data/Nerdy.sav)
  
 
 Researchers are interested in the following research question: “An average, do people consider themselves to be nerdy?”

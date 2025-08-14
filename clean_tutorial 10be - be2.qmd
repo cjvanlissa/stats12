@@ -103,7 +103,7 @@ As you can see, the logit follows a linear function, the odds follow an exponent
 
 Today we will study whether the probability to pass a Statistics course depends on exam fear and the math grade obtained in high school (prior math ability).
 
-Open LAS BE LR.sav.
+Open [`LAS_BE_LR.sav`](data/LAS_BE_LR.sav)
 
 In the table below you find the variables included in this fictional data set.
 

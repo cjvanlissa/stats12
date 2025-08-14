@@ -84,7 +84,7 @@ The scale consists of the following items:
 * Speeding over limit
 * Euthanasia
 
-Open the datafile evs.sav.
+Open the datafile [`evs.sav`](data/evs.sav).
 
  
 
@@ -145,7 +145,7 @@ In this assignment we will look into the latent concept Machiavellianism.
 
 The personality trait of Machiavellianism is part of what's called the "dark triad", a personality type that is characterized by deceitfulness, cynicism, and an absence of morality and empathy.
 
-Open the datafile shortmach2.sav Download shortmach2.sav. The data file contains data on Machiavellianism and some other variables.
+Open the datafile [`shortmach2.sav`](data/shortmach2.sav). The data file contains data on Machiavellianism and some other variables.
 
  
 
@@ -356,7 +356,7 @@ Controlled for Gender and Voting, if we would increase one year in age, the pred
 
 In this assignment, you will evaluate the reliability of a scale measuring solidarity.
 
-Download and open the following data file: solidarity.sav.
+Download and open the following data file: [`solidarity.sav`](data/solidarity.sav).
 
  
 

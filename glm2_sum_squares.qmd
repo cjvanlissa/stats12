@@ -45,7 +45,7 @@ add_mcs("questions_sum_squares.csv")
 
 ## Bivariate Regression
 
-Social science students were asked about their opinion towards Tilburg’s nightlife, number of Facebook friends, and some other characteristics. The data are in the SocScSurvey.sav file.
+Social science students were asked about their opinion towards Tilburg’s nightlife, number of Facebook friends, and some other characteristics. The data are in the [`SocScSurvey.sav`](data/SocScSurvey.sav) file.
 
 
 Download the file to your computer and open it in SPSS. 
@@ -261,7 +261,7 @@ Consult the output of the regression analysis again, particularly the table Mode
 
 Verify that the R-square that is reported in the table is the same as the proportion of explained variance that you have calculated yourself.
 
-Finally, independently go through all the steps of a simple regression analysis using the data file LAS_SS_Work.sav.
+Finally, independently go through all the steps of a simple regression analysis using the data file [`Work.sav`](data/Work.sav).
 
 Your theory suggests that independence at work predicts emotional pressure.
 

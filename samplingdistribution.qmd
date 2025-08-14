@@ -79,7 +79,7 @@ The proportion of male babies is .51. Assume babies born in each hospital in a g
 
 ### SE for Means
 
-Open the file called `student_questionnaire.sav`.
+Open the file called [`student_questionnaire.sav`](data/student_questionnaire.sav).
 
 These are data from a previous cohort of students. Note that we have data about biometric differences (e.g., age, height, shoesize), as well as school-related questions (which program they are enrolled in), variables about their love for statistics, and about moral preferences (based on the "Morality As Cooperation" questionnaire that I helped develop).
 

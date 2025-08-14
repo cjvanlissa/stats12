@@ -322,7 +322,7 @@ Type D is measured with the DS14 scale. The DS14 consists of 14 items, 7 measuri
 
 * see also Type D personality on Wikipedia.
 
-Open the data file `TypeDDataSSC.sav` in SPSS. The data file contains the scores on the DS14 items measuring Type D as well as the background variables for 80 respondents.
+Open the data file [`TypeDDataSSC.sav`](data/TypeDDataSSC.sav) in SPSS. The data file contains the scores on the DS14 items measuring Type D as well as the background variables for 80 respondents.
 
 Go to the variable view. The content of the items are given under labels and it is indicated whether the item measures NA or SI.
 
