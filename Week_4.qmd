@@ -142,6 +142,9 @@ So where does causality come from?
 The short answer is: from theory or methodology.
 Causality can be assumed on theoretical grounds,
 or established using a randomized controlled experiment.
+
+In order for causality to be established, three conditions must be met, and only one of these conditions is covariation of these two variables, which implies that when X changes, Y must change too. However, two more conditions must be met: *Temporal precedence*, which means that X happens before changes occur in Y; and *Non-spuriousness*, referring to the existence of no third variable Z that can explain the changes in both X and Y. These criteria summarize what observational patterns must look like if a causal story is true (Oppewal, 2010). A randomized controlled experiment is a situation where it is possible to enforce these three conditions.
+
 In such an experiment, researchers randomly assign participants to either an experimental condition (e.g., receiving a drug, instruction, treatment, et cetera), or a control condition (e.g., receiving a placebo, no instruction, non-effective treatment, et cetera).
 The random assignment should, theoretically, result in two groups with no systematic differences that could explain between-group differences in the outcome of interest.
 Of course, due to pure chance, it could happen that there are systematic differences (more men in one group, taller people in one group, et cetera).
