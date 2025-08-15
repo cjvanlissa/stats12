@@ -44,6 +44,7 @@ book:
   page-footer: CC-BY (2023) Caspar J. Van Lissa
   chapters:
   - index.qmd
+  - statistics1.qmd
   - introduction.qmd
   - chapter2_descriptive_statistics.qmd
   - Chapter3_Correlation.qmd
