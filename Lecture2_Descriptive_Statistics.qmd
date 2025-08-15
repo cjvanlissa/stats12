@@ -135,22 +135,56 @@ $$
 
 ## Mean - Example {.smaller}
 
-Suppose five exam scores: 4, 6, 7, 3, 10  
+Suppose five exam scores: 4, 6, 7, 3, 10
 
-**Compute the mean**
+```{r}
+df = data.frame(Score = c(4, 6, 7, 3, 10))
+library(ggplot2)
+
+ggplot(df, aes(x = Score, y = 1)) + scale_y_continuous(limits = c(0, 5)) + geom_point(shape = 21, size = 5, color = "black", fill = "orange") + 
+  geom_hline(yintercept = 0, size = 2) +
+  theme_minimal() + theme(axis.text.y = element_blank(), axis.title.y = element_blank())
+```
+
+---
+
+## Mean
+
+```{r}
+df = data.frame(Score = c(4, 6, 7, 3, 10))
+library(ggplot2)
+
+dists <- data.frame(
+  x = df$Score,
+  xend = mean(df$Score),
+  y = seq(.2,1, length.out = length(df$Score))
+)
+dists$yend = dists$y
+df$y <- dists$y
+ggplot(df, aes(x = Score, y = df$y)) +
+  scale_y_continuous(limits = c(0, 5)) +
+  scale_x_continuous(breaks = c(1:10), labels = c(1:10)) +
+  geom_point(shape = 21, size = 5, color = "black", fill = "orange") + 
+  geom_hline(yintercept = 0, size = 2) +
+  geom_segment(data = dists, aes(x = x, xend = xend, y = y, yend = yend)) +
+  geom_vline(xintercept = mean(df$Score), color = "red", size = 2) +
+  theme_minimal() + theme(axis.text.y = element_blank(), axis.title.y = element_blank())
+```
+
+---
+
+## Compute the mean
 
 $$
 M = \frac{4 + 6 + 7 + 3 + 10}{5} = \frac{30}{5} = 6
 $$
 
-**Check the key properties**
-
 | Operation                                   | New scores                | New mean             |
 |---------------------------------------------|---------------------------|----------------------------|
-| Add $k = 2$ to every score                  | 6, 8, 9, 5, 12            | $6 + 2 = 8$                |
-| Multiply every score by $c = 3$             | 12, 18, 21, 9, 30         | $6 \times 3 = 18$          |
-| Change one score by $\Delta = +3$ (10: 13) | 4, 6, 7, 3, 13            | $6 + \tfrac{3}{5} = 6.6$   |
-| Add a new score equal to the mean (6)       | 4, 6, 7, 3, 10, 6         | 6             |
+| Add $+2$ to every score                  | 6, 8, 9, 5, 12            | $6 + 2 = 8$                |
+| Multiply every score by $3$             | 12, 18, 21, 9, 30         | $6 \times 3 = 18$          |
+| Change one score by $+3$ | 4, 6, 7, 3, 13            | $6 + \tfrac{3}{5} = 6.6$   |
+| Add score equal to mean (6)       | 4, 6, 7, 3, 10, 6         | 6             |
 
 ---
 
@@ -193,8 +227,22 @@ $$
 - Order scores; median is middle score.
 - **Robust** to skew & outliers (e.g., income).  
 
+---
+
+## Median
+
+```{r}
+ggplot(df[-2, ], aes(x = Score, y = 1)) +
+  scale_y_continuous(limits = c(0, 5)) +
+  scale_x_continuous(breaks = c(1:10), labels = c(1:10)) +
+  geom_point(shape = 21, size = 5, color = "black", fill = "orange") + 
+  geom_point(data = df[2, , drop = FALSE], shape = 21, size = 5, color = "black", fill = "red") + 
+  geom_hline(yintercept = 0, size = 2) +
+  theme_minimal() + theme(axis.text.y = element_blank(), axis.title.y = element_blank())
+```
 
 ---
+
 
 ## Median - Example
 
@@ -245,6 +293,21 @@ $$
     + But it's rare for two scores to be identical with interval and continuous variables
 - Useful for discrete ratio variables (e.g., number of children; modal family has 2).  
 
+
+---
+
+## Mode
+
+```{r}
+ggplot(df[-3, ], aes(x = Score, y = 1)) +
+  scale_y_continuous(limits = c(0, 5)) +
+  scale_x_continuous(breaks = c(1:10), labels = c(1:10)) +
+  geom_point(shape = 21, size = 5, color = "black", fill = "orange") + 
+  geom_point(data = df[3, , drop = FALSE], shape = 21, size = 5, color = "black", fill = "red") + 
+  geom_point(data = df[3, , drop = FALSE], y = 1.5, shape = 21, size = 5, color = "black", fill = "red") + 
+  geom_hline(yintercept = 0, size = 2) +
+  theme_minimal() + theme(axis.text.y = element_blank(), axis.title.y = element_blank())
+```
 
 ---
 

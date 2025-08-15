@@ -1,0 +1,61 @@
+Week,Day,Activity,,Topic,Link
+35,Friday,Exams,,Register group for Assignment 1,
+41,Friday,Exams,,Deadline Assignment 1,
+42,Friday,Exams,,Register group for Assignment 2,
+50,Friday,Exams,,Deadline Assignment 2,
+42,Tuesday,Exams,,Exam 1,
+51,Friday,Exams,,Exam 2,
+,,,,,
+35,Tuesday,Lecture,all,Introduction to Statistics,https://cjvanlissa.github.io/stats12/introduction.html
+36,Tuesday,Lecture,all,NO LECTURE! But watch Descriptive Statistics,https://cjvanlissa.github.io/stats12/chapter2_descriptive_statistics.html
+37,Monday,Lecture,all,Bivariate Descriptives,https://cjvanlissa.github.io/stats12/Chapter3_Correlation.html
+38,Wednesday,Lecture,all,Probability Distributions,https://cjvanlissa.github.io/stats12/probability.html
+39,Monday,Lecture,all,Sampling Distribution,https://cjvanlissa.github.io/stats12/samplingdistribution.html
+40,Monday,Lecture,all,Philosophy of Science,https://cjvanlissa.github.io/stats12/Week_4.html
+41,Monday,Lecture,all,Hypothesis Testing,https://cjvanlissa.github.io/stats12/testing.html
+43,Monday,Lecture,all,General Linear Model (GLM) I: Bivariate regression ,https://cjvanlissa.github.io/stats12/glm1_regression.html
+44,Monday,Lecture,all,"GLM II: Sums of squares, explained variance, and correlation",https://cjvanlissa.github.io/stats12/glm2_sum_squares.html
+45,Monday,Lecture,all,GLM III: Differences between two groups: dummy variables and two-sample t-test ,https://cjvanlissa.github.io/stats12/glm3binary.html
+46,Monday,Lecture,all,GLM IV: Differences between more groups: dummy variables and ANOVA,https://cjvanlissa.github.io/stats12/glm4anova.html
+47,Monday,Lecture,all,Open science and questionable research practices,
+48,Monday,Lecture,all,Q&A,
+,,,,,
+35,Thursday,Tutorial,CN,Introduction to Statistics,
+35,Thursday,Tutorial,BE,Introduction to Statistics,
+35,Thursday,Tutorial,SS,Introduction to Statistics,
+36,Thursday,Tutorial,CN,Descriptive Statistics,
+36,Thursday,Tutorial,BE,Descriptive Statistics,
+36,Thursday,Tutorial,SS,Descriptive Statistics,
+37,Tuesday,Tutorial,CN,Bivariate Descriptives,
+37,Thursday,Tutorial,BE,Bivariate Descriptives,
+37,Thursday,Tutorial,SS,Bivariate Descriptives,
+38,Thursday,Tutorial,CN,Probability Distributions,
+38,Thursday,Tutorial,BE,Probability Distributions,
+38,Thursday,Tutorial,SS,Probability Distributions,
+39,Thursday,Tutorial,CN,Sampling Distribution,
+39,Thursday,Tutorial,BE,Sampling Distribution,
+39,Thursday,Tutorial,SS,Sampling Distribution,
+40,Thursday,Tutorial,CN,Philosophy of Science,
+40,Thursday,Tutorial,BE,Philosophy of Science,
+40,Thursday,Tutorial,SS,Philosophy of Science,
+41,Thursday,Tutorial,CN,Hypothesis Testing,
+41,Thursday,Tutorial,BE,Hypothesis Testing,
+41,Thursday,Tutorial,SS,Hypothesis Testing,
+43,Thursday,Tutorial,CN,General Linear Model (GLM) I: Bivariate regression ,
+43,Thursday,Tutorial,BE,General Linear Model (GLM) I: Bivariate regression ,
+43,Friday,Tutorial,SS,General Linear Model (GLM) I: Bivariate regression ,
+44,Thursday,Tutorial,CN,"GLM II: Sums of squares, explained variance, and correlation",
+44,Thursday,Tutorial,BE,"GLM II: Sums of squares, explained variance, and correlation",
+44,Friday,Tutorial,SS,"GLM II: Sums of squares, explained variance, and correlation",
+45,Thursday,Tutorial,CN,GLM III: Differences between two groups: dummy variables and two-sample t-test ,
+45,Thursday,Tutorial,BE,GLM III: Differences between two groups: dummy variables and two-sample t-test ,
+45,Friday,Tutorial,SS,GLM III: Differences between two groups: dummy variables and two-sample t-test ,
+46,Friday,Tutorial,CN,GLM IV: Differences between more groups: dummy variables and ANOVA,
+46,Friday,Tutorial,BE,GLM IV: Differences between more groups: dummy variables and ANOVA,
+46,Friday,Tutorial,SS,GLM IV: Differences between more groups: dummy variables and ANOVA,
+47,Friday,Tutorial,CN,Open science and questionable research practices,
+47,Friday,Tutorial,BE,Open science and questionable research practices,
+47,Friday,Tutorial,SS,Open science and questionable research practices,
+48,Tuesday,Tutorial,CN,Portfolio,
+48,Thursday,Tutorial,BE,Portfolio,
+48,Thursday,Tutorial,SS,Portfolio,

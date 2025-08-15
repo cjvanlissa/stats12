@@ -31,7 +31,7 @@ After taking this course, students will be able to...
 
 1.	compute and interpret commonly used descriptive statistics such as the sample mean, the median, the mode, variance and standard deviation, the standard error, and the correlation coefficient.
 2.	recognize different probability distributions such as the normal distribution, and make computations for these probability distributions. 
-3.	explain the essential aspects of null-hypothesis significance testing, including sampling distributions, Type I and Type II errors, one-tailed versus two-tailed testing, and statistical power. 
+3.	explain the essential aspects of null-hypothesis significance testing, including sampling distributions, Type I and Type II errors, one-tailed versus two-tailed testing, and statistical power.
 4.	apply different statistical tests such as the Z-test, the one sample t-test, the one way Between Subjects Analysis of Variance test, and statistical tests related to (multiple) linear regression analysis with continuous and categorical predictors; and clarify the statistical and/or methodological assumptions that apply to the techniques that are discussed in this course.
 5.	explain basic concepts in regression analysis, including: linear association, least-squares estimation, explained variance, Multiple R, multiple correlation, adjusted R-square, raw and standardized regression coefficients, model-comparison tests, predicted scores, residuals and the assumptions;
 6.	choose the appropriate analysis technique for answering a specific research problem from the range of techniques that are covered in the course.
@@ -47,21 +47,27 @@ The official **course schedule** is available on [TimeEdit](https://www.timeedit
 #| results = "asis",
 #| echo = FALSE,
 #| cache = FALSE
-schedule <- read.csv("schedule_notes.csv")[, 1:4]
-schedule$Date <- as.Date(paste(2024, (schedule$Week-1), 1, sep="-"), "%Y-%U-%u")
+schedule <- read.csv("schedule_2025.csv")[, 1:6]
+schedule$Date <- as.Date(paste(2025, (schedule$Week-1), 1, sep="-"), "%Y-%U-%u")
 addthis <- c(0:5)
 names(addthis) <- c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday")
 schedule$Date <- schedule$Date+addthis[schedule$Day]
+schedule$Topic[which(!schedule$Link == "")] <- paste0("<a href='", schedule$Link[which(!schedule$Link == '')], "'>", schedule$Topic[which(!schedule$Link == '')], "</a>")
 schedule <- schedule[!is.na(schedule$Week), c("Week", "Activity", "Date", "Topic")]
 ordr <- order(schedule$Date, decreasing = FALSE)
 schedule$Date <- format(schedule$Date, format = "%d-%m-%Y")
-suppressWarnings(library(DT))
+if(knitr::is_html_output()){
+  suppressWarnings(library(DT))
 # library(lubridate)
 # mdy(isoweek(4))
 # lubridate::isoweek(as.Date("13-09-2021", format = "%d-%m-%Y"))
 # lubridate::parse_date_time("37", orders = "%W")
 # lubridate::isoweek(as.Date("13-09-2021", format = "%d-%m-%Y"))
 DT::datatable(schedule[ordr, ], rownames = FALSE, options = list(pageLength = nrow(schedule)), escape = FALSE)
+} else {
+  knitr::kable(schedule[ordr, ])
+}
+
 ```
 
 
@@ -75,7 +81,7 @@ so if you have to miss either one, absolutely make sure you have caught up with 
 
 Below is a breakdown of the expected study load:
 
-```{r}
+```{r out.width="800px"}
 #| echo = FALSE
 options(knitr.kable.NA = '')
 tab_load <- xlsx::read.xlsx("hours_breakdown.xlsx", 1)
@@ -93,7 +99,7 @@ kbl(tab_load) |>
 
 **Lab sessions**
 
-(Thu) Tra Lê
+Amirali Rezazadeh
 
 
 ## Teaching Philosophy
@@ -140,7 +146,7 @@ The first occasion for the exam is split into three sessions, administered throu
 
 While you do receive an informal grade for each session, the final grade is simply calculated based on your correct answers in all sessions. If that grade falls below 5.5, you can take a resit which covers the material of the entire exam (all 3 sessions).
 
-### Portfolios 40% (3 x 13.3%)
+### Portfolios 40% (2 x 20%)
 
 You work on the portfolio assignments with your group, both during the lab sessions and outside of class.
 For each assignment, register your group membership before the set deadline at <http://tiny.cc/stats12_portfolio>.
@@ -152,31 +158,13 @@ Groups should equally distribute the work load for the portfolio assignments. In
 
 To make sure that all students are equally involved in the making of the portfolio assignments, an individual exam assesses comprehension of the material covered therein. It is a digital multiple choice exam, split into three sessions, to test comprehension of the material covered in the portfolios.
 
-#### Exam 1: Covers weeks 1-4
+#### Exam 1
 
-* Univariate descriptive statistics
-* Probability Distributions/Probability Calculus
-* The Sampling Distribution, probability calculus with sampling distribution
-* Hypothesis Testing
+Covers Week 35 (Introduction to Statistics) up to Week 41 (Hypothesis Testing)
 
-#### Exam 2: Covers weeks 5-10
+#### Exam 2
 
-* GLM-I: Linear Regression
-* GLM-II: Sums of Squares
-* GLM-III: Binary Predictors
-* GLM-IV: ANOVA
-* GLM-V: Multiple regression
-* GLM-VI: Nested models
-
-#### Exam 3: Covers major-specific weeks 11-?
-
-<!--Note that some of the questions are developed by you, the students (see portfolio)! You thus have an advantage if you develop questions that are good enough to be on the exam.-->
-
-<!--You may bring all course materials to the exam, including the portfolio. The exam consists of a common part and a major-specific part. Note: As per university policy, a guessing correction is applied to your grade.-->
-
-</span>
-
-<!-- **Note: I recommend that you download the GitBook onto a USB stick so you have access during your exam!**-->
+Covers Week 43 (General Linear Model (GLM) I: Bivariate regression) up to Week 47 (Open science and questionable research practices)
 
 ## Assignments 
 
@@ -294,141 +282,14 @@ distractor3 = "This is an incorrect distractor answer",
 expanation = "Why is the correct answer correct?"
 ```-->
 
-### Assignment 3 (BE)
-
-Logistic regression
-
-a. Select at least three variables for further analysis, and using at least one reference, explain what research questions you will investigate and what hypotheses you will test (150 words)
-    i.	Choose a binary outcome variable
-    ii.	Include at least two predictors
-b.	Construct a model with only main effects (200 words)
-    i. Report and interpret the results
-c.	Construct a model with the interaction effect (200 words)
-    i. Report and interpret the model results
-    ii. Conduct and report a nested model test
-d.  Throughout your report, report confidence intervals. For at least one hypothesis, use interval testing (optionally, alongside p-value based testing).
-e.	Discuss your analyses (300 words)
-    i. Explain your rationale for important modeling decisions
-    ii.	Motivate your choice for the type of statistics and analyses
-    iii. Discuss assumptions
-    iv.	Discuss what you have learned from it and how you might improve it 
-f.	Use APA style throughout your report
-g.  Reflect on the group process (300 words). Note: I will grade your *reflection*, not your *process*. So: if your group's process is not working well, but you reflect on it properly, you can still get full marks for this component. Use Gibbs' Reflective Cycle:
-    i. Describe what happened during the group work
-    ii. Explain how you felt during the group work
-    iii. Look at the good and bad aspects of the group work
-    iv. What were the obstacles you experienced? What factors contributed to success?
-    v. What could you have done differently to improve the situation?
-    vi. What are your intentions to make the next group assignment work (even) better?
-    
-<!--g.  Create four multiple choice questions about the major-specific material. The best questions will be part of the real exam, so you have an advantage if you make questions that are good, but that you can still answer correctly!
-
-The multiple choice questions must be in plain text (no images or special characters, in the format below. You can just copy-paste this into the (Word?) document of your assignment:
-
-```
-question = "This is the question",
-answer = "This is the correct answer",
-distractor1 = "This is an incorrect distractor answer",
-distractor2 = "This is an incorrect distractor answer",
-distractor3 = "This is an incorrect distractor answer",
-expanation = "Why is the correct answer correct?"
-```
--->
-
-### Assignment 3 (SS)
-
-a. Select at least three constructs for further analysis, and using at least one reference, explain what research questions you will investigate and what hypotheses you will test (150 words)
-    i.	At least one of these constructs must be a scale with 3+ items
-    ii.	Include at least two predictors
-b.	Perform some kind of data reduction analysis (200 words)
-    i. Report and interpret the results
-c.	Perform reliability analysis (200 words)
-    i. Report and interpret the results
-d.	Construct a model with only main effects (200 words)
-    i. Report and interpret the results
-e.	Construct a model with the interaction effect (200 words)
-    i. Report and interpret the model results
-    ii. Conduct and report a nested model test
-<!-- d.  Throughout your report, report confidence intervals. For at least one hypothesis, use interval testing (optionally, alongside p-value based testing). -->
-f.	Discuss your analyses (300 words)
-    i. Explain your rationale for important modeling decisions
-    ii.	Motivate your choice for the type of statistics and analyses
-    iii. Discuss assumptions
-    iv.	Discuss what you have learned from it and how you might improve it 
-g.	Use APA style throughout your report
-h.  Reflect on the group process (300 words). Note: I will grade your *reflection*, not your *process*. So: if your group's process is not working well, but you reflect on it properly, you can still get full marks for this component. Use Gibbs' Reflective Cycle:
-    i. Describe what happened during the group work
-    ii. Explain how you felt during the group work
-    iii. Look at the good and bad aspects of the group work
-    iv. What were the obstacles you experienced? What factors contributed to success?
-    v. What could you have done differently to improve the situation?
-    vi. What are your intentions to make the next group assignment work (even) better?
-    
-<!--h.  Create four multiple choice questions about the major-specific material. The best questions will be part of the real exam, so you have an advantage if you make questions that are good, but that you can still answer correctly!
-
-The multiple choice questions must be in plain text (no images or special characters, in the format below. You can just copy-paste this into the (Word?) document of your assignment:
-
-```
-question = "This is the question",
-answer = "This is the correct answer",
-distractor1 = "This is an incorrect distractor answer",
-distractor2 = "This is an incorrect distractor answer",
-distractor3 = "This is an incorrect distractor answer",
-expanation = "Why is the correct answer correct?"
-```-->
-
-### Assignment 3 (CN)
-
-a. Select at least three variables for further analysis, and using at least one reference, explain what research questions you will investigate and what hypotheses you will test (150 words)
-    i.	At least one of these variables must be categorical with 3+ levels
-    ii.	Include at least two predictors
-b.	Perform an ANOVA (200 words)
-    i. Report and interpret the results
-    ii. Use either a different kind of coding, or post-hoc tests, or planned comparisons
-b.	Perform a factorial ANOVA (200 words)
-    i. Report and interpret the results
-    ii. Report on the interaction effect
-c.	Include a continuous control variable in one of the preceding models (200 words)
-    i. Report and interpret the results
-d.	Discuss your analyses (300 words)
-    i. Explain your rationale for important modeling decisions
-    ii.	Motivate your choice for the type of statistics and analyses
-    iii. Discuss assumptions
-    iv.	Discuss what you have learned from it and how you might improve it 
-e.	Use APA style throughout your report
-f.  Reflect on the group process (300 words). Note: I will grade your *reflection*, not your *process*. So: if your group's process is not working well, but you reflect on it properly, you can still get full marks for this component. Use Gibbs' Reflective Cycle:
-    i. Describe what happened during the group work
-    ii. Explain how you felt during the group work
-    iii. Look at the good and bad aspects of the group work
-    iv. What were the obstacles you experienced? What factors contributed to success?
-    v. What could you have done differently to improve the situation?
-    vi. What are your intentions to make the next group assignment work (even) better?
-
-<!--f.  Create four multiple choice questions about the major-specific material. The best questions will be part of the real exam, so you have an advantage if you make questions that are good, but that you can still answer correctly!
-
-The multiple choice questions must be in plain text (no images or special characters, in the format below. You can just copy-paste this into the (Word?) document of your assignment:
-
-```
-question = "This is the question",
-answer = "This is the correct answer",
-distractor1 = "This is an incorrect distractor answer",
-distractor2 = "This is an incorrect distractor answer",
-distractor3 = "This is an incorrect distractor answer",
-expanation = "Why is the correct answer correct?"
-```-->
-
 ## Use of Large Language Models (LLMs) 
 
-Be warned: LLMs learn from all text on the internet, which includes a *lot* of incorrect information about statistics. As a result, my experience is that e.g. ChatGPT produces a lot of incorrect output for statistics assignments.
+Honestly: I advise against using ChatGPT and similar LLMs for this course.
+Here's why:
+LLMs learn from all text on the internet, which includes a *lot* of text posted by people who do not understand statistics.
+As a result, my experience is that LLMs produce a lot of plausible sounding nonsense for statistics assignments.
+
+If you're worried about the quality of your writing: that is not graded here. I'd rather have a simple and clear report in imperfect English than a beautifully written AI-fluff piece full of hallucinated nonsense.
 
 If you decide to use LLMs, it is your responsibility to thoroughly check its output for logical consistency and correctness. You may not yet have the level of expertise required to know when ChatGPT generates irrelevant nonsense - but the teacher who grades your work does. Consider this carefully when deciding what makes more sense: doing your work manually, making sure each step is correct - or outsourcing it to AI, and then checking its work before submitting.
 
-
-## Credit
-
-This book was authored by Caspar J. Van Lissa. Its code and layout are derived from Lisa DeBruine's "booktem":
-
-> DeBruine L, Lakens D (2023). _booktem: Methods Book Template_.
-  https://github.com/debruine/booktem, https://debruine.github.io/booktem/.
-
-Also see: https://psyteachr.github.io/
