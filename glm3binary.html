@@ -5,7 +5,7 @@
 <meta name="generator" content="quarto-1.7.33">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="description" content="Book Description">
-<title>10&nbsp; GLM-III: Binary Predictors – Statistics 1 and 2</title>
+<title>13&nbsp; GLM-III: Binary Predictors – Statistics 1 and 2</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -27,7 +27,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./glm4anova.html" rel="next">
-<link href="./glm2_sum_squares.html" rel="prev">
+<link href="./glm_assumptions.html" rel="prev">
 <link href="./images/logos/favicon.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -269,7 +269,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./glm3binary.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">GLM-III: Binary Predictors</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./glm3binary.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">GLM-III: Binary Predictors</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -321,145 +321,151 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Overview</span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Overview</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./statistics1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Statistics 1</span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Statistics 1</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./introduction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to Statistics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Introduction to Statistics</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./chapter2_descriptive_statistics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Descriptive Statistics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Descriptive Statistics</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Chapter3_Correlation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Bivariate Descriptive Statistics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Bivariate Descriptive Statistics</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./probability.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Probability Distributions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Probability Distributions</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./samplingdistribution.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">The Sampling Distribution</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">The Sampling Distribution</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Week_4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Philosophy of Science</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Philosophy of Science</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./testing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Hypothesis Testing</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Hypothesis Testing</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./glm1_regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">GLM-I: Linear Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">GLM-I: Linear Regression</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./glm2_sum_squares.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">GLM-II: Sums of Squares</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">GLM-II: Sums of Squares</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glm_assumptions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Assumptions</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./glm3binary.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">GLM-III: Binary Predictors</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">GLM-III: Binary Predictors</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./glm4anova.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">GLM-IV: ANOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">GLM-IV: ANOVA</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./glm5multiple.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">GLM-V: Multiple regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">GLM-V: Multiple regression</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./glm6nested.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">GLM-VI: Nested models</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">GLM-VI: Nested models</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./glm7interaction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">GLM-VII: Interaction</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">GLM-VII: Interaction</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./logistic.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">GLM VIII - Logistic Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">GLM VIII - Logistic Regression</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./glm_contrasts.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">GLM: Contrasts</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">GLM: Contrasts</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./factorial.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">GLM: Factorial ANOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">GLM: Factorial ANOVA</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ancova.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">GLM: ANCOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">GLM: ANCOVA</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./rmanova.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">GLM: Repeated Measures ANOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">GLM: Repeated Measures ANOVA</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./reliability_validity.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Reliability and Validity</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Reliability and Validity</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./data_reduction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Dimension Reduction</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Dimension Reduction</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./confint.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">BE2 - Confidence Intervals</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">BE2 - Confidence Intervals</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -474,25 +480,25 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Data for Portfolio</span></a>
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Data for Portfolio</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./probability_tables.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Z-table</span></span></a>
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Z-table</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./formula_sheet2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Formula sheet</span></span></a>
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Formula sheet</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">References</span></a>
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">References</span></span></a>
   </div>
 </li>
       </ul>
@@ -505,26 +511,26 @@ window.Quarto = {
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#lecture" id="toc-lecture" class="nav-link active" data-scroll-target="#lecture"><span class="header-section-number">11</span> Lecture</a></li>
-  <li><a href="#formative-test" id="toc-formative-test" class="nav-link" data-scroll-target="#formative-test"><span class="header-section-number">12</span> Formative Test</a></li>
+<li><a href="#lecture" id="toc-lecture" class="nav-link active" data-scroll-target="#lecture"><span class="header-section-number">13.1</span> Lecture</a></li>
+  <li><a href="#formative-test" id="toc-formative-test" class="nav-link" data-scroll-target="#formative-test"><span class="header-section-number">13.2</span> Formative Test</a></li>
   <li>
-<a href="#in-spss" id="toc-in-spss" class="nav-link" data-scroll-target="#in-spss"><span class="header-section-number">13</span> In SPSS</a>
+<a href="#in-spss" id="toc-in-spss" class="nav-link" data-scroll-target="#in-spss"><span class="header-section-number">13.3</span> In SPSS</a>
   <ul class="collapse">
-<li><a href="#independent-samples-t-test" id="toc-independent-samples-t-test" class="nav-link" data-scroll-target="#independent-samples-t-test"><span class="header-section-number">13.1</span> Independent Samples t-test</a></li>
+<li><a href="#independent-samples-t-test" id="toc-independent-samples-t-test" class="nav-link" data-scroll-target="#independent-samples-t-test"><span class="header-section-number">13.3.1</span> Independent Samples t-test</a></li>
   </ul>
 </li>
   <li>
-<a href="#tutorial" id="toc-tutorial" class="nav-link" data-scroll-target="#tutorial"><span class="header-section-number">14</span> Tutorial</a>
+<a href="#tutorial" id="toc-tutorial" class="nav-link" data-scroll-target="#tutorial"><span class="header-section-number">13.4</span> Tutorial</a>
   <ul class="collapse">
-<li><a href="#independent-samples-t-test-1" id="toc-independent-samples-t-test-1" class="nav-link" data-scroll-target="#independent-samples-t-test-1"><span class="header-section-number">14.1</span> Independent Samples T-Test</a></li>
-  <li><a href="#regression-with-dummies" id="toc-regression-with-dummies" class="nav-link" data-scroll-target="#regression-with-dummies"><span class="header-section-number">14.2</span> Regression with dummies</a></li>
+<li><a href="#independent-samples-t-test-1" id="toc-independent-samples-t-test-1" class="nav-link" data-scroll-target="#independent-samples-t-test-1"><span class="header-section-number">13.4.1</span> Independent Samples T-Test</a></li>
+  <li><a href="#regression-with-dummies" id="toc-regression-with-dummies" class="nav-link" data-scroll-target="#regression-with-dummies"><span class="header-section-number">13.4.2</span> Regression with dummies</a></li>
   </ul>
 </li>
   </ul></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
-<h1 class="title"><span id="sec-glm3" class="quarto-section-identifier"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">GLM-III: Binary Predictors</span></span></h1>
+<h1 class="title"><span id="sec-glm3" class="quarto-section-identifier"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">GLM-III: Binary Predictors</span></span></h1>
 </div>
 
 
@@ -542,64 +548,64 @@ window.Quarto = {
 <p>Regression with a binary predictor is completely equivalent to the independent samples t-test. The independent samples t-test is also used to compare the means of two independent groups. In regression, we estimate the slope (b) for the binary predictor, which represents the difference between the means of the two groups. This t-test of the slope in regression is the same as an independent samples t-test.</p>
 <p>Both regression with a binary predictor and the independent samples t-test rely on certain assumptions. These include the linearity of the relationship between the binary predictor and the outcome variable, the normality of residuals (the outcome variable should be normally distributed within each group), homoscedasticity (equal variances in both groups), and independence of observations. To check for equal variances, we can use Levene’s test - but keep in mind that “assumption checks” are questionable. If you assume equal variances, report the normal t-test; if you do not assume equal variances, you can report a corrected t-test that allows for different variances. Both are included in SPSS output by default.</p>
 <p>To determine the practical significance of a mean difference, we can calculate an effect size measure. Cohen’s d is a commonly used effect size for mean differences. It standardizes the difference between the two group means by the pooled standard deviation. A larger Cohen’s d indicates a greater magnitude of difference between the groups. As a rule of thumb, a small effect size is typically considered around d ≈ 0.2, a medium effect size around d ≈ 0.5, and a large effect size around d ≈ 0.8.</p>
-<section id="lecture" class="level1" data-number="11"><h1 data-number="11">
-<span class="header-section-number">11</span> Lecture</h1>
+<section id="lecture" class="level2" data-number="13.1"><h2 data-number="13.1" class="anchored" data-anchor-id="lecture">
+<span class="header-section-number">13.1</span> Lecture</h2>
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/QeKr2R8Eyhk" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
-</section><section id="formative-test" class="level1" data-number="12"><h1 data-number="12">
-<span class="header-section-number">12</span> Formative Test</h1>
+</section><section id="formative-test" class="level2" data-number="13.2"><h2 data-number="13.2" class="anchored" data-anchor-id="formative-test">
+<span class="header-section-number">13.2</span> Formative Test</h2>
 <p>A formative test helps you assess your progress in the course, and helps you address any blind spots in your understanding of the material. If you get a question wrong, you will receive a hint on how to improve your understanding of the material.</p>
 <p>Complete the formative test ideally after you’ve seen the lecture, but before the lecture meeting in which we can discuss any topics that need more attention</p>
 <div class="cell" data-layout-align="center">
 <div class="webex-check webex-box">
 <p><strong>Question 1</strong></p>
 What is the purpose of dummy coding in regression with binary predictors?
-<div id="radio_USIERFLTSX" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_USIERFLTSX" value=""><span>To increase the number of predictors in the model.</span></label><label><input type="radio" autocomplete="off" name="radio_USIERFLTSX" value="answer"><span>To estimate the mean of the reference category and test the difference between categories.</span></label><label><input type="radio" autocomplete="off" name="radio_USIERFLTSX" value=""><span>To simplify the model by removing categorical predictors.</span></label><label><input type="radio" autocomplete="off" name="radio_USIERFLTSX" value=""><span>To convert binary variables into continuous variables.</span></label>
+<div id="radio_YLYUYTLVPC" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_YLYUYTLVPC" value=""><span>To simplify the model by removing categorical predictors.</span></label><label><input type="radio" autocomplete="off" name="radio_YLYUYTLVPC" value="answer"><span>To estimate the mean of the reference category and test the difference between categories.</span></label><label><input type="radio" autocomplete="off" name="radio_YLYUYTLVPC" value=""><span>To increase the number of predictors in the model.</span></label><label><input type="radio" autocomplete="off" name="radio_YLYUYTLVPC" value=""><span>To convert binary variables into continuous variables.</span></label>
 </div>
 <p><strong>Question 2</strong></p>
 What does the slope coefficient (b) represent in regression with a binary predictor?
-<div id="radio_ZNRECAMRWG" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_ZNRECAMRWG" value="answer"><span>The difference in means between the two categories.</span></label><label><input type="radio" autocomplete="off" name="radio_ZNRECAMRWG" value=""><span>The mean of the second category.</span></label><label><input type="radio" autocomplete="off" name="radio_ZNRECAMRWG" value=""><span>The ratio of the two categories' means.</span></label><label><input type="radio" autocomplete="off" name="radio_ZNRECAMRWG" value=""><span>The intercept of the reference category.</span></label>
+<div id="radio_YOWGXSBHAF" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_YOWGXSBHAF" value=""><span>The ratio of the two categories' means.</span></label><label><input type="radio" autocomplete="off" name="radio_YOWGXSBHAF" value="answer"><span>The difference in means between the two categories.</span></label><label><input type="radio" autocomplete="off" name="radio_YOWGXSBHAF" value=""><span>The mean of the second category.</span></label><label><input type="radio" autocomplete="off" name="radio_YOWGXSBHAF" value=""><span>The intercept of the reference category.</span></label>
 </div>
 <p><strong>Question 3</strong></p>
 Which assumption is not relevant for the independent samples t-test and bivariate linear regression with only a binary predictor?
-<div id="radio_TZFCONZWSC" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_TZFCONZWSC" value=""><span>Independence of observations</span></label><label><input type="radio" autocomplete="off" name="radio_TZFCONZWSC" value=""><span>Normality of residuals</span></label><label><input type="radio" autocomplete="off" name="radio_TZFCONZWSC" value=""><span>Homoscedasticity</span></label><label><input type="radio" autocomplete="off" name="radio_TZFCONZWSC" value="answer"><span>Linearity of relationship between X and Y</span></label>
+<div id="radio_NJCIUKWUHZ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_NJCIUKWUHZ" value=""><span>Homoscedasticity</span></label><label><input type="radio" autocomplete="off" name="radio_NJCIUKWUHZ" value=""><span>Normality of residuals</span></label><label><input type="radio" autocomplete="off" name="radio_NJCIUKWUHZ" value=""><span>Independence of observations</span></label><label><input type="radio" autocomplete="off" name="radio_NJCIUKWUHZ" value="answer"><span>Linearity of relationship between X and Y</span></label>
 </div>
 <p><strong>Question 4</strong></p>
 What does the Levene’s test check in the context of the independent samples t-test?
-<div id="radio_SWWWRQZOOZ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_SWWWRQZOOZ" value=""><span>Normality of residuals.</span></label><label><input type="radio" autocomplete="off" name="radio_SWWWRQZOOZ" value=""><span>Normality of variances in both groups.</span></label><label><input type="radio" autocomplete="off" name="radio_SWWWRQZOOZ" value="answer"><span>Equality of variances in both groups.</span></label><label><input type="radio" autocomplete="off" name="radio_SWWWRQZOOZ" value=""><span>Linearity of relationship between X and Y.</span></label>
+<div id="radio_MEZXMZNPTQ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_MEZXMZNPTQ" value=""><span>Normality of residuals.</span></label><label><input type="radio" autocomplete="off" name="radio_MEZXMZNPTQ" value=""><span>Linearity of relationship between X and Y.</span></label><label><input type="radio" autocomplete="off" name="radio_MEZXMZNPTQ" value="answer"><span>Equality of variances in both groups.</span></label><label><input type="radio" autocomplete="off" name="radio_MEZXMZNPTQ" value=""><span>Normality of variances in both groups.</span></label>
 </div>
 <p><strong>Question 5</strong></p>
 How is the independent samples t-test related to the t-test of the slope in regression with a binary predictor?
-<div id="radio_YPMVWLBQBA" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_YPMVWLBQBA" value=""><span>They are not related.</span></label><label><input type="radio" autocomplete="off" name="radio_YPMVWLBQBA" value=""><span>The t-test of the slope is a subset of the independent samples t-test.</span></label><label><input type="radio" autocomplete="off" name="radio_YPMVWLBQBA" value=""><span>The independent samples t-test is a subset of the t-test of the slope.</span></label><label><input type="radio" autocomplete="off" name="radio_YPMVWLBQBA" value="answer"><span>They are equivalent.</span></label>
+<div id="radio_CNKRPPSAPK" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_CNKRPPSAPK" value=""><span>The t-test of the slope is a subset of the independent samples t-test.</span></label><label><input type="radio" autocomplete="off" name="radio_CNKRPPSAPK" value="answer"><span>They are equivalent.</span></label><label><input type="radio" autocomplete="off" name="radio_CNKRPPSAPK" value=""><span>They are not related.</span></label><label><input type="radio" autocomplete="off" name="radio_CNKRPPSAPK" value=""><span>The independent samples t-test is a subset of the t-test of the slope.</span></label>
 </div>
 <p><strong>Question 6</strong></p>
 What does the p-value in the context of the independent samples t-test indicate?
-<div id="radio_NWOAMKYKGY" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_NWOAMKYKGY" value=""><span>The probability that the null hypothesis is rejected.</span></label><label><input type="radio" autocomplete="off" name="radio_NWOAMKYKGY" value=""><span>The probability that the null hypothesis is true.</span></label><label><input type="radio" autocomplete="off" name="radio_NWOAMKYKGY" value="answer"><span>The probability of observing a group difference at least as extreme as the one observed, if the null hypothesis is true.</span></label><label><input type="radio" autocomplete="off" name="radio_NWOAMKYKGY" value=""><span>The probability of observing a statistically significant result.</span></label>
+<div id="radio_XZJLHZQYAA" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_XZJLHZQYAA" value="answer"><span>The probability of observing a group difference at least as extreme as the one observed, if the null hypothesis is true.</span></label><label><input type="radio" autocomplete="off" name="radio_XZJLHZQYAA" value=""><span>The probability that the null hypothesis is rejected.</span></label><label><input type="radio" autocomplete="off" name="radio_XZJLHZQYAA" value=""><span>The probability that the null hypothesis is true.</span></label><label><input type="radio" autocomplete="off" name="radio_XZJLHZQYAA" value=""><span>The probability of observing a statistically significant result.</span></label>
 </div>
 <p><strong>Question 7</strong></p>
 What does Cohen’s d represent?
-<div id="radio_DLWDXYLPEP" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_DLWDXYLPEP" value=""><span>A measure of explained variance for mean differences.</span></label><label><input type="radio" autocomplete="off" name="radio_DLWDXYLPEP" value="answer"><span>An effect size for the mean difference, expressed in number of standard deviations.</span></label><label><input type="radio" autocomplete="off" name="radio_DLWDXYLPEP" value=""><span>An effect size for the difference between standardized group means.</span></label><label><input type="radio" autocomplete="off" name="radio_DLWDXYLPEP" value=""><span>The difference between the two categories' means.</span></label>
+<div id="radio_CUIDOVWNVU" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_CUIDOVWNVU" value=""><span>An effect size for the difference between standardized group means.</span></label><label><input type="radio" autocomplete="off" name="radio_CUIDOVWNVU" value=""><span>The difference between the two categories' means.</span></label><label><input type="radio" autocomplete="off" name="radio_CUIDOVWNVU" value=""><span>A measure of explained variance for mean differences.</span></label><label><input type="radio" autocomplete="off" name="radio_CUIDOVWNVU" value="answer"><span>An effect size for the mean difference, expressed in number of standard deviations.</span></label>
 </div>
 <p><strong>Question 8</strong></p>
 What is the recommended approach when assumption checks for homoscedasticity are significant?
-<div id="radio_EWFALQTMQJ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_EWFALQTMQJ" value=""><span>It depends - in confirmatory analyses, you may switch to a robust test; in exploratory analyses, you would report the violation and proceed as planned.</span></label><label><input type="radio" autocomplete="off" name="radio_EWFALQTMQJ" value=""><span>Use a robust t-test.</span></label><label><input type="radio" autocomplete="off" name="radio_EWFALQTMQJ" value=""><span>Exclude outliers to ensure homoscedasticity.</span></label><label><input type="radio" autocomplete="off" name="radio_EWFALQTMQJ" value="answer"><span>It depends - in exploratory analyses, you may switch to a robust test; in confirmatory analyses, you would report the violation and proceed as planned.</span></label>
+<div id="radio_BNWRKPTHYS" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_BNWRKPTHYS" value=""><span>Use a robust t-test.</span></label><label><input type="radio" autocomplete="off" name="radio_BNWRKPTHYS" value=""><span>It depends - in confirmatory analyses, you may switch to a robust test; in exploratory analyses, you would report the violation and proceed as planned.</span></label><label><input type="radio" autocomplete="off" name="radio_BNWRKPTHYS" value="answer"><span>It depends - in exploratory analyses, you may switch to a robust test; in confirmatory analyses, you would report the violation and proceed as planned.</span></label><label><input type="radio" autocomplete="off" name="radio_BNWRKPTHYS" value=""><span>Exclude outliers to ensure homoscedasticity.</span></label>
 </div>
 <p><strong>Question 9</strong></p>
 The observed mean difference between two groups is 2.50, and Cohen’s D is 1.25. What is the pooled standard deviation?
-<div id="radio_IZIQZTOVPB" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_IZIQZTOVPB" value=""><span>Can't say based on this information.</span></label><label><input type="radio" autocomplete="off" name="radio_IZIQZTOVPB" value=""><span>1.25</span></label><label><input type="radio" autocomplete="off" name="radio_IZIQZTOVPB" value="answer"><span>2</span></label><label><input type="radio" autocomplete="off" name="radio_IZIQZTOVPB" value=""><span>2.50</span></label>
+<div id="radio_YRCWSDQAKF" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_YRCWSDQAKF" value=""><span>2.50</span></label><label><input type="radio" autocomplete="off" name="radio_YRCWSDQAKF" value="answer"><span>2</span></label><label><input type="radio" autocomplete="off" name="radio_YRCWSDQAKF" value=""><span>Can't say based on this information.</span></label><label><input type="radio" autocomplete="off" name="radio_YRCWSDQAKF" value=""><span>1.25</span></label>
 </div>
 <p><strong>Question 10</strong></p>
 A researcher accidentally coded a dummy variable as 0 and 2, instead of 0 and 1. The regression equation is Y = 5.66 + 3*D. What is the mean value of the group coded 2?
-<div id="radio_YVWSNKMEQU" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_YVWSNKMEQU" value=""><span>7.16</span></label><label><input type="radio" autocomplete="off" name="radio_YVWSNKMEQU" value="answer"><span>11.66</span></label><label><input type="radio" autocomplete="off" name="radio_YVWSNKMEQU" value=""><span>3</span></label><label><input type="radio" autocomplete="off" name="radio_YVWSNKMEQU" value=""><span>8.66</span></label>
+<div id="radio_IQONMLMXHY" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_IQONMLMXHY" value="answer"><span>11.66</span></label><label><input type="radio" autocomplete="off" name="radio_IQONMLMXHY" value=""><span>3</span></label><label><input type="radio" autocomplete="off" name="radio_IQONMLMXHY" value=""><span>8.66</span></label><label><input type="radio" autocomplete="off" name="radio_IQONMLMXHY" value=""><span>7.16</span></label>
 </div>
 </div>
 <div class="webex-solution">
@@ -628,16 +634,16 @@ Show explanations
 <p>The slope tells you how much the predicted value goes up for a 1-unit increase in the predictor D. Since D is coded 0 and 2, a 1-unit increase only gets you halfway!</p>
 </div>
 </div>
-</section><section id="in-spss" class="level1" data-number="13"><h1 data-number="13">
-<span class="header-section-number">13</span> In SPSS</h1>
-<section id="independent-samples-t-test" class="level2" data-number="13.1"><h2 data-number="13.1" class="anchored" data-anchor-id="independent-samples-t-test">
-<span class="header-section-number">13.1</span> Independent Samples t-test</h2>
+</section><section id="in-spss" class="level2" data-number="13.3"><h2 data-number="13.3" class="anchored" data-anchor-id="in-spss">
+<span class="header-section-number">13.3</span> In SPSS</h2>
+<section id="independent-samples-t-test" class="level3" data-number="13.3.1"><h3 data-number="13.3.1" class="anchored" data-anchor-id="independent-samples-t-test">
+<span class="header-section-number">13.3.1</span> Independent Samples t-test</h3>
 <p>As a t-test and as regression with a dummy predictor:</p>
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/PbXMMN4YTQc" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
-</section></section><section id="tutorial" class="level1" data-number="14"><h1 data-number="14">
-<span class="header-section-number">14</span> Tutorial</h1>
-<section id="independent-samples-t-test-1" class="level2" data-number="14.1"><h2 data-number="14.1" class="anchored" data-anchor-id="independent-samples-t-test-1">
-<span class="header-section-number">14.1</span> Independent Samples T-Test</h2>
+</section></section><section id="tutorial" class="level2" data-number="13.4"><h2 data-number="13.4" class="anchored" data-anchor-id="tutorial">
+<span class="header-section-number">13.4</span> Tutorial</h2>
+<section id="independent-samples-t-test-1" class="level3" data-number="13.4.1"><h3 data-number="13.4.1" class="anchored" data-anchor-id="independent-samples-t-test-1">
+<span class="header-section-number">13.4.1</span> Independent Samples T-Test</h3>
 <p>In this assignment we will use the data file <a href="data/5groups.sav"><code>5groups.sav</code></a>. Download the file and open it in SPSS.</p>
 <p>This time, we will compare the means of the variable y of two specific groups: group 1 and group 4. To test the difference between two sample means, we will use the t-test for independent samples.</p>
 <p>What is the null hypothesis of this test? And what is the alternative hypothesis?</p>
@@ -674,8 +680,8 @@ Explanation
 <p>Do you reject the null hypothesis of this t-test at alpha 0.05? <select class="webex-select"><option value="blank"></option>
 <option value="answer">Yes</option>
 <option value="">No</option></select></p>
-</section><section id="regression-with-dummies" class="level2" data-number="14.2"><h2 data-number="14.2" class="anchored" data-anchor-id="regression-with-dummies">
-<span class="header-section-number">14.2</span> Regression with dummies</h2>
+</section><section id="regression-with-dummies" class="level3" data-number="13.4.2"><h3 data-number="13.4.2" class="anchored" data-anchor-id="regression-with-dummies">
+<span class="header-section-number">13.4.2</span> Regression with dummies</h3>
 <p>We will now perform the exact same analysis, but with regression and dummies.</p>
 <p>To test the difference between group 1 and group 4, we first create a dummy variable to distinguish these two groups. Use group 1 as reference category. You can use either Transform -&gt; Recode into different variables, or syntax:</p>
 <pre><code>RECODE group (1=0) (4=1) INTO dgroup4.
@@ -716,8 +722,8 @@ Answer
 <p>Remember that the t-test of the dummy variable should be the same as the t-test we conducted before. Verify that this is true.</p>
 <p>What is the two-sided p-value? <input class="webex-solveme nospaces" data-tol="0.001" size="5" data-answer="[&quot;0.021&quot;,&quot;.021&quot;]"></p>
 <p>We see one more t-test: for the “(Constant)” or intercept. How do we interpret this?</p>
-<div id="radio_XWRSOERERB" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_XWRSOERERB" value=""><span>The mean difference between both Groups is 7, and this differs significantly from zero.</span></label><label><input type="radio" autocomplete="off" name="radio_XWRSOERERB" value="answer"><span>The mean value in Group 1 is 7, and this differs significantly from zero.</span></label><label><input type="radio" autocomplete="off" name="radio_XWRSOERERB" value=""><span>The mean value in Group 4 is 7, and this differs significantly from zero.</span></label><label><input type="radio" autocomplete="off" name="radio_XWRSOERERB" value=""><span>The mean value across both Groups is 7, and this differs significantly from zero.</span></label>
+<div id="radio_YZKJXTRSTZ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_YZKJXTRSTZ" value=""><span>The mean difference between both Groups is 7, and this differs significantly from zero.</span></label><label><input type="radio" autocomplete="off" name="radio_YZKJXTRSTZ" value=""><span>The mean value in Group 4 is 7, and this differs significantly from zero.</span></label><label><input type="radio" autocomplete="off" name="radio_YZKJXTRSTZ" value=""><span>The mean value across both Groups is 7, and this differs significantly from zero.</span></label><label><input type="radio" autocomplete="off" name="radio_YZKJXTRSTZ" value="answer"><span>The mean value in Group 1 is 7, and this differs significantly from zero.</span></label>
 </div>
 
 
@@ -1570,13 +1576,13 @@ window.onload = function() {
     }
   });
   </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="./glm2_sum_squares.html" class="pagination-link" aria-label="GLM-II: Sums of Squares">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">GLM-II: Sums of Squares</span></span>
+      <a href="./glm_assumptions.html" class="pagination-link" aria-label="Assumptions">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Assumptions</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./glm4anova.html" class="pagination-link" aria-label="GLM-IV: ANOVA">
-        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">GLM-IV: ANOVA</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">GLM-IV: ANOVA</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
