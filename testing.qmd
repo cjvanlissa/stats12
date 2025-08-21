@@ -5,7 +5,7 @@ source("R/booktem_setup.R")
 source("R/my_setup.R")
 ```
 
-## Falsificationism {#sec-falsificationism}
+### Falsificationism {#sec-falsificationism}
 
 In science, it is rarely possible to **prove** a general theory true. Instead, theories earn credibility by **surviving** serious attempts to refute them. This is the core of **falsificationism**, most closely associated with Karl Popper (Popper, 1959/2002). A scientific claim must be **testable** and **falsifiable**: it should make predictions that could, in principle, be shown false by observation. The proverbially simple example is “All swans are white.” No number of white swans can verify the claim, but a **single** black swan would falsify it.
 
@@ -13,7 +13,7 @@ This logic connects directly to statistical practice. In hypothesis testing we d
 
 
 
-## Hypothesis testing {#sec-Hypothesis testing}
+### Hypothesis testing {#sec-Hypothesis testing}
 
 Hypothesis testing is a method of inferential statistics which allows researchers to draw conclusions about the population based on sample data. It involves formulating hypotheses, calculating test statistics, determining p-values, and drawing conclusions about the null hypothesis.
 
@@ -55,20 +55,20 @@ Rejecting the null hypothesis indicates that the observed data is unlikely to oc
 
 When testing hypotheses, we can make two types of errors: A Type I error refers to rejecting the null hypothesis when it is true (a false-positive conclusion), while Type II error refers to accepting the null hypothesis when it is false (failing to detect a true effect).
 
-## Causality {#sec-causality}
+### Causality {#sec-causality}
 
 Causal knowledge explains **what would change if we intervened**: “If we change $X$, $Y$ will tend to change in a predictable direction.” This is why causality matters for science and policy—causal claims connect description to **action** (Shadish, Cook, & Campbell, 2002). Two levels are useful to distinguish. **Type (general) causality** concerns population regularities (e.g., “Smoking causes lung cancer.”). **Actual (token) causality** concerns whether a **specific** event in a concrete situation caused a particular outcome (e.g., “This crash occurred because the brakes failed.”). For the latter, the modified Halpern–Pearl account captures the core intuition: $X$ counts as a cause of $Y$ when (i) both occurred; (ii) had $X$ been different, and relevant background factors held as they actually were, $Y$ would have been different; and (iii) nothing extraneous is needed for the claim (Halpern, 2015).
 
 How do we justify causal claims in practice? A helpful everyday test traces to Mill’s requirements: **covariation**, **temporal precedence**, and **non-spuriousness** (Oppewal, 2010). Randomized experiments are powerful because they **enforce** these conditions by design: random assignment severs links from unmeasured causes to treatment, outcomes are measured **after** assignment, and treatment–control contrasts establish covariation (Shadish et al., 2002). Outside experiments, causal inference relies on design and assumptions—e.g., careful measurement of confounders, quasi-experimental strategies, and transparent modeling. Hypothesis tests then assess whether the observed data are compatible with specific causal predictions, but **testing alone does not create causality**: the strength of a causal claim ultimately rests on research design, the plausibility of assumptions, and the theory’s survival of severe attempts at refutation.
 
-# Lecture
+## Lecture
 
 {{< video https://www.youtube.com/embed/-1J2Ge0B3Ro >}}
 
-# Statistical Power
+## Statistical Power
 
 
-## Hypothesis Testing: Type I and Type II Errors
+### Hypothesis Testing: Type I and Type II Errors
 
 When we conduct a null-hypothesis significance test,
 we select the significance level $\alpha$.
@@ -81,7 +81,7 @@ This is called $\beta$.
 We don't know the value of $\beta$ beforehand, but we can calculate it if we make some assumptions.
 The probability of committing a Type II error (drawing a false-negative conclusion) depends on a few factors:
 
-### How big the effect is
+#### How big the effect is
 
 Big effects are harder to miss; imagine trying to detect a difference between two groups.
 If the mean of both groups is really close together, it will be harder to detect a difference (see below):
@@ -111,7 +111,7 @@ Effect of Effect Size
 :::
 
 
-### How big the sample is
+#### How big the sample is
 
 Large samples make it easier to detect smaller effects;
 imagine that the two distributions below are sampling distributions for two groups
@@ -141,7 +141,7 @@ ggplot(data = data.frame(x = c(-6, 6)), aes(x)) +
 Effect of Sample Size
 :::
 
-### How 'noisy' the data are
+#### How 'noisy' the data are
 
 The standard deviation is a measure of how "noisy" the data are.
 If observations are very spread out (high standard deviation), it will be harder to detect small differences. Consider that a small difference between two groups would be hard to detect if the two groups overlapped very much (= high standard deviation).
@@ -152,7 +152,7 @@ $$
 SE_M = \frac{SD}{\sqrt{n}}
 $$
 
-## Power of a Test
+### Power of a Test
 
 
 The "power" of a test is the probability that it will correctly detect a true effect of a specific size.
@@ -196,7 +196,7 @@ ggplot(data = data.frame(x = c(-.5, .5)), aes(x)) +
   theme_void()
 ```
 
-## Try it Yourself
+### Try it Yourself
 
 Now, let's calculate this by hand.
 Imagine that last year's average grade was $M = 5$, with a standard deviation of $SD = 1.5$.
@@ -239,7 +239,7 @@ Thus, the left-tail probability $\beta$ will be tiny - $\beta < .01$.
 
 
 
-# Formative Test
+## Formative Test
 
 A formative test helps you assess your progress in the course, and helps you address any blind spots in your understanding of the material. If you get a question wrong, you will receive a hint on how to improve your understanding of the material.
 
@@ -254,9 +254,9 @@ add_mcs("questions4.csv")
 
 
 
-# Tutorial
+## Tutorial
 
-## Assignment 1: Hypothesis Testing - Formulating Hypotheses
+### Assignment 1: Hypothesis Testing - Formulating Hypotheses
 
 Discuss with your portfolio group the logic behind hypothesis testing, and how it relates to your personal (and group's) research interests.
 
@@ -298,7 +298,7 @@ $H_A: \rho \neq 0$
 
 Formulating the hypothesis is an important very first step in hypotheses testing. Continue with the next assignment, in which we will go through the steps of a hypothesis test.
 
-## Assignment 2: Test Statistics, Alpha and Significance
+### Assignment 2: Test Statistics, Alpha and Significance
 
 In this assignment we will go through the steps of a hypothesis test.
 
@@ -430,7 +430,7 @@ The test-statistic equals $z = \frac{\bar{X}-\mu}{\sigma_{\bar{X}}}$
 
 The test statistic is normally distributed.
 
-## Assignment 3: Z-test
+### Assignment 3: Z-test
 
 In this assignment we will apply the Z-test.
 
@@ -490,7 +490,7 @@ Step 4: Draw conclusion
 $H_0$ is not rejected.
 `r unhide()`
 
-## Quiz
+### Quiz
 
 ::: {.webex-check .webex-box}
 
@@ -528,7 +528,7 @@ Increasing the sample size n (and holding all the rest constant) does not decrea
 
 :::
 
-## Assignment 4: Z-test and Alpha-levels
+### Assignment 4: Z-test and Alpha-levels
 
 In this assignment we will practice some more with the Z-test, meanwhile we will review important concepts of hypothesis testing. In particular, we will look at significance levels.
  
@@ -556,7 +556,7 @@ Let $Z_\text{crit}$ be the critical value. For the Z-test it holds that:
 * $Z_\text{crit} = 1.96$, if $\alpha = 0.05$ (two-tailed)
 * $Z_\text{crit} = 2.58$, if $\alpha = 0.01$ (two-tailed)
 
-## Quiz
+### Quiz
 
 ::: {.webex-check .webex-box}
 
@@ -577,7 +577,7 @@ $H_0$ can be rejected at one of the three levels discussed above ($\alpha = .10,
 :::
 
 
-## Assignment 5: P-values
+### Assignment 5: P-values
 
 We will now focus on the interpretation of the p-values and how to use the p-values to decide about significance. 
  

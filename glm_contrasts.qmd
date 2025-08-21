@@ -23,32 +23,32 @@ $\hat{Y}_i = b_1D_{1i}+ b_2D_{2i}+ b_3D_{3i}+ b_4D_{4i}+ b_5D_{5i}$
 Both of these models are mathematically identical.
 The advantage of estimating all group means is that this model provides a standard error for each group mean, allowing us to test each group mean against hypothesized values.
 
-## Effects Coding
+### Effects Coding
 
 Another way to include a categorical predictor is via effects coding. Effects coding compares each group to the grand mean.
 When we have unequal group sizes, the coding scheme should account for relative group size.
 
-## Contrast Coding
+### Contrast Coding
 
 Contrast coding is yet another coding scheme; it compares groups of means. This allows us to test specific hypotheses about differences between groups. Contrast coding is a very advanced technique that requires you to perform some basic matrix algebra in Excel.
 
-## 'Post-Hoc' Tests
+### 'Post-Hoc' Tests
 
 The notion of post-hoc tests is a bit outdated; it essentially refers to making all possible comparisons between group means. The name is based on the fact that such tests are rarely hypothesized beforehand. They can be considered an exploratory procedure to look for differences between groups. Note that performing many tests inflates the risk of drawing false-positive conclusions (Type I error).
 
 
-## Adjusting for Multiple Comparisons
+### Adjusting for Multiple Comparisons
 
 When conducting multiple tests, we face an increased risk of committing Type I errors (false positives). If we perform $m$ tests within one study, the experiment-wise Type I error rate is $1- (1-\alpha)^m$.
 To control the experiment-wise Type I error rate, we can apply a Bonferroni correction, which divides the significance level $\alpha$ by the number of tests $m$. This trades off fewer false positive results for more false negative results.
 
 Planning to test specific hypotheses before conducting the study also helps control Type I error.
 
-# Lecture
+## Lecture
 
 {{< video https://www.youtube.com/embed/8UDpTwXoINU >}}
 
-# Tutorial
+## Tutorial
 
 ```{r}
 #| echo = FALSE
@@ -61,7 +61,7 @@ hangtime <- abs(hangtime)
 chalk <- data.frame(condition = factor(condition, levels = c("nothing", "t-shirt", "chalk ball", "chalk powder", "liquid chalk")), hangtime = hangtime)
 ```
 
-## Group Means
+### Group Means
 
 In this tutorial, you will learn to use the general linear model to estimate means and to test the difference between two group means, the difference between individual group means and the overall mean, and between groups of means.
 
@@ -167,7 +167,7 @@ How can we interpret this coefficient?
 
 `r longmcq(c(answer = "The difference between the mean of the singing group and the mean of the stories group.", "The mean of the stories group.")[sample.int(2)])` 
 
-## More Dummies
+### More Dummies
 
 As we've previously established, dummy variables allow us to test the significance of mean differences between one reference group and all other groups.
 
@@ -217,7 +217,7 @@ You can use this technique any time you want to test the significance of the dif
 
 Note that, in the first assignment, we used a different set of dummy variables than in the second assignment. This means that you can always use different sets of dummy variables when want to compare against multiple reference groups.
 
-## Estimating group means
+### Estimating group means
 
 In the first assignment, we computed the group means. But remember that the ANOVA model allows us to estimate them using the general linear model. In this assignment, we will do so by hand. After the previous assignment, you should have five dummy variables to represent the five groups of `behavior`.
 
@@ -268,7 +268,7 @@ Is the difference significant? `r mcq(c("Yes", answer = "No"))`
 
 You can use regression without an intercept any time you wish to estimate *all* group means in a single analysis and/or test the group means against specific hypothesized values.
 
-## Comparing to Overall Mean
+### Comparing to Overall Mean
 
 Until now, we've represented levels of a categorical variable using *dummy variables* with values 0 or 1.
 
@@ -357,7 +357,7 @@ Using the coefficients table, calculate the mean of the jokes group. What value 
 
 This should be identical to the mean you observed in the previous assignment (using regression to estimate means), and in the first assignment (just computing the means).
 
-## Comparing Groups of Means
+### Comparing Groups of Means
 
 Extending the methods above, it is also possible to compare *groups* of means.
 For example, we might wonder whether negative behaviors (rushing and insulting) differ significantly from positive behaviors (stories, jokes, and singing).
@@ -366,7 +366,7 @@ This approach builds upon the logic of effects coding, where the weights for the
 
 We are going to perform several steps, as explained in the lecture.
 
-### Step 1: Plan Contrasts
+#### Step 1: Plan Contrasts
 
 Keep in mind these rules:
 
@@ -394,7 +394,7 @@ In this case, we only care about C1; we created C2, C3 and C4 to ensure that eve
 
 C2 compares the two negative behaviors; C3 compares stories against jokes and singing. C4 compares jokes and singing.
 
-### Step 2: Account for Group Size
+#### Step 2: Account for Group Size
 
 Now, we have to account for the relative sample sizes of these groups to ensure that we can interpret the coefficients as the difference between the means of those combinations of groups.
 
@@ -411,7 +411,7 @@ making jokes | -$\frac{2}{3}$ | 0 | -13/(11+13) | 1
 singing | -$\frac{2}{3}$ | 0 | -11/(11+13) | -1
 
 
-### Step 3: Do Matrix Algebra
+#### Step 3: Do Matrix Algebra
 
 Enter the complete matrix into a spreadsheet program.
 Add one column before the contrasts with an intercept for each group, equal to $1/k$.
@@ -445,7 +445,7 @@ EXECUTE.
 
 What does the final contrast encode? `r mcq(c(answer = "joke versus singing", "story vs singing",  "positive versus negative", "all levels")[sample.int(4)])`
 
-## Run the Analysis
+### Run the Analysis
 
 Create the indicator variables and run the regression analysis.
 
@@ -453,7 +453,7 @@ What is the mean difference in feeling between rushing and insulting behaviors? 
 
 Which effects are significant? `r mcq(c(answer = "story V jokes, singing", "all contrasts", "positive V negative behaviors", "rushing V insulting")[sample.int(4)])`
 
-## Adjusting for Multiple Comparisons
+### Adjusting for Multiple Comparisons
 
 In these assignments, we have been conducting many tests.
 You have learned that the significance level $\alpha$ indicates the probability of drawing a false-positive conclusion (Type I error).
@@ -469,7 +469,7 @@ And if we perform 10 tests? `r fitb(.4, num = T, tol = .01)`
 
 If this makes you uncomfortable - you're not alone! People often seek to maintain a low risk of drawing any false-positive conclusions, and we can do so simply by lowering $\alpha$.
 
-### Bonferroni correction
+#### Bonferroni correction
 
 Bonferroni proposed a simple correction of $\alpha = \alpha_{EW}/m$, where $\alpha_{EW}$ is the desired experiment-wise Type I error rate (e.g., .05), and $m$ is the number of tests.
 
@@ -477,7 +477,7 @@ What alpha level would you use per test if you want to achieve an experiment-wis
 
 The Bonferroni correction is quite conservative; in other words - although Bonferroni helps you avoid false-positive conclusions, it becomes much harder to detect true effects.
 
-## Compare All Groups
+### Compare All Groups
 
 Through the ANOVA interface, you can compare all groups to one another. This is equivalent to repeating a regression analysis multiple times, making each category the reference category in turn.
 

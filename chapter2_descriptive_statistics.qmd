@@ -32,13 +32,13 @@ Descriptive statistics are almost always computed when data are collected, for a
     + What is the most common major in my classroom?
     + Based on data collected from all inhabitants of the Netherlands (i.e.: a census, not a sample), what is the average income?
 
-## Measures of Central Tendency {#sec-central}
+### Measures of Central Tendency {#sec-central}
 
 Measures of central tendency are statistics that try to capture the "most common" value in a sample.
 The most common measure of central tendency is the "average", which statisticians would call the "mean".
 All measures of central tendency summarize the distribution of values of one particular variable as **one representative number**.
 
-### Mean: the "average" value
+#### Mean: the "average" value
 
 The most common measure of central tendency is the mean (or average).
 It is computed by adding all observed scores, and dividing that total by the number of observations.
@@ -96,7 +96,7 @@ figure
 ```
 
 
-### Median: the middle milestone
+#### Median: the middle milestone
 
 If you were to order all scores of your variable from lowest to highest, then the median value is the value that splits your sample in half:
 half of the participants score lower than this value, and half score higher.
@@ -142,7 +142,7 @@ figure <- ggarrange(p1, p2, p3, p4,
 figure
 ```
 
-### Mode: the most common value
+#### Mode: the most common value
 
 The mode is the most common value in a sample.
 We can calculate or find it by creating a frequency table, tabulating how often each score is observed in the sample, and then picking the score that occurs most frequently.
@@ -170,7 +170,7 @@ However, it would be perfectly reasonable for me to say that the mode grade obta
 Visually, the location of the mode is the same as the location of the median in plots a, b, and d in Figure @fig-medians.
 Plot c does not have a mode; no score is more common than any other score.
 
-## Choosing a Measure of Central Tendency
+### Choosing a Measure of Central Tendency
 
 Which measure to choose depends, in part, on the measurement level of the variable.
 
@@ -178,7 +178,7 @@ Which measure to choose depends, in part, on the measurement level of the variab
 * **Ordinal:** Mode; if you calculate the mean or median, that means you assume that the distances between all categories are equal (i.e., you're treating your ordinal variable as interval).
 * **Interval/Ratio:** Mode (but: it is rare for multiple interval/ratio scores to have identical values, unless they are integer), mean, and median
 
-## Measures of Dispersion {#sec-variability}
+### Measures of Dispersion {#sec-variability}
 
 
 Measures of central tendency tell us what is a typical score;
@@ -187,7 +187,7 @@ Dispersion simply means variability, so from now on, we will use this term.
 
 Here are several measures of variability:
 
-### Range: full span
+#### Range: full span
 
 The range is the distance from the smallest to the largest value.
 You calculate it by subtracting the smallest value from the largest;
@@ -202,7 +202,7 @@ Sometimes, the range is also reported as an interval, $[1, 5]$, or as minimum an
 The range is an intuitive metric, but it is unstable because its value is fully determined by just two observations (the lowest and highest).
 The variability of all of the other observations does not affect it.
 
-### Sum of Squared Distances to the Mean
+#### Sum of Squared Distances to the Mean
 
 A metric of variability that does take all observations into account is the sum of squared distances to the mean - or "sum of squares".
 
@@ -233,7 +233,7 @@ ggplot(df, aes(x = Deviation, y = Squared)) + geom_point() + geom_line() + scale
 ```
 
 
-### Variance: mean squared distance
+#### Variance: mean squared distance
 
 One way to make the sum of squares more interpretable is to divide it by the number of observations.
 This tells us how far away each observation is from the sample mean, on average.
@@ -258,7 +258,7 @@ We do this to account for the fact that we don't know the exact value of the pop
 If we just assume that the sample mean is a perfect representation of the population mean, we will systematically under-estimate the variance.
 By dividing by $n-1$, we get a slightly larger variance estimate, adjusted for our uncertainty about the value of the population mean.
 
-### Standard Deviation
+#### Standard Deviation
 
 One disadvantage of the variance is that it is still on the squared scale we obtained by squaring the distances.
 So, if your variable measures age in years, than the variance of age is expressed in years squared.
@@ -276,7 +276,7 @@ So, intuitively it is fine to think of the standard deviation as the "average" d
 Imagine I tell you that, in one class, the average grade is a 5, with a standard deviation of .5. You would know that most students scored close to a 5, and many of them failed the course. If I told you that the average grade is 5 with a standard deviation of 2, you would know that scores are much more spread out, and a large portion of the students must have passed the course as well.
 
 
-## Effects of Transformations & Outliers {#sec-transform}
+### Effects of Transformations & Outliers {#sec-transform}
 
 | Transformation            | The **mean**... | The **SD**... |
 |---------------------------|---------------------------------|----------------------------|
@@ -286,20 +286,20 @@ Imagine I tell you that, in one class, the average grade is a 5, with a standard
 
 *Example*: Changing units (e.g., converting centimeters to inches) would rescale both the mean and SD.
 
-## Why Descriptives Matter {#sec-bridge}
+### Why Descriptives Matter {#sec-bridge}
 
 * **Data cleaning**: Outliers leap out when you know the usual range.  
 * **Analysis choices**: Skewed or heavy-tailed distributions may call for robust or non-parametric methods.  
 * **Transparency**: Readers can judge your results only if they see the data’s headline features.  
 * **Communication**: "Participants averaged *8.9 hours of screen time per day* (SD = 1 hr)" paints an instant picture.
 
-## Descriptive VS Inferential Statistics
+### Descriptive VS Inferential Statistics
 
 Descriptive statistics describe sample properties, while inferential statistics (which are covered in later chapters) give us a best guess for the corresponding population parameter.
 It is important to realize that some descriptive statistics are *calculated in the same way*, or very similar, as inferential statistics.
 The distinctive feature of descriptive statistics is how they are used: use them to describe the data observed in a sample, and not to make claims about the larger population.
 
-## Context of Discovery VS Justification
+### Context of Discovery VS Justification
 
 ```{r fig-ecwagenmakers, echo = FALSE, fig.cap="An interpretation of De Groot’s empirical cycle, by Wagenmakers, Dutilh, & Sarafoglou, 2018. CC-BY: Artwork by Viktor Beekman, concept by Eric-Jan Wagenmakers"}
 knitr::include_graphics("images/creativity_verification.jpg")
@@ -346,11 +346,11 @@ For an example of how preregistered hypothesis tests can be combined with rigoro
 <!-- * a measure of how far typical scores wander from that value (noise). -->
 
 
-# Lecture 
+## Lecture 
 
 {{< video https://www.youtube.com/embed/zkEQmYjBHfE?si=DsDyXBztPmpgWTVQ >}}
 
-# Formative Test
+## Formative Test
 
 A formative test helps you gauge how well you’ve grasped the ideas and calculations from **Chapter 2 – Descriptive Statistics**. Try the quiz after working through the lecture slides but **before** our live meeting, so we can focus on any topics that still feel wobbly. If you miss a question you’ll see a hint that points you back to the relevant slide or worked example.
 
@@ -358,12 +358,12 @@ A formative test helps you gauge how well you’ve grasped the ideas and calcula
 add_mcs("ch2_formativ.csv")
 ```
 
-# Tutorial
+## Tutorial
 
 
-## Descriptive Statistics
+### Descriptive Statistics
 
-### Step 1
+#### Step 1
 
 As explained before, the first step in any statistical analysis involves **inspection of the data**. In the previous assignment we looked at graphical summaries.
 
@@ -372,7 +372,7 @@ This assignment shows you how to explore data using **descriptive statistics**�
 Use the data file [`stressLAS.sav`](data/stressLAS.sav), as in the previous chapter.
 
 
-### Step 2 – Descriptives for Key Variables
+#### Step 2 – Descriptives for Key Variables
 
 We will first examine the descriptive statistics for **Optimism, Life Satisfaction,** and **Negative Emotions**.
 
@@ -385,7 +385,7 @@ Compute descriptive statistics as follows:
 SPSS opens a new **Output** window with a table of descriptives for the selected variables.
 
 
-### Step 3 – Frequency Tables
+#### Step 3 – Frequency Tables
 
 In the previous step we computed the average value and standard deviations. However, for nominal and ordinal variables, the average value is meaningless. To explore nominal and ordinal variables we may produce **frequency tables**. A frequency table shows the observed percentage for each level of the variable.
 
@@ -400,7 +400,7 @@ SPSS now adds a table with the frequency distributions of the selected variables
 *Note:* SPSS reports **Percent** and **Valid Percent**. These differ only when missing values are present (none in this dataset).
 
 
-#### Extra – Spotting Multimodality {.smaller}
+##### Extra – Spotting Multimodality {.smaller}
 
 Sometimes a single mean or median masks sub-groups.
 
@@ -426,7 +426,7 @@ If you notice **two peaks**, color the bars by **Relation** (single vs. relation
 <!-- satis:   1–50 -->
 <!-- negemo:  1–50 -->
 
-## Quiz 1 – Basic Descriptives
+### Quiz 1 – Basic Descriptives
 
 ::: {.webex-check .webex-box}
 
@@ -446,7 +446,7 @@ What percentage of participants is in a relationship? `r fitb(47.9, num = TRUE, 
 :::
 
 
-### Weighted Mean {.smaller}
+#### Weighted Mean {.smaller}
 
 Suppose Class A (*n* = 12, mean = 6) and Class B (*n* = 8, mean = 7) are merged.  
 SPSS effectively multiplies each mean by its *n*, sums those products, and divides by the **total** 20 students, yielding **6.4**.
@@ -457,7 +457,7 @@ SPSS effectively multiplies each mean by its *n*, sums those products, and divid
 - Run *Analyze > Descriptive Statistics > Descriptives* on the combined score column.
 
 
-### Step 4 – Finding Erroneous Values
+#### Step 4 – Finding Erroneous Values
 
 One reason to inspect descriptives first is to spot **erroneous values** (e.g., age 511 instead of 51).
 
@@ -471,7 +471,7 @@ At this stage we remove entire cases; later you’ll learn gentler missing-data 
 
 
 
-### Step 5 – Group Comparison with Split File
+#### Step 5 – Group Comparison with Split File
 
 Research question: *“Are non-smokers more satisfied with life than smokers?”*
 
@@ -480,7 +480,7 @@ Research question: *“Are non-smokers more satisfied with life than smokers?”
 
 SPSS now outputs separate means for smokers and non-smokers.
 
-## Quiz 2 – Group Means
+### Quiz 2 – Group Means
 
 ::: {.webex-check .webex-box}
 
@@ -497,7 +497,7 @@ Does this difference necessarily hold in the population? `r mcq(c("answer" = "Ca
 :::
 
 
-### Step 6 – Quick Check: How Recoding Affects Spread {.smaller}
+#### Step 6 – Quick Check: How Recoding Affects Spread {.smaller}
 
 *Add 10 points* to every Life-Satisfaction score:
 
@@ -517,11 +517,11 @@ Run Descriptives on both variables:
 
 
 
-## More Descriptive Statistics
+### More Descriptive Statistics
 
 Describing the data is an essential first step in any research context.
 
-### Central Tendency by Hand
+#### Central Tendency by Hand
 
 Grades: 6  3  4  6  7  6  8  9  10  9
 
@@ -533,7 +533,7 @@ Compute **mean, median, mode** by hand.
 - Mean = sum / *n*  
 `r unhide()`
 
-#### Quiz 3 – Hand Computation
+##### Quiz 3 – Hand Computation
 
 ::: {.webex-check .webex-box}
 
@@ -546,7 +546,7 @@ Mode `r fitb(6, num = TRUE)`
 :::
 
 
-### Variation by Hand
+#### Variation by Hand
 
 Grades: 2  7  6  7  8  9
 
@@ -560,7 +560,7 @@ SD = √ variance
 > **Why divide by *n – 1*?**  
 > After the mean is fixed, only *n – 1* deviations are free to vary, so dividing by *n – 1* keeps the sample variance unbiased.
 
-#### Quiz 4 – Hand Computation
+##### Quiz 4 – Hand Computation
 
 ::: {.webex-check .webex-box}
 
@@ -571,7 +571,7 @@ Standard Deviation `r fitb(2.43, num = TRUE, tol = .1)`
 :::
 
 
-### Verifying in SPSS
+#### Verifying in SPSS
 
 Enter the six grades, name the variable, then:
 

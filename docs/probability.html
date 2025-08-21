@@ -2,10 +2,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.57">
+<meta name="generator" content="quarto-1.7.33">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="description" content="Book Description">
-<title>4&nbsp; Probability Distributions – Statistics 1 and 2</title>
+<title>6&nbsp; Probability Distributions – Statistics 1 and 2</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -29,17 +29,20 @@ ul.task-list li input[type="checkbox"] {
 <link href="./samplingdistribution.html" rel="next">
 <link href="./Chapter3_Correlation.html" rel="prev">
 <link href="./images/logos/favicon.png" rel="icon" type="image/png">
-<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-c2894b54f4b00a27b9651b11dcf5df54.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-7530c408590d20eba92ebedbb433c75c.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-c2894b54f4b00a27b9651b11dcf5df54.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark"><script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap-e5f62320892960dc23dd0786c8482584.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-11ad583e60b2cd5ac7d46970bf1aa65a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-e5f62320892960dc23dd0786c8482584.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -97,14 +100,176 @@ window.Quarto = {
 <link rel="stylesheet" href="include/style.css">
 <link rel="stylesheet" href="include/webex.css">
 </head>
-<body class="nav-sidebar floating">
+<body class="nav-sidebar floating quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./probability.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Probability Distributions</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./probability.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Probability Distributions</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -156,145 +321,151 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Overview</span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Overview</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./statistics1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Statistics 1</span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Statistics 1</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./introduction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to Statistics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Introduction to Statistics</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./chapter2_descriptive_statistics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Descriptive Statistics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Descriptive Statistics</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Chapter3_Correlation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Bivariate Descriptive Statistics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Bivariate Descriptive Statistics</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./probability.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Probability Distributions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Probability Distributions</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./samplingdistribution.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">The Sampling Distribution</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">The Sampling Distribution</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Week_4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Philosophy of Science</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Philosophy of Science</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./testing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Hypothesis Testing</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Hypothesis Testing</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./glm1_regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">GLM-I: Linear Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">GLM-I: Linear Regression</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./glm2_sum_squares.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">GLM-II: Sums of Squares</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">GLM-II: Sums of Squares</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glm_assumptions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Assumptions</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./glm3binary.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">GLM-III: Binary Predictors</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">GLM-III: Binary Predictors</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./glm4anova.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">GLM-IV: ANOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">GLM-IV: ANOVA</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./glm5multiple.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">GLM-V: Multiple regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">GLM-V: Multiple regression</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./glm6nested.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">GLM-VI: Nested models</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">GLM-VI: Nested models</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./glm7interaction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">GLM-VII: Interaction</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">GLM-VII: Interaction</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./logistic.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">GLM VIII - Logistic Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">GLM VIII - Logistic Regression</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./glm_contrasts.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">GLM: Contrasts</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">GLM: Contrasts</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./factorial.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">GLM: Factorial ANOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">GLM: Factorial ANOVA</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ancova.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">GLM: ANCOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">GLM: ANCOVA</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./rmanova.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">GLM: Repeated Measures ANOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">GLM: Repeated Measures ANOVA</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./reliability_validity.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Reliability and Validity</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Reliability and Validity</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./data_reduction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Dimension Reduction</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Dimension Reduction</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./confint.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">BE2 - Confidence Intervals</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">BE2 - Confidence Intervals</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -309,25 +480,25 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Data for Portfolio</span></a>
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Data for Portfolio</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./probability_tables.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Z-table</span></span></a>
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Z-table</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./formula_sheet2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Formula sheet</span></span></a>
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Formula sheet</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">References</span></a>
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">References</span></span></a>
   </div>
 </li>
       </ul>
@@ -340,68 +511,23 @@ window.Quarto = {
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#lecture" id="toc-lecture" class="nav-link active" data-scroll-target="#lecture"><span class="header-section-number">5</span> Lecture</a></li>
+<li><a href="#lecture" id="toc-lecture" class="nav-link active" data-scroll-target="#lecture"><span class="header-section-number">6.1</span> Lecture</a></li>
+  <li><a href="#formative-test" id="toc-formative-test" class="nav-link" data-scroll-target="#formative-test"><span class="header-section-number">6.2</span> Formative Test</a></li>
   <li>
-<a href="#formative-test" id="toc-formative-test" class="nav-link" data-scroll-target="#formative-test"><span class="header-section-number">6</span> Formative Test</a>
+<a href="#tutorial" id="toc-tutorial" class="nav-link" data-scroll-target="#tutorial"><span class="header-section-number">6.3</span> Tutorial</a>
   <ul class="collapse">
-<li><a href="#popcorn-consumption-table" id="toc-popcorn-consumption-table" class="nav-link" data-scroll-target="#popcorn-consumption-table"><span class="header-section-number">6.0.1</span> Popcorn consumption Table</a></li>
-  </ul>
-</li>
-  <li>
-<a href="#tutorial" id="toc-tutorial" class="nav-link" data-scroll-target="#tutorial"><span class="header-section-number">7</span> Tutorial</a>
-  <ul class="collapse">
-<li>
-<a href="#normal-distribution" id="toc-normal-distribution" class="nav-link" data-scroll-target="#normal-distribution"><span class="header-section-number">7.1</span> Normal Distribution</a>
-  <ul class="collapse">
-<li><a href="#quiz" id="toc-quiz" class="nav-link" data-scroll-target="#quiz"><span class="header-section-number">7.1.1</span> Quiz</a></li>
-  <li><a href="#the-empirical-rules" id="toc-the-empirical-rules" class="nav-link" data-scroll-target="#the-empirical-rules"><span class="header-section-number">7.1.2</span> “The Empirical Rules”</a></li>
-  <li><a href="#quiz-1" id="toc-quiz-1" class="nav-link" data-scroll-target="#quiz-1"><span class="header-section-number">7.1.3</span> Quiz</a></li>
-  <li><a href="#calculating-probabilities" id="toc-calculating-probabilities" class="nav-link" data-scroll-target="#calculating-probabilities"><span class="header-section-number">7.1.4</span> Calculating probabilities</a></li>
-  <li><a href="#quiz-2" id="toc-quiz-2" class="nav-link" data-scroll-target="#quiz-2"><span class="header-section-number">7.1.5</span> Quiz</a></li>
-  </ul>
-</li>
-  <li>
-<a href="#missing-values" id="toc-missing-values" class="nav-link" data-scroll-target="#missing-values"><span class="header-section-number">7.2</span> Missing Values</a>
-  <ul class="collapse">
-<li><a href="#quiz-3" id="toc-quiz-3" class="nav-link" data-scroll-target="#quiz-3"><span class="header-section-number">7.2.1</span> Quiz</a></li>
-  <li><a href="#recoding-missing-values" id="toc-recoding-missing-values" class="nav-link" data-scroll-target="#recoding-missing-values"><span class="header-section-number">7.2.2</span> Recoding missing values</a></li>
-  <li><a href="#recode-into-same-variables" id="toc-recode-into-same-variables" class="nav-link" data-scroll-target="#recode-into-same-variables"><span class="header-section-number">7.2.3</span> Recode into Same Variables</a></li>
-  <li><a href="#quiz-4" id="toc-quiz-4" class="nav-link" data-scroll-target="#quiz-4"><span class="header-section-number">7.2.4</span> Quiz</a></li>
-  </ul>
-</li>
-  <li>
-<a href="#select-cases-and-split-file" id="toc-select-cases-and-split-file" class="nav-link" data-scroll-target="#select-cases-and-split-file"><span class="header-section-number">7.3</span> Select Cases and Split File</a>
-  <ul class="collapse">
-<li><a href="#selecting-cases" id="toc-selecting-cases" class="nav-link" data-scroll-target="#selecting-cases"><span class="header-section-number">7.3.1</span> Selecting Cases</a></li>
-  <li><a href="#quiz-5" id="toc-quiz-5" class="nav-link" data-scroll-target="#quiz-5"><span class="header-section-number">7.3.2</span> Quiz</a></li>
-  <li><a href="#split-file" id="toc-split-file" class="nav-link" data-scroll-target="#split-file"><span class="header-section-number">7.3.3</span> Split File</a></li>
-  <li><a href="#quiz-6" id="toc-quiz-6" class="nav-link" data-scroll-target="#quiz-6"><span class="header-section-number">7.3.4</span> Quiz</a></li>
-  </ul>
-</li>
-  <li>
-<a href="#recode-and-compute" id="toc-recode-and-compute" class="nav-link" data-scroll-target="#recode-and-compute"><span class="header-section-number">7.4</span> Recode and Compute</a>
-  <ul class="collapse">
-<li><a href="#reverse-scoring-contra-indicative-items" id="toc-reverse-scoring-contra-indicative-items" class="nav-link" data-scroll-target="#reverse-scoring-contra-indicative-items"><span class="header-section-number">7.4.1</span> Reverse Scoring Contra Indicative Items</a></li>
-  </ul>
-</li>
-  <li>
-<a href="#using-syntax" id="toc-using-syntax" class="nav-link" data-scroll-target="#using-syntax"><span class="header-section-number">7.5</span> Using Syntax</a>
-  <ul class="collapse">
-<li><a href="#why-syntax" id="toc-why-syntax" class="nav-link" data-scroll-target="#why-syntax"><span class="header-section-number">7.5.1</span> Why syntax?</a></li>
-  <li><a href="#help" id="toc-help" class="nav-link" data-scroll-target="#help"><span class="header-section-number">7.5.2</span> Help!</a></li>
-  <li><a href="#how-to-use-syntax" id="toc-how-to-use-syntax" class="nav-link" data-scroll-target="#how-to-use-syntax"><span class="header-section-number">7.5.3</span> How to use syntax</a></li>
-  <li><a href="#commenting" id="toc-commenting" class="nav-link" data-scroll-target="#commenting"><span class="header-section-number">7.5.4</span> Commenting</a></li>
-  <li><a href="#compute-variable" id="toc-compute-variable" class="nav-link" data-scroll-target="#compute-variable"><span class="header-section-number">7.5.5</span> Compute Variable</a></li>
-  <li><a href="#quiz-7" id="toc-quiz-7" class="nav-link" data-scroll-target="#quiz-7"><span class="header-section-number">7.5.6</span> Quiz</a></li>
-  </ul>
-</li>
+<li><a href="#normal-distribution" id="toc-normal-distribution" class="nav-link" data-scroll-target="#normal-distribution"><span class="header-section-number">6.3.1</span> Normal Distribution</a></li>
+  <li><a href="#missing-values" id="toc-missing-values" class="nav-link" data-scroll-target="#missing-values"><span class="header-section-number">6.3.2</span> Missing Values</a></li>
+  <li><a href="#select-cases-and-split-file" id="toc-select-cases-and-split-file" class="nav-link" data-scroll-target="#select-cases-and-split-file"><span class="header-section-number">6.3.3</span> Select Cases and Split File</a></li>
+  <li><a href="#recode-and-compute" id="toc-recode-and-compute" class="nav-link" data-scroll-target="#recode-and-compute"><span class="header-section-number">6.3.4</span> Recode and Compute</a></li>
+  <li><a href="#using-syntax" id="toc-using-syntax" class="nav-link" data-scroll-target="#using-syntax"><span class="header-section-number">6.3.5</span> Using Syntax</a></li>
   </ul>
 </li>
   </ul></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
-<h1 class="title"><span id="sec-probability" class="quarto-section-identifier"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Probability Distributions</span></span></h1>
+<h1 class="title"><span id="sec-probability" class="quarto-section-identifier"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Probability Distributions</span></span></h1>
 </div>
 
 
@@ -426,50 +552,50 @@ window.Quarto = {
 <p>The <em>standard</em> normal distribution, also known as the Z-distribution, is a standardized version of the normal distribution, rescaled to have a mean of 0 and a standard deviation of 1. Standardizing normal distributions allows us to calculate probabilities more easily using standard normal distribution tables or calculators. We can then convert these probabilities back to the original units if needed.</p>
 <p>Probability distributions can be used as models to describe/approximate the distribution of real data. Behind the scenes, we do this any time we describe the distribution of scores on a variable using its mean and standard deviation. While we often assumpe that variables are normally distributed, that assumption is not always accurate. For example, depression symptoms do not follow a normal distribution: Most people score near-zero on depression symptoms, and few people have higher scores (but these are also not normally distributed). In such cases of violations of the assumption of normality, the mean and standard deviation are not very informative. You may use other descriptive statistics, consider different probability distributions (outside the scope of this course), or discuss the limitations of the assumption of normality.</p>
 <p>In conclusion, probability distributions provide a way to represent the probabilities associated with different outcomes of a random variable, whether discrete or continuous. By using probability distributions, we can report descriptive statistics, calculate probabilities, and make predictions about future observations.</p>
-<section id="lecture" class="level1" data-number="5"><h1 data-number="5">
-<span class="header-section-number">5</span> Lecture</h1>
+<section id="lecture" class="level2" data-number="6.1"><h2 data-number="6.1" class="anchored" data-anchor-id="lecture">
+<span class="header-section-number">6.1</span> Lecture</h2>
 <p><strong>VIDEO ERRATA: from 10:10 - 10:50 I talk about the probability of Being Dutch and Having a Tattoo, but I’m calculating the probability of Being Dutch and Not Having a Tattoo (I misread the column labels).</strong></p>
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/p9QWOXR4OT8" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
-</section><section id="formative-test" class="level1" data-number="6"><h1 data-number="6">
-<span class="header-section-number">6</span> Formative Test</h1>
+</section><section id="formative-test" class="level2" data-number="6.2"><h2 data-number="6.2" class="anchored" data-anchor-id="formative-test">
+<span class="header-section-number">6.2</span> Formative Test</h2>
 <p>A formative test helps you assess your progress in the course, and helps you address any blind spots in your understanding of the material. If you get a question wrong, you will receive a hint on how to improve your understanding of the material.</p>
 <p>Complete the formative test ideally after you’ve seen the lecture, but before the lecture meeting in which we can discuss any topics that need more attention</p>
 <div class="cell" data-layout-align="center">
 <div class="webex-check webex-box">
 <p><strong>Question 1</strong></p>
 An HR advisor is looking for new employees for LEGO. He thinks it is important for them to be creative. Creativity is normally distributed in the population, with a mean of 180 and a standard deviation of 25. A higher score indicates higher creativity. The advisor only wants to select applicants that belong to the 0.015 proportion of most creative people. What cut-off/boundary score for creativity should the HR advisor use?
-<div id="radio_YGZLLRDBLF" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_YGZLLRDBLF" value=""><span>206.13</span></label><label><input type="radio" autocomplete="off" name="radio_YGZLLRDBLF" value="answer"><span>234.25</span></label><label><input type="radio" autocomplete="off" name="radio_YGZLLRDBLF" value=""><span>180.38</span></label><label><input type="radio" autocomplete="off" name="radio_YGZLLRDBLF" value=""><span>125.75</span></label>
+<div id="radio_MIJGEJHTUJ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_MIJGEJHTUJ" value=""><span>180.38</span></label><label><input type="radio" autocomplete="off" name="radio_MIJGEJHTUJ" value=""><span>125.75</span></label><label><input type="radio" autocomplete="off" name="radio_MIJGEJHTUJ" value="answer"><span>234.25</span></label><label><input type="radio" autocomplete="off" name="radio_MIJGEJHTUJ" value=""><span>206.13</span></label>
 </div>
 <p><strong>Question 2</strong></p>
 What is probability?
-<div id="radio_JZZAIMKWYI" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_JZZAIMKWYI" value=""><span>The proportion of times an outcome was observed in a sample.</span></label><label><input type="radio" autocomplete="off" name="radio_JZZAIMKWYI" value="answer"><span>The proportion of times an outcome would be observed in a random experiment if it were repeated many times.</span></label><label><input type="radio" autocomplete="off" name="radio_JZZAIMKWYI" value=""><span>A measure of association between two categorical variables.</span></label><label><input type="radio" autocomplete="off" name="radio_JZZAIMKWYI" value=""><span>The subjective chance of observing a specific outcome in a single random experiment.</span></label>
+<div id="radio_HTLPDQQAQO" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_HTLPDQQAQO" value=""><span>A measure of association between two categorical variables.</span></label><label><input type="radio" autocomplete="off" name="radio_HTLPDQQAQO" value=""><span>The proportion of times an outcome was observed in a sample.</span></label><label><input type="radio" autocomplete="off" name="radio_HTLPDQQAQO" value="answer"><span>The proportion of times an outcome would be observed in a random experiment if it were repeated many times.</span></label><label><input type="radio" autocomplete="off" name="radio_HTLPDQQAQO" value=""><span>The subjective chance of observing a specific outcome in a single random experiment.</span></label>
 </div>
 <p><strong>Question 3</strong></p>
 What is a random experiment?
-<div id="radio_JGLKRWHEUC" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_JGLKRWHEUC" value=""><span>An example of the experimental method where people are assigned to a treatment- or control group.</span></label><label><input type="radio" autocomplete="off" name="radio_JGLKRWHEUC" value=""><span>Any process with multiple potential outcomes where the probability of each outcome is unknown.</span></label><label><input type="radio" autocomplete="off" name="radio_JGLKRWHEUC" value=""><span>A naturally occurring experiment; for example comparing participants who grow up in an area where the drinking water is rich in a particular mineral with control participants from another area.</span></label><label><input type="radio" autocomplete="off" name="radio_JGLKRWHEUC" value="answer"><span>A process with multiple potential outcomes that could be repeated under similar conditions.</span></label>
+<div id="radio_KUSMRDDCWL" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_KUSMRDDCWL" value=""><span>Any process with multiple potential outcomes where the probability of each outcome is unknown.</span></label><label><input type="radio" autocomplete="off" name="radio_KUSMRDDCWL" value=""><span>A naturally occurring experiment; for example comparing participants who grow up in an area where the drinking water is rich in a particular mineral with control participants from another area.</span></label><label><input type="radio" autocomplete="off" name="radio_KUSMRDDCWL" value="answer"><span>A process with multiple potential outcomes that could be repeated under similar conditions.</span></label><label><input type="radio" autocomplete="off" name="radio_KUSMRDDCWL" value=""><span>An example of the experimental method where people are assigned to a treatment- or control group.</span></label>
 </div>
 <p><strong>Question 4</strong></p>
 What are discrete random variables?
-<div id="radio_LPLCKPLYAN" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_LPLCKPLYAN" value=""><span>Variables with an infinite number of possible outcomes.</span></label><label><input type="radio" autocomplete="off" name="radio_LPLCKPLYAN" value=""><span>Variables with a probability distribution.</span></label><label><input type="radio" autocomplete="off" name="radio_LPLCKPLYAN" value="answer"><span>Variables with a finite or countable number of possible outcomes.</span></label><label><input type="radio" autocomplete="off" name="radio_LPLCKPLYAN" value=""><span>Variables with a normal distribution.</span></label>
+<div id="radio_UQXZQYECIY" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_UQXZQYECIY" value=""><span>Variables with a normal distribution.</span></label><label><input type="radio" autocomplete="off" name="radio_UQXZQYECIY" value="answer"><span>Variables with a finite or countable number of possible outcomes.</span></label><label><input type="radio" autocomplete="off" name="radio_UQXZQYECIY" value=""><span>Variables with a probability distribution.</span></label><label><input type="radio" autocomplete="off" name="radio_UQXZQYECIY" value=""><span>Variables with an infinite number of possible outcomes.</span></label>
 </div>
 <p><strong>Question 5</strong></p>
 What information is contained in a frequency distribution?
-<div id="radio_OPMFFZCSKF" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_OPMFFZCSKF" value="answer"><span>A summary of the observed counts of discrete outcomes in a sample.</span></label><label><input type="radio" autocomplete="off" name="radio_OPMFFZCSKF" value=""><span>A measure of association between two categorical variables.</span></label><label><input type="radio" autocomplete="off" name="radio_OPMFFZCSKF" value=""><span>A summary of the observed counts of discrete outcomes in the population.</span></label><label><input type="radio" autocomplete="off" name="radio_OPMFFZCSKF" value=""><span>A summary of observed probabilities of discrete outcomes in a sample.</span></label>
+<div id="radio_XMYEHGXUOE" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_XMYEHGXUOE" value=""><span>A summary of the observed counts of discrete outcomes in the population.</span></label><label><input type="radio" autocomplete="off" name="radio_XMYEHGXUOE" value=""><span>A summary of observed probabilities of discrete outcomes in a sample.</span></label><label><input type="radio" autocomplete="off" name="radio_XMYEHGXUOE" value=""><span>A measure of association between two categorical variables.</span></label><label><input type="radio" autocomplete="off" name="radio_XMYEHGXUOE" value="answer"><span>A summary of the observed counts of discrete outcomes in a sample.</span></label>
 </div>
 <p><strong>Question 6</strong></p>
 What is the standard normal distribution?
-<div id="radio_JSRXTYMNVC" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_JSRXTYMNVC" value=""><span>Any continuous distribution with infinite possible outcomes.</span></label><label><input type="radio" autocomplete="off" name="radio_JSRXTYMNVC" value=""><span>A probability distribution where the total probability sums to 1.</span></label><label><input type="radio" autocomplete="off" name="radio_JSRXTYMNVC" value=""><span>A contingency table summarizing two categorical variables.</span></label><label><input type="radio" autocomplete="off" name="radio_JSRXTYMNVC" value="answer"><span>A standardized version of the normal distribution with a mean of 0 and a standard deviation of 1.</span></label>
+<div id="radio_OLLBJHLAUG" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_OLLBJHLAUG" value="answer"><span>A standardized version of the normal distribution with a mean of 0 and a standard deviation of 1.</span></label><label><input type="radio" autocomplete="off" name="radio_OLLBJHLAUG" value=""><span>A contingency table summarizing two categorical variables.</span></label><label><input type="radio" autocomplete="off" name="radio_OLLBJHLAUG" value=""><span>A probability distribution where the total probability sums to 1.</span></label><label><input type="radio" autocomplete="off" name="radio_OLLBJHLAUG" value=""><span>Any continuous distribution with infinite possible outcomes.</span></label>
 </div>
 <p><strong>Question 7</strong></p>
 A researcher is interested in the relationship between movie watched and popcorn consumption. She counts the number of people who consume popcorn during a movie, and whether they have watched Mean Girls or not. The results are presented in the table below this quiz. What is P(Popcorn|Mean Girls), rounded to 3 decimal places?
-<div id="radio_LREIYSYZMV" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_LREIYSYZMV" value=""><span>0.06</span></label><label><input type="radio" autocomplete="off" name="radio_LREIYSYZMV" value="answer"><span>0.63</span></label><label><input type="radio" autocomplete="off" name="radio_LREIYSYZMV" value=""><span>0.04</span></label><label><input type="radio" autocomplete="off" name="radio_LREIYSYZMV" value=""><span>0.08</span></label>
+<div id="radio_YQKFPSRZLZ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_YQKFPSRZLZ" value=""><span>0.08</span></label><label><input type="radio" autocomplete="off" name="radio_YQKFPSRZLZ" value=""><span>0.04</span></label><label><input type="radio" autocomplete="off" name="radio_YQKFPSRZLZ" value=""><span>0.06</span></label><label><input type="radio" autocomplete="off" name="radio_YQKFPSRZLZ" value="answer"><span>0.63</span></label>
 </div>
 </div>
 <div class="webex-solution">
@@ -492,8 +618,8 @@ Show explanations
 <p>The question is about the <em>conditional probability</em> of having popcorn given that (|) someone watched mean girls; divide the 151 pp who match this description by the total number of people who watched mean girls.</p>
 </div>
 </div>
-<section id="popcorn-consumption-table" class="level3" data-number="6.0.1"><h3 data-number="6.0.1" class="anchored" data-anchor-id="popcorn-consumption-table">
-<span class="header-section-number">6.0.1</span> Popcorn consumption Table</h3>
+<section id="popcorn-consumption-table" class="level4" data-number="6.2.0.1"><h4 data-number="6.2.0.1" class="anchored" data-anchor-id="popcorn-consumption-table">
+<span class="header-section-number">6.2.0.1</span> Popcorn consumption Table</h4>
 <table class="caption-top table">
 <thead><tr class="header">
 <th style="text-align: center;">&nbsp;</th>
@@ -532,10 +658,10 @@ Show explanations
 <td style="text-align: center;">4049</td>
 </tr>
 </tbody>
-</table></section></section><section id="tutorial" class="level1" data-number="7"><h1 data-number="7">
-<span class="header-section-number">7</span> Tutorial</h1>
-<section id="normal-distribution" class="level2" data-number="7.1"><h2 data-number="7.1" class="anchored" data-anchor-id="normal-distribution">
-<span class="header-section-number">7.1</span> Normal Distribution</h2>
+</table></section></section><section id="tutorial" class="level2" data-number="6.3"><h2 data-number="6.3" class="anchored" data-anchor-id="tutorial">
+<span class="header-section-number">6.3</span> Tutorial</h2>
+<section id="normal-distribution" class="level3" data-number="6.3.1"><h3 data-number="6.3.1" class="anchored" data-anchor-id="normal-distribution">
+<span class="header-section-number">6.3.1</span> Normal Distribution</h3>
 <p>In this assignment you will practice with the normal distribution.</p>
 <p>The normal distribution deserves special attention as it is commonly used in statistics for the social sciences. The normal distribution was already derived in the 18 century by DeMoivre, Adrian, and also Gauss*, and since then it played a central role in statistics. More importantly, many attributes in the social sciences are by close approximation normally distributed, as was first discovered by Quetelet. Hence, the normal distribution has great empirical relevance, which comes in handy for our research!</p>
 <ul>
@@ -582,15 +708,15 @@ Show explanations
 </table>
 <p>Inspection of the graphs of the bell-shape distributions shows that it is a symmetric distribution. We also see that the distributions differ in location (the point on the x-axis where it reaches its maximum) and the spread. In other words, the distribution is characterized by two parameters: the mean and standard deviation. The mean is denoted by the Greek letter <span class="math inline">\(\mu\)</span> (pronounced as “moo”) and standard deviation is denoted by the Greek letter <span class="math inline">\(\sigma\)</span> (pronounced as “sigma”).</p>
 <p>Compare the distributions and see how the parameters determine the location (mean) and spread (standard deviation).</p>
-<section id="quiz" class="level3" data-number="7.1.1"><h3 data-number="7.1.1" class="anchored" data-anchor-id="quiz">
-<span class="header-section-number">7.1.1</span> Quiz</h3>
+<section id="quiz" class="level4" data-number="6.3.1.1"><h4 data-number="6.3.1.1" class="anchored" data-anchor-id="quiz">
+<span class="header-section-number">6.3.1.1</span> Quiz</h4>
 <div class="webex-check webex-box">
 <p>Correctly complete the sentence below by filling in the gaps:</p>
 <p>Given the example “A student guesses the correct answer to 10 multiple choice questions with four answer categories each” the random experiment is <select class="webex-select"><option value="blank"></option>
-<option value="answer">guessing the correct answer</option>
-<option value="">the 4 answer categories</option>
+<option value="">the correct answer</option>
 <option value="">the number of correct answers</option>
-<option value="">the correct answer</option></select> and the random variable is <select class="webex-select"><option value="blank"></option>
+<option value="">the 4 answer categories</option>
+<option value="answer">guessing the correct answer</option></select> and the random variable is <select class="webex-select"><option value="blank"></option>
 <option value="">the 4 answer categories</option>
 <option value="">the correct answer</option>
 <option value="answer">the number of correct answers</option>
@@ -612,48 +738,48 @@ Show explanations
 <option value="answer">TRUE</option>
 <option value="NA">FALSE</option></select></p>
 <p>If the standard deviation (SD) increases, the distribution becomes <select class="webex-select"><option value="blank"></option>
-<option value="answer">wider</option>
-<option value="">narrower</option></select></p>
+<option value="">narrower</option>
+<option value="answer">wider</option></select></p>
 </div>
-</section><section id="the-empirical-rules" class="level3" data-number="7.1.2"><h3 data-number="7.1.2" class="anchored" data-anchor-id="the-empirical-rules">
-<span class="header-section-number">7.1.2</span> “The Empirical Rules”</h3>
+</section><section id="the-empirical-rules" class="level4" data-number="6.3.1.2"><h4 data-number="6.3.1.2" class="anchored" data-anchor-id="the-empirical-rules">
+<span class="header-section-number">6.3.1.2</span> “The Empirical Rules”</h4>
 <p>As a first step we may consider some practical rules for working with the normal distribution, the so called “empirical rules”. In particular, if a random variable is normally distributed the following empirical rules apply:</p>
 <p>68% of the values lie within one standard deviation from the mean. 95% of the values lie within two standard deviations from the mean.</p>
 <p>If we know that a variable is normally distributed, we can also compute probabilities of certain outcomes, so called events. For example, if we know that the scores on a test are normally distributed, we may want to know the probability that a randomly selected person has a score above a certain cut-off (i.e., satisfies a certain selection criterion).</p>
 <p>In the next few steps, you will practice on how to compute probabilities under the normal distribution. To do so, we have to be able to work with the standard normal distribution (Z-distribution) and accompanying tables.</p>
-</section><section id="quiz-1" class="level3" data-number="7.1.3"><h3 data-number="7.1.3" class="anchored" data-anchor-id="quiz-1">
-<span class="header-section-number">7.1.3</span> Quiz</h3>
+</section><section id="quiz-1" class="level4" data-number="6.3.1.3"><h4 data-number="6.3.1.3" class="anchored" data-anchor-id="quiz-1">
+<span class="header-section-number">6.3.1.3</span> Quiz</h4>
 <div class="webex-check webex-box">
 <p>Complete the following sentences:</p>
 <p>IQ scores are normally distributed with mean 100 and an SD of 15. This means that 95% of the persons in the population has an IQ in between <select class="webex-select"><option value="blank"></option>
-<option value="">55</option>
-<option value="">15</option>
 <option value="">85</option>
-<option value="answer">70</option></select> and <select class="webex-select"><option value="blank"></option>
+<option value="answer">70</option>
+<option value="">55</option>
+<option value="">15</option></select> and <select class="webex-select"><option value="blank"></option>
+<option value="">100</option>
 <option value="answer">130</option>
 <option value="">145</option>
-<option value="">100</option>
 <option value="">115</option></select>.</p>
 <p>Students loan after completing the bachelor is normally distributed with mean 1500 Euros and an SD of 150. This means that 68% of the students ends up with a loan between <select class="webex-select"><option value="blank"></option>
+<option value="">1200</option>
 <option value="answer">1350</option>
 <option value="">1485</option>
-<option value="">1000</option>
-<option value="">1200</option></select> and <select class="webex-select"><option value="blank"></option>
-<option value="">1800</option>
+<option value="">1000</option></select> and <select class="webex-select"><option value="blank"></option>
 <option value="">1450</option>
 <option value="">1515</option>
-<option value="answer">1650</option></select>.</p>
+<option value="answer">1650</option>
+<option value="">1800</option></select>.</p>
 <p>What is the mean of the standard normal distribution? <input class="webex-solveme nospaces" size="1" data-answer="[&quot;0&quot;]"></p>
 <p>What is the SD of the standard normal distribution? <input class="webex-solveme nospaces" size="1" data-answer="[&quot;1&quot;]"></p>
 </div>
-</section><section id="calculating-probabilities" class="level3" data-number="7.1.4"><h3 data-number="7.1.4" class="anchored" data-anchor-id="calculating-probabilities">
-<span class="header-section-number">7.1.4</span> Calculating probabilities</h3>
-<p>For the next series of exercises you need to use a Z-table or calculator (e.g., Excel, Google Sheets, R online, or the Z-table in this GitBook, <a href="probability_tables.html" class="quarto-xref"><span>Appendix A</span></a>).</p>
+</section><section id="calculating-probabilities" class="level4" data-number="6.3.1.4"><h4 data-number="6.3.1.4" class="anchored" data-anchor-id="calculating-probabilities">
+<span class="header-section-number">6.3.1.4</span> Calculating probabilities</h4>
+<p>For the next series of exercises you need to use a Z-table or calculator (e.g., Excel, Google Sheets, R online, or the Z-table in this GitBook, <a href="probability_tables.html" class="quarto-xref"><span>Appendix B</span></a>).</p>
 <p>We have seen that probabilities are related to the area under the curve. This means that for continuous variables we can only find the probability that the outcome falls within a certain interval. For example, the time to complete a task is more than 10 minutes; the IQ is in between 70 and 90.</p>
 <p>Note that there may be different ways to get to the correct answer.</p>
 <p>Numerical Examples</p>
-</section><section id="quiz-2" class="level3" data-number="7.1.5"><h3 data-number="7.1.5" class="anchored" data-anchor-id="quiz-2">
-<span class="header-section-number">7.1.5</span> Quiz</h3>
+</section><section id="quiz-2" class="level4" data-number="6.3.1.5"><h4 data-number="6.3.1.5" class="anchored" data-anchor-id="quiz-2">
+<span class="header-section-number">6.3.1.5</span> Quiz</h4>
 <div class="webex-check webex-box">
 <p>Consider a continuous variable X, which is normally distributed with <span class="math inline">\(X \sim(\mu = 30, \sigma = 4)\)</span>.</p>
 <p>Compute the following probabilities:</p>
@@ -753,8 +879,8 @@ Explanations
 <p>To get to the correct answer, these are the steps: - First find the Z-value that marks the highest 20%. This value equals 0.84. - Then compute the corresponding cut-off on the X-scale: X = 0.84×18.3 + 133.4 = 148.772 - Rounded to the nearest integer equals 149.</p>
 </div>
 </div>
-</section></section><section id="missing-values" class="level2" data-number="7.2"><h2 data-number="7.2" class="anchored" data-anchor-id="missing-values">
-<span class="header-section-number">7.2</span> Missing Values</h2>
+</section></section><section id="missing-values" class="level3" data-number="6.3.2"><h3 data-number="6.3.2" class="anchored" data-anchor-id="missing-values">
+<span class="header-section-number">6.3.2</span> Missing Values</h3>
 <p>For this assignment, and also later assignments, we will use a (real) data set on Type D personality and several background characteristics (age, gender, and education level (7 ordered levels)).</p>
 <p>Type D personality is defined as the tendency towards negative affectivity (NA) (e.g., worry, irritability, gloom) and social inhibition (SI) (e.g., reticence and a lack of self-assurance). Theory suggests that Type D individuals have poorer health outcomes.</p>
 <p>Type D is measured with the DS14 scale. The DS14 consists of 14 items, 7 measuring NA and 7 items measuring SI. Answers are given on a five point scale (scored 0 through 4).</p>
@@ -763,12 +889,12 @@ Explanations
 </ul>
 <p>Open the data file <a href="data/TypeDDataSSC.sav"><code>TypeDDataSSC.sav</code></a> in SPSS. The data file contains the scores on the DS14 items measuring Type D as well as the background variables for 80 respondents.</p>
 <p>Go to the variable view. The content of the items are given under labels and it is indicated whether the item measures NA or SI.</p>
-<section id="quiz-3" class="level3" data-number="7.2.1"><h3 data-number="7.2.1" class="anchored" data-anchor-id="quiz-3">
-<span class="header-section-number">7.2.1</span> Quiz</h3>
+<section id="quiz-3" class="level4" data-number="6.3.2.1"><h4 data-number="6.3.2.1" class="anchored" data-anchor-id="quiz-3">
+<span class="header-section-number">6.3.2.1</span> Quiz</h4>
 <div class="webex-check webex-box">
 <p>Is the first item in the DS14 an indicator of NA or SI? <select class="webex-select"><option value="blank"></option>
-<option value="">NA</option>
-<option value="answer">SI</option></select></p>
+<option value="answer">SI</option>
+<option value="">NA</option></select></p>
 <p>Go to the data view in SPSS and inspect the data.</p>
 <p>Do you see any missings? <select class="webex-select"><option value="blank"></option>
 <option value="">No</option>
@@ -776,8 +902,8 @@ Explanations
 <p>What is the valid N of the variable age? <input class="webex-solveme nospaces" size="2" data-answer="[&quot;77&quot;]"></p>
 <p>How many system missings do we have on gender? <input class="webex-solveme nospaces" size="1" data-answer="[&quot;8&quot;]"></p>
 </div>
-</section><section id="recoding-missing-values" class="level3" data-number="7.2.2"><h3 data-number="7.2.2" class="anchored" data-anchor-id="recoding-missing-values">
-<span class="header-section-number">7.2.2</span> Recoding missing values</h3>
+</section><section id="recoding-missing-values" class="level4" data-number="6.3.2.2"><h4 data-number="6.3.2.2" class="anchored" data-anchor-id="recoding-missing-values">
+<span class="header-section-number">6.3.2.2</span> Recoding missing values</h4>
 <p>Remember that Empty cells are called system missings. There are reasons to use user-specified missing codes instead; for example, this allows you to keep track of reasons for missingness (which enables you to report more comprehensively on your missing data).</p>
 <p>So, for this exercise we will define a user-missing code for the missing values. Missing code is number that a researcher uses to designate that the value is missing. The code must be chosen such that it cannot be confused with actual scores. For example, for age the missing code can be 999, because 999 is an impossible age.</p>
 <p>Now, we will first define missings for age.</p>
@@ -788,8 +914,8 @@ Explanations
 <p>To do so, we will use the function recode in SPSS. We will first apply the recoding to gender.</p>
 <p>Before going into the recoding, let’s first look at the frequency table for gender.</p>
 <p>You may already have this output from answering the Quiz.</p>
-</section><section id="recode-into-same-variables" class="level3" data-number="7.2.3"><h3 data-number="7.2.3" class="anchored" data-anchor-id="recode-into-same-variables">
-<span class="header-section-number">7.2.3</span> Recode into Same Variables</h3>
+</section><section id="recode-into-same-variables" class="level4" data-number="6.3.2.3"><h4 data-number="6.3.2.3" class="anchored" data-anchor-id="recode-into-same-variables">
+<span class="header-section-number">6.3.2.3</span> Recode into Same Variables</h4>
 <p>Replacing user missing values with a missing code using the recode option works as follows:</p>
 <p>Navigate to Transform &gt; Recode into the same variables. SPSS opens a new window.</p>
 <p>Select gender as the variable to be recoded.</p>
@@ -809,8 +935,8 @@ Explanations
 <p>Click on Define Values. SPSS opens a new window. Select System or User Missing at the left and click on add. Click on continue than OK.</p>
 <p>SPSS will now create a new variable that shows how many missings there are for each person on the variables selected in the list.</p>
 <p>Go to the data view and verify that SPSS added a new variable (i.e., a new column with values) named CountMiss.</p>
-</section><section id="quiz-4" class="level3" data-number="7.2.4"><h3 data-number="7.2.4" class="anchored" data-anchor-id="quiz-4">
-<span class="header-section-number">7.2.4</span> Quiz</h3>
+</section><section id="quiz-4" class="level4" data-number="6.3.2.4"><h4 data-number="6.3.2.4" class="anchored" data-anchor-id="quiz-4">
+<span class="header-section-number">6.3.2.4</span> Quiz</h4>
 <div class="webex-check webex-box">
 <p>Compute the frequency table for the third DS14 item. How many missing values do we have on this item? <input class="webex-solveme nospaces" size="1" data-answer="[&quot;6&quot;]"></p>
 <p>How many missings does person 8 have, using the variable CountMiss? <input class="webex-solveme nospaces" size="1" data-answer="[&quot;3&quot;]"></p>
@@ -820,11 +946,11 @@ Explanations
 <p>How many participants have at least one missing value? <input class="webex-solveme nospaces" size="2" data-answer="[&quot;17&quot;]"></p>
 </div>
 <p>Make sure you save the data file including the variable with the number of missings. We will use it in the next assignment. `</p>
-</section></section><section id="select-cases-and-split-file" class="level2" data-number="7.3"><h2 data-number="7.3" class="anchored" data-anchor-id="select-cases-and-split-file">
-<span class="header-section-number">7.3</span> Select Cases and Split File</h2>
+</section></section><section id="select-cases-and-split-file" class="level3" data-number="6.3.3"><h3 data-number="6.3.3" class="anchored" data-anchor-id="select-cases-and-split-file">
+<span class="header-section-number">6.3.3</span> Select Cases and Split File</h3>
 <p>In this assignment we will take a closer look at selecting cases and how to do analyses for subgroups.</p>
-<section id="selecting-cases" class="level3" data-number="7.3.1"><h3 data-number="7.3.1" class="anchored" data-anchor-id="selecting-cases">
-<span class="header-section-number">7.3.1</span> Selecting Cases</h3>
+<section id="selecting-cases" class="level4" data-number="6.3.3.1"><h4 data-number="6.3.3.1" class="anchored" data-anchor-id="selecting-cases">
+<span class="header-section-number">6.3.3.1</span> Selecting Cases</h4>
 <p>In the previous assignment we have seen that some respondents had one or more missing values. Suppose we want to discard these persons in the analysis, which means that for all the remaining analyses we only want to include participants with no missings. This method of handling missing data is called <em>listwise deletion</em>, and it is generally considered bad practice - but it’s also easy, so we will teach it in this course. More advanced courses cover expert methods of handling missing data.</p>
 <p>Proceed as follows:</p>
 <p>Data &gt; Select cases. SPSS opens a new window.</p>
@@ -834,8 +960,8 @@ Explanations
 <p>Go to the data view.</p>
 <p>Verify that SPSS crossed out cases with one or more missings.</p>
 <p>Verify that SPSS added a new variable labelled ‘filter_$’. This is filter variable indicating who is included in the analyses (value = 1) or not (value is 0). If you remove the filter variable, SPSS will use all cases again.</p>
-</section><section id="quiz-5" class="level3" data-number="7.3.2"><h3 data-number="7.3.2" class="anchored" data-anchor-id="quiz-5">
-<span class="header-section-number">7.3.2</span> Quiz</h3>
+</section><section id="quiz-5" class="level4" data-number="6.3.3.2"><h4 data-number="6.3.3.2" class="anchored" data-anchor-id="quiz-5">
+<span class="header-section-number">6.3.3.2</span> Quiz</h4>
 <div class="webex-check webex-box">
 <p>What is the mean for the variable age of the selected group? <input class="webex-solveme nospaces" data-tol="0.01" size="5" data-answer="[&quot;42.68&quot;]"></p>
 <p>What is the valid sample size for that mean? <input class="webex-solveme nospaces" size="2" data-answer="[&quot;63&quot;]"></p>
@@ -844,8 +970,8 @@ Explanations
 <p>Proceed as follows:</p>
 <p>Data &gt; Select cases Choose “Delete Unselected Cases” under output. Click OK. Verify that the incomplete cases are removed.</p>
 <p>Because you have modified the data, it is prudent to save the new file under a different name (e.g., TypeD_selection.sav). Use this file with only the complete cases (i.e., TypeD_selection.sav) for the remaining steps.</p>
-</section><section id="split-file" class="level3" data-number="7.3.3"><h3 data-number="7.3.3" class="anchored" data-anchor-id="split-file">
-<span class="header-section-number">7.3.3</span> Split File</h3>
+</section><section id="split-file" class="level4" data-number="6.3.3.3"><h4 data-number="6.3.3.3" class="anchored" data-anchor-id="split-file">
+<span class="header-section-number">6.3.3.3</span> Split File</h4>
 <p>Sometimes we want to do analyses for subgroups, especially when exploring the data for the first time. For example, we may want to have the descriptive statistics for males and females separately. One way to do this is to use the Split File option. With this option you can tell SPSS that you want to have tables for each subgroup separately.</p>
 <p>Let’s see how it works!</p>
 <p>Proceed as follows:</p>
@@ -855,8 +981,8 @@ Explanations
 <p>Important: Notice no output appears and no changes are made to the data. This makes sense because we haven’t asked SPSS to generate any output nor to make changes in the data. Yet, SPSS now knows that he has to produce tables for males and females separately once we ask to generate output.</p>
 <p>To undo the split file, proceed as follows.</p>
 <p>Data &gt; Split file Choose Analyze all cases, do not create groups. Click OK. SPSS now no longer produces the output per group.</p>
-</section><section id="quiz-6" class="level3" data-number="7.3.4"><h3 data-number="7.3.4" class="anchored" data-anchor-id="quiz-6">
-<span class="header-section-number">7.3.4</span> Quiz</h3>
+</section><section id="quiz-6" class="level4" data-number="6.3.3.4"><h4 data-number="6.3.3.4" class="anchored" data-anchor-id="quiz-6">
+<span class="header-section-number">6.3.3.4</span> Quiz</h4>
 <div class="webex-check webex-box">
 <p>Have SPSS compute the mean and SD for age.</p>
 <p>How many women are there in the sample? <input class="webex-solveme nospaces" size="2" data-answer="[&quot;38&quot;]"> What is the mean age of men in the sample? <input class="webex-solveme nospaces" data-tol="0.1" size="5" data-answer="[&quot;41.64&quot;]"> What is the mean age of women in the sample? <input class="webex-solveme nospaces" data-tol="0.1" size="5" data-answer="[&quot;43.37&quot;]"></p>
@@ -865,14 +991,14 @@ Explanations
 <p>For which education level was the mean age highest? <input class="webex-solveme nospaces" size="1" data-answer="[&quot;2&quot;]"></p>
 <p>What was the value of the mean age for this education level? <input class="webex-solveme nospaces" data-tol="0.1" size="4" data-answer="[&quot;54.5&quot;]"></p>
 </div>
-</section></section><section id="recode-and-compute" class="level2" data-number="7.4"><h2 data-number="7.4" class="anchored" data-anchor-id="recode-and-compute">
-<span class="header-section-number">7.4</span> Recode and Compute</h2>
+</section></section><section id="recode-and-compute" class="level3" data-number="6.3.4"><h3 data-number="6.3.4" class="anchored" data-anchor-id="recode-and-compute">
+<span class="header-section-number">6.3.4</span> Recode and Compute</h3>
 <p>For this assignment we will continue with the data on Type D and the selection of complete cases.</p>
 <p>Before you start, make sure that the Split File option is disabled.</p>
 <p>In practice, you often have to do some data handling before you can actually start doing analyses. For example by coding missing values, or you may have questionnaire data for which some of the questions are formulated contra-indicative and therefore should be reverse coded. Another reason would be that you may have to compute the total score (e.g., sum or average) for a set of questions.</p>
 <p>In this assignment we will practice some basic data handling skills.</p>
-<section id="reverse-scoring-contra-indicative-items" class="level3" data-number="7.4.1"><h3 data-number="7.4.1" class="anchored" data-anchor-id="reverse-scoring-contra-indicative-items">
-<span class="header-section-number">7.4.1</span> Reverse Scoring Contra Indicative Items</h3>
+<section id="reverse-scoring-contra-indicative-items" class="level4" data-number="6.3.4.1"><h4 data-number="6.3.4.1" class="anchored" data-anchor-id="reverse-scoring-contra-indicative-items">
+<span class="header-section-number">6.3.4.1</span> Reverse Scoring Contra Indicative Items</h4>
 <p>If you read the item labels, you will see that the first two SI items (items DS14_1 and DS14_3 in the scale) are contra indicative. This means that for these items higher scores reflect low SI, while for other items higher scores reflect high SI. Therefore, the responses to these items should be recoded first to make sure that all items are scored in the same direction. To do so, we will create new variables that reflect the recoded items. Proceed as follows:</p>
 <p>Transform &gt; Recode into different Variables</p>
 <p>Choose DS14_1 as the Numerical Variable to be recoded</p>
@@ -888,14 +1014,14 @@ Explanations
 <p>old value 4 -&gt; new value 0</p>
 <p>(*) You may think this line is superfluous but for the recoding in SPSS you need to specify for every possible value a recoded new value, even if the values remains the same.</p>
 <p>Specify the old and new values. Each time you specified old and new values click on ADD such that the recoding scheme appears in the little dialog.</p>
-</section></section><section id="using-syntax" class="level2" data-number="7.5"><h2 data-number="7.5" class="anchored" data-anchor-id="using-syntax">
-<span class="header-section-number">7.5</span> Using Syntax</h2>
+</section></section><section id="using-syntax" class="level3" data-number="6.3.5"><h3 data-number="6.3.5" class="anchored" data-anchor-id="using-syntax">
+<span class="header-section-number">6.3.5</span> Using Syntax</h3>
 <p>To ensure that others can see exactly how you got from raw data to the final dataset used for analysis, it is <strong>essential</strong> to keep a complete record of any changes made to the data. This is also why we previously argued that you should <strong>not overwrite</strong> a datafile after altering it.</p>
 <p>Up until now, we ran the analyses by “click-and-point” via the menu. This is a good starting point to explore the software SPSS, but it is not good practice for professional use because there’s no record of what you did to the data in order to get your result.</p>
 <p><strong>NOTE: For all your portfolio assignments, providing syntax is mandatory so I can grade what you DID, not just what you reported!</strong></p>
 <p>To keep a record of changes made to your data, you can prepare a script that contains all instructions for the analysis instead. By evaluating this script on the data, you should consistently get the same results.</p>
-<section id="why-syntax" class="level3" data-number="7.5.1"><h3 data-number="7.5.1" class="anchored" data-anchor-id="why-syntax">
-<span class="header-section-number">7.5.1</span> Why syntax?</h3>
+<section id="why-syntax" class="level4" data-number="6.3.5.1"><h4 data-number="6.3.5.1" class="anchored" data-anchor-id="why-syntax">
+<span class="header-section-number">6.3.5.1</span> Why syntax?</h4>
 <p>Using syntax is important for several reasons:</p>
 <ul>
 <li>First, efficiency: it makes life easier. Once you have the syntax, you can easily redo the whole analysis without going through all the points-and-clicks again.</li>
@@ -903,12 +1029,12 @@ Explanations
 <li>Third, documentation &amp; data management: As a researcher you are responsible for data storage and management (!). This not only includes storage of data, but also documentation of the all the steps and analyses you did to come to your results (e.g., handling missing values, detection of outlying values). Ideally, you should provide the materials such that other researchers can easily replicate your analyses starting from the raw data file. Working with SPSS syntax is a great way to do so.</li>
 <li>Fourth, necessity: some statistical procedures are only available via SPSS syntax (e.g., simple effects analysis in MANOVA).</li>
 </ul>
-<!-- First, we will see how to set-up a basic syntax via the menu. Once you have the basic syntax, you can modify it to your own needs and preferences. --><!-- To get there, we will use the data file LAS-CNS_stress.sav Download LAS-CNS_stress.sav. --><!-- Download and open the data file in SPSS. --><!-- We will now generate the syntax for computing basic descriptive statistics for the variable optimism. --><!-- Navigate to Analyze > Descriptive statistics > Descriptives. --><!-- Select the variable (i.e., optimism) for which you want the descriptives. --><!-- But instead of OK, now click on PASTE. SPSS will open the syntax editor and adds new syntax. --><!-- Carefully inspect the syntax and try to "read" what it says. --><!-- To run the syntax, select the commands with your mouse and click on the big green "Play button" in the top menu. --><!-- You will see that SPSS now executes the commands that you selected and includes the descriptives in the output. --><!-- (The SPSS output does not pop up automatically. If you go to the output, you will see that the command worked though.) --></section><section id="help" class="level3" data-number="7.5.2"><h3 data-number="7.5.2" class="anchored" data-anchor-id="help">
-<span class="header-section-number">7.5.2</span> Help!</h3>
+<!-- First, we will see how to set-up a basic syntax via the menu. Once you have the basic syntax, you can modify it to your own needs and preferences. --><!-- To get there, we will use the data file LAS-CNS_stress.sav Download LAS-CNS_stress.sav. --><!-- Download and open the data file in SPSS. --><!-- We will now generate the syntax for computing basic descriptive statistics for the variable optimism. --><!-- Navigate to Analyze > Descriptive statistics > Descriptives. --><!-- Select the variable (i.e., optimism) for which you want the descriptives. --><!-- But instead of OK, now click on PASTE. SPSS will open the syntax editor and adds new syntax. --><!-- Carefully inspect the syntax and try to "read" what it says. --><!-- To run the syntax, select the commands with your mouse and click on the big green "Play button" in the top menu. --><!-- You will see that SPSS now executes the commands that you selected and includes the descriptives in the output. --><!-- (The SPSS output does not pop up automatically. If you go to the output, you will see that the command worked though.) --></section><section id="help" class="level4" data-number="6.3.5.2"><h4 data-number="6.3.5.2" class="anchored" data-anchor-id="help">
+<span class="header-section-number">6.3.5.2</span> Help!</h4>
 <p>You don’t need to memorize the commands by heart. SPSS offers help functions. If you highlight the command (e.g., statistics) and click on the button with the paper and the question mark in the top menu. SPSS opens a help file.</p>
 <p>Use the help function to modify the syntax such that SPSS produces a table that also reports the range (e.g., the difference between the largest and smallest value).</p>
-</section><section id="how-to-use-syntax" class="level3" data-number="7.5.3"><h3 data-number="7.5.3" class="anchored" data-anchor-id="how-to-use-syntax">
-<span class="header-section-number">7.5.3</span> How to use syntax</h3>
+</section><section id="how-to-use-syntax" class="level4" data-number="6.3.5.3"><h4 data-number="6.3.5.3" class="anchored" data-anchor-id="how-to-use-syntax">
+<span class="header-section-number">6.3.5.3</span> How to use syntax</h4>
 <p>There are two ways to use syntax. The first is to create an empty syntax script via File -&gt; New -&gt; Syntax, and then start adding the code from scratch. You can either write the code as text, or create it via SPSS’ various dialog windows. For this course, we recommend using the dialogs:</p>
 <ul>
 <li>In any dialog window, click “Paste” instead of “OK”.</li>
@@ -934,8 +1060,8 @@ EXECUTE.</code></pre>
 COMPUTE DS14_3R = 4-DS14_3.
 EXECUTE.</code></pre>
 <p>Verify that this calculation also works.</p>
-</section><section id="commenting" class="level3" data-number="7.5.4"><h3 data-number="7.5.4" class="anchored" data-anchor-id="commenting">
-<span class="header-section-number">7.5.4</span> Commenting</h3>
+</section><section id="commenting" class="level4" data-number="6.3.5.4"><h4 data-number="6.3.5.4" class="anchored" data-anchor-id="commenting">
+<span class="header-section-number">6.3.5.4</span> Commenting</h4>
 <p>When working with syntax, it is highly recommended to add comments as reminders to your future self of the purpose of each step in the script. These comments should clarify the syntax and give general information (e.g., when was the syntax last modified, who did the modifications, etc.).</p>
 <p>Comments are text lines that start with an * and ends with a dot. Comments are printed in grey.</p>
 <p>REMARK: the dot at the end of your text line is really important. If you do not add it, your syntax will run work properly!</p>
@@ -952,8 +1078,8 @@ COMPUTE DS14_3R = 4-DS14_3.
 EXECUTE.</code></pre>
 <p>After including the comments, run the complete syntax including the comment line (by selecting and running it, or via top menu Run &gt; All).</p>
 <p>If the syntax runs correctly, the comments were correctly included.</p>
-</section><section id="compute-variable" class="level3" data-number="7.5.5"><h3 data-number="7.5.5" class="anchored" data-anchor-id="compute-variable">
-<span class="header-section-number">7.5.5</span> Compute Variable</h3>
+</section><section id="compute-variable" class="level4" data-number="6.3.5.5"><h4 data-number="6.3.5.5" class="anchored" data-anchor-id="compute-variable">
+<span class="header-section-number">6.3.5.5</span> Compute Variable</h4>
 <p>For the analyses we are not interested in the single item scores but in the summed scores. Because the DS14 contains two subscales (consult the item labels to see to which subscale the item belongs), we want to compute the summed scores for the NA and SI items separately.</p>
 <p>Let’s first do this for NA. Proceed as follows:</p>
 <p>Transform &gt; Compute variable. SPSS opens a new window.</p>
@@ -964,8 +1090,8 @@ EXECUTE.</code></pre>
 <pre><code>COMPUTE NAtotal = DS14_2 + DS14_4 + .
 COMPUTE SItotal = .
 EXECUTE.</code></pre>
-</section><section id="quiz-7" class="level3" data-number="7.5.6"><h3 data-number="7.5.6" class="anchored" data-anchor-id="quiz-7">
-<span class="header-section-number">7.5.6</span> Quiz</h3>
+</section><section id="quiz-7" class="level4" data-number="6.3.5.6"><h4 data-number="6.3.5.6" class="anchored" data-anchor-id="quiz-7">
+<span class="header-section-number">6.3.5.6</span> Quiz</h4>
 <div class="webex-check webex-box">
 <p>Compute the frequency table for the recoded DS14_3 item.</p>
 <p>What percentage of the respondents had the highest score on this item? <input class="webex-solveme nospaces" data-tol="0.1" size="4" data-answer="[&quot;28.6&quot;]"></p>
@@ -1417,383 +1543,255 @@ window.onload = function() {
 }
 
 </script><script id="quarto-html-after-body" type="application/javascript">
-window.document.addEventListener("DOMContentLoaded", function (event) {
-  const toggleBodyColorMode = (bsSheetEl) => {
-    const mode = bsSheetEl.getAttribute("data-mode");
-    const bodyEl = window.document.querySelector("body");
-    if (mode === "dark") {
-      bodyEl.classList.add("quarto-dark");
-      bodyEl.classList.remove("quarto-light");
-    } else {
-      bodyEl.classList.add("quarto-light");
-      bodyEl.classList.remove("quarto-dark");
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
     }
-  }
-  const toggleBodyColorPrimary = () => {
-    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-    if (bsSheetEl) {
-      toggleBodyColorMode(bsSheetEl);
-    }
-  }
-  toggleBodyColorPrimary();  
-  const disableStylesheet = (stylesheets) => {
-    for (let i=0; i < stylesheets.length; i++) {
-      const stylesheet = stylesheets[i];
-      stylesheet.rel = 'prefetch';
-    }
-  }
-  const enableStylesheet = (stylesheets) => {
-    for (let i=0; i < stylesheets.length; i++) {
-      const stylesheet = stylesheets[i];
-      stylesheet.rel = 'stylesheet';
-    }
-  }
-  const manageTransitions = (selector, allowTransitions) => {
-    const els = window.document.querySelectorAll(selector);
-    for (let i=0; i < els.length; i++) {
-      const el = els[i];
-      if (allowTransitions) {
-        el.classList.remove('notransition');
-      } else {
-        el.classList.add('notransition');
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
       }
+      return false;
     }
-  }
-  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
-    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
-    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
-    let newTheme = '';
-    if(darkModeDefault) {
-      newTheme = isAlternate ? baseTheme : alternateTheme;
-    } else {
-      newTheme = isAlternate ? alternateTheme : baseTheme;
-    }
-    const changeGiscusTheme = () => {
-      // From: https://github.com/giscus/giscus/issues/336
-      const sendMessage = (message) => {
-        const iframe = document.querySelector('iframe.giscus-frame');
-        if (!iframe) return;
-        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
       }
-      sendMessage({
-        setConfig: {
-          theme: newTheme
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
         }
       });
     }
-    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
-    if (isGiscussLoaded) {
-      changeGiscusTheme();
-    }
-  }
-  const toggleColorMode = (alternate) => {
-    // Switch the stylesheets
-    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
-    manageTransitions('#quarto-margin-sidebar .nav-link', false);
-    if (alternate) {
-      enableStylesheet(alternateStylesheets);
-      for (const sheetNode of alternateStylesheets) {
-        if (sheetNode.id === "quarto-bootstrap") {
-          toggleBodyColorMode(sheetNode);
-        }
-      }
-    } else {
-      disableStylesheet(alternateStylesheets);
-      toggleBodyColorPrimary();
-    }
-    manageTransitions('#quarto-margin-sidebar .nav-link', true);
-    // Switch the toggles
-    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
-    for (let i=0; i < toggles.length; i++) {
-      const toggle = toggles[i];
-      if (toggle) {
-        if (alternate) {
-          toggle.classList.add("alternate");     
-        } else {
-          toggle.classList.remove("alternate");
-        }
-      }
-    }
-    // Hack to workaround the fact that safari doesn't
-    // properly recolor the scrollbar when toggling (#1455)
-    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
-      manageTransitions("body", false);
-      window.scrollTo(0, 1);
-      setTimeout(() => {
-        window.scrollTo(0, 0);
-        manageTransitions("body", true);
-      }, 40);  
-    }
-  }
-  const isFileUrl = () => { 
-    return window.location.protocol === 'file:';
-  }
-  const hasAlternateSentinel = () => {  
-    let styleSentinel = getColorSchemeSentinel();
-    if (styleSentinel !== null) {
-      return styleSentinel === "alternate";
-    } else {
-      return false;
-    }
-  }
-  const setStyleSentinel = (alternate) => {
-    const value = alternate ? "alternate" : "default";
-    if (!isFileUrl()) {
-      window.localStorage.setItem("quarto-color-scheme", value);
-    } else {
-      localAlternateSentinel = value;
-    }
-  }
-  const getColorSchemeSentinel = () => {
-    if (!isFileUrl()) {
-      const storageValue = window.localStorage.getItem("quarto-color-scheme");
-      return storageValue != null ? storageValue : localAlternateSentinel;
-    } else {
-      return localAlternateSentinel;
-    }
-  }
-  const darkModeDefault = false;
-  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
-  // Dark / light mode switch
-  window.quartoToggleColorScheme = () => {
-    // Read the current dark / light value 
-    let toAlternate = !hasAlternateSentinel();
-    toggleColorMode(toAlternate);
-    setStyleSentinel(toAlternate);
-    toggleGiscusIfUsed(toAlternate, darkModeDefault);
-  };
-  // Ensure there is a toggle, if there isn't float one in the top right
-  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
-    const a = window.document.createElement('a');
-    a.classList.add('top-right');
-    a.classList.add('quarto-color-scheme-toggle');
-    a.href = "";
-    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
-    const i = window.document.createElement("i");
-    i.classList.add('bi');
-    a.appendChild(i);
-    window.document.body.appendChild(a);
-  }
-  // Switch to dark mode if need be
-  if (hasAlternateSentinel()) {
-    toggleColorMode(true);
-  } else {
-    toggleColorMode(false);
-  }
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
-  const isCodeAnnotation = (el) => {
-    for (const clz of el.classList) {
-      if (clz.startsWith('code-annotation-')) {                     
-        return true;
-      }
-    }
-    return false;
-  }
-  const onCopySuccess = function(e) {
-    // button target
-    const button = e.trigger;
-    // don't keep focus
-    button.blur();
-    // flash "checked"
-    button.classList.add('code-copy-button-checked');
-    var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Copied!");
-    let tooltip;
-    if (window.bootstrap) {
-      button.setAttribute("data-bs-toggle", "tooltip");
-      button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Copied!");
-      tooltip = new bootstrap.Tooltip(button, 
-        { trigger: "manual", 
-          customClass: "code-copy-button-tooltip",
-          offset: [0, -8]});
-      tooltip.show();    
-    }
-    setTimeout(function() {
-      if (tooltip) {
-        tooltip.hide();
-        button.removeAttribute("data-bs-title");
-        button.removeAttribute("data-bs-toggle");
-        button.removeAttribute("data-bs-placement");
-      }
-      button.setAttribute("title", currentTitle);
-      button.classList.remove('code-copy-button-checked');
-    }, 1000);
-    // clear code selection
-    e.clearSelection();
-  }
-  const getTextToCopy = function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-  }
-  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-    text: getTextToCopy
-  });
-  clipboard.on('success', onCopySuccess);
-  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
-    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-      text: getTextToCopy,
-      container: window.document.getElementById('quarto-embedded-source-code-modal')
-    });
-    clipboardModal.on('success', onCopySuccess);
-  }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
-      }
-    }
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-    const config = {
-      allowHTML: true,
-      maxWidth: 500,
-      delay: 100,
-      arrow: false,
-      appendTo: function(el) {
-          return el.parentElement;
-      },
-      interactive: true,
-      interactiveBorder: 10,
-      theme: 'quarto',
-      placement: 'bottom-start',
-    };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
-    window.tippy(el, config); 
-  }
-  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-  for (var i=0; i<noterefs.length; i++) {
-    const ref = noterefs[i];
-    tippyHover(ref, function() {
-      // use id or data attribute instead here
-      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-      try { href = new URL(href).hash; } catch {}
-      const id = href.replace(/^#\/?/, "");
-      const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
-    });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
-        }
-      }
-    }
-    stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
-          } else {
-            container.appendChild(child.cloneNode(true));
-            break;
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
           }
         }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
         }
-        return container.innerHTML
       } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
         if (window.Quarto?.typesetMath) {
           window.Quarto.typesetMath(note);
         }
-        return note.innerHTML;
-      }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      // TODO in 1.5, we should make sure this works without a callout special case
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
       }
     }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
           }
         } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
           .then(res => res.text())
           .then(html => {
             const parser = new DOMParser();
             const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
+            const note = htmlDoc.querySelector('main.content');
             if (note !== null) {
-              const html = processXRef(id, note);
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
               instance.setContent(html);
             } 
           }).finally(() => {
@@ -1801,192 +1799,168 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
-    });
-  }
-      let selectedAnnoteEl;
-      const selectorForAnnotation = ( cell, annotation) => {
-        let cellAttr = 'data-code-cell="' + cell + '"';
-        let lineAttr = 'data-code-annotation="' +  annotation + '"';
-        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-        return selector;
-      }
-      const selectCodeLines = (annoteEl) => {
-        const doc = window.document;
-        const targetCell = annoteEl.getAttribute("data-target-cell");
-        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-        const lineIds = lines.map((line) => {
-          return targetCell + "-" + line;
-        })
-        let top = null;
-        let height = null;
-        let parent = null;
-        if (lineIds.length > 0) {
-            //compute the position of the single el (top and bottom and make a div)
-            const el = window.document.getElementById(lineIds[0]);
-            top = el.offsetTop;
-            height = el.offsetHeight;
-            parent = el.parentElement.parentElement;
-          if (lineIds.length > 1) {
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-            height = bottom - top;
-          }
-          if (top !== null && height !== null && parent !== null) {
-            // cook up a div (if necessary) and position it 
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
-            }
-            div.style.top = top - 2 + "px";
-            div.style.height = height + 4 + "px";
-            div.style.left = 0;
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
-            }
-            gutterDiv.style.top = top - 2 + "px";
-            gutterDiv.style.height = height + 4 + "px";
-          }
-          selectedAnnoteEl = annoteEl;
-        }
-      };
-      const unselectCodeLines = () => {
-        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-        elementsIds.forEach((elId) => {
-          const div = window.document.getElementById(elId);
-          if (div) {
-            div.remove();
-          }
-        });
-        selectedAnnoteEl = undefined;
-      };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
-          }
-        });
-      }
-  const findCites = (el) => {
-    const parentEl = el.parentElement;
-    if (parentEl) {
-      const cites = parentEl.dataset.cites;
-      if (cites) {
-        return {
-          el,
-          cites: cites.split(' ')
-        };
-      } else {
-        return findCites(el.parentElement)
-      }
-    } else {
-      return undefined;
-    }
-  };
-  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-  for (var i=0; i<bibliorefs.length; i++) {
-    const ref = bibliorefs[i];
-    const citeInfo = findCites(ref);
-    if (citeInfo) {
-      tippyHover(citeInfo.el, function() {
-        var popup = window.document.createElement('div');
-        citeInfo.cites.forEach(function(cite) {
-          var citeDiv = window.document.createElement('div');
-          citeDiv.classList.add('hanging-indent');
-          citeDiv.classList.add('csl-entry');
-          var biblioDiv = window.document.getElementById('ref-' + cite);
-          if (biblioDiv) {
-            citeDiv.innerHTML = biblioDiv.innerHTML;
-          }
-          popup.appendChild(citeDiv);
-        });
-        return popup.innerHTML;
+      }, function(instance) {
       });
     }
-  }
-});
-</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="./Chapter3_Correlation.html" class="pagination-link" aria-label="Bivariate Descriptive Statistics">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Bivariate Descriptive Statistics</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Bivariate Descriptive Statistics</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./samplingdistribution.html" class="pagination-link" aria-label="The Sampling Distribution">
-        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">The Sampling Distribution</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">The Sampling Distribution</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

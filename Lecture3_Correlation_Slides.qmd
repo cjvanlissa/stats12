@@ -1,5 +1,5 @@
 ---
-title: "Bivariate Descriptive Statistics: Correlation"
+title: "Bivariate Descriptive Statistics"
 author:   "Caspar J. van Lissa"
 date:     "`r format(Sys.Date(), '%d %b %Y')`"
 format: revealjs
@@ -17,7 +17,6 @@ set.seed(1)
 
 * Previously: **Univariate statistics**
 * Today: First **bivariate statistics**
-
   * Covariance
   * Correlation
 
@@ -25,7 +24,7 @@ set.seed(1)
 
 ## Motivation
 
-* Variance: tells us how scores deviate from the mean.
+* _Variance: tells us how scores deviate from the mean._
 * Covariance: do deviations on one variable go with deviations on another?
 * Correlation: strength & direction of association.
 
@@ -281,7 +280,7 @@ knitr::kable(
 
 ---
 
-## Anscombe’s Quartet
+## Anscombe’s Quartet {#anscombe}
 
 ```{r fig-anscombe, fig.cap="Anscombe's quartet"}
 plts <- lapply(1:4, function(i){

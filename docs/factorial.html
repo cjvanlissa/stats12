@@ -2,10 +2,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.57">
+<meta name="generator" content="quarto-1.7.33">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="description" content="Book Description">
-<title>17&nbsp; GLM: Factorial ANOVA – Statistics 1 and 2</title>
+<title>20&nbsp; GLM: Factorial ANOVA – Statistics 1 and 2</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,8 +19,9 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 /* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -31,7 +32,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -63,17 +64,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="./ancova.html" rel="next">
 <link href="./glm_contrasts.html" rel="prev">
 <link href="./images/logos/favicon.png" rel="icon" type="image/png">
-<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-c2894b54f4b00a27b9651b11dcf5df54.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-7530c408590d20eba92ebedbb433c75c.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-c2894b54f4b00a27b9651b11dcf5df54.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark"><script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap-e5f62320892960dc23dd0786c8482584.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-11ad583e60b2cd5ac7d46970bf1aa65a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-e5f62320892960dc23dd0786c8482584.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -131,14 +135,176 @@ window.Quarto = {
 <link rel="stylesheet" href="include/style.css">
 <link rel="stylesheet" href="include/webex.css">
 </head>
-<body class="nav-sidebar floating">
+<body class="nav-sidebar floating quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./factorial.html"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">GLM: Factorial ANOVA</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./factorial.html"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">GLM: Factorial ANOVA</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -190,145 +356,151 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Overview</span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Overview</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./statistics1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Statistics 1</span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Statistics 1</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./introduction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to Statistics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Introduction to Statistics</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./chapter2_descriptive_statistics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Descriptive Statistics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Descriptive Statistics</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Chapter3_Correlation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Bivariate Descriptive Statistics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Bivariate Descriptive Statistics</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./probability.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Probability Distributions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Probability Distributions</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./samplingdistribution.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">The Sampling Distribution</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">The Sampling Distribution</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Week_4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Philosophy of Science</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Philosophy of Science</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./testing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Hypothesis Testing</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Hypothesis Testing</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./glm1_regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">GLM-I: Linear Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">GLM-I: Linear Regression</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./glm2_sum_squares.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">GLM-II: Sums of Squares</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">GLM-II: Sums of Squares</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glm_assumptions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Assumptions</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./glm3binary.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">GLM-III: Binary Predictors</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">GLM-III: Binary Predictors</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./glm4anova.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">GLM-IV: ANOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">GLM-IV: ANOVA</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./glm5multiple.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">GLM-V: Multiple regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">GLM-V: Multiple regression</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./glm6nested.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">GLM-VI: Nested models</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">GLM-VI: Nested models</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./glm7interaction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">GLM-VII: Interaction</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">GLM-VII: Interaction</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./logistic.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">GLM VIII - Logistic Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">GLM VIII - Logistic Regression</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./glm_contrasts.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">GLM: Contrasts</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">GLM: Contrasts</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./factorial.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">GLM: Factorial ANOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">GLM: Factorial ANOVA</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ancova.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">GLM: ANCOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">GLM: ANCOVA</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./rmanova.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">GLM: Repeated Measures ANOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">GLM: Repeated Measures ANOVA</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./reliability_validity.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Reliability and Validity</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Reliability and Validity</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./data_reduction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Dimension Reduction</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Dimension Reduction</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./confint.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">BE2 - Confidence Intervals</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">BE2 - Confidence Intervals</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -343,25 +515,25 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Data for Portfolio</span></a>
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Data for Portfolio</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./probability_tables.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Z-table</span></span></a>
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Z-table</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./formula_sheet2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Formula sheet</span></span></a>
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Formula sheet</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">References</span></a>
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">References</span></span></a>
   </div>
 </li>
       </ul>
@@ -374,30 +546,22 @@ window.Quarto = {
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#lecture" id="toc-lecture" class="nav-link active" data-scroll-target="#lecture"><span class="header-section-number">18</span> Lecture</a></li>
-  <li><a href="#formative-test" id="toc-formative-test" class="nav-link" data-scroll-target="#formative-test"><span class="header-section-number">19</span> Formative Test</a></li>
+<li><a href="#lecture" id="toc-lecture" class="nav-link active" data-scroll-target="#lecture"><span class="header-section-number">20.1</span> Lecture</a></li>
+  <li><a href="#formative-test" id="toc-formative-test" class="nav-link" data-scroll-target="#formative-test"><span class="header-section-number">20.2</span> Formative Test</a></li>
   <li>
-<a href="#tutorial" id="toc-tutorial" class="nav-link" data-scroll-target="#tutorial"><span class="header-section-number">20</span> Tutorial</a>
+<a href="#tutorial" id="toc-tutorial" class="nav-link" data-scroll-target="#tutorial"><span class="header-section-number">20.3</span> Tutorial</a>
   <ul class="collapse">
-<li><a href="#factorial-anova" id="toc-factorial-anova" class="nav-link" data-scroll-target="#factorial-anova"><span class="header-section-number">20.1</span> Factorial ANOVA</a></li>
-  <li><a href="#regression-with-dummies" id="toc-regression-with-dummies" class="nav-link" data-scroll-target="#regression-with-dummies"><span class="header-section-number">20.2</span> Regression with dummies</a></li>
-  <li>
-<a href="#anova-interface" id="toc-anova-interface" class="nav-link" data-scroll-target="#anova-interface"><span class="header-section-number">20.3</span> ANOVA interface</a>
-  <ul class="collapse">
-<li><a href="#homoscedasticity" id="toc-homoscedasticity" class="nav-link" data-scroll-target="#homoscedasticity"><span class="header-section-number">20.3.1</span> Homoscedasticity</a></li>
-  <li><a href="#effect-size" id="toc-effect-size" class="nav-link" data-scroll-target="#effect-size"><span class="header-section-number">20.3.2</span> Effect size</a></li>
-  <li><a href="#pairwise-comparisons" id="toc-pairwise-comparisons" class="nav-link" data-scroll-target="#pairwise-comparisons"><span class="header-section-number">20.3.3</span> Pairwise comparisons</a></li>
-  <li><a href="#simple-effects-test" id="toc-simple-effects-test" class="nav-link" data-scroll-target="#simple-effects-test"><span class="header-section-number">20.3.4</span> Simple Effects test</a></li>
-  </ul>
-</li>
-  <li><a href="#optional-do-it-yourself" id="toc-optional-do-it-yourself" class="nav-link" data-scroll-target="#optional-do-it-yourself"><span class="header-section-number">20.4</span> Optional: do it yourself!</a></li>
+<li><a href="#factorial-anova" id="toc-factorial-anova" class="nav-link" data-scroll-target="#factorial-anova"><span class="header-section-number">20.3.1</span> Factorial ANOVA</a></li>
+  <li><a href="#regression-with-dummies" id="toc-regression-with-dummies" class="nav-link" data-scroll-target="#regression-with-dummies"><span class="header-section-number">20.3.2</span> Regression with dummies</a></li>
+  <li><a href="#anova-interface" id="toc-anova-interface" class="nav-link" data-scroll-target="#anova-interface"><span class="header-section-number">20.3.3</span> ANOVA interface</a></li>
+  <li><a href="#optional-do-it-yourself" id="toc-optional-do-it-yourself" class="nav-link" data-scroll-target="#optional-do-it-yourself"><span class="header-section-number">20.3.4</span> Optional: do it yourself!</a></li>
   </ul>
 </li>
   </ul></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
-<h1 class="title"><span id="sec-glmfactorial" class="quarto-section-identifier"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">GLM: Factorial ANOVA</span></span></h1>
+<h1 class="title"><span id="sec-glmfactorial" class="quarto-section-identifier"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">GLM: Factorial ANOVA</span></span></h1>
 </div>
 
 
@@ -419,59 +583,59 @@ window.Quarto = {
 <p>In factorial ANOVA, we examine main effects and interaction effects. As in multiple regression, main effects represent the influence of each factor on the dependent variable, controlling for all other predictors. Interaction effects capture how the effects of one factor depend on the levels of another factor.</p>
 <p>Because each factor may be represented by multiple dummies, we can’t use individual t-tests for the dummies to determine the siginficance of the Factor they belong to. Instead, we use F-tests to test the significance of the effect of a Factor. These F-tests compare the variance explained by the factor to the unexplained variance.</p>
 <p>In addition to significance tests, effect size measures help us understand the practical importance of the effects observed in factorial ANOVA. Eta squared and partial eta squared are common effect size measures that quantify the proportion of variance explained by each factor or interaction, relative to the total variance or unexplained variance, respectively. Eta squared is just a different name for R squared; partial eta squared is something different, and typically only reported for ANOVA.</p>
-<section id="lecture" class="level1" data-number="18"><h1 data-number="18">
-<span class="header-section-number">18</span> Lecture</h1>
+<section id="lecture" class="level2" data-number="20.1"><h2 data-number="20.1" class="anchored" data-anchor-id="lecture">
+<span class="header-section-number">20.1</span> Lecture</h2>
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/fBQoxrleFoM" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
-</section><section id="formative-test" class="level1" data-number="19"><h1 data-number="19">
-<span class="header-section-number">19</span> Formative Test</h1>
+</section><section id="formative-test" class="level2" data-number="20.2"><h2 data-number="20.2" class="anchored" data-anchor-id="formative-test">
+<span class="header-section-number">20.2</span> Formative Test</h2>
 <p>A formative test helps you assess your progress in the course, and helps you address any blind spots in your understanding of the material. If you get a question wrong, you will receive a hint on how to improve your understanding of the material.</p>
 <p>Complete the formative test ideally after you’ve seen the lecture, but before the lecture meeting in which we can discuss any topics that need more attention</p>
 <div class="cell" data-layout-align="center">
 <div class="webex-check webex-box">
 <p><strong>Question 1</strong></p>
 What is the primary objective of factorial ANOVA?
-<div id="radio_DVAGNHKBNQ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_DVAGNHKBNQ" value="answer"><span>To examine the effects of multiple categorical predictors and their interactions on a continuous outcome variable.</span></label><label><input type="radio" autocomplete="off" name="radio_DVAGNHKBNQ" value=""><span>To compare the means of two independent groups.</span></label><label><input type="radio" autocomplete="off" name="radio_DVAGNHKBNQ" value=""><span>To determine the correlation between two continuous variables.</span></label><label><input type="radio" autocomplete="off" name="radio_DVAGNHKBNQ" value=""><span>To analyze the variance between different levels of a single categorical predictor.</span></label>
+<div id="radio_HUSFGJWRWM" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_HUSFGJWRWM" value="answer"><span>To examine the effects of multiple categorical predictors and their interactions on a continuous outcome variable.</span></label><label><input type="radio" autocomplete="off" name="radio_HUSFGJWRWM" value=""><span>To analyze the variance between different levels of a single categorical predictor.</span></label><label><input type="radio" autocomplete="off" name="radio_HUSFGJWRWM" value=""><span>To determine the correlation between two continuous variables.</span></label><label><input type="radio" autocomplete="off" name="radio_HUSFGJWRWM" value=""><span>To compare the means of two independent groups.</span></label>
 </div>
 <p><strong>Question 2</strong></p>
 In a 2x2 factorial design, how many unique conditions or groups are there?
-<div id="radio_HOADTZIJSD" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_HOADTZIJSD" value=""><span>6</span></label><label><input type="radio" autocomplete="off" name="radio_HOADTZIJSD" value="answer"><span>4</span></label><label><input type="radio" autocomplete="off" name="radio_HOADTZIJSD" value=""><span>2</span></label><label><input type="radio" autocomplete="off" name="radio_HOADTZIJSD" value=""><span>3</span></label>
+<div id="radio_NUJEOLGVUR" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_NUJEOLGVUR" value=""><span>2</span></label><label><input type="radio" autocomplete="off" name="radio_NUJEOLGVUR" value=""><span>6</span></label><label><input type="radio" autocomplete="off" name="radio_NUJEOLGVUR" value=""><span>3</span></label><label><input type="radio" autocomplete="off" name="radio_NUJEOLGVUR" value="answer"><span>4</span></label>
 </div>
 <p><strong>Question 3</strong></p>
 What does a main effect represent in factorial ANOVA?
-<div id="radio_NSGCKOGRHN" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_NSGCKOGRHN" value=""><span>The interaction between two factors on the dependent variable.</span></label><label><input type="radio" autocomplete="off" name="radio_NSGCKOGRHN" value=""><span>The combined effect of all factors on the dependent variable.</span></label><label><input type="radio" autocomplete="off" name="radio_NSGCKOGRHN" value=""><span>The unexplained variance in the model.</span></label><label><input type="radio" autocomplete="off" name="radio_NSGCKOGRHN" value="answer"><span>The influence of a single factor on the dependent variable, controlling for other factors.</span></label>
+<div id="radio_MSKCRUNFBV" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_MSKCRUNFBV" value=""><span>The unexplained variance in the model.</span></label><label><input type="radio" autocomplete="off" name="radio_MSKCRUNFBV" value=""><span>The interaction between two factors on the dependent variable.</span></label><label><input type="radio" autocomplete="off" name="radio_MSKCRUNFBV" value=""><span>The combined effect of all factors on the dependent variable.</span></label><label><input type="radio" autocomplete="off" name="radio_MSKCRUNFBV" value="answer"><span>The influence of a single factor on the dependent variable, controlling for other factors.</span></label>
 </div>
 <p><strong>Question 4</strong></p>
 What does an interaction effect capture in factorial ANOVA?
-<div id="radio_ASUMBOWAHK" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_ASUMBOWAHK" value="answer"><span>How the effects of one factor depend on the levels of another factor.</span></label><label><input type="radio" autocomplete="off" name="radio_ASUMBOWAHK" value=""><span>The combined effect of all factors on the dependent variable.</span></label><label><input type="radio" autocomplete="off" name="radio_ASUMBOWAHK" value=""><span>The influence of a single factor on the dependent variable, controlling for other factors.</span></label><label><input type="radio" autocomplete="off" name="radio_ASUMBOWAHK" value=""><span>The unexplained variance in the model.</span></label>
+<div id="radio_SLURVUPDTV" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_SLURVUPDTV" value="answer"><span>How the effects of one factor depend on the levels of another factor.</span></label><label><input type="radio" autocomplete="off" name="radio_SLURVUPDTV" value=""><span>The influence of a single factor on the dependent variable, controlling for other factors.</span></label><label><input type="radio" autocomplete="off" name="radio_SLURVUPDTV" value=""><span>The unexplained variance in the model.</span></label><label><input type="radio" autocomplete="off" name="radio_SLURVUPDTV" value=""><span>The combined effect of all factors on the dependent variable.</span></label>
 </div>
 <p><strong>Question 5</strong></p>
 Which effect size measure quantifies the proportion of variance explained by each factor or interaction relative to the total variance?
-<div id="radio_BIHRPTFBIU" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_BIHRPTFBIU" value=""><span>Sum of Squares</span></label><label><input type="radio" autocomplete="off" name="radio_BIHRPTFBIU" value=""><span>Eta</span></label><label><input type="radio" autocomplete="off" name="radio_BIHRPTFBIU" value="answer"><span>Eta squared</span></label><label><input type="radio" autocomplete="off" name="radio_BIHRPTFBIU" value=""><span>Partial eta squared</span></label>
+<div id="radio_SOGLIKTSFK" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_SOGLIKTSFK" value=""><span>Eta</span></label><label><input type="radio" autocomplete="off" name="radio_SOGLIKTSFK" value=""><span>Partial eta squared</span></label><label><input type="radio" autocomplete="off" name="radio_SOGLIKTSFK" value=""><span>Sum of Squares</span></label><label><input type="radio" autocomplete="off" name="radio_SOGLIKTSFK" value="answer"><span>Eta squared</span></label>
 </div>
 <p><strong>Question 6</strong></p>
 What does it mean when lines representing different conditions on a means plot cross each other?
-<div id="radio_BNKOYCYTQB" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_BNKOYCYTQB" value="answer"><span>There is a significant interaction between the factors.</span></label><label><input type="radio" autocomplete="off" name="radio_BNKOYCYTQB" value=""><span>The main effects of the factors are significant.</span></label><label><input type="radio" autocomplete="off" name="radio_BNKOYCYTQB" value=""><span>The factors have equal effects on the dependent variable.</span></label><label><input type="radio" autocomplete="off" name="radio_BNKOYCYTQB" value=""><span>The model is poorly specified.</span></label>
+<div id="radio_FZRPMFTDYD" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_FZRPMFTDYD" value=""><span>The model is poorly specified.</span></label><label><input type="radio" autocomplete="off" name="radio_FZRPMFTDYD" value="answer"><span>There is a significant interaction between the factors.</span></label><label><input type="radio" autocomplete="off" name="radio_FZRPMFTDYD" value=""><span>The main effects of the factors are significant.</span></label><label><input type="radio" autocomplete="off" name="radio_FZRPMFTDYD" value=""><span>The factors have equal effects on the dependent variable.</span></label>
 </div>
 <p><strong>Question 7</strong></p>
 In a 3x2 factorial design, how many dummies would be required in total to represent both factors?
-<div id="radio_HLBQAURRCY" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_HLBQAURRCY" value=""><span>5</span></label><label><input type="radio" autocomplete="off" name="radio_HLBQAURRCY" value="answer"><span>4</span></label><label><input type="radio" autocomplete="off" name="radio_HLBQAURRCY" value=""><span>6</span></label><label><input type="radio" autocomplete="off" name="radio_HLBQAURRCY" value=""><span>3</span></label>
+<div id="radio_TQZZSHVFBD" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_TQZZSHVFBD" value=""><span>3</span></label><label><input type="radio" autocomplete="off" name="radio_TQZZSHVFBD" value=""><span>6</span></label><label><input type="radio" autocomplete="off" name="radio_TQZZSHVFBD" value="answer"><span>4</span></label><label><input type="radio" autocomplete="off" name="radio_TQZZSHVFBD" value=""><span>5</span></label>
 </div>
 <p><strong>Question 8</strong></p>
 Which term describes the variance remaining unexplained by the factors and interactions in factorial ANOVA?
-<div id="radio_MISKEQSXMR" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_MISKEQSXMR" value=""><span>Interaction variance</span></label><label><input type="radio" autocomplete="off" name="radio_MISKEQSXMR" value=""><span>Total variance</span></label><label><input type="radio" autocomplete="off" name="radio_MISKEQSXMR" value=""><span>Explained variance</span></label><label><input type="radio" autocomplete="off" name="radio_MISKEQSXMR" value="answer"><span>Residual variance</span></label>
+<div id="radio_QLUECAIKHG" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_QLUECAIKHG" value="answer"><span>Residual variance</span></label><label><input type="radio" autocomplete="off" name="radio_QLUECAIKHG" value=""><span>Interaction variance</span></label><label><input type="radio" autocomplete="off" name="radio_QLUECAIKHG" value=""><span>Explained variance</span></label><label><input type="radio" autocomplete="off" name="radio_QLUECAIKHG" value=""><span>Total variance</span></label>
 </div>
 <p><strong>Question 9</strong></p>
 What does a partial eta squared measure in factorial ANOVA?
-<div id="radio_JGAAVPUGJF" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_JGAAVPUGJF" value=""><span>The proportion of variance explained by each factor relative to the unexplained variance.</span></label><label><input type="radio" autocomplete="off" name="radio_JGAAVPUGJF" value=""><span>The interaction between two factors.</span></label><label><input type="radio" autocomplete="off" name="radio_JGAAVPUGJF" value="answer"><span>The proportion of variance explained by each factor, controlling for other factors.</span></label><label><input type="radio" autocomplete="off" name="radio_JGAAVPUGJF" value=""><span>The total variance explained by each factor.</span></label>
+<div id="radio_WSHWVEVCKS" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_WSHWVEVCKS" value=""><span>The interaction between two factors.</span></label><label><input type="radio" autocomplete="off" name="radio_WSHWVEVCKS" value=""><span>The proportion of variance explained by each factor relative to the unexplained variance.</span></label><label><input type="radio" autocomplete="off" name="radio_WSHWVEVCKS" value="answer"><span>The proportion of variance explained by each factor, controlling for other factors.</span></label><label><input type="radio" autocomplete="off" name="radio_WSHWVEVCKS" value=""><span>The total variance explained by each factor.</span></label>
 </div>
 </div>
 <div class="webex-solution">
@@ -498,10 +662,10 @@ Show explanations
 <p>Partial eta squared quantifies the proportion of variance explained by a specific factor while controlling for the influence of other factors in the model.</p>
 </div>
 </div>
-</section><section id="tutorial" class="level1" data-number="20"><h1 data-number="20">
-<span class="header-section-number">20</span> Tutorial</h1>
-<section id="factorial-anova" class="level2" data-number="20.1"><h2 data-number="20.1" class="anchored" data-anchor-id="factorial-anova">
-<span class="header-section-number">20.1</span> Factorial ANOVA</h2>
+</section><section id="tutorial" class="level2" data-number="20.3"><h2 data-number="20.3" class="anchored" data-anchor-id="tutorial">
+<span class="header-section-number">20.3</span> Tutorial</h2>
+<section id="factorial-anova" class="level3" data-number="20.3.1"><h3 data-number="20.3.1" class="anchored" data-anchor-id="factorial-anova">
+<span class="header-section-number">20.3.1</span> Factorial ANOVA</h3>
 <p>Consider the following research situation: A psychologist wants to study if and to what extent different behavior of waiters affect the amount of tip money they get, and whether it matters if the behavior is shown by a waiter or waitress.</p>
 <p>The researcher distinguishes the following types of behavior: neutral behavior, drawing a smiley on the bill, or making small talk.</p>
 <p>They ran a fully crossed experiment with 3 (behaviors) x 2 (gender: waiter or waitress) = 6 conditions. For each condition they collected data for 10 customers who were helped by a waiter showing neutral behavior, 10 helped by a waiter drawing a smiley on the bill, and so forth.</p>
@@ -509,9 +673,9 @@ Show explanations
 <option value="answer">Yes</option>
 <option value="">No</option></select></p>
 <p>What is/are the independent variable(s) in this experiment? <select class="webex-select"><option value="blank"></option>
-<option value="">Tip size</option>
+<option value="answer">Behavior</option>
 <option value="">Gender</option>
-<option value="answer">Behavior</option></select></p>
+<option value="">Tip size</option></select></p>
 <p>Draw the conceptual model of the experiment. Then, check your answer.</p>
 <div class="webex-solution">
 <button>
@@ -558,8 +722,8 @@ Answer
 </div>
 <p>As you can see, the dependent variable is Tip money, and the independent variables are Type of behavior and Gender. More specifically. Gender is the moderator, as is expected to influence the relationship between Behavior and Tip money.</p>
 </div>
-</section><section id="regression-with-dummies" class="level2" data-number="20.2"><h2 data-number="20.2" class="anchored" data-anchor-id="regression-with-dummies">
-<span class="header-section-number">20.2</span> Regression with dummies</h2>
+</section><section id="regression-with-dummies" class="level3" data-number="20.3.2"><h3 data-number="20.3.2" class="anchored" data-anchor-id="regression-with-dummies">
+<span class="header-section-number">20.3.2</span> Regression with dummies</h3>
 <p>First, we analyze these data using regression with dummies.</p>
 <p>You will need to dummy code both categorical predictors.</p>
 <p>Do this in the familiar way, then check your syntax.</p>
@@ -760,8 +924,8 @@ Answer
 <!-- Now, perform the test. What is the test statistic? <input class='webex-solveme nospaces' data-tol='0.01' size='8' data-answer='["2.725724"]'/> -->
 <!-- Would this Z-value be significant at $\alpha = .05$ for a two-sided test? <select class='webex-select'><option value='blank'></option><option value='answer'>TRUE</option><option value='NA'>FALSE</option></select> -->
 <!-- And what about a one-sided test? <select class='webex-select'><option value='blank'></option><option value='answer'>TRUE</option><option value='NA'>FALSE</option></select> -->
-</section><section id="anova-interface" class="level2" data-number="20.3"><h2 data-number="20.3" class="anchored" data-anchor-id="anova-interface">
-<span class="header-section-number">20.3</span> ANOVA interface</h2>
+</section><section id="anova-interface" class="level3" data-number="20.3.3"><h3 data-number="20.3.3" class="anchored" data-anchor-id="anova-interface">
+<span class="header-section-number">20.3.3</span> ANOVA interface</h3>
 <p>SPSS also has a dedicated “ANOVA interface”. It specifies exactly the same model as we have been investigating, but its output is more focused on information that is typically requested when estimating a model with only categorical predictors and (optionally) interactions between them.</p>
 <p>We will now use the ANOVA interface and pay special attention to output it gives us that is not directly available via the Regression interface.</p>
 <p>You can either use the graphical user interface, or copy-paste this syntax. Either way, pay particular attention to the following:</p>
@@ -787,8 +951,8 @@ Answer
 <p>Copy and run this syntax.</p>
 <p>Note that the table labelled <strong>Parameter Estimates</strong> is identical to the Coefficients table from the previous regression analysis.</p>
 <p>Also note that, for example, the F-value for the explained variance for the interaction between Gender an Behavior is identical to the F-value for the <span class="math inline">\(\Delta R^2\)</span> test you performed in the previous hierarchical regression analysis.</p>
-<section id="homoscedasticity" class="level3" data-number="20.3.1"><h3 data-number="20.3.1" class="anchored" data-anchor-id="homoscedasticity">
-<span class="header-section-number">20.3.1</span> Homoscedasticity</h3>
+<section id="homoscedasticity" class="level4" data-number="20.3.3.1"><h4 data-number="20.3.3.1" class="anchored" data-anchor-id="homoscedasticity">
+<span class="header-section-number">20.3.3.1</span> Homoscedasticity</h4>
 <p>Regression models have an assumption of homoscedasticity. If all predictors are categorical, that means that we assume equal variances in all groups.</p>
 <p>The ANOVA output offers us a Levene’s test for homogeneity of variance. Find it, and answer the following question:</p>
 <p>True or false: There is reason to doubt the assumption of homogeneity. <select class="webex-select"><option value="blank"></option>
@@ -798,8 +962,8 @@ Answer
 <p>True or false: As a rule, the assumption of homogeneity is more likely to be violated in a factorial ANOVA with an unbalanced design (as compared to a balanced design). <select class="webex-select"><option value="blank"></option>
 <option value="answer">TRUE</option>
 <option value="NA">FALSE</option></select></p>
-</section><section id="effect-size" class="level3" data-number="20.3.2"><h3 data-number="20.3.2" class="anchored" data-anchor-id="effect-size">
-<span class="header-section-number">20.3.2</span> Effect size</h3>
+</section><section id="effect-size" class="level4" data-number="20.3.3.2"><h4 data-number="20.3.3.2" class="anchored" data-anchor-id="effect-size">
+<span class="header-section-number">20.3.3.2</span> Effect size</h4>
 <p>We can also calculate effect sizes <span class="math inline">\(\eta^2\)</span> or partial <span class="math inline">\(\eta^2\)</span>, for the two factors and the interaction effect separately.</p>
 <p>Recall that <span class="math inline">\(\eta^2\)</span> is just the explained variance, <span class="math inline">\(R^2\)</span>. In other words: What proportion of the total sum of squares is explained by the factor of interest?</p>
 <p>We obtain <span class="math inline">\(\eta^2\)</span> for Factor A by dividing the sum of squares for factor A, <span class="math inline">\(SS_A\)</span>, by the <span class="math inline">\(SST\)</span>, which is labeled “Corrected total” in the ANOVA output: <span class="math inline">\(\eta^2 = \frac{SS_A}{SST}\)</span></p>
@@ -809,15 +973,15 @@ Answer
 <p>We obtain <span class="math inline">\(\eta_p^2\)</span> for Factor A by dividing the sum of squares for factor A, <span class="math inline">\(SS_A\)</span>, by <span class="math inline">\(SS_A\)</span> plus the residual sum of squares <span class="math inline">\(SSE\)</span>: <span class="math inline">\(\eta_p^2 = \frac{SS_A}{SS_A+SSE}\)</span>.</p>
 <p>Note that SPSS allows us to request partial <span class="math inline">\(\eta^2\)</span>. We did so by including the line <code>/PRINT=ETASQ</code> in our syntax.</p>
 <p>What is the value of partial <span class="math inline">\(\eta^2\)</span> for the factor Behavior? <input class="webex-solveme nospaces" data-tol="0.01" size="5" data-answer="[&quot;0.515&quot;,&quot;.515&quot;]"></p>
-</section><section id="pairwise-comparisons" class="level3" data-number="20.3.3"><h3 data-number="20.3.3" class="anchored" data-anchor-id="pairwise-comparisons">
-<span class="header-section-number">20.3.3</span> Pairwise comparisons</h3>
+</section><section id="pairwise-comparisons" class="level4" data-number="20.3.3.3"><h4 data-number="20.3.3.3" class="anchored" data-anchor-id="pairwise-comparisons">
+<span class="header-section-number">20.3.3.3</span> Pairwise comparisons</h4>
 <p>Another unique feature of the ANOVA interface is that it gives us all pairwise comparisons when we ask for them using the code <code>/EMMEANS=TABLES(Behavior*Gender) COMPARE(Behavior) ADJ(LSD)</code></p>
 <p>Note that this line asks for comparisons of the three levels of behavior for each gender separately. You can also ask for comparisons of the two levels of gender for each behavior separately by specifying <code>COMPARE(Gender)</code> instead.</p>
 <p>Inspect the table Pairwise Comparisons. The three experimental conditions are compared in a pairwise manner, split over the factor Gender.</p>
 <p>For which pair of groups do the means differ significantly from one another (at the 5% level)? <select class="webex-select"><option value="blank"></option>
-<option value="">Waiter: Neutral-Smiley</option>
 <option value="">Waiter: Small talk-Smiley</option>
 <option value="answer">Waitress: Neutral-Smiley</option>
+<option value="">Waiter: Neutral-Smiley</option>
 <option value="">Waiter: Neutral-Small talk</option></select></p>
 <p>Look at the note under the table. True or false: the p-values in this table are adjusted for multiple comparisons. <select class="webex-select"><option value="blank"></option>
 <option value="NA">TRUE</option>
@@ -831,8 +995,8 @@ Answer
 <p>Although it is possible to ask for SPSS to adjust the p-values in the table, I have expressly not instructed you to do so. The reason for this is that, strictly speaking, Bonferroni is an adjustment of the significance level <span class="math inline">\(\alpha\)</span> - not of the p-values. Moreover, sometimes you conduct many more tests in a study aside from the pairwise comparisons performed here. In that case, you might want to include those in your Bonferroni correction too, and SPSS does not know about their existence when it applies a Bonferroni correction to the p-values.</p>
 <p>In other words: It is better to set the alpha level yourself, and apply it consistently across all tests in a study.</p>
 </div>
-</section><section id="simple-effects-test" class="level3" data-number="20.3.4"><h3 data-number="20.3.4" class="anchored" data-anchor-id="simple-effects-test">
-<span class="header-section-number">20.3.4</span> Simple Effects test</h3>
+</section><section id="simple-effects-test" class="level4" data-number="20.3.3.4"><h4 data-number="20.3.3.4" class="anchored" data-anchor-id="simple-effects-test">
+<span class="header-section-number">20.3.3.4</span> Simple Effects test</h4>
 <p>The significant interaction effect tells us that the effect of behavior differs by gender, or conversely, that gender differences vary across the three behavoirs.</p>
 <p>Simple effects analysis allows us to test the significance of these marginal effects.</p>
 <p>Simply put: They give us an overall test of the mean differences across levels of one factor, within each level of a different factor.</p>
@@ -852,8 +1016,8 @@ Answer
 <option value="answer">TRUE</option>
 <option value="NA">FALSE</option></select></p>
 <p>Does it make sense to adjust your behavior as a waiter/waitress if you want to increase your tip?</p>
-<div id="radio_HPUGREWGGV" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_HPUGREWGGV" value="answer"><span>For waitresses behavior does affect amount of tip money received, but for waiters it does not.</span></label><label><input type="radio" autocomplete="off" name="radio_HPUGREWGGV" value=""><span>For both waiters and waitresses behavior does affect amount of tip money received.</span></label><label><input type="radio" autocomplete="off" name="radio_HPUGREWGGV" value=""><span>For both waiters and waitresses behavior does not affect amount of tip money received.</span></label><label><input type="radio" autocomplete="off" name="radio_HPUGREWGGV" value=""><span>For waiters behavior does affect amount of tip money received, but for waitresses it does not.</span></label>
+<div id="radio_CNTABIOCCF" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_CNTABIOCCF" value=""><span>For waiters behavior does affect amount of tip money received, but for waitresses it does not.</span></label><label><input type="radio" autocomplete="off" name="radio_CNTABIOCCF" value=""><span>For both waiters and waitresses behavior does not affect amount of tip money received.</span></label><label><input type="radio" autocomplete="off" name="radio_CNTABIOCCF" value="answer"><span>For waitresses behavior does affect amount of tip money received, but for waiters it does not.</span></label><label><input type="radio" autocomplete="off" name="radio_CNTABIOCCF" value=""><span>For both waiters and waitresses behavior does affect amount of tip money received.</span></label>
 </div>
 <p>Report your results, then check the answer.</p>
 <div class="webex-solution">
@@ -862,8 +1026,8 @@ Answer
 </button>
 <p>We do see a significant effect of behavior on average tip money for waitresses, F(2,52) = 46.385, p &lt; .001. Hence, we have convincing evidence that the type of behavior by waitresses affects the average amount of tips. Results suggest that in order to have high tips, waitresses best can make small talk.</p>
 </div>
-</section></section><section id="optional-do-it-yourself" class="level2" data-number="20.4"><h2 data-number="20.4" class="anchored" data-anchor-id="optional-do-it-yourself">
-<span class="header-section-number">20.4</span> Optional: do it yourself!</h2>
+</section></section><section id="optional-do-it-yourself" class="level3" data-number="20.3.4"><h3 data-number="20.3.4" class="anchored" data-anchor-id="optional-do-it-yourself">
+<span class="header-section-number">20.3.4</span> Optional: do it yourself!</h3>
 <p>Open the datafile <a href="data/hiking.sav"><code>hiking.sav</code></a>. The data file also contains data on weather.</p>
 <p>Examine the effect of weather and behavior and their potential interaction, with feelings as the dependent variable.</p>
 <p>What is the explained variance of the main effects and interaction effects together? <input class="webex-solveme nospaces" data-tol="0.01" size="5" data-answer="[&quot;0.239&quot;,&quot;.239&quot;]"></p>
@@ -1331,383 +1495,255 @@ window.onload = function() {
 }
 
 </script><script id="quarto-html-after-body" type="application/javascript">
-window.document.addEventListener("DOMContentLoaded", function (event) {
-  const toggleBodyColorMode = (bsSheetEl) => {
-    const mode = bsSheetEl.getAttribute("data-mode");
-    const bodyEl = window.document.querySelector("body");
-    if (mode === "dark") {
-      bodyEl.classList.add("quarto-dark");
-      bodyEl.classList.remove("quarto-light");
-    } else {
-      bodyEl.classList.add("quarto-light");
-      bodyEl.classList.remove("quarto-dark");
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
     }
-  }
-  const toggleBodyColorPrimary = () => {
-    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-    if (bsSheetEl) {
-      toggleBodyColorMode(bsSheetEl);
-    }
-  }
-  toggleBodyColorPrimary();  
-  const disableStylesheet = (stylesheets) => {
-    for (let i=0; i < stylesheets.length; i++) {
-      const stylesheet = stylesheets[i];
-      stylesheet.rel = 'prefetch';
-    }
-  }
-  const enableStylesheet = (stylesheets) => {
-    for (let i=0; i < stylesheets.length; i++) {
-      const stylesheet = stylesheets[i];
-      stylesheet.rel = 'stylesheet';
-    }
-  }
-  const manageTransitions = (selector, allowTransitions) => {
-    const els = window.document.querySelectorAll(selector);
-    for (let i=0; i < els.length; i++) {
-      const el = els[i];
-      if (allowTransitions) {
-        el.classList.remove('notransition');
-      } else {
-        el.classList.add('notransition');
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
       }
+      return false;
     }
-  }
-  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
-    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
-    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
-    let newTheme = '';
-    if(darkModeDefault) {
-      newTheme = isAlternate ? baseTheme : alternateTheme;
-    } else {
-      newTheme = isAlternate ? alternateTheme : baseTheme;
-    }
-    const changeGiscusTheme = () => {
-      // From: https://github.com/giscus/giscus/issues/336
-      const sendMessage = (message) => {
-        const iframe = document.querySelector('iframe.giscus-frame');
-        if (!iframe) return;
-        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
       }
-      sendMessage({
-        setConfig: {
-          theme: newTheme
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
         }
       });
     }
-    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
-    if (isGiscussLoaded) {
-      changeGiscusTheme();
-    }
-  }
-  const toggleColorMode = (alternate) => {
-    // Switch the stylesheets
-    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
-    manageTransitions('#quarto-margin-sidebar .nav-link', false);
-    if (alternate) {
-      enableStylesheet(alternateStylesheets);
-      for (const sheetNode of alternateStylesheets) {
-        if (sheetNode.id === "quarto-bootstrap") {
-          toggleBodyColorMode(sheetNode);
-        }
-      }
-    } else {
-      disableStylesheet(alternateStylesheets);
-      toggleBodyColorPrimary();
-    }
-    manageTransitions('#quarto-margin-sidebar .nav-link', true);
-    // Switch the toggles
-    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
-    for (let i=0; i < toggles.length; i++) {
-      const toggle = toggles[i];
-      if (toggle) {
-        if (alternate) {
-          toggle.classList.add("alternate");     
-        } else {
-          toggle.classList.remove("alternate");
-        }
-      }
-    }
-    // Hack to workaround the fact that safari doesn't
-    // properly recolor the scrollbar when toggling (#1455)
-    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
-      manageTransitions("body", false);
-      window.scrollTo(0, 1);
-      setTimeout(() => {
-        window.scrollTo(0, 0);
-        manageTransitions("body", true);
-      }, 40);  
-    }
-  }
-  const isFileUrl = () => { 
-    return window.location.protocol === 'file:';
-  }
-  const hasAlternateSentinel = () => {  
-    let styleSentinel = getColorSchemeSentinel();
-    if (styleSentinel !== null) {
-      return styleSentinel === "alternate";
-    } else {
-      return false;
-    }
-  }
-  const setStyleSentinel = (alternate) => {
-    const value = alternate ? "alternate" : "default";
-    if (!isFileUrl()) {
-      window.localStorage.setItem("quarto-color-scheme", value);
-    } else {
-      localAlternateSentinel = value;
-    }
-  }
-  const getColorSchemeSentinel = () => {
-    if (!isFileUrl()) {
-      const storageValue = window.localStorage.getItem("quarto-color-scheme");
-      return storageValue != null ? storageValue : localAlternateSentinel;
-    } else {
-      return localAlternateSentinel;
-    }
-  }
-  const darkModeDefault = false;
-  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
-  // Dark / light mode switch
-  window.quartoToggleColorScheme = () => {
-    // Read the current dark / light value 
-    let toAlternate = !hasAlternateSentinel();
-    toggleColorMode(toAlternate);
-    setStyleSentinel(toAlternate);
-    toggleGiscusIfUsed(toAlternate, darkModeDefault);
-  };
-  // Ensure there is a toggle, if there isn't float one in the top right
-  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
-    const a = window.document.createElement('a');
-    a.classList.add('top-right');
-    a.classList.add('quarto-color-scheme-toggle');
-    a.href = "";
-    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
-    const i = window.document.createElement("i");
-    i.classList.add('bi');
-    a.appendChild(i);
-    window.document.body.appendChild(a);
-  }
-  // Switch to dark mode if need be
-  if (hasAlternateSentinel()) {
-    toggleColorMode(true);
-  } else {
-    toggleColorMode(false);
-  }
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
-  const isCodeAnnotation = (el) => {
-    for (const clz of el.classList) {
-      if (clz.startsWith('code-annotation-')) {                     
-        return true;
-      }
-    }
-    return false;
-  }
-  const onCopySuccess = function(e) {
-    // button target
-    const button = e.trigger;
-    // don't keep focus
-    button.blur();
-    // flash "checked"
-    button.classList.add('code-copy-button-checked');
-    var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Copied!");
-    let tooltip;
-    if (window.bootstrap) {
-      button.setAttribute("data-bs-toggle", "tooltip");
-      button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Copied!");
-      tooltip = new bootstrap.Tooltip(button, 
-        { trigger: "manual", 
-          customClass: "code-copy-button-tooltip",
-          offset: [0, -8]});
-      tooltip.show();    
-    }
-    setTimeout(function() {
-      if (tooltip) {
-        tooltip.hide();
-        button.removeAttribute("data-bs-title");
-        button.removeAttribute("data-bs-toggle");
-        button.removeAttribute("data-bs-placement");
-      }
-      button.setAttribute("title", currentTitle);
-      button.classList.remove('code-copy-button-checked');
-    }, 1000);
-    // clear code selection
-    e.clearSelection();
-  }
-  const getTextToCopy = function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-  }
-  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-    text: getTextToCopy
-  });
-  clipboard.on('success', onCopySuccess);
-  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
-    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-      text: getTextToCopy,
-      container: window.document.getElementById('quarto-embedded-source-code-modal')
-    });
-    clipboardModal.on('success', onCopySuccess);
-  }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
-      }
-    }
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-    const config = {
-      allowHTML: true,
-      maxWidth: 500,
-      delay: 100,
-      arrow: false,
-      appendTo: function(el) {
-          return el.parentElement;
-      },
-      interactive: true,
-      interactiveBorder: 10,
-      theme: 'quarto',
-      placement: 'bottom-start',
-    };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
-    window.tippy(el, config); 
-  }
-  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-  for (var i=0; i<noterefs.length; i++) {
-    const ref = noterefs[i];
-    tippyHover(ref, function() {
-      // use id or data attribute instead here
-      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-      try { href = new URL(href).hash; } catch {}
-      const id = href.replace(/^#\/?/, "");
-      const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
-    });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
-        }
-      }
-    }
-    stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
-          } else {
-            container.appendChild(child.cloneNode(true));
-            break;
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
           }
         }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
         }
-        return container.innerHTML
       } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
         if (window.Quarto?.typesetMath) {
           window.Quarto.typesetMath(note);
         }
-        return note.innerHTML;
-      }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      // TODO in 1.5, we should make sure this works without a callout special case
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
       }
     }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
           }
         } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
           .then(res => res.text())
           .then(html => {
             const parser = new DOMParser();
             const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
+            const note = htmlDoc.querySelector('main.content');
             if (note !== null) {
-              const html = processXRef(id, note);
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
               instance.setContent(html);
             } 
           }).finally(() => {
@@ -1715,192 +1751,168 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
-    });
-  }
-      let selectedAnnoteEl;
-      const selectorForAnnotation = ( cell, annotation) => {
-        let cellAttr = 'data-code-cell="' + cell + '"';
-        let lineAttr = 'data-code-annotation="' +  annotation + '"';
-        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-        return selector;
-      }
-      const selectCodeLines = (annoteEl) => {
-        const doc = window.document;
-        const targetCell = annoteEl.getAttribute("data-target-cell");
-        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-        const lineIds = lines.map((line) => {
-          return targetCell + "-" + line;
-        })
-        let top = null;
-        let height = null;
-        let parent = null;
-        if (lineIds.length > 0) {
-            //compute the position of the single el (top and bottom and make a div)
-            const el = window.document.getElementById(lineIds[0]);
-            top = el.offsetTop;
-            height = el.offsetHeight;
-            parent = el.parentElement.parentElement;
-          if (lineIds.length > 1) {
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-            height = bottom - top;
-          }
-          if (top !== null && height !== null && parent !== null) {
-            // cook up a div (if necessary) and position it 
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
-            }
-            div.style.top = top - 2 + "px";
-            div.style.height = height + 4 + "px";
-            div.style.left = 0;
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
-            }
-            gutterDiv.style.top = top - 2 + "px";
-            gutterDiv.style.height = height + 4 + "px";
-          }
-          selectedAnnoteEl = annoteEl;
-        }
-      };
-      const unselectCodeLines = () => {
-        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-        elementsIds.forEach((elId) => {
-          const div = window.document.getElementById(elId);
-          if (div) {
-            div.remove();
-          }
-        });
-        selectedAnnoteEl = undefined;
-      };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
-          }
-        });
-      }
-  const findCites = (el) => {
-    const parentEl = el.parentElement;
-    if (parentEl) {
-      const cites = parentEl.dataset.cites;
-      if (cites) {
-        return {
-          el,
-          cites: cites.split(' ')
-        };
-      } else {
-        return findCites(el.parentElement)
-      }
-    } else {
-      return undefined;
-    }
-  };
-  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-  for (var i=0; i<bibliorefs.length; i++) {
-    const ref = bibliorefs[i];
-    const citeInfo = findCites(ref);
-    if (citeInfo) {
-      tippyHover(citeInfo.el, function() {
-        var popup = window.document.createElement('div');
-        citeInfo.cites.forEach(function(cite) {
-          var citeDiv = window.document.createElement('div');
-          citeDiv.classList.add('hanging-indent');
-          citeDiv.classList.add('csl-entry');
-          var biblioDiv = window.document.getElementById('ref-' + cite);
-          if (biblioDiv) {
-            citeDiv.innerHTML = biblioDiv.innerHTML;
-          }
-          popup.appendChild(citeDiv);
-        });
-        return popup.innerHTML;
+      }, function(instance) {
       });
     }
-  }
-});
-</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="./glm_contrasts.html" class="pagination-link" aria-label="GLM: Contrasts">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">GLM: Contrasts</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">GLM: Contrasts</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./ancova.html" class="pagination-link" aria-label="GLM: ANCOVA">
-        <span class="nav-page-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">GLM: ANCOVA</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">GLM: ANCOVA</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

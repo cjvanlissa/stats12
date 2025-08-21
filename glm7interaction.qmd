@@ -23,7 +23,7 @@ $\hat{Y}_i = a + b \cdot X_i$
 
 Where $Y^i$ is the predicted score for individual $i$ on the dependent variable $Y$.
 
-## Introducing Interactions
+### Introducing Interactions
 
 Now, let's take our regression analysis to the next level by introducing the concept of interactions. An interaction implies that the effect of one predictor variable depends on the level of another predictor variable.
 
@@ -38,7 +38,7 @@ To include an interaction term in your regression model:
 
 In summary, interactions add a new layer of complexity to regression analysis by acknowledging that the relationships between variables can be contingent on other factors. By incorporating interactions, we can gain deeper insights into the nuanced dynamics between predictors and outcomes in our statistical models.
 
-## Interaction between one Continuous and one Binary Predictor
+### Interaction between one Continuous and one Binary Predictor
 
 Interaction is easiest to explain using one binary predictor, coded as 0 and 1, and one continuous predictor. 
 
@@ -72,13 +72,13 @@ Note that both groups' regression equations can be simplified into a basic linea
 
 If the interaction term is significant (i.e., the slope for the product of the interacting variables), we conclude that there is significant interaction and the slope of the effect of one interacting variable depends on the value of the other interacting variable.
 
-## Simple Effects
+### Simple Effects
 
 When the interaction between a binary moderator and a continuous predictor is significant, we often want to know how big the regression effect of the continuous predictor is in each group of the binary predictor. This is called simple effects analysis.
 
 One straightforward way to perform simple effects analysis involves creating dummy variables for both categories of the binary moderator and computing interaction terms with these dummies. Then, specifying two regression models with different reference categories. This gives the effect of the continuous moderator for each group, along with a significance test.
 
-## Interaction with Two Continuous Predictors
+### Interaction with Two Continuous Predictors
 
 When we previously discussed interaction effects involving one binary and one continuous predictor, we discovered that such interactions result in distinct regression lines for each unique value of the binary predictor. Now, consider an interaction between two continuous predictors. In this scenario, each variable can theoretically take infinite possible values. Therefore, we can no longer think of this as a distinct regression line for each value of the moderator. Instead, we can imagine how an increase in the value of one interacting variable leads to an adjustment of the effect of the other interacting variable.
 
@@ -96,11 +96,11 @@ $Y = 12.50 + 1.50 \cdot X_{1} - 0.20 \cdot 1 + 0.07 \cdot (X_{1} \times 1) = (12
 
 Now, the effect of $X_1$ has increased by 0.07 - which was exactly the size of the regression slope for the interaction term.
 
-## Centering for Interpretability
+### Centering for Interpretability
 
 When working with interactions between two continuous predictors, it's essential to center the variables. Centering aids interpretability - the effect of one predictor is now given for the average value of the other predictors. Moreover, centering avoids artificial multicollinearity between the two interacting variables and their interaction term.
 
-### Simple Slopes
+#### Simple Slopes
 
 If the interaction effect between two continuous predictors is significant, we might want to understand how the effect of one of the interacting predictors varies across levels of the other interacting predictor. This is similar to the simple effects approach from before, except now it's called simple slopes.
 
@@ -108,11 +108,11 @@ Instead of computing the effect of one variable for all unique values of a binar
 
 By centering the interacting predictors at their mean value +/- 1SD and re-computing the interaction term using those transformed predictors, we obtain simple slopes at different levels of the moderator. Note that centering at $M + 1SD$ gives us the effect for people who score 1SD **below** the mean (you're sliding the distribution to the right on the number line, until people who used to score -1SD are centered at 0).
 
-# Lecture
+## Lecture
 
 {{< video https://www.youtube.com/embed/fGj_t72VJPk >}}
 
-# Formative Test
+## Formative Test
 
 Complete the formative test ideally after you’ve seen the lecture, but before the lecture meeting in which we can discuss any topics that need more attention
 
@@ -124,9 +124,9 @@ add_mcs("questions_interaction.csv")
 ```
 
 
-# In SPSS
+## In SPSS
 
-## Multiple Regression
+### Multiple Regression
 
 {{< video https://www.youtube.com/watch?v=l3Aoikhaxtg >}}
 
@@ -138,9 +138,9 @@ add_mcs("questions_interaction.csv")
 
 {{< video https://www.youtube.com/watch?v=SdOrkPn7d8Y >}}
 
-# Tutorial
+## Tutorial
 
-## Interaction
+### Interaction
 
 In this assignment we work with the [`PublicParticipation.sav`](data/PublicParticipation.sav) data.
 It contains (fictional) data on the following variables:  income (higher scores, more income), public participation, education, age, and gender (0 = females; 1 = males). Public participation involves being member of school boards, municipal councillor, etc.
@@ -260,7 +260,7 @@ Proceed as follows:
 
 
 
-## Categorical Predictors with Three or more Categories
+### Categorical Predictors with Three or more Categories
 
 The categorical predictor Education has three levels (low, middle, high). If we want to include such a variable we need to use dummies.
 
@@ -340,7 +340,7 @@ The researchers conclude:
 Is this a valid conclusion? `r torf(FALSE)`
 
 
-## Interaction with more than Two Categories
+### Interaction with more than Two Categories
 
 In the previous assignment, we assumed that the effect of Age on Public participation was equal for each of the education level groups. However, we do not know whether this assumption is reasonable. In this assignment, we will check whether the interaction effect between Age and Education level is statistically significant or not.
  
@@ -451,7 +451,7 @@ There is no evidence for a significant effect of Age and Education on Participat
 `r unhide()`
 
 
-## Interaction Effects
+### Interaction Effects
 
 In this assignment, you will examine whether the effect of relationship with coworkers (sccowork; higher score = better relationship) on the emotional pressure at work (scemoti) has an interation effect with gender (0 = male, 1 = female).
 

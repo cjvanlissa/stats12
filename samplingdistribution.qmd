@@ -36,14 +36,14 @@ The formula for a confidence interval is often written as:
 $M \pm Z_{95\%} * SE_M$.
 In practice, this comes down to approximately: $M \pm 2 * SE_M$.
 
-# Lecture
+## Lecture
 
 **VIDEO ERRATA: from 19:40 - 19:50 I incorrectly report the probability of P(Z > 1) as .025, but it is .16.**
 
 {{< video https://www.youtube.com/embed/iNxF0Tr6R9M >}}
 
 
-# Formative Test
+## Formative Test
 
 A formative test helps you assess your progress in the course, and helps you address any blind spots in your understanding of the material. If you get a question wrong, you will receive a hint on how to improve your understanding of the material.
 
@@ -57,9 +57,9 @@ add_mcs("questions3.csv")
 ```
 
 
-# Tutorial
+## Tutorial
 
-## Sampling Distribution
+### Sampling Distribution
 
 Complete the following sentences:
 
@@ -75,9 +75,9 @@ Consider a continuous variable X, which is normally distributed with $X \sim(\mu
 The proportion of male babies is .51. Assume babies born in each hospital in a given month constitute a random sample of size 100. The standard error of a proportion is given by $\sqrt(p*(1-p) / n) = \sqrt(.51*.49 / 100) = 0.05$. What proportion of hospitals will have more than 60% male babies? `r fitb(.04, num = T, tol = .01)`
 
 
-## In SPSS
+### In SPSS
 
-### SE for Means
+#### SE for Means
 
 Open the file called [`student_questionnaire.sav`](data/student_questionnaire.sav).
 
@@ -108,7 +108,7 @@ A Z-score of nearly -4, so this probability is going to be extremely small, < .0
 
 `r unhide()`
 
-### SE for Proportions
+#### SE for Proportions
 
 Go to Analyze -> Compare Means -> One Sample Proportions.
 
@@ -144,7 +144,7 @@ answer = "A range of values that, 95% of the time, contains the population param
 "The range of likely population values.",
 "The population value, with a 95% margin of error.")[sample.int(4)])`
 
-### SE for Correlation
+#### SE for Correlation
 
 Recall from the first lecture that the correlation coefficient is a measure of linear association between two variables, or: a descriptive statistic that describes how strongly two continuous variables are associated.
 

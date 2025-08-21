@@ -1,4 +1,4 @@
-# Overview {.unnumbered}
+# Overview
 
 This GitBook covers the basics of statistics and data analysis.
 The ability to extract insights from data is an essential skill for both academic and non-academic work, and "data literacy" is increasingly important in a world where data are collected about every aspect of our lives.
@@ -38,22 +38,21 @@ All essential information is contained within this GitBook. However, it is recom
 1. [Download all lecture PDFs](include/pdfs.zip)
 1. *Optional:* [Download the PDF of the book](https://cjvanlissa.github.io/stats12/Statistics-1-and-2.pdf)
 
-## Contributing / Fixing Errors
-
-This book is a work in progress, so you might find errors. Please help me fix them! The best way is to [open an issue on github that describes the error](https://github.com/cjvanlissa/stats12/issues).
-You are also welcome to suggest fixes directly by [opening a pull request](https://github.com/cjvanlissa/stats12/pulls), if you know how to.
-
-
-## Software {#sec-software}
+## Software {#software}
 
 By default, it is assumed that you will be making the exercises in this book using the commercial program 'SPSS'. 
 
 It is important to note that there are free alternatives to SPSS; you might consider using these on your own computer, instead of buying a license for SPSS:
 
 * PSPP, which is designed to be nearly identical to SPSS with all the same basic functionality: <https://www.gnu.org/software/pspp/pspp.html>
+    + If the PSPP website is down, the Windows installer is here: <https://sourceforge.net/projects/pspp4windows/>
 * JASP, which is more modern, looks nicer and is very easy to use – but looks less similar to SPSS: 
 <https://jasp-stats.org/>
 
+## Contributing / Fixing Errors
+
+This book is a work in progress, so you might find errors. Please help me fix them! The best way is to [open an issue on github that describes the error](https://github.com/cjvanlissa/stats12/issues).
+You are also welcome to suggest fixes directly by [opening a pull request](https://github.com/cjvanlissa/stats12/pulls), if you know how to.
 
 ## Credit
 

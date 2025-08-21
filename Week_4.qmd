@@ -11,7 +11,7 @@ The numbers we calculate here only have relevance to real-world research questio
 While most of these are outside the scope of the present course,
 we want you to be familiar with the main concepts before moving on.
 
-## Deduction and Induction in Hypothesis Testing
+### Deduction and Induction in Hypothesis Testing
 
 Hypothesis testing has roots in the philosophy of logic, or correct reasoning.
 In logic, arguments consist of a set of premises, which can be true or false, that together lead to a conclusion, which can also be true or false.
@@ -72,7 +72,7 @@ The problem of induction challenges the very foundation of science.
 We cannot escape the use of induction when seeking to learn general insights from specific observations,
 but Hume showed that induction lacks a purely rational justification.
 
-## Falsificationism
+### Falsificationism
 
 It follows from the problem of induction that it is impossible to definitively prove a theory to be true.
 No matter how much evidence I have observed that supports a theory (white swans),
@@ -85,7 +85,7 @@ Note that - while Popper's work has been heavily criticized (for good reasons),
 his work is very influential in social science.
 Therefore, Popper is a good *starting point* for our course - even though he probably should not be the *endpoint* for students with a genuine interest in philosophy of science.
 
-## Falsificationism and Hypothesis Testing
+### Falsificationism and Hypothesis Testing
 
 The idea of falsificationism has been very influential in applied statistics in the social sciences, particularly in the practice of "Null-Hypothesis Significance Testing" (NHST).
 In NHST, researchers proceed as follows:
@@ -103,14 +103,14 @@ As argued by Andrew Gelman in [this blog post](https://statmodeling.stat.columbi
 A true falsificationist would put their true belief (alternative hypothesis) to the test.
 Fake falsificationism is creating a meaningless, "straw man" null-hypothesis, whose sole purpose is to be rejected.
 
-## Moving Forward
+### Moving Forward
 
 Where does this leave us? The most important point is that there are important limitations to commonly used methods,
 including null-hypothesis significance testing.
 There is no real satisfying solution.
 Just keep in mind that no statistical test can give evidence in support of a theory or hypothesis; neither a null nor an alternative hypothesis.
 
-## Causality
+### Causality
 
 Another crucial philosophical issue relevant for statistics is the question of causality.
 Scientists are often interested in causal questions.
@@ -177,13 +177,13 @@ Note that this definition does not *require* randomized experimentation, but ran
 The field of *causal inference* focuses on developing methods that can estimate causal effects (like you would get from a randomized controlled experiment) from observational data [@pearlCausalInferenceStatistics2009].
 
 
-# Lecture
+## Lecture
 
 TO DO
 
 <!-- {{< video https://www.youtube.com/embed/-1J2Ge0B3Ro >}} -->
 
-# Formative Test
+## Formative Test
 
 A formative test helps you assess your progress in the course, and helps you address any blind spots in your understanding of the material. If you get a question wrong, you will receive a hint on how to improve your understanding of the material.
 
@@ -196,9 +196,9 @@ Complete the formative test ideally after you’ve seen the lecture, but before 
 add_mcs("philosophy.csv")
 ```
 
-# Tutorial
+## Tutorial
 
-## Assignment 1: Induction and Deduction
+### Assignment 1: Induction and Deduction
 
 Below are two texts like you might find in a social science publication.
 Carefully read both, and highlight examples of inductive- and deductive reasoning.
@@ -217,7 +217,7 @@ a. Are all inductive and deductive inferences warranted? Do the fragments show s
 > Social norms theory posits that behavior is shaped by perceptions of typical peer behavior. We thus hypothesized that providing households with descriptive norm feedback about neighborhood electricity use would reduce individual electricity consumption, relative to a neutral informational control. We preregistered H1: households receiving monthly comparative reports will exhibit lower kWh usage over three billing cycles than controls. The null hypothesis H0 was that there was no difference between the experimental and control conditions. In a randomized field experiment (N = 3,042 households), treatment households received reports comparing their usage to that of "similar homes", alongside efficiency tips; control households received tips only. Mixed-effects models with random intercepts for household indicated a 2.4% reduction in usage for households in the experimental condition, $\beta$ = −0.024, SE = 0.007, p < .001. We rejected the null hypothesis of no difference. These results are consistent with H1, indicating that social norms theory is a relevant framework for understanding household electricity consumption.
 
 
-## Assignment X: Causality
+### Assignment X: Causality
 
 Below are five examples of statements from social scientific papers, courtesy of [Calvin Isch](https://www.asc.upenn.edu/people/graduate-student/calvin-isch).
 

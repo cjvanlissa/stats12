@@ -2,10 +2,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.57">
+<meta name="generator" content="quarto-1.7.33">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="description" content="Book Description">
-<title>9&nbsp; GLM-II: Sums of Squares – Statistics 1 and 2</title>
+<title>11&nbsp; GLM-II: Sums of Squares – Statistics 1 and 2</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -26,20 +26,23 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./glm3binary.html" rel="next">
+<link href="./glm_assumptions.html" rel="next">
 <link href="./glm1_regression.html" rel="prev">
 <link href="./images/logos/favicon.png" rel="icon" type="image/png">
-<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-c2894b54f4b00a27b9651b11dcf5df54.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-7530c408590d20eba92ebedbb433c75c.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-c2894b54f4b00a27b9651b11dcf5df54.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark"><script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap-e5f62320892960dc23dd0786c8482584.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-11ad583e60b2cd5ac7d46970bf1aa65a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-e5f62320892960dc23dd0786c8482584.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -97,14 +100,176 @@ window.Quarto = {
 <link rel="stylesheet" href="include/style.css">
 <link rel="stylesheet" href="include/webex.css">
 </head>
-<body class="nav-sidebar floating">
+<body class="nav-sidebar floating quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./glm2_sum_squares.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">GLM-II: Sums of Squares</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./glm2_sum_squares.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">GLM-II: Sums of Squares</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -156,145 +321,151 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Overview</span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Overview</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./statistics1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Statistics 1</span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Statistics 1</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./introduction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to Statistics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Introduction to Statistics</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./chapter2_descriptive_statistics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Descriptive Statistics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Descriptive Statistics</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Chapter3_Correlation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Bivariate Descriptive Statistics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Bivariate Descriptive Statistics</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./probability.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Probability Distributions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Probability Distributions</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./samplingdistribution.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">The Sampling Distribution</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">The Sampling Distribution</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Week_4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Philosophy of Science</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Philosophy of Science</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./testing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Hypothesis Testing</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Hypothesis Testing</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./glm1_regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">GLM-I: Linear Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">GLM-I: Linear Regression</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./glm2_sum_squares.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">GLM-II: Sums of Squares</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">GLM-II: Sums of Squares</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glm_assumptions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Assumptions</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./glm3binary.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">GLM-III: Binary Predictors</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">GLM-III: Binary Predictors</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./glm4anova.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">GLM-IV: ANOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">GLM-IV: ANOVA</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./glm5multiple.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">GLM-V: Multiple regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">GLM-V: Multiple regression</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./glm6nested.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">GLM-VI: Nested models</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">GLM-VI: Nested models</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./glm7interaction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">GLM-VII: Interaction</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">GLM-VII: Interaction</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./logistic.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">GLM VIII - Logistic Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">GLM VIII - Logistic Regression</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./glm_contrasts.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">GLM: Contrasts</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">GLM: Contrasts</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./factorial.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">GLM: Factorial ANOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">GLM: Factorial ANOVA</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ancova.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">GLM: ANCOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">GLM: ANCOVA</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./rmanova.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">GLM: Repeated Measures ANOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">GLM: Repeated Measures ANOVA</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./reliability_validity.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Reliability and Validity</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Reliability and Validity</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./data_reduction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Dimension Reduction</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Dimension Reduction</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./confint.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">BE2 - Confidence Intervals</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">BE2 - Confidence Intervals</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -309,25 +480,25 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Data for Portfolio</span></a>
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Data for Portfolio</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./probability_tables.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Z-table</span></span></a>
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Z-table</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./formula_sheet2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Formula sheet</span></span></a>
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Formula sheet</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">References</span></a>
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">References</span></span></a>
   </div>
 </li>
       </ul>
@@ -340,27 +511,27 @@ window.Quarto = {
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#lecture" id="toc-lecture" class="nav-link active" data-scroll-target="#lecture"><span class="header-section-number">10</span> Lecture</a></li>
-  <li><a href="#formative-test" id="toc-formative-test" class="nav-link" data-scroll-target="#formative-test"><span class="header-section-number">11</span> Formative Test</a></li>
+<li><a href="#lecture" id="toc-lecture" class="nav-link active" data-scroll-target="#lecture"><span class="header-section-number">11.1</span> Lecture</a></li>
+  <li><a href="#formative-test" id="toc-formative-test" class="nav-link" data-scroll-target="#formative-test"><span class="header-section-number">11.2</span> Formative Test</a></li>
   <li>
-<a href="#in-spss" id="toc-in-spss" class="nav-link" data-scroll-target="#in-spss"><span class="header-section-number">12</span> In SPSS</a>
+<a href="#in-spss" id="toc-in-spss" class="nav-link" data-scroll-target="#in-spss"><span class="header-section-number">11.3</span> In SPSS</a>
   <ul class="collapse">
-<li><a href="#correlation-analysis" id="toc-correlation-analysis" class="nav-link" data-scroll-target="#correlation-analysis"><span class="header-section-number">12.1</span> Correlation Analysis</a></li>
+<li><a href="#correlation-analysis" id="toc-correlation-analysis" class="nav-link" data-scroll-target="#correlation-analysis"><span class="header-section-number">11.3.1</span> Correlation Analysis</a></li>
   </ul>
 </li>
   <li>
-<a href="#tutorial" id="toc-tutorial" class="nav-link" data-scroll-target="#tutorial"><span class="header-section-number">13</span> Tutorial</a>
+<a href="#tutorial" id="toc-tutorial" class="nav-link" data-scroll-target="#tutorial"><span class="header-section-number">11.4</span> Tutorial</a>
   <ul class="collapse">
-<li><a href="#bivariate-regression" id="toc-bivariate-regression" class="nav-link" data-scroll-target="#bivariate-regression"><span class="header-section-number">13.1</span> Bivariate Regression</a></li>
-  <li><a href="#correlation" id="toc-correlation" class="nav-link" data-scroll-target="#correlation"><span class="header-section-number">13.2</span> Correlation</a></li>
-  <li><a href="#r-squared" id="toc-r-squared" class="nav-link" data-scroll-target="#r-squared"><span class="header-section-number">13.3</span> R squared</a></li>
+<li><a href="#bivariate-regression" id="toc-bivariate-regression" class="nav-link" data-scroll-target="#bivariate-regression"><span class="header-section-number">11.4.1</span> Bivariate Regression</a></li>
+  <li><a href="#correlation" id="toc-correlation" class="nav-link" data-scroll-target="#correlation"><span class="header-section-number">11.4.2</span> Correlation</a></li>
+  <li><a href="#r-squared" id="toc-r-squared" class="nav-link" data-scroll-target="#r-squared"><span class="header-section-number">11.4.3</span> R squared</a></li>
   </ul>
 </li>
   </ul></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
-<h1 class="title"><span id="sec-glm2" class="quarto-section-identifier"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">GLM-II: Sums of Squares</span></span></h1>
+<h1 class="title"><span id="sec-glm2" class="quarto-section-identifier"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">GLM-II: Sums of Squares</span></span></h1>
 </div>
 
 
@@ -380,64 +551,64 @@ window.Quarto = {
 <p>To understand how much of the TSS is explained by the regression line, we calculate the Regression Sum of Squares (RSS). This is the difference between the TSS and the SSE: the reduction in TSS achieved by using the regression line to predict observations instead of just the mean. It indicates how well the regression line explains the variance in the dependent variable.</p>
 <p>We can standardize this RSS by dividing it by the SSE, which gives us the “explained variance” <span class="math inline">\(R^2\)</span>, which ranges from 0 to 1. A higher R^2 value indicates that a larger portion of the total variance in the dependent variable is accounted for by the predictor variable. Explained variance is the proportion of the total sum of squares (TSS) that is explained by the regression line (RSS).</p>
 <p>Understanding these sums of squares gives us a good foundation for understanding another statistic: the correlation coefficient <span class="math inline">\(r\)</span>. The correlation coefficient describes the strength and direction of the linear relationship between two variables. It differs from regression because regression describes one of these variables as an outcome of the other: an asymmetrical relationship. Correlation instead just describes how strongly these two variables are associated without labeling one as the predictor and the other as the outcome: a symmetrical relationship. The correlation coefficient is a standardized measure of the strength of this association that ranges from -1 (perfectly negatively associated) to 1 (perfectly positively associated). A correlation coefficient of 0 means that there is no association between X and Y. Correlation and regression are very closely related, as the squared correlation coefficient (<span class="math inline">\(r\)</span>, squared) is the same as the measure of explained variance from simple linear regression, <span class="math inline">\(R^2\)</span>, and is also the same as the standardized regression coefficient.</p>
-<section id="lecture" class="level1" data-number="10"><h1 data-number="10">
-<span class="header-section-number">10</span> Lecture</h1>
+<section id="lecture" class="level2" data-number="11.1"><h2 data-number="11.1" class="anchored" data-anchor-id="lecture">
+<span class="header-section-number">11.1</span> Lecture</h2>
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/okrRJXb0YT4" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
-</section><section id="formative-test" class="level1" data-number="11"><h1 data-number="11">
-<span class="header-section-number">11</span> Formative Test</h1>
+</section><section id="formative-test" class="level2" data-number="11.2"><h2 data-number="11.2" class="anchored" data-anchor-id="formative-test">
+<span class="header-section-number">11.2</span> Formative Test</h2>
 <p>A formative test helps you assess your progress in the course, and helps you address any blind spots in your understanding of the material. If you get a question wrong, you will receive a hint on how to improve your understanding of the material.</p>
 <p>Complete the formative test ideally after you’ve seen the lecture, but before the lecture meeting in which we can discuss any topics that need more attention</p>
 <div class="cell" data-layout-align="center">
 <div class="webex-check webex-box">
 <p><strong>Question 1</strong></p>
 What does SSE stand for in linear regression?
-<div id="radio_JBHDIROURL" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_JBHDIROURL" value=""><span>Sum of Squared Explained Variance</span></label><label><input type="radio" autocomplete="off" name="radio_JBHDIROURL" value="answer"><span>Sum of Squared Errors</span></label><label><input type="radio" autocomplete="off" name="radio_JBHDIROURL" value=""><span>Sum of Standard Errors</span></label><label><input type="radio" autocomplete="off" name="radio_JBHDIROURL" value=""><span>Sum of Squares for the Expectation</span></label>
+<div id="radio_FPMJAPXRIG" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_FPMJAPXRIG" value="answer"><span>Sum of Squared Errors</span></label><label><input type="radio" autocomplete="off" name="radio_FPMJAPXRIG" value=""><span>Sum of Squares for the Expectation</span></label><label><input type="radio" autocomplete="off" name="radio_FPMJAPXRIG" value=""><span>Sum of Squared Explained Variance</span></label><label><input type="radio" autocomplete="off" name="radio_FPMJAPXRIG" value=""><span>Sum of Standard Errors</span></label>
 </div>
 <p><strong>Question 2</strong></p>
 Which of the following describes the concept of Ordinary Least Squares?
-<div id="radio_BFUYXOMXSM" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_BFUYXOMXSM" value=""><span>Minimizing the correlation</span></label><label><input type="radio" autocomplete="off" name="radio_BFUYXOMXSM" value=""><span>Minimizing the total sum of squares</span></label><label><input type="radio" autocomplete="off" name="radio_BFUYXOMXSM" value="answer"><span>Minimizing the sum of squared errors</span></label><label><input type="radio" autocomplete="off" name="radio_BFUYXOMXSM" value=""><span>Minimizing the regression sum of squares</span></label>
+<div id="radio_FOYXHCNXFP" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_FOYXHCNXFP" value="answer"><span>Minimizing the sum of squared errors</span></label><label><input type="radio" autocomplete="off" name="radio_FOYXHCNXFP" value=""><span>Minimizing the total sum of squares</span></label><label><input type="radio" autocomplete="off" name="radio_FOYXHCNXFP" value=""><span>Minimizing the correlation</span></label><label><input type="radio" autocomplete="off" name="radio_FOYXHCNXFP" value=""><span>Minimizing the regression sum of squares</span></label>
 </div>
 <p><strong>Question 3</strong></p>
 What does the Regression Sum of Squares (RSS) represent?
-<div id="radio_LSYBVRQYIM" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_LSYBVRQYIM" value=""><span>The explained variance by the regression line</span></label><label><input type="radio" autocomplete="off" name="radio_LSYBVRQYIM" value=""><span>The total sum of squares minus the predicted values</span></label><label><input type="radio" autocomplete="off" name="radio_LSYBVRQYIM" value="answer"><span>The reduction in sum of squares by using the regression line as a predictor, rather than the mean</span></label><label><input type="radio" autocomplete="off" name="radio_LSYBVRQYIM" value=""><span>The sum of squared prediction errors</span></label>
+<div id="radio_PKSQRHZUPU" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_PKSQRHZUPU" value=""><span>The total sum of squares minus the predicted values</span></label><label><input type="radio" autocomplete="off" name="radio_PKSQRHZUPU" value=""><span>The sum of squared prediction errors</span></label><label><input type="radio" autocomplete="off" name="radio_PKSQRHZUPU" value=""><span>The explained variance by the regression line</span></label><label><input type="radio" autocomplete="off" name="radio_PKSQRHZUPU" value="answer"><span>The reduction in sum of squares by using the regression line as a predictor, rather than the mean</span></label>
 </div>
 <p><strong>Question 4</strong></p>
 What is the purpose of the Total Sum of Squares (TSS) in linear regression?
-<div id="radio_NLPYAQNOWS" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_NLPYAQNOWS" value=""><span>It measures the standard deviation of the errors.</span></label><label><input type="radio" autocomplete="off" name="radio_NLPYAQNOWS" value="answer"><span>It measures the total variability of the dependent variable.</span></label><label><input type="radio" autocomplete="off" name="radio_NLPYAQNOWS" value=""><span>It measures the residual error in the model.</span></label><label><input type="radio" autocomplete="off" name="radio_NLPYAQNOWS" value=""><span>It measures the explained variance of the predictor.</span></label>
+<div id="radio_EHMSESHEIH" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_EHMSESHEIH" value=""><span>It measures the standard deviation of the errors.</span></label><label><input type="radio" autocomplete="off" name="radio_EHMSESHEIH" value=""><span>It measures the residual error in the model.</span></label><label><input type="radio" autocomplete="off" name="radio_EHMSESHEIH" value="answer"><span>It measures the total variability of the dependent variable.</span></label><label><input type="radio" autocomplete="off" name="radio_EHMSESHEIH" value=""><span>It measures the explained variance of the predictor.</span></label>
 </div>
 <p><strong>Question 5</strong></p>
 What does the term ‘explained variance’ refer to in linear regression?
-<div id="radio_TDDIDAWWLA" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_TDDIDAWWLA" value=""><span>The portion of the standard deviation explained by the predictor.</span></label><label><input type="radio" autocomplete="off" name="radio_TDDIDAWWLA" value="answer"><span>The portion of the total variance explained by the regression line.</span></label><label><input type="radio" autocomplete="off" name="radio_TDDIDAWWLA" value=""><span>The portion of the total variance explained by the null model.</span></label><label><input type="radio" autocomplete="off" name="radio_TDDIDAWWLA" value=""><span>The portion of the regression sum of squares explained by the predictor.</span></label>
+<div id="radio_BGLLOYMWHE" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_BGLLOYMWHE" value=""><span>The portion of the regression sum of squares explained by the predictor.</span></label><label><input type="radio" autocomplete="off" name="radio_BGLLOYMWHE" value=""><span>The portion of the standard deviation explained by the predictor.</span></label><label><input type="radio" autocomplete="off" name="radio_BGLLOYMWHE" value="answer"><span>The portion of the total variance explained by the regression line.</span></label><label><input type="radio" autocomplete="off" name="radio_BGLLOYMWHE" value=""><span>The portion of the total variance explained by the null model.</span></label>
 </div>
 <p><strong>Question 6</strong></p>
 How is correlation different from regression?
-<div id="radio_TPKFWYLIMB" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_TPKFWYLIMB" value="answer"><span>Correlation measures the strength of linear association, while regression predicts one variable from another.</span></label><label><input type="radio" autocomplete="off" name="radio_TPKFWYLIMB" value=""><span>Correlation focuses on categorical variables, while regression focuses on continuous variables.</span></label><label><input type="radio" autocomplete="off" name="radio_TPKFWYLIMB" value=""><span>Correlation predicts one variable from another, while regression measures the strength of linear association.</span></label><label><input type="radio" autocomplete="off" name="radio_TPKFWYLIMB" value=""><span>Correlation measures the total variance, while regression measures the explained variance.</span></label>
+<div id="radio_LZHXUUPZPY" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_LZHXUUPZPY" value=""><span>Correlation measures the total variance, while regression measures the explained variance.</span></label><label><input type="radio" autocomplete="off" name="radio_LZHXUUPZPY" value=""><span>Correlation focuses on categorical variables, while regression focuses on continuous variables.</span></label><label><input type="radio" autocomplete="off" name="radio_LZHXUUPZPY" value=""><span>Correlation predicts one variable from another, while regression measures the strength of linear association.</span></label><label><input type="radio" autocomplete="off" name="radio_LZHXUUPZPY" value="answer"><span>Correlation measures the strength of linear association, while regression predicts one variable from another.</span></label>
 </div>
 <p><strong>Question 7</strong></p>
 What is the range of the correlation coefficient (r) between two variables?
-<div id="radio_OQEROAPEAX" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_OQEROAPEAX" value=""><span>[-∞, ∞]</span></label><label><input type="radio" autocomplete="off" name="radio_OQEROAPEAX" value=""><span>[0, 1]</span></label><label><input type="radio" autocomplete="off" name="radio_OQEROAPEAX" value=""><span>[-1, 0]</span></label><label><input type="radio" autocomplete="off" name="radio_OQEROAPEAX" value="answer"><span>[-1, 1]</span></label>
+<div id="radio_MZFSTAXWEC" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_MZFSTAXWEC" value="answer"><span>[-1, 1]</span></label><label><input type="radio" autocomplete="off" name="radio_MZFSTAXWEC" value=""><span>[-∞, ∞]</span></label><label><input type="radio" autocomplete="off" name="radio_MZFSTAXWEC" value=""><span>[0, 1]</span></label><label><input type="radio" autocomplete="off" name="radio_MZFSTAXWEC" value=""><span>[-1, 0]</span></label>
 </div>
 <p><strong>Question 8</strong></p>
 Which statistic is equivalent to the standardized regression coefficient in bivariate regression?
-<div id="radio_MNUYQLQESF" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_MNUYQLQESF" value=""><span>Sum of Squared Errors (SSE)</span></label><label><input type="radio" autocomplete="off" name="radio_MNUYQLQESF" value="answer"><span>Correlation coefficient (r)</span></label><label><input type="radio" autocomplete="off" name="radio_MNUYQLQESF" value=""><span>Coefficient of determination (R²)</span></label><label><input type="radio" autocomplete="off" name="radio_MNUYQLQESF" value=""><span>Standard deviation of the predictor</span></label>
+<div id="radio_TVKOIYLVXM" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_TVKOIYLVXM" value=""><span>Sum of Squared Errors (SSE)</span></label><label><input type="radio" autocomplete="off" name="radio_TVKOIYLVXM" value=""><span>Standard deviation of the predictor</span></label><label><input type="radio" autocomplete="off" name="radio_TVKOIYLVXM" value=""><span>Coefficient of determination (R²)</span></label><label><input type="radio" autocomplete="off" name="radio_TVKOIYLVXM" value="answer"><span>Correlation coefficient (r)</span></label>
 </div>
 <p><strong>Question 9</strong></p>
 What is the relationship between the Total Sum of Squares (TSS) and the Regression Sum of Squares (RSS)?
-<div id="radio_MXKJBLIIFY" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_MXKJBLIIFY" value=""><span>SSR- SSE = SST</span></label><label><input type="radio" autocomplete="off" name="radio_MXKJBLIIFY" value=""><span>TSS + RSS = SSE</span></label><label><input type="radio" autocomplete="off" name="radio_MXKJBLIIFY" value="answer"><span>TSS - SSE = RSS</span></label><label><input type="radio" autocomplete="off" name="radio_MXKJBLIIFY" value=""><span>TSS + SSE = SSR</span></label>
+<div id="radio_KRJIWSGFJJ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_KRJIWSGFJJ" value=""><span>TSS + RSS = SSE</span></label><label><input type="radio" autocomplete="off" name="radio_KRJIWSGFJJ" value=""><span>SSR- SSE = SST</span></label><label><input type="radio" autocomplete="off" name="radio_KRJIWSGFJJ" value=""><span>TSS + SSE = SSR</span></label><label><input type="radio" autocomplete="off" name="radio_KRJIWSGFJJ" value="answer"><span>TSS - SSE = RSS</span></label>
 </div>
 <p><strong>Question 10</strong></p>
 How is the proportion of explained variance (R²) related to the correlation coefficient (r)?
-<div id="radio_TARUPFUCYJ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_TARUPFUCYJ" value="answer"><span>R² = r²</span></label><label><input type="radio" autocomplete="off" name="radio_TARUPFUCYJ" value=""><span>R² = 1 - r²</span></label><label><input type="radio" autocomplete="off" name="radio_TARUPFUCYJ" value=""><span>R² = 1 / r</span></label><label><input type="radio" autocomplete="off" name="radio_TARUPFUCYJ" value=""><span>R² = 2 * r</span></label>
+<div id="radio_FQSCTOLEPN" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_FQSCTOLEPN" value=""><span>R² = 1 / r</span></label><label><input type="radio" autocomplete="off" name="radio_FQSCTOLEPN" value=""><span>R² = 1 - r²</span></label><label><input type="radio" autocomplete="off" name="radio_FQSCTOLEPN" value="answer"><span>R² = r²</span></label><label><input type="radio" autocomplete="off" name="radio_FQSCTOLEPN" value=""><span>R² = 2 * r</span></label>
 </div>
 </div>
 <div class="webex-solution">
@@ -466,15 +637,15 @@ Show explanations
 <p>The proportion of explained variance (R²) is equal to the square of the correlation coefficient (r), meaning R² = r².</p>
 </div>
 </div>
-</section><section id="in-spss" class="level1" data-number="12"><h1 data-number="12">
-<span class="header-section-number">12</span> In SPSS</h1>
-<section id="correlation-analysis" class="level2" data-number="12.1"><h2 data-number="12.1" class="anchored" data-anchor-id="correlation-analysis">
-<span class="header-section-number">12.1</span> Correlation Analysis</h2>
+</section><section id="in-spss" class="level2" data-number="11.3"><h2 data-number="11.3" class="anchored" data-anchor-id="in-spss">
+<span class="header-section-number">11.3</span> In SPSS</h2>
+<section id="correlation-analysis" class="level3" data-number="11.3.1"><h3 data-number="11.3.1" class="anchored" data-anchor-id="correlation-analysis">
+<span class="header-section-number">11.3.1</span> Correlation Analysis</h3>
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/VOI5IlHfZVE" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
-</section></section><section id="tutorial" class="level1" data-number="13"><h1 data-number="13">
-<span class="header-section-number">13</span> Tutorial</h1>
-<section id="bivariate-regression" class="level2" data-number="13.1"><h2 data-number="13.1" class="anchored" data-anchor-id="bivariate-regression">
-<span class="header-section-number">13.1</span> Bivariate Regression</h2>
+</section></section><section id="tutorial" class="level2" data-number="11.4"><h2 data-number="11.4" class="anchored" data-anchor-id="tutorial">
+<span class="header-section-number">11.4</span> Tutorial</h2>
+<section id="bivariate-regression" class="level3" data-number="11.4.1"><h3 data-number="11.4.1" class="anchored" data-anchor-id="bivariate-regression">
+<span class="header-section-number">11.4.1</span> Bivariate Regression</h3>
 <p>Social science students were asked about their opinion towards Tilburg’s nightlife, number of Facebook friends, and some other characteristics. The data are in the <a href="data/SocScSurvey.sav"><code>SocScSurvey.sav</code></a> file.</p>
 <p>Download the file to your computer and open it in SPSS.</p>
 <p>Suppose researchers are interested in the relationship between personality and social media use. In particular, they want to know if extraversion explains the number of Facebook friends.</p>
@@ -493,15 +664,15 @@ Answer
 <p><span class="math inline">\(\text{Friends}_i = -62.377 + 26.788*\text{Extraversion}_i + e_i\)</span></p>
 </div>
 <p>Which of the following statements is true?</p>
-<div id="radio_EOWCDJDFTO" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_EOWCDJDFTO" value="answer"><span>If Extraversion increases with one unit, the number of facebook friends increases with 26.788 units</span></label><label><input type="radio" autocomplete="off" name="radio_EOWCDJDFTO" value=""><span>If Extraversion increases with 26.788 units, the number of facebook friends increases with 1 unit</span></label><label><input type="radio" autocomplete="off" name="radio_EOWCDJDFTO" value=""><span>If Facebook friends increases with one unit, extraversion increases with 26.788 units</span></label>
+<div id="radio_SPSKCHWTBO" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_SPSKCHWTBO" value="answer"><span>If Extraversion increases with one unit, the number of facebook friends increases with 26.788 units</span></label><label><input type="radio" autocomplete="off" name="radio_SPSKCHWTBO" value=""><span>If Facebook friends increases with one unit, extraversion increases with 26.788 units</span></label><label><input type="radio" autocomplete="off" name="radio_SPSKCHWTBO" value=""><span>If Extraversion increases with 26.788 units, the number of facebook friends increases with 1 unit</span></label>
 </div>
 <p>Remember that the general form of interpretation of the unstandardized effect is: “If X increases with 1 unit, Y increases/decreases with ‘unstandardized regression coefficient’ units”.</p>
 <p>What is the value of the standardized regression coefficient? <input class="webex-solveme nospaces" data-tol="0.01" size="5" data-answer="[&quot;0.438&quot;,&quot;.438&quot;]"></p>
 <p>You can find the standardized regression coefficients in the column called ‘Standardized Coefficients Beta’.</p>
 <p>Which of the following statements about the standardized regression coefficients is correct?</p>
-<div id="radio_GEMCBFNWXI" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_GEMCBFNWXI" value="answer"><span>If extraversion increases with one SD, the number of facebook friends increases with 0.438 SDs</span></label><label><input type="radio" autocomplete="off" name="radio_GEMCBFNWXI" value=""><span>If extraversion increases with one SD, the number of facebook friends increases with 0.438 units</span></label><label><input type="radio" autocomplete="off" name="radio_GEMCBFNWXI" value=""><span>If extraversion increases with one unit, the number of facebook friends increases with 0.438 SDs</span></label>
+<div id="radio_UBJFSIMKCG" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_UBJFSIMKCG" value=""><span>If extraversion increases with one unit, the number of facebook friends increases with 0.438 SDs</span></label><label><input type="radio" autocomplete="off" name="radio_UBJFSIMKCG" value=""><span>If extraversion increases with one SD, the number of facebook friends increases with 0.438 units</span></label><label><input type="radio" autocomplete="off" name="radio_UBJFSIMKCG" value="answer"><span>If extraversion increases with one SD, the number of facebook friends increases with 0.438 SDs</span></label>
 </div>
 <p>Remember that standardized regression coefficients are interpreted in a similar way as unstandardized regression coefficients are, with the one difference being they are interpreted in terms of standard deviations.</p>
 <p>Consider the first person in the data file. The person had an extraversion score of 9.</p>
@@ -525,20 +696,20 @@ Answer
 <p>Suppose three researchers test the significance of the R-square.</p>
 <p>Researcher I tests at the 10% level, researcher II tests at the 5% level, and researcher III at the 1% level.</p>
 <p>Which researcher will reject the null hypothesis? <select class="webex-select"><option value="blank"></option>
-<option value="">Only researcher I</option>
-<option value="">Only researcher III</option>
 <option value="">Only researcher II</option>
-<option value="answer">All three researchers</option></select></p>
+<option value="answer">All three researchers</option>
+<option value="">Only researcher III</option>
+<option value="">Only researcher I</option></select></p>
 <p>When reporting the F-test for the model, you would report <span class="math inline">\(R^2\)</span>, the F-test statistic, its degrees of freedom, and the p-value.</p>
 <p>The F-test has two distinct degrees of freedom. The first refers to the degrees of freedom for the regression equation, and the second to the degrees of freedom for the residuals. The degrees of freedom are given in brackets. For example, if regression has 2 degrees of freedom and the residuals 100, we write the F-value as F(2,100) = ….</p>
 <p>Which of the following F value and corresponding degrees of freedom should be reported? <select class="webex-select"><option value="blank"></option>
 <option value="">F(1,132) = 0.000</option>
-<option value="">F(1,133) = 31.283</option>
-<option value="answer">F(1,132) = 31.283</option></select></p>
+<option value="answer">F(1,132) = 31.283</option>
+<option value="">F(1,133) = 31.283</option></select></p>
 <!-- Keep the output for the next assignment. -->
 <!-- In the next assignment we will extend our analysis by including multiple predictors to predict the number of Facebook friends (i.e., we will carry out multiple regression analysis).     -->
-</section><section id="correlation" class="level2" data-number="13.2"><h2 data-number="13.2" class="anchored" data-anchor-id="correlation">
-<span class="header-section-number">13.2</span> Correlation</h2>
+</section><section id="correlation" class="level3" data-number="11.4.2"><h3 data-number="11.4.2" class="anchored" data-anchor-id="correlation">
+<span class="header-section-number">11.4.2</span> Correlation</h3>
 <p>Correlations and regression analyses can both be used to study the relationship between variables, but there is an important difference.</p>
 <p>Discuss with your group mates what the similarities and differences between the two methods are.</p>
 <div class="webex-solution">
@@ -556,13 +727,13 @@ Answer
 <p>What is the correlation between Extraversion and number of Facebook friends? <input class="webex-solveme nospaces" data-tol="0.01" size="5" data-answer="[&quot;0.438&quot;,&quot;.438&quot;]"></p>
 <p>Suppose three researchers test the significance of the correlation between Extraversion and Facebook friends. Researcher I tests at the 10% level, researcher II tests at the 5% level, and researcher III at the 1% level.</p>
 <p>Which researcher will reject the null hypothesis? <select class="webex-select"><option value="blank"></option>
-<option value="">Only researcher III</option>
+<option value="answer">All three researchers</option>
 <option value="">Only researcher II</option>
-<option value="">Only researcher I</option>
-<option value="answer">All three researchers</option></select></p>
+<option value="">Only researcher III</option>
+<option value="">Only researcher I</option></select></p>
 <p>Which of the following interpretations is true?</p>
-<div id="radio_EFDDUPUNEU" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_EFDDUPUNEU" value=""><span>We don't have convincing evidence that Facebook friends and extraversion are associated in the population.</span></label><label><input type="radio" autocomplete="off" name="radio_EFDDUPUNEU" value=""><span>We have convincing evidence that Facebook friends and extraversion are associated in the population.</span></label><label><input type="radio" autocomplete="off" name="radio_EFDDUPUNEU" value="answer"><span>It would be very unlikely to observe a sample correlation of .44 by chance if the population correlation would be zero.</span></label>
+<div id="radio_XNGYCSOGGF" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_XNGYCSOGGF" value="answer"><span>It would be very unlikely to observe a sample correlation of .44 by chance if the population correlation would be zero.</span></label><label><input type="radio" autocomplete="off" name="radio_XNGYCSOGGF" value=""><span>We don't have convincing evidence that Facebook friends and extraversion are associated in the population.</span></label><label><input type="radio" autocomplete="off" name="radio_XNGYCSOGGF" value=""><span>We have convincing evidence that Facebook friends and extraversion are associated in the population.</span></label>
 </div>
 <p>Compare the correlation coefficient to the standardized regression coefficient from the bivariate regression you conducted previously.</p>
 <p>Then, compare it to the value labeled “R” in the “Model Summary” table from the regression.</p>
@@ -575,8 +746,8 @@ Answer
 <p>If you did everything correctly, you should observe that the bivariate correlation is identical to the standardized regression coefficient. This is only the case with <em>bivariate</em> regression.</p>
 <p>Furthermore, the bivariate correlation should be identical to the R reported in the Model Summary table, because they are both just the correlation coefficient. R squared is the squared correlation coefficient, and we interpret it as the “proportion of variance in the outcome explained by the predictor”. Only in bivariate regression is this identical to the squared correlation coefficient.</p>
 </div>
-</section><section id="r-squared" class="level2" data-number="13.3"><h2 data-number="13.3" class="anchored" data-anchor-id="r-squared">
-<span class="header-section-number">13.3</span> R squared</h2>
+</section><section id="r-squared" class="level3" data-number="11.4.3"><h3 data-number="11.4.3" class="anchored" data-anchor-id="r-squared">
+<span class="header-section-number">11.4.3</span> R squared</h3>
 <p>The R squared expresses how well the predictors explain variance in the outcome of a regression. In the next few steps we will look in more detail at this concept.</p>
 <p>Consider the results of the regression model again.</p>
 <p>Write down the (unstandardized) regression equation based on your previous results, and use the raw data in the Data View to answer the following question.</p>
@@ -1064,383 +1235,255 @@ window.onload = function() {
 }
 
 </script><script id="quarto-html-after-body" type="application/javascript">
-window.document.addEventListener("DOMContentLoaded", function (event) {
-  const toggleBodyColorMode = (bsSheetEl) => {
-    const mode = bsSheetEl.getAttribute("data-mode");
-    const bodyEl = window.document.querySelector("body");
-    if (mode === "dark") {
-      bodyEl.classList.add("quarto-dark");
-      bodyEl.classList.remove("quarto-light");
-    } else {
-      bodyEl.classList.add("quarto-light");
-      bodyEl.classList.remove("quarto-dark");
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
     }
-  }
-  const toggleBodyColorPrimary = () => {
-    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-    if (bsSheetEl) {
-      toggleBodyColorMode(bsSheetEl);
-    }
-  }
-  toggleBodyColorPrimary();  
-  const disableStylesheet = (stylesheets) => {
-    for (let i=0; i < stylesheets.length; i++) {
-      const stylesheet = stylesheets[i];
-      stylesheet.rel = 'prefetch';
-    }
-  }
-  const enableStylesheet = (stylesheets) => {
-    for (let i=0; i < stylesheets.length; i++) {
-      const stylesheet = stylesheets[i];
-      stylesheet.rel = 'stylesheet';
-    }
-  }
-  const manageTransitions = (selector, allowTransitions) => {
-    const els = window.document.querySelectorAll(selector);
-    for (let i=0; i < els.length; i++) {
-      const el = els[i];
-      if (allowTransitions) {
-        el.classList.remove('notransition');
-      } else {
-        el.classList.add('notransition');
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
       }
+      return false;
     }
-  }
-  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
-    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
-    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
-    let newTheme = '';
-    if(darkModeDefault) {
-      newTheme = isAlternate ? baseTheme : alternateTheme;
-    } else {
-      newTheme = isAlternate ? alternateTheme : baseTheme;
-    }
-    const changeGiscusTheme = () => {
-      // From: https://github.com/giscus/giscus/issues/336
-      const sendMessage = (message) => {
-        const iframe = document.querySelector('iframe.giscus-frame');
-        if (!iframe) return;
-        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
       }
-      sendMessage({
-        setConfig: {
-          theme: newTheme
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
         }
       });
     }
-    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
-    if (isGiscussLoaded) {
-      changeGiscusTheme();
-    }
-  }
-  const toggleColorMode = (alternate) => {
-    // Switch the stylesheets
-    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
-    manageTransitions('#quarto-margin-sidebar .nav-link', false);
-    if (alternate) {
-      enableStylesheet(alternateStylesheets);
-      for (const sheetNode of alternateStylesheets) {
-        if (sheetNode.id === "quarto-bootstrap") {
-          toggleBodyColorMode(sheetNode);
-        }
-      }
-    } else {
-      disableStylesheet(alternateStylesheets);
-      toggleBodyColorPrimary();
-    }
-    manageTransitions('#quarto-margin-sidebar .nav-link', true);
-    // Switch the toggles
-    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
-    for (let i=0; i < toggles.length; i++) {
-      const toggle = toggles[i];
-      if (toggle) {
-        if (alternate) {
-          toggle.classList.add("alternate");     
-        } else {
-          toggle.classList.remove("alternate");
-        }
-      }
-    }
-    // Hack to workaround the fact that safari doesn't
-    // properly recolor the scrollbar when toggling (#1455)
-    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
-      manageTransitions("body", false);
-      window.scrollTo(0, 1);
-      setTimeout(() => {
-        window.scrollTo(0, 0);
-        manageTransitions("body", true);
-      }, 40);  
-    }
-  }
-  const isFileUrl = () => { 
-    return window.location.protocol === 'file:';
-  }
-  const hasAlternateSentinel = () => {  
-    let styleSentinel = getColorSchemeSentinel();
-    if (styleSentinel !== null) {
-      return styleSentinel === "alternate";
-    } else {
-      return false;
-    }
-  }
-  const setStyleSentinel = (alternate) => {
-    const value = alternate ? "alternate" : "default";
-    if (!isFileUrl()) {
-      window.localStorage.setItem("quarto-color-scheme", value);
-    } else {
-      localAlternateSentinel = value;
-    }
-  }
-  const getColorSchemeSentinel = () => {
-    if (!isFileUrl()) {
-      const storageValue = window.localStorage.getItem("quarto-color-scheme");
-      return storageValue != null ? storageValue : localAlternateSentinel;
-    } else {
-      return localAlternateSentinel;
-    }
-  }
-  const darkModeDefault = false;
-  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
-  // Dark / light mode switch
-  window.quartoToggleColorScheme = () => {
-    // Read the current dark / light value 
-    let toAlternate = !hasAlternateSentinel();
-    toggleColorMode(toAlternate);
-    setStyleSentinel(toAlternate);
-    toggleGiscusIfUsed(toAlternate, darkModeDefault);
-  };
-  // Ensure there is a toggle, if there isn't float one in the top right
-  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
-    const a = window.document.createElement('a');
-    a.classList.add('top-right');
-    a.classList.add('quarto-color-scheme-toggle');
-    a.href = "";
-    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
-    const i = window.document.createElement("i");
-    i.classList.add('bi');
-    a.appendChild(i);
-    window.document.body.appendChild(a);
-  }
-  // Switch to dark mode if need be
-  if (hasAlternateSentinel()) {
-    toggleColorMode(true);
-  } else {
-    toggleColorMode(false);
-  }
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
-  const isCodeAnnotation = (el) => {
-    for (const clz of el.classList) {
-      if (clz.startsWith('code-annotation-')) {                     
-        return true;
-      }
-    }
-    return false;
-  }
-  const onCopySuccess = function(e) {
-    // button target
-    const button = e.trigger;
-    // don't keep focus
-    button.blur();
-    // flash "checked"
-    button.classList.add('code-copy-button-checked');
-    var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Copied!");
-    let tooltip;
-    if (window.bootstrap) {
-      button.setAttribute("data-bs-toggle", "tooltip");
-      button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Copied!");
-      tooltip = new bootstrap.Tooltip(button, 
-        { trigger: "manual", 
-          customClass: "code-copy-button-tooltip",
-          offset: [0, -8]});
-      tooltip.show();    
-    }
-    setTimeout(function() {
-      if (tooltip) {
-        tooltip.hide();
-        button.removeAttribute("data-bs-title");
-        button.removeAttribute("data-bs-toggle");
-        button.removeAttribute("data-bs-placement");
-      }
-      button.setAttribute("title", currentTitle);
-      button.classList.remove('code-copy-button-checked');
-    }, 1000);
-    // clear code selection
-    e.clearSelection();
-  }
-  const getTextToCopy = function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-  }
-  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-    text: getTextToCopy
-  });
-  clipboard.on('success', onCopySuccess);
-  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
-    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-      text: getTextToCopy,
-      container: window.document.getElementById('quarto-embedded-source-code-modal')
-    });
-    clipboardModal.on('success', onCopySuccess);
-  }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
-      }
-    }
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-    const config = {
-      allowHTML: true,
-      maxWidth: 500,
-      delay: 100,
-      arrow: false,
-      appendTo: function(el) {
-          return el.parentElement;
-      },
-      interactive: true,
-      interactiveBorder: 10,
-      theme: 'quarto',
-      placement: 'bottom-start',
-    };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
-    window.tippy(el, config); 
-  }
-  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-  for (var i=0; i<noterefs.length; i++) {
-    const ref = noterefs[i];
-    tippyHover(ref, function() {
-      // use id or data attribute instead here
-      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-      try { href = new URL(href).hash; } catch {}
-      const id = href.replace(/^#\/?/, "");
-      const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
-    });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
-        }
-      }
-    }
-    stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
-          } else {
-            container.appendChild(child.cloneNode(true));
-            break;
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
           }
         }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
         }
-        return container.innerHTML
       } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
         if (window.Quarto?.typesetMath) {
           window.Quarto.typesetMath(note);
         }
-        return note.innerHTML;
-      }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      // TODO in 1.5, we should make sure this works without a callout special case
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
       }
     }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
           }
         } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
           .then(res => res.text())
           .then(html => {
             const parser = new DOMParser();
             const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
+            const note = htmlDoc.querySelector('main.content');
             if (note !== null) {
-              const html = processXRef(id, note);
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
               instance.setContent(html);
             } 
           }).finally(() => {
@@ -1448,192 +1491,168 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
-    });
-  }
-      let selectedAnnoteEl;
-      const selectorForAnnotation = ( cell, annotation) => {
-        let cellAttr = 'data-code-cell="' + cell + '"';
-        let lineAttr = 'data-code-annotation="' +  annotation + '"';
-        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-        return selector;
-      }
-      const selectCodeLines = (annoteEl) => {
-        const doc = window.document;
-        const targetCell = annoteEl.getAttribute("data-target-cell");
-        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-        const lineIds = lines.map((line) => {
-          return targetCell + "-" + line;
-        })
-        let top = null;
-        let height = null;
-        let parent = null;
-        if (lineIds.length > 0) {
-            //compute the position of the single el (top and bottom and make a div)
-            const el = window.document.getElementById(lineIds[0]);
-            top = el.offsetTop;
-            height = el.offsetHeight;
-            parent = el.parentElement.parentElement;
-          if (lineIds.length > 1) {
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-            height = bottom - top;
-          }
-          if (top !== null && height !== null && parent !== null) {
-            // cook up a div (if necessary) and position it 
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
-            }
-            div.style.top = top - 2 + "px";
-            div.style.height = height + 4 + "px";
-            div.style.left = 0;
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
-            }
-            gutterDiv.style.top = top - 2 + "px";
-            gutterDiv.style.height = height + 4 + "px";
-          }
-          selectedAnnoteEl = annoteEl;
-        }
-      };
-      const unselectCodeLines = () => {
-        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-        elementsIds.forEach((elId) => {
-          const div = window.document.getElementById(elId);
-          if (div) {
-            div.remove();
-          }
-        });
-        selectedAnnoteEl = undefined;
-      };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
-          }
-        });
-      }
-  const findCites = (el) => {
-    const parentEl = el.parentElement;
-    if (parentEl) {
-      const cites = parentEl.dataset.cites;
-      if (cites) {
-        return {
-          el,
-          cites: cites.split(' ')
-        };
-      } else {
-        return findCites(el.parentElement)
-      }
-    } else {
-      return undefined;
-    }
-  };
-  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-  for (var i=0; i<bibliorefs.length; i++) {
-    const ref = bibliorefs[i];
-    const citeInfo = findCites(ref);
-    if (citeInfo) {
-      tippyHover(citeInfo.el, function() {
-        var popup = window.document.createElement('div');
-        citeInfo.cites.forEach(function(cite) {
-          var citeDiv = window.document.createElement('div');
-          citeDiv.classList.add('hanging-indent');
-          citeDiv.classList.add('csl-entry');
-          var biblioDiv = window.document.getElementById('ref-' + cite);
-          if (biblioDiv) {
-            citeDiv.innerHTML = biblioDiv.innerHTML;
-          }
-          popup.appendChild(citeDiv);
-        });
-        return popup.innerHTML;
+      }, function(instance) {
       });
     }
-  }
-});
-</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="./glm1_regression.html" class="pagination-link" aria-label="GLM-I: Linear Regression">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">GLM-I: Linear Regression</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">GLM-I: Linear Regression</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./glm3binary.html" class="pagination-link" aria-label="GLM-III: Binary Predictors">
-        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">GLM-III: Binary Predictors</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./glm_assumptions.html" class="pagination-link" aria-label="Assumptions">
+        <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Assumptions</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

@@ -32,7 +32,7 @@ One way to think of the correlation coefficient is as a *bivariate (= two variab
 
 To explore this relationship visually, researchers often rely on scatter plots. In a scatter plot, *X* values appear along the horizontal axis and *Y* values along the vertical. Each point on the plot corresponds to one participant’s pair of scores. These plots allow immediate detection of linear trends, and outliers—patterns that may remain obscured when examining data in purely numerical or tabular form.
 
-## Covariance
+### Covariance
 
 The word "covariance" means: varying, or moving, together.
 Let's have a look at mock data from five students on hours studied and final grade obtained:
@@ -66,7 +66,7 @@ the SP measures how two variables vary together.
 
 To calculate the SP, take the following steps:
 
-#### Step 1: Calculate the variables' means
+##### Step 1: Calculate the variables' means
 
 Take the mean of each column (bold in the table below):
 
@@ -81,7 +81,7 @@ kable(mns) |>
   row_spec(nrow(mns),bold=T,hline_after = T)
 ```
 
-#### Step 2: Calculate Deviations
+##### Step 2: Calculate Deviations
 
 For each variable, calculate the deviations by subtracting the mean from the observed scores:
 
@@ -93,7 +93,7 @@ names(devs) <- c("X", "Y", "X-mean(X)", "Y-mean(Y)")
 kable(devs)
 ```
 
-#### Step 3: Multiply Deviations
+##### Step 3: Multiply Deviations
 
 If we were to calculate the SS, we would now square the deviations and add them up in each column.
 To get the SP, instead of squaring the deviations - we multiply them across variables.
@@ -122,7 +122,7 @@ SP = \sum \bigl(X - \bar{X}\bigr)\bigl(Y - \bar{Y}\bigr)
 $$
 
 
-### Covariance
+#### Covariance
 
 To get the covariance from the sum of products, we divide by the sample size, so in this case, $\frac{`r sum(prods[[5]])`}{5}$.
 
@@ -136,7 +136,7 @@ If it is negative, there is a negative association.
 But how strong is the association?
 It is hard to say, because the *size* of the covariance depends on the units and scale of the two variables involved.
 
-## Correlation
+### Correlation
 
 To answer the question of how strong the association is,
 we must standardize the covariance to drop the units of both variables.
@@ -146,7 +146,7 @@ This standardization results in a number between -1 and +1, where 0 means no ass
 This number, the correlation coefficient, tells us both the **direction** (-/+) and **strength** (value) of association between two variables.
 Because the correlation coefficients is unit-free, or standardized, it can also be compared across variables measured on different scales and across studies.
 
-## Limitations
+### Limitations
 
 While correlation coefficients are useful,
 they must be interpreted with care.
@@ -209,28 +209,33 @@ We will revisit the topic of causality later.
 
 Anscombe's quartet is a good illustration of the limitations of causality, and also demonstrates the value of **visually inspecting your data (including with  scatter plots)** before interpreting any statistics.
 
-## Summary
+### Summary
 
 In summary, **covariance** offers an initial metric for gauging whether two variables tend to vary in the same or opposite direction. However, because its magnitude depends on the measurement units of the variables involved, it cannot be directly interpreted in terms of strength. The **Pearson correlation coefficient (*r*)** addresses this limitation by standardizing the covariance, yielding a unit-free statistic bounded between –1 and +1. This standardized measure expresses both the **direction** and **strength** of a linear relationship, enabling meaningful comparisons across contexts. Nevertheless, interpreting correlations requires caution, particularly with respect to restricted sampling ranges, the influence of outliers, and the fundamental distinction between correlation and causation.
 
-# Formative Test
+## Lecture
+
+{{< video https://www.youtube.com/embed/jNI0YNjpvHs?si=hSdVTaoX1geeVMzn >}}
+
+
+## Formative Test
 
 This short quiz checks your grasp of **Chapter 3 – Covariance & Correlation**.  
 Work through it after you’ve studied the lecture slides (and before the next live session) so we can focus on anything that still feels uncertain. Each incorrect answer reveals a hint that sends you back to the exact slide or numerical example you need.
 
 ```{r}
-add_mcs("ch3_formative_corrected.csv")
+add_mcs("questions_correlation.csv")
 ```
 
 
-# Tutorial
+## Tutorial
 
-## Load Data
+### Load Data
 
 Open [`LAS_SocSc_DataLab2.sav`](data/LAS_SocSc_DataLab2.sav).  
 The file contains six variables (`X1` … `X6`). You’ll inspect three bivariate relationships.
 
-### Plot the pairs
+#### Plot the pairs
 
 Generate three simple scatterplots:
 
@@ -266,7 +271,7 @@ Strength of `X5`–`X6`:
 
 
 
-### Correlation coefficients
+#### Correlation coefficients
 
 Even when the pattern is non-linear it’s useful to see why Pearson *r* can mislead.
 
@@ -303,7 +308,7 @@ Having practiced on simulated data, let’s now apply the same workflow to a rea
 
 **Data File:** [`Work.sav`](data/Work.sav)
 
-### Why inspect the plot first?
+#### Why inspect the plot first?
 
 Before trusting Pearson *r* we check for
 
@@ -318,7 +323,7 @@ Select the correct reason:
 
 :::
 
-### Create the scatter-plot
+#### Create the scatter-plot
 
 `Graphs` › `Legacy Dialogs` › `Scatter/Dot` → **Simple Scatter**
 
@@ -339,7 +344,7 @@ Approximate strength:
 
 :::
 
-### Compute Pearson *r*
+#### Compute Pearson *r*
 
 `Analyze` › `Correlate` › `Bivariate` → (`scmental`, `scemoti`) → **OK**
 

@@ -13,7 +13,7 @@ and will have heteroscedastic and non-normal residuals because there are only tw
 The core idea behind logistic regression is to predict a transformation of the dependent variable, Y, rather than the raw scores. Specifically, we model the **log odds** of the probability of Y being one category (e.g., 1) versus the other category (e.g., 0). The logit function, denoted as `log(p/(1-p))`, models the probability p using an s-shaped curve bounded by 0 and 1.
 Furthermore, logistic regression assumes a Bernoulli error distribution, instead of a normal error distribution, which accounts for the fact that observed outcomes can only take the values 0 or 1.
 
-## Introducing the logit
+### Introducing the logit
 
 Logistic regression predicts the **logit function** of the individual probabilities of observing the outcome, pi. The logit of the probability (pi) is given by `log(pi/(1-pi))`, ensuring that the predicted values remain within the valid probability range. The outcome, Yi, is assumed to follow a Bernoulli distribution with an individual probability of success, pi. The logit of this success probability is modeled as a linear function of the predictors, allowing us to use the familiar linear regression model to predict the logit of pi.
 
@@ -43,34 +43,34 @@ In traditional linear regression, we use "ordinary least squares" (OLS) estimati
 
 In other words, we look for the values of a and b that maximize the likelihood  of observing the observed outcome values.
 
-## Interpreting Coefficients
+### Interpreting Coefficients
 
 The **intercept (a)** represents the log odds of the outcome (Y) for someone who scores 0 on all predictors. We can convert this log odds to the probability of the outcome for an individual who scores 0 on all predictors using the formula `P = e^(a) / (1 + e^(a))`. We can also solve for the inflection point at which the model stops predicting 0 and starts predicting 1, or vice versa, using $X_{p = .5} = \frac{-a}{b}$.
 
 The **slope (b)** of the logistic regression equation determines how steeply the logistic function switches from predicting 0 to predicting 1 as the predictor variable (Xi) increases. Larger absolute values of b indicate a steeper transition between the two outcomes. If the slope is positive, the function ascends (starts at 0 and goes to 1), resulting in an S-shaped curve. Conversely, if the slope is negative, the function descends (starts at 1 and goes to 0), resulting in a Z-shaped curve.
 
-## Odds Ratio
+### Odds Ratio
 
 The **odds ratio** is another important concept when interpreting logistic regression coefficients. It represents the odds of the outcome occurring given a one-unit increase in the predictor variable (Xi), relative to the odds of the outcome occurring when Xi remains unchanged. For binary predictors (e.g., conditions), the odds ratio provides a sensible effect size. For continuous predictors, the odds ratio is a multiplyer by which the odds increase when the predictor increases by one unit.
 
 To calculate the odds ratio for a logistic regression coefficient (b), we use the formula `OR = e^(b)`. A value greater than 1 indicates that the predictor is associated with higher odds of the outcome, while a value less than 1 indicates lower odds of the outcome. For example, if the odds ratio for the test score coefficient (b = 2.12) is 8.35, it means that for each unit increase in the test score, the odds of the outcome are multiplied by 8.35.
 
 
-## Model Fit
+### Model Fit
 
 To assess how well the logistic regression model fits the data, we can use the likelihood obtained from maximum likelihood estimation (MLE). By multiplying the log likelihood by -2, we obtain the $-2LL$, which is a chi-square distributed test statistic. Performing a chi-square test allows us to determine if the overall model is significant. The null hypothesis is that the model does not significantly differ from a model with no predictors. If the chi-square test is significant, it indicates that the model provides a better fit than a null model.
 
-## Likelihood Ratio Test
+### Likelihood Ratio Test
 
 In logistic regression, we can also conduct a **Likelihood Ratio (LR) test**, which is a chi-square test for the difference in log likelihood between two nested models, $-2LL_0 - -2LL_1$. The first model is the restricted model with fewer parameters, and the second is the full model with more parameters. The LR test helps us compare the two models and determine if the additional predictors in the full model significantly improve its fit. The degrees of freedom for the LR test are equal to the difference in the number of parameters between the two models.
 
-## Pseudo R2
+### Pseudo R2
 
 Unlike linear regression, logistic regression doesn't have a traditional R-squared to measure explained variance. However, researchers have proposed several **Pseudo R2** statistics to approximate the concept of explained variance in logistic regression. These Pseudo R2 statistics rescale the -2 log likelihood of the model. Two common Pseudo R2 statistics are Cox & Snell and Nagelkerke.
 
 Cox & Snell is a generalization of the "normal" R2, which provides the same value for ordinary least squares regression. For logistic regression, however, its value can never reach 1; it will be somewhere between 0 and < 1. Nagelkerke aims to "fix" this property by rescaling Cox & Snell to a range of [0, 1], by dividing it by its maximum possible value. While these statistics can provide a measure of relative model fit and help compare models on the same dataset, they do not represent absolute model fit or effect size.
 
-## Classification Accuracy
+### Classification Accuracy
 
 One way to evaluate the model's predictive performance is by using a **classification table**. The classification table compares the predicted outcomes with the actual outcomes to determine how well the model predicts true positives and true negatives. The table is constructed by calculating the predicted probability for each individual and then dichotomizing these probabilities using a specific cutoff, typically 0.5. Individuals with predicted probabilities above the cutoff are classified as "1," and those below as "0." The observed outcomes are then cross-tabulated against the dichotomized predictions.
 
@@ -78,11 +78,11 @@ By examining the classification table, we can assess the accuracy of the model's
 
 In summary, evaluating logistic regression models involves assessing model fit through chi-square tests, using Pseudo R2 statistics for relative fit comparison, and examining classification accuracy to understand the model's predictive performance.
 
-# Lecture
+## Lecture
 
 
 
-# Formative Test
+## Formative Test
 
 A formative test helps you assess your progress in the course, and helps you address any blind spots in your understanding of the material. If you get a question wrong, you will receive a hint on how to improve your understanding of the material.
 
@@ -96,9 +96,9 @@ add_mcs("questionslogistic.csv")
 ```
 
 
-# Tutorial
+## Tutorial
 
-## Probability, Odds, and Logits
+### Probability, Odds, and Logits
 
 We will start this session on logistic regression with some theoretical exercises. This way, you will learn how to work with probability, odds, and logits.
  
@@ -192,7 +192,7 @@ As you can see, the logit follows a linear function, the odds follow an exponent
 ![](images/Figure 7-1.png)
 
 
-## Logistic Regression
+### Logistic Regression
 
 Today we will study whether the probability to pass a Statistics course depends on exam fear and the math grade obtained in high school (prior math ability).
 
@@ -273,7 +273,7 @@ Controlled for Math grade, Exam stress has no significant effect on the probabil
  
 `r unhide()`
 
-## Logistic Regression with Categorical Predictor
+### Logistic Regression with Categorical Predictor
 
 Now, we will carry out a logistic regression analysis to study whether the probability to pass can be predicted from the amount of preparation (Preparation), controlled for prior math ability (Math).
 
@@ -359,7 +359,7 @@ What is worse in your opinion? Incorrectly predicting that students will pass (w
 If you chose a different decision criteria to predict passing - say .7, what would happen to the proportion of students that were classified as "pass", but actually failed? `r mcq(c(answer = "gets smaller", "gets bigger", "stays the same", "can't say")[sample.int(4)])`
 
 
-## Hierarchical Logistic Regression
+### Hierarchical Logistic Regression
 
 In this assignment we will compare the following two models against each other.
 

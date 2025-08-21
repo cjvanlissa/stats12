@@ -24,7 +24,7 @@ Unlike PCA, EFA is a latent variable method that assumes that latent variables (
 
 Confirmatory Factor Analysis (CFA) tests a theory about the specific associations between latent variables and observed indicators. Unlike Principal Components Analysis (PCA) and Exploratory Factor Analysis (EFA), which are exploratory, CFA is a confirmatory approach that tests how well a hypothesized measurement model fits the data. In CFA, researchers specify a theoretical model that defines the relationships between observed variables and latent constructs (factors). These latent constructs are not directly measured but are assumed to explain the correlations among the observed variables. The primary goal of CFA is to evaluate whether the data support the hypothesized model. By doing so, researchers can determine if their theoretical model fits the observed data well, providing evidence for the validity of the underlying construct and the measurement instrument. CFA is part of a family of statistical modeling techniques known as "Structural Equation Modeling" (SEM).
 
-## Comparing Method
+### Comparing Method
 
 Purpose:
 
@@ -44,7 +44,7 @@ Interpretation:
 * EFA: Factors represent theoretical latent constructs.
 * CFA: Factors represent known theoretical latent constructs.
 
-## Principal Components Analysis
+### Principal Components Analysis
 
 PCA is a data rotation technique that aligns the largest amount of variance with the first component, the second-largest variance with the second component, and so on. These components are uncorrelated by definition, and they serve as linear combinations of the original items. The primary use of PCA is dimension reduction by retaining only components that explain a significant amount of variance, thus providing a lower-dimensional representation of the data.
 
@@ -58,7 +58,7 @@ Interpreting PCA Loadings:
 
 Interpreting PCA loadings can be challenging, especially in cases where multiple components are correlated. Orthogonal rotation, such as Varimax, can be employed to simplify the pattern of loadings and improve interpretability. However, it is essential to remember that rotated loadings should not be directly interpreted as correlations between items and factors as in PCA.
 
-## Exploratory Factor Analysis
+### Exploratory Factor Analysis
 
 EFA is a model-based approach that assumes the existence of latent variables that cause item responses. It is suitable when you expect clusters of items to be correlated (multicollinear) and seeks to explain correlations between items. EFA assumes that unexplained variance in the items can be attributed to measurement error. This aligns with test theory, where it is assumed that observed items measure latent constructs with error. EFA is particularly suitable when there is a theoretical basis for assuming the existence of latent variables, such as when developing a new questionnaire that has not been validated yet. However, if a theoretical model already exists, Confirmatory Factor Analysis (CFA) may be more appropriate.
 
@@ -70,7 +70,7 @@ We can compute Eigenvalues in EFA just as in PCA by taking the column sums of th
 
 Similarly, communalities in EFA are always < 1 because EFA assumes the existence of error variance.
 
-### Selecting the Number of Factors
+#### Selecting the Number of Factors
 
 Determining the appropriate number of factors to extract is a critical step in EFA.
 Researchers often use eigenvalues as a cue to determine the number of factors to extract, similar to the Kaiser's criterion and Scree plot used in PCA - but note that in EFA, this can be misleading as Eigenvalues now depend on the number of extracted factors. Also, by default, SPSS applies Kaiser's criterion and the Scree plot to PCA Eigenvalues, even if you request EFA!
@@ -82,7 +82,7 @@ BIC = \chi^2 - df ∗ log(n)
 $$
 
 
-## EFA Assumption Checks
+### EFA Assumption Checks
 
 Before conducting exploratory factor analysis (EFA), it is good practice to perform several assumption checks to ensure the validity and appropriateness of the analysis. One critical aspect to consider is multicollinearity. While factor analysis aims to identify clusters of items that are correlated, excessive multicollinearity can lead to issues. This occurs when multiple items are perfectly linearly dependent, meaning that one item's score can be exactly reproduced using other variables. In such cases, it becomes difficult to discern the unique contribution of collinear items to the underlying factor model. To detect multicollinearity, researchers can examine the determinant, a value between 0 and 1. It has been argued that the determinant should be greater than 0.00001, which indicates multicollinearity is not too high.
 
@@ -99,7 +99,7 @@ Value | Interpretation
 
 
 
-## Rotating Factor Loadings
+### Rotating Factor Loadings
 
 In factor analysis, we aim to interpret the underlying structure of observed variables. The pattern of factor loadings is crucial in this process, helping us identify items that load highly on specific factors and potentially naming those factors based on high-loading indicators. In a perfect world, factor loadings would be clear and straightforward, with each item loading highly on only one factor. However, real-life factor loadings are not always so clear-cut, making interpretation more challenging.
 
@@ -123,7 +123,7 @@ Calculate SSL as: $SSL = (\sum_{j=0}^k L_{1,k})^2$ (first sum loadings, then squ
 
 Calculate SSR as: $SSR = 1-\sum_{j=0}^k L_{1,k}^2$ (first square loadings, then sum)
 
-## Estimating Factor Scores
+### Estimating Factor Scores
 
 In many cases, researchers want to conduct further analyses using idividuals' scores on components or latent variables. In previous sections, we learned about two common methods for obtaining scale scores from multiple items: sum scores and mean scores. In sum scores, we add up the responses from each item to create a total score for each individual. Similarly, in mean scores, we take the average of the responses from all items to obtain a score. In both cases, all items contribute equally to the final scale score. However, this approach assumes that all items are equally important, which might not always be the case. PCA and EFA both allow us to determine whether items are indeed equally important. We can also try to compute scale scores that take differences in item loadings into account.
 
@@ -138,11 +138,11 @@ DiStefano, C., Zhu, M., & Mindrila, D. (2009). Understanding and Using Factor Sc
 
 
 
-# Lecture
+## Lecture
 
 {{< video https://www.youtube.com/embed/EF2Jcsh4OqA >}}
 
-# Formative Test
+## Formative Test
 
 A formative test helps you assess your progress in the course, and helps you address any blind spots in your understanding of the material. If you get a question wrong, you will receive a hint on how to improve your understanding of the material.
 
@@ -156,9 +156,9 @@ add_mcs("questions_dimension_reduction.csv")
 ```
 
 
-# Tutorial
+## Tutorial
 
-## PCA
+### PCA
 
 Open the data file: [`emotions.sav`](data/emotions.sav).
 
@@ -250,7 +250,7 @@ What proportion of the variance in the item stress is accounted for by the two c
 
 Which item has the highest unicity? `r mcq(c(answer = "Pride", "Cheerful", "Anger", "Happy")[sample.int(4)])` 
 
-## Exploratory Factor Analysis
+### Exploratory Factor Analysis
 
 We will move on to work with Exploratory Factor Analysis.
 
@@ -372,13 +372,13 @@ There appears to be a distinction between legal and religious issues.
 
 `r unhide()`
 
-## Exploratory Factor Analysis II
+### Exploratory Factor Analysis II
 
 Open the dataset called [`student_questionnaire.sav`](data/student_questionnaire.sav).
 
 It contains data on moral judgment in a variety of domains of social life (variables whose names start with MACJ). Note that you need the variable `MACJ13_imputed`, not `MACJ13`.
 
-### Model Selection using the BIC
+#### Model Selection using the BIC
 
 When conducting EFA with ML estimation, we obtain a chi-square test of model fit that allows us to compute the BIC, a comparative fit index that can help us choose the number of factors that best balances model fit and complexity.
 
@@ -421,7 +421,7 @@ The BIC for 7 factors is almost identical to the one for 8 factors. If theory di
 
 `r unhide()`
 
-### Latent Variable Reliability
+#### Latent Variable Reliability
 
 Regardless of your previous answer, perform EFA with one factor. Recall that this is equivalent to performing CFA with one factor.
 
@@ -447,7 +447,7 @@ Report McDonald's Omega: `r fitb(0.952571482, num = T, tol = .01)`
 
 Note that McDonald's Omega is larger than Cronbach's alpha. This is a rule; Cronbach's alpha underestimates reliability compared to McDonald's omega, and the underestimation becomes worse as the assumption of equal factor loadings is more violated.
 
-### Model Fit
+#### Model Fit
 
 Finally, calculate the RMSEA model fit index for this one-factor model. The cutoff for acceptable fit is RMSEA < .08.
 

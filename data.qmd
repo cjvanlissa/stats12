@@ -1,4 +1,4 @@
-# Data for Portfolio {.unnumbered}
+# Data for Portfolio
 
 You will need to use an appropriate data source for your portfolio assignments. Although you are welcome to use any data that you consider to be suitable for making the assignments - including data sets that you have previously collected, or open access data sources - we want to make sure that everybody has a backup option that meets the course requirements. Below, we introduce three data sources that have been customized for the three major tracks. You can follow your own interests in selecting one of these data sources.
 

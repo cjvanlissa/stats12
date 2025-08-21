@@ -54,6 +54,7 @@ book:
   - testing.qmd
   - glm1_regression.qmd
   - glm2_sum_squares.qmd
+  - glm_assumptions.qmd
   - glm3binary.qmd
   - glm4anova.qmd
   - glm5multiple.qmd

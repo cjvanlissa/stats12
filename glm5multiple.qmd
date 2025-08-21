@@ -5,7 +5,7 @@ source("R/booktem_setup.R")
 source("R/my_setup.R")
 ```
 
-## Multiple regression
+### Multiple regression
 
 Multiple regression is a statistical technique that allows us to examine the relationship between one outcome and multiple predictors. It extends the concept of bivariate linear regression, where we model the relationship between two variables, to include more predictors. In the context of social science research, multiple regression helps us answer the question: What is the unique effect of one predictor, while controlling for the effects of all other predictors?
 
@@ -17,7 +17,7 @@ Centering predictors can be useful in multiple regression. By centering, we shif
 
 As previously explained, standardized regression coefficients drop the units of the predictor and outcome variable. They are calculated by transforming the predictors and outcome variable into z-scores with a mean of 0 and a standard deviation of 1, and performing the (multiple) regression analysis on those z-scores. Because the units of the variables are dropped, standardized coefficients make the effects of predictors comparable across different studies or variables with different measurement units. They represent the change in the dependent variable in terms of standard deviations when the corresponding predictor increases by 1 standard deviation.
 
-## Causality
+### Causality
 
 A statistical association between variables does not necessarily imply a causal relationship. Instead, causality is either assumed on theoretical grounds, or established using the experimental method. In an experiment, researchers manipulate an independent variable and observe its effects on the dependent variable. However, in many social science studies, experiments are not feasible or ethical, so researchers rely on observational data. In these cases, establishing causal relationships relies on theory and careful statistical analysis.
 
@@ -31,14 +31,14 @@ Colliders are variables that are caused by both the independent and dependent va
 
 One important take-home message is that, in multiple regression, the distinction between confounders and colliders is crucial. Including confounders as control variables in multiple regression improves our inferences - but accidentally including a collider as control variable (severely) biases our inferences. You therefore have to carefully reason about each variable's role in relation to the other variables in the model.
 
-# Lectures
+## Lectures
 
 {{< video https://www.youtube.com/embed/lT-6YoSfwC4 >}}
 
 {{< video https://www.youtube.com/embed/wBB4sed9ku0 >}}
 
 
-# Formative Test
+## Formative Test
 
 A formative test helps you assess your progress in the course, and helps you address any blind spots in your understanding of the material. If you get a question wrong, you will receive a hint on how to improve your understanding of the material.
 
@@ -51,15 +51,15 @@ Complete the formative test ideally after you’ve seen the lecture, but before 
 add_mcs("questions_multiple.csv")
 ```
 
-# In SPSS
+## In SPSS
 
-## Multiple Regression
+### Multiple Regression
 
 {{< video https://www.youtube.com/watch?v=ueNrP5TyZaE >}}
 
-# Tutorial
+## Tutorial
 
-## Multiple Regression
+### Multiple Regression
 
 Social science students were asked about their opinion towards Tilburg’s nightlife, number of Facebook friends, and some other characteristics. The data are in the [`SocScSurvey.sav`](data/SocScSurvey.sav) file.
 
@@ -159,7 +159,7 @@ Two models are nested if the larger model (i.e., the model with the most predict
 In the next lecture we will learn more about nested models, model comparisons, and how useful they are for researchers! 
 
 
-## Multiple Regression II
+### Multiple Regression II
 
 For this assignment we need the file [`HealthyFood.sav`](data/HealthyFood.sav).
 

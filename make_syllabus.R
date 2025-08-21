@@ -1,4 +1,4 @@
-txt <- readLines("index.Qmd")
+txt <- readLines("statistics1.Qmd")
 txt <- c("---", "format: docx", "prefer-html: true", "---", "", txt)
 file_qmd <- "temp_syllabus.qmd"
 file_word <- "temp_syllabus.docx"

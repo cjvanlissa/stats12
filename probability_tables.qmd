@@ -44,7 +44,7 @@ DT::datatable(tab, rownames = FALSE, options = list(ordering=F, pageLength = nro
 
 ```
 
-# t-table {#sec-ttable}
+## t-table {#sec-ttable}
 
 Table gives the t-value corresponding to the right-tail probability indicated by the columns.
 

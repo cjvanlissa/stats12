@@ -1,0 +1,2006 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.33">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="description" content="Book Description">
+<title>12&nbsp; Assumptions – Statistics 1 and 2</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./glm3binary.html" rel="next">
+<link href="./glm2_sum_squares.html" rel="prev">
+<link href="./images/logos/favicon.png" rel="icon" type="image/png">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-c2894b54f4b00a27b9651b11dcf5df54.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-7530c408590d20eba92ebedbb433c75c.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-c2894b54f4b00a27b9651b11dcf5df54.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-e5f62320892960dc23dd0786c8482584.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-11ad583e60b2cd5ac7d46970bf1aa65a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-e5f62320892960dc23dd0786c8482584.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script><script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
+<link rel="stylesheet" href="include/booktem.css">
+<link rel="stylesheet" href="include/webex.css">
+<link rel="stylesheet" href="include/glossary.css">
+<link rel="stylesheet" href="include/style.css">
+<link rel="stylesheet" href="include/webex.css">
+</head>
+<body class="nav-sidebar floating quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./glm_assumptions.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Assumptions</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Statistics 1 and 2</a> 
+        <div class="sidebar-tools-main tools-wide">
+    <a href="https://github.com/cjvanlissa/stats12" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="./Statistics-1-and-2.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+    <div class="dropdown">
+      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Share"><i class="bi bi-share"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+<li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
+              <i class="bi bi-twitter pe-1"></i>
+            Twitter
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=|url|">
+              <i class="bi bi-facebook pe-1"></i>
+            Facebook
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=|url|">
+              <i class="bi bi-linkedin pe-1"></i>
+            LinkedIn
+            </a>
+          </li>
+      </ul>
+</div>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Overview</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./statistics1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Statistics 1</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Introduction to Statistics</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter2_descriptive_statistics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Descriptive Statistics</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Chapter3_Correlation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Bivariate Descriptive Statistics</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./probability.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Probability Distributions</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./samplingdistribution.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">The Sampling Distribution</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Week_4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Philosophy of Science</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./testing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Hypothesis Testing</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glm1_regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">GLM-I: Linear Regression</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glm2_sum_squares.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">GLM-II: Sums of Squares</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glm_assumptions.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Assumptions</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glm3binary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">GLM-III: Binary Predictors</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glm4anova.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">GLM-IV: ANOVA</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glm5multiple.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">GLM-V: Multiple regression</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glm6nested.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">GLM-VI: Nested models</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glm7interaction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">GLM-VII: Interaction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./logistic.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">GLM VIII - Logistic Regression</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glm_contrasts.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">GLM: Contrasts</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./factorial.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">GLM: Factorial ANOVA</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ancova.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">GLM: ANCOVA</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./rmanova.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">GLM: Repeated Measures ANOVA</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./reliability_validity.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Reliability and Validity</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data_reduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Dimension Reduction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./confint.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">BE2 - Confidence Intervals</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Data for Portfolio</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./probability_tables.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Z-table</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./formula_sheet2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Formula sheet</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">References</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+    </ul>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+<li><a href="#assumptions-for-linear-regression" id="toc-assumptions-for-linear-regression" class="nav-link active" data-scroll-target="#assumptions-for-linear-regression"><span class="header-section-number">12.0.1</span> Assumptions for Linear Regression</a></li>
+  <li><a href="#formative-test" id="toc-formative-test" class="nav-link" data-scroll-target="#formative-test"><span class="header-section-number">12.1</span> Formative Test</a></li>
+  <li>
+<a href="#tutorial" id="toc-tutorial" class="nav-link" data-scroll-target="#tutorial"><span class="header-section-number">12.2</span> Tutorial</a>
+  <ul class="collapse">
+<li><a href="#before-you-start" id="toc-before-you-start" class="nav-link" data-scroll-target="#before-you-start"><span class="header-section-number">12.2.1</span> Before you start</a></li>
+  <li><a href="#assignment-1" id="toc-assignment-1" class="nav-link" data-scroll-target="#assignment-1"><span class="header-section-number">12.2.2</span> Assignment 1</a></li>
+  <li><a href="#assignment-2-linearity-check" id="toc-assignment-2-linearity-check" class="nav-link" data-scroll-target="#assignment-2-linearity-check"><span class="header-section-number">12.2.3</span> Assignment 2 — Linearity check</a></li>
+  <li><a href="#assignment-3-homoscedasticity" id="toc-assignment-3-homoscedasticity" class="nav-link" data-scroll-target="#assignment-3-homoscedasticity"><span class="header-section-number">12.2.4</span> Assignment 3 — Homoscedasticity</a></li>
+  <li><a href="#assignment-4-normality-of-residuals" id="toc-assignment-4-normality-of-residuals" class="nav-link" data-scroll-target="#assignment-4-normality-of-residuals"><span class="header-section-number">12.2.5</span> Assignment 4 — Normality of residuals</a></li>
+  <li><a href="#assignment-5-outliers" id="toc-assignment-5-outliers" class="nav-link" data-scroll-target="#assignment-5-outliers"><span class="header-section-number">12.2.6</span> Assignment 5 — Outliers</a></li>
+  <li><a href="#exercise-6-multicollinearity" id="toc-exercise-6-multicollinearity" class="nav-link" data-scroll-target="#exercise-6-multicollinearity"><span class="header-section-number">12.2.7</span> Exercise 6 — Multicollinearity</a></li>
+  </ul>
+</li>
+  <li><a href="#assignment-7-putting-it-together-choose-two-datasets" id="toc-assignment-7-putting-it-together-choose-two-datasets" class="nav-link" data-scroll-target="#assignment-7-putting-it-together-choose-two-datasets"><span class="header-section-number">12.3</span> Assignment 7 — Putting it together (choose two datasets)</a></li>
+  </ul></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<h1 class="title">
+<span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Assumptions</span>
+</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header><p>Every time we use a statistical model to describe data, we make certain simplifying assumptions. If these assumptions are met, the model is a good representation of the data (descriptive statistics), and we can make valid inferences about the population based on the model’s parameters (inferential statistics). However, when these assumptions are violated, the model is a bad descriptor of the data, and inferences based on the model can be misleading or difficult to interpret.</p>
+<p>To de-mystify assumptions, let’s examine one of the simplest statistical models possible: the normal distribution. The normal distribution is a statistical model to describe the distribution of scores on a variable (or: in the population), and its two parameters are the mean and standard deviation. If I draw a random sample of 1000 participants from the population of the Netherlands, their observed heights might be distributed as in the histogram below. I could use the normal distribution as a model for these data, and it would do a pretty good job (see the red normal distribution). In this case, my assumption is that <em>height is normally distributed around a mean</em> <span class="math inline">\(\mu\)</span> <em>and with standard deviation</em> <span class="math inline">\(\sigma\)</span>, or:</p>
+<p><span class="math display">\[
+\text{Height} \sim N(\mu, \sigma)
+\]</span></p>
+<p>If this assumption holds, the mean and standard deviations will be pretty good descriptive statistics of the distribution of data in the sample. If I assume that height is also normally distributed in the population, and that my sample is representative - then my sample statistics are also pretty good estimators for the population parameters.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb1-2"><a href="#cb1-2"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">1000</span>, <span class="at">mean =</span> <span class="dv">175</span>, <span class="at">sd =</span> <span class="dv">15</span>)</span>
+<span id="cb1-3"><a href="#cb1-3"></a>outlrs <span class="ot">&lt;-</span> (x <span class="sc">&lt;</span> <span class="dv">25</span> <span class="sc">|</span> x <span class="sc">&gt;</span> <span class="dv">215</span>)</span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="cf">while</span>(<span class="fu">any</span>(outlrs)){</span>
+<span id="cb1-5"><a href="#cb1-5"></a>  x[<span class="fu">which</span>(outlrs)] <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="fu">sum</span>(outlrs), <span class="at">mean =</span> <span class="dv">175</span>, <span class="at">sd =</span> <span class="dv">15</span>)</span>
+<span id="cb1-6"><a href="#cb1-6"></a>  outlrs <span class="ot">&lt;-</span> (x <span class="sc">&lt;</span> <span class="dv">25</span> <span class="sc">|</span> x <span class="sc">&gt;</span> <span class="dv">215</span>)</span>
+<span id="cb1-7"><a href="#cb1-7"></a>}</span>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-9"><a href="#cb1-9"></a><span class="do">## parameters that will be passed to ``stat_function``</span></span>
+<span id="cb1-10"><a href="#cb1-10"></a>n <span class="ot">=</span> <span class="fu">length</span>(x)</span>
+<span id="cb1-11"><a href="#cb1-11"></a>mean <span class="ot">=</span> <span class="fu">mean</span>(x)</span>
+<span id="cb1-12"><a href="#cb1-12"></a>sd <span class="ot">=</span> <span class="fu">sd</span>(x)</span>
+<span id="cb1-13"><a href="#cb1-13"></a>binwidth <span class="ot">=</span> <span class="dv">10</span> <span class="co"># passed to geom_histogram and stat_function</span></span>
+<span id="cb1-14"><a href="#cb1-14"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb1-15"><a href="#cb1-15"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> x)</span>
+<span id="cb1-16"><a href="#cb1-16"></a></span>
+<span id="cb1-17"><a href="#cb1-17"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">mean =</span> mean, <span class="at">sd =</span> sd, <span class="at">binwidth =</span> binwidth, <span class="at">n =</span> n)) <span class="sc">+</span></span>
+<span id="cb1-18"><a href="#cb1-18"></a>    <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb1-19"><a href="#cb1-19"></a>    <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> binwidth, </span>
+<span id="cb1-20"><a href="#cb1-20"></a>        <span class="at">colour =</span> <span class="st">"white"</span>, <span class="at">fill =</span> <span class="st">"cornflowerblue"</span>, <span class="at">size =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
+<span id="cb1-21"><a href="#cb1-21"></a><span class="fu">stat_function</span>(<span class="at">fun =</span> <span class="cf">function</span>(x) <span class="fu">dnorm</span>(x, <span class="at">mean =</span> mean, <span class="at">sd =</span> sd) <span class="sc">*</span> n <span class="sc">*</span> binwidth,</span>
+<span id="cb1-22"><a href="#cb1-22"></a>    <span class="at">color =</span> <span class="st">"darkred"</span>, <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Height (cm)"</span>, <span class="at">y =</span> <span class="st">"Frequency"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
+ℹ Please use `linewidth` instead.</code></pre>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="glm_assumptions_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Now imagine that I draw a convenience sample of 200 members of my local basketball association (figure below). Do you think I can assume that their heights will be normally distributed? Why (not)? Do you think these individuals will be representative of the Dutch population? Will they be representative of the population of Dutch basketball players? If the assumption that these scores are normally distributed is violated, then the mean and standard deviation of the normal distribution will be poor descriptive statistics. Moreover, these sample statistics will be poor estimators of the population parameters.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">set.seed</span>(<span class="dv">2</span>)</span>
+<span id="cb3-2"><a href="#cb3-2"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">200</span>, <span class="at">mean =</span> <span class="dv">190</span>, <span class="at">sd =</span> <span class="dv">15</span>)</span>
+<span id="cb3-3"><a href="#cb3-3"></a>outlrs <span class="ot">&lt;-</span> (x <span class="sc">&lt;</span> <span class="dv">185</span> <span class="sc">|</span> x <span class="sc">&gt;</span> <span class="dv">240</span>)</span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="cf">while</span>(<span class="fu">any</span>(outlrs)){</span>
+<span id="cb3-5"><a href="#cb3-5"></a>  x[<span class="fu">which</span>(outlrs)] <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="fu">sum</span>(outlrs), <span class="at">mean =</span> <span class="dv">175</span>, <span class="at">sd =</span> <span class="dv">15</span>)</span>
+<span id="cb3-6"><a href="#cb3-6"></a>  outlrs <span class="ot">&lt;-</span> (x <span class="sc">&lt;</span> <span class="dv">185</span> <span class="sc">|</span> x <span class="sc">&gt;</span> <span class="dv">240</span>)</span>
+<span id="cb3-7"><a href="#cb3-7"></a>}</span>
+<span id="cb3-8"><a href="#cb3-8"></a><span class="do">## parameters that will be passed to ``stat_function``</span></span>
+<span id="cb3-9"><a href="#cb3-9"></a>n <span class="ot">=</span> <span class="fu">length</span>(x)</span>
+<span id="cb3-10"><a href="#cb3-10"></a>mean <span class="ot">=</span> <span class="fu">mean</span>(x)</span>
+<span id="cb3-11"><a href="#cb3-11"></a>sd <span class="ot">=</span> <span class="fu">sd</span>(x)</span>
+<span id="cb3-12"><a href="#cb3-12"></a>binwidth <span class="ot">=</span> <span class="dv">10</span> <span class="co"># passed to geom_histogram and stat_function</span></span>
+<span id="cb3-13"><a href="#cb3-13"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb3-14"><a href="#cb3-14"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> x)</span>
+<span id="cb3-15"><a href="#cb3-15"></a></span>
+<span id="cb3-16"><a href="#cb3-16"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">mean =</span> mean, <span class="at">sd =</span> sd, <span class="at">binwidth =</span> binwidth, <span class="at">n =</span> n)) <span class="sc">+</span></span>
+<span id="cb3-17"><a href="#cb3-17"></a>    <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb3-18"><a href="#cb3-18"></a>    <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> binwidth, </span>
+<span id="cb3-19"><a href="#cb3-19"></a>        <span class="at">colour =</span> <span class="st">"white"</span>, <span class="at">fill =</span> <span class="st">"cornflowerblue"</span>, <span class="at">size =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
+<span id="cb3-20"><a href="#cb3-20"></a><span class="fu">stat_function</span>(<span class="at">fun =</span> <span class="cf">function</span>(x) <span class="fu">dnorm</span>(x, <span class="at">mean =</span> mean, <span class="at">sd =</span> sd) <span class="sc">*</span> n <span class="sc">*</span> binwidth,</span>
+<span id="cb3-21"><a href="#cb3-21"></a>    <span class="at">color =</span> <span class="st">"darkred"</span>, <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Height (cm)"</span>, <span class="at">y =</span> <span class="st">"Frequency"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="glm_assumptions_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<section id="assumptions-for-linear-regression" class="level3" data-number="12.0.1"><h3 data-number="12.0.1" class="anchored" data-anchor-id="assumptions-for-linear-regression">
+<span class="header-section-number">12.0.1</span> Assumptions for Linear Regression</h3>
+<p>The same principles apply to more complex models than the normal distribution - for example, linear regression. In fact, linear regression can be written <em>as</em> a normal distribution whose mean depends on the value of a predictor variable. If this equation says that height is normally distributed:</p>
+<p><span class="math display">\[
+\text{Height} \sim N(\mu, \sigma)
+\]</span></p>
+<p>Then this equation says that height is normally distributed with a mean value that depends on age:</p>
+<p><span class="math display">\[
+\text{Height}_i \sim N(\alpha + \beta*\text{Age}_i, \sigma)
+\]</span> Notice that the overall (population) mean of height <span class="math inline">\(\mu\)</span> is now replaced with a linear formula with population intercept <span class="math inline">\(\alpha\)</span> and effect of Age <span class="math inline">\(\beta\)</span>. Another way to rewrite this formula without changing the meaning is:</p>
+<p><span class="math display">\[\begin{align}
+\text{Height}_i &amp;= \alpha + \beta * \text{Age}_i + \epsilon_i \\
+\epsilon_i &amp;\sim N(0, \sigma)
+\end{align}\]</span></p>
+<p>This is the familiar notation of a regression equation. There are two points here: one, regression can be written as an extension of the normal distribution by plugging a linear formula in the place of the distribution mean. This means that regression inherits the assumptions of the normal distribution (e.g., no outliers), and gains a few more because of the added linear formula. Two, all of the assumptions are right there, in the formula itself: the fact that we specify height as a <em>linear function</em> of age means that we assume linearity. The fact that we use a little subscript <span class="math inline">\(_i\)</span> for height and age means that we assume independent observations from different individuals for these variables. The fact that we have one normal distribution for the error term <span class="math inline">\(\epsilon_i\)</span> means that we do not expect the error distribution to vary at different values of the predictor, in other words, we expect homoscedasticity.</p>
+<p>Below, we get deeper into the assumptions of linear regression, explains why each one matters, and shows how to check whether they are likely to hold in your data.</p>
+<section id="independence-of-observations" class="level4" data-number="12.0.1.1"><h4 data-number="12.0.1.1" class="anchored" data-anchor-id="independence-of-observations">
+<span class="header-section-number">12.0.1.1</span> Independence of Observations</h4>
+<p>Linear regression assumes that every observation, or every row in the dataset, represents an independent observation, contributing unique information to the dataset. This means that observations should not be systematically related to each other. For example, participants should not be partners, friends, classmates, et cetera - any reason why participants might be more similar than randomly selected members of the population could introduce a violation of the assumption of independence.</p>
+<p><strong>Why it matters</strong></p>
+<p>When observations are <em>clustered</em> - for example, when data come from students in the same classroom, patients treated by the same clinician, or repeated measurements from the same individual - the assumption of independence is violated. In such cases, the residuals of these observations are correlated, which causes the model to underestimate the true variability, leading to overconfident conclusions.</p>
+<p><strong>How to check</strong></p>
+<ul>
+<li>Consider the study design: Were the data collected from naturally grouped or repeated units, such as individuals within teams, families, schools, or measured over time?</li>
+</ul>
+<p><strong>When it is violated</strong></p>
+<p>This assumption is likely to be violated when:</p>
+<ul>
+<li>Observations are nested within a shared context (e.g., students within schools).</li>
+<li>The same individual or unit appears multiple times in the dataset.</li>
+<li>There is a known time-based or spatial structure to the data.</li>
+</ul></section><section id="correct-measurement-levels" class="level4" data-number="12.0.1.2"><h4 data-number="12.0.1.2" class="anchored" data-anchor-id="correct-measurement-levels">
+<span class="header-section-number">12.0.1.2</span> Correct Measurement Levels</h4>
+<p>Linear regression requires the outcome variable (<em>Y</em>) to have a continuous measurement level. This also follows from the linearity assumption: if we assume that an increase on X from 1 to 2 will have the same effect (regression slope) as an increase on X from 4 to 5, then that also means that Y must have a measurement level where the same distance has the same numerical value (interval or ratio). Examples of appropriate variables are test scores, height, or income. Predictors (<em>X</em> variables) can have any measurement level, but they must be <em>encoded</em> as continuous or binary (0 and 1-coded dummy variables). Some statistical software encodes nominal and ordinal variables as binary indicators behind the scenes, effectively doing this work for you.</p>
+<p><strong>Why it matters</strong></p>
+<p>If <em>Y</em> is nominal, it does not make sense to predict it numerically. If <em>Y</em> is ordinal, we cannot be sure that steps of equal numerical size have the same meaning. Sometimes a linear model works quite well for ordinal scales, but it is always important to check for indications of model violations when you use it for such variables.</p>
+<p><strong>How to check</strong></p>
+<p>First, review the codebook, metadata, or variable definitions in SPSS to confirm that:</p>
+<ul>
+<li>The outcome (<em>Y</em>) is coded as a continuous numeric variable.</li>
+<li>Categorical predictors are either dummy-coded or otherwise appropriately handled.</li>
+</ul>
+<p><strong>When it is violated</strong></p>
+<p>The assumption is violated when:</p>
+<ul>
+<li>
+<em>Y</em> is nominal (categories like “red”, “green”, “blue”) or ordinal (e.g., Likert scales).</li>
+<li>An ordinal <em>X</em> is treated as numeric without justification, leading the model to assume equal spacing between categories.</li>
+</ul>
+<p>Note that the operationalization of a variable is not the only factor that matters; its true measurement level also matters. For example, if you want to measure height, you could put a mark on the doorpost and rate everyone taller than the mark as “tall”, and anyone shorter than the mark as “short” - but the fact that you operationalized height this way doesn’t negate the fact that it is inherently a continuous variable.</p>
+<p>More pertinently: gender is often operationalized as binary. This does not mean that gender <em>is</em> binary; its true measurement level is more complex. If you are interested in gender as a social construct, then there are more then two discrete categories. If you are interested in gender for its biological aspects, then there is both nominal variability. Nominal variability includes aneuploidy of sex chromosomes, and continuous variability occurs in various biological aspects of male-ness and female-ness, like hormone balances and -sensitivities.</p>
+</section><section id="linearity-the-straight-line-assumption" class="level4" data-number="12.0.1.3"><h4 data-number="12.0.1.3" class="anchored" data-anchor-id="linearity-the-straight-line-assumption">
+<span class="header-section-number">12.0.1.3</span> Linearity – the “straight-line” assumption</h4>
+<p>Linear regression assumes that the relationship between each predictor X and the outcome Y is linear, that is, that the same change in X corresponds to the same change in Y for all values of X. The slope <span class="math inline">\(\beta\)</span>, or its sample estimate <span class="math inline">\(b\)</span>, tells us how much <em>Y</em> is expected to increase (or decrease) for a one-unit increase in <em>X</em>, but this only holds if the relationship is approximately linear.</p>
+<p><strong>Why it matters</strong></p>
+<p>If the relationship is actually non-linear, fitting a straight line will misrepresent the nature or strength of the association. Remember Anscombe’s quartet in <span class="quarto-unresolved-ref">?sec-anscombe</span>. A straight line fitted to a pattern in data that, in reality/in the population, is non-linear (quadratic, S-shaped, etc) will result in inaccurate or meaningless slope estimates and misleading conclusions about the predictor’s effect.</p>
+<p><strong>How to check</strong></p>
+<ol type="1">
+<li>Create a scatterplot of <em>Y</em> against each <em>X</em> variable.<br>
+</li>
+<li>Add a straight trend line (e.g., “fit line at total” in your software).</li>
+<li>Visually assess whether the line aligns with the overall pattern of the data points.</li>
+</ol>
+<p><strong>When it is violated</strong></p>
+<p>Linearity is likely violated if the plotted points form a clear curve, wave, or other systematic pattern that deviates from a straight path.</p>
+<p>Alternatively, outside the scope of this course:</p>
+<ol type="1">
+<li>Estimate a linear model</li>
+<li>Estimate a model with a different functional form (e.g., quadratic)</li>
+<li>Compare the fit of the models using the BIC model fit index (lower is better)</li>
+</ol></section><section id="normality-of-residuals" class="level4" data-number="12.0.1.4"><h4 data-number="12.0.1.4" class="anchored" data-anchor-id="normality-of-residuals">
+<span class="header-section-number">12.0.1.4</span> Normality of Residuals</h4>
+<p>As evident from the <span class="math inline">\(\epsilon_i \sim N(0, \sigma)\)</span> part of the regression equation, linear regression assumes that the residuals, the differences between the observed and predicted values, are normally distributed.</p>
+<p><strong>Why it matters</strong></p>
+<p>When the residuals deviate strongly from normality (e.g., they are skewed or have heavy tails), inferences based on the regression model may be misleading. Standard errors and metrics derived from them, like <em>p</em>-values, and confidence intervals, depend on this assumption.</p>
+<p><strong>How to check</strong></p>
+<ul>
+<li>Save the residuals and inspect their distribution using a <strong>histogram</strong> or a <strong>Q–Q plot</strong>.<br>
+</li>
+<li>For very small datasets (e.g., <em>N</em> &lt; 50), formal tests such as the <strong>Shapiro–Wilk test</strong> can be used to assess normality.</li>
+</ul>
+<p><strong>When it is violated</strong></p>
+<p>This assumption is often violated when:</p>
+<ul>
+<li>The outcome variable is highly skewed or bounded</li>
+<li>There are extreme values in the outcome that disproportionately influence the residuals.<br>
+</li>
+<li>The sample size is small and the residual pattern does not resemble a bell-shaped curve.</li>
+</ul></section><section id="homoscedasticity" class="level4" data-number="12.0.1.5"><h4 data-number="12.0.1.5" class="anchored" data-anchor-id="homoscedasticity">
+<span class="header-section-number">12.0.1.5</span> Homoscedasticity</h4>
+<p>The fact that linear regression has a single error term implies an assumption that the variance of the residuals remains constant across all levels of the predicted values. This condition, known as <em>homoscedasticity</em> (homo = equal, scedasticity = variance), implies that the model has equal predictive accuracy across the full range of the outcome.</p>
+<p><strong>Why it matters</strong></p>
+<p>When residuals fan out, contract, or otherwise vary as the predicted values increase, this is called <em>heteroscedasticity</em> (hetero = different, scedasticity = variability). In such cases, the standard errors may be inaccurate, which undermines the reliability of p-values and confidence intervals.</p>
+<p><strong>How to check</strong></p>
+<ol type="1">
+<li>Save the residuals from the fitted model.<br>
+</li>
+<li>Create a scatter plot of residuals (Y-axis) and predicted values (X-axis).</li>
+<li>Visually determine whether the spread of residuals appears approximately constant across the range of predicted values.</li>
+</ol>
+<p><strong>When it is violated</strong></p>
+<p>This assumption is violated when: - The residuals become more dispersed or more concentrated as the predicted value increases. - The residual-versus-predicted plot reveals a funnel-like or cone-shaped pattern rather than a uniform band. - The residuals shows any pattern, other than a random dot cloud.</p>
+</section><section id="no-outliers" class="level4" data-number="12.0.1.6"><h4 data-number="12.0.1.6" class="anchored" data-anchor-id="no-outliers">
+<span class="header-section-number">12.0.1.6</span> No Outliers</h4>
+<p>The assumption of no outliers is related to the assumption of linearity and the assumptions of normal, homoscedastic residuals. An extreme case can distort slope estimates (as in Anscombe’s quartet, figure c) and standard errors, and consequently, confidence intervals and <em>p</em>-values which are based on those standard errors.</p>
+<p><strong>Why it matters</strong></p>
+<p>Outliers can pull the regression line toward themselves, leading to misleading interpretations. Even a single influential point can change the direction, strength, or significance of a predictor’s effect.</p>
+<p><strong>How to check</strong></p>
+<ul>
+<li>Calculate diagnostic statistics such as <strong>leverage</strong>, <strong>Cook’s distance</strong>, and <strong>standardized residuals</strong> to detect potential outliers.</li>
+</ul>
+<p><strong>When it is violated</strong></p>
+<p>This assumption may be violated when:</p>
+<ol type="a">
+<li>A case lies far from the bulk of the data on one or more predictors.<br>
+</li>
+<li>The residual for a single observation is large relative to others.<br>
+</li>
+<li>Diagnostic measures flag a case as both high-leverage and high-influence.</li>
+</ol></section><section id="reliable-predictors" class="level4" data-number="12.0.1.7"><h4 data-number="12.0.1.7" class="anchored" data-anchor-id="reliable-predictors">
+<span class="header-section-number">12.0.1.7</span> Reliable Predictors</h4>
+<p>In the regression equation, the outcome has an error term, <span class="math inline">\(\epsilon_i\)</span>. If the model makes imperfect predictions for any reason, these prediction errors contribute to the error term. One reason for prediction error is measurement error in the outcome. Note, however, that while the outcome has an error term - the predictor does not. This implies an assumption that predictor variables (<em>X</em>) are measured without error. Inaccurate or inconsistent measurement introduces noise, which can attenuate the estimated relationship between <em>X</em> and <em>Y</em>. As a result, regression coefficients may be biased toward zero, and the model may attribute true effects to random error.</p>
+<p><strong>Why it matters</strong></p>
+<p>When predictors are measured with error (unreliable), the estimated slopes become less trustworthy. Even in large samples, measurement error in <em>X</em> can severely compromise the interpretability of regression results, leading to underestimation of effect sizes and increased standard errors.</p>
+<p><strong>How to check</strong></p>
+<ul>
+<li>For predictors based on multiple items (e.g., survey scales), compute internal consistency (e.g., Cronbach’s alpha). Values below 0.70 often indicate problematic measurement.</li>
+<li>If repeated measurements of the same predictor are available, examine the test–retest correlation. High correlation supports reliability.</li>
+</ul>
+<p><strong>When it is violated</strong></p>
+<p>This assumption is violated when: - A predictor contains high random measurement error. - Multi-item scales exhibit low internal consistency. - Temporal stability of repeated measures is weak (e.g., inconsistent responses across time).</p>
+</section><section id="no-multicollinearity" class="level4" data-number="12.0.1.8"><h4 data-number="12.0.1.8" class="anchored" data-anchor-id="no-multicollinearity">
+<span class="header-section-number">12.0.1.8</span> <em>No Multicollinearity</em>
+</h4>
+<p>As a preview of what is to come: it is possible to include more than one predictor in a regression model. This is called <em>multiple regression</em>, and it will be covered in Statistics 2. Multiple regression additionally assumes that each predictor contributes uniquely to the explanation of the outcome variable. When two or more predictors explain the <em>same</em> variance in the outcome, the model struggles to estimate their unique effects. This overlap in explained variance makes coefficient estimates unstable and difficult to interpret, and inflates the individual predictors’ standard errors.</p>
+<p><strong>Why it matters</strong></p>
+<p>Multicollinearity undermines the precision of regression coefficients. When predictors convey redundant information, the model’s ability to estimate each slope independently deteriorates. This can lead to wide confidence intervals, non-significant p-values, or coefficients with counterintuitive signs.</p>
+<p><strong>How to check</strong></p>
+<ul>
+<li>Examine the <strong>Variance Inflation Factor (VIF)</strong> for each predictor. A common guideline is that values above 5 may indicate multicolinearity, values above 10 indicate severe multicolinearity.</li>
+</ul>
+<p><strong>When it is violated</strong></p>
+<p>This assumption may be violated when:</p>
+<ul>
+<li>Two predictors are strongly correlated (e.g., income and years of education).</li>
+<li>More than two predictors explain the same variance in the outcome (e.g., mother’s income, father’s income, and family Socio-Economic Status might explain the same variance in children’s educational attainment)</li>
+<li>VIF values are unusually high.<br>
+</li>
+<li>The inclusion of additional predictors drastically alters the estimated slopes or increases their standard errors.</li>
+</ul></section><section id="putting-it-all-together" class="level4" data-number="12.0.1.9"><h4 data-number="12.0.1.9" class="anchored" data-anchor-id="putting-it-all-together">
+<span class="header-section-number">12.0.1.9</span> Putting It All Together</h4>
+<p>Before interpreting regression results, it is essential to check for evidence of violations of assumptions. If the assumptions are violated, interpretation of the results might not be straightforward. Note, however, that assumption checks are subject to the same caveats as other statistical inferences:</p>
+<ul>
+<li>Assumptions are statements about the <em>population</em>; even if they appear to be violated in the <em>sample</em>, they might be met in the population</li>
+<li>Consequently, it is possible to draw false positive (incorrectly concluding that an assumption is violated, while in reality it is not) or false negative (incorrectly concluding that an assumption is not violated, when in reality it is) conclusions about assumptions</li>
+<li>Making data-driven analysis decisions incurs researcher degrees of freedom (see the chapter on questionable research practices). You run the risk of overfitting (customizing) your analysis so much to the sample at hand that it no longer generalizes well to the general population, or other samples from that population.</li>
+</ul>
+<p>None of this diminishes the importance of checking assumptions, it is merely a call to exercise critical thinking when doing so. For example, regression assumes that the dependent variable is normally distributed. If your dependent variable is a Likert-type scale, sometimes, you may get away with making this assumption (figure <span class="quarto-unresolved-ref">?fig-figviolate</span> panel a below). Nevertheless, you should discuss this <em>potential</em> violation of the assumption of normality in the Discussion of your paper or report. However, if you notice after data collection that your dependent variable is distributed as in figure b below, the assumption of normality is so eggregiously violated that analysis results are probably meaningless. In this case, you might still analyze the results as planned - but that analysis will likely be meaningless. You might want to present a second analysis that treats the outcome as ordinal (which is possible, but outside the scope of this course), and emphasize that this was a data-driven analysis decision.</p>
+<p>In sum:</p>
+<ul>
+<li>Always check assumptions</li>
+<li>Always report the result of assumption checks and discuss (in the Discussion) how potential violation might affect your conclusions</li>
+<li>In case of strong evidence of violations, you might report a secondary analysis that is robust to the violation of the assumption, but make it clear that this analysis was performed <em>after</em> seeing the data.</li>
+<li>Optionally, compare the results of both the planned analysis and the robust analysis. If the conclusions are the same (e.g., both analyses provide results consistent with your hypothesis), this is reassuring.</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb4-3"><a href="#cb4-3"></a>n <span class="ot">=</span> <span class="dv">100</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n)</span>
+<span id="cb4-5"><a href="#cb4-5"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb4-6"><a href="#cb4-6"></a>  <span class="at">Value =</span> <span class="fu">c</span>(<span class="fu">cut</span>(x, <span class="dv">7</span>, <span class="at">labels =</span> <span class="cn">FALSE</span>),</span>
+<span id="cb4-7"><a href="#cb4-7"></a>            <span class="fu">cut</span>(x, <span class="at">breaks =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>), <span class="at">labels =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb4-8"><a href="#cb4-8"></a>            ),</span>
+<span id="cb4-9"><a href="#cb4-9"></a>  <span class="at">Panel =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"a"</span>, <span class="st">"b"</span>), <span class="at">each =</span> n)</span>
+<span id="cb4-10"><a href="#cb4-10"></a>)</span>
+<span id="cb4-11"><a href="#cb4-11"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> Value)) <span class="sc">+</span> <span class="fu">geom_bar</span>() <span class="sc">+</span> <span class="fu">facet_wrap</span>(<span class="sc">~</span>Panel) <span class="sc">+</span> <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>)) <span class="sc">+</span><span class="fu">scale_y_continuous</span>(<span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>)) <span class="sc">+</span> <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 11 rows containing non-finite outside the scale range
+(`stat_count()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="glm_assumptions_files/figure-html/figviolate-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption>Figure a shows a Likert-type scale that is approximately normally distributed. Figure b shows a Likert scale with extreme censoring</figcaption></figure>
+</div>
+</div>
+</div>
+<ol type="1">
+<li>
+<strong>Visual diagnostics</strong> – Begin with graphical checks for linearity, constant variance, outliers, and normality of residuals. Plots often reveal violations at a glance.<br>
+</li>
+<li>
+<strong>Statistical diagnostics</strong> – Follow up with numerical checks, such as the Variance Inflation Factor (VIF) for multicollinearity and formal tests for heteroskedasticity or autocorrelation when appropriate.<br>
+</li>
+<li>
+<strong>Assessment of model structure</strong> – Consider whether the data meet requirements for independence and correct scale of measurement.</li>
+</ol></section></section><section id="formative-test" class="level2" data-number="12.1"><h2 data-number="12.1" class="anchored" data-anchor-id="formative-test">
+<span class="header-section-number">12.1</span> Formative Test</h2>
+<p>A formative test helps you assess your progress in the course, and helps you address any blind spots in your understanding of the material. If you get a question wrong, you will receive a hint on how to improve your understanding of the material.</p>
+<p>Complete the formative test ideally after you’ve seen the lecture, but before the lecture meeting in which we can discuss any topics that need more attention</p>
+<div class="cell" data-layout-align="center">
+<div class="webex-check webex-box">
+<p><strong>Question 1</strong></p>
+Which statement best captures the linearity assumption in OLS regression?
+<div id="radio_BBSQBKCCNS" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_BBSQBKCCNS" value=""><span>The residuals must have constant variance</span></label><label><input type="radio" autocomplete="off" name="radio_BBSQBKCCNS" value=""><span>The predictors must be normally distributed</span></label><label><input type="radio" autocomplete="off" name="radio_BBSQBKCCNS" value="answer"><span>The expected change in the outcome is proportional to changes in each predictor across its range</span></label><label><input type="radio" autocomplete="off" name="radio_BBSQBKCCNS" value=""><span>The outcome must be measured without error</span></label>
+</div>
+<p><strong>Question 2</strong></p>
+Homoscedasticity means:
+<div id="radio_IRZXJOTEYE" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_IRZXJOTEYE" value="answer"><span>Residuals have constant variance across all levels of the predicted values</span></label><label><input type="radio" autocomplete="off" name="radio_IRZXJOTEYE" value=""><span>Predictors are uncorrelated with each other</span></label><label><input type="radio" autocomplete="off" name="radio_IRZXJOTEYE" value=""><span>Residuals are centered at zero</span></label><label><input type="radio" autocomplete="off" name="radio_IRZXJOTEYE" value=""><span>Predictors are measured on a continuous scale</span></label>
+</div>
+<p><strong>Question 3</strong></p>
+A residuals versus predicted plot shows a clear funnel shape. Which assumption is most likely violated?
+<div id="radio_LNFTPOBACX" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_LNFTPOBACX" value=""><span>Independence of observations</span></label><label><input type="radio" autocomplete="off" name="radio_LNFTPOBACX" value=""><span>Normality of predictors</span></label><label><input type="radio" autocomplete="off" name="radio_LNFTPOBACX" value="answer"><span>Homoscedasticity</span></label><label><input type="radio" autocomplete="off" name="radio_LNFTPOBACX" value=""><span>Linearity</span></label>
+</div>
+<p><strong>Question 4</strong></p>
+Why does normality of residuals matter most for small samples in OLS?
+<div id="radio_EILUHDQIUA" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_EILUHDQIUA" value="answer"><span>It underpins the accuracy of t tests and confidence intervals for coefficients</span></label><label><input type="radio" autocomplete="off" name="radio_EILUHDQIUA" value=""><span>It guarantees unbiased slope estimates</span></label><label><input type="radio" autocomplete="off" name="radio_EILUHDQIUA" value=""><span>It eliminates the need to check other assumptions</span></label><label><input type="radio" autocomplete="off" name="radio_EILUHDQIUA" value=""><span>It ensures predictors are measured reliably</span></label>
+</div>
+<p><strong>Question 5</strong></p>
+Your data consist of students nested within classrooms but you fit a single level OLS model that treats all rows as independent. Which assumption is threatened?
+<div id="radio_YXUUVFRPBH" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_YXUUVFRPBH" value="answer"><span>Independence of observations</span></label><label><input type="radio" autocomplete="off" name="radio_YXUUVFRPBH" value=""><span>No outliers</span></label><label><input type="radio" autocomplete="off" name="radio_YXUUVFRPBH" value=""><span>Normality of predictors</span></label><label><input type="radio" autocomplete="off" name="radio_YXUUVFRPBH" value=""><span>Correct scale of measurement for the outcome</span></label>
+</div>
+<p><strong>Question 6</strong></p>
+Two predictors are highly correlated. What is the most common consequence for the regression coefficients?
+<div id="radio_HUEHXGTDQJ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_HUEHXGTDQJ" value=""><span>They become unbiased and more precise</span></label><label><input type="radio" autocomplete="off" name="radio_HUEHXGTDQJ" value=""><span>They remain unchanged but model fit worsens</span></label><label><input type="radio" autocomplete="off" name="radio_HUEHXGTDQJ" value=""><span>They become systematically too large</span></label><label><input type="radio" autocomplete="off" name="radio_HUEHXGTDQJ" value="answer"><span>They become unstable with inflated standard errors and may change sign with small data changes</span></label>
+</div>
+<p><strong>Question 7</strong></p>
+Which outcome variable violates the correct scale of measurement assumption for standard OLS regression?
+<div id="radio_IOYFFDCCMI" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_IOYFFDCCMI" value=""><span>Height in centimeters</span></label><label><input type="radio" autocomplete="off" name="radio_IOYFFDCCMI" value="answer"><span>A binary pass or fail indicator coded 0 and 1</span></label><label><input type="radio" autocomplete="off" name="radio_IOYFFDCCMI" value=""><span>Test score from 0 to 100</span></label><label><input type="radio" autocomplete="off" name="radio_IOYFFDCCMI" value=""><span>Annual income in dollars</span></label>
+</div>
+<p><strong>Question 8</strong></p>
+What is the typical effect of measurement error in a predictor on its estimated slope in OLS?
+<div id="radio_NEGTTJHANL" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_NEGTTJHANL" value="answer"><span>Bias toward zero</span></label><label><input type="radio" autocomplete="off" name="radio_NEGTTJHANL" value=""><span>No bias but larger p values</span></label><label><input type="radio" autocomplete="off" name="radio_NEGTTJHANL" value=""><span>No effect if the outcome is normal</span></label><label><input type="radio" autocomplete="off" name="radio_NEGTTJHANL" value=""><span>Bias away from zero</span></label>
+</div>
+<p><strong>Question 9</strong></p>
+You see a systematic curve in the residuals versus predicted plot. Which assumption is most suspect?
+<div id="radio_QADUUVYXEL" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_QADUUVYXEL" value="answer"><span>Linearity</span></label><label><input type="radio" autocomplete="off" name="radio_QADUUVYXEL" value=""><span>Independence</span></label><label><input type="radio" autocomplete="off" name="radio_QADUUVYXEL" value=""><span>Homoscedasticity</span></label><label><input type="radio" autocomplete="off" name="radio_QADUUVYXEL" value=""><span>No outliers</span></label>
+</div>
+<p><strong>Question 10</strong></p>
+Which statement about outliers and influence in OLS is correct?
+<div id="radio_ORAHUXJGGK" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ORAHUXJGGK" value=""><span>Only points with extreme outcome values can be influential</span></label><label><input type="radio" autocomplete="off" name="radio_ORAHUXJGGK" value=""><span>Any point far from the regression line is necessarily highly influential</span></label><label><input type="radio" autocomplete="off" name="radio_ORAHUXJGGK" value="answer"><span>A point can be influential if it has unusual predictor values and substantially changes the fitted line</span></label><label><input type="radio" autocomplete="off" name="radio_ORAHUXJGGK" value=""><span>Influential points affect p values but never change coefficient signs</span></label>
+</div>
+</div>
+<div class="webex-solution">
+<button>
+Show explanations
+</button>
+<p><strong>Question 1</strong></p>
+<p>Linearity is about the average of Y at each X forming a straight line. The other options describe different assumptions.</p>
+<p><strong>Question 2</strong></p>
+<p>Homoscedasticity is constant spread of residuals across the range of fitted values.</p>
+<p><strong>Question 3</strong></p>
+<p>A funnel pattern indicates changing residual variance across fitted values.</p>
+<p><strong>Question 4</strong></p>
+<p>With small samples inference for slopes uses normality. In large samples asymptotics help.</p>
+<p><strong>Question 5</strong></p>
+<p>Clustering creates correlated errors. Rows are not independent.</p>
+<p><strong>Question 6</strong></p>
+<p>High correlation among predictors creates multicollinearity and unstable estimates.</p>
+<p><strong>Question 7</strong></p>
+<p>OLS assumes a continuous outcome. A binary outcome calls for a different model.</p>
+<p><strong>Question 8</strong></p>
+<p>Classical measurement error in X attenuates the slope.</p>
+<p><strong>Question 9</strong></p>
+<p>A patterned residual plot suggests a wrong functional form. The relation is not linear.</p>
+<p><strong>Question 10</strong></p>
+<p>Influence depends on leverage and residual. Such points can change slopes and even signs.</p>
+</div>
+</div>
+</section><section id="tutorial" class="level2" data-number="12.2"><h2 data-number="12.2" class="anchored" data-anchor-id="tutorial">
+<span class="header-section-number">12.2</span> Tutorial</h2>
+<section id="before-you-start" class="level3" data-number="12.2.1"><h3 data-number="12.2.1" class="anchored" data-anchor-id="before-you-start">
+<span class="header-section-number">12.2.1</span> Before you start</h3>
+<ul>
+<li>In each exercise, fit an OLS model with y as the outcome and the listed predictors.</li>
+</ul></section><section id="assignment-1" class="level3" data-number="12.2.2"><h3 data-number="12.2.2" class="anchored" data-anchor-id="assignment-1">
+<span class="header-section-number">12.2.2</span> Assignment 1</h3>
+<p>File: <a href="data/reg_assump_check.sav"><code>reg_assump_check.sav</code></a><br>
+Variables: y, x1, x2</p>
+<p>Steps (SPSS GUI):</p>
+<ol type="1">
+<li>
+<strong>Check linearity (for each predictor)</strong>
+<ul>
+<li>Graphs &gt; Legacy Dialogs &gt; Scatter/Dot &gt; Simple Scatter
+<ul>
+<li>Y axis: <strong>y</strong>; X axis: <strong>x1</strong>. Create plot.<br>
+</li>
+<li>Repeat for <strong>x2</strong>.<br>
+</li>
+</ul>
+</li>
+<li>In the Chart Editor: Element &gt; Fit Line at Total.<br>
+</li>
+</ul>
+</li>
+<li>Analyze &gt; Regression &gt; Linear
+<ul>
+<li>Dependent: y<br>
+</li>
+<li>Independents: x1 x2<br>
+</li>
+<li>Statistics: Estimates, Confidence intervals, Collinearity diagnostics<br>
+</li>
+<li>Plots: ZPRED on X, ZRESID on Y<br>
+</li>
+<li>Save: Standardized residuals (ZRESID), Predicted values (ZPRED)</li>
+</ul>
+</li>
+<li>Graphs &gt; Legacy Dialogs &gt; Histogram
+<ul>
+<li>Variable: ZRESID; check “Display normal curve”</li>
+</ul>
+</li>
+<li>Graphs &gt; Legacy Dialogs &gt; Q-Q
+<ul>
+<li>Variable: ZRESID</li>
+</ul>
+</li>
+</ol>
+<p>Questions:</p>
+<ul>
+<li>Is there a linear association among these variables?</li>
+<li>Is the measurement scale of these variables appropriate for regression analysis?</li>
+<li>Are residuals normally distributed?<br>
+</li>
+<li>Is homoscedasticity supported?<br>
+</li>
+<li>Are there any multicollinearity concerns?</li>
+</ul></section><section id="assignment-2-linearity-check" class="level3" data-number="12.2.3"><h3 data-number="12.2.3" class="anchored" data-anchor-id="assignment-2-linearity-check">
+<span class="header-section-number">12.2.3</span> Assignment 2 — Linearity check</h3>
+<p>File: <a href="data/reg_linearity_check.sav"><code>reg_linearity_check.sav</code></a><br>
+Variables: y, x1</p>
+<p>Steps:</p>
+<ol type="1">
+<li>Graphs &gt; Legacy Dialogs &gt; Scatter/Dot &gt; Simple Scatter
+<ul>
+<li>Y axis: y; X axis: x1<br>
+</li>
+<li>In Chart Editor, add a straight fit line (Fit Line at Total).</li>
+</ul>
+</li>
+<li>Analyze &gt; Regression &gt; Linear
+<ul>
+<li>y on x1; request the same plots and saves as in Assignment 1.</li>
+</ul>
+</li>
+</ol>
+<p>Questions:</p>
+<ul>
+<li>Does the y vs x1 scatterplot suggest a straight-line relation?<br>
+</li>
+<li>Do residual plots show a pattern (e.g., systematic bends) inconsistent with linearity?<br>
+</li>
+<li>Based on the diagnostics, is a linear specification for x1 adequate in this dataset?</li>
+</ul></section><section id="assignment-3-homoscedasticity" class="level3" data-number="12.2.4"><h3 data-number="12.2.4" class="anchored" data-anchor-id="assignment-3-homoscedasticity">
+<span class="header-section-number">12.2.4</span> Assignment 3 — Homoscedasticity</h3>
+<p>File: <a href="data/reg_homoscedasticity_check.sav"><code>reg_homoscedasticity_check.sav</code></a><br>
+Variables: y, x1</p>
+<p>Steps: 1) Fit OLS as in Assignment 1 and save ZRESID and ZPRED.<br>
+2) Graphs &gt; Legacy Dialogs &gt; Scatter/Dot &gt; Simple Scatter<br>
+- X axis: ZPRED; Y axis: ZRESID.</p>
+<p>Questions:</p>
+<ul>
+<li>Do residuals show roughly constant spread across predicted values, or a cone/funnel?</li>
+</ul></section><section id="assignment-4-normality-of-residuals" class="level3" data-number="12.2.5"><h3 data-number="12.2.5" class="anchored" data-anchor-id="assignment-4-normality-of-residuals">
+<span class="header-section-number">12.2.5</span> Assignment 4 — Normality of residuals</h3>
+<p>File: <a href="data/reg_normality_check.sav"><code>reg_normality_check.sav</code></a><br>
+Variables: y, x1</p>
+<p>Steps:</p>
+<ol type="1">
+<li>Fit the regression and save residuals
+<ul>
+<li>Analyze &gt; Regression &gt; Linear
+<ul>
+<li>Dependent: y</li>
+<li>Independent(s): your predictor(s)</li>
+<li>Save &gt; Standardized residuals</li>
+<li>Plots &gt; Tick Histogram</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>To produce Q-Q plot
+<ul>
+<li>Analyze &gt; Descriptive Statistics &gt; Explore</li>
+<li>Add the saved standardized residuals to the dependent list</li>
+<li>Plots &gt; Check Normality plots with tests</li>
+</ul>
+</li>
+</ol>
+<p>Questions:</p>
+<ul>
+<li>Is the residual distribution approximately symmetric and bell-shaped?<br>
+</li>
+<li>Do Q-Q points track the diagonal?</li>
+</ul></section><section id="assignment-5-outliers" class="level3" data-number="12.2.6"><h3 data-number="12.2.6" class="anchored" data-anchor-id="assignment-5-outliers">
+<span class="header-section-number">12.2.6</span> Assignment 5 — Outliers</h3>
+<p>File: <a href="data/reg_outliers.sav"><code>reg_outliers.sav</code></a><br>
+Variables: y, x1</p>
+<p>Steps:</p>
+<ol type="1">
+<li>Analyze &gt; Regression &gt; Linear
+<ul>
+<li>Dependent: y<br>
+</li>
+<li>Independent: x1<br>
+</li>
+<li>Statistics: Estimates, Casewise diagnostics (e.g., standardized residuals &gt; 3), Collinearity diagnostics (optional here)<br>
+</li>
+<li>Save: Cook’s distance, and Leverage (Hat)</li>
+</ul>
+</li>
+<li>Graphs &gt; Legacy Dialogs &gt; Boxplot
+<ul>
+<li>Summaries for separate variables: <strong>y</strong>, <strong>x1</strong>
+</li>
+</ul>
+</li>
+<li>Graphs &gt; Legacy Dialogs &gt; Scatter/Dot &gt; Simple Scatter
+<ul>
+<li>Y axis: <strong>y</strong>; X axis: <strong>x1</strong>
+</li>
+</ul>
+</li>
+</ol>
+<p>Questions:</p>
+<ul>
+<li>Are any cases flagged in Casewise diagnostics (e.g., |Std. Residual| &gt; 3)?<br>
+</li>
+<li>Do any observations show high leverage* or large Cook’s distance relative to others?<br>
+</li>
+<li>Based on these diagnostics, could a single case plausibly dominate the fitted line? Identify the case ID if so.</li>
+</ul></section><section id="exercise-6-multicollinearity" class="level3" data-number="12.2.7"><h3 data-number="12.2.7" class="anchored" data-anchor-id="exercise-6-multicollinearity">
+<span class="header-section-number">12.2.7</span> Exercise 6 — Multicollinearity</h3>
+<p>File: <a href="data/reg_multicollinearity.sav"><code>reg_multicollinearity.sav</code></a></p>
+<p>Variables: y, x1, x2, x3</p>
+<p>Steps: 1) Analyze &gt; Correlate &gt; Bivariate<br>
+- Inspect correlations among x1, x2, x3.<br>
+2) Analyze &gt; Regression &gt; Linear<br>
+- y on x1 x2 x3<br>
+- Statistics: Collinearity diagnostics, Estimates.</p>
+<p>Questions:</p>
+<ul>
+<li>Are any predictor pairs highly correlated in the correlation matrix?<br>
+</li>
+<li>What are the VIF and Tolerance values for each predictor?<br>
+</li>
+<li>Do the signs and standardized Betas align with the simple correlations, or do you see suppression patterns?</li>
+</ul>
+<p>What to look for:</p>
+<ul>
+<li>VIF substantially above 5 (or Tolerance, which is <span class="math inline">\(\frac{1}{VIF}\)</span>, below .20) suggests collinearity.</li>
+<li>Large divergence between simple r and Beta can signal overlap among predictors.</li>
+</ul></section></section><section id="assignment-7-putting-it-together-choose-two-datasets" class="level2" data-number="12.3"><h2 data-number="12.3" class="anchored" data-anchor-id="assignment-7-putting-it-together-choose-two-datasets">
+<span class="header-section-number">12.3</span> Assignment 7 — Putting it together (choose two datasets)</h2>
+<p>Files: pick any two from the set</p>
+<p>Task:</p>
+<ul>
+<li>For each dataset, run the standard diagnostic workflow from Assignment 1. - Summarize, in a short paragraph per dataset, which assumptions are reasonably met and which are doubtful, citing the specific plot or statistic you used.</li>
+</ul>
+<p>Reminder:</p>
+<ul>
+<li>Focus on diagnosis only. Do not apply remedies or re-specify models here.</li>
+</ul>
+
+
+</section></main><!-- /main --><script>
+
+/* update total correct if #webex-total_correct exists */
+update_total_correct = function() {
+  console.log("webex: update total_correct");
+
+  var t = document.getElementsByClassName("webex-total_correct");
+  for (var i = 0; i < t.length; i++) {
+    p = t[i].parentElement;
+    var correct = p.getElementsByClassName("webex-correct").length;
+    var solvemes = p.getElementsByClassName("webex-solveme").length;
+    var radiogroups = p.getElementsByClassName("webex-radiogroup").length;
+    var selects = p.getElementsByClassName("webex-select").length;
+
+    t[i].innerHTML = correct + " of " + (solvemes + radiogroups + selects) + " correct";
+  }
+}
+
+/* webex-solution button toggling function */
+b_func = function() {
+  console.log("webex: toggle hide");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('open')) {
+    cl.remove("open");
+  } else {
+    cl.add("open");
+  }
+}
+
+/* check answers */
+check_func = function() {
+  console.log("webex: check answers");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('unchecked')) {
+    cl.remove("unchecked");
+    this.innerHTML = "Hide Answers";
+  } else {
+    cl.add("unchecked");
+    this.innerHTML = "Show Answers";
+  }
+}
+
+/* function for checking solveme answers */
+solveme_func = function(e) {
+  console.log("webex: check solveme");
+
+  var real_answers = JSON.parse(this.dataset.answer);
+  var my_answer = this.value;
+  var cl = this.classList;
+  if (cl.contains("ignorecase")) {
+    my_answer = my_answer.toLowerCase();
+  }
+  if (cl.contains("nospaces")) {
+    my_answer = my_answer.replace(/ /g, "")
+  }
+
+  if (my_answer == "") {
+    cl.remove("webex-correct");
+    cl.remove("webex-incorrect");
+  } else if (real_answers.includes(my_answer)) {
+    cl.add("webex-correct");
+    cl.remove("webex-incorrect");
+  } else {
+    cl.add("webex-incorrect");
+    cl.remove("webex-correct");
+  }
+
+  // match numeric answers within a specified tolerance
+  if(this.dataset.tol > 0){
+    var tol = JSON.parse(this.dataset.tol);
+    var matches = real_answers.map(x => Math.abs(x - my_answer) < tol)
+    if (matches.reduce((a, b) => a + b, 0) > 0) {
+      cl.add("webex-correct");
+    } else {
+      cl.remove("webex-correct");
+    }
+  }
+
+  // added regex bit
+  if (cl.contains("regex")){
+    answer_regex = RegExp(real_answers.join("|"))
+    if (answer_regex.test(my_answer)) {
+      cl.add("webex-correct");
+    }
+  }
+
+  update_total_correct();
+}
+
+/* function for checking select answers */
+select_func = function(e) {
+  console.log("webex: check select");
+
+  var cl = this.classList
+
+  /* add style */
+  cl.remove("webex-incorrect");
+  cl.remove("webex-correct");
+  if (this.value == "answer") {
+    cl.add("webex-correct");
+  } else if (this.value != "blank") {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+/* function for checking radiogroups answers */
+radiogroups_func = function(e) {
+  console.log("webex: check radiogroups");
+
+  var checked_button = document.querySelector('input[name=' + this.id + ']:checked');
+  var cl = checked_button.parentElement.classList;
+  var labels = checked_button.parentElement.parentElement.children;
+
+  /* get rid of styles */
+  for (i = 0; i < labels.length; i++) {
+    labels[i].classList.remove("webex-incorrect");
+    labels[i].classList.remove("webex-correct");
+  }
+
+  /* add style */
+  if (checked_button.value == "answer") {
+    cl.add("webex-correct");
+  } else {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+window.onload = function() {
+  console.log("webex onload");
+  /* set up solution buttons */
+  var buttons = document.getElementsByTagName("button");
+
+  for (var i = 0; i < buttons.length; i++) {
+    if (buttons[i].parentElement.classList.contains('webex-solution')) {
+      buttons[i].onclick = b_func;
+    }
+  }
+
+  var check_sections = document.getElementsByClassName("webex-check");
+  console.log("check:", check_sections.length);
+  for (var i = 0; i < check_sections.length; i++) {
+    check_sections[i].classList.add("unchecked");
+
+    let btn = document.createElement("button");
+    btn.innerHTML = "Show Answers";
+    btn.classList.add("webex-check-button");
+    btn.onclick = check_func;
+    check_sections[i].appendChild(btn);
+
+    let spn = document.createElement("span");
+    spn.classList.add("webex-total_correct");
+    check_sections[i].appendChild(spn);
+  }
+
+  /* set up webex-solveme inputs */
+  var solveme = document.getElementsByClassName("webex-solveme");
+
+  for (var i = 0; i < solveme.length; i++) {
+    /* make sure input boxes don't auto-anything */
+    solveme[i].setAttribute("autocomplete","off");
+    solveme[i].setAttribute("autocorrect", "off");
+    solveme[i].setAttribute("autocapitalize", "off");
+    solveme[i].setAttribute("spellcheck", "false");
+    solveme[i].value = "";
+
+    /* adjust answer for ignorecase or nospaces */
+    var cl = solveme[i].classList;
+    var real_answer = solveme[i].dataset.answer;
+    if (cl.contains("ignorecase")) {
+      real_answer = real_answer.toLowerCase();
+    }
+    if (cl.contains("nospaces")) {
+      real_answer = real_answer.replace(/ /g, "");
+    }
+    solveme[i].dataset.answer = real_answer;
+
+    /* attach checking function */
+    solveme[i].onkeyup = solveme_func;
+    solveme[i].onchange = solveme_func;
+
+    solveme[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+  }
+
+  /* set up radiogroups */
+  var radiogroups = document.getElementsByClassName("webex-radiogroup");
+  for (var i = 0; i < radiogroups.length; i++) {
+    radiogroups[i].onchange = radiogroups_func;
+  }
+
+  /* set up selects */
+  var selects = document.getElementsByClassName("webex-select");
+  for (var i = 0; i < selects.length; i++) {
+    selects[i].onchange = select_func;
+    selects[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+  }
+
+  update_total_correct();
+}
+
+</script><script>
+// open rdrr links externally ----
+
+var exlinks = document.querySelectorAll("a[href^='https://rdrr.io']");
+var exlink_func = function(){
+  window.open(this.href);
+  return false;
+};
+for (var i = 0; i < exlinks.length; i++) {
+    exlinks[i].addEventListener('click', exlink_func, false);
+}
+
+// visible second sidebar in mobile ----
+
+function move_sidebar() {
+  var toc = document.getElementById("TOC");
+  var small_sidebar = document.querySelector("#quarto-sidebar .sidebar-menu-container");
+  var right_sidebar = document.getElementById("quarto-margin-sidebar");
+
+  if (window.innerWidth < 768) {
+    small_sidebar.append(toc);
+  } else {
+    right_sidebar.append(toc);
+  }
+}
+move_sidebar();
+window.onresize = move_sidebar;
+</script><script>
+
+/* update total correct if #webex-total_correct exists */
+update_total_correct = function() {
+  console.log("webex: update total_correct");
+
+  var t = document.getElementsByClassName("webex-total_correct");
+  for (var i = 0; i < t.length; i++) {
+    p = t[i].parentElement;
+    var correct = p.getElementsByClassName("webex-correct").length;
+    var solvemes = p.getElementsByClassName("webex-solveme").length;
+    var radiogroups = p.getElementsByClassName("webex-radiogroup").length;
+    var selects = p.getElementsByClassName("webex-select").length;
+
+    t[i].innerHTML = correct + " of " + (solvemes + radiogroups + selects) + " correct";
+  }
+}
+
+/* webex-solution button toggling function */
+b_func = function() {
+  console.log("webex: toggle hide");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('open')) {
+    cl.remove("open");
+  } else {
+    cl.add("open");
+  }
+}
+
+/* check answers */
+check_func = function() {
+  console.log("webex: check answers");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('unchecked')) {
+    cl.remove("unchecked");
+    this.innerHTML = "Hide Answers";
+  } else {
+    cl.add("unchecked");
+    this.innerHTML = "Show Answers";
+  }
+}
+
+/* function for checking solveme answers */
+solveme_func = function(e) {
+  console.log("webex: check solveme");
+
+  var real_answers = JSON.parse(this.dataset.answer);
+  var my_answer = this.value;
+  var cl = this.classList;
+  if (cl.contains("ignorecase")) {
+    my_answer = my_answer.toLowerCase();
+  }
+  if (cl.contains("nospaces")) {
+    my_answer = my_answer.replace(/ /g, "")
+  }
+
+  if (my_answer == "") {
+    cl.remove("webex-correct");
+    cl.remove("webex-incorrect");
+  } else if (real_answers.includes(my_answer)) {
+    cl.add("webex-correct");
+    cl.remove("webex-incorrect");
+  } else {
+    cl.add("webex-incorrect");
+    cl.remove("webex-correct");
+  }
+
+  // match numeric answers within a specified tolerance
+  if(this.dataset.tol > 0){
+    var tol = JSON.parse(this.dataset.tol);
+    var matches = real_answers.map(x => Math.abs(x - my_answer) < tol)
+    if (matches.reduce((a, b) => a + b, 0) > 0) {
+      cl.add("webex-correct");
+    } else {
+      cl.remove("webex-correct");
+    }
+  }
+
+  // added regex bit
+  if (cl.contains("regex")){
+    answer_regex = RegExp(real_answers.join("|"))
+    if (answer_regex.test(my_answer)) {
+      cl.add("webex-correct");
+    }
+  }
+
+  update_total_correct();
+}
+
+/* function for checking select answers */
+select_func = function(e) {
+  console.log("webex: check select");
+
+  var cl = this.classList
+
+  /* add style */
+  cl.remove("webex-incorrect");
+  cl.remove("webex-correct");
+  if (this.value == "answer") {
+    cl.add("webex-correct");
+  } else if (this.value != "blank") {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+/* function for checking radiogroups answers */
+radiogroups_func = function(e) {
+  console.log("webex: check radiogroups");
+
+  var checked_button = document.querySelector('input[name=' + this.id + ']:checked');
+  var cl = checked_button.parentElement.classList;
+  var labels = checked_button.parentElement.parentElement.children;
+
+  /* get rid of styles */
+  for (i = 0; i < labels.length; i++) {
+    labels[i].classList.remove("webex-incorrect");
+    labels[i].classList.remove("webex-correct");
+  }
+
+  /* add style */
+  if (checked_button.value == "answer") {
+    cl.add("webex-correct");
+  } else {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+window.onload = function() {
+  console.log("webex onload");
+  /* set up solution buttons */
+  var buttons = document.getElementsByTagName("button");
+
+  for (var i = 0; i < buttons.length; i++) {
+    if (buttons[i].parentElement.classList.contains('webex-solution')) {
+      buttons[i].onclick = b_func;
+    }
+  }
+
+  var check_sections = document.getElementsByClassName("webex-check");
+  console.log("check:", check_sections.length);
+  for (var i = 0; i < check_sections.length; i++) {
+    check_sections[i].classList.add("unchecked");
+
+    let btn = document.createElement("button");
+    btn.innerHTML = "Show Answers";
+    btn.classList.add("webex-check-button");
+    btn.onclick = check_func;
+    check_sections[i].appendChild(btn);
+
+    let spn = document.createElement("span");
+    spn.classList.add("webex-total_correct");
+    check_sections[i].appendChild(spn);
+  }
+
+  /* set up webex-solveme inputs */
+  var solveme = document.getElementsByClassName("webex-solveme");
+
+  for (var i = 0; i < solveme.length; i++) {
+    /* make sure input boxes don't auto-anything */
+    solveme[i].setAttribute("autocomplete","off");
+    solveme[i].setAttribute("autocorrect", "off");
+    solveme[i].setAttribute("autocapitalize", "off");
+    solveme[i].setAttribute("spellcheck", "false");
+    solveme[i].value = "";
+
+    /* adjust answer for ignorecase or nospaces */
+    var cl = solveme[i].classList;
+    var real_answer = solveme[i].dataset.answer;
+    if (cl.contains("ignorecase")) {
+      real_answer = real_answer.toLowerCase();
+    }
+    if (cl.contains("nospaces")) {
+      real_answer = real_answer.replace(/ /g, "");
+    }
+    solveme[i].dataset.answer = real_answer;
+
+    /* attach checking function */
+    solveme[i].onkeyup = solveme_func;
+    solveme[i].onchange = solveme_func;
+
+    solveme[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+  }
+
+  /* set up radiogroups */
+  var radiogroups = document.getElementsByClassName("webex-radiogroup");
+  for (var i = 0; i < radiogroups.length; i++) {
+    radiogroups[i].onchange = radiogroups_func;
+  }
+
+  /* set up selects */
+  var selects = document.getElementsByClassName("webex-select");
+  for (var i = 0; i < selects.length; i++) {
+    selects[i].onchange = select_func;
+    selects[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+  }
+
+  update_total_correct();
+}
+
+</script><script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="./glm2_sum_squares.html" class="pagination-link" aria-label="GLM-II: Sums of Squares">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">GLM-II: Sums of Squares</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./glm3binary.html" class="pagination-link" aria-label="GLM-III: Binary Predictors">
+        <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">GLM-III: Binary Predictors</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer"><div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>CC-BY (2023) Caspar J. Van Lissa</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

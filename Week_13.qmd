@@ -4,30 +4,85 @@
 source("R/booktem_setup.R")
 source("R/my_setup.R")
 ```
+
 ## Introduction — Open Science and Questionable Research Practices {#week-open-science-intro}
 
-Scientific claims should earn credibility because their evidence is **transparent and reproducible**, not because results are surprising or the narrative is compelling. Over the past decade, large-scale replication efforts have shown that many published effects weaken or fail to reappear when re-tested with high-powered designs and original materials (e.g., replication effects were, on average, about half the size of originals; 36% of replications were statistically significant versus 97% of originals) (Open Science Collaboration, 2015). At the same time, incentives often reward **publishability**—novel, positive results—over **verifiability**, creating a misalignment between what advances careers and what advances knowledge (Nosek et al., 2012).
+Over the past decade, large-scale replication efforts have shown that many published effects cannot be replicated,
+or finds much weaker effects when reproducing published work with high-powered designs (e.g., replication effects were, on average, about half the size of originals; 36% of replications were statistically significant versus 97% of originals) (Open Science Collaboration, 2015).
+One reason might be that scientific journals select for "newsworthy" (novel and exciting) findings,
+rather than unsurprising but diligently produced facts.
+In other words, there is a misalignment between what advances careers and what advances knowledge (Nosek et al., 2012).
+Scientific claims should earn credibility because they are based on **transparent and reproducible** research,
+not because results are surprising or the narrative is compelling. 
 
 This week examines how research practices and incentive structures can **inflate false positives** and **distort effect estimates**. Psychology has reported an unusually high share of significant findings (≈96%) despite typical studies being underpowered—conditions that favor publication bias and exaggerated effects (Bakker, van Dijk, & Wicherts, 2012). When samples are small, hypotheses are numerous, and analytic choices are flexible, the **positive predictive value** of a single significant result is low (Ioannidis, 2005). These problems motivate **open-science** reforms that reward accuracy over novelty: preregistration to reduce researcher degrees of freedom and to separate confirmatory from exploratory work; routine sharing of data, code, and materials; and explicit valuing of replication (Nosek et al., 2012; Bakker et al., 2020).
 
+## Scientific Fraud
+
+While it is unlikely that scientific fraud is a main cause of the replication crisis in psychology and other fields,
+a highly publicized case of fraud did act as a catalyst, drawing attention to potential shortcomings in the way science was being conducted.
+Tilburg University professor Diederik Stapel,
+a prominent social psychologist, was found by the Levelt Committee to have fabricated and manipulated data across many studies,
+often supplying such fake datasets to PhD students and coauthors,  unwittingly involving them in the fraud.
+The resulting papers reported striking effects that were considered exemplary, passed peer review, were widely cited, and shaped research agendas - until independent teams failed to reproduce them.
+The case exposed structural failures of the scientific enterprise, including incentives for newsworthy findings, a lack of auditing of data and analysis code, and tolerance of researcher degrees of freedom that are also common in non-fraudulent questionable research practices (p‑hacking, HARKing, low power).
+This case motivated the adoption of open science practices that seek to improve academic rigor, such as preregistration of study- and analysis plans prior to data collection, and transparent sharing of data, code, and materials.
+
+More recently, the Francesca Gino scandal revived this debate.
+In 2023, [Data Colada](https://datacolada.org/109) research auditors published a report of irregularities in several of Gino's papers on dishonesty (ironically).
+One striking finding was that the user history of an Excel spreadsheet seemed to indicate that several cases were moved from the control- to the experimental condition - and that this edit led to statistically significant findings.
+
+While these cases are thought-provoking, it is unlikely that they are the sole cause for the replication crisis. The main contributing factors might be much more mundane.
+
 ## Questionable Research Practices (QRPs) {#sec-qrps}
 
-**Definition:** QRPs are research and reporting choices that may be defensible in isolation but, when guided by the pursuit of statistical significance, **inflate false positives and effect sizes** and distort the published record. In psychology, unusually high rates of “positive” findings alongside typically low power indicate conditions under which QRPs and publication bias can thrive (Bakker et al., 2012).
+**Definition:** QRPs are choices made in research and reporting that may be defensible but, when guided by the pursuit of statistical significance (motivated reasoning), end up inflating false-positive findings and effect sizes, thus distorting the published record. In psychology, unusually high rates of “positive” findings alongside typically low power indicate conditions under which QRPs and publication bias can thrive (Bakker et al., 2012).
 
-**Why they matter.** Small samples produce **imprecise estimates** (high sampling variability). When results are preferentially reported only if $p<.05$, selection operates on that noise: estimates that are **upwardly biased by chance** are more likely to appear in print, yielding **selection-induced overestimation** of effects (Bakker et al., 2012; Ioannidis, 2005). Added **analytic flexibility**—post hoc exclusions, outcome switching, and multiple model specifications—introduces multiplicity and raises the **effective Type I error rate**, further increasing the share of statistically significant findings (Bakker et al., 2012). Under more stringent tests, the pattern reverses: high-powered, preplanned replications recover **smaller effects** and **fewer rejections** (≈36% significant vs. 97% in the originals), indicating that the original record was shaped by QRPs and selective reporting (Open Science Collaboration, 2015).
+Questionable research practices are especially problematic in relation to researcher degrees of freedom, because nearly any dataset can be tortured and sliced until it serves up a significant effect.
+This raises the proportion of false-positive findings in the literature.
 
-**Common forms (mechanism → consequence).**
+### Examples of QRPs:
 
-- **Optional stopping / sequential testing:** Peeking at results and adding participants until $p<.05$ → inflates Type I error and exaggerates effects (Bakker et al., 2012).
-- **Selective outcome reporting:** Measuring many dependent variables but reporting only those that are significant → increases the chance of spurious “discoveries” (Bakker et al., 2012; Nosek et al., 2012).
-- **Flexible data cleaning:** Post hoc exclusions, outlier rules, and transformations chosen after seeing results → capitalizes on chance and inflates effects (Bakker et al., 2012).
-- **Researcher degrees of freedom in modeling:** After inspecting the data, trying multiple reasonable model specifications (e.g., covariate sets, transformations, interactions) and reporting only the one with $p<.05$ → inflates the false-positive rate; prespecifying a primary analysis and reporting all specifications mitigate this risk (Bakker et al., 2012; Nosek et al., 2012).
-- **HARKing (hypothesizing after results are known):** Presenting post hoc explanations as if they were a priori predictions → blurs confirmatory and exploratory claims and overstates evidential value (Nosek et al., 2012).
-- **Publication bias (“file drawer”):** Studies with $p<.05$ are more likely to be submitted and published than null results. When typical power is low (e.g., 20–40%), only about 20–40% of studies should be significant **even if effects are real**; yet many literatures report 80–95% significant findings. This gap signals selective publication and inflated effects (Bakker et al., 2012; Open Science Collaboration, 2015).
+- **Optional stopping / sequential testing:** Conducting an analysis, looking at the results, and adding more participants if the result is not (yet) significant ends up inflating the Type I error rate. This is especially problematic if you consider that, when the null hypothesis is true, p-values are uniformly distributed (all values equally likely). Thus, you can keep adding participants until by pure chance you find a significant result.
+- **Outcome Switching / Selective reporting:** Measuring multiple dependent variables but reporting only those that are significant. 
+- **Flexible data cleaning:** Post hoc exclusions, outlier rules, and transformations chosen after seeing results and applied such that a hypothesized difference becomes significant, or an inconvenient significant difference disappears.
+- **Researcher degrees of freedom in modeling:** After inspecting the data, trying multiple reasonable model specifications (e.g., control variables, mathematical transformations, exploring interaction effects) and picking the model with the "most interesting" results, or the one that supports the researcher's hypothesis.
+- **HARKing (hypothesizing after results are known):** Constructing a hypothesis after seeing a surprising result, and then presenting this post hoc hypothesis as if it was specified before seeing the data. This blurs the distinction between confirmatory and exploratory research. Keep in mind that unexpected things do happen by chance, and creating a hypothesis after observing something unexpected does mean that the hypothesis will be significant, but does not mean that it is likely to be true. For example, Lucia de B. and Lucy Ledby were both convicted after an unusual event was observed (high proportion of infant deaths at their hospitals), and the post-hoc hypothesis was constructed that this must be the result of murder. However, rare events do happen, and they are not always the result of murder.
+- **Publication bias ("file drawer" effect):** Studies with significant findings are more likely to be submitted and published than null results. When typical power is low (e.g., 20–40%), only about 20–40% of studies should be significant **even if effects are real**; yet many literatures report mostly significant findings. This indicates publication bias.
+
+## Well-Intended Flawed Practices
+
+Even well-intended practices can misfire when applied uncritically.
+As briefly mentioned in the chapter on philosophy of science, Null‑Hypothesis Significance Testing (NHST) is a prime example of how deeply entrenched scientific practices can be misleading.
+Gerd Gigerenzer called this the "null ritual": set up a straw man null hypothesis which states that the effect is zero, adopt $\alpha = .05$ as default significance level, reject the null hypothesis if $p < .05$ and interpret the result as positive evidence for some finding.
+This practice encourages dichotomous thinking,
+neglects effect sizes and uncertainty,
+and mixes the incompatible philosophies of testing from Fisher and Neyman–Pearson.
+This ritual ignores important principles - such as, that even trivial effects become "significant" in very large samples,
+and that extreme results (including effects that are significant by pure chance) are more common in small samples.
+What is the alternative? To move beyond the ritual and emphasize effect size estimation, uncertainty quantification, power analysis and sample size justification, and open science practices that allow others to replicate and audit findings.
+
 
 ## Open Science Practices — Preregistration and Registered Reports {#sec-open-practices}
 
-Open practices aim to **realign incentives with accuracy** by making plans, analyses, and materials transparent before outcomes are known, and by valuing methodological rigor over positive results (Nosek et al., 2012).
+Open science practices aim to improve scientific rigor, and the efficiency with which knowledge can accumulate and errors can be corrected,
+by making many aspects of the scientific enterprise *open, accessible, transparent, and reproducible*.
+We examine several open science practices.
+
+### Data Sharing
+
+In a way, you have already enjoyed the benefits of data sharing: the exercises and portfolio assignments for this course make use of either real "open data", or fake data that was generated based on open data accessed by the author (Caspar van Lissa).
+Data sharing helps people reproduce published findings, and makes it possible to reuse existing datasets to test novel research questions.
+
+### Reproducibility
+
+Reproducibility means being able to re-perform the same analysis with the same code using a different analyst [@patilVisualToolDefining2019].
+This can be achieved by creating research archives that include [@vanlissaWORCSWorkflowOpen2021]:
+
+1. Well-documented analysis code; for example, in the form of a dynamic document that combines the written text of a paper or research report (Introduction, Discussion) with the code required to generate the analysis results (e.g., SPSS syntax, R- or Python code). Such dynamic documents can be exported to any format, including PDF, or a website. This GitBook is an example of a dynamic document; both text and analysis results/figures are dynamically generated.
+1. A complete time line of the research archive's historical development. Akin to a lab notebook that documents decisions made during the research process, modern "version control" systems make it possible to track, document, and preserve all changes to data and code from the moment a project is conceived, until it is preregistered, and data are collected, and it is ultimately published.
+1. A time capsule of the computer environment (exact versions of software used), because the same analysis code can sometimes give different results on different systems. This is called "dependency management"; the most extreme form of dependency management is "containerization": creating a virtual computer to run the code.
+
 
 ### Preregistration {#sec-prereg}
 
@@ -44,3 +99,128 @@ Open practices aim to **realign incentives with accuracy** by making plans, anal
 **Practical payoff.** Registered Reports move the credibility test **upstream**. Peer review and in-principle acceptance occur **before** data collection, which (a) locks key design and analysis decisions, (b) commits publication regardless of outcome, and (c) requires transparent documentation of any deviations. By decoupling publication from statistical significance and limiting undisclosed flexibility, Registered Reports reduce publication bias, HARKing, and selective reporting, complementing preregistration with editorial enforcement at the design stage (Nosek et al., 2012; Bakker et al., 2020).
 
 
+## Lecture
+
+Please watch this conference presentation by Dr. Amy Orben on questionable research practices:
+
+https://www.youtube.com/embed/EIDY6TAy52M?si=SvbSK86hFga3JLq6
+
+# Formative Test
+
+A formative test helps you assess your progress in the course, and helps you address any blind spots in your understanding of the material. If you get a question wrong, you will receive a hint on how to improve your understanding of the material.
+
+Complete the formative test ideally after you’ve seen the lecture, but before the lecture meeting in which we can discuss any topics that need more attention
+
+```{r}
+#| results = "asis",
+#| echo = FALSE,
+#| cache = FALSE
+add_mcs("open_science_formative.csv")
+```
+
+# Tutorial
+
+## Assignment 1: Spot the Practice — QRPs or Good Methods?
+
+Below are short methods/results fragments from fictional studies. Read each one closely. For each fragment:
+
+1) Identify whether it (potentially) shows a **questionable research practice (QRP)** or **good practice**.  
+2) Name the specific issue (e.g., optional stopping, outcome switching, flexible data cleaning, model fishing, HARKing, or good practice).  
+3) Explain **why** it matters.  
+4) Propose a **minimal fix** (what the authors should have done or reported).  
+5) Decide whether the claim should be labeled **confirmatory** or **exploratory** in the write-up.
+
+**Fragment A**
+
+> Our sample consisted of two cohorts of first-year bachelor's students: 74 students enrolled in 2023, and 82 students enrolled in 2024. We found a statistically significant effect, t(154), p = .047, which we interpret as evidence that the intervention improves well-being.
+
+**Fragment B**
+
+> **Experimental Design** We randomly assigned participants to be in the social support or control condition. The social support condition received daily encouraging messages, supposedly sent by another participant in the study. The control condition received daily informative messages, taken from WikiPedia.
+> **Measurements** We measured participants' stress, mood, sleep, productivity, and affect variability using validated self-report questionnaires. 
+> **Results** In line with predictions, participants in the social support condition showed a significant improvement in mood, p = .03.
+
+**Fragment C**
+
+> Participants with unusually fast reaction times (log reaction time < M − 2 SD; n = 4) were considered outliers and were excluded from the study.
+
+**Fragment D**
+
+> We tested several plausible specifications (adding/removing covariates such as age, SES, hours worked; linear vs. log transforms). The model controlling for age and using a log transform yielded a significant effect (p = .041), so we focus on this specification below. Other models are not shown.
+
+**Fragment E**
+
+> **Introduction**: The present study hypothesized that herbal tea would increase sleep quality.
+Our sample consisted of patients who presented with disturbed sleep but were not considered eligible for other medical treatment.
+> **Results**: Consistent with expectations, we found a significant effect of herbal tea on sleep quality for participants who scored high on baseline stress, p = .02.
+
+**Fragment F**
+
+> Before data collection, we preregistered our hypotheses, primary outcome (PSQI total score), stopping rule (N = 200), and analysis plan (linear model with preregistered covariates: age, gender). We also specified exclusion criteria (failed attention check; PSQI missingness > 20%). Deviations: We added one robustness check using a median-split sensitivity analysis (exploratory; reported in Supplement). Data, code, and materials are available on OSF (anonymized).
+
+**Fragment G**
+
+> The study protocol (theory, design, and analysis) received in-principle acceptance prior to data collection. Results were published regardless of outcome, provided fidelity to the approved plan. The primary effect was not significant (p = .21); exploratory analyses are labeled and reported in the Supplement.
+
+
+Discuss with your group:
+
+a. Did you all agree on the label (QRP vs. good practice) and the specific issue?  
+a. Which fixes would you prioritize if the authors could change only one thing?  
+a. How would preregistration or a Registered Report have changed the design, analysis, or write-up?
+
+
+## Assignment 2: Preregistration Audit — Make It Specific
+
+Below is an excerpt from a **vague** preregistration. Your task is to (i) spot ambiguities and (ii) rewrite the excerpt so it is **specific, precise, and comprehensive**.
+
+**Vague preregistration excerpt:**
+
+> We will test whether our workshop improves student success. We’ll recruit around 150 students and stop once effects stabilize. We’ll measure several outcomes related to performance and well-being and analyze them using appropriate models. Outliers will be excluded. Demographic control variables will be included.
+
+**Your tasks:**
+
+1) Underline every ambiguity, pinpoint what the risk of QRPs is
+2) Rewrite the preregistration to make it more robust against QRPs. Pinpoint how each change improves the preregistration.
+
+`r hide("Hints")`
+
+Consider specifying:
+
+- **Primary outcome** (exact variable/scale and scoring); **secondary outcomes** (if any).  
+- **Hypotheses** (directional; one line per test).  
+- **Sampling plan and stopping rule** (target N; any interim looks; conditions for stopping).  
+- **Inclusion/exclusion** and **outlier rules** (exact thresholds, applied blindly if feasible).  
+- **Analysis plan** (model form, covariates, sidedness, alpha, multiple-testing plan).  
+- **Deviations policy** (how you will document any changes).  
+- Distinguishing which analyses are **confirmatory** and which are **exploratory**.
+
+`r unhide()`
+
+
+
+## Psilocybin Liberates the Entrenched Brain?
+
+In recent years, enthusiasm has grown for psychedelics (like magic mushrooms) as a treatment for depression and other mental health problems.
+However, the methodological rigor of studies that find support for psychedelics' efficacy has been severely criticized.
+Professor [Eiko Fried](https://eiko-fried.com/), one of the main contributors to the methodological critiques, engaged in a real-life exercise, very similar to the one you just completed.
+
+With your group, pick one of the following sources:
+
+* [Eiko Fried's blog post](https://eiko-fried.com/psilocybin-2022-study-remains-uncorrected/), summarizing the critiques
+* The original [authors' rebuttal of the critiques](https://osf.io/preprints/psyarxiv/pdbf5_v1) (which is separated into seven "Points"; pick one point)
+
+Discuss: Do you find the arguments (for or against the presence of QRPs) persuasive? Which QRPs do you recognize?
+
+## Mini Registered Report Pitch
+
+With your group, prepare a single presentation slide for an **imaginary study** that you could use for your portfolio assignment (i.e., you can use the same hypothesis as for your portfolio).
+
+Describe the:
+
+- **Theory** (1–2 sentences) and **confirmatory hypothesis** (directional).  
+- **Study Design** (sampling strategy, assignment or not, sample size, stopping rule, exclusion criteria).  
+- **Primary outcome** (exact measure) and **analysis plan** (model, covariates, sidedness, alpha, multiple-testing plan if applicable).  
+- **Transparency** (data/code/materials; prereg link to be created; planned deviations policy).
+
+If there is time, groups present and receive peer feedback focusing on **clarity**, **testability**, and **reducing flexibility** at design time.

@@ -1,4 +1,4 @@
-# Statistics 1 {.unnumbered}
+# Statistics 1
 
 The course *Statistics 1* covers the basics of statistics and data analysis.
 This GitBook contains all relevant information about this course.

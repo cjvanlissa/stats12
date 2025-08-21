@@ -11,49 +11,49 @@ Recall that a construct is an abstract feature of interest within a population, 
 
 Examples of observed constructs are height and weight. Latent constructs cannot be directly measured and require observed indicators to capture their underlying meaning. Latent constructs are commonly used in social sciences to measure attitudes, beliefs, opinions, and other complex attributes. The items, more often than not, are questions in a questionnaire - although they could also be tests, performance assessments, behavioral observations, multiple choice questions, puzzles, et cetera.
 
-## Classical Test Theory
+### Classical Test Theory
 
 Classical Test Theory posits that observed test scores are a function of the true score on the latent construct, plus measurement error. Different sources of measurement error can influence observed scores, including instrument properties and individual factors.
 
-## Reliability
+### Reliability
 
 Reliability refers to the consistency or stability of test scores over time or across different measurement occasions. It is related to the proportion of true score variance to total score variance. Reliability can be estimated using methods such as test-retest reliability (consistency across repeated measurements), internal consistency (consistency across items within a test), and inter-rater reliability (consistency across different raters).
 
-### Test-Retest Reliability
+#### Test-Retest Reliability
 
 Test-retest reliability involves administering the same test to the same participants on two separate occasions and calculating the correlation between their scores. Test-retest reliability is suitable for stable traits and can provide insight into the stability of a construct over time. However, learning effects, memory effects, and change over time need to be considered when determining the appropriate interval between test administrations.
 
-### Internal Consistency
+#### Internal Consistency
 
 Internal consistency measures the association among items within a test. It can be estimated using methods such as split halves or Cronbach's alpha. Split halves involve dividing the test into two halves and correlating the scores between them. Cronbach's alpha is a measure of internal consistency that indicates how closely related items are to each other within a scale. It is affected by the number of items, their average covariance, and their average variance. Note that this means you can artificially inflate Cronbach's alpha by using very similar items, or using very many items.
 
 When diagnosing the internal consisteny of a scale, we can compute item-total correlations to examine the correlation between individual items and the total scale score (minus that item). Low item-total correlations may indicate problematic items, and Cronbach's alpha can be recalculated with items removed to assess their impact on reliability.
 
-## Validity
+### Validity
 
 Validity refers to the extent to which an instrument measures what it is intended to measure. There are several types of validity, including face validity (whether the items appear relevant to the construct), content validity (whether the instrument adequately covers all aspects of the construct), and criterion validity (whether the instrument is associated with relevant outcomes or indicators of the construct).
 
-### Face Validity
+#### Face Validity
 
 Face validity assesses whether items in an instrument are clearly related to the construct of interest. It considers the clarity, readability, and unambiguity of wording and answer options. Face validity is subjective and relies on a first-glance assessment of whether the items seem relevant to the construct being measured.
 
-### Content Validity
+#### Content Validity
 
 Content validity is usually determined by involving experts in the field, and having them define the construct's scope, generating items for subdomains of the construct, and rating the relevance of items. An instrument has content validity if it adequately covers all aspects of the construct. Content validity is essential for ensuring that the instrument comprehensively captures the intended construct.
 
-### Criterion Validity
+#### Criterion Validity
 
 Criterion validity assesses whether an instrument is associated with outcomes or indicators of the construct it is designed to measure. This can involve correlations between the instrument and external measures (e.g., other validated scales) or predictions of behavior related to the construct. Criterion validity provides evidence that the instrument measures what it is intended to measure.
 
 In sum, effective measurement instruments in the social sciences must have both high reliability and high validity. Reliability ensures that the instrument consistently measures the same construct with low measurement error, and validity ensures that the instrument accurately measures the intended construct (not something else). By considering these principles, researchers can enhance the quality and meaningfulness of their questionnaire-based measurements.
 
-# Lecture
+## Lecture
 
 {{< video https://www.youtube.com/embed/LuxXUQCI_XI >}}
 
 
 
-# Formative Test
+## Formative Test
 
 A formative test helps you assess your progress in the course, and helps you address any blind spots in your understanding of the material. If you get a question wrong, you will receive a hint on how to improve your understanding of the material.
 
@@ -67,9 +67,9 @@ add_mcs("questions_reliability.csv")
 ```
 
 
-# Tutorial
+## Tutorial
 
-## Norm Violating Behaviors
+### Norm Violating Behaviors
 
 In this assignment we are going to take a look at scale that measures whether people engage in norm violating behaviors.
 
@@ -139,7 +139,7 @@ We might thus question whether this item belongs in the scale or not.
  
 
 
-## Machiavellianism
+### Machiavellianism
 
 In this assignment we will look into the latent concept Machiavellianism.
 
@@ -352,7 +352,7 @@ Finish the following sentence.
 Controlled for Gender and Voting, if we would increase one year in age, the predicted score on the Machiavellianism scale would `r mcq(c(answer = "Decrease with 0.294 units.", "Increase with 0.294 units.", "Increase with 0.243 units.", "Decrease with 0.243 units.")[sample.int(4)])` 
   
   
-## Solidarity
+### Solidarity
 
 In this assignment, you will evaluate the reliability of a scale measuring solidarity.
 

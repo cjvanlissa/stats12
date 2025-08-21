@@ -24,11 +24,11 @@ and a building block for many more advanced analysis techniques.
 It allows us to make predictions based on available information and understand the strength and significance of the relationship between a continuous predictor and continuous outcome.
 By considering the assumptions and conducting hypothesis tests, we can ensure the validity of our regression models and draw meaningful conclusions from the analysis.
 
-# Lecture
+## Lecture
 
 {{< video https://www.youtube.com/embed/Mkc17DG4KdI >}}
 
-# Formative Test
+## Formative Test
 
 A formative test helps you assess your progress in the course, and helps you address any blind spots in your understanding of the material. If you get a question wrong, you will receive a hint on how to improve your understanding of the material.
 
@@ -42,18 +42,18 @@ add_mcs("questions_regression.csv")
 ```
 
 
-# In SPSS
+## In SPSS
 
-## Linear Regression
+### Linear Regression
 
 {{< video https://youtu.be/0AGLdgUtIJg?si=SZQxa2Qt9oOTEg-O >}}
 
 {{< video https://www.youtube.com/watch?v=VEQPX6d-EQw >}}
 
 
-# Tutorial
+## Tutorial
 
-## Regression Analysis
+### Regression Analysis
 
 In this assignment we will make a start with regression analysis.
 
@@ -109,12 +109,12 @@ What is the p-value for the regression coefficient for scvariety? `r fitb(0, num
 Can we conclude that the effect of scvariety on scpleasure is significant? (use $\alpha$ = .05). `r mcq(c(answer = "Yes", "No"))`
 
 
-## Assumptions
+### Assumptions
 
 Recall that regression assumes linearity, normality of residuals, homoscedasticity (equal variance of residuals), and independence of observations. We will check each of these assumptions in turn, except for independence of observations because this is a property of our sampling method and cannot be checked statistically.
 
 
-### Scatterplot
+#### Scatterplot
 
 A scatter plot can provide some insight into linearity.
 
@@ -124,7 +124,7 @@ Place variety at work on the X axis and emotional pressure on the Y axis.
 
 Is the assumption of linearity met in this case?  `r mcq(c(answer = "Yes", "No"))`
 
-### Regression Diagnostics
+#### Regression Diagnostics
 
 Aside from the scatterplot, we can check the assumptions of regression by requesting additional options in the analysis.
 
@@ -141,7 +141,7 @@ Now paste and run the syntax. You should see the following added to your previou
   /RESIDUALS HISTOGRAM(ZRESID) NORMPROB(ZRESID)
 ```
 
-### Linearity
+#### Linearity
 
 How can we test linearity using this additional output?
 
@@ -151,7 +151,7 @@ First, we can use the "Normal P-P plot". If the relationship is perfectly linear
 
 Does the P-P plot for your regression give cause for concern for violation of the assumption of linearity? `r mcq(c("Yes",answer="No", "Unclear"))`  
 
-### Normality
+#### Normality
 
 One way to check normality is by examining the histogram of residuals. This histogram displays a normal curve by default. If the observed residuals deviate strongly from this histogram, there may be a problem.
 
@@ -161,7 +161,7 @@ The plot below shows a residual histogram with some minor deviations from normal
 
 Does the residual histogram for your regression give cause for concern for violation of the assumption of normal residuals? `r mcq(c(answer="Yes","No", "Unclear"))`
 
-### Homoscedasticity
+#### Homoscedasticity
 
 We examine homoscedasticity using a plot of standardized predicted values against standardized residuals. We want residuals to be identically distributed on the Y-axis for all values on the X-axs. 
 In other words, this scatterplot should look like a dot cloud (no pattern) around the zero line (left picture below), and not like a pattern (right picture below).

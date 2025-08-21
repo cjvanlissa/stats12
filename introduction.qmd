@@ -19,13 +19,13 @@ In scientific research, statistics can help us test theories. The process of sci
 
 To lay a foundation for understanding statistics, it's essential to be familiar with some basic concepts. First, data in the social sciences often come in tabular format (e.g., spreadsheets), where each row represents an individual observation, and each column represents the individuals' scores on various variables.
 
-## Population and Sample
+### Population and Sample
 
 A crucial distinction is the one between population and sample. The population refers to the complete set of objects of interest, such as all people in a country or all students in a class. However, due to practical limitations, we usually do not have access to the population. Instead, we draw a sample from it, which is a subset of the population. Sampling theory establishes the rationale for drawing inferences about a population based on samples. Sample statistics serve as our best estimate of population parameters. If the sample is representative, those estimates will be unbiased. Moreover, we can estimate our uncertainty about the sample statistics as estimates of population parameters. The best way to ensure a representative sample is to use random sampling, where each individual in the population has an equal chance of being included—though in practice, constraints often lead researchers to rely on convenience or stratified sampling, which can limit the strength of our inferences.
 
 The distinction between constructs and variables is also important. Constructs are abstract features of interest within a population, like short-term memory, intelligence, or education. Variables, on the other hand, are placeholders that represent specific values associated with these constructs—much like column headers in a spreadsheet. Data then refer to the specific values of a variable.
 
-## Measurement Levels
+### Measurement Levels
 
 Measurement level refers to the kind of information contained in a variable. 
 The four common measurement levels are nominal, ordinal, interval, and ratio (NOIR).
@@ -42,7 +42,7 @@ Ratio variables have equal units and a meaningful zero (e.g., income, reaction t
 In practice, researchers sometimes treat coarse ordinal scales (e.g., 5‑point Likert scales) as interval (or even ratio) for convenience's sake. 
 This is a pretty strong assumption about measurement level.
 
-## Descriptive Statistics
+### Descriptive Statistics
 
 Descriptive statistics are used to summarize and analyze data. They help us get a sense of the dataset and answer questions like the most common major among students or the average age of a group. Descriptive statistics can also be relevant in answering research questions, such as evaluating exam questions or determining if the proportion of correct answers on a multiple-choice question is greater than chance.
 
@@ -50,7 +50,7 @@ Descriptive statistics are used to summarize and analyze data. They help us get 
 <!-- ## Correlation ≠ Causation -->
 <!-- Because patterns can be visually compelling, it is crucial to remember that correlation does not imply causation. For instance, ice-cream sales and drowning deaths rise together in summer, but purchasing ice-cream does not cause drowning. Establishing causal claims requires careful design and statistical control. -->
 
-## Study Design and Validity
+### Study Design and Validity
 
 Researchers employ several study designs to collect data, for example, experimental, quasi-experimental, and observational studies.
 Each has its own strengths and limitations. The quality of study designs can be evaluated along two dimensions:
@@ -69,7 +69,7 @@ and conducting conceptual replications (using different methods to find the same
 A tightly controlled laboratory experiment may score high on internal validity but lower on external validity, whereas a large-scale field survey often shows the opposite pattern. Balancing both is a central concern of scientific inquiry.
 
 
-## Ethics, Privacy, and Reproducible Workflows
+### Ethics, Privacy, and Reproducible Workflows
 
 Modern data analysis carries legal and ethical responsibilities.
 Ethical social science research involves protecting participants’ autonomy, welfare, and privacy.
@@ -84,11 +84,11 @@ They sometimes create "replication packages" or "reproducible research archives"
 so that other researchers (and sometimes, anyone) can re-use the code, and reproduce and verify the results.
 
 
-# Lecture
+## Lecture
 
 {{< video https://www.youtube.com/embed/_TZIIANBt94 >}}
 
-# Formative Test
+## Formative Test
 
 A formative test helps you assess your progress in the course, and helps you address any blind spots in your understanding of the material. If you get a question wrong, you will receive a hint on how to improve your understanding of the material.
 
@@ -113,21 +113,21 @@ Scatterplots
 
 :::
 
-# In SPSS
+## In SPSS
 
-## Instruction Video
+### Instruction Video
 
 {{< video https://www.youtube.com/embed/bapuGcjwiLQ?si=51NN65ETr3evOBWb >}}
 
 
-# Tutorial
+## Tutorial
 
 ```{r, include = FALSE}
 source("R/booktem_setup.R")
 source("R/my_setup.R")
 ```
 
-## Introducing SPSS
+### Introducing SPSS
 
 Welcome everyone to your first lab session for Statistics 1 and 2. Today, we start working with an introduction to SPSS and we calculate a few basic descriptive statistics.
 
@@ -139,7 +139,7 @@ You will receive feedback to your answers after you have submitted the practical
 
 Good luck!
 
-### Step  1
+#### Step  1
 
 Hi there!
 
@@ -151,7 +151,7 @@ If you’re working from a student workplace, SPSS is already installed. If you�
 
 Your first task is to start the SPSS program. You can easily find SPSS via the Windows Start Menu. SPSS may ask about the coding: use Unicode (button to the left). Then there may be another window open that you can close. In the end you should see an empty spread sheet.
  
-### Step  2
+#### Step  2
 
 Now you’ve got SPSS running, we’re ready to go!
 
@@ -161,7 +161,7 @@ Open the file in SPSS. Proceed as follows: via the op menu follow the route: Fil
 
 
  
-### Step  3
+#### Step  3
 
 The file contains data about a study on - you guessed it - stress.
 
@@ -174,7 +174,7 @@ More precisely, it contains data on the following variables:
 - `satis`: Measures of life satisfaction of the participant on a scale of 0 to 50.
 - `negemo`: The amount of negative emotions on a scale of 0 to 50.
  
-### Step  4
+#### Step  4
 
 After opening the data file, you will see the tabs Data View and Variable View at the bottom of your screen.
 
@@ -183,7 +183,7 @@ Make sure the tab Data View is selected.
 Look at the Data View and describe the data file. What do the rows represent, and what do the columns represent?
 
  
-### Step  5
+#### Step  5
 
 Now switch to the Variable View tab.
 
@@ -192,7 +192,7 @@ The Variable View lists the variables and their properties. We will not discuss 
 Explain for each of the columns name, label, values, and measure what aspect of the variable it describes. Also explain the difference between variable name and variable label.
 
  
-### Step  6
+#### Step  6
 
 Value Labels
 
@@ -204,7 +204,7 @@ If you click on values for the variable of interest, and then on the blue button
 What are the value labels for the Stress and what are they for Smoke?
 
  
-### Step 6a
+#### Step 6a
 
 You may have noticed that the value labels are missing for the nominal variable Relation.
 
@@ -212,13 +212,13 @@ You may have noticed that the value labels are missing for the nominal variable 
 Add the value labels yourself in SPSS such that a score 1 represents “Single” and 2 represents “In a relationship”.
 
  
-### Step  7
+#### Step  7
 
 Every variable has a so-called Measurement Level.
 
 First, summarize the measurement levels in your own words (as if you have to explain it to a fellow student). Then, indicate the measurement level for each of the variables of interest (Stress, Smoking, etc.).
 
-### Step 8
+#### Step 8
 
 Congratulations, you have completed your first assignment! 
 
@@ -227,9 +227,9 @@ Before we proceed make sure that you save the data file (via file > save). Becau
 In the next assignment we will generate descriptive statistics for this data.
 
 
-## Plotting data
+### Plotting data
 
-### Step 1
+#### Step 1
 
 The first step in any statistical analysis involves inspection of the data at hand by means of descriptive statistics and/or graphical summaries. Descriptive statistics include the mean, standard deviation, minimum and maximum value. Examples of graphical summaries are bar charts, histograms, and scatter plots.
 
@@ -237,7 +237,7 @@ In this assignment we will look at graphical summaries. In particular, we will l
 
 You may use the same data file as for the previous assignments.
 
-### Step 2
+#### Step 2
 
 First, we will create a bar chart for Stress.
 
@@ -248,7 +248,7 @@ Select Simple and click on define
 Select Stress under Category Axis (i.e., the variable at the x-axis)
 Then Click on OK and consult the graph in the output
 
-### Step 3
+#### Step 3
 
 You may have noticed that SPSS by default creates a bar chart with the observed frequency depicted on the y-axis. We will now create a new bar chart and instead ask SPSS to show the percentages on the y-axis.
 
@@ -260,7 +260,7 @@ Under “Bars represent” choose “% of cases”
 Click on OK.
 SPSS will now create a bar chart, where the heights of the bars represent percentages.
 
-### Step 4
+#### Step 4
 
 Next, we will create a histogram for Negative Emotions.
 
@@ -280,7 +280,7 @@ bars represent score ranges; the more respondents with a score in that range, th
 * y-axis: the observed number of respondents per score range.
  
 
-### Step 5
+#### Step 5
 
 Finally, we will create a scatter plot for Negative Emotions and Life Satisfaction. Scatter plots are very useful to get a first impression of whether variables are associated.
 
@@ -299,7 +299,7 @@ How to read a scatter plot:
 * y-axis represents the scores on Life Satisfaction.
 * Each dot in the graph is a case, representing how the case scores on both Negative Emotions and Life Satisfaction. 
 
-## Quiz
+### Quiz
 
 ::: {.webex-check .webex-box}
 
@@ -319,9 +319,9 @@ Based on the scatter plot from Step 5, would you expect an association between N
 
  
 
-## Descriptive Statistics
+### Descriptive Statistics
 
-### Step 1
+#### Step 1
 
 As explained before, the first step in any statistical analysis involves inspection of the data. In the previous assignment we looked at graphical summaries.
 
@@ -330,7 +330,7 @@ This assignment shows you how to explore data using descriptive statistics. Desc
 Use the same data file as for the previous assignments.
 
 
-### Step 2
+#### Step 2
 
 We will first take a look at the descriptive statistics for Optimism, Life Satisfaction, and Negative Emotions.
 
@@ -343,7 +343,7 @@ Now click on OK
 SPSS will open a new window - the output window - including a table with the descriptives for the selected variables.
 
 
-### Step 3
+#### Step 3
 
 In the previous step we computed the average value and standard deviations. However, for nominal and ordinal variables, the average value is meaningless. To explore nominal and ordinal variables we may produce Frequency tables. A frequency table shows the observed percentage for each level of the variable.
 
@@ -374,7 +374,7 @@ Note: SPSS reports percentages and valid percentages. Percentages differ when th
 
 <!-- Did you find it? -->
 
-## Quiz
+### Quiz
 
 
 
@@ -395,7 +395,7 @@ What percentage of participants is in a relationship? `r fitb(47.9, num = TRUE, 
 :::
 
 
-### Step 4
+#### Step 4
 
 One of the reasons to first inspect descriptive statistics is to have a first check if there are erroneous values in the data file. Erroneous values are values that are out of range, or impossible given the variable envisaged. For example, a person may have mistyped his/her age (e.g., 511 instead of 51).
 
@@ -417,7 +417,7 @@ Go the data view and verify that the cases are now ordered.
 
 Remove the case(s) (i.e., delete the row from the data file) with invalid values.
 
-### Step 5
+#### Step 5
 
 Now that we’ve "cleaned" the data file it’s time to answer our first research question!
 
@@ -435,7 +435,7 @@ Compute the mean of Life Satisfaction (via descriptive statistics) and consult t
 
 You may notice that SPSS provides the means of the non-smoking and smoking group separately. Compare the means for both groups to answer the following questions.
 
-## Quiz
+### Quiz
 
 ::: {.webex-check .webex-box}
 
@@ -458,7 +458,7 @@ Do you think this also holds for the population of all persons? `r mcq(c("answer
 
 
 
-## Missing Values
+### Missing Values
 
 This is a short assignment about missing values.
 
@@ -473,7 +473,7 @@ Choose “Analyze all cases, do not create groups”
  
 Compute the frequency distribution of stress. Consult the output, and answer the following questions
 
-## Quiz
+### Quiz
 
 ::: {.webex-check .webex-box}
 
@@ -519,7 +519,7 @@ Re-compute the frequency distribution for Stress.
 Examine how the table changed compared to the previous ones.
 
  
-## More Descriptive Statistics
+### More Descriptive Statistics
 
 In this final assignment, we will continue with descriptive statistics.
 
@@ -539,7 +539,7 @@ Compute (by hand) the mean, median, and mode.
 * The mean is calculated as the sum of all values, divided by the number of values: $\frac{\sum_{i=1}^nX_i}{n}$
 `r unhide()`
 
-## Quiz
+### Quiz
 
 ::: {.webex-check .webex-box}
 
@@ -574,7 +574,7 @@ Follow these steps:
 
 `r unhide()`
 
-## Quiz
+### Quiz
 
 ::: {.webex-check .webex-box}
 
@@ -611,7 +611,7 @@ Consult the table descriptive statistics in the output window.
 
 Were your computations correct?
  
-## Correlation
+### Correlation
 
 For the next few questions we need the data file [`LAS_SocSc_DataLab2.sav`](data/LAS_SocSc_DataLab2.sav).
 Open the file in SPSS. You will see that the file contains data for six variables, named X1 through X6. We will inspect the associations between pairs of variables (so called bivariate relationships).
@@ -652,7 +652,7 @@ Any cyclical process;
  
 `r unhide()`
 
-### Correlation Coefficient
+#### Correlation Coefficient
 
 In this step we will look at the correlation coefficient as numerical description of linear association.
 
@@ -668,7 +668,7 @@ Consult the table Correlations in the output.
 
 There are several values in the table, but we are looking for the Pearson Correlation. The other numbers are the so called significance level, a concept we discuss soon, and the sample size.
 
-## Quiz
+### Quiz
 
 ::: {.webex-check .webex-box}
 

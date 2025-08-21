@@ -28,14 +28,14 @@ While we often assumpe that variables are normally distributed, that assumption 
 
 In conclusion, probability distributions provide a way to represent the probabilities associated with different outcomes of a random variable, whether discrete or continuous. By using probability distributions, we can report descriptive statistics, calculate probabilities, and make predictions about future observations.
 
-# Lecture
+## Lecture
 
 **VIDEO ERRATA: from 10:10 - 10:50 I talk about the probability of Being Dutch and Having a Tattoo, but I'm calculating the probability of Being Dutch and Not Having a Tattoo (I misread the column labels).**
 
 {{< video https://www.youtube.com/embed/p9QWOXR4OT8 >}}
 
 
-# Formative Test
+## Formative Test
 
 A formative test helps you assess your progress in the course, and helps you address any blind spots in your understanding of the material. If you get a question wrong, you will receive a hint on how to improve your understanding of the material.
 
@@ -49,7 +49,7 @@ add_mcs("questions2.csv")
 ```
 
 
-### Popcorn consumption Table
+#### Popcorn consumption Table
 
 |   |   | Popcorn consumption |  |   |
 | :-: | :-: | :-: | :-: | :-: |
@@ -59,9 +59,9 @@ add_mcs("questions2.csv")
 |   | Total | 1829 | 2220 | 4049 |
 
 
-# Tutorial
+## Tutorial
 
-## Normal Distribution
+### Normal Distribution
 
 In this assignment you will practice with the normal distribution.
 
@@ -98,7 +98,7 @@ Inspection of the graphs of the bell-shape distributions shows that it is a symm
 
 Compare the distributions and see how the parameters determine the location (mean) and spread (standard deviation).
 
-### Quiz
+#### Quiz
 
 ::: {.webex-check .webex-box}
 
@@ -122,7 +122,7 @@ If the standard deviation (SD) increases, the distribution becomes `r mcq(c("ans
 
 :::
 
-### “The Empirical Rules”
+#### “The Empirical Rules”
 
 As a first step we may consider some practical rules for working with the normal distribution, the so called “empirical rules”. In particular, if a random variable is normally distributed the following empirical rules apply:
 
@@ -133,7 +133,7 @@ If we know that a variable is normally distributed, we can also compute probabil
 
 In the next few steps, you will practice on how to compute probabilities under the normal distribution. To do so, we have to be able to work with the standard normal distribution (Z-distribution) and accompanying tables.
 
-### Quiz
+#### Quiz
 
 ::: {.webex-check .webex-box}
 
@@ -149,7 +149,7 @@ What is the SD of the standard normal distribution? `r fitb(1, num = TRUE)`
 
 :::
 
-### Calculating probabilities
+#### Calculating probabilities
 
 For the next series of exercises you need to use a Z-table or calculator (e.g., Excel, Google Sheets, R online, or the Z-table in this GitBook, @sec-ztable).
 
@@ -159,7 +159,7 @@ Note that there may be different ways to get to the correct answer.
 
 Numerical Examples
 
-### Quiz
+#### Quiz
 
 ::: {.webex-check .webex-box}
 
@@ -312,7 +312,7 @@ To get to the correct answer, these are the steps:
 
 :::
 
-## Missing Values
+### Missing Values
 
 For this assignment, and also later assignments, we will use a (real) data set on Type D personality and several background characteristics (age, gender, and education level (7 ordered levels)).
 
@@ -327,7 +327,7 @@ Open the data file [`TypeDDataSSC.sav`](data/TypeDDataSSC.sav) in SPSS. The data
 Go to the variable view. The content of the items are given under labels and it is indicated whether the item measures NA or SI.
 
  
-### Quiz
+#### Quiz
 
 ::: {.webex-check .webex-box}
 
@@ -343,7 +343,7 @@ How many system missings do we have on gender? `r fitb(8, num = TRUE)`
 
 :::
 
-### Recoding missing values
+#### Recoding missing values
 
 Remember that Empty cells are called system missings. There are reasons to use user-specified missing codes instead; for example, this allows you to keep track of reasons for missingness (which enables you to report more comprehensively on your missing data).
 
@@ -366,7 +366,7 @@ Before going into the recoding, let’s first look at the frequency table for ge
 You may already have this output from answering the Quiz.
 
 
-### Recode into Same Variables
+#### Recode into Same Variables
 
 Replacing user missing values with a missing code using the recode option works as follows:
 
@@ -408,7 +408,7 @@ SPSS will now create a new variable that shows how many missings there are for e
 
 Go to the data view and verify that SPSS added a new variable (i.e., a new column with values) named CountMiss.
 
-### Quiz
+#### Quiz
 
 ::: {.webex-check .webex-box}
 
@@ -430,11 +430,11 @@ How many participants have at least one missing value? `r fitb(17, num = TRUE)`
 Make sure you save the data file including the variable with the number of missings. We will use it in the next assignment.
 `
 
-## Select Cases and Split File
+### Select Cases and Split File
 
 In this assignment we will take a closer look at selecting cases and how to do analyses for subgroups.
  
-### Selecting Cases
+#### Selecting Cases
 
 In the previous assignment we have seen that some respondents had one or more missing values. Suppose we want to discard these persons in the analysis, which means that for all the remaining analyses we only want to include participants with no missings. This method of handling missing data is called *listwise deletion*, and it is generally considered bad practice - but it's also easy, so we will teach it in this course. More advanced courses cover expert methods of handling missing data.
 
@@ -454,7 +454,7 @@ Verify that SPSS crossed out cases with one or more missings.
 
 Verify that SPSS added a new variable labelled ‘filter_$’. This is filter variable indicating who is included in the analyses (value = 1) or not (value is 0). If you remove the filter variable, SPSS will use all cases again.
 
-### Quiz
+#### Quiz
 
 ::: {.webex-check .webex-box}
 
@@ -476,7 +476,7 @@ Verify that the incomplete cases are removed.
 Because you have modified the data, it is prudent to save the new file under a different name (e.g., TypeD_selection.sav). Use this file with only the complete cases (i.e., TypeD_selection.sav) for the remaining steps.
 
 
-### Split File
+#### Split File
 
 Sometimes we want to do analyses for subgroups, especially when exploring the data for the first time. For example, we may want to have the descriptive statistics for males and females separately. One way to do this is to use the Split File option. With this option you can tell SPSS that you want to have tables for each subgroup separately.
 
@@ -499,7 +499,7 @@ Choose Analyze all cases, do not create groups.
 Click OK.
 SPSS now no longer produces the output per group.
 
-### Quiz
+#### Quiz
 
 ::: {.webex-check .webex-box}
 
@@ -520,7 +520,7 @@ What was the value of the mean age for this education level? `r fitb(54.5, num =
 :::
  
  
-## Recode and Compute
+### Recode and Compute
 
 For this assignment we will continue with the data on Type D and the selection of complete cases.
 
@@ -530,7 +530,7 @@ In practice, you often have to do some data handling before you can actually sta
 
 In this assignment we will practice some basic data handling skills.
 
-### Reverse Scoring Contra Indicative Items
+#### Reverse Scoring Contra Indicative Items
 
 If you read the item labels, you will see that the first two SI items (items DS14_1 and DS14_3 in the scale) are contra indicative. This means that for these items higher scores reflect low SI, while for other items higher scores reflect high SI. Therefore, the responses to these items should be recoded first to make sure that all items are scored in the same direction. To do so, we will create new variables that reflect the recoded items. Proceed as follows:
 
@@ -563,7 +563,7 @@ old value 4 -> new value 0
 
 Specify the old and new values. Each time you specified old and new values click on ADD such that the recoding scheme appears in the little dialog. 
 
-## Using Syntax
+### Using Syntax
 
 To ensure that others can see exactly how you got from raw data to the final dataset used for analysis, it is **essential** to keep a complete record of any changes made to the data. This is also why we previously argued that you should **not overwrite** a datafile after altering it.
 
@@ -574,7 +574,7 @@ Up until now, we ran the analyses by "click-and-point" via the menu. This is a g
 To keep a record of changes made to your data, you can prepare a script that contains all instructions for the analysis instead.
 By evaluating this script on the data, you should consistently get the same results.
 
-### Why syntax?
+#### Why syntax?
 
 Using syntax is important for several reasons:
 
@@ -603,13 +603,13 @@ Using syntax is important for several reasons:
 
 <!-- (The SPSS output does not pop up automatically. If you go to the output, you will see that the command worked though.) -->
 
-### Help!
+#### Help!
 
 You don't need to memorize the commands by heart. SPSS offers help functions. If you highlight the command (e.g., statistics) and click on the button with the paper and the question mark in the top menu. SPSS opens a help file.
 
 Use the help function to modify the syntax such that SPSS produces a table that also reports the range (e.g., the difference between the largest and smallest value). 
 
-### How to use syntax
+#### How to use syntax
 
 There are two ways to use syntax. The first is to create an empty syntax script via File -> New -> Syntax, and then start adding the code from scratch. You can either write the code as text, or create it via SPSS' various dialog windows. For this course, we recommend using the dialogs:
 
@@ -650,7 +650,7 @@ EXECUTE.
 
 Verify that this calculation also works.
 
-### Commenting
+#### Commenting
 
 When working with syntax, it is highly recommended to add comments as reminders to your future self of the purpose of each step in the script. These comments should clarify the syntax and give general information (e.g., when was the syntax last modified, who did the modifications, etc.). 
 
@@ -678,7 +678,7 @@ After including the comments, run the complete syntax including the comment line
 If the syntax runs correctly, the comments were correctly included.
 
 
-### Compute Variable
+#### Compute Variable
 
 For the analyses we are not interested in the single item scores but in the summed scores. Because the DS14 contains two subscales (consult the item labels to see to which subscale the item belongs), we want to compute the summed scores for the NA and SI items separately.
 
@@ -701,7 +701,7 @@ EXECUTE.
 ```
 
 
-### Quiz
+#### Quiz
 
 ::: {.webex-check .webex-box}
 
