@@ -410,9 +410,9 @@ Sometimes a single mean or median masks sub-groups.
 If you notice **two peaks**, color the bars by **Relation** (single vs. relationship):
 
 1. *Graphs > Chart Builder*  
-2. Drag **Histogram** onto the canvas  
+2. Go to **Histogram** in the gallery section and drag **Stacked Histogram** onto the canvas  
 3. Place **Life Satisfaction** on the *x*-axis  
-4. Drag **Relation** into *Cluster on X*  
+4. Drag **Relation** into **Stack** box  
 5. Click **OK**
 
 *Take-away:* multiple modes often reveal hidden clusters that may need separate analysis.
