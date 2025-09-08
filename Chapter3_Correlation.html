@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.33">
+<meta name="generator" content="quarto-1.7.34">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="description" content="Book Description">
 <title>5&nbsp; Bivariate Descriptive Statistics – Statistics 1 and 2</title>
@@ -17,41 +17,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -70,9 +35,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-c2894b54f4b00a27b9651b11dcf5df54.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-7530c408590d20eba92ebedbb433c75c.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-c2894b54f4b00a27b9651b11dcf5df54.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7ad8df1012cc34949a7a0ac4d54234c8.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-4025c78eb06e3211cf54df66d954ffce.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7ad8df1012cc34949a7a0ac4d54234c8.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-e5f62320892960dc23dd0786c8482584.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
@@ -591,12 +556,6 @@ window.Quarto = {
 <span class="header-section-number">5.0.1</span> Covariance</h3>
 <p>The word “covariance” means: varying, or moving, together. Let’s have a look at mock data from five students on hours studied and final grade obtained:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">set.seed</span>(<span class="dv">2</span>)</span>
-<span id="cb1-2"><a href="#cb1-2"></a>grads <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb1-3"><a href="#cb1-3"></a>  <span class="at">Hours =</span> <span class="fu">round</span>(<span class="fu">runif</span>(<span class="dv">5</span>, <span class="dv">2</span>, <span class="dv">20</span>))</span>
-<span id="cb1-4"><a href="#cb1-4"></a>)</span>
-<span id="cb1-5"><a href="#cb1-5"></a>grads<span class="sc">$</span>Grade <span class="ot">&lt;-</span> <span class="fu">round</span>(scales<span class="sc">::</span><span class="fu">rescale</span>(.<span class="dv">7</span><span class="sc">*</span>grads<span class="sc">$</span>Hours <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">5</span>), <span class="at">to =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">10</span>)))</span>
-<span id="cb1-6"><a href="#cb1-6"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(grads)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small">
 <thead><tr class="header">
@@ -630,8 +589,6 @@ window.Quarto = {
 </div>
 <p>We can visualize these data using a “scatterplot”; a simple graph where each observation is shown as a dot with X-coordinate determined by their value on the X variable (Hours), and Y-coordinate determined by the Y variable (Grade):</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb2-2"><a href="#cb2-2"></a><span class="fu">ggplot</span>(grads, <span class="fu">aes</span>(<span class="at">x =</span> Hours, <span class="at">y =</span> Grade)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="Chapter3_Correlation_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
@@ -648,14 +605,6 @@ window.Quarto = {
 <span class="header-section-number">5.0.2.0.1</span> Step 1: Calculate the variables’ means</h5>
 <p>Take the mean of each column (bold in the table below):</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">library</span>(kableExtra)</span>
-<span id="cb3-2"><a href="#cb3-2"></a>mns <span class="ot">&lt;-</span> grads</span>
-<span id="cb3-3"><a href="#cb3-3"></a>mns[] <span class="ot">&lt;-</span> <span class="fu">lapply</span>(mns, as.character)</span>
-<span id="cb3-4"><a href="#cb3-4"></a>mns <span class="ot">&lt;-</span> <span class="fu">rbind</span>(mns, <span class="fu">colMeans</span>(grads))</span>
-<span id="cb3-5"><a href="#cb3-5"></a><span class="fu">names</span>(mns) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"X"</span>, <span class="st">"Y"</span>)</span>
-<span id="cb3-6"><a href="#cb3-6"></a><span class="fu">kable</span>(mns) <span class="sc">|&gt;</span></span>
-<span id="cb3-7"><a href="#cb3-7"></a>  <span class="fu">kable_styling</span>() <span class="sc">|&gt;</span></span>
-<span id="cb3-8"><a href="#cb3-8"></a>  <span class="fu">row_spec</span>(<span class="fu">nrow</span>(mns),<span class="at">bold=</span>T,<span class="at">hline_after =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="table caption-top table-sm table-striped small" data-quarto-postprocess="true">
 <thead><tr class="header">
@@ -695,11 +644,6 @@ window.Quarto = {
 <span class="header-section-number">5.0.2.0.2</span> Step 2: Calculate Deviations</h5>
 <p>For each variable, calculate the deviations by subtracting the mean from the observed scores:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">library</span>(kableExtra)</span>
-<span id="cb4-2"><a href="#cb4-2"></a>devs <span class="ot">&lt;-</span> grads</span>
-<span id="cb4-3"><a href="#cb4-3"></a>devs <span class="ot">&lt;-</span> <span class="fu">cbind</span>(devs, <span class="fu">sweep</span>(devs, <span class="dv">2</span>, <span class="fu">colMeans</span>(devs)))</span>
-<span id="cb4-4"><a href="#cb4-4"></a><span class="fu">names</span>(devs) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"X"</span>, <span class="st">"Y"</span>, <span class="st">"X-mean(X)"</span>, <span class="st">"Y-mean(Y)"</span>)</span>
-<span id="cb4-5"><a href="#cb4-5"></a><span class="fu">kable</span>(devs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small">
 <thead><tr class="header">
@@ -747,10 +691,6 @@ window.Quarto = {
 <span class="header-section-number">5.0.2.0.3</span> Step 3: Multiply Deviations</h5>
 <p>If we were to calculate the SS, we would now square the deviations and add them up in each column. To get the SP, instead of squaring the deviations - we multiply them across variables. Note that if the deviations for both variables have the same sign, then this will give a positive result (positive times positive is positive, and negative times negative is positive too). Moreover, if the deviations from both variables are high, the product will be a high number too. So the SP tends to be a large positive number if high positive (or negative) deviations on one variable go hand in hand with high positive (or negative) deviations on the other variable.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>prods <span class="ot">&lt;-</span> devs</span>
-<span id="cb5-2"><a href="#cb5-2"></a>prods <span class="ot">&lt;-</span> <span class="fu">cbind</span>(prods, <span class="fu">apply</span>(devs[, <span class="dv">3</span><span class="sc">:</span><span class="dv">4</span>], <span class="dv">1</span>, prod))</span>
-<span id="cb5-3"><a href="#cb5-3"></a><span class="fu">names</span>(prods)[<span class="dv">5</span>] <span class="ot">&lt;-</span> <span class="st">"Product"</span></span>
-<span id="cb5-4"><a href="#cb5-4"></a><span class="fu">kable</span>(prods)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small">
 <thead><tr class="header">
@@ -820,13 +760,6 @@ SP = \sum \bigl(X - \bar{X}\bigr)\bigl(Y - \bar{Y}\bigr)
 <p>While correlation coefficients are useful, they must be interpreted with care.</p>
 <p>To illustrate the limitations of correlations, the statistician Anscombe (1973) created four data sets with identical correlation coefficients, <span class="math inline">\(r = 0.82\)</span>. When plotting the data, however, it becomes clear that the correlation coefficient can only be meaningfully interpreted for the first dataset (figure a below).</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>plts <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="cf">function</span>(i){</span>
-<span id="cb6-2"><a href="#cb6-2"></a>  df <span class="ot">&lt;-</span> anscombe[, <span class="fu">paste0</span>(<span class="fu">c</span>(<span class="st">"x"</span>, <span class="st">"y"</span>), i)]</span>
-<span id="cb6-3"><a href="#cb6-3"></a>  <span class="fu">names</span>(df) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"X"</span>, <span class="st">"Y"</span>)</span>
-<span id="cb6-4"><a href="#cb6-4"></a></span>
-<span id="cb6-5"><a href="#cb6-5"></a>  <span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> X, <span class="at">y =</span> Y)) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">shape =</span> <span class="dv">21</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">fill =</span> <span class="st">"orange"</span>) <span class="sc">+</span> <span class="fu">theme_linedraw</span>()</span>
-<span id="cb6-6"><a href="#cb6-6"></a>})</span>
-<span id="cb6-7"><a href="#cb6-7"></a>ggpubr<span class="sc">::</span><span class="fu">ggarrange</span>(<span class="at">plotlist =</span> plts, <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">labels =</span> <span class="st">"auto"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-anscombe" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-anscombe-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -845,17 +778,6 @@ Figure&nbsp;5.1: Anscombe’s quartet, 1973
 <p>Secondly, these plots illustrate that <strong>outliers</strong> can have a disproportionate impact. In figures c and d, a single extreme observation artificially deflates (c) or inflates (d) the correlation coefficient, potentially leading to misleading conclusions.</p>
 <p>Thirdly, a <strong>restricted range</strong> of scores can obscure or distort relationships. For example, if you were to examine the pattern in figure b of <a href="#fig-anscombe" class="quarto-xref">Figure&nbsp;<span>5.1</span></a> for values of X between [4, 9], you would conclude that <span class="math inline">\(r = 0.99\)</span>, or near perfect positive correlation. If you examined the same pattern for values of X between (0, 13), you would conclude that <span class="math inline">\(r = -0.07\)</span>, or near-zero. If you examined the same pattern for values of X between [13, 20), you would conclude that <span class="math inline">\(r = -1.00\)</span>, or perfect negative correlation. Figure <a href="#fig-nonlin" class="quarto-xref">Figure&nbsp;<span>5.2</span></a> below zooms into the pattern from figure b, by restricting the range of variable X into three segments:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>df <span class="ot">&lt;-</span> anscombe[, <span class="fu">paste0</span>(<span class="fu">c</span>(<span class="st">"x"</span>, <span class="st">"y"</span>), <span class="dv">2</span>)]</span>
-<span id="cb7-2"><a href="#cb7-2"></a><span class="fu">names</span>(df) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"X"</span>, <span class="st">"Y"</span>)</span>
-<span id="cb7-3"><a href="#cb7-3"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df[df<span class="sc">$</span>X <span class="sc">&lt;=</span> <span class="dv">9</span>, ], <span class="fu">aes</span>(<span class="at">x =</span> X, <span class="at">y =</span> Y)) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">shape =</span> <span class="dv">21</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">fill =</span> <span class="st">"orange"</span>) <span class="sc">+</span> <span class="fu">theme_linedraw</span>()<span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb7-4"><a href="#cb7-4"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df[df<span class="sc">$</span>X <span class="sc">&gt;</span> <span class="dv">9</span> <span class="sc">&amp;</span> df<span class="sc">$</span>X <span class="sc">&lt;</span> <span class="dv">13</span>, ], <span class="fu">aes</span>(<span class="at">x =</span> X, <span class="at">y =</span> Y)) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">shape =</span> <span class="dv">21</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">fill =</span> <span class="st">"orange"</span>) <span class="sc">+</span> <span class="fu">theme_linedraw</span>() <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb7-5"><a href="#cb7-5"></a>p3 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df[df<span class="sc">$</span>X <span class="sc">&gt;=</span> <span class="dv">13</span>, ], <span class="fu">aes</span>(<span class="at">x =</span> X, <span class="at">y =</span> Y)) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">shape =</span> <span class="dv">21</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">fill =</span> <span class="st">"orange"</span>) <span class="sc">+</span> <span class="fu">theme_linedraw</span>() <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb7-6"><a href="#cb7-6"></a>ggpubr<span class="sc">::</span><span class="fu">ggarrange</span>(p1,p2,p3, <span class="at">ncol =</span> <span class="dv">3</span>, <span class="at">nrow =</span> <span class="dv">1</span>, <span class="at">labels =</span> <span class="st">"auto"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>`geom_smooth()` using formula = 'y ~ x'
-`geom_smooth()` using formula = 'y ~ x'
-`geom_smooth()` using formula = 'y ~ x'</code></pre>
-</div>
 <div class="cell-output-display">
 <div id="fig-nonlin" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-nonlin-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -881,151 +803,117 @@ Figure&nbsp;5.2: Zooming in on panel b of Anscombe’s quartet, restricting the 
 <p>This short quiz checks your grasp of <strong>Chapter 3 – Covariance &amp; Correlation</strong>.<br>
 Work through it after you’ve studied the lecture slides (and before the next live session) so we can focus on anything that still feels uncertain. Each incorrect answer reveals a hint that sends you back to the exact slide or numerical example you need.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">add_mcs</span>(<span class="st">"questions_correlation.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>::: {.webex-check .webex-box}
-
-**Question 1**
-
-A covariance of +120 cmkg tells you... &lt;div class='webex-radiogroup' id='radio_RSWHGAVIPD'&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_RSWHGAVIPD" value=""&gt;&lt;/input&gt; &lt;span&gt;120 % of Y variance explained&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_RSWHGAVIPD" value=""&gt;&lt;/input&gt; &lt;span&gt;A perfect linear trend&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_RSWHGAVIPD" value=""&gt;&lt;/input&gt; &lt;span&gt;The units have been standardised&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_RSWHGAVIPD" value="answer"&gt;&lt;/input&gt; &lt;span&gt;X and Y tend to rise together&lt;/span&gt;&lt;/label&gt;&lt;/div&gt;
-
-
-**Question 2**
-
-If the covariance between study hours and stress level is negative, what does that imply? &lt;div class='webex-radiogroup' id='radio_HPMNPFSIWH'&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_HPMNPFSIWH" value=""&gt;&lt;/input&gt; &lt;span&gt;No relationship&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_HPMNPFSIWH" value=""&gt;&lt;/input&gt; &lt;span&gt;Longer study -&gt; higher stress&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_HPMNPFSIWH" value="answer"&gt;&lt;/input&gt; &lt;span&gt;Longer study -&gt; lower stress&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_HPMNPFSIWH" value=""&gt;&lt;/input&gt; &lt;span&gt;Units are incomparable&lt;/span&gt;&lt;/label&gt;&lt;/div&gt;
-
-
-**Question 3**
-
-Which statement about covariance magnitude is true? &lt;div class='webex-radiogroup' id='radio_BWRCTCAWPI'&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_BWRCTCAWPI" value="answer"&gt;&lt;/input&gt; &lt;span&gt;Its size depends on measurement units&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_BWRCTCAWPI" value=""&gt;&lt;/input&gt; &lt;span&gt;It equals the regression slope&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_BWRCTCAWPI" value=""&gt;&lt;/input&gt; &lt;span&gt;It ranges only from -1 to +1&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_BWRCTCAWPI" value=""&gt;&lt;/input&gt; &lt;span&gt;A larger value always means a stronger relationship&lt;/span&gt;&lt;/label&gt;&lt;/div&gt;
-
-
-**Question 4**
-
-Converting temperatures from Celsius to Fahrenheit will make the covariance between temperature and ice-cream sales... &lt;div class='webex-radiogroup' id='radio_HDMEBUVMGR'&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_HDMEBUVMGR" value="answer"&gt;&lt;/input&gt; &lt;span&gt;Increase by a constant factor&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_HDMEBUVMGR" value=""&gt;&lt;/input&gt; &lt;span&gt;Switch sign&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_HDMEBUVMGR" value=""&gt;&lt;/input&gt; &lt;span&gt;Become unitfree&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_HDMEBUVMGR" value=""&gt;&lt;/input&gt; &lt;span&gt;Stay exactly the same&lt;/span&gt;&lt;/label&gt;&lt;/div&gt;
-
-
-**Question 5**
-
-Pearson's r is best described as... &lt;div class='webex-radiogroup' id='radio_DIJORFVSOM'&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_DIJORFVSOM" value=""&gt;&lt;/input&gt; &lt;span&gt;Raw measure of joint variability&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_DIJORFVSOM" value=""&gt;&lt;/input&gt; &lt;span&gt;Mean of X and Y combined&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_DIJORFVSOM" value=""&gt;&lt;/input&gt; &lt;span&gt;Ratio of two variances&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_DIJORFVSOM" value="answer"&gt;&lt;/input&gt; &lt;span&gt;Standardised (unit-free) covariance&lt;/span&gt;&lt;/label&gt;&lt;/div&gt;
-
-
-**Question 6**
-
-If r = 0, we can conclude that... &lt;div class='webex-radiogroup' id='radio_MQEFQZIUXO'&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_MQEFQZIUXO" value=""&gt;&lt;/input&gt; &lt;span&gt;X causes Y&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_MQEFQZIUXO" value=""&gt;&lt;/input&gt; &lt;span&gt;X and Y are unrelated in every way&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_MQEFQZIUXO" value="answer"&gt;&lt;/input&gt; &lt;span&gt;No linear relationship is present&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_MQEFQZIUXO" value=""&gt;&lt;/input&gt; &lt;span&gt;The data contain no outliers&lt;/span&gt;&lt;/label&gt;&lt;/div&gt;
-
-
-**Question 7**
-
-A positive covariance but r ~= 0.05 usually indicates that... &lt;div class='webex-radiogroup' id='radio_PUKIOJNEKQ'&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_PUKIOJNEKQ" value=""&gt;&lt;/input&gt; &lt;span&gt;Data range is restricted to zero&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_PUKIOJNEKQ" value="answer"&gt;&lt;/input&gt; &lt;span&gt;The variables move together only slightly&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_PUKIOJNEKQ" value=""&gt;&lt;/input&gt; &lt;span&gt;The relationship is strong&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_PUKIOJNEKQ" value=""&gt;&lt;/input&gt; &lt;span&gt;Units have been standardised&lt;/span&gt;&lt;/label&gt;&lt;/div&gt;
-
-
-**Question 8**
-
-Which scatterplot feature primarily determines the sign of covariance (and r)? &lt;div class='webex-radiogroup' id='radio_YWTADVXYFW'&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_YWTADVXYFW" value=""&gt;&lt;/input&gt; &lt;span&gt;Sample size&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_YWTADVXYFW" value="answer"&gt;&lt;/input&gt; &lt;span&gt;Overall slope direction&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_YWTADVXYFW" value=""&gt;&lt;/input&gt; &lt;span&gt;Point density&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_YWTADVXYFW" value=""&gt;&lt;/input&gt; &lt;span&gt;Presence of a mode&lt;/span&gt;&lt;/label&gt;&lt;/div&gt;
-
-
-**Question 9**
-
-You multiply every X score by 10 but leave Y unchanged. What happens? &lt;div class='webex-radiogroup' id='radio_SETUOMIEZC'&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_SETUOMIEZC" value=""&gt;&lt;/input&gt; &lt;span&gt;Both covariance and r unchanged&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_SETUOMIEZC" value=""&gt;&lt;/input&gt; &lt;span&gt;Covariance unchanged; r x 10&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_SETUOMIEZC" value="answer"&gt;&lt;/input&gt; &lt;span&gt;Covariance x 10; r unchanged&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_SETUOMIEZC" value=""&gt;&lt;/input&gt; &lt;span&gt;Covariance x 10; r x 10&lt;/span&gt;&lt;/label&gt;&lt;/div&gt;
-
-
-**Question 10**
-
-A covariance of 0 implies that... &lt;div class='webex-radiogroup' id='radio_NYKECCFALB'&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_NYKECCFALB" value=""&gt;&lt;/input&gt; &lt;span&gt;They have opposite scales&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_NYKECCFALB" value="answer"&gt;&lt;/input&gt; &lt;span&gt;Their linear relationship (r) is 0&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_NYKECCFALB" value=""&gt;&lt;/input&gt; &lt;span&gt;X causes Z&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_NYKECCFALB" value=""&gt;&lt;/input&gt; &lt;span&gt;X and Y are unrelated in every way&lt;/span&gt;&lt;/label&gt;&lt;/div&gt;
-
-
-**Question 11**
-
-Two variables show r = 0.85. Which conclusion is justified? &lt;div class='webex-radiogroup' id='radio_IQWSEHDBHM'&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_IQWSEHDBHM" value=""&gt;&lt;/input&gt; &lt;span&gt;X causes Y&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_IQWSEHDBHM" value="answer"&gt;&lt;/input&gt; &lt;span&gt;X and Y are associated; causal direction unknown&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_IQWSEHDBHM" value=""&gt;&lt;/input&gt; &lt;span&gt;A third variable is impossible&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_IQWSEHDBHM" value=""&gt;&lt;/input&gt; &lt;span&gt;Y causes X&lt;/span&gt;&lt;/label&gt;&lt;/div&gt;
-
-
-**Question 12**
-
-Analysing data with a restricted range typically makes r... &lt;div class='webex-radiogroup' id='radio_GXSHZAQTJR'&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_GXSHZAQTJR" value="answer"&gt;&lt;/input&gt; &lt;span&gt;Smaller in magnitude&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_GXSHZAQTJR" value=""&gt;&lt;/input&gt; &lt;span&gt;Exactly zero&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_GXSHZAQTJR" value=""&gt;&lt;/input&gt; &lt;span&gt;Larger in magnitude&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_GXSHZAQTJR" value=""&gt;&lt;/input&gt; &lt;span&gt;Change sign&lt;/span&gt;&lt;/label&gt;&lt;/div&gt;
-
-
-**Question 13**
-
-An extreme outlier that follows the overall trend will most likely... &lt;div class='webex-radiogroup' id='radio_VPVNLCUEOR'&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_VPVNLCUEOR" value=""&gt;&lt;/input&gt; &lt;span&gt;Remove measurement error&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_VPVNLCUEOR" value="answer"&gt;&lt;/input&gt; &lt;span&gt;Inflate the magnitude of r&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_VPVNLCUEOR" value=""&gt;&lt;/input&gt; &lt;span&gt;Drive r toward zero&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_VPVNLCUEOR" value=""&gt;&lt;/input&gt; &lt;span&gt;Make covariance negative&lt;/span&gt;&lt;/label&gt;&lt;/div&gt;
-
-
-**Question 14**
-
-A coefficient of determination (r2) of 0.49 means that... &lt;div class='webex-radiogroup' id='radio_CURTKBWNBU'&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_CURTKBWNBU" value=""&gt;&lt;/input&gt; &lt;span&gt;49 % of X variance is explained by Y&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_CURTKBWNBU" value=""&gt;&lt;/input&gt; &lt;span&gt;The correlation is -0.70&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_CURTKBWNBU" value=""&gt;&lt;/input&gt; &lt;span&gt;Covariance is unitfree&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_CURTKBWNBU" value="answer"&gt;&lt;/input&gt; &lt;span&gt;49 % of Y variance is explained by X&lt;/span&gt;&lt;/label&gt;&lt;/div&gt;
-
-
-**Question 15**
-
-After converting both X and Y to zscores, the covariance of those zvariables equals... &lt;div class='webex-radiogroup' id='radio_KCVYNXFPYV'&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_KCVYNXFPYV" value=""&gt;&lt;/input&gt; &lt;span&gt;Their geometric mean&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_KCVYNXFPYV" value=""&gt;&lt;/input&gt; &lt;span&gt;Always zero&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_KCVYNXFPYV" value=""&gt;&lt;/input&gt; &lt;span&gt;Sample size&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_KCVYNXFPYV" value="answer"&gt;&lt;/input&gt; &lt;span&gt;Pearson&amp;apos;s r&lt;/span&gt;&lt;/label&gt;&lt;/div&gt;
-
-
-:::
-
-
-&lt;div class='webex-solution'&gt;&lt;button&gt;Show explanations&lt;/button&gt;
-**Question 1**
-
-Positive sign = same-direction movement; magnitude is unit-dependent so strength not directly interpretable.
-
-**Question 2**
-
-Negative covariance means high X pairs with low Y and viceversa.
-
-**Question 3**
-
-Rescaling either variable rescales covariance; therefore magnitude alone is not comparable across units.
-
-**Question 4**
-
-Multiplying Celsius by 1.8 and adding 32 rescales covariance by 1.8; adding a constant does not affect it.
-
-**Question 5**
-
-Dividing covariance by the product of SDs removes units and bounds the result between -1 and +1.
-
-**Question 6**
-
-r only detects linear association; other patterns may still exist.
-
-**Question 7**
-
-Small r means weak linear association despite positive sign.
-
-**Question 8**
-
-Positive slope -&gt; positive sign; negative slope -&gt; negative sign.
-
-**Question 9**
-
-Scaling one variable scales covariance by that factor but leaves r (unitfree) unchanged.
-
-**Question 10**
-
-Zero covariance means no linear comovement; nonlinear links could still exist.
-
-**Question 11**
-
-Correlation quantifies association but cannot establish causality without experimental control.
-
-**Question 12**
-
-Less variability reduces covariance relative to the SDs, shrinking r.
-
-**Question 13**
-
-Trendconsistent outliers add leverage, increasing |r|.
-
-**Question 14**
-
-r2 translates correlation into varianceexplained terms.
-
-**Question 15**
-
-Standardising divides by SDs, so covariance in zspace equals r.
-
-
-&lt;/div&gt;</code></pre>
+<div class="webex-check webex-box">
+<p><strong>Question 1</strong></p>
+A covariance of +120 cmkg tells you…
+<div id="radio_RSWHGAVIPD" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_RSWHGAVIPD" value=""><span>120 % of Y variance explained</span></label><label><input type="radio" autocomplete="off" name="radio_RSWHGAVIPD" value=""><span>A perfect linear trend</span></label><label><input type="radio" autocomplete="off" name="radio_RSWHGAVIPD" value=""><span>The units have been standardised</span></label><label><input type="radio" autocomplete="off" name="radio_RSWHGAVIPD" value="answer"><span>X and Y tend to rise together</span></label>
+</div>
+<p><strong>Question 2</strong></p>
+If the covariance between study hours and stress level is negative, what does that imply?
+<div id="radio_HPMNPFSIWH" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_HPMNPFSIWH" value=""><span>No relationship</span></label><label><input type="radio" autocomplete="off" name="radio_HPMNPFSIWH" value=""><span>Longer study -&gt; higher stress</span></label><label><input type="radio" autocomplete="off" name="radio_HPMNPFSIWH" value="answer"><span>Longer study -&gt; lower stress</span></label><label><input type="radio" autocomplete="off" name="radio_HPMNPFSIWH" value=""><span>Units are incomparable</span></label>
+</div>
+<p><strong>Question 3</strong></p>
+Which statement about covariance magnitude is true?
+<div id="radio_BWRCTCAWPI" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_BWRCTCAWPI" value="answer"><span>Its size depends on measurement units</span></label><label><input type="radio" autocomplete="off" name="radio_BWRCTCAWPI" value=""><span>It equals the regression slope</span></label><label><input type="radio" autocomplete="off" name="radio_BWRCTCAWPI" value=""><span>It ranges only from -1 to +1</span></label><label><input type="radio" autocomplete="off" name="radio_BWRCTCAWPI" value=""><span>A larger value always means a stronger relationship</span></label>
+</div>
+<p><strong>Question 4</strong></p>
+Converting temperatures from Celsius to Fahrenheit will make the covariance between temperature and ice-cream sales…
+<div id="radio_HDMEBUVMGR" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_HDMEBUVMGR" value="answer"><span>Increase by a constant factor</span></label><label><input type="radio" autocomplete="off" name="radio_HDMEBUVMGR" value=""><span>Switch sign</span></label><label><input type="radio" autocomplete="off" name="radio_HDMEBUVMGR" value=""><span>Become unitfree</span></label><label><input type="radio" autocomplete="off" name="radio_HDMEBUVMGR" value=""><span>Stay exactly the same</span></label>
+</div>
+<p><strong>Question 5</strong></p>
+Pearson’s r is best described as…
+<div id="radio_DIJORFVSOM" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_DIJORFVSOM" value=""><span>Raw measure of joint variability</span></label><label><input type="radio" autocomplete="off" name="radio_DIJORFVSOM" value=""><span>Mean of X and Y combined</span></label><label><input type="radio" autocomplete="off" name="radio_DIJORFVSOM" value=""><span>Ratio of two variances</span></label><label><input type="radio" autocomplete="off" name="radio_DIJORFVSOM" value="answer"><span>Standardised (unit-free) covariance</span></label>
+</div>
+<p><strong>Question 6</strong></p>
+If r = 0, we can conclude that…
+<div id="radio_MQEFQZIUXO" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_MQEFQZIUXO" value=""><span>X causes Y</span></label><label><input type="radio" autocomplete="off" name="radio_MQEFQZIUXO" value=""><span>X and Y are unrelated in every way</span></label><label><input type="radio" autocomplete="off" name="radio_MQEFQZIUXO" value="answer"><span>No linear relationship is present</span></label><label><input type="radio" autocomplete="off" name="radio_MQEFQZIUXO" value=""><span>The data contain no outliers</span></label>
+</div>
+<p><strong>Question 7</strong></p>
+A positive covariance but r ~= 0.05 usually indicates that…
+<div id="radio_PUKIOJNEKQ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_PUKIOJNEKQ" value=""><span>Data range is restricted to zero</span></label><label><input type="radio" autocomplete="off" name="radio_PUKIOJNEKQ" value="answer"><span>The variables move together only slightly</span></label><label><input type="radio" autocomplete="off" name="radio_PUKIOJNEKQ" value=""><span>The relationship is strong</span></label><label><input type="radio" autocomplete="off" name="radio_PUKIOJNEKQ" value=""><span>Units have been standardised</span></label>
+</div>
+<p><strong>Question 8</strong></p>
+Which scatterplot feature primarily determines the sign of covariance (and r)?
+<div id="radio_YWTADVXYFW" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_YWTADVXYFW" value=""><span>Sample size</span></label><label><input type="radio" autocomplete="off" name="radio_YWTADVXYFW" value="answer"><span>Overall slope direction</span></label><label><input type="radio" autocomplete="off" name="radio_YWTADVXYFW" value=""><span>Point density</span></label><label><input type="radio" autocomplete="off" name="radio_YWTADVXYFW" value=""><span>Presence of a mode</span></label>
+</div>
+<p><strong>Question 9</strong></p>
+You multiply every X score by 10 but leave Y unchanged. What happens?
+<div id="radio_SETUOMIEZC" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_SETUOMIEZC" value=""><span>Both covariance and r unchanged</span></label><label><input type="radio" autocomplete="off" name="radio_SETUOMIEZC" value=""><span>Covariance unchanged; r x 10</span></label><label><input type="radio" autocomplete="off" name="radio_SETUOMIEZC" value="answer"><span>Covariance x 10; r unchanged</span></label><label><input type="radio" autocomplete="off" name="radio_SETUOMIEZC" value=""><span>Covariance x 10; r x 10</span></label>
+</div>
+<p><strong>Question 10</strong></p>
+A covariance of 0 implies that…
+<div id="radio_NYKECCFALB" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_NYKECCFALB" value=""><span>They have opposite scales</span></label><label><input type="radio" autocomplete="off" name="radio_NYKECCFALB" value="answer"><span>Their linear relationship (r) is 0</span></label><label><input type="radio" autocomplete="off" name="radio_NYKECCFALB" value=""><span>X causes Z</span></label><label><input type="radio" autocomplete="off" name="radio_NYKECCFALB" value=""><span>X and Y are unrelated in every way</span></label>
+</div>
+<p><strong>Question 11</strong></p>
+Two variables show r = 0.85. Which conclusion is justified?
+<div id="radio_IQWSEHDBHM" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_IQWSEHDBHM" value=""><span>X causes Y</span></label><label><input type="radio" autocomplete="off" name="radio_IQWSEHDBHM" value="answer"><span>X and Y are associated; causal direction unknown</span></label><label><input type="radio" autocomplete="off" name="radio_IQWSEHDBHM" value=""><span>A third variable is impossible</span></label><label><input type="radio" autocomplete="off" name="radio_IQWSEHDBHM" value=""><span>Y causes X</span></label>
+</div>
+<p><strong>Question 12</strong></p>
+Analysing data with a restricted range typically makes r…
+<div id="radio_GXSHZAQTJR" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_GXSHZAQTJR" value="answer"><span>Smaller in magnitude</span></label><label><input type="radio" autocomplete="off" name="radio_GXSHZAQTJR" value=""><span>Exactly zero</span></label><label><input type="radio" autocomplete="off" name="radio_GXSHZAQTJR" value=""><span>Larger in magnitude</span></label><label><input type="radio" autocomplete="off" name="radio_GXSHZAQTJR" value=""><span>Change sign</span></label>
+</div>
+<p><strong>Question 13</strong></p>
+An extreme outlier that follows the overall trend will most likely…
+<div id="radio_VPVNLCUEOR" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_VPVNLCUEOR" value=""><span>Remove measurement error</span></label><label><input type="radio" autocomplete="off" name="radio_VPVNLCUEOR" value="answer"><span>Inflate the magnitude of r</span></label><label><input type="radio" autocomplete="off" name="radio_VPVNLCUEOR" value=""><span>Drive r toward zero</span></label><label><input type="radio" autocomplete="off" name="radio_VPVNLCUEOR" value=""><span>Make covariance negative</span></label>
+</div>
+<p><strong>Question 14</strong></p>
+A coefficient of determination (r2) of 0.49 means that…
+<div id="radio_CURTKBWNBU" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_CURTKBWNBU" value=""><span>49 % of X variance is explained by Y</span></label><label><input type="radio" autocomplete="off" name="radio_CURTKBWNBU" value=""><span>The correlation is -0.70</span></label><label><input type="radio" autocomplete="off" name="radio_CURTKBWNBU" value=""><span>Covariance is unitfree</span></label><label><input type="radio" autocomplete="off" name="radio_CURTKBWNBU" value="answer"><span>49 % of Y variance is explained by X</span></label>
+</div>
+<p><strong>Question 15</strong></p>
+After converting both X and Y to zscores, the covariance of those zvariables equals…
+<div id="radio_KCVYNXFPYV" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_KCVYNXFPYV" value=""><span>Their geometric mean</span></label><label><input type="radio" autocomplete="off" name="radio_KCVYNXFPYV" value=""><span>Always zero</span></label><label><input type="radio" autocomplete="off" name="radio_KCVYNXFPYV" value=""><span>Sample size</span></label><label><input type="radio" autocomplete="off" name="radio_KCVYNXFPYV" value="answer"><span>Pearson's r</span></label>
+</div>
+</div>
+<div class="webex-solution">
+<button>
+Show explanations
+</button>
+<p><strong>Question 1</strong></p>
+<p>Positive sign = same-direction movement; magnitude is unit-dependent so strength not directly interpretable.</p>
+<p><strong>Question 2</strong></p>
+<p>Negative covariance means high X pairs with low Y and viceversa.</p>
+<p><strong>Question 3</strong></p>
+<p>Rescaling either variable rescales covariance; therefore magnitude alone is not comparable across units.</p>
+<p><strong>Question 4</strong></p>
+<p>Multiplying Celsius by 1.8 and adding 32 rescales covariance by 1.8; adding a constant does not affect it.</p>
+<p><strong>Question 5</strong></p>
+<p>Dividing covariance by the product of SDs removes units and bounds the result between -1 and +1.</p>
+<p><strong>Question 6</strong></p>
+<p>r only detects linear association; other patterns may still exist.</p>
+<p><strong>Question 7</strong></p>
+<p>Small r means weak linear association despite positive sign.</p>
+<p><strong>Question 8</strong></p>
+<p>Positive slope -&gt; positive sign; negative slope -&gt; negative sign.</p>
+<p><strong>Question 9</strong></p>
+<p>Scaling one variable scales covariance by that factor but leaves r (unitfree) unchanged.</p>
+<p><strong>Question 10</strong></p>
+<p>Zero covariance means no linear comovement; nonlinear links could still exist.</p>
+<p><strong>Question 11</strong></p>
+<p>Correlation quantifies association but cannot establish causality without experimental control.</p>
+<p><strong>Question 12</strong></p>
+<p>Less variability reduces covariance relative to the SDs, shrinking r.</p>
+<p><strong>Question 13</strong></p>
+<p>Trendconsistent outliers add leverage, increasing |r|.</p>
+<p><strong>Question 14</strong></p>
+<p>r2 translates correlation into varianceexplained terms.</p>
+<p><strong>Question 15</strong></p>
+<p>Standardising divides by SDs, so covariance in zspace equals r.</p>
 </div>
 </div>
 </section><section id="tutorial" class="level2" data-number="5.3"><h2 data-number="5.3" class="anchored" data-anchor-id="tutorial">
