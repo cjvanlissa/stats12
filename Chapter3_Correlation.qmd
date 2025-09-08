@@ -3,6 +3,7 @@
 ```{r, include = FALSE}
 source("R/booktem_setup.R")
 source("R/my_setup.R")
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
 ```
 
 In the previous chapter, we covered univariate (= single variable) descriptive statistics.
@@ -223,7 +224,7 @@ In summary, **covariance** offers an initial metric for gauging whether two vari
 This short quiz checks your grasp of **Chapter 3 – Covariance & Correlation**.  
 Work through it after you’ve studied the lecture slides (and before the next live session) so we can focus on anything that still feels uncertain. Each incorrect answer reveals a hint that sends you back to the exact slide or numerical example you need.
 
-```{r}
+```{r results='asis', echo=FALSE}
 add_mcs("questions_correlation.csv")
 ```
 
