@@ -49,8 +49,8 @@ The official **course schedule** is available on [TimeEdit](https://www.timeedit
 #| cache = FALSE
 schedule <- read.csv("schedule_2025.csv")[, 1:6]
 schedule$Date <- as.Date(paste(2025, (schedule$Week-1), 1, sep="-"), "%Y-%U-%u")
-addthis <- c(0:5)
-names(addthis) <- c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday")
+addthis <- c(0:6)
+names(addthis) <- c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")
 schedule$Date <- schedule$Date+addthis[schedule$Day]
 schedule$Topic[which(!schedule$Link == "")] <- paste0("<a href='", schedule$Link[which(!schedule$Link == '')], "'>", schedule$Topic[which(!schedule$Link == '')], "</a>")
 schedule <- schedule[!is.na(schedule$Week), c("Week", "Activity", "Date", "Topic")]
@@ -86,7 +86,7 @@ Below is a breakdown of the expected study load:
 options(knitr.kable.NA = '')
 tab_load <- xlsx::read.xlsx("hours_breakdown.xlsx", 1)
 library(kableExtra)
-kbl(tab_load) |>
+kbl(tab_load, format = c("latex", "html")[knitr::is_html_output()+1L]) |>
   row_spec(which(is.na(tab_load$Duration)), bold = TRUE, hline_after = T)
 ```
 

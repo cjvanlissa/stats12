@@ -7,11 +7,11 @@ file_word_out <- quarto::quarto_render(file_qmd, output_format = "all", output_f
 
 
 library(officer)
-file.remove("Syllabus_Statistis_1_2.docx")
+file.remove("Syllabus_Statistis_1.docx")
 doc <- read_docx("c:/gitbook_stats12/Syllabus_intro.docx")
 doc <- officer::body_replace_all_text(doc, "XXyear", paste0(format(Sys.Date(), format = "%Y"), "-", as.integer(format(Sys.Date(), format = "%Y"))+1))
 doc <- officer::body_add_docx(doc, file_word)
 doc <- officer::body_add_docx(doc, "c:/gitbook_stats12/Syllabus_outro.docx")
-print(doc, target="Syllabus_Statistis_1_2.docx")
+print(doc, target="Syllabus_Statistis_1.docx")
 
 file.remove(file_qmd, file_word)

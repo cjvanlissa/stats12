@@ -1,5 +1,5 @@
 ---
-title: "Welcome to 'Statistics 1 and 2'"
+title: "Welcome to 'Statistics 1'"
 author:   "Caspar J. van Lissa"
 date:     "`r format(Sys.Date(), '%d %b %Y')`"
 format: revealjs
@@ -45,10 +45,8 @@ Forget about specific techniques; you will learn:
 
 
 * ~14 lectures
-    + 10 shared lectures, 4 major specific
-* ~11 lab sessions
-    + 10 shared, 4 major specific
- 
+* ~14 lab sessions
+
 ## Course Philosophy
 
 * Flipped classroom
@@ -80,9 +78,9 @@ Forget about specific techniques; you will learn:
 ## Examination
 
 * 1 multiple choice exam
-    + Split into 3 sessions
+    + Split into 2 sessions
     + 60% of grade
-* 1 portfolio, split into 3 group assignments
+* 1 portfolio, split into 2 group assignments
     + 40% of grade
   
 ## Course Resources
@@ -100,8 +98,8 @@ I assume that you...
 * Show up on time to all sessions
 * Have studied the lecture video
 * Participate actively during lectures and lab sessions
-* Help co-create a supportive, safe, fun, and empathic space for learning
-    + Learning also means: being challenged. Challenges come in many forms
+* Co-create supportive, safe, fun, empathic space for learning
+    + Learning meansbeing challenged. Challenges come in many forms
     
 ## Hierarchy for Questions
 
@@ -138,7 +136,7 @@ Forget about passing. What do **YOU** want to get out of this course?
 
 **De-cidere: Cutting off alternative paths**
 
-Are you ready to become really GREAT at statistis?
+Are you ready to become really GREAT at statistics?
 
 Deciding means committing to a specific result, and closing the door to any other outcome.
 
@@ -158,7 +156,7 @@ Decide what kind of student you will be.
 
 Complete trust in your ability to pass this course
 
-I had a 3.4 in math in high school - now I am a statistics professor
+I had a 3.4 in high school math - now I am a statistics professor
 
 The question is not: can I do this? The question is: How do I do this!
 
@@ -218,7 +216,7 @@ Each of these can bring pain or pleasure
 ## Increasing Motivation
 
 * Make the pain associated with NOT studying bigger, and increase reward associated with studying
-* Reward yourself regularly! (celebrate every small succes, Caryl Rusbult)
+* Reward yourself regularly! (celebrate every small success, Caryl Rusbult)
 * Create accountability: share your goals with team members
 * Agree on rewards: make it fun (social), create a point system, give each other compliments, whatever works for you
 * Or agree on "punishments": lowest grade pays a round of drinks, etc.
@@ -229,9 +227,9 @@ Each of these can bring pain or pleasure
 **Behavior that is consistently reinforced will become a habit**
 
 * Create positive study habits: 
-		+ Just commit to 5 minutes, every morning (5 soon turns into 50)
-		+ Schedule regular study times (put it in your agenda)
-		+ Reward small successes (do a bit of work before exercise, or before having a nice snack, or before going out with a friend)
+  + Just commit to 5 minutes, every morning (5 soon turns into 50)
+	+ Schedule regular study times (put it in your agenda)
+	+ Reward small successes (do a bit of work before exercise, or before having a nice snack, or before going out with a friend)
 * _Habits_ will serve you throughout your academic career and life
 
 
@@ -254,13 +252,13 @@ Each of these can bring pain or pleasure
 
 ## Handle Your Emotions
 
-* Sh*#$ gets personal!
+* S#*$ gets personal!
 * Emotions are part of the learning and teamwork process
 * Remember a time when you felt a similar emotion and realize that you've successfully handled this before
 * These are also learning opportunities
 * Expect emotions and prepare strategies to cope
-		+ Frustration: Take a breather, take smaller steps, ask for help
-		+ In team work: use co-regulation (e.g., empathy and constructive problem solving) to resolve negative emotions together
+  + Frustration: Take a breather, take smaller steps, ask for help
+  + In team work: use co-regulation (e.g., empathy and constructive problem solving) to resolve negative emotions together
 
 
 **Become Resilient:** Your ability to manage stress and emotions will contribute to your success in this course and life
@@ -281,6 +279,7 @@ Each of these can bring pain or pleasure
 
 * It is possible to work hard and still fall short (work smart, not hard)
 * Focus on what's important:
+
 		+ Studying: Understanding > passing exam questions
 		+ Assignments: Good/clear > long and fluffy
 		+ Scope: Material offered > other/extra material
