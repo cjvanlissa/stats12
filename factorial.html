@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.34">
+<meta name="generator" content="quarto-1.8.25">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="description" content="Book Description">
 <title>20&nbsp; GLM: Factorial ANOVA – Statistics 1 and 2</title>
@@ -66,18 +66,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="./images/logos/favicon.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-7ad8df1012cc34949a7a0ac4d54234c8.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-4025c78eb06e3211cf54df66d954ffce.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-7ad8df1012cc34949a7a0ac4d54234c8.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-bb1cd4028f63a369ab283e072cb7d572.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-54c8f25464f32f8783bd446cee98020d.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-bb1cd4028f63a369ab283e072cb7d572.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-e5f62320892960dc23dd0786c8482584.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-11ad583e60b2cd5ac7d46970bf1aa65a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-e5f62320892960dc23dd0786c8482584.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap-bb5d2cf76dd9d8b046063047f144de0c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-c8dd5cd8506132e8ba466e2074c506b4.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-bb5d2cf76dd9d8b046063047f144de0c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -114,7 +115,7 @@ const typesetMath = (el) => {
     var macros = [];
     for (var i = 0; i < mathElements.length; i++) {
       var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
         window.katex.render(texText.data, mathElements[i], {
           displayMode: mathElements[i].classList.contains('display'),
           throwOnError: false,
@@ -313,7 +314,9 @@ window.Quarto = {
     </div>
   </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./index.html" class="sidebar-logo-link">
+      </a>
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Statistics 1 and 2</a> 
         <div class="sidebar-tools-main tools-wide">
@@ -682,13 +685,13 @@ Show explanations
 Answer
 </button>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(tidySEM)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(tidySEM)</span>
 <span id="cb1-2"><a href="#cb1-2"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb1-3"><a href="#cb1-3"></a>lo <span class="ot">&lt;-</span> <span class="fu">get_layout</span>(<span class="st">""</span>, <span class="st">"Gender"</span>, <span class="st">""</span>,</span>
 <span id="cb1-4"><a href="#cb1-4"></a>                 <span class="st">"Behavior"</span>, <span class="st">""</span>, <span class="st">"Tip size"</span>, <span class="at">rows =</span> <span class="dv">2</span>)</span>
 <span id="cb1-5"><a href="#cb1-5"></a>edges <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">from =</span> <span class="st">"Behavior"</span>, <span class="at">to =</span> <span class="st">"Tip size"</span>)</span>
 <span id="cb1-6"><a href="#cb1-6"></a>p <span class="ot">&lt;-</span> <span class="fu">prepare_graph</span>(<span class="at">layout =</span> lo, <span class="at">edges=</span> edges)</span>
-<span id="cb1-7"><a href="#cb1-7"></a><span class="fu">plot</span>(p) <span class="sc">+</span> <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x =</span> p<span class="sc">$</span>nodes<span class="sc">$</span>x[p<span class="sc">$</span>nodes<span class="sc">$</span>name <span class="sc">==</span> <span class="st">"Gender"</span>], <span class="at">xend =</span>  p<span class="sc">$</span>nodes<span class="sc">$</span>x[p<span class="sc">$</span>nodes<span class="sc">$</span>name <span class="sc">==</span> <span class="st">"Gender"</span>], <span class="at">y =</span> p<span class="sc">$</span>nodes<span class="sc">$</span>node_ymin[p<span class="sc">$</span>nodes<span class="sc">$</span>name <span class="sc">==</span> <span class="st">"Gender"</span>], <span class="at">yend =</span> p<span class="sc">$</span>nodes<span class="sc">$</span>y[p<span class="sc">$</span>nodes<span class="sc">$</span>name <span class="sc">==</span> <span class="st">"Behavior"</span>]), <span class="at">arrow =</span> <span class="fu">arrow</span>(<span class="at">length =</span> <span class="fu">unit</span>(<span class="fl">0.03</span>, <span class="st">"npc"</span>), <span class="at">type =</span> <span class="st">"closed"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="fu">plot</span>(p) <span class="sc">+</span> <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x =</span> p<span class="sc">$</span>nodes<span class="sc">$</span>x[p<span class="sc">$</span>nodes<span class="sc">$</span>name <span class="sc">==</span> <span class="st">"Gender"</span>], <span class="at">xend =</span>  p<span class="sc">$</span>nodes<span class="sc">$</span>x[p<span class="sc">$</span>nodes<span class="sc">$</span>name <span class="sc">==</span> <span class="st">"Gender"</span>], <span class="at">y =</span> p<span class="sc">$</span>nodes<span class="sc">$</span>node_ymin[p<span class="sc">$</span>nodes<span class="sc">$</span>name <span class="sc">==</span> <span class="st">"Gender"</span>], <span class="at">yend =</span> p<span class="sc">$</span>nodes<span class="sc">$</span>y[p<span class="sc">$</span>nodes<span class="sc">$</span>name <span class="sc">==</span> <span class="st">"Behavior"</span>]), <span class="at">arrow =</span> <span class="fu">arrow</span>(<span class="at">length =</span> <span class="fu">unit</span>(<span class="fl">0.03</span>, <span class="st">"npc"</span>), <span class="at">type =</span> <span class="st">"closed"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="factorial_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
@@ -706,13 +709,13 @@ Answer
 Answer
 </button>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">library</span>(tidySEM)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">library</span>(tidySEM)</span>
 <span id="cb2-2"><a href="#cb2-2"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb2-3"><a href="#cb2-3"></a>lo <span class="ot">&lt;-</span> <span class="fu">get_layout</span>(<span class="st">""</span>, <span class="st">"Gender"</span>, <span class="st">""</span>,</span>
 <span id="cb2-4"><a href="#cb2-4"></a>                 <span class="st">"Behavior"</span>, <span class="st">""</span>, <span class="st">"Tip size"</span>, <span class="at">rows =</span> <span class="dv">2</span>)</span>
 <span id="cb2-5"><a href="#cb2-5"></a>edges <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">from =</span> <span class="st">"Behavior"</span>, <span class="at">to =</span> <span class="st">"Tip size"</span>)</span>
 <span id="cb2-6"><a href="#cb2-6"></a>p <span class="ot">&lt;-</span> <span class="fu">prepare_graph</span>(<span class="at">layout =</span> lo, <span class="at">edges=</span> edges)</span>
-<span id="cb2-7"><a href="#cb2-7"></a><span class="fu">plot</span>(p) <span class="sc">+</span> <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x =</span> p<span class="sc">$</span>nodes<span class="sc">$</span>x[p<span class="sc">$</span>nodes<span class="sc">$</span>name <span class="sc">==</span> <span class="st">"Gender"</span>], <span class="at">xend =</span>  p<span class="sc">$</span>nodes<span class="sc">$</span>x[p<span class="sc">$</span>nodes<span class="sc">$</span>name <span class="sc">==</span> <span class="st">"Gender"</span>], <span class="at">y =</span> p<span class="sc">$</span>nodes<span class="sc">$</span>node_ymin[p<span class="sc">$</span>nodes<span class="sc">$</span>name <span class="sc">==</span> <span class="st">"Gender"</span>], <span class="at">yend =</span> p<span class="sc">$</span>nodes<span class="sc">$</span>y[p<span class="sc">$</span>nodes<span class="sc">$</span>name <span class="sc">==</span> <span class="st">"Behavior"</span>]), <span class="at">arrow =</span> <span class="fu">arrow</span>(<span class="at">length =</span> <span class="fu">unit</span>(<span class="fl">0.03</span>, <span class="st">"npc"</span>), <span class="at">type =</span> <span class="st">"closed"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-7"><a href="#cb2-7"></a><span class="fu">plot</span>(p) <span class="sc">+</span> <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x =</span> p<span class="sc">$</span>nodes<span class="sc">$</span>x[p<span class="sc">$</span>nodes<span class="sc">$</span>name <span class="sc">==</span> <span class="st">"Gender"</span>], <span class="at">xend =</span>  p<span class="sc">$</span>nodes<span class="sc">$</span>x[p<span class="sc">$</span>nodes<span class="sc">$</span>name <span class="sc">==</span> <span class="st">"Gender"</span>], <span class="at">y =</span> p<span class="sc">$</span>nodes<span class="sc">$</span>node_ymin[p<span class="sc">$</span>nodes<span class="sc">$</span>name <span class="sc">==</span> <span class="st">"Gender"</span>], <span class="at">yend =</span> p<span class="sc">$</span>nodes<span class="sc">$</span>y[p<span class="sc">$</span>nodes<span class="sc">$</span>name <span class="sc">==</span> <span class="st">"Behavior"</span>]), <span class="at">arrow =</span> <span class="fu">arrow</span>(<span class="at">length =</span> <span class="fu">unit</span>(<span class="fl">0.03</span>, <span class="st">"npc"</span>), <span class="at">type =</span> <span class="st">"closed"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="factorial_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
@@ -1558,13 +1561,14 @@ window.onload = function() {
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy
