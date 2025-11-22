@@ -57,6 +57,7 @@ book:
   - glm_assumptions.qmd
   - glm3binary.qmd
   - glm4anova.qmd
+  - Week_13.qmd
   - glm5multiple.qmd
   - glm6nested.qmd
   - glm7interaction.qmd

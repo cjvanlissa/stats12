@@ -79,7 +79,7 @@ If you look in the output, you will see that SPSS shows four tables in the outpu
 
 In the table labeled "Model Summary" we can find the R2 value. R2 indicates the total proportion of explained variance in the dependent variable in the model; this is the focus of next week's class.
 
-What proportion of the variance Emotional pressure (scpleasure) is explained by our single predictor Variety at work (scvariety)? `r fitb(.195, num = T, tol = .01)`
+What proportion of the variance Emotional Pleasure (scpleasure) is explained by our single predictor Variety at work (scvariety)? `r fitb(.195, num = T, tol = .01)`
 
 Consider the unstandardized Coefficients in the table labeled "Coefficients".
 
@@ -96,7 +96,7 @@ answer = "Someone who reports zero Variety at work (meaning a score of 0 on scva
 
 Consider the unstandardized regression coefficients again.
 
-What is the value of the regression coefficient of scpleasure on scemoti (b1)? `r fitb(.618, num = T, tol = .01)`
+What is the value of the regression coefficient of scpleasure on scvariety (b1)? `r fitb(.618, num = T, tol = .01)`
 
 How should we interpret the regression coefficient of scvariety within the context of this analysis?
 
