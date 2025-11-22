@@ -103,7 +103,7 @@ This can be achieved by creating research archives that include [@vanlissaWORCSW
 
 Please watch this conference presentation by Dr. Amy Orben on questionable research practices:
 
-https://www.youtube.com/embed/EIDY6TAy52M?si=SvbSK86hFga3JLq6
+{{< video https://www.youtube.com/embed/EIDY6TAy52M?si=SvbSK86hFga3JLq6 >}}
 
 # Formative Test
 

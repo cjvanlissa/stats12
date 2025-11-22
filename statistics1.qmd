@@ -248,9 +248,18 @@ b.	Construct a model with only the continuous predictor (200 words)
 c.	Construct a model with only the categorical predictor (200 words)
     i. Report and interpret the model results
     ii. Conduct a separate ANOVA or t-test with the same variables, whichever one is suitable. Compare the results with the regression analysis.
-d.  Construct a model with both the continuous and categorical predictor (200 words)
-    i. Report and interpret the model results
-    ii. Conduct and report a nested model test
+<!-- d.  Construct a model with both the continuous and categorical predictor (200 words) -->
+<!--     i. Report and interpret the model results -->
+<!--     ii. Conduct and report a nested model test -->
+d.  Practice Open Science:
+    i. Pick a continuous outcome, ideally one you have not used as an outcome before. Pick a predictor (continuous or categorical doesn't matter, but use the appropriate analysis).
+    ii. Write down a hypothesis about this predictor and outcome, BEFORE looking at the analysis results. Treat this hypothesis as your "preregistration".
+    iii. Conduct the appropriate analysis to test your hypothesis. In the spirit of reproducibility, use the "Paste" buttons in SPSS to save all analysis syntax, to make it reproducible. Report the SPSS version number and the syntax in your portfolio. After preparing the syntax, run it and report the results.
+e.  Practice P-hacking:
+    i. Use the syntax from d. to conduct 5 more unplanned analyses. Swap out the predictor- and outcome variables in the syntax as you please to create these additional analyses.
+    ii. Run all analyses, look at the results, and pick one with the most interesting (unexpected or significant) results.
+    iii. Come up with a hypothesis to explain this finding.
+    iv. Discuss why the analysis from d. should be trusted, and the one from e. should not (200 words)
 e.	Discuss your analyses (300 words)
     i. Explain your rationale for important modeling decisions
     ii.	Motivate your choice for the type of statistics and analyses
