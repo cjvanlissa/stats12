@@ -5,7 +5,7 @@
 <meta name="generator" content="quarto-1.8.26">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="description" content="Book Description">
-<title>15&nbsp; GLM-V: Multiple regression – Statistics 1 and 2</title>
+<title>26&nbsp; Open science and questionable research practices – Statistics 1 and 2</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -18,7 +18,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
@@ -26,8 +46,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./glm6nested.html" rel="next">
-<link href="./glm4anova.html" rel="prev">
+<link href="./data.html" rel="next">
+<link href="./confint.html" rel="prev">
 <link href="./images/logos/favicon.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -270,7 +290,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./glm5multiple.html"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">GLM-V: Multiple regression</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Week_13.html"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Open science and questionable research practices</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -405,7 +425,7 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./glm5multiple.html" class="sidebar-item-text sidebar-link active">
+  <a href="./glm5multiple.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">GLM-V: Multiple regression</span></span></a>
   </div>
 </li>
@@ -471,7 +491,7 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Week_13.html" class="sidebar-item-text sidebar-link">
+  <a href="./Week_13.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Open science and questionable research practices</span></span></a>
   </div>
 </li>
@@ -518,28 +538,40 @@ window.Quarto = {
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#multiple-regression" id="toc-multiple-regression" class="nav-link active" data-scroll-target="#multiple-regression"><span class="header-section-number">15.0.1</span> Multiple regression</a></li>
-  <li><a href="#causality" id="toc-causality" class="nav-link" data-scroll-target="#causality"><span class="header-section-number">15.0.2</span> Causality</a></li>
-  <li><a href="#lectures" id="toc-lectures" class="nav-link" data-scroll-target="#lectures"><span class="header-section-number">15.1</span> Lectures</a></li>
-  <li><a href="#formative-test" id="toc-formative-test" class="nav-link" data-scroll-target="#formative-test"><span class="header-section-number">15.2</span> Formative Test</a></li>
+<li><a href="#week-open-science-intro" id="toc-week-open-science-intro" class="nav-link active" data-scroll-target="#week-open-science-intro"><span class="header-section-number">26.1</span> Introduction — Open Science and Questionable Research Practices</a></li>
+  <li><a href="#scientific-fraud" id="toc-scientific-fraud" class="nav-link" data-scroll-target="#scientific-fraud"><span class="header-section-number">26.2</span> Scientific Fraud</a></li>
   <li>
-<a href="#in-spss" id="toc-in-spss" class="nav-link" data-scroll-target="#in-spss"><span class="header-section-number">15.3</span> In SPSS</a>
+<a href="#sec-qrps" id="toc-sec-qrps" class="nav-link" data-scroll-target="#sec-qrps"><span class="header-section-number">26.3</span> Questionable Research Practices (QRPs)</a>
   <ul class="collapse">
-<li><a href="#multiple-regression-1" id="toc-multiple-regression-1" class="nav-link" data-scroll-target="#multiple-regression-1"><span class="header-section-number">15.3.1</span> Multiple Regression</a></li>
+<li><a href="#examples-of-qrps" id="toc-examples-of-qrps" class="nav-link" data-scroll-target="#examples-of-qrps"><span class="header-section-number">26.3.1</span> Examples of QRPs:</a></li>
   </ul>
 </li>
+  <li><a href="#well-intended-flawed-practices" id="toc-well-intended-flawed-practices" class="nav-link" data-scroll-target="#well-intended-flawed-practices"><span class="header-section-number">26.4</span> Well-Intended Flawed Practices</a></li>
   <li>
-<a href="#tutorial" id="toc-tutorial" class="nav-link" data-scroll-target="#tutorial"><span class="header-section-number">15.4</span> Tutorial</a>
+<a href="#sec-open-practices" id="toc-sec-open-practices" class="nav-link" data-scroll-target="#sec-open-practices"><span class="header-section-number">26.5</span> Open Science Practices — Preregistration and Registered Reports</a>
   <ul class="collapse">
-<li><a href="#multiple-regression-2" id="toc-multiple-regression-2" class="nav-link" data-scroll-target="#multiple-regression-2"><span class="header-section-number">15.4.1</span> Multiple Regression</a></li>
-  <li><a href="#multiple-regression-ii" id="toc-multiple-regression-ii" class="nav-link" data-scroll-target="#multiple-regression-ii"><span class="header-section-number">15.4.2</span> Multiple Regression II</a></li>
+<li><a href="#data-sharing" id="toc-data-sharing" class="nav-link" data-scroll-target="#data-sharing"><span class="header-section-number">26.5.1</span> Data Sharing</a></li>
+  <li><a href="#reproducibility" id="toc-reproducibility" class="nav-link" data-scroll-target="#reproducibility"><span class="header-section-number">26.5.2</span> Reproducibility</a></li>
+  <li><a href="#sec-prereg" id="toc-sec-prereg" class="nav-link" data-scroll-target="#sec-prereg"><span class="header-section-number">26.5.3</span> Preregistration</a></li>
+  <li><a href="#sec-rr" id="toc-sec-rr" class="nav-link" data-scroll-target="#sec-rr"><span class="header-section-number">26.5.4</span> Registered Reports</a></li>
+  </ul>
+</li>
+  <li><a href="#lecture" id="toc-lecture" class="nav-link" data-scroll-target="#lecture"><span class="header-section-number">26.6</span> Lecture</a></li>
+  <li><a href="#formative-test" id="toc-formative-test" class="nav-link" data-scroll-target="#formative-test"><span class="header-section-number">27</span> Formative Test</a></li>
+  <li>
+<a href="#tutorial" id="toc-tutorial" class="nav-link" data-scroll-target="#tutorial"><span class="header-section-number">28</span> Tutorial</a>
+  <ul class="collapse">
+<li><a href="#assignment-1-spot-the-practice-qrps-or-good-methods" id="toc-assignment-1-spot-the-practice-qrps-or-good-methods" class="nav-link" data-scroll-target="#assignment-1-spot-the-practice-qrps-or-good-methods"><span class="header-section-number">28.1</span> Assignment 1: Spot the Practice — QRPs or Good Methods?</a></li>
+  <li><a href="#assignment-2-preregistration-audit-make-it-specific" id="toc-assignment-2-preregistration-audit-make-it-specific" class="nav-link" data-scroll-target="#assignment-2-preregistration-audit-make-it-specific"><span class="header-section-number">28.2</span> Assignment 2: Preregistration Audit — Make It Specific</a></li>
+  <li><a href="#psilocybin-liberates-the-entrenched-brain" id="toc-psilocybin-liberates-the-entrenched-brain" class="nav-link" data-scroll-target="#psilocybin-liberates-the-entrenched-brain"><span class="header-section-number">28.3</span> Psilocybin Liberates the Entrenched Brain?</a></li>
+  <li><a href="#mini-registered-report-pitch" id="toc-mini-registered-report-pitch" class="nav-link" data-scroll-target="#mini-registered-report-pitch"><span class="header-section-number">28.4</span> Mini Registered Report Pitch</a></li>
   </ul>
 </li>
   </ul></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
-<h1 class="title"><span id="sec-glm5" class="quarto-section-identifier"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">GLM-V: Multiple regression</span></span></h1>
+<h1 class="title"><span id="sec-testing" class="quarto-section-identifier"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Open science and questionable research practices</span></span></h1>
 </div>
 
 
@@ -553,80 +585,118 @@ window.Quarto = {
   
 
 
-</header><section id="multiple-regression" class="level3" data-number="15.0.1"><h3 data-number="15.0.1" class="anchored" data-anchor-id="multiple-regression">
-<span class="header-section-number">15.0.1</span> Multiple regression</h3>
-<p>Multiple regression is a statistical technique that allows us to examine the relationship between one outcome and multiple predictors. It extends the concept of bivariate linear regression, where we model the relationship between two variables, to include more predictors. In the context of social science research, multiple regression helps us answer the question: What is the unique effect of one predictor, while controlling for the effects of all other predictors?</p>
-<p>As a matter of fact, last week’s analyses for categorical variables with more than two categories were already an example of multiple regression. We included two dummy variables to represent a categorical variable with three categories. All that’s new today is that we also consider the case where the multiple predictors are continuous variables. An important realization is that a regression model can be expanded to include as many predictors as needed. The general formula for multiple regression is <span class="math inline">\(\hat{Y} = a + b_1X_1 + b_2X_2 + \ldots + b_KX_K\)</span>, where <span class="math inline">\(\hat{Y}\)</span> represents the predicted value of the dependent variable Y, <span class="math inline">\(a\)</span> is the intercept, and <span class="math inline">\(b_{1 \ldots K}\)</span> are the slopes for each predictor.</p>
-<p>When interpreting the regression coefficients, the intercept (a) represents the expected value of the dependent variable when all predictors are equal to 0. For dummy variables, this is the mean value of the reference category, while for continuous predictors, it represents the expected value for someone who scores 0 on all predictors. The regression coefficients (b1, b2, …, bK) indicate how many units the dependent variable Y is expected to change when the corresponding predictor X increases by 1 unit, while holding all other predictors constant.</p>
-<p>Centering predictors can be useful in multiple regression. By centering, we shift the zero-point of the predictor to a meaningful value, such as the mean value on that predictor. This helps in interpretation, because the intercept now gives us the mean value on the outcome for someone who has an average score on all predictors.</p>
-<p>As previously explained, standardized regression coefficients drop the units of the predictor and outcome variable. They are calculated by transforming the predictors and outcome variable into z-scores with a mean of 0 and a standard deviation of 1, and performing the (multiple) regression analysis on those z-scores. Because the units of the variables are dropped, standardized coefficients make the effects of predictors comparable across different studies or variables with different measurement units. They represent the change in the dependent variable in terms of standard deviations when the corresponding predictor increases by 1 standard deviation.</p>
-</section><section id="causality" class="level3" data-number="15.0.2"><h3 data-number="15.0.2" class="anchored" data-anchor-id="causality">
-<span class="header-section-number">15.0.2</span> Causality</h3>
-<p>A statistical association between variables does not necessarily imply a causal relationship. Instead, causality is either assumed on theoretical grounds, or established using the experimental method. In an experiment, researchers manipulate an independent variable and observe its effects on the dependent variable. However, in many social science studies, experiments are not feasible or ethical, so researchers rely on observational data. In these cases, establishing causal relationships relies on theory and careful statistical analysis.</p>
-<p>One important concept in causal inference is the direction of effects. While statistical methods can identify associations between variables, determining the direction of causality is a causal assumption that cannot be estimated using statistics alone. The assumed direction of effects is often based on theory and prior knowledge of the subject matter. Researchers make informed assumptions about which variable is likely to have a causal effect on the other based on theoretical reasoning and empirical evidence.</p>
-<p>In the process of analyzing causal relationships, it is essential to consider the presence of confounders, mediators, and colliders. Confounders are variables that are associated with both the independent and dependent variables and can create a spurious association or distort the true causal relationship. Identifying and controlling for confounders is crucial to ensure accurate causal inference.</p>
-<p>Mediators, on the other hand, are variables that explain the relationship between the independent and dependent variables. They act as intermediate steps or process variables in the causal pathway. Understanding and analyzing mediation effects help us understand the underlying mechanisms through which the independent variable affects the dependent variable.</p>
-<p>Colliders are variables that are caused by both the independent and dependent variables. Controlling for colliders can lead to spurious statistical relationships between unrelated variables. It is essential to be cautious when including variables in the analysis and consider the causal structure of the variables involved.</p>
-<p>One important take-home message is that, in multiple regression, the distinction between confounders and colliders is crucial. Including confounders as control variables in multiple regression improves our inferences - but accidentally including a collider as control variable (severely) biases our inferences. You therefore have to carefully reason about each variable’s role in relation to the other variables in the model.</p>
-</section><section id="lectures" class="level2" data-number="15.1"><h2 data-number="15.1" class="anchored" data-anchor-id="lectures">
-<span class="header-section-number">15.1</span> Lectures</h2>
-<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/lT-6YoSfwC4" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
-<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/wBB4sed9ku0" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
-</section><section id="formative-test" class="level2" data-number="15.2"><h2 data-number="15.2" class="anchored" data-anchor-id="formative-test">
-<span class="header-section-number">15.2</span> Formative Test</h2>
+</header><section id="week-open-science-intro" class="level2" data-number="26.1"><h2 data-number="26.1" class="anchored" data-anchor-id="week-open-science-intro">
+<span class="header-section-number">26.1</span> Introduction — Open Science and Questionable Research Practices</h2>
+<p>Over the past decade, large-scale replication efforts have shown that many published effects cannot be replicated, or finds much weaker effects when reproducing published work with high-powered designs (e.g., replication effects were, on average, about half the size of originals; 36% of replications were statistically significant versus 97% of originals) (Open Science Collaboration, 2015). One reason might be that scientific journals select for “newsworthy” (novel and exciting) findings, rather than unsurprising but diligently produced facts. In other words, there is a misalignment between what advances careers and what advances knowledge (Nosek et al., 2012). Scientific claims should earn credibility because they are based on <strong>transparent and reproducible</strong> research, not because results are surprising or the narrative is compelling.</p>
+<p>This week examines how research practices and incentive structures can <strong>inflate false positives</strong> and <strong>distort effect estimates</strong>. Psychology has reported an unusually high share of significant findings (≈96%) despite typical studies being underpowered—conditions that favor publication bias and exaggerated effects (Bakker, van Dijk, &amp; Wicherts, 2012). When samples are small, hypotheses are numerous, and analytic choices are flexible, the <strong>positive predictive value</strong> of a single significant result is low (Ioannidis, 2005). These problems motivate <strong>open-science</strong> reforms that reward accuracy over novelty: preregistration to reduce researcher degrees of freedom and to separate confirmatory from exploratory work; routine sharing of data, code, and materials; and explicit valuing of replication (Nosek et al., 2012; Bakker et al., 2020).</p>
+</section><section id="scientific-fraud" class="level2" data-number="26.2"><h2 data-number="26.2" class="anchored" data-anchor-id="scientific-fraud">
+<span class="header-section-number">26.2</span> Scientific Fraud</h2>
+<p>While it is unlikely that scientific fraud is a main cause of the replication crisis in psychology and other fields, a highly publicized case of fraud did act as a catalyst, drawing attention to potential shortcomings in the way science was being conducted. Tilburg University professor Diederik Stapel, a prominent social psychologist, was found by the Levelt Committee to have fabricated and manipulated data across many studies, often supplying such fake datasets to PhD students and coauthors, unwittingly involving them in the fraud. The resulting papers reported striking effects that were considered exemplary, passed peer review, were widely cited, and shaped research agendas - until independent teams failed to reproduce them. The case exposed structural failures of the scientific enterprise, including incentives for newsworthy findings, a lack of auditing of data and analysis code, and tolerance of researcher degrees of freedom that are also common in non-fraudulent questionable research practices (p‑hacking, HARKing, low power). This case motivated the adoption of open science practices that seek to improve academic rigor, such as preregistration of study- and analysis plans prior to data collection, and transparent sharing of data, code, and materials.</p>
+<p>More recently, the Francesca Gino scandal revived this debate. In 2023, <a href="https://datacolada.org/109">Data Colada</a> research auditors published a report of irregularities in several of Gino’s papers on dishonesty (ironically). One striking finding was that the user history of an Excel spreadsheet seemed to indicate that several cases were moved from the control- to the experimental condition - and that this edit led to statistically significant findings.</p>
+<p>While these cases are thought-provoking, it is unlikely that they are the sole cause for the replication crisis. The main contributing factors might be much more mundane.</p>
+</section><section id="sec-qrps" class="level2" data-number="26.3"><h2 data-number="26.3" class="anchored" data-anchor-id="sec-qrps">
+<span class="header-section-number">26.3</span> Questionable Research Practices (QRPs)</h2>
+<p><strong>Definition:</strong> QRPs are choices made in research and reporting that may be defensible but, when guided by the pursuit of statistical significance (motivated reasoning), end up inflating false-positive findings and effect sizes, thus distorting the published record. In psychology, unusually high rates of “positive” findings alongside typically low power indicate conditions under which QRPs and publication bias can thrive (Bakker et al., 2012).</p>
+<p>Questionable research practices are especially problematic in relation to researcher degrees of freedom, because nearly any dataset can be tortured and sliced until it serves up a significant effect. This raises the proportion of false-positive findings in the literature.</p>
+<section id="examples-of-qrps" class="level3" data-number="26.3.1"><h3 data-number="26.3.1" class="anchored" data-anchor-id="examples-of-qrps">
+<span class="header-section-number">26.3.1</span> Examples of QRPs:</h3>
+<ul>
+<li>
+<strong>Optional stopping / sequential testing:</strong> Conducting an analysis, looking at the results, and adding more participants if the result is not (yet) significant ends up inflating the Type I error rate. This is especially problematic if you consider that, when the null hypothesis is true, p-values are uniformly distributed (all values equally likely). Thus, you can keep adding participants until by pure chance you find a significant result.</li>
+<li>
+<strong>Outcome Switching / Selective reporting:</strong> Measuring multiple dependent variables but reporting only those that are significant.</li>
+<li>
+<strong>Flexible data cleaning:</strong> Post hoc exclusions, outlier rules, and transformations chosen after seeing results and applied such that a hypothesized difference becomes significant, or an inconvenient significant difference disappears.</li>
+<li>
+<strong>Researcher degrees of freedom in modeling:</strong> After inspecting the data, trying multiple reasonable model specifications (e.g., control variables, mathematical transformations, exploring interaction effects) and picking the model with the “most interesting” results, or the one that supports the researcher’s hypothesis.</li>
+<li>
+<strong>HARKing (hypothesizing after results are known):</strong> Constructing a hypothesis after seeing a surprising result, and then presenting this post hoc hypothesis as if it was specified before seeing the data. This blurs the distinction between confirmatory and exploratory research. Keep in mind that unexpected things do happen by chance, and creating a hypothesis after observing something unexpected does mean that the hypothesis will be significant, but does not mean that it is likely to be true. For example, Lucia de B. and Lucy Ledby were both convicted after an unusual event was observed (high proportion of infant deaths at their hospitals), and the post-hoc hypothesis was constructed that this must be the result of murder. However, rare events do happen, and they are not always the result of murder.</li>
+<li>
+<strong>Publication bias (“file drawer” effect):</strong> Studies with significant findings are more likely to be submitted and published than null results. When typical power is low (e.g., 20–40%), only about 20–40% of studies should be significant <strong>even if effects are real</strong>; yet many literatures report mostly significant findings. This indicates publication bias.</li>
+</ul></section></section><section id="well-intended-flawed-practices" class="level2" data-number="26.4"><h2 data-number="26.4" class="anchored" data-anchor-id="well-intended-flawed-practices">
+<span class="header-section-number">26.4</span> Well-Intended Flawed Practices</h2>
+<p>Even well-intended practices can misfire when applied uncritically. As briefly mentioned in the chapter on philosophy of science, Null‑Hypothesis Significance Testing (NHST) is a prime example of how deeply entrenched scientific practices can be misleading. Gerd Gigerenzer called this the “null ritual”: set up a straw man null hypothesis which states that the effect is zero, adopt <span class="math inline">\(\alpha = .05\)</span> as default significance level, reject the null hypothesis if <span class="math inline">\(p &lt; .05\)</span> and interpret the result as positive evidence for some finding. This practice encourages dichotomous thinking, neglects effect sizes and uncertainty, and mixes the incompatible philosophies of testing from Fisher and Neyman–Pearson. This ritual ignores important principles - such as, that even trivial effects become “significant” in very large samples, and that extreme results (including effects that are significant by pure chance) are more common in small samples. What is the alternative? To move beyond the ritual and emphasize effect size estimation, uncertainty quantification, power analysis and sample size justification, and open science practices that allow others to replicate and audit findings.</p>
+</section><section id="sec-open-practices" class="level2" data-number="26.5"><h2 data-number="26.5" class="anchored" data-anchor-id="sec-open-practices">
+<span class="header-section-number">26.5</span> Open Science Practices — Preregistration and Registered Reports</h2>
+<p>Open science practices aim to improve scientific rigor, and the efficiency with which knowledge can accumulate and errors can be corrected, by making many aspects of the scientific enterprise <em>open, accessible, transparent, and reproducible</em>. We examine several open science practices.</p>
+<section id="data-sharing" class="level3" data-number="26.5.1"><h3 data-number="26.5.1" class="anchored" data-anchor-id="data-sharing">
+<span class="header-section-number">26.5.1</span> Data Sharing</h3>
+<p>In a way, you have already enjoyed the benefits of data sharing: the exercises and portfolio assignments for this course make use of either real “open data”, or fake data that was generated based on open data accessed by the author (Caspar van Lissa). Data sharing helps people reproduce published findings, and makes it possible to reuse existing datasets to test novel research questions.</p>
+</section><section id="reproducibility" class="level3" data-number="26.5.2"><h3 data-number="26.5.2" class="anchored" data-anchor-id="reproducibility">
+<span class="header-section-number">26.5.2</span> Reproducibility</h3>
+<p>Reproducibility means being able to re-perform the same analysis with the same code using a different analyst <span class="citation" data-cites="patilVisualToolDefining2019">(<a href="references.html#ref-patilVisualToolDefining2019" role="doc-biblioref">Patil et al., 2019</a>)</span>. This can be achieved by creating research archives that include <span class="citation" data-cites="vanlissaWORCSWorkflowOpen2021">(<a href="references.html#ref-vanlissaWORCSWorkflowOpen2021" role="doc-biblioref">Van Lissa et al., 2021</a>)</span>:</p>
+<ol type="1">
+<li>Well-documented analysis code; for example, in the form of a dynamic document that combines the written text of a paper or research report (Introduction, Discussion) with the code required to generate the analysis results (e.g., SPSS syntax, R- or Python code). Such dynamic documents can be exported to any format, including PDF, or a website. This GitBook is an example of a dynamic document; both text and analysis results/figures are dynamically generated.</li>
+<li>A complete time line of the research archive’s historical development. Akin to a lab notebook that documents decisions made during the research process, modern “version control” systems make it possible to track, document, and preserve all changes to data and code from the moment a project is conceived, until it is preregistered, and data are collected, and it is ultimately published.</li>
+<li>A time capsule of the computer environment (exact versions of software used), because the same analysis code can sometimes give different results on different systems. This is called “dependency management”; the most extreme form of dependency management is “containerization”: creating a virtual computer to run the code.</li>
+</ol></section><section id="sec-prereg" class="level3" data-number="26.5.3"><h3 data-number="26.5.3" class="anchored" data-anchor-id="sec-prereg">
+<span class="header-section-number">26.5.3</span> Preregistration</h3>
+<p><strong>Purpose:</strong> Reduce undisclosed flexibility by <strong>specifying key decisions in advance</strong>—hypotheses, primary outcomes, sampling plan and stopping rule, inclusion/exclusion criteria, randomization, and the primary analysis plan. Preregistration <strong>separates confirmatory from exploratory work</strong>; it does not forbid exploration. Deviations are permitted, but they should be <strong>documented and justified</strong>, with the original, time-stamped plan remaining visible. This transparency lets readers follow the study’s evolution, evaluate analytic degrees of freedom, and interpret results accordingly; it also encourages <strong>follow-up confirmation</strong> of exploratory findings with new data (Bakker et al., 2020; Nosek et al., 2012).</p>
+<p><strong>Quality matters.</strong> Effective preregistrations are <strong>specific, precise, and comprehensive</strong>. Structured templates with itemized prompts constrain opportunistic degrees of freedom better than unstructured formats, though <strong>neither eliminates</strong> flexibility entirely (Bakker et al., 2020).</p>
+<p><strong>What preregistration is not.</strong> It is not a ban on creativity. Exploratory analyses remain valuable, preregistration simply makes their status transparent and encourages follow-up confirmation with <strong>new data</strong> (Bakker et al., 2020).</p>
+</section><section id="sec-rr" class="level3" data-number="26.5.4"><h3 data-number="26.5.4" class="anchored" data-anchor-id="sec-rr">
+<span class="header-section-number">26.5.4</span> Registered Reports</h3>
+<p><strong>Model.</strong> A two-stage publication track in which the <strong>study rationale, design, and analysis plan</strong> are peer-reviewed <strong>before data collection</strong> (Stage 1). Upon <strong>in-principle acceptance</strong>, the journal commits to publish the results regardless of outcome <strong>if</strong> authors follow the approved protocol (Stage 2). This shifts incentives away from “significance” toward <strong>design quality and theoretical contribution</strong>, reducing publication bias and HARKing pressure (Nosek et al., 2012; Bakker et al., 2020).</p>
+<p><strong>Practical payoff.</strong> Registered Reports move the credibility test <strong>upstream</strong>. Peer review and in-principle acceptance occur <strong>before</strong> data collection, which (a) locks key design and analysis decisions, (b) commits publication regardless of outcome, and (c) requires transparent documentation of any deviations. By decoupling publication from statistical significance and limiting undisclosed flexibility, Registered Reports reduce publication bias, HARKing, and selective reporting, complementing preregistration with editorial enforcement at the design stage (Nosek et al., 2012; Bakker et al., 2020).</p>
+</section></section><section id="lecture" class="level2" data-number="26.6"><h2 data-number="26.6" class="anchored" data-anchor-id="lecture">
+<span class="header-section-number">26.6</span> Lecture</h2>
+<p>Please watch this conference presentation by Dr.&nbsp;Amy Orben on questionable research practices:</p>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/EIDY6TAy52M?si=SvbSK86hFga3JLq6" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</section><section id="formative-test" class="level1" data-number="27"><h1 data-number="27">
+<span class="header-section-number">27</span> Formative Test</h1>
 <p>A formative test helps you assess your progress in the course, and helps you address any blind spots in your understanding of the material. If you get a question wrong, you will receive a hint on how to improve your understanding of the material.</p>
 <p>Complete the formative test ideally after you’ve seen the lecture, but before the lecture meeting in which we can discuss any topics that need more attention</p>
 <div class="cell" data-layout-align="center">
 <div class="webex-check webex-box">
 <p><strong>Question 1</strong></p>
-What is the primary advantage of using multiple regression analysis?
-<div id="radio_OGRKLDDFDA" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_OGRKLDDFDA" value=""><span>To group predictors based on their significance</span></label><label><input type="radio" autocomplete="off" name="radio_OGRKLDDFDA" value=""><span>To find a single predictor that explains all the variance</span></label><label><input type="radio" autocomplete="off" name="radio_OGRKLDDFDA" value="answer"><span>To understand the unique effect of each predictor while accounting for others</span></label><label><input type="radio" autocomplete="off" name="radio_OGRKLDDFDA" value=""><span>To identify the most significant predictor</span></label>
+A field reports about 90 percent significant findings while typical study power is about 35 percent. What is the most plausible interpretation?
+<div id="radio_YRSLUGQYQY" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_YRSLUGQYQY" value=""><span>The nominal alpha is lower than 0.05 across studies</span></label><label><input type="radio" autocomplete="off" name="radio_YRSLUGQYQY" value=""><span>The field studies exceptionally large true effects</span></label><label><input type="radio" autocomplete="off" name="radio_YRSLUGQYQY" value=""><span>Replications will usually find larger effects</span></label><label><input type="radio" autocomplete="off" name="radio_YRSLUGQYQY" value="answer"><span>Publication bias and selective reporting are likely inflating the visible discovery rate</span></label>
 </div>
 <p><strong>Question 2</strong></p>
-What is the purpose of centering in multiple regression analysis?
-<div id="radio_COYGHJXQQB" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_COYGHJXQQB" value=""><span>To ensure the assumption of normality is met</span></label><label><input type="radio" autocomplete="off" name="radio_COYGHJXQQB" value="answer"><span>To choose a meaningful zero-point for predictors</span></label><label><input type="radio" autocomplete="off" name="radio_COYGHJXQQB" value=""><span>To remove outliers from the data</span></label><label><input type="radio" autocomplete="off" name="radio_COYGHJXQQB" value=""><span>To standardize all predictors</span></label>
+Which practice best describes collecting an initial sample then checking results and adding participants until p is below 0.05 without a prespecified stopping rule or correction
+<div id="radio_NXWYHIDEDE" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_NXWYHIDEDE" value=""><span>Publication bias</span></label><label><input type="radio" autocomplete="off" name="radio_NXWYHIDEDE" value=""><span>HARKing</span></label><label><input type="radio" autocomplete="off" name="radio_NXWYHIDEDE" value=""><span>Proper sequential design</span></label><label><input type="radio" autocomplete="off" name="radio_NXWYHIDEDE" value="answer"><span>Optional stopping without error control</span></label>
 </div>
 <p><strong>Question 3</strong></p>
-What does the intercept (a) in a multiple regression model represent?
-<div id="radio_TBQCLQARJY" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_TBQCLQARJY" value=""><span>The difference between the two groups</span></label><label><input type="radio" autocomplete="off" name="radio_TBQCLQARJY" value="answer"><span>Expected value when all predictors are equal to 0</span></label><label><input type="radio" autocomplete="off" name="radio_TBQCLQARJY" value=""><span>The effect of the first predictor</span></label><label><input type="radio" autocomplete="off" name="radio_TBQCLQARJY" value=""><span>The effect of the last predictor</span></label>
+A study measures five outcomes but reports only the one that is significant as the primary outcome while omitting the rest. Which QRP is this
+<div id="radio_SJAWVFITIR" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_SJAWVFITIR" value="answer"><span>Selective outcome reporting</span></label><label><input type="radio" autocomplete="off" name="radio_SJAWVFITIR" value=""><span>Appropriate parsimony</span></label><label><input type="radio" autocomplete="off" name="radio_SJAWVFITIR" value=""><span>Flexible data cleaning</span></label><label><input type="radio" autocomplete="off" name="radio_SJAWVFITIR" value=""><span>Model fishing</span></label>
 </div>
 <p><strong>Question 4</strong></p>
-What do the b-coefficients in a multiple regression model represent?
-<div id="radio_NIBYZTASUQ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_NIBYZTASUQ" value="answer"><span>The change in the dependent variable for a one-unit change in the predictor while other predictors are held constant</span></label><label><input type="radio" autocomplete="off" name="radio_NIBYZTASUQ" value=""><span>The change in the dependent variable for a one-unit change in the predictor without considering other predictors</span></label><label><input type="radio" autocomplete="off" name="radio_NIBYZTASUQ" value=""><span>The average of all predictor values</span></label><label><input type="radio" autocomplete="off" name="radio_NIBYZTASUQ" value=""><span>The change in the predictor for a one-unit change in the dependent variable while other predictors are held constant</span></label>
+After inspecting results the authors exclude outliers using a post hoc rule that increases the effect size. Which problem is most salient
+<div id="radio_WRCSTGOTZY" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_WRCSTGOTZY" value=""><span>Correct robustness analysis</span></label><label><input type="radio" autocomplete="off" name="radio_WRCSTGOTZY" value=""><span>Predefined exclusion criteria</span></label><label><input type="radio" autocomplete="off" name="radio_WRCSTGOTZY" value="answer"><span>Flexible data cleaning that capitalizes on chance</span></label><label><input type="radio" autocomplete="off" name="radio_WRCSTGOTZY" value=""><span>Registered Report compliance</span></label>
 </div>
 <p><strong>Question 5</strong></p>
-When is multicollinearity a concern in multiple regression analysis?
-<div id="radio_XBLLXCKCCE" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_XBLLXCKCCE" value=""><span>When there are multiple outcome variables</span></label><label><input type="radio" autocomplete="off" name="radio_XBLLXCKCCE" value=""><span>When predictor variables are independent</span></label><label><input type="radio" autocomplete="off" name="radio_XBLLXCKCCE" value=""><span>When there are outliers in the data</span></label><label><input type="radio" autocomplete="off" name="radio_XBLLXCKCCE" value="answer"><span>When predictor variables are highly correlated with each other</span></label>
+Authors try many plausible models with different covariates and transforms and present only the one that yields p below 0.05. This primarily illustrates
+<div id="radio_NOOGMDVEFP" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_NOOGMDVEFP" value=""><span>Randomization failure</span></label><label><input type="radio" autocomplete="off" name="radio_NOOGMDVEFP" value=""><span>Proper sensitivity analysis</span></label><label><input type="radio" autocomplete="off" name="radio_NOOGMDVEFP" value=""><span>Correct multiple testing adjustment</span></label><label><input type="radio" autocomplete="off" name="radio_NOOGMDVEFP" value="answer"><span>Model fishing</span></label>
 </div>
 <p><strong>Question 6</strong></p>
-What is the role of standardized regression coefficients in multiple regression analysis?
-<div id="radio_FYJRMDNKKA" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_FYJRMDNKKA" value="answer"><span>To compare the effect sizes of predictors on a common scale</span></label><label><input type="radio" autocomplete="off" name="radio_FYJRMDNKKA" value=""><span>To determine the unique effect of each predictor</span></label><label><input type="radio" autocomplete="off" name="radio_FYJRMDNKKA" value=""><span>To calculate the intercept</span></label><label><input type="radio" autocomplete="off" name="radio_FYJRMDNKKA" value=""><span>To convert categorical predictors to continuous ones</span></label>
+A moderation effect is described as predicted but the interaction was considered only after seeing the data. What is this called
+<div id="radio_UKUBAUYMLE" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_UKUBAUYMLE" value="answer"><span>HARKing</span></label><label><input type="radio" autocomplete="off" name="radio_UKUBAUYMLE" value=""><span>Preregistration</span></label><label><input type="radio" autocomplete="off" name="radio_UKUBAUYMLE" value=""><span>Outcome switching</span></label><label><input type="radio" autocomplete="off" name="radio_UKUBAUYMLE" value=""><span>Optional stopping</span></label>
 </div>
 <p><strong>Question 7</strong></p>
-What is the potential bias introduced when controlling for a collider in multiple regression analysis?
-<div id="radio_JBMKTQIHYE" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_JBMKTQIHYE" value="answer"><span>It biases the estimate of the association between the two variables that cause the collider</span></label><label><input type="radio" autocomplete="off" name="radio_JBMKTQIHYE" value=""><span>It creates a causal relationship between the variables that cause the collider</span></label><label><input type="radio" autocomplete="off" name="radio_JBMKTQIHYE" value=""><span>It has no effect on the causal inference between the variables that form the collider</span></label><label><input type="radio" autocomplete="off" name="radio_JBMKTQIHYE" value=""><span>It biases the estimate of the association between the two variables that are caused by the collider</span></label>
+With ten independent tests at alpha equals 0.05 and no adjustment what is the approximate probability of at least one false positive
+<div id="radio_XZHCQPJDBO" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_XZHCQPJDBO" value="answer"><span>About 40 percent</span></label><label><input type="radio" autocomplete="off" name="radio_XZHCQPJDBO" value=""><span>About 10 percent</span></label><label><input type="radio" autocomplete="off" name="radio_XZHCQPJDBO" value=""><span>About 95 percent</span></label><label><input type="radio" autocomplete="off" name="radio_XZHCQPJDBO" value=""><span>About 5 percent</span></label>
 </div>
 <p><strong>Question 8</strong></p>
-Given the multiple regression equation: Y = 12.5 + 2.3<em>X1 + 1.8</em>X2 - 0.5*X3, calculate the predicted value of Y when X1 = 5, X2 = 3, and X3 = 2.
-<div id="radio_RQRSVCEKII" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_RQRSVCEKII" value=""><span>27.6</span></label><label><input type="radio" autocomplete="off" name="radio_RQRSVCEKII" value=""><span>20.5</span></label><label><input type="radio" autocomplete="off" name="radio_RQRSVCEKII" value="answer"><span>28.4</span></label><label><input type="radio" autocomplete="off" name="radio_RQRSVCEKII" value=""><span>23.1</span></label>
+Which statement best captures the purpose of preregistration in this course
+<div id="radio_KYGJJTOAUU" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_KYGJJTOAUU" value=""><span>Ban exploratory analyses</span></label><label><input type="radio" autocomplete="off" name="radio_KYGJJTOAUU" value=""><span>Prevent all deviations from the plan</span></label><label><input type="radio" autocomplete="off" name="radio_KYGJJTOAUU" value="answer"><span>Specify key decisions in advance to separate confirmatory from exploratory work and reduce undisclosed flexibility</span></label><label><input type="radio" autocomplete="off" name="radio_KYGJJTOAUU" value=""><span>Guarantee replication success</span></label>
 </div>
 <p><strong>Question 9</strong></p>
-In a multiple regression model, if the coefficient of determination (R²) is 0.75 and the SSE is 150, what is the value of SST?
-<div id="radio_XWGSTTIOLF" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_XWGSTTIOLF" value=""><span>450</span></label><label><input type="radio" autocomplete="off" name="radio_XWGSTTIOLF" value=""><span>0.25</span></label><label><input type="radio" autocomplete="off" name="radio_XWGSTTIOLF" value=""><span>112.5</span></label><label><input type="radio" autocomplete="off" name="radio_XWGSTTIOLF" value="answer"><span>600</span></label>
+Which preregistration description is strongest
+<div id="radio_FCCURDZYNL" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_FCCURDZYNL" value=""><span>We will choose outcomes after data collection to reduce noise</span></label><label><input type="radio" autocomplete="off" name="radio_FCCURDZYNL" value="answer"><span>Primary outcome PSQI total; hypothesis treatment lowers PSQI versus control; N equals 200 with a fixed stopping rule; exclusions preregistered attention check; analysis linear model with prespecified covariates; alpha equals 0.05; secondary outcomes labeled exploratory</span></label><label><input type="radio" autocomplete="off" name="radio_FCCURDZYNL" value=""><span>We predict positive effects on several variables and will include covariates as needed</span></label><label><input type="radio" autocomplete="off" name="radio_FCCURDZYNL" value=""><span>We will analyze outcomes using appropriate models and stop when effects stabilize</span></label>
 </div>
 <p><strong>Question 10</strong></p>
-Given the following standardized regression equation: Y = 0.6 + 0.35<em>X1 + 0.25</em>X2 - 0.15*X3, what is the correct conclusion about the effect of X2?
-<div id="radio_EKBKZMOVWB" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_EKBKZMOVWB" value=""><span>X2 is associated with a 0.25 increase in Y, keeping all other predictors constant.</span></label><label><input type="radio" autocomplete="off" name="radio_EKBKZMOVWB" value=""><span>A one unit increase in X2 is associated with a 0.25 unit increase in Y.</span></label><label><input type="radio" autocomplete="off" name="radio_EKBKZMOVWB" value="answer"><span>A one SD increase in X2 is associated with a 0.25 SD increase in Y, keeping all other predictors constant.</span></label><label><input type="radio" autocomplete="off" name="radio_EKBKZMOVWB" value=""><span>A one unit increase in X2 is associated with a 0.25 increase in Y, keeping all other predictors constant.</span></label>
+Which statement about Registered Reports is accurate
+<div id="radio_MLEEPAMCBL" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_MLEEPAMCBL" value=""><span>Methods are reviewed only after results are known</span></label><label><input type="radio" autocomplete="off" name="radio_MLEEPAMCBL" value=""><span>They eliminate the need to share data or code</span></label><label><input type="radio" autocomplete="off" name="radio_MLEEPAMCBL" value=""><span>Acceptance depends on obtaining p below 0.05</span></label><label><input type="radio" autocomplete="off" name="radio_MLEEPAMCBL" value="answer"><span>In principle acceptance before data collection commits publication if the approved protocol is followed regardless of outcome</span></label>
 </div>
 </div>
 <div class="webex-solution">
@@ -634,177 +704,155 @@ Given the following standardized regression equation: Y = 0.6 + 0.35<em>X1 + 0.2
 Show explanations
 </button>
 <p><strong>Question 1</strong></p>
-<p>Multiple regression analysis helps to understand the unique effect of each predictor while controlling for the effects of other predictors.</p>
+<p>If average power is about 35 percent then only about 35 percent of studies should be significant even when effects are real. Much higher rates suggest selection on significance and QRPs</p>
 <p><strong>Question 2</strong></p>
-<p>Centering is used in multiple regression analysis to choose a meaningful zero-point for predictors.</p>
+<p>Peeking and topping up until a threshold inflates the Type I error unless a sequential design with error spending is prespecified</p>
 <p><strong>Question 3</strong></p>
-<p>The intercept (a) in a multiple regression model represents the expected value when all predictors are equal to 0.</p>
+<p>Reporting only significant outcomes increases false positives and overstates effects in the visible record</p>
 <p><strong>Question 4</strong></p>
-<p>The b-coefficients in a multiple regression model represent the change in the dependent variable for a one-unit change in the predictor while other predictors are held constant.</p>
+<p>Data dependent exclusion rules raise false positives and bias estimates</p>
 <p><strong>Question 5</strong></p>
-<p>Multicollinearity is a concern in multiple regression analysis when predictor variables are highly correlated with each other.</p>
+<p>Undisclosed multiple testing across specifications inflates the effective Type I error and effect estimates</p>
 <p><strong>Question 6</strong></p>
-<p>Standardized regression coefficients are used to compare the effect sizes of predictors on a common scale, especially when the units of predictors are not meaningful.</p>
+<p>Hypothesizing after results are known presents post hoc explanations as if they were a priori predictions</p>
 <p><strong>Question 7</strong></p>
-<p>Controlling for a collider in multiple regression analysis can introduce bias in the estimated association between the variables that form the collider.</p>
+<p>The family wise error is 1 minus 0.95 to the power of 10 which is about 0.40</p>
 <p><strong>Question 8</strong></p>
-<p>Plug in the values of X1, X2, and X3 into the regression equation: Y = 12.5 + 2.3<em>5 + 1.8</em>3 - 0.5*2 = 28.4.</p>
+<p>Preregistration clarifies plans and reduces hidden degrees of freedom. It does not forbid exploration or ensure positive results</p>
 <p><strong>Question 9</strong></p>
-<p>Use the formula R2 = 1-(SSE/SST) or R2 = SSR/SST</p>
+<p>Specific precise and comprehensive plans reduce undisclosed flexibility and clarify confirmatory versus exploratory analyses</p>
 <p><strong>Question 10</strong></p>
-<p>The correct interpretation is in the original units of the variables, and emphasizing the fact that other predictors were controlled for.</p>
+<p>Registered Reports decouple publication from results and move review upstream to focus on theory and design quality</p>
 </div>
 </div>
-</section><section id="in-spss" class="level2" data-number="15.3"><h2 data-number="15.3" class="anchored" data-anchor-id="in-spss">
-<span class="header-section-number">15.3</span> In SPSS</h2>
-<section id="multiple-regression-1" class="level3" data-number="15.3.1"><h3 data-number="15.3.1" class="anchored" data-anchor-id="multiple-regression-1">
-<span class="header-section-number">15.3.1</span> Multiple Regression</h3>
-<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/ueNrP5TyZaE" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
-</section></section><section id="tutorial" class="level2" data-number="15.4"><h2 data-number="15.4" class="anchored" data-anchor-id="tutorial">
-<span class="header-section-number">15.4</span> Tutorial</h2>
-<section id="multiple-regression-2" class="level3" data-number="15.4.1"><h3 data-number="15.4.1" class="anchored" data-anchor-id="multiple-regression-2">
-<span class="header-section-number">15.4.1</span> Multiple Regression</h3>
-<p>Social science students were asked about their opinion towards Tilburg’s nightlife, number of Facebook friends, and some other characteristics. The data are in the <a href="data/SocScSurvey.sav"><code>SocScSurvey.sav</code></a> file.</p>
-<p>In a previous assignment we predicted Facebook friends by extraversion.</p>
-<p>In this question we will add another predictor, peer pressure.</p>
-<p>The variable peer pressure refers to the tendency to be influenced by close friends. Higher scores reflect higher sensitivity to peer pressure.</p>
-<p>Before we proceed with the regression analysis, we will first look at the correlations between the variables.</p>
-<p>Analyze &gt; correlate &gt; bivariate.</p>
-<p>Now choose as variables: Facebook Friends, Extraversion and Peer Pressure, and click OK.</p>
-<p>What is the correlation between peer pressure and number of Facebook friends? <input class="webex-solveme nospaces" data-tol="0.01" size="5" data-answer="[&quot;0.145&quot;,&quot;.145&quot;]"></p>
-<p>Suppose three researchers test the significance of the correlation between peer pressure and Facebook friends. Researcher I tests at the 10% level, researcher II tests at the 5% level, and researcher III at the 1% level.</p>
-<p>Which researcher will reject the null hypothesis? <select class="webex-select"><option value="blank"></option>
-<option value="">All three researchers</option>
-<option value="">Only researcher II</option>
-<option value="answer">Only researcher I</option>
-<option value="">Only researcher III</option></select></p>
-<p>Now, run the regression analysis in which the number of Facebook friends is regressed on extraversion and peer pressure.</p>
-<p>Proceed as follows: via analyze &gt; regression &gt; linear. Choose Facebook friends as dependent and extraversion and peer pressure as independents.</p>
-<p>Consult the output and write down the regression equation.</p>
-<div class="webex-solution">
-<button>
-Answer
-</button>
-<p><span class="math inline">\(\text{Friends}_i = -158.012 + 26.560*\text{Extraversion}_i + 12.056*\text{Peer}_i + e_i\)</span></p>
-</div>
-<p>Consider the second person in the sample. The person had an extraversion score of 11 and a score of 9 on peer pressure.</p>
-<p>What is the predicted number of Facebook friends for this person? <input class="webex-solveme nospaces" data-tol="0.1" size="7" data-answer="[&quot;242.652&quot;]"></p>
-<p>Consult the output.</p>
-<p>Researchers conclude that – in the sample – as peer pressure increases with one unit, the predicted number of Facebook friends increases with 12.056 units.</p>
-<p>Is this a valid conclusion? <select class="webex-select"><option value="blank"></option>
-<option value="">Yes</option>
-<option value="answer">No</option></select></p>
-<p>In multiple regression, the regression coefficients show us the expected changes in the dependent variable, while keeping the other independent variables constant.</p>
-<p>With this in mind, what is the correct conclusion?</p>
-<div id="radio_FPAWXAYMJV" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_FPAWXAYMJV" value=""><span>As peer pressure increases with one unit the predicted number of Facebook friends increases with 12.056 units.</span></label><label><input type="radio" autocomplete="off" name="radio_FPAWXAYMJV" value=""><span>As peer pressure increases with one unit the predicted number of Facebook friends increases with 12.056 units. This is added to the constant of -158.01.</span></label><label><input type="radio" autocomplete="off" name="radio_FPAWXAYMJV" value="answer"><span>As peer pressure increases with one unit the predicted number of Facebook friends increases with 12.056 units, while keeping extraversion constant.</span></label><label><input type="radio" autocomplete="off" name="radio_FPAWXAYMJV" value=""><span>As peer pressure increases with one unit the predicted number of Facebook friends increases with 12.056 units, while extraversion changes with 26.56 units.</span></label>
-</div>
-<p>Consult the table Coefficients. The table shows the results of t-tests.</p>
-<p>What are the null hypotheses and alternative hypotheses that are tested here?</p>
-<div class="webex-solution">
-<button>
-Answer
-</button>
-<p>The t-tests test significance of the individual regression coefficients. In particular, for each coefficient we can use the t-tests to test the following hypotheses:</p>
-<p><span class="math inline">\(H_0: \beta = 0\)</span>, <span class="math inline">\(H_1: \beta \ne 0\)</span></p>
-</div>
-<p>What is the value of the test-statistic for the significance test for extraversion? <input class="webex-solveme nospaces" data-tol="0.01" size="5" data-answer="[&quot;5.583&quot;]"></p>
-<p>Consider the t-tests for the regression coefficients again.</p>
-<p>How many degrees of freedom do the t-tests have? <input class="webex-solveme nospaces" size="3" data-answer="[&quot;131&quot;]"></p>
-<div class="webex-solution">
-<button>
-Explanation
-</button>
-<p>Note that:</p>
-<p>Degrees of freedom = N - p N = number of participants; p = number of parameters in the model (intercept + two regression slopes)</p>
-</div>
-<p>Suppose three researchers test the significance of peer pressure as a predictor of Facebook friends, while controlling for extraversion. Researcher I tests at the 10% level, researcher II tests at the 5% level, and researcher III at the 1% level.</p>
-<p>Which researcher(s) will reject the null hypothesis? <select class="webex-select"><option value="blank"></option>
-<option value="">Only researcher III</option>
-<option value="answer">Only researcher I</option>
-<option value="">All three researchers</option>
-<option value="">Only researcher II</option></select></p>
-<p>What <em>percentage</em> of the total variance in Facebook friends can be explained by both extraversion and peer pressure? <input class="webex-solveme nospaces" data-tol="0.1" size="4" data-answer="[&quot;20.9&quot;]"></p>
-<p>Compare the <span class="math inline">\(R^2\)</span> of the regression model with both predictors with the <span class="math inline">\(R^2\)</span> of a model with only extraversion as the predictor.</p>
-<p>What is the difference? <input class="webex-solveme nospaces" data-tol="0.01" size="5" data-answer="[&quot;0.017&quot;,&quot;.017&quot;]"></p>
-<p>In the previous step we compared the <span class="math inline">\(R^2\)</span> of two so called nested models.</p>
-<p>Two models are nested if the larger model (i.e., the model with the most predictors) contains all predictors of the smaller model.</p>
-<p>In the next lecture we will learn more about nested models, model comparisons, and how useful they are for researchers!</p>
-</section><section id="multiple-regression-ii" class="level3" data-number="15.4.2"><h3 data-number="15.4.2" class="anchored" data-anchor-id="multiple-regression-ii">
-<span class="header-section-number">15.4.2</span> Multiple Regression II</h3>
-<p>For this assignment we need the file <a href="data/HealthyFood.sav"><code>HealthyFood.sav</code></a>.</p>
-<p>This file contains hypothetical data on three variables:</p>
-<p>Eating healthy food (the higher the score, the healthier a person’s diet) Knowledge about food (the higher the score, the more a person knows about healthy food and risks of unhealthy food) Income (higher scores = more income).</p>
-<p>Let’s first look at the associations (correlations) between the three variables.</p>
-<p>Compute the correlations and summarize the relationships between all pairs of variables. Include in your answer the strength of the relationship (i.e., weak, moderate, or strong), the direction of the relationship (i.e., positive or negative), and generalizability to the population (i.e., is the correlation significant at the 5% level).</p>
-<p>Cohen’s rules of thumb:</p>
-<ul>
-<li>r = 0.00-0.30 (none to weak)</li>
-<li>r = 0.30-0.50 (weak to moderate)</li>
-<li>r = 0.50-0.70 (moderate to strong)</li>
-<li>r = 0.70-0.90 (strong to very strong)</li>
-<li>r = 0.90-1.00 (very strong)</li>
-</ul>
-<div class="webex-solution">
-<button>
-Answer
-</button>
-<ul>
-<li>Income and eating have a weak positive correlation, which is significant at the 5% level.</li>
-<li>Income and knowledge have a weak to moderate positive correlation, which is significant at the 5% level.</li>
-<li>Knowledge and eating have a moderate to strong positive correlation, which is significant at the 5% level.</li>
-</ul>
-</div>
-<p>Researchers may be interested in explaining differences in eating healthy food: in other words, they want to know why some people eat very healthy, while others tend to eat unhealthy.</p>
-<p>One of the hypotheses is that healthy food is on average more expensive than unhealthy food, so one of the explanatory variables may be income.</p>
-<p>Run a regression analysis using eating as the dependent variable and income as the independent variable.</p>
-<p>Consult the output.</p>
-<p>Which of the following conclusions is correct?</p>
-<div id="radio_MNAUZJBJJL" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_MNAUZJBJJL" value="answer"><span>The effect of Income on eating healthy food is positive and significantly different from zero.</span></label><label><input type="radio" autocomplete="off" name="radio_MNAUZJBJJL" value=""><span>The effect of Income on eating healthy food is positive but not significantly different from zero.</span></label>
-</div>
-<p>Simple regression analysis suggests a positive relationship between income and healthy food.</p>
-<p>However, other researchers (say Team B) came up with an alternative explanation. They hypothesized that the relationship between income and healthy food can be explained by a confounder; knowledge. People with more knowledge will have better jobs (on average), and, as a result more, income. As the result of their knowledge they also prefer to eat healthy food. I.e., Team B thinks knowledge is a common cause of income and eating healthy food.</p>
-<p>In other words, the researchers of Team B hypothesize that the relationship between income and eating healthy food is <select class="webex-select"><option value="blank"></option>
-<option value="">Indirect</option>
-<option value="answer">Spurious</option></select></p>
-<p>Draw (on a piece of paper) the conceptual model that reflects the hypotheses of the researchers.</p>
-<div class="webex-solution">
-<button>
-Answer
-</button>
-<p><img src="images/y_x_on_z_spurious.png" class="img-fluid"></p>
-</div>
-<p>Now let’s see if the data support the hypotheses of the researchers.</p>
-<p>Run a multiple regression analysis using eating healthy food as the dependent variable and income and knowledge as independent variables.</p>
-<p>Consult the output. Look at the effect of income, controlled for knowledge (both the coefficient and the significance test).</p>
-<ul>
-<li>What happened with the effect of income if you control for knowledge?</li>
-<li>Does knowledge predict eating healthy food (controlled for income)?</li>
-<li>Do the data support the hypothesis that the relationship between income and healthy food is confounded by knowledge?</li>
-</ul>
-<p>What is the p-value of Income when you control for Knowledge? <input class="webex-solveme nospaces" data-tol="0.01" size="5" data-answer="[&quot;0.778&quot;,&quot;.778&quot;]"></p>
-<p>What is the p-value of Knowledge, controlling for Income? <input class="webex-solveme nospaces" data-tol="0.01" size="5" data-answer="[&quot;0.001&quot;,&quot;.001&quot;]"></p>
-<p>Do the data support the hypothesis that the relationship between income and healthy food is confounded by knowledge? <select class="webex-select"><option value="blank"></option>
-<option value="answer">Yes</option>
-<option value="">No</option></select></p>
-<p>Finally, interpret the output. Write down the answers to the following questions:</p>
+</section><section id="tutorial" class="level1" data-number="28"><h1 data-number="28">
+<span class="header-section-number">28</span> Tutorial</h1>
+<section id="assignment-1-spot-the-practice-qrps-or-good-methods" class="level2" data-number="28.1"><h2 data-number="28.1" class="anchored" data-anchor-id="assignment-1-spot-the-practice-qrps-or-good-methods">
+<span class="header-section-number">28.1</span> Assignment 1: Spot the Practice — QRPs or Good Methods?</h2>
+<p>Below are short methods/results fragments from fictional studies. Read each one closely. For each fragment:</p>
 <ol type="1">
-<li>How well can we predict the variance in healthy eating with the predictors income and knowledge? Interpret R2, report the appropriate test and its significance</li>
-<li>Interpret the regression coefficients (size, direction, significance)</li>
-<li>Which predictor is the most important predictor of healthy eating behavior? Inspect the standardized regression coefficients</li>
+<li>Identify whether it (potentially) shows a <strong>questionable research practice (QRP)</strong> or <strong>good practice</strong>.<br>
+</li>
+<li>Name the specific issue (e.g., optional stopping, outcome switching, flexible data cleaning, model fishing, HARKing, or good practice).<br>
+</li>
+<li>Explain <strong>why</strong> it matters.<br>
+</li>
+<li>Propose a <strong>minimal fix</strong> (what the authors should have done or reported).<br>
+</li>
+<li>Decide whether the claim should be labeled <strong>confirmatory</strong> or <strong>exploratory</strong> in the write-up.</li>
+</ol>
+<p><strong>Fragment A</strong></p>
+<blockquote class="blockquote">
+<p>Our sample consisted of two cohorts of first-year bachelor’s students: 74 students enrolled in 2023, and 82 students enrolled in 2024. We found a statistically significant effect, t(154), p = .047, which we interpret as evidence that the intervention improves well-being.</p>
+</blockquote>
+<p><strong>Fragment B</strong></p>
+<blockquote class="blockquote">
+<p><strong>Experimental Design</strong> We randomly assigned participants to be in the social support or control condition. The social support condition received daily encouraging messages, supposedly sent by another participant in the study. The control condition received daily informative messages, taken from WikiPedia. <strong>Measurements</strong> We measured participants’ stress, mood, sleep, productivity, and affect variability using validated self-report questionnaires. <strong>Results</strong> In line with predictions, participants in the social support condition showed a significant improvement in mood, p = .03.</p>
+</blockquote>
+<p><strong>Fragment C</strong></p>
+<blockquote class="blockquote">
+<p>Participants with unusually fast reaction times (log reaction time &lt; M − 2 SD; n = 4) were considered outliers and were excluded from the study.</p>
+</blockquote>
+<p><strong>Fragment D</strong></p>
+<blockquote class="blockquote">
+<p>We tested several plausible specifications (adding/removing covariates such as age, SES, hours worked; linear vs.&nbsp;log transforms). The model controlling for age and using a log transform yielded a significant effect (p = .041), so we focus on this specification below. Other models are not shown.</p>
+</blockquote>
+<p><strong>Fragment E</strong></p>
+<blockquote class="blockquote">
+<p><strong>Introduction</strong>: The present study hypothesized that herbal tea would increase sleep quality. Our sample consisted of patients who presented with disturbed sleep but were not considered eligible for other medical treatment. <strong>Results</strong>: Consistent with expectations, we found a significant effect of herbal tea on sleep quality for participants who scored high on baseline stress, p = .02.</p>
+</blockquote>
+<p><strong>Fragment F</strong></p>
+<blockquote class="blockquote">
+<p>Before data collection, we preregistered our hypotheses, primary outcome (PSQI total score), stopping rule (N = 200), and analysis plan (linear model with preregistered covariates: age, gender). We also specified exclusion criteria (failed attention check; PSQI missingness &gt; 20%). Deviations: We added one robustness check using a median-split sensitivity analysis (exploratory; reported in Supplement). Data, code, and materials are available on OSF (anonymized).</p>
+</blockquote>
+<p><strong>Fragment G</strong></p>
+<blockquote class="blockquote">
+<p>The study protocol (theory, design, and analysis) received in-principle acceptance prior to data collection. Results were published regardless of outcome, provided fidelity to the approved plan. The primary effect was not significant (p = .21); exploratory analyses are labeled and reported in the Supplement.</p>
+</blockquote>
+<p>Discuss with your group:</p>
+<ol type="a">
+<li>Did you all agree on the label (QRP vs.&nbsp;good practice) and the specific issue?<br>
+</li>
+<li>Which fixes would you prioritize if the authors could change only one thing?<br>
+</li>
+<li>How would preregistration or a Registered Report have changed the design, analysis, or write-up?</li>
+</ol></section><section id="assignment-2-preregistration-audit-make-it-specific" class="level2" data-number="28.2"><h2 data-number="28.2" class="anchored" data-anchor-id="assignment-2-preregistration-audit-make-it-specific">
+<span class="header-section-number">28.2</span> Assignment 2: Preregistration Audit — Make It Specific</h2>
+<p>Below is an excerpt from a <strong>vague</strong> preregistration. Your task is to (i) spot ambiguities and (ii) rewrite the excerpt so it is <strong>specific, precise, and comprehensive</strong>.</p>
+<p><strong>Vague preregistration excerpt:</strong></p>
+<blockquote class="blockquote">
+<p>We will test whether our workshop improves student success. We’ll recruit around 150 students and stop once effects stabilize. We’ll measure several outcomes related to performance and well-being and analyze them using appropriate models. Outliers will be excluded. Demographic control variables will be included.</p>
+</blockquote>
+<p><strong>Your tasks:</strong></p>
+<ol type="1">
+<li>Underline every ambiguity, pinpoint what the risk of QRPs is</li>
+<li>Rewrite the preregistration to make it more robust against QRPs. Pinpoint how each change improves the preregistration.</li>
 </ol>
 <div class="webex-solution">
 <button>
-Answer
+Hints
 </button>
-<p>Income and Knowledge together predict 44.9% of the variance in Eating healthy food, which is significantly different from zero, <span class="math inline">\(R^2 = .45, F(2, 347) = 141.179, p &lt;.001\)</span>.</p>
-<p>Controlling for Knowledge, Income has a positive, but non-significant effect on Eating healthy food, t(347) = .283, p = .778.</p>
-<p>Controlling for Income, Knowledge has a positive, significant effect on Eating healthy food, t(347) = 15.287, p &lt;.001.</p>
-<p>Knowledge is the most important predictor (<span class="math inline">\(\beta\)</span> = .665) (compare it with <span class="math inline">\(\beta\)</span> = .012 of Income).</p>
+<p>Consider specifying:</p>
+<ul>
+<li>
+<strong>Primary outcome</strong> (exact variable/scale and scoring); <strong>secondary outcomes</strong> (if any).<br>
+</li>
+<li>
+<strong>Hypotheses</strong> (directional; one line per test).<br>
+</li>
+<li>
+<strong>Sampling plan and stopping rule</strong> (target N; any interim looks; conditions for stopping).<br>
+</li>
+<li>
+<strong>Inclusion/exclusion</strong> and <strong>outlier rules</strong> (exact thresholds, applied blindly if feasible).<br>
+</li>
+<li>
+<strong>Analysis plan</strong> (model form, covariates, sidedness, alpha, multiple-testing plan).<br>
+</li>
+<li>
+<strong>Deviations policy</strong> (how you will document any changes).<br>
+</li>
+<li>Distinguishing which analyses are <strong>confirmatory</strong> and which are <strong>exploratory</strong>.</li>
+</ul>
 </div>
+</section><section id="psilocybin-liberates-the-entrenched-brain" class="level2" data-number="28.3"><h2 data-number="28.3" class="anchored" data-anchor-id="psilocybin-liberates-the-entrenched-brain">
+<span class="header-section-number">28.3</span> Psilocybin Liberates the Entrenched Brain?</h2>
+<p>In recent years, enthusiasm has grown for psychedelics (like magic mushrooms) as a treatment for depression and other mental health problems. However, the methodological rigor of studies that find support for psychedelics’ efficacy has been severely criticized. Professor <a href="https://eiko-fried.com/">Eiko Fried</a>, one of the main contributors to the methodological critiques, engaged in a real-life exercise, very similar to the one you just completed.</p>
+<p>With your group, pick one of the following sources:</p>
+<ul>
+<li>
+<a href="https://eiko-fried.com/psilocybin-2022-study-remains-uncorrected/">Eiko Fried’s blog post</a>, summarizing the critiques</li>
+<li>The original <a href="https://osf.io/preprints/psyarxiv/pdbf5_v1">authors’ rebuttal of the critiques</a> (which is separated into seven “Points”; pick one point)</li>
+</ul>
+<p>Discuss: Do you find the arguments (for or against the presence of QRPs) persuasive? Which QRPs do you recognize?</p>
+</section><section id="mini-registered-report-pitch" class="level2" data-number="28.4"><h2 data-number="28.4" class="anchored" data-anchor-id="mini-registered-report-pitch">
+<span class="header-section-number">28.4</span> Mini Registered Report Pitch</h2>
+<p>With your group, prepare a single presentation slide for an <strong>imaginary study</strong> that you could use for your portfolio assignment (i.e., you can use the same hypothesis as for your portfolio).</p>
+<p>Describe the:</p>
+<ul>
+<li>
+<strong>Theory</strong> (1–2 sentences) and <strong>confirmatory hypothesis</strong> (directional).<br>
+</li>
+<li>
+<strong>Study Design</strong> (sampling strategy, assignment or not, sample size, stopping rule, exclusion criteria).<br>
+</li>
+<li>
+<strong>Primary outcome</strong> (exact measure) and <strong>analysis plan</strong> (model, covariates, sidedness, alpha, multiple-testing plan if applicable).<br>
+</li>
+<li>
+<strong>Transparency</strong> (data/code/materials; prereg link to be created; planned deviations policy).</li>
+</ul>
+<p>If there is time, groups present and receive peer feedback focusing on <strong>clarity</strong>, <strong>testability</strong>, and <strong>reducing flexibility</strong> at design time.</p>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
+<div id="ref-patilVisualToolDefining2019" class="csl-entry" role="listitem">
+Patil, P., Peng, R. D., &amp; Leek, J. T. (2019). A visual tool for defining reproducibility and replicability. <em>Nature Human Behaviour</em>, <em>3</em>(7), 650–652. <a href="https://doi.org/10.1038/s41562-019-0629-z">https://doi.org/10.1038/s41562-019-0629-z</a>
+</div>
+<div id="ref-vanlissaWORCSWorkflowOpen2021" class="csl-entry" role="listitem">
+Van Lissa, C. J., Brandmaier, A. M., Brinkman, L., Lamprecht, A.-L., Peikert, A., Struiksma, M. E., &amp; Vreede, B. M. I. (2021). <span>WORCS</span>: <span>A</span> workflow for open reproducible code in science. <em>Data Science</em>, <em>4</em>(1), 29–49. <a href="https://doi.org/10.3233/DS-210031">https://doi.org/10.3233/DS-210031</a>
+</div>
+</div>
 </section></section></main><!-- /main --><script>
 
 /* update total correct if #webex-total_correct exists */
@@ -1655,13 +1703,13 @@ window.onload = function() {
     }
   });
   </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="./glm4anova.html" class="pagination-link" aria-label="GLM-IV: ANOVA">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">GLM-IV: ANOVA</span></span>
+      <a href="./confint.html" class="pagination-link" aria-label="BE2 - Confidence Intervals">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">BE2 - Confidence Intervals</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./glm6nested.html" class="pagination-link" aria-label="GLM-VI: Nested models">
-        <span class="nav-page-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">GLM-VI: Nested models</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./data.html" class="pagination-link" aria-label="Data for Portfolio">
+        <span class="nav-page-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Data for Portfolio</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
